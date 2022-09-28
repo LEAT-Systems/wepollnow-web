@@ -1,114 +1,164 @@
+import React from "react";
+import { useState, useEffect } from "react";
+import { Formik, Form, Field, ErrorMessage } from "formik";
 import Nav from "../Layout/Landing/mainNav";
+import Done from "@mui/icons-material/Done";
+import * as Yup from "yup";
 
-const FormThree = () => {
+const FormThree = (props) => {
+  const [formisCompleted, setFormIsCompleted] = useState(false);
+  const handleSubmit = (values) => {
+    props.next(values);
+  };
+  // Configuring the indicators
+  const { Gender, employmentStatus } = props.data;
+  useEffect(() => {
+    if (Gender && employmentStatus !== "") {
+      setFormIsCompleted(true);
+    }
+  }, [Gender, employmentStatus]);
+
+  const formThreeValidationSchema = Yup.object({
+    Gender: Yup.string().required().label("* This"),
+  });
   return (
     <>
       <Nav />
-      <div className="flex flex-row items-center justify-center mx-auto py-4  px-4 md:px-0">
-        <div class="w-full md:w-1/2 h-[500px] text-lg text-gray-700 border rounded-lg">
-          <header className="w-full p-8 border-b">
+      <div className="flex flex-row items-center justify-center px-4 py-4 mx-auto md:px-0">
+        <div className="w-full text-lg text-gray-700 border rounded-lg md:w-1/2">
+          <header className="flex flex-col w-full p-8 space-y-2 border-b">
             <div className="flex flex-row items-center justify-center space-x-4">
-              <div className="inline-flex items-center justify-center rounded-full p-4 bg-white text-black w-5 h-5">
+              <div className="inline-flex items-center justify-center w-5 h-5 p-4 text-black bg-gray-200 rounded-full">
                 1
               </div>
-              <hr className="border-dashed border-1 border-black w-12" />
-              <div className="inline-flex items-center justify-center rounded-full p-4 bg-white text-black w-5 h-5">
+              <hr className="w-12 border-black border-dashed border-1" />
+              <div className="inline-flex items-center justify-center w-5 h-5 p-4 text-black bg-gray-200 rounded-full">
                 2
               </div>
-              <hr className="border-dashed border-1 border-black w-12" />
-              <div className="inline-flex items-center justify-center rounded-full p-4 bg-black text-white w-5 h-5">
-                3
-              </div>
-            </div>
-          </header>
-          <section>
-            <form>
-              <div className="flex flex-col space-y-4 p-8">
-                <div className="overflow-y-scroll space-y-4 h-64 scrollable px-4">
-                  <div className="border border-gray-200 p-8 rounded-md space-y-4">
-                    <label className="font-bold">
-                      Which best describes your employment status?
-                    </label>
-                    <div class="flex flex-row items-center justify-between border p-4 rounded">
-                      <label
-                        for="push-everything"
-                        class="ml-3 block text-sm font-medium text-gray-700"
-                      >
-                        Student
-                      </label>
-                      <input
-                        id="push-everything"
-                        name="push-notifications"
-                        type="radio"
-                        class="h-4 w-4 border-gray-300 text-gray-600 focus:ring-gray-500"
-                      />
-                    </div>
-                    <div class="flex flex-row items-center justify-between border p-4 rounded">
-                      <label
-                        for="push-everything"
-                        class="ml-3 block text-sm font-medium text-gray-700"
-                      >
-                        Employed
-                      </label>
-                      <input
-                        id="push-everything"
-                        name="push-notifications"
-                        type="radio"
-                        class="h-4 w-4 border-gray-300 text-gray-600 focus:ring-gray-500"
-                      />
-                    </div>
-                    <div class="flex flex-row items-center justify-between border p-4 rounded">
-                      <label
-                        for="push-everything"
-                        class="ml-3 block text-sm font-medium text-gray-700"
-                      >
-                        Unemployed
-                      </label>
-                      <input
-                        id="push-everything"
-                        name="push-notifications"
-                        type="radio"
-                        class="h-4 w-4 border-gray-300 text-gray-600 focus:ring-gray-500"
-                      />
-                    </div>
-                    <div class="flex flex-row items-center justify-between border p-4 rounded">
-                      <label
-                        for="push-everything"
-                        class="ml-3 block text-sm font-medium text-gray-700"
-                      >
-                        Self-employed
-                      </label>
-                      <input
-                        id="push-everything"
-                        name="push-notifications"
-                        type="radio"
-                        class="h-4 w-4 border-gray-300 text-gray-600 focus:ring-gray-500"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="border border-gray-200 p-8 rounded-md space-y-4">
-                    <label className="font-bold">Select your Gender</label>
-                    <div className="flex flex-row items-start justify-between">
-                      <select
-                        id="country"
-                        class="mt-1 block w-full border-b border-gray-300 bg-white py-2 px-3"
-                      >
-                        <option>Male</option>
-                        <option>Female</option>
-                        <option>Other</option>
-                      </select>
-                    </div>
-                  </div>
+              <hr className="w-12 border-black border-dashed border-1" />
+              {formisCompleted ? (
+                <div className="inline-flex items-center justify-center w-5 h-5 p-4 text-white bg-green-600 rounded-full">
+                  <Done />
                 </div>
-              </div>
-            </form>
+              ) : (
+                <div className="inline-flex items-center justify-center w-5 h-5 p-4 text-white bg-black rounded-full">
+                  3
+                </div>
+              )}
+            </div>
+            <p className="font-semibold text-center">
+              <span className="px-4 text-white bg-gray-400 rounded-full ">
+                FILL IN YOUR:
+              </span>{" "}
+              Employment Status & Gender
+            </p>
+          </header>
+
+          {/*  */}
+          <section>
+            <Formik
+              validationSchema={formThreeValidationSchema}
+              initialValues={props.data}
+              onSubmit={handleSubmit}
+            >
+              {({ values }) => (
+                <Form>
+                  <div className="flex flex-col p-8 space-y-4">
+                    <div className="h-64 px-4 space-y-4 overflow-y-scroll scrollable">
+                      <div className="p-8 space-y-4 border border-gray-200 rounded-md">
+                        <label className="font-bold">
+                          Which best describes your employment status?
+                        </label>
+                        <p className="text-red-600">
+                          <ErrorMessage name="employmentStatus" />
+                        </p>
+                        <div className="flex flex-row items-center justify-between p-4 border rounded">
+                          <label className="block ml-3 text-sm font-medium text-gray-700">
+                            Student
+                          </label>
+
+                          <Field
+                            type="radio"
+                            name="employmentStatus"
+                            value="Student"
+                            className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
+                          />
+                        </div>
+                        <div className="flex flex-row items-center justify-between p-4 border rounded">
+                          <label className="block ml-3 text-sm font-medium text-gray-700">
+                            Employed
+                          </label>
+                          <Field
+                            type="radio"
+                            name="employmentStatus"
+                            value="Employed"
+                            className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
+                          />
+                        </div>
+                        <div className="flex flex-row items-center justify-between p-4 border rounded">
+                          <label className="block ml-3 text-sm font-medium text-gray-700">
+                            Unemployed
+                          </label>
+                          <Field
+                            type="radio"
+                            name="employmentStatus"
+                            value="Unemployed"
+                            className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
+                          />
+                        </div>
+                        <div className="flex flex-row items-center justify-between p-4 border rounded">
+                          <label className="block ml-3 text-sm font-medium text-gray-700">
+                            Self-employed
+                          </label>
+                          <Field
+                            type="radio"
+                            name="employmentStatus"
+                            value="Self-employed"
+                            className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
+                          />
+                        </div>
+                      </div>
+
+                      <div className="p-8 space-y-4 border border-gray-200 rounded-md">
+                        <label className="font-bold">Select your Gender</label>
+                        <p className="text-red-600">
+                          <ErrorMessage name="Gender" />
+                        </p>
+                        <div className="flex flex-row items-start justify-between">
+                          <Field
+                            as="select"
+                            name="Gender"
+                            className="block w-full px-3 py-2 mt-1 bg-white border-b border-gray-300"
+                          >
+                            <option value="">Select an option</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                            <option value="Other">Other</option>
+                          </Field>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <section className="w-full p-4 space-x-6 border-t">
+                    <button
+                      type="button"
+                      onClick={() => props.prev(values)}
+                      className="p-2 px-8 ml-8 text-white bg-black rounded-md"
+                    >
+                      Previous
+                    </button>
+                    <button
+                      onClick={() => props.next(values)}
+                      type="button"
+                      className="p-2 px-8 text-white bg-black rounded-md"
+                    >
+                      Submit
+                    </button>
+                  </section>
+                </Form>
+              )}
+            </Formik>
           </section>
-          <footer className="w-full p-4 border-t">
-            <button className="p-2 px-4 bg-black text-white rounded-md ml-6">
-              Next
-            </button>
-          </footer>
         </div>
       </div>
     </>

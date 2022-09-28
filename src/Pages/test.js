@@ -1,11 +1,16 @@
 import React from "react";
-import FormFour from "../Components/Forms/FormFour";
-import FormOne from "../Components/Forms/FormOne";
+// import FormThree from "../Components/Forms/FormThree";
+// import FormOne from "../Components/Forms/FormOne";
+// import FormTwo from "../Components/Forms/FormTwo";
+import FormComponent from "../Components/Forms/FormComponent";
 
 const Test = () => {
   return (
     <>
-      <FormOne />
+      {/* <FormOne />
+      <FormTwo /> */}
+      {/* <FormThree /> */}
+      <FormComponent />
     </>
   );
 };

@@ -1,5 +1,7 @@
 import React, { Suspense } from "react";
 import { Route, Switch } from "react-router-dom";
+import FormComponent from "./Components/Forms/FormComponent";
+import FormFour from "./Components/Forms/FormFour";
 import Loading from "./UI/Loading";
 const GettingStartedOne = React.lazy(() =>
   import("./Pages/landingPages/gettingStarted-1")
@@ -53,8 +55,13 @@ function App() {
           <Test />
         </Route>
 
-        <Route path="/test" exact>
-          <Test />
+        <Route path="/register" exact>
+          <FormComponent />
+        </Route>
+
+        {/* Some Other Page */}
+        <Route path="/vote" exact>
+          <FormFour />
         </Route>
 
         {/* Not Found route*/}

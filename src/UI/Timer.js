@@ -1,5 +1,6 @@
 import React from "react";
 import { useState, useEffect, useRef } from "react";
+import { countDownDate } from "./MagicVars";
 
 const Test = () => {
   const [timerDays, setTimerDays] = useState("00");
@@ -9,13 +10,12 @@ const Test = () => {
   const [due, setIsDue] = useState(false);
 
   // Would be gotten from DB
-  const date = "September 22, 2022 00:00:00";
 
   //
   let interval = useRef();
 
   function startTimer() {
-    const countdownDate = new Date(date).getTime();
+    const countdownDate = new Date(countDownDate).getTime();
     interval = setInterval(() => {
       const now = new Date().getTime();
       const distance = countdownDate - now;
@@ -52,24 +52,24 @@ const Test = () => {
       {!due ? (
         <div className="flex flex-row items-center justify-center space-x-4">
           <div className="flex flex-col items-center p-4 space-y-2 border-r border-gray-300">
-            <h1 className="font-bold text-3xl md:text-7xl">{timerDays}</h1>
+            <h1 className="text-3xl font-bold md:text-7xl">{timerDays}</h1>
             <p>days</p>
           </div>
           <div className="flex flex-col items-center p-4 space-y-2 border-r border-gray-300">
-            <h1 className="font-bold text-3xl md:text-7xl">{timerHours}</h1>
+            <h1 className="text-3xl font-bold md:text-7xl">{timerHours}</h1>
             <p>Hours</p>
           </div>
           <div className="flex flex-col items-center p-4 space-y-2 border-r border-gray-300">
-            <h1 className="font-bold text-3xl md:text-7xl">{timerMinutes}</h1>
+            <h1 className="text-3xl font-bold md:text-7xl">{timerMinutes}</h1>
             <p>minutes</p>
           </div>
           <div className="flex flex-col items-center p-4 space-y-2">
-            <h1 className="font-bold text-3xl md:text-7xl">{timerSeconds}</h1>
+            <h1 className="text-3xl font-bold md:text-7xl">{timerSeconds}</h1>
             <p>seconds</p>
           </div>
         </div>
       ) : (
-        <p className="font-bold text-6xl border-4 border-blue-200 p-6 rounded-lg">
+        <p className="p-6 text-3xl font-bold border-4 border-blue-200 rounded-lg md:text-6xl">
           Election is today
         </p>
       )}

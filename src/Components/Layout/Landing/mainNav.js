@@ -10,7 +10,9 @@ const Nav = () => {
   return (
     <React.Fragment>
       {/* Top Navigation */}
-      <div className="container flex flex-row items-center justify-between px-12 py-8 mx-auto border-b border-gray-200">
+      <div
+        className={`container flex flex-row items-center justify-between px-12 py-8 mx-auto border-b border-gray-200`}
+      >
         <Link to="/">
           <p className="text-4xl font-bold ">
             <span className="text-gray-400">Poll</span>it
@@ -77,7 +79,7 @@ const Nav = () => {
         </div>
         <div className="flex flex-col items-center justify-center mx-auto">
           <div className="space-y-4">
-            <h4 className="text-center md:text-left text-2xl font-bold text-white ">
+            <h4 className="text-2xl font-bold text-center text-white md:text-left ">
               Get in touch
             </h4>
             <form className="space-y-2">

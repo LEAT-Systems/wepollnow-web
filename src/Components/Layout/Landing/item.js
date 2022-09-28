@@ -1,46 +1,71 @@
-import React from "react";
+import React, { useState } from "react";
 import Badge from "../../../UI/Badge";
 import SwipeDownIcon from "@mui/icons-material/SwipeDown";
 import { NavLink } from "react-router-dom";
 import { Link } from "react-router-dom";
-import Loading from "../../../UI/Loading";
+import loading from "../../../images/loading.gif";
 import DoneComponent from "../../../UI/Done";
+import { countDownDate } from "../../../UI/MagicVars";
 const Timer = React.lazy(() => import("../../../UI/Timer"));
 //
-const controls = (
-  <div className="absolute z-10 flex flex-col items-center justify-center space-y-4 px-4 md:px-12 lg:px-24 mt-24 ">
-    <div className="p-2 bg-blue-400 rounded-full animate-ping mx-auto">
-      <SwipeDownIcon />
-    </div>
-    <div className="space-y-4 flex flex-col">
-      <NavLink activeClassName="active" to="/getting-started-one">
-        <button className="inline-flex items-center justify-center w-10 h-10 mr-2 transition-colors duration-150 bg-gray-200 rounded-full focus:shadow-outline hover:bg-blue-400">
-          1
-        </button>
-      </NavLink>
-      <NavLink activeClassName="active" to="/getting-started-two">
-        <button className="inline-flex items-center justify-center w-10 h-10 mr-2 transition-colors duration-150 bg-gray-200 rounded-full focus:shadow-outline hover:bg-blue-400">
-          2
-        </button>
-      </NavLink>
-      <NavLink activeClassName="active" to="/getting-started-three">
-        <button className="inline-flex items-center justify-center w-10 h-10 mr-2 transition-colors duration-150 bg-gray-200 rounded-full focus:shadow-outline hover:bg-blue-400">
-          3
-        </button>
-      </NavLink>
-    </div>
-  </div>
-);
+
+const Controls = () => {
+  const [tooltipStatus, setTooltipStatus] = useState(0);
+  return (
+    <>
+      <div className="absolute z-10 flex flex-col items-center justify-center px-4 mt-24 space-y-4 md:px-12 lg:px-24">
+        <div className="p-2 mx-auto bg-blue-400 rounded-full animate-ping">
+          <SwipeDownIcon />
+        </div>
+        <div className="flex flex-col space-y-4">
+          <NavLink activeClassName="active" to="/getting-started-one">
+            <button className="inline-flex items-center justify-center w-10 h-10 mr-2 transition-colors duration-150 bg-gray-200 rounded-full focus:shadow-outline hover:bg-blue-400">
+              1
+            </button>
+          </NavLink>
+          <NavLink activeClassName="active" to="/getting-started-two">
+            <button className="inline-flex items-center justify-center w-10 h-10 mr-2 transition-colors duration-150 bg-gray-200 rounded-full focus:shadow-outline hover:bg-blue-400">
+              2
+            </button>
+          </NavLink>
+          <NavLink
+            activeClassName="active"
+            to="/getting-started-three"
+            onMouseEnter={() => setTooltipStatus(2)}
+            onMouseLeave={() => setTooltipStatus(0)}
+          >
+            <button className="relative inline-flex items-center justify-center w-10 h-10 mr-2 transition-colors duration-150 bg-gray-200 rounded-full text-dark focus:shadow-outline hover:bg-blue-400 hover:text-white">
+              3
+            </button>
+          </NavLink>
+          {tooltipStatus === 2 && (
+            <div
+              role="tooltip"
+              className="absolute left-0 z-20 w-56 p-4 ml-8 -mt-20 text-center text-white transition duration-150 ease-in-out bg-blue-400 rounded shadow-lg"
+            >
+              <p className="pb-1 text-sm font-bold">
+                Click this button to register
+              </p>
+              <p className="pb-3 text-xs leading-4 ">
+                You have to register before you can cast your vote.
+              </p>
+            </div>
+          )}
+        </div>
+      </div>
+    </>
+  );
+};
 
 export const Item1 = (
   <div className="relative flex flex-col">
-    {controls}
+    {<Controls />}
     <div className="relative flex flex-col items-center justify-center space-y-8">
       <p className="font-bold">Gubernatorial Poll</p>
-      <Badge>12 November, 2022</Badge>
+      <Badge>{countDownDate}</Badge>
       <Timer />
       <div>
-        <p className="max-w-xs md:max-w-md text-center">
+        <p className="max-w-xs text-center md:max-w-md">
           We would love to keep you informed as the date draws closer
         </p>
       </div>
@@ -75,12 +100,12 @@ export const Item1 = (
 
 export const Item2 = (
   <div className="relative flex flex-col">
-    {controls}
+    {<Controls />}
     <div className="relative flex flex-col items-center justify-center space-y-4">
       <p className="font-bold">Presidential Poll</p>
-      <Badge>12 November, 2022</Badge>
+      <Badge>{countDownDate}</Badge>
       <div className="flex flex-row items-center justify-center">
-        <h2 className="max-w-4xl font-bold text-5xl text-center p-8">
+        <h2 className="max-w-4xl p-8 text-5xl font-bold text-center">
           Let's change the narrative.
           <br /> Make your vote count.
         </h2>
@@ -88,7 +113,7 @@ export const Item2 = (
       <div className="md:pt-8">
         <Link
           to="/getting-started-three"
-          className="w-full p-4 bg-gray-900 text-white rounded-xl px-8"
+          className="w-full p-4 px-8 text-white bg-gray-900 rounded-xl"
         >
           Vote Now
         </Link>
@@ -115,14 +140,13 @@ export const Item2 = (
 
 export const Item3 = (
   <>
-    <div className="flex flex-col items-center justify-center mx-auto min-h-screen space-y-4">
-      <div>{<Loading />}</div>
-      <div className="flex flex-col space-y-2">
-        <h2 className="max-w-3xl font-bold text-5xl text-center">
-          Staging the registration area.
-        </h2>
-        <h2 className="max-w-3xl font-bold text-5xl text-center">
-          This will take a few minutes.
+    <div className="flex flex-col items-center justify-center min-h-screen mx-auto space-y-4">
+      <div>{<img src={loading} className="w-56 h-56" alt="loading" />}</div>
+      <div className="flex flex-col space-y-4">
+        <h2 className="max-w-3xl text-5xl font-bold text-center">
+          Preparing the registration area...
+          <br />
+          This will take a few minutes...
         </h2>
       </div>
     </div>
@@ -131,17 +155,17 @@ export const Item3 = (
 
 export const Item4 = (
   <>
-    <div className="flex flex-col items-center justify-center mx-auto min-h-screen space-y-2">
+    <div className="flex flex-col items-center justify-center min-h-screen mx-auto space-y-2">
       <div>{<DoneComponent />}</div>
       <div className="">
-        <h2 className="max-w-4xl font-bold text-5xl text-center p-8">
+        <h2 className="max-w-4xl p-8 text-5xl font-bold text-center">
           Registration Area ready. <br />
           Kindly Proceed.
         </h2>
       </div>
       <div>
-        <Link to="/test">
-          <button className="w-full p-4 bg-blue-600 rounded-xl px-8 text-white">
+        <Link to="/register">
+          <button className="w-full p-4 px-8 text-white bg-blue-600 rounded-xl">
             Let's Proceed
           </button>
         </Link>
