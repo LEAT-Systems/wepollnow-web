@@ -15,7 +15,7 @@ const Footer = () => {
             <span className="text-white">Wepoll</span>Now
           </p>
         </Link>
-        <div className="flex flex-col md:flex-row items-center justify-center  md:space-x-8 space-y-4 text-white mx-auto">
+        <div className="flex flex-col md:flex-row items-center justify-center  md:space-x-8 space-y-2 text-white mx-auto">
           <Link to="/">
             <p>Home</p>
           </Link>
@@ -29,7 +29,7 @@ const Footer = () => {
             <p>Polls</p>
           </Link>
         </div>
-        <div className="flex flex-col md:flex-row items-center justify-center space-y-4 mx-auto md:space-x-6 text-[#C0C0C0]">
+        <div className="flex flex-col md:flex-row items-center justify-center space-y-2 mx-auto md:space-x-6 text-[#C0C0C0]">
           <a href="www.twitter.com/wepollnow">
             <TwitterIcon />
           </a>

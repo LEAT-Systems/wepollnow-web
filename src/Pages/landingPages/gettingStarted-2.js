@@ -131,16 +131,16 @@ const GettingStartedTwo = () => {
                 for everyone.
                 <br /> Together, We can make Nigeria Great!
               </p>
-              <div className="pt-4">
-                <Link to="/about">
-                  <button className="p-4 w-1/3 rounded-lg bg-gray-500 px-4 text-white font-bold hover:bg-black">
-                    Learn More
-                  </button>
-                </Link>
-              </div>
             </div>
             <div className="bg-gray-200 p-8">
               <img src={image} alt="" />
+            </div>
+            <div className="pt-2 md:pt-4">
+              <Link to="/about">
+                <button className="p-4 w-1/3 rounded-lg bg-gray-500 px-4 text-white font-bold hover:bg-black">
+                  Learn More
+                </button>
+              </Link>
             </div>
           </div>
         </section>
@@ -151,7 +151,7 @@ const GettingStartedTwo = () => {
         </div>
 
         {/* Footer Section */}
-        <div className="mt-48">
+        <div className="mt-12 md:mt-48">
           <Footer />
         </div>
       </div>
