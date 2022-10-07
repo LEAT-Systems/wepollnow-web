@@ -15,7 +15,7 @@ const Footer = () => {
             <span className="text-white">Wepoll</span>Now
           </p>
         </Link>
-        <div className="hidden md:flex flex-row items-center justify-center  md:space-x-8 space-y-2 text-white mx-auto">
+        <div className="flex flex-row items-center justify-center space-x-2 md:space-x-8 text-white">
           <Link to="/">
             <p>Home</p>
           </Link>
@@ -29,27 +29,7 @@ const Footer = () => {
             <p>Polls</p>
           </Link>
         </div>
-
-        {/* Mobile footer */}
-        <div className="flex md:hidden flex-row items-center justify-center mx-auto py-4">
-          <div className="flex flex-col md:flex-row items-center justify-center px-2  space-x-2  text-white mx-auto">
-            <Link to="/">
-              <p>Home</p>
-            </Link>
-            <Link to="about">
-              <p>About</p>
-            </Link>
-          </div>
-          <div className="flex flex-col md:flex-row items-center justify-center px-2  space-x-2  text-white mx-auto">
-            <Link to="/blog">
-              <p>Blog</p>
-            </Link>
-            <Link to="/polls">
-              <p>Polls</p>
-            </Link>
-          </div>
-        </div>
-        <div className="flex flex-row items-center justify-center mx-auto space-x-2 md:space-x-6 text-[#C0C0C0]">
+        <div className="flex flex-row items-center justify-center space-x-2 md:space-x-6 text-[#C0C0C0]">
           <a href="www.twitter.com/wepollnow">
             <TwitterIcon />
           </a>
@@ -65,9 +45,7 @@ const Footer = () => {
         </div>
       </div>
       <div className="flex flex-row items-center justify-center bg-black py-8 px-12 text-white">
-        <p className="text-center">
-          WepollNow copyright {copy} 2022. All rights reserved.
-        </p>
+        <p>WepollNow copyright {copy} 2022. All rights reserved.</p>
       </div>
     </>
   );

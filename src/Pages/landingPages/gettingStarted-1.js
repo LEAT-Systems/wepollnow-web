@@ -43,7 +43,7 @@ const GettingStartedOne = () => {
       <Nav />
       <div className="relative flex flex-col mt-12">
         {<Socials />}
-        <div className="relative flex flex-col items-center justify-center space-y-8">
+        <div className="relative flex flex-col items-center bg-no-repeat bg-top bg-opacity-5 justify-center space-y-8 bg-hero-pattern">
           <p className="font-bold">Gubernatorial Poll</p>
           <Badge>{countDownDate}</Badge>
           <Timer date={countDownDate} size="4xl" sizeMD="6xl" />
@@ -64,7 +64,7 @@ const GettingStartedOne = () => {
               />
               <button
                 type="submit"
-                className="absolute inset-y-0 right-0 flex items-center px-4 font-bold text-white bg-gray-600 rounded-r-lg hover:bg-gray-300 focus:bg-gray-700"
+                className="absolute inset-y-0 right-0 flex items-center px-4 font-bold text-white bg-green-500 rounded-r-lg hover:bg-gray-300 focus:bg-gray-700"
               >
                 Notify Me
               </button>
@@ -72,7 +72,7 @@ const GettingStartedOne = () => {
           </div>
           {/* Small screen controls */}
           <div className="flex flex-row items-center justify-center lg:hidden space-x-4  bg-gray-400 p-4 rounded-lg px-12">
-            <Link to="/" className=" bg-black text-white rounded-full">
+            <Link to="/" className=" bg-green-200 text-white rounded-full">
               <KeyboardArrowLeftIcon />
             </Link>
             <div className="flex flex-row items-center justify-center space-x-3">
@@ -95,14 +95,14 @@ const GettingStartedOne = () => {
             </div>
             <Link
               to="/getting-started-two"
-              className=" bg-black text-white rounded-full"
+              className=" bg-green-400 text-white rounded-full"
             >
               <KeyboardArrowRightIcon />
             </Link>
           </div>
           {/* Large screen controls */}
           <div className="absolute flex-col items-start justify-center hidden lg:flex lg:ml-[1200px] space-y-4 ">
-            <Link to="/" className=" bg-gray-100 rounded-full">
+            <Link to="/" className=" bg-green-200 rounded-full">
               <KeyboardArrowUpIcon />
             </Link>
             <div className="flex flex-col items-center justify-center px-2 space-y-3">
@@ -125,18 +125,17 @@ const GettingStartedOne = () => {
             </div>
             <Link
               to="/getting-started-two"
-              className=" bg-gray-100 rounded-full"
+              className=" bg-green-200 rounded-full"
             >
               <KeyboardArrowDownIcon />
             </Link>
           </div>
         </div>
-
-        <div className="flex flex-row items-center justify-center md:-mt-2 ">
-          <h1 className="text-[150px] text-center md:text-[200px] lg:text-[350px] font-bold text-gray-300 md:ml-8">
-            VOTE
-          </h1>
-        </div>
+      </div>
+      <div className="flex flex-col items-center justify-center md:-mt-24">
+        <h1 className="text-[150px] text-center logo md:text-[200px] lg:text-[350px] font-bold text-[#D2D2D2] md:ml-8">
+          VOTE
+        </h1>
       </div>
     </>
   );

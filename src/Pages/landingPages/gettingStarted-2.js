@@ -21,19 +21,23 @@ const GettingStartedTwo = () => {
       <Nav />
       <div className="relative flex flex-col">
         {<Socials />}
-        <div className="relative flex flex-col items-center justify-center space-y-4 mt-12">
+        <div className="relative flex flex-col items-center justify-center space-y-4 mt-12 bg-hero-pattern bg-no-repeat bg-top bg-opacity-5 md:py-8">
           <p className="font-bold">Presidential Poll</p>
           <Badge>{countDownDate}</Badge>
           <div className="flex flex-row items-center justify-center">
             <h2 className="max-w-4xl p-8 text-2xl md:text-5xl font-bold text-center">
-              Let's change the narrative.
+              Let's{" "}
+              <span className="underline underline-offset-4 decoration-yellow-500 decoration-[5px]">
+                change
+              </span>{" "}
+              the narrative.
               <br /> Make your vote count.
             </h2>
           </div>
-          <div className="md:pt-8 bottom-24">
+          <div className="md:pt-8">
             <Link
               to="/getting-started-phone-required"
-              className="w-full p-4 px-8 text-white bg-gray-900 rounded-lg"
+              className="w-full p-4 px-8 text-white bg-green-500 rounded-lg"
             >
               Vote Now
             </Link>
@@ -42,7 +46,7 @@ const GettingStartedTwo = () => {
           {/* Small screen controls */}
           <div></div>
           <div className="flex flex-row items-center justify-center lg:hidden space-x-4 bg-gray-400 p-4 rounded-lg px-12">
-            <Link to="/" className=" bg-black text-white rounded-full">
+            <Link to="/" className=" bg-green-200 text-white rounded-full">
               <KeyboardArrowLeftIcon />
             </Link>
             <div className="flex flex-row items-center justify-center space-x-3">
@@ -65,7 +69,7 @@ const GettingStartedTwo = () => {
             </div>
             <Link
               to="/getting-started-three"
-              className=" bg-black text-white rounded-full"
+              className=" bg-green-200 text-white rounded-full"
             >
               <KeyboardArrowRightIcon />
             </Link>
@@ -74,7 +78,7 @@ const GettingStartedTwo = () => {
           {/* Large screen controls */}
 
           <div className="absolute flex-col items-start justify-center hidden lg:flex lg:ml-[1200px] space-y-4 ">
-            <Link to="/" className=" bg-gray-100 rounded-full">
+            <Link to="/" className=" bg-green-200 rounded-full">
               <KeyboardArrowUpIcon />
             </Link>
             <div className="flex flex-col items-center justify-center px-2 space-y-3">
@@ -97,7 +101,7 @@ const GettingStartedTwo = () => {
             </div>
             <Link
               to="/getting-started-three"
-              className=" bg-gray-100 rounded-full"
+              className=" bg-green-200 rounded-full"
             >
               <KeyboardArrowDownIcon />
             </Link>
@@ -105,7 +109,7 @@ const GettingStartedTwo = () => {
         </div>
 
         <div className="flex flex-row items-center justify-center lg:-mt-24">
-          <h1 className="text-[150px] text-center md:text-[200px] lg:text-[350px] font-bold text-gray-300 md:ml-8">
+          <h1 className="text-[150px] logo text-center md:text-[200px] lg:text-[350px] font-bold text-gray-300 md:ml-8">
             VOTE
           </h1>
         </div>
@@ -131,16 +135,16 @@ const GettingStartedTwo = () => {
                 for everyone.
                 <br /> Together, We can make Nigeria Great!
               </p>
+              <div className="pt-8 md:pt-4 text-center">
+                <Link to="/about">
+                  <button className="p-4 w-1/3 rounded-lg bg-gray-500 px-4 text-white font-bold hover:bg-black">
+                    Learn More
+                  </button>
+                </Link>
+              </div>
             </div>
-            <div className="bg-gray-200 p-8">
+            <div className="bg-gray-200 p-8 hidden md:flex">
               <img src={image} alt="" />
-            </div>
-            <div className="pt-8 md:pt-4 text-center">
-              <Link to="/about">
-                <button className="p-4 w-1/3 rounded-lg bg-gray-500 px-4 text-white font-bold hover:bg-black">
-                  Learn More
-                </button>
-              </Link>
             </div>
           </div>
         </section>
