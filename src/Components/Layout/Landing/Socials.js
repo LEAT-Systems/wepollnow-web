@@ -8,7 +8,7 @@ import Facebook from "@mui/icons-material/Facebook";
 const Socials = () => {
   return (
     <>
-      <div className="absolute z-10 flex flex-col items-center justify-center px-4 mt-24 space-y-4 md:px-12 lg:px-24">
+      <div className="absolute z-10 hidden md:flex flex-col items-center justify-center px-4 mt-24 space-y-4 md:px-12 lg:px-24">
         <div className="p-4 mx-auto bg-gray-400 rounded-full animate-pulse">
           <SwipeDownIcon />
         </div>
