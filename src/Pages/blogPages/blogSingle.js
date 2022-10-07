@@ -7,12 +7,12 @@ import avatar from "../../images/avatar.svg";
 
 const BlogSingle = () => {
   return (
-    <div className="space-y-4 mt-48">
-      <p className="px-12 ml-6 font-bold text-xl underline underline-offset-2">
+    <div className="space-y-4 mt-8 md:mt-48">
+      <p className="md:px-12 px-4 md:ml-6 font-bold text-xl underline underline-offset-2">
         Latest Update
       </p>
 
-      <div className="flex flex-col md:flex-row items-center justify-center mx-auto">
+      <div className="flex flex-col space-y-4 md:space-y-0 md:flex-row items-center justify-center mx-auto">
         <div className="flex flex-col space-y-2">
           <img src={votingg} className="" alt={"Voter"} />
           <div className="flex flex-row space-x-4">
