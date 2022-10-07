@@ -14,7 +14,7 @@ const BlogPage = () => {
       <div className="flex flex-col md:flex-row items-center justify-between px-4 md:px-24 py-8 mx-auto bg-gray-100">
         <div className="flex flex-col space-y-2 ">
           <p className="text-xs font-bold underline">Our Blog</p>
-          <h1 className="md:max-w-xl text-3xl md:text-6xl font-bold">
+          <h1 className="md:max-w-xl text-5xl md:text-6xl font-bold">
             We keep you informed with the latest update.
           </h1>
         </div>
@@ -30,11 +30,7 @@ const BlogPage = () => {
       {/* ITEM 1 */}
       <div className="container flex flex-col space-y-6 md:space-y-0 md:flex-row items-center justify-between max-w-5xl mx-auto mt-24 space-x-4">
         <div className="flex flex-col space-y-2 px-4">
-          <img
-            src={votingg}
-            className="w-[20rem] h-[20rem] rounded-xl"
-            alt={"Voter"}
-          />
+          <img src={votingg} alt={"Voter"} />
           <div className="flex flex-row space-x-4">
             <img className="w-6 h-6 rounded-full" src={avatar} alt="" />
             <p className="font-bold">Olumide Adebayo</p>
@@ -59,7 +55,7 @@ const BlogPage = () => {
           </div>
         </div>
         <div className="flex flex-col space-y-2">
-          <img src={votingg} className="w-[20rem] h-[20rem]" alt={"Voter"} />
+          <img src={votingg} alt={"Voter"} />
           <div className="flex flex-row space-x-4">
             <img className="w-6 h-6 rounded-full" src={avatar} alt={"Voter"} />
             <p className="font-bold">Olumide Adebayo</p>
@@ -84,7 +80,7 @@ const BlogPage = () => {
           </div>
         </div>
         <div className="flex flex-col space-y-2">
-          <img src={votingg} className="w-[20rem] h-[20rem]" alt={"Voter"} />
+          <img src={votingg} alt={"Voter"} />
           <div className="flex flex-row space-x-4">
             <img className="w-6 h-6 rounded-full" src={avatar} alt={"Voter"} />
             <p className="font-bold">Olumide Adebayo</p>
