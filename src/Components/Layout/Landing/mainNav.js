@@ -1,21 +1,86 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import FaceBookIcon from "@mui/icons-material/Facebook";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import YouTubeIcon from "@mui/icons-material/YouTube";
+import { Modal } from "@mui/material";
 
 const Nav = () => {
+  const [data, setData] = useState();
   const [show, setShow] = useState(false);
+  const [dismiss, setDismiss] = useState(false);
+  const [hasSubmitted, setHasSubmitted] = useState(false);
+  const nameRef = useRef();
+  const emailRef = useRef();
+  const messageRef = useRef();
+
+  // Handle submission handler
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    // Collecting the data with refs
+    let name = nameRef.current.value.trim();
+    let email = emailRef.current.value.trim();
+    let message = messageRef.current.value.trim();
+
+    // preparing the data into setData() in useState()
+    setData({
+      dataID: "Navigation Bar Form Data",
+      userNames: name,
+      userEmail: email,
+      message: message,
+    });
+
+    // getting the data() value from useState and Sending the data to API endpoint
+    localStorage.setItem("Contact Form", JSON.stringify(data));
+    setHasSubmitted(true);
+
+    // clear form
+    nameRef.current.value = "";
+    emailRef.current.value = "";
+    messageRef.current.value = "";
+  };
+
+  // Dismissing success message on form
+  setTimeout(() => {
+    setHasSubmitted(false);
+  }, 2000);
+
+  // Handling state for dismiss button of modal
+  const handleClick = () => {
+    setDismiss(true);
+  };
+
+  // Modal content
+  const message = (
+    <div className="flex flex-col items-center justify-center min-h-screen mx-auto space-y-4">
+      <div className="bg-gray-50 rounded-lg space-y-8 px-24 py-12">
+        <h1 className="text-6xl text-black">Successful</h1>
+        <div className="flex flex-row items-end justify-end">
+          <button
+            onClick={handleClick}
+            className="bg-black text-white py-2 px-4 rounded-lg"
+          >
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+
   return (
     <React.Fragment>
+      {hasSubmitted && (
+        <Modal children={message} open={dismiss ? false : true} />
+      )}
       {/* Top Navigation */}
       <div
         className={`container flex flex-row items-center justify-between px-12 py-8 mx-auto border-b border-gray-200`}
       >
         <Link to="/">
-          <p className="text-4xl font-bold ">
-            <span className="text-gray-400">Poll</span>it
+          <p className="text-3xl font-bold logo">
+            <span className="text-gray-400">Wepoll</span>Now
           </p>
         </Link>
         {/* <Link to="/test">TEST</Link> */}
@@ -31,17 +96,16 @@ const Nav = () => {
           </button>
         </div>
       </div>
-
       {/* Collapsible Nav */}
       <div
         className={
           !show
             ? "hidden"
-            : "flex flex-col md:flex-row items-start justify-start py-12 bg-black mx-auto space-y-12"
+            : "flex flex-col md:flex-row items-center justify-center py-12 bg-black mx-auto space-y-12"
         }
       >
         <div className="flex flex-col items-center justify-center mx-auto space-y-8 md:mx-0 md:px-48">
-          <div className="space-y-8 text-center md:text-left md:mt-10">
+          <div className="space-y-8 text-center md:text-left md:mt-10 md:mx-auto">
             <div>
               <Link to="/" className="text-5xl font-bold stroke md:text-8xl">
                 <h1>Home</h1>
@@ -77,35 +141,53 @@ const Nav = () => {
             </div>
           </div>
         </div>
-        <div className="flex flex-col items-center justify-center mx-auto">
+
+        <div className="flex flex-col items-center justify-center mx-auto border-t md:border-0 border-gray-200">
           <div className="space-y-4">
-            <h4 className="text-2xl font-bold text-center text-white md:text-left ">
+            {hasSubmitted && (
+              <div className="bg-green-500 p-4 rounded-lg text-white">
+                Action was Successful. We will get back to you
+              </div>
+            )}
+            <h4 className="text-xl md:text-2xl mt-8 md:mt-0 font-bold text-left text-white md:text-left ">
               Get in touch
             </h4>
-            <form className="space-y-2">
+            <form className="space-y-2" onSubmit={handleSubmit}>
               <div>
                 <p className="text-white">Name</p>
                 <input
-                  className="p-4 text-white placeholder-gray-200 bg-black border rounded w-[400px] lg:w-[500px] hover:bg-gray-900"
+                  required
+                  type="text"
+                  ref={nameRef}
+                  className="p-4 text-white placeholder-gray-200 bg-black border rounded w-[300px] md:w-[400px] lg:w-[500px] hover:bg-gray-900"
                   placeholder="Enter Your Name"
                 />
               </div>
               <div>
                 <p className="text-white">Email</p>
                 <input
-                  className="p-4 text-white placeholder-gray-200 bg-black border rounded w-[400px] lg:w-[500px] hover:bg-gray-900"
+                  required
+                  type="email"
+                  ref={emailRef}
+                  className="p-4 text-white placeholder-gray-200 bg-black border rounded w-[300px] md:w-[400px] lg:w-[500px] hover:bg-gray-900"
                   placeholder="Enter Your Email"
                 />
               </div>
               <div>
                 <p className="text-white">Message</p>
                 <textarea
-                  className="p-4 text-white placeholder-gray-200 bg-black border rounded w-[400px] lg:w-[500px] hover:bg-gray-900 h-32"
+                  required
+                  type="text"
+                  ref={messageRef}
+                  className="p-4 text-white placeholder-gray-200 bg-black border rounded w-[300px] md:w-[400px] lg:w-[500px] hover:bg-gray-900 h-32"
                   placeholder="Enter Your Message"
                 />
               </div>
               <div>
-                <button className="w-full p-4 transition bg-white rounded text-dark hover:-translate-y-1">
+                <button
+                  type="submit"
+                  className="w-full p-4 transition bg-white rounded text-dark hover:-translate-y-1"
+                >
                   Send Message
                 </button>
               </div>

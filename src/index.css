@@ -67,3 +67,13 @@ body::-webkit-scrollbar-thumb {
   border-radius: 10px;
   /* border: 3px solid #000; */
 }
+
+.bg-hero {
+  width: 200px;
+  height: 300px;
+  left: 30%;
+}
+
+.logo {
+  font-family: "Fira Sans Condensed", sans-serif;
+}

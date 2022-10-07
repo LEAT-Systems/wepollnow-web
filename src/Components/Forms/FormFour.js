@@ -1,105 +1,280 @@
-import { useState } from "react";
+import React from "react";
+import { useState, useEffect } from "react";
+import { Formik, Form, Field, ErrorMessage } from "formik";
 import Nav from "../Layout/Landing/mainNav";
-import Badge from "../../UI/Badge";
+import Done from "@mui/icons-material/Done";
+import * as Yup from "yup";
+import FormLabel from "../../UI/FormLabel";
 
-const Parties = [
-  {
-    id: "p1",
-    partyName: "All Progressive Congress (APC)",
-    candidate: "Bola Ahmed Tinubu",
-    runningMate: "Kashim Shettima",
-  },
-  {
-    id: "p2",
-    partyName: "Labour Party (LP)",
-    candidate: "Peter Gregory Obi",
-    runningMate: "Datti",
-  },
-  {
-    id: "p3",
-    partyName: "Peoples Democratic Party (PDP)",
-    candidate: "Atiku Abubakar",
-    runningMate: "Ifeanyi Okowa",
-  },
-];
-const FormFour = () => {
-  const [query, setQuery] = useState("");
+const FormFour = (props) => {
+  const [formisCompleted, setFormIsCompleted] = useState(false);
+  const handleSubmit = (values) => {
+    props.next(values);
+  };
+  // Configuring the indicators
+  const { gender, religion, selectOneOption, accomodationStatus } = props.data;
+  useEffect(() => {
+    if (gender && religion && selectOneOption && accomodationStatus !== "") {
+      setFormIsCompleted(true);
+    }
+  }, [gender, religion, selectOneOption, accomodationStatus]);
 
-  //   Search Functionality
-  const keys = ["partyName", "candidate", "runningMate"];
-  const search = (data) =>
-    data.filter((data) =>
-      keys.some((key) => data[key].toLowerCase().includes(query))
-    );
+  const formThreeValidationSchema = Yup.object({
+    gender: Yup.string().required().label("* This"),
+  });
   return (
     <>
       <Nav />
-      <div className="flex flex-row items-center justify-center mx-auto py-4  px-4 md:px-0">
-        <div className="w-full md:w-1/2 h-[500px] text-lg text-gray-700 border rounded-lg">
-          <header className="w-full p-8 border-b">
-            <div className="flex flex-col items-center justify-center ">
-              <h3 className="font-bold text-black uppercase text-4xl">
-                Cast Your Vote
-              </h3>
-            </div>
-          </header>
-          <section>
-            <form>
-              <div className="flex flex-col space-y-4 p-8">
-                <div className="overflow-y-scroll space-y-4 h-64 scrollable px-4">
-                  <div className="">
-                    <label className="font-bold">Select your candidate</label>
-                    <input
-                      className="w-full h-12 px-4 mb-2 text-lg text-gray-700 placeholder-gray-600 border-b"
-                      type="text"
-                      placeholder="Search Party or Candidate Name"
-                      onChange={(e) => {
-                        return setQuery(e.target.value.toLowerCase());
-                      }}
-                    />
-                  </div>
-
-                  {search(Parties).map((item) => {
-                    return (
-                      <div
-                        key={item.id}
-                        type="radio"
-                        className=" border border-gray-200 p-6 rounded-md"
-                      >
-                        <div className="flex flex-row items-center justify-between pb-2">
-                          <label className="font-semibold">
-                            {item.partyName}
-                          </label>
-                          <input
-                            id={item.id}
-                            name="radio"
-                            type="radio"
-                            value={item.partyName}
-                            className="h-4 w-4  border-gray-300 text-gray-600 focus:ring-gray-500"
-                          />
-                        </div>
-                        <header className="flex flex-col items-start justify-start w-full p-4 border-t space-y-2">
-                          <div className="flex flex-row items-start justify-start space-x-4">
-                            <p>{item.candidate}</p>
-                            <Badge>Candidate</Badge>
-                          </div>
-                          <div className="flex flex-row items-start justify-start space-x-4">
-                            <p>{item.runningMate}</p>
-                            <Badge>Running Mate</Badge>
-                          </div>
-                        </header>
-                      </div>
-                    );
-                  })}
-                </div>
+      <div className="flex flex-row items-center justify-center px-4 py-4 mx-auto md:px-0">
+        <div className="w-full text-lg text-gray-700 border rounded-lg md:w-3/4">
+          <header className="flex flex-col w-full p-6 space-y-1 border-b">
+            <div className="flex flex-row items-center justify-center space-x-4">
+              <div className="inline-flex items-center justify-center w-5 h-5 p-4 text-black bg-gray-200 rounded-full">
+                1
               </div>
-            </form>
+              <hr className="w-12 border-black border-dashed border-1" />
+              <div className="inline-flex items-center justify-center w-5 h-5 p-4 text-black bg-gray-200 rounded-full">
+                2
+              </div>
+              <hr className="w-12 border-black border-dashed border-1" />
+              <div className="inline-flex items-center justify-center w-5 h-5 p-4 text-black bg-gray-200 rounded-full">
+                3
+              </div>
+              <hr className="w-12 border-black border-dashed border-1" />
+              {formisCompleted ? (
+                <div className="inline-flex items-center justify-center w-5 h-5 p-4 text-white bg-green-600 rounded-full">
+                  <Done />
+                </div>
+              ) : (
+                <div className="inline-flex items-center justify-center w-5 h-5 p-4 text-white bg-black rounded-full">
+                  4
+                </div>
+              )}
+            </div>
+            <p className="font-semibold text-center">
+              <span className="px-4 text-white bg-gray-400 rounded-full ">
+                Form Four: 3 Questions
+              </span>{" "}
+            </p>
+          </header>
+
+          {/*  */}
+          <section>
+            <Formik
+              validationSchema={formThreeValidationSchema}
+              initialValues={props.data}
+              onSubmit={handleSubmit}
+            >
+              {({ values }) => (
+                <Form>
+                  <div className="flex flex-col p-8 space-y-4">
+                    <div className="h-64 px-4 space-y-2 overflow-y-scroll scrollable">
+                      {/*  */}
+                      {/* ================= 1.  Gender    ================*/}
+                      {/*  */}
+                      <div className="space-y-1">
+                        <FormLabel no="i" title=" Select your Gender" />
+                        <p className="text-red-600">
+                          <ErrorMessage name="gender" />
+                        </p>
+                        <div className="flex flex-row items-center justify-between space-x-4 p-2">
+                          <div className="flex flex-row items-center justify-between p-4 border rounded w-full">
+                            <label className="block ml-3 text-sm font-medium text-gray-700">
+                              Male
+                            </label>
+                            <Field
+                              type="radio"
+                              name="gender"
+                              value="male"
+                              className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
+                            />
+                          </div>
+                          <div className="flex flex-row items-center justify-between p-4 border rounded w-full">
+                            <label className="block ml-3 text-sm font-medium text-gray-700">
+                              Female
+                            </label>
+                            <Field
+                              type="radio"
+                              name="gender"
+                              value="female"
+                              className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
+                            />
+                          </div>
+                        </div>
+                      </div>
+
+                      {/*================== 2. Religion ===========================*/}
+
+                      <div className="pt-4">
+                        <FormLabel no="i" title=" What is your religion?" />
+                        <p className="text-red-600">
+                          <ErrorMessage name="religion" />
+                        </p>
+                        <div className="flex flex-row items-center justify-between space-x-4 p-2">
+                          <div className="flex flex-row items-center justify-between p-4 border rounded w-full">
+                            <label className="block ml-3 text-sm font-medium text-gray-700">
+                              Christianity
+                            </label>
+                            <Field
+                              type="radio"
+                              name="religion"
+                              value="christianity"
+                              className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
+                            />
+                          </div>
+                          <div className="flex flex-row items-center justify-between p-4 border rounded w-full">
+                            <label className="block ml-3 text-sm font-medium text-gray-700">
+                              Islam
+                            </label>
+                            <Field
+                              type="radio"
+                              name="religion"
+                              value="islam"
+                              className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
+                            />
+                          </div>
+                        </div>
+                        <div className="flex flex-row items-center justify-between space-x-4 p-2">
+                          <div className="flex flex-row items-center justify-between p-4 border rounded w-full">
+                            <label className="block ml-3 text-sm font-medium text-gray-700">
+                              Traditional
+                            </label>
+                            <Field
+                              type="radio"
+                              name="religion"
+                              value="traditional"
+                              className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
+                            />
+                          </div>
+                          <div className="flex flex-row items-center justify-between p-4 border rounded w-full">
+                            <label className="block ml-3 text-sm font-medium text-gray-700">
+                              Other
+                            </label>
+                            <Field
+                              type="radio"
+                              name="religion"
+                              value="other"
+                              className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
+                            />
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* ========== 3. Select one option below ===============*/}
+
+                      <div className="pt-4">
+                        <FormLabel
+                          no="i"
+                          title=" Select one of the options below"
+                        />
+                        <p className="text-red-600">
+                          <ErrorMessage name="selectOneOpt" />
+                        </p>
+                        <div className="flex flex-col md:flex-row items-center justify-between md:space-x-4 md:p-2 space-y-2 md:space-y-0">
+                          <div className="flex flex-row items-center justify-between p-4 border rounded w-full">
+                            <label className="block ml-3 text-sm font-medium text-gray-700">
+                              Student
+                            </label>
+                            <Field
+                              type="radio"
+                              name="selectOneOpt"
+                              value="student"
+                              className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
+                            />
+                          </div>
+                          <div className="flex flex-row items-center justify-between p-4 border rounded w-full">
+                            <label className="block ml-3 text-sm font-medium text-gray-700">
+                              unemployed
+                            </label>
+                            <Field
+                              type="radio"
+                              name="selectOneOpt"
+                              value="unemployed"
+                              className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
+                            />
+                          </div>
+                          <div className="flex flex-row items-center justify-between p-4 border rounded w-full">
+                            <label className="block ml-3 text-sm font-medium text-gray-700">
+                              Employed
+                            </label>
+                            <Field
+                              type="radio"
+                              name="selectOneOpt"
+                              value="employed"
+                              className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
+                            />
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* ================= 4. Accomodation status =============== */}
+
+                      <div className="pt-4">
+                        <FormLabel
+                          no="i"
+                          title="What best describes your accomodation status?"
+                        />
+                        <p className="text-red-600">
+                          <ErrorMessage name="accomodationStatus" />
+                        </p>
+                        <div className="flex flex-col md:flex-row items-center justify-between md:space-x-4 md:p-2 space-y-2 md:space-y-0">
+                          <div className="flex flex-row items-center justify-between p-4 border rounded w-full">
+                            <label className="block ml-3 text-sm font-medium text-gray-700">
+                              Living with family
+                            </label>
+                            <Field
+                              type="radio"
+                              name="accomodationStatus"
+                              value="Living with family"
+                              className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
+                            />
+                          </div>
+                          <div className="flex flex-row items-center justify-between p-4 border rounded w-full">
+                            <label className="block ml-3 text-sm font-medium text-gray-700">
+                              Living with friends
+                            </label>
+                            <Field
+                              type="radio"
+                              name="accomodationStatus"
+                              value="Living with friends"
+                              className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
+                            />
+                          </div>
+                          <div className="flex flex-row items-center justify-between p-4 border rounded w-full">
+                            <label className="block ml-3 text-sm font-medium text-gray-700">
+                              Living on your own
+                            </label>
+                            <Field
+                              type="radio"
+                              name="accomodationStatus"
+                              value="Living on your own"
+                              className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <section className="w-full p-4 space-x-6 border-t">
+                    <button
+                      type="button"
+                      onClick={() => props.prev(values)}
+                      className="p-2 px-8 ml-8 text-white bg-gray-400 rounded-md"
+                    >
+                      Previous
+                    </button>
+                    <button
+                      onClick={() => props.next(values)}
+                      type="button"
+                      className="p-2 px-8 text-white bg-black rounded-md"
+                    >
+                      Submit
+                    </button>
+                  </section>
+                </Form>
+              )}
+            </Formik>
           </section>
-          <div className="flex flex-col w-full border-t text-center min-h-[70px] items-center justify-center">
-            <button className="p-2 w-1/4 bg-black text-white rounded-md">
-              CAST VOTE
-            </button>
-          </div>
         </div>
       </div>
     </>

@@ -1,8 +1,7 @@
 import React from "react";
 import { useState, useEffect, useRef } from "react";
-import { countDownDate } from "./MagicVars";
 
-const Test = () => {
+const Timer = (props) => {
   const [timerDays, setTimerDays] = useState("00");
   const [timerHours, setTimerHours] = useState("00");
   const [timerMinutes, setTimerMinutes] = useState("00");
@@ -15,7 +14,7 @@ const Test = () => {
   let interval = useRef();
 
   function startTimer() {
-    const countdownDate = new Date(countDownDate).getTime();
+    const countdownDate = new Date(props.date).getTime();
     interval = setInterval(() => {
       const now = new Date().getTime();
       const distance = countdownDate - now;
@@ -52,29 +51,45 @@ const Test = () => {
       {!due ? (
         <div className="flex flex-row items-center justify-center space-x-4">
           <div className="flex flex-col items-center p-4 space-y-2 border-r border-gray-300">
-            <h1 className="text-3xl font-bold md:text-7xl">{timerDays}</h1>
-            <p>days</p>
+            <h1
+              className={`text-${props.size} font-bold md:text-${props.sizeMD}`}
+            >
+              {timerDays}
+            </h1>
+            <p>Days</p>
           </div>
           <div className="flex flex-col items-center p-4 space-y-2 border-r border-gray-300">
-            <h1 className="text-3xl font-bold md:text-7xl">{timerHours}</h1>
+            <h1
+              className={`text-${props.size} font-bold md:text-${props.sizeMD}`}
+            >
+              {timerHours}
+            </h1>
             <p>Hours</p>
           </div>
           <div className="flex flex-col items-center p-4 space-y-2 border-r border-gray-300">
-            <h1 className="text-3xl font-bold md:text-7xl">{timerMinutes}</h1>
-            <p>minutes</p>
+            <h1
+              className={`text-${props.size} font-bold md:text-${props.sizeMD}`}
+            >
+              {timerMinutes}
+            </h1>
+            <p>Minutes</p>
           </div>
           <div className="flex flex-col items-center p-4 space-y-2">
-            <h1 className="text-3xl font-bold md:text-7xl">{timerSeconds}</h1>
-            <p>seconds</p>
+            <h1
+              className={`text-${props.size} font-bold md:text-${props.sizeMD}`}
+            >
+              {timerSeconds}
+            </h1>
+            <p>Seconds</p>
           </div>
         </div>
       ) : (
         <p className="p-6 text-3xl font-bold border-4 border-blue-200 rounded-lg md:text-6xl">
-          Election is today
+          Election is Ongoing...
         </p>
       )}
     </>
   );
 };
 
-export default Test;
+export default Timer;

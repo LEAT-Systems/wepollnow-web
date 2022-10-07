@@ -11,22 +11,36 @@ const Confirm = (props) => {
     phone,
     email,
     firstTimeVoter,
-    LGAofR,
-    SoR,
+    diasporaVoter,
+    stateOfVotingRes,
+    LGAofVotingRes,
+    stateOfOrigin,
+    ageRange,
     pvc,
+    maritalStatus,
     employmentStatus,
-    Gender,
+    gender,
+    religion,
+    selectOneOpt,
+    accomodationStatus,
   } = props.data;
 
   const data = [
     phone,
     email,
     firstTimeVoter,
-    LGAofR,
-    SoR,
+    diasporaVoter,
+    stateOfVotingRes,
+    LGAofVotingRes,
+    stateOfOrigin,
+    ageRange,
     pvc,
+    maritalStatus,
     employmentStatus,
-    Gender,
+    gender,
+    religion,
+    selectOneOpt,
+    accomodationStatus,
   ];
 
   useEffect(() => {
@@ -47,7 +61,7 @@ const Confirm = (props) => {
               <h3 className="text-2xl font-bold text-center md:text-3xl">
                 Review & Confirm Your Details
               </h3>
-              <p className="px-4 text-sm font-semibold text-center text-black bg-green-200 rounded-full md:text-lg">
+              <p className="px-4 text-sm font-semibold text-center text-black bg-gray-200 rounded-full md:text-lg">
                 You can go back to modify details before submitting
               </p>
             </div>
@@ -80,14 +94,14 @@ const Confirm = (props) => {
                       >
                         <div className="flex flex-row justify-between px-4 py-3 border-b border-gray-200">
                           <span className="font-bold">PHONE NUMBER :</span>{" "}
-                          <p className="px-2 bg-green-200 rounded-lg ">
+                          <p className="px-2 border border-gray-200 rounded-lg ">
                             {props.data.phone}
                           </p>
                         </div>
                         <div className="flex flex-row justify-between px-4 py-3 border-b border-gray-200">
                           <span className="font-bold uppercase">Email : </span>
                           {""}
-                          <p className="px-2 bg-green-200 rounded-lg">
+                          <p className="px-2 border border-gray-200 rounded-lg">
                             {props.data.email}
                           </p>
                         </div>
@@ -95,46 +109,102 @@ const Confirm = (props) => {
                           <span className="font-bold uppercase">
                             FIRST TIME VOTER ? :
                           </span>
-                          <p className="px-2 bg-green-200 rounded-lg">
+                          <p className="px-2 border border-gray-200 rounded-lg">
                             {props.data.firstTimeVoter}
                           </p>
                         </div>
                         <div className="flex flex-row justify-between px-4 py-3 border-b border-gray-200">
                           <span className="font-bold uppercase">
-                            LGA of origin:{" "}
+                            Diaspora Voter:{" "}
                           </span>
-                          <p className="px-2 bg-green-200 rounded-lg">
-                            {props.data.LGAofR}
+                          <p className="px-2 border border-gray-200 rounded-lg">
+                            {props.data.diasporaVoter}
                           </p>
                         </div>
                         <div className="flex flex-row justify-between px-4 py-3 border-b border-gray-200">
                           <span className="font-bold uppercase">
-                            State of origin:{" "}
+                            State of Voting Residence:{" "}
                           </span>
-                          <p className="px-2 bg-green-200 rounded-lg">
-                            {props.data.SoR}
+                          <p className="px-2 border border-gray-200 rounded-lg">
+                            {props.data.stateOfVotingRes}
                           </p>
                         </div>
                         <div className="flex flex-row justify-between px-4 py-3 border-b border-gray-200">
                           <span className="font-bold uppercase">
-                            Do you have a PVC ? :{" "}
+                            LGA of Voting Residence ? :{" "}
                           </span>
-                          <p className="px-2 bg-green-200 rounded-lg">
+                          <p className="px-2 border border-gray-200 rounded-lg">
+                            {props.data.LGAofVotingRes}
+                          </p>
+                        </div>
+                        <div className="flex flex-row justify-between px-4 py-3 border-b border-gray-200">
+                          <span className="font-bold uppercase">
+                            State Of Origin:{" "}
+                          </span>
+                          <p className="px-2 border border-gray-200 rounded-lg">
+                            {props.data.stateOfOrigin}
+                          </p>
+                        </div>
+                        <div className="flex flex-row justify-between px-4 py-3 border-b border-gray-200">
+                          <span className="font-bold uppercase">
+                            Age range:{" "}
+                          </span>
+                          <p className="px-2 border border-gray-200 rounded-lg">
+                            {props.data.ageRange}
+                          </p>
+                        </div>
+                        <div className="flex flex-row justify-between px-4 py-3 border-b border-gray-200">
+                          <span className="font-bold uppercase">
+                            Do you have a PVC?:{" "}
+                          </span>
+                          <p className="px-2 border border-gray-200 rounded-lg">
                             {props.data.pvc}
                           </p>
                         </div>
                         <div className="flex flex-row justify-between px-4 py-3 border-b border-gray-200">
-                          <span className="font-bold uppercase">GENDER: </span>
-                          <p className="px-2 bg-green-200 rounded-lg">
-                            {props.data.Gender}
+                          <span className="font-bold uppercase">
+                            Marital Status:{" "}
+                          </span>
+                          <p className="px-2 border border-gray-200 rounded-lg">
+                            {props.data.maritalStatus}
                           </p>
                         </div>
-                        <div className="flex flex-row justify-between px-4 py-3">
+                        <div className="flex flex-row justify-between border-b px-4 py-3">
                           <span className="font-bold uppercase">
                             Employment Status:{" "}
                           </span>
-                          <p className="px-2 bg-green-200 rounded-lg">
+                          <p className="px-2 border border-gray-200 rounded-lg">
                             {props.data.employmentStatus}
+                          </p>
+                        </div>
+                        <div className="flex flex-row justify-between px-4 py-3 border-b border-gray-200">
+                          <span className="font-bold uppercase">Gender: </span>
+                          <p className="px-2 border border-gray-200 rounded-lg">
+                            {props.data.gender}
+                          </p>
+                        </div>
+                        <div className="flex flex-row justify-between px-4 py-3 border-b border-gray-200">
+                          <span className="font-bold uppercase">
+                            Religion:{" "}
+                          </span>
+                          <p className="px-2 border border-gray-200 rounded-lg">
+                            {props.data.religion}
+                          </p>
+                        </div>
+                        <div className="flex flex-row justify-between px-4 py-3 border-b border-gray-200">
+                          <span className="font-bold uppercase">
+                            You are a:{" "}
+                          </span>
+                          <p className="px-2 border border-gray-200 rounded-lg">
+                            {props.data.selectOneOpt}
+                          </p>
+                        </div>
+                        <div className="flex flex-row justify-between px-4 py-3 border-b border-gray-200">
+                          <span className="font-bold uppercase">
+                            Accomodation Status:{" "}
+                          </span>
+                          <p className="px-2 border border-gray-200 rounded-lg">
+                            {props.data.accomodationStatus}
                           </p>
                         </div>
                       </div>
@@ -144,7 +214,7 @@ const Confirm = (props) => {
                     <button
                       type="button"
                       onClick={() => props.prev(values)}
-                      className="p-2 px-4 ml-6 text-white bg-red-500 rounded-md"
+                      className="p-2 px-4 ml-6 text-white bg-gray-500 rounded-md"
                     >
                       Go Back
                     </button>
@@ -153,7 +223,7 @@ const Confirm = (props) => {
                       className={
                         hasError
                           ? "hidden"
-                          : "p-2 px-4 bg-green-800 text-white rounded-md"
+                          : "p-2 px-4 bg-black text-white rounded-md"
                       }
                     >
                       {`Confirm & Submit`}

@@ -6,26 +6,42 @@ import FormTwo from "./FormTwo";
 import FormThree from "./FormThree";
 import Confirm from "./Confirm";
 import Message from "./Message";
+import FormFour from "./FormFour";
 
+// From local Storage
+const phone = localStorage.getItem("phoneNumber");
+
+//
 const FormComponent = () => {
   const [userIp, setUserIp] = useState("");
   const [currentStep, setCurrentStep] = useState(0);
   const [hasError, setHasError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [data, setData] = useState({
+    // Local Storage
+    phone: phone,
+
     // Form 1
-    phone: "",
     email: "",
     firstTimeVoter: "",
+    diasporaVoter: "",
+    stateOfVotingRes: "",
 
     // // Form 2
-    LGAofR: "",
-    SoR: "",
-    pvc: "",
+    LGAofVotingRes: "",
+    stateOfOrigin: "",
+    ageRange: "",
 
     // // Form 3
+    pvc: "",
+    maritalStatus: "",
     employmentStatus: "",
-    Gender: "",
+
+    // Form 4
+    gender: "",
+    religion: "",
+    selectOneOpt: "",
+    accomodationStatus: "",
   });
 
   //   Getting the User IP Address
@@ -57,11 +73,18 @@ const FormComponent = () => {
               phone: formData.phone,
               email: formData.email,
               firstTimeVoter: formData.firstTimeVoter,
-              LGAofR: formData.LGAofR,
-              Sor: formData.Sor,
+              diasporaVoter: formData.diasporaVoter,
+              stateOfVotingResidence: formData.stateOfVotingResidence,
+              LGAofVotingResidence: formData.LGAofVotingResidence,
+              StateOfOrigin: formData.StateOfOrigin,
+              ageRange: formData.ageRange,
               pvc: formData.pvc,
+              maritalStatus: formData.maritalStatus,
               employmentStatus: formData.employmentStatus,
-              Gender: formData.gender,
+              Gender: formData.Gender,
+              Religion: formData.Religion,
+              SelectOneOpt: formData.SelectOneOpt,
+              AccomodationStatus: formData.AccomodationStatus,
               userIp: formData.userIp,
             }),
           }
@@ -90,6 +113,7 @@ const FormComponent = () => {
     <FormOne next={handleNextStep} data={data} />,
     <FormTwo next={handleNextStep} prev={handlePrevStep} data={data} />,
     <FormThree next={handleNextStep} prev={handlePrevStep} data={data} />,
+    <FormFour next={handleNextStep} prev={handlePrevStep} data={data} />,
     <Confirm next={handleNextStep} prev={handlePrevStep} data={data} />,
     <Message state={hasError} message={errorMessage} />,
   ];

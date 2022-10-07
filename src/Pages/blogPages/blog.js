@@ -5,6 +5,7 @@ import avatar from "../../images/avatar.svg";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import CommentIcon from "@mui/icons-material/Comment";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
+import Footer from "../../Components/Layout/Landing/Footer";
 
 const BlogPage = () => {
   return (
@@ -108,6 +109,7 @@ const BlogPage = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </>
   );
 };
