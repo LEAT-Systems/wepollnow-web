@@ -13,7 +13,7 @@ const PollsSingle = () => {
         <div className="flex flex-col md:flex-row items-center justify-between px-12">
           {Polls.map((item) => {
             return (
-              <div className="flex flex-col items-center justify-center space-x-4 space-y-2 p-4 ">
+              <div className="flex flex-col items-center justify-center space-x-4 space-y-2 p-4 px-4 md:px-0">
                 <div className="bg-gray-100 items-center justify-center flex flex-col py-12 space-y-2">
                   <p className="font-bold text-xl">{item.description}</p>
                   <label className="bg-gray-200 px-4 rounded-lg">
