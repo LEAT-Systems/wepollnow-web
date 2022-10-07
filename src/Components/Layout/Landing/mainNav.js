@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import FaceBookIcon from "@mui/icons-material/Facebook";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import YouTubeIcon from "@mui/icons-material/YouTube";
-import { Modal } from "@mui/material";
+// import { Modal } from "@mui/material";
 
 const Nav = () => {
   const [data, setData] = useState();
@@ -53,27 +53,27 @@ const Nav = () => {
   };
 
   // Modal content
-  const message = (
-    <div className="flex flex-col items-center justify-center min-h-screen mx-auto space-y-4">
-      <div className="bg-gray-50 rounded-lg space-y-8 px-24 py-12">
-        <h1 className="text-6xl text-black">Successful</h1>
-        <div className="flex flex-row items-end justify-end">
-          <button
-            onClick={handleClick}
-            className="bg-black text-white py-2 px-4 rounded-lg"
-          >
-            Close
-          </button>
-        </div>
-      </div>
-    </div>
-  );
+  // const message = (
+  //   <div className="flex flex-col items-center justify-center min-h-screen mx-auto space-y-4">
+  //     <div className="bg-gray-50 rounded-lg space-y-8 px-24 py-12">
+  //       <h1 className="text-6xl text-black">Successful</h1>
+  //       <div className="flex flex-row items-end justify-end">
+  //         <button
+  //           onClick={handleClick}
+  //           className="bg-black text-white py-2 px-4 rounded-lg"
+  //         >
+  //           Close
+  //         </button>
+  //       </div>
+  //     </div>
+  //   </div>
+  // );
 
   return (
     <React.Fragment>
-      {hasSubmitted && (
+      {/* {hasSubmitted && (
         <Modal children={message} open={dismiss ? false : true} />
-      )}
+      )} */}
       {/* Top Navigation */}
       <div
         className={`container flex flex-row items-center justify-between px-12 py-8 mx-auto border-b border-gray-200`}
