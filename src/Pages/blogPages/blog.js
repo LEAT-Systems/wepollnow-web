@@ -11,7 +11,7 @@ const BlogPage = () => {
   return (
     <>
       <Nav />
-      <div className="flex flex-col md:flex-row items-center justify-between px-4 md:px-24 py-8 mx-auto bg-gray-100">
+      <div className="flex flex-col md:flex-row  items-center justify-between px-4 md:px-24 py-8 mx-auto bg-gray-100">
         <div className="flex flex-col space-y-2 ">
           <p className="text-xs font-bold underline">Our Blog</p>
           <h1 className="md:max-w-xl text-5xl md:text-6xl font-bold">
