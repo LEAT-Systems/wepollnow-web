@@ -31,8 +31,8 @@ const Footer = () => {
         </div>
 
         {/* Mobile footer */}
-        <div className="flex md:hidden flex-row items-center justify-center mx-auto">
-          <div className="flex flex-col md:flex-row items-center justify-center  space-x-2  text-white mx-auto">
+        <div className="flex md:hidden flex-row items-center justify-center mx-auto py-4">
+          <div className="flex flex-col md:flex-row items-center justify-center px-2  space-x-2  text-white mx-auto">
             <Link to="/">
               <p>Home</p>
             </Link>
@@ -40,7 +40,7 @@ const Footer = () => {
               <p>About</p>
             </Link>
           </div>
-          <div className="flex flex-col md:flex-row items-center justify-center  space-x-2  text-white mx-auto">
+          <div className="flex flex-col md:flex-row items-center justify-center px-2  space-x-2  text-white mx-auto">
             <Link to="/blog">
               <p>Blog</p>
             </Link>
@@ -49,7 +49,7 @@ const Footer = () => {
             </Link>
           </div>
         </div>
-        <div className="flex flex-row items-center justify-center space-y-2 mx-auto md:space-x-6 text-[#C0C0C0]">
+        <div className="flex flex-row items-center justify-center mx-auto space-x-2 md:space-x-6 text-[#C0C0C0]">
           <a href="www.twitter.com/wepollnow">
             <TwitterIcon />
           </a>
