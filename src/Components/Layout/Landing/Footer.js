@@ -29,8 +29,10 @@ const Footer = () => {
             <p>Polls</p>
           </Link>
         </div>
-        <div className="flex md:hidden flex-row items-center justify-center">
-          <div className="flex flex-col md:flex-row items-center justify-center  md:space-x-8 space-y-2 text-white mx-auto">
+
+        {/* Mobile footer */}
+        <div className="flex md:hidden flex-row items-center justify-center mx-auto">
+          <div className="flex flex-col md:flex-row items-center justify-center  space-x-2  text-white mx-auto">
             <Link to="/">
               <p>Home</p>
             </Link>
@@ -38,7 +40,7 @@ const Footer = () => {
               <p>About</p>
             </Link>
           </div>
-          <div className="flex flex-col md:flex-row items-center justify-center  md:space-x-8 space-y-2 text-white mx-auto">
+          <div className="flex flex-col md:flex-row items-center justify-center  space-x-2  text-white mx-auto">
             <Link to="/blog">
               <p>Blog</p>
             </Link>
