@@ -76,7 +76,7 @@ const GettingStartedThree = () => {
               <Link
                 to="/getting-started-four"
                 type="submit"
-                className="border-b border-gray-50 w-full p-4 rounded-lg bg-green-500 text-white text-center hover:-translate-y-1"
+                className="w-full p-4 rounded-lg bg-green-500 text-white text-center hover:-translate-y-1"
               >
                 Continue
               </Link>
