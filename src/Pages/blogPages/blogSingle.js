@@ -4,6 +4,9 @@ import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import votingg from "../../images/votingg.jpg";
 import avatar from "../../images/avatar.svg";
+import img_1 from "../../images/image_5.png";
+import img_2 from "../../images/image_3.png";
+import img_3 from "../../images/image_4.png";
 
 const BlogSingle = () => {
   return (
@@ -14,7 +17,7 @@ const BlogSingle = () => {
 
       <div className="flex flex-col space-y-8 md:space-y-0 md:flex-row items-center justify-center mx-auto">
         <div className="flex flex-col space-y-2">
-          <img src={votingg} className="" alt={"Voter"} />
+          <img src={img_1} className="" alt={"Voter"} />
           <div className="flex flex-row space-x-4">
             <img className="w-6 h-6 rounded-full" src={avatar} alt="" />
             <p className="font-bold">Olumide Adebayo</p>
@@ -39,7 +42,7 @@ const BlogSingle = () => {
           </div>
         </div>
         <div className="flex flex-col space-y-2 px-4">
-          <img src={votingg} alt={"Voter"} />
+          <img src={img_2} alt={"Voter"} />
           <div className="flex flex-row space-x-4">
             <img className="w-6 h-6 rounded-full" src={avatar} alt="" />
             <p className="font-bold">Olumide Adebayo</p>
@@ -64,7 +67,7 @@ const BlogSingle = () => {
           </div>
         </div>
         <div className="flex flex-col space-y-2 px-4">
-          <img src={votingg} alt={"Voter"} />
+          <img src={img_3} alt={"Voter"} />
           <div className="flex flex-row space-x-4">
             <img className="w-6 h-6 rounded-full" src={avatar} alt="" />
             <p className="font-bold">Olumide Adebayo</p>
@@ -90,8 +93,8 @@ const BlogSingle = () => {
         </div>
       </div>
       <div className="text-center pt-12">
-        <button className="bg-gray-400 p-4 rounded-lg px-8 font-semibold text-white hover:bg-black">
-          View more
+        <button className="bg-green-500 p-4 rounded-lg px-8 font-semibold text-white hover:bg-black">
+          View Stories
         </button>
       </div>
     </div>

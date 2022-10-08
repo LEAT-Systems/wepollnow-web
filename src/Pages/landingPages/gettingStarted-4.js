@@ -16,7 +16,7 @@ const GettingStartedFour = () => {
           </h2>
           <div>
             <Link to="/register">
-              <button className="p-4 px-8 text-white bg-gray-600 rounded">
+              <button className="p-4 px-8 text-white bg-green-500 rounded hover:bg-green-600 hover:-translate-y-1">
                 Let's Proceed
               </button>
             </Link>

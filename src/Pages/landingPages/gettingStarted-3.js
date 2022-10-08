@@ -26,9 +26,9 @@ const GettingStartedThree = () => {
       <div className="flex flex-col items-center justify-center min-h-screen mx-auto space-y-4 bg-gray-100">
         <div className="flex flex-col items-center justify-center p-12 bg-white rounded-lg space-y-12 ">
           {hasSubmitted && (
-            <div className="p-8 border border-gray-400 rounded-full">
+            <div className="p-8 border border-green-500 rounded-full">
               <Done
-                className="animate-pulse text-black text-center"
+                className="animate-pulse text-green-500 text-center"
                 fontSize="large"
               />
             </div>
@@ -46,7 +46,7 @@ const GettingStartedThree = () => {
               </p>
             )}
             {hasSubmitted && (
-              <p className="text-gray-500 font-bold">
+              <p className="text-black font-bold">
                 Successfully Submitted. Proceed by Clicking the button below.
               </p>
             )}
@@ -67,7 +67,7 @@ const GettingStartedThree = () => {
             {!hasSubmitted && (
               <button
                 type="submit"
-                className="border-b border-gray-50 w-full p-4 rounded-lg bg-[#808080] text-white hover:bg-black"
+                className="w-full p-4 rounded-lg bg-green-500 text-white hover:bg-green-600 hover:-translate-y-1"
               >
                 Submit
               </button>
@@ -76,7 +76,7 @@ const GettingStartedThree = () => {
               <Link
                 to="/getting-started-four"
                 type="submit"
-                className="border-b border-gray-50 w-full p-4 rounded-lg bg-[#000] text-white text-center"
+                className="border-b border-gray-50 w-full p-4 rounded-lg bg-green-500 text-white text-center hover:-translate-y-1"
               >
                 Continue
               </Link>

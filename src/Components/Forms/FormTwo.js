@@ -38,13 +38,13 @@ const FormTwo = (props) => {
     <>
       <Nav />
       <div className="flex flex-row items-center justify-center mx-auto py-4  px-4 md:px-0">
-        <div className="w-full md:w-3/4 text-lg text-gray-700 border rounded-lg">
+        <div className="w-full md:w-1/2 text-lg text-gray-700 border rounded-lg">
           <header className="flex flex-col space-y-2 w-full p-4 border-b">
             <div className="flex flex-row items-center justify-center space-x-4">
               <div className="inline-flex items-center justify-center rounded-full p-4 bg-gray-200 text-black w-5 h-5">
                 1
               </div>
-              <hr className="border-dashed border-1 border-black w-12" />
+              <hr className="border-dashed border border-black w-12" />
               {formisCompleted ? (
                 <div className="inline-flex items-center justify-center rounded-full p-4 bg-green-600 text-white w-5 h-5">
                   <Done />
@@ -55,17 +55,21 @@ const FormTwo = (props) => {
                 </div>
               )}
 
-              <hr className="border-dashed border-1 border-black w-12" />
+              <hr
+                className={`w-12 border-black border-dashed border ${
+                  formisCompleted && "border-green-500"
+                }`}
+              />
               <div className="inline-flex items-center justify-center rounded-full p-4 bg-gray-100 text-black w-5 h-5">
                 3
               </div>
-              <hr className="border-dashed border-1 border-black w-12" />
+              <hr className="border-dashed border border-black w-12" />
               <div className="inline-flex items-center justify-center rounded-full p-4 bg-gray-100 text-black w-5 h-5">
                 4
               </div>
             </div>
             <p className="text-center font-semibold">
-              <span className=" bg-gray-400 rounded-full text-white px-4">
+              <span className="px-4 text-white bg-gradient-to-r from-blue-500 to-green-500 rounded-full text-sm">
                 Form Two: 3 Questions
               </span>{" "}
             </p>
@@ -131,17 +135,7 @@ const FormTwo = (props) => {
                           <ErrorMessage name="ageRange" />
                         </p>
                         <div className="flex flex-row items-center justify-between space-x-4 p-2">
-                          <div
-                            className={`${
-                              isTouched
-                                ? "bg-gray-200 flex flex-row items-center justify-between p-4 border rounded w-full"
-                                : "flex flex-row items-center justify-between p-4 border rounded w-full"
-                            } 
-                             `}
-                          >
-                            <label className="block ml-3 text-sm font-medium text-gray-700">
-                              18-25
-                            </label>
+                          <div className="flex flex-row items-center space-x-2 px-4 p-4 border rounded w-full">
                             <Field
                               onClick={handlerFunc}
                               type="radio"
@@ -150,18 +144,9 @@ const FormTwo = (props) => {
                               placeholder="18-25"
                               className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
                             />
+                            <p>18-25</p>
                           </div>
-                          <div
-                            className={`${
-                              isTouched
-                                ? "bg-gray-200 flex flex-row items-center justify-between p-4 border rounded w-full"
-                                : "flex flex-row items-center justify-between p-4 border rounded w-full"
-                            } 
-                             `}
-                          >
-                            <label className="block ml-3 text-sm font-medium text-gray-700">
-                              25-35
-                            </label>
+                          <div className="flex flex-row items-center space-x-2 p-4 border rounded w-full">
                             <Field
                               onClick={handlerFunc}
                               type="radio"
@@ -169,13 +154,11 @@ const FormTwo = (props) => {
                               value="25-35"
                               className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
                             />
+                            <p>25-35</p>
                           </div>
                         </div>
                         <div className="flex flex-row items-center justify-between space-x-4 p-2">
-                          <div className="flex flex-row items-center justify-between p-4 border rounded w-full">
-                            <label className="block ml-3 text-sm font-medium text-gray-700">
-                              35-45
-                            </label>
+                          <div className="flex flex-row items-center space-x-2 p-4 border rounded w-full">
                             <Field
                               onClick={handlerFunc}
                               type="radio"
@@ -183,11 +166,9 @@ const FormTwo = (props) => {
                               value="35-45"
                               className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
                             />
+                            <p>35-45</p>
                           </div>
-                          <div className="flex flex-row items-center justify-between p-4 border rounded w-full">
-                            <label className="block ml-3 text-sm font-medium text-gray-700">
-                              45-50
-                            </label>
+                          <div className="flex flex-row items-center space-x-2 p-4 border rounded w-full">
                             <Field
                               onClick={handlerFunc}
                               type="radio"
@@ -195,13 +176,11 @@ const FormTwo = (props) => {
                               value="45-50"
                               className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
                             />
+                            <p>45-50</p>
                           </div>
                         </div>
                         <div className="flex flex-row items-center justify-between space-x-4 p-2">
-                          <div className="flex flex-row items-center justify-between p-4 border rounded w-full">
-                            <label className="block ml-3 text-sm font-medium text-gray-700">
-                              50 and above
-                            </label>
+                          <div className="flex flex-row items-center space-x-2 p-4 border rounded w-full">
                             <Field
                               onClick={handlerFunc}
                               type="radio"
@@ -209,6 +188,7 @@ const FormTwo = (props) => {
                               value="50 and above"
                               className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
                             />
+                            <p>50 and above</p>
                           </div>
                         </div>
                       </div>
@@ -218,13 +198,13 @@ const FormTwo = (props) => {
                     <button
                       onClick={() => props.prev(values)}
                       type="button"
-                      className="p-2 px-8 bg-gray-400 text-white rounded-md ml-6"
+                      className="p-2 px-4 border bg-transparent border-black text-black rounded-md ml-6 hover:border-red-500"
                     >
                       Previous
                     </button>
                     <button
                       type="submit"
-                      className="p-2 px-8 bg-black text-white rounded-md"
+                      className="p-2 px-8 bg-green-500 text-white rounded-md hover:-translate-y-1 hover:bg-green-600"
                     >
                       Next
                     </button>

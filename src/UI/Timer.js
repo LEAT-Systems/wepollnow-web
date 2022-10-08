@@ -52,35 +52,35 @@ const Timer = (props) => {
         <div className="flex flex-row items-center justify-center space-x-4">
           <div className="flex flex-col items-center p-4 space-y-2 border-r border-gray-300">
             <h1
-              className={`text-${props.size} font-bold md:text-${props.sizeMD}`}
+              className={`text-${props.size} font-bold md:text-${props.sizeMD} text-${props.color}`}
             >
               {timerDays}
             </h1>
-            <p>Days</p>
+            <p className={`text-${props.pcolor}`}>Days</p>
           </div>
           <div className="flex flex-col items-center p-4 space-y-2 border-r border-gray-300">
             <h1
-              className={`text-${props.size} font-bold md:text-${props.sizeMD}`}
+              className={`text-${props.size} font-bold md:text-${props.sizeMD} text-${props.color}`}
             >
               {timerHours}
             </h1>
-            <p>Hours</p>
+            <p className={`text-${props.pcolor}`}>Hours</p>
           </div>
           <div className="flex flex-col items-center p-4 space-y-2 border-r border-gray-300">
             <h1
-              className={`text-${props.size} font-bold md:text-${props.sizeMD}`}
+              className={`text-${props.size} font-bold md:text-${props.sizeMD} text-${props.color}`}
             >
               {timerMinutes}
             </h1>
-            <p>Minutes</p>
+            <p className={`text-${props.pcolor}`}>Minutes</p>
           </div>
           <div className="flex flex-col items-center p-4 space-y-2">
             <h1
-              className={`text-${props.size} font-bold md:text-${props.sizeMD}`}
+              className={`text-${props.size} font-bold md:text-${props.sizeMD} text-${props.color}`}
             >
               {timerSeconds}
             </h1>
-            <p>Seconds</p>
+            <p className={`text-${props.pcolor}`}>Seconds</p>
           </div>
         </div>
       ) : (

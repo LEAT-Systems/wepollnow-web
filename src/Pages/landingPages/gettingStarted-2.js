@@ -8,7 +8,7 @@ import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import Nav from "../../Components/Layout/Landing/mainNav";
 import Badge from "../../UI/Badge";
-import image from "../../images/bg.png";
+import image from "../../images/image_2.png";
 import Footer from "../../Components/Layout/Landing/Footer";
 import Socials from "../../Components/Layout/Landing/Socials";
 import { countDownDate } from "../../UI/MagicVars";
@@ -36,8 +36,8 @@ const GettingStartedTwo = () => {
           </div>
           <div className="md:pt-8">
             <Link
-              to="/getting-started-phone-required"
-              className="w-full p-4 px-8 text-white bg-green-500 rounded-lg"
+              to="/getting-started-three"
+              className="w-full p-4 px-8 text-white bg-green-500 rounded-lg hover:bg-green-600"
             >
               Vote Now
             </Link>
@@ -45,8 +45,8 @@ const GettingStartedTwo = () => {
 
           {/* Small screen controls */}
           <div></div>
-          <div className="flex flex-row items-center justify-center lg:hidden space-x-4 bg-gray-400 p-4 rounded-lg px-12">
-            <Link to="/" className=" bg-green-200 text-white rounded-full">
+          <div className="flex flex-row items-center justify-center lg:hidden space-x-4 bg-gray-300 p-4 rounded-lg px-12">
+            <Link to="/" className=" bg-green-400 text-white rounded-full">
               <KeyboardArrowLeftIcon />
             </Link>
             <div className="flex flex-row items-center justify-center space-x-3">
@@ -69,7 +69,7 @@ const GettingStartedTwo = () => {
             </div>
             <Link
               to="/getting-started-three"
-              className=" bg-green-200 text-white rounded-full"
+              className=" bg-green-400 text-white rounded-full"
             >
               <KeyboardArrowRightIcon />
             </Link>
@@ -121,29 +121,31 @@ const GettingStartedTwo = () => {
 
         <section>
           <div className="relative flex flex-col max-w-6xl px-6 mx-auto my-32 text-gray-900 md:flex-row md:px-0">
-            <div className="pr-0 text-black bg-white top-48 md:right-0 md:py-20 md:pl-20 md:p-0 md:absolute max-w-3xl space-y-8">
-              <p className="text-lg font-bold underline">About WepollNow</p>
-              <h1 className=" text-2xl md:text-5xl font-bold">
-                Creating a better Society by making every vote count.
-              </h1>
-              <p className="text-lg">
-                We are a dedicated group that is passionate about making the
-                society a better place by ensuring that we simulate polls and
-                ensure that all your votes count. We liase with civil bodies in
-                the real world to also monitor the electoral processes at your
-                polling Units and stations to ensure a free and fair election
-                for everyone.
-                <br /> Together, We can make Nigeria Great!
-              </p>
-              <div className="pt-8 md:pt-4 text-center">
+            <div className="pr-0 text-black bg-[#FFF1F4] top-48 md:right-0 md:py-20 md:pl-20 md:p-0 md:absolute max-w-3xl space-y-8">
+              <div className="px-4 md:px-0 py-4 md:py-0">
+                <p className="text-lg font-bold underline">About WepollNow</p>
+                <h1 className=" text-2xl md:text-5xl font-bold">
+                  Creating a better Society by making every vote count.
+                </h1>
+                <p className="text-lg">
+                  We are a dedicated group that is passionate about making the
+                  society a better place by ensuring that we simulate polls and
+                  ensure that all your votes count. We liase with civil bodies
+                  in the real world to also monitor the electoral processes at
+                  your polling Units and stations to ensure a free and fair
+                  election for everyone.
+                  <br /> Together, We can make Nigeria Great!
+                </p>
+              </div>
+              <div className="pt-8 md:pt-4 text-center md:text-left py-4">
                 <Link to="/about">
-                  <button className="p-4 w-1/3 rounded-lg bg-gray-500 px-4 text-white font-bold hover:bg-black">
+                  <button className="p-4 w-1/3 rounded-lg bg-[#E2345A] px-4 text-white font-bold hover:bg-black">
                     Learn More
                   </button>
                 </Link>
               </div>
             </div>
-            <div className="bg-gray-200 p-8 hidden md:flex">
+            <div className=" p-8 hidden md:flex">
               <img src={image} alt="" />
             </div>
           </div>

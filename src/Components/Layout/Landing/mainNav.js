@@ -3,6 +3,7 @@ import { useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import FaceBookIcon from "@mui/icons-material/Facebook";
 import InstagramIcon from "@mui/icons-material/Instagram";
+import logo from "../../../images/logo.png";
 import YouTubeIcon from "@mui/icons-material/YouTube";
 // import { Modal } from "@mui/material";
 
@@ -79,9 +80,7 @@ const Nav = () => {
         className={`container flex flex-row items-center justify-between px-12 py-8 mx-auto border-b border-gray-200`}
       >
         <Link to="/">
-          <p className="text-3xl font-bold logo">
-            <span className="text-gray-400">Wepoll</span>Now
-          </p>
+          <img src={logo} alt="logo" />
         </Link>
         {/* <Link to="/test">TEST</Link> */}
         <div>

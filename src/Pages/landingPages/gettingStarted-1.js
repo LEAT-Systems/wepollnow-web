@@ -64,15 +64,15 @@ const GettingStartedOne = () => {
               />
               <button
                 type="submit"
-                className="absolute inset-y-0 right-0 flex items-center px-4 font-bold text-white bg-green-500 rounded-r-lg hover:bg-gray-300 focus:bg-gray-700"
+                className="absolute inset-y-0 right-0 flex items-center px-4 font-bold text-white bg-green-600 rounded-r-lg hover:bg-green-500 focus:bg-gray-700"
               >
                 Notify Me
               </button>
             </form>
           </div>
           {/* Small screen controls */}
-          <div className="flex flex-row items-center justify-center lg:hidden space-x-4  bg-gray-400 p-4 rounded-lg px-12">
-            <Link to="/" className=" bg-green-200 text-white rounded-full">
+          <div className="flex flex-row items-center justify-center lg:hidden space-x-4  bg-gray-300 p-4 rounded-lg px-12">
+            <Link to="/" className=" bg-green-500 text-white rounded-full">
               <KeyboardArrowLeftIcon />
             </Link>
             <div className="flex flex-row items-center justify-center space-x-3">
@@ -95,7 +95,7 @@ const GettingStartedOne = () => {
             </div>
             <Link
               to="/getting-started-two"
-              className=" bg-green-400 text-white rounded-full"
+              className=" bg-green-500 text-white rounded-full"
             >
               <KeyboardArrowRightIcon />
             </Link>

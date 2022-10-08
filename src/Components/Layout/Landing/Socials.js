@@ -3,6 +3,7 @@ import SwipeDownIcon from "@mui/icons-material/SwipeDown";
 import Instagram from "@mui/icons-material/Instagram";
 import YouTube from "@mui/icons-material/YouTube";
 import Facebook from "@mui/icons-material/Facebook";
+import { Tooltip } from "@mui/material";
 
 //
 const Socials = () => {

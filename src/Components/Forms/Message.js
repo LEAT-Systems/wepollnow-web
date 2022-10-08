@@ -34,15 +34,15 @@ const Message = (props) => {
           ) : (
             <div className="flex flex-col items-center space-y-4">
               <div className="p-8 bg-red-500 rounded-full animate-ping">
-                <ErrorOutlineIcon fontSize="large" color="red" />
+                <ErrorOutlineIcon color="red" />
               </div>
-              <h1 className="text-3xl font-semibold text-center text-red-500 ">
+              <h1 className="text-xl md:text-3xl font-semibold text-center text-red-500 ">
                 {props.message}. An Error Occured.
                 <br /> Check internet connection.
               </h1>
               <div className="flex flex-row items-center justify-center space-x-4">
-                <Link to="/">
-                  <button className="p-4 px-6 text-black border-2 border-double rounded-lg hover:bg-green-200">
+                <Link to="/getting-started-three">
+                  <button className="p-2 px-6 text-white bg-green-500 border rounded-lg hover:bg-green-600">
                     Start Over
                   </button>
                 </Link>
