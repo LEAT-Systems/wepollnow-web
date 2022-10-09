@@ -1,10 +1,8 @@
 import React from "react";
-import CalendarMonth from "@mui/icons-material/CalendarMonth";
 
 const Badge = (props) => {
   return (
-    <span className="inline-flex items-center justify-center space-x-1 px-4 py-1 text-lg font-semibold leading-none text-black bg-yellow-200 rounded-full">
-      {CalendarMonth}
+    <span className="inline-flex items-center justify-center space-x-1 px-4 py-1 text-lg font-semibold leading-none text-black bg-yellow-100 rounded-full">
       {props.children}
     </span>
   );

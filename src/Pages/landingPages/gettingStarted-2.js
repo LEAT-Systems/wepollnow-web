@@ -45,14 +45,14 @@ const GettingStartedTwo = () => {
 
           {/* Small screen controls */}
           <div></div>
-          <div className="flex flex-row items-center justify-center lg:hidden space-x-4 bg-gray-300 p-4 rounded-lg px-12">
+          <div className="flex flex-row items-center justify-center lg:hidden space-x-4 bg-yellow-100 p-4 rounded-lg px-12">
             <Link to="/" className=" bg-green-400 text-white rounded-full">
               <KeyboardArrowLeftIcon />
             </Link>
             <div className="flex flex-row items-center justify-center space-x-3">
               <NavLink
                 to="/"
-                className="inline-block w-2 h-2 bg-gray-200 rounded-full"
+                className="inline-block w-2 h-2 bg-gray-300 rounded-full"
               ></NavLink>
               <NavLink
                 to="/getting-started-two"
@@ -60,11 +60,11 @@ const GettingStartedTwo = () => {
               ></NavLink>
               <NavLink
                 to="getting-started-three"
-                className="inline-block w-2 h-2 mr-2 bg-gray-200 rounded-full"
+                className="inline-block w-2 h-2 mr-2 bg-gray-300 rounded-full"
               ></NavLink>
               <NavLink
                 to="/email"
-                className="inline-block w-2 h-2 mr-2 bg-gray-200 rounded-full"
+                className="inline-block w-2 h-2 mr-2 bg-gray-300 rounded-full"
               ></NavLink>
             </div>
             <Link
