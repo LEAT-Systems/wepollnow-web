@@ -73,11 +73,8 @@ const GettingStartedThree = () => {
               </button>
             )}
             {hasSubmitted && (
-              <Link to="/getting-started-four" type="submit">
-                <button
-                  type="submit"
-                  className="w-full p-4 px-8 rounded-lg bg-green-500 text-white hover:bg-green-600 hover:-translate-y-1"
-                >
+              <Link to="/getting-started-four">
+                <button className="w-full p-4 px-8 rounded-lg bg-green-500 text-white hover:bg-green-600 hover:-translate-y-1">
                   Continue
                 </button>
               </Link>
