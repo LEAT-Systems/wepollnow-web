@@ -69,17 +69,17 @@ const FormThree = (props) => {
             >
               {({ values }) => (
                 <Form>
-                  <div className="flex flex-col p-8 space-y-4">
+                  <div className="flex flex-col md:p-8 space-y-4">
                     <div className="h-64 px-4 space-y-2 overflow-y-scroll scrollable">
                       {/*  */}
                       {/* Do you have a PVC */}
-                      <div className="space-y-1">
+                      <div className="space-y-1 py-4">
                         <FormLabel no="i" title="Do you have a PVC?" />
                         <p className="text-red-600">
                           <ErrorMessage name="pvc" />
                         </p>
-                        <div className="flex flex-row items-center justify-between space-x-4 p-2">
-                          <div className="flex flex-row items-center space-x-2 p-4 border rounded w-full">
+                        <div className="flex flex-row items-center justify-between space-x-4 md:p-2">
+                          <div className="flex flex-row items-center space-x-2 p-3 md:p-4 border rounded w-full">
                             <Field
                               type="radio"
                               name="pvc"
@@ -88,7 +88,7 @@ const FormThree = (props) => {
                             />
                             <p>Yes</p>
                           </div>
-                          <div className="flex flex-row items-center space-x-2 p-4 border rounded w-full">
+                          <div className="flex flex-row items-center space-x-2 p-3 md:p-4 border rounded w-full">
                             <Field
                               type="radio"
                               name="pvc"
@@ -111,8 +111,8 @@ const FormThree = (props) => {
                         <p className="text-red-600">
                           <ErrorMessage name="employmentStatus" />
                         </p>
-                        <div className="flex flex-row items-center justify-between space-x-4 p-2">
-                          <div className="flex flex-row items-center space-x-2 p-4 border rounded w-full">
+                        <div className="flex flex-row items-center justify-between space-x-4 md:p-2">
+                          <div className="flex flex-row items-center space-x-2 p-3 md:p-4 border rounded w-full">
                             <Field
                               type="radio"
                               name="maritalStatus"
@@ -121,7 +121,7 @@ const FormThree = (props) => {
                             />
                             <p>Single</p>
                           </div>
-                          <div className="flex flex-row items-center space-x-2 p-4 border rounded w-full">
+                          <div className="flex flex-row items-center space-x-2 p-3 md:p-4 border rounded w-full">
                             <Field
                               type="radio"
                               name="maritalStatus"
@@ -131,8 +131,8 @@ const FormThree = (props) => {
                             <p>Married</p>
                           </div>
                         </div>
-                        <div className="flex flex-row items-center justify-between space-x-4 p-2">
-                          <div className="flex flex-row items-center space-x-2 p-4 border rounded w-full">
+                        <div className="flex flex-row items-center justify-between space-x-4 md:p-2 mt-2 md:mt-0">
+                          <div className="flex flex-row items-center space-x-2 p-3 md:p-4 border rounded w-full">
                             <Field
                               type="radio"
                               name="maritalStatus"
@@ -141,7 +141,7 @@ const FormThree = (props) => {
                             />
                             <p>Divorced</p>
                           </div>
-                          <div className="flex flex-row items-center space-x-2 p-4 border rounded w-full">
+                          <div className="flex flex-row items-center space-x-2 p-3 md:p-4 border rounded w-full">
                             <Field
                               type="radio"
                               name="maritalStatus"
@@ -163,8 +163,8 @@ const FormThree = (props) => {
                         <p className="text-red-600">
                           <ErrorMessage name="employmentStatus" />
                         </p>
-                        <div className="flex flex-row items-center justify-between space-x-4 p-2">
-                          <div className="flex flex-row items-center space-x-2 p-4 border rounded w-full">
+                        <div className="flex flex-row items-center justify-between space-x-4 md:p-2">
+                          <div className="flex flex-row items-center space-x-2 p-3 md:p-4 border rounded w-full">
                             <Field
                               type="radio"
                               name="employmentStatus"
@@ -173,7 +173,7 @@ const FormThree = (props) => {
                             />
                             <p>Student</p>
                           </div>
-                          <div className="flex flex-row items-center space-x-2 p-4 border rounded w-full">
+                          <div className="flex flex-row items-center space-x-2 p-3 md:p-4 border rounded w-full">
                             <Field
                               type="radio"
                               name="employmentStatus"
@@ -183,8 +183,8 @@ const FormThree = (props) => {
                             <p className="">Employed</p>
                           </div>
                         </div>
-                        <div className="flex flex-row items-center justify-between space-x-4 p-2">
-                          <div className="flex flex-row items-center space-x-2 p-4 border rounded w-full">
+                        <div className="flex flex-row items-center justify-between space-x-4 md:p-2 mt-2 md:mt-0">
+                          <div className="flex flex-row items-center space-x-2 p-3 md:p-4 border rounded w-full">
                             <Field
                               type="radio"
                               name="employmentStatus"
@@ -193,14 +193,14 @@ const FormThree = (props) => {
                             />
                             <p>Unemployed</p>
                           </div>
-                          <div className="flex flex-row items-center space-x-2 p-4 border rounded w-full">
+                          <div className="flex flex-row items-center space-x-2 p-4 md:p-4 border rounded w-full">
                             <Field
                               type="radio"
                               name="employmentStatus"
                               value="self-employed"
                               className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
                             />
-                            <p>Self-employed</p>
+                            <p className="text-sm">Self-employed</p>
                           </div>
                         </div>
                       </div>

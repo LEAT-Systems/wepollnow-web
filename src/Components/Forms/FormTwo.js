@@ -83,9 +83,9 @@ const FormTwo = (props) => {
             >
               {({ values }) => (
                 <Form>
-                  <div className="flex flex-col space-y-4 p-8">
-                    <div className="relative overflow-y-scroll space-y-4 h-64 scrollable px-4">
-                      <div className=" p-2 rounded-md space-y-4">
+                  <div className="flex flex-col space-y-4 p-2 md:p-8">
+                    <div className="relative overflow-y-scroll space-y-4 h-64 scrollable px-2 md:px-4">
+                      <div className=" md:p-2 rounded-md space-y-4">
                         <FormLabel
                           no="i"
                           title=" Select L.G.A of voting residence(Not applicable for
@@ -98,7 +98,7 @@ const FormTwo = (props) => {
                           <Field
                             as="select"
                             name="LGAofVotingRes"
-                            className="mt-1 block w-full border rounded border-gray-300 bg-white py-2 px-3"
+                            className="mt-1 block w-full border rounded border-gray-300 bg-white py-3 px-3"
                           >
                             <option value="">Select an option</option>
                             <option value="Umuahia">Umuahia</option>
@@ -109,7 +109,7 @@ const FormTwo = (props) => {
 
                       {/* State of Origin  */}
 
-                      <div className="p-2 space-y-2">
+                      <div className="md:p-2 space-y-2">
                         <FormLabel no="i" title=" Select State of Origin" />
                         <p className="text-red-600">
                           <ErrorMessage name="stateOfOrigin" />
@@ -118,7 +118,7 @@ const FormTwo = (props) => {
                           <Field
                             as="select"
                             name="stateOfOrigin"
-                            className="mt-1 block w-full border rounded border-gray-300 bg-white py-2 px-3"
+                            className="mt-1 block w-full border rounded border-gray-300 bg-white py-3 px-3"
                           >
                             <option value="">Select an option</option>
                             <option value="Abia">Abia</option>
@@ -129,13 +129,13 @@ const FormTwo = (props) => {
 
                       {/* Age Range */}
 
-                      <div className="p-2">
+                      <div className="md:p-2">
                         <FormLabel no="i" title="Select Your Age Range" />
                         <p className="text-red-600">
                           <ErrorMessage name="ageRange" />
                         </p>
-                        <div className="flex flex-row items-center justify-between space-x-4 p-2">
-                          <div className="flex flex-row items-center space-x-2 px-4 p-4 border rounded w-full">
+                        <div className="flex flex-row items-center justify-between space-x-4 md:p-2">
+                          <div className="flex flex-row items-center space-x-2 px-4 p-3 md:p-4 border rounded w-full">
                             <Field
                               onClick={handlerFunc}
                               type="radio"
@@ -146,7 +146,7 @@ const FormTwo = (props) => {
                             />
                             <p>18-25</p>
                           </div>
-                          <div className="flex flex-row items-center space-x-2 p-4 border rounded w-full">
+                          <div className="flex flex-row items-center space-x-2 p-3 md:p-4 border rounded w-full">
                             <Field
                               onClick={handlerFunc}
                               type="radio"
@@ -157,8 +157,8 @@ const FormTwo = (props) => {
                             <p>25-35</p>
                           </div>
                         </div>
-                        <div className="flex flex-row items-center justify-between space-x-4 p-2">
-                          <div className="flex flex-row items-center space-x-2 p-4 border rounded w-full">
+                        <div className="flex flex-row items-center justify-between space-x-4 md:p-2 mt-2 md:mt-0">
+                          <div className="flex flex-row items-center space-x-2 px-4 p-3 md:p-4 border rounded w-full">
                             <Field
                               onClick={handlerFunc}
                               type="radio"
@@ -168,7 +168,7 @@ const FormTwo = (props) => {
                             />
                             <p>35-45</p>
                           </div>
-                          <div className="flex flex-row items-center space-x-2 p-4 border rounded w-full">
+                          <div className="flex flex-row items-center space-x-2 p-3 md:p-4 border rounded w-full">
                             <Field
                               onClick={handlerFunc}
                               type="radio"
@@ -179,8 +179,8 @@ const FormTwo = (props) => {
                             <p>45-50</p>
                           </div>
                         </div>
-                        <div className="flex flex-row items-center justify-between space-x-4 p-2">
-                          <div className="flex flex-row items-center space-x-2 p-4 border rounded w-full">
+                        <div className="flex flex-row items-center justify-between space-x-4 md:p-2 mt-2 md:mt-0">
+                          <div className="flex flex-row items-center space-x-2 p-3 md:p-4 border rounded w-full">
                             <Field
                               onClick={handlerFunc}
                               type="radio"

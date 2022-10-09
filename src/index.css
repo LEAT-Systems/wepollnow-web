@@ -74,6 +74,13 @@ body::-webkit-scrollbar-thumb {
   left: 30%;
 }
 
-.logo {
-  font-family: "Fira Sans Condensed", sans-serif;
+h1,
+h2,
+h3,
+p {
+  font-family: "Monserrat", sans-serif;
+}
+
+.fontAwesome {
+  font-family: "Manrope", FontAwesome, sans-serif;
 }

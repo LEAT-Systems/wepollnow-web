@@ -76,11 +76,11 @@ const FormOne = (props) => {
             >
               {() => (
                 <Form>
-                  <div className="flex flex-col p-1 md:p-8 space-y-4">
+                  <div className="flex flex-col md:p-8 space-y-4">
                     <div className="h-64 px-4 space-y-4 overflow-y-scroll scrollable">
                       {/* Email Address */}
 
-                      <div className="flex flex-col p-2 space-y-1">
+                      <div className="flex flex-col md:p-2 space-y-1">
                         <FormLabel no="i" title="Enter Email " />
                         <p className="text-red-600">
                           <ErrorMessage name="email" />
@@ -99,8 +99,8 @@ const FormOne = (props) => {
                           no="i"
                           title="Are you a first time voter? "
                         />
-                        <div className="flex flex-row items-center justify-between space-x-4 p-2">
-                          <div className="flex flex-row items-center p-4 border space-x-2 rounded w-full">
+                        <div className="flex flex-row items-center justify-between space-x-4 md:p-2">
+                          <div className="flex flex-row items-center p-3 md:p-4 border space-x-2 rounded w-full">
                             <Field
                               type="radio"
                               name="firstTimeVoter"
@@ -109,7 +109,7 @@ const FormOne = (props) => {
                             />
                             <p>Yes</p>
                           </div>
-                          <div className="flex flex-row items-center space-x-2 p-4 border rounded w-full">
+                          <div className="flex flex-row items-center space-x-2 p-3 md:p-4 border rounded w-full">
                             <Field
                               type="radio"
                               name="firstTimeVoter"
@@ -125,7 +125,7 @@ const FormOne = (props) => {
 
                       <div className="space-y-1">
                         <FormLabel no="i" title="Are you a Diaspora voter? " />
-                        <div className="flex flex-row items-center justify-between space-x-4 p-2">
+                        <div className="flex flex-row items-center justify-between space-x-4 md:p-2">
                           <div className="flex flex-row items-center p-4 border rounded w-full space-x-2">
                             <Field
                               type="radio"
@@ -149,7 +149,7 @@ const FormOne = (props) => {
 
                       {/* Select State of voting residence */}
 
-                      <div className="flex flex-col p-2 space-y-1">
+                      <div className="flex flex-col md:p-2 space-y-1">
                         <FormLabel
                           no="i"
                           title="Select state of voting residence (Not applicable for

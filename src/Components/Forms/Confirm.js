@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Formik, Form } from "formik";
 import Nav from "../Layout/Landing/mainNav";
+import errorIcon from "../../images/errorImg.png";
 
 const Confirm = (props) => {
   const [hasError, sethasError] = useState(false);
@@ -58,10 +59,11 @@ const Confirm = (props) => {
         <div className="w-full text-lg text-gray-700 border rounded-lg shadow-lg md:w-1/2">
           <header className="w-full p-8 border-b">
             <div className="flex flex-col items-center justify-center space-y-1">
-              <h3 className="text-xl font-bold text-center md:text-3xl">
+              <img src={errorIcon} alt="error" />
+              <h3 className="text-xl font-bold text-center md:text-2xl">
                 Review & Confirm Your Details
               </h3>
-              <p className="px-4 text-sm text-white font-semibold text-center bg-gradient-to-r from-blue-500 to-green-500 rounded-full md:text-lg">
+              <p className="px-4 p-1 text-xs text-white font-semibold text-center bg-gradient-to-r from-blue-500 to-green-500 rounded-full md:text-[17px]">
                 You can go back to modify details before submitting
               </p>
             </div>
@@ -199,7 +201,7 @@ const Confirm = (props) => {
                         </div>
                         <div className="flex flex-row justify-between px-4 py-3 border-b border-gray-200">
                           <span className="font-bold uppercase text-xs md:text-lg">
-                            You are a:{" "}
+                            Selected Option:{" "}
                           </span>
                           <p className="px-2 border border-gray-200 rounded-lg text-xs md:text-lg">
                             {props.data.selectOneOpt}

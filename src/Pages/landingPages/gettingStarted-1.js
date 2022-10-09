@@ -9,6 +9,7 @@ import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
+import calendar from "../../images/calendar.png";
 const Timer = React.lazy(() => import("../../UI/Timer"));
 
 //
@@ -41,11 +42,14 @@ const GettingStartedOne = () => {
   return (
     <>
       <Nav />
-      <div className="relative flex flex-col mt-12">
+      <div className="relative flex flex-col mt-12 ">
         {<Socials />}
-        <div className="relative flex flex-col items-center bg-no-repeat bg-top bg-opacity-5 justify-center space-y-8 bg-hero-pattern">
-          <p className="font-bold">Gubernatorial Poll</p>
-          <Badge>{countDownDate}</Badge>
+        <div className="relative flex flex-col items-center bg-no-repeat bg-top bg-opacity-5 justify-center space-y-8 bg-hero-pattern lg:pb-[10rem]">
+          <p className="font-extrabold">Gubernatorial Poll</p>
+          <Badge className="flex flex-row space-x-3">
+            <img src={calendar} alt="calendarMonth" />
+            <p>{countDownDate}</p>
+          </Badge>
           <Timer date={countDownDate} size="4xl" sizeMD="6xl" />
           <div>
             <p className="max-w-xs text-center md:max-w-xl text-xl">
@@ -71,7 +75,7 @@ const GettingStartedOne = () => {
             </form>
           </div>
           {/* Small screen controls */}
-          <div className="flex flex-row items-center justify-center lg:hidden space-x-4  bg-yellow-100 p-4 rounded-lg px-12">
+          <div className="flex flex-row items-center justify-center lg:hidden space-x-4 border border-green-500 p-4 rounded-lg px-12">
             <Link to="/" className=" bg-green-500 text-white rounded-full">
               <KeyboardArrowLeftIcon />
             </Link>

@@ -13,6 +13,7 @@ import Footer from "../../Components/Layout/Landing/Footer";
 import Socials from "../../Components/Layout/Landing/Socials";
 import { countDownDate } from "../../UI/MagicVars";
 import ArticleData from "../blogPages/blogSingle";
+import calendar from "../../images/calendar.png";
 
 //
 const GettingStartedTwo = () => {
@@ -21,11 +22,14 @@ const GettingStartedTwo = () => {
       <Nav />
       <div className="relative flex flex-col">
         {<Socials />}
-        <div className="relative flex flex-col items-center justify-center space-y-4 mt-12 bg-hero-pattern bg-no-repeat bg-top bg-opacity-5 md:py-8">
-          <p className="font-bold">Presidential Poll</p>
-          <Badge>{countDownDate}</Badge>
+        <div className="relative flex flex-col items-center justify-center space-y-4 mt-12 bg-hero-pattern bg-no-repeat lg:pb-[10rem] bg-top bg-opacity-5 md:py-8 pb-24">
+          <p className="font-extrabold">Presidential Poll</p>
+          <Badge className="flex flex-row space-x-3">
+            <img src={calendar} alt="calendarMonth" />
+            <p>{countDownDate}</p>
+          </Badge>
           <div className="flex flex-row items-center justify-center">
-            <h2 className="max-w-4xl p-8 text-2xl md:text-5xl font-bold text-center">
+            <h2 className="max-w-4xl p-8 text-2xl md:text-5xl font-extrabold text-center">
               Let's{" "}
               <span className="underline underline-offset-4 decoration-yellow-500 decoration-[5px]">
                 change
@@ -45,7 +49,7 @@ const GettingStartedTwo = () => {
 
           {/* Small screen controls */}
           <div></div>
-          <div className="flex flex-row items-center justify-center lg:hidden space-x-4 bg-yellow-100 p-4 rounded-lg px-12">
+          <div className="flex flex-row items-center justify-center lg:hidden space-x-4 border border-green-500 p-4 rounded-lg px-12">
             <Link to="/" className=" bg-green-400 text-white rounded-full">
               <KeyboardArrowLeftIcon />
             </Link>

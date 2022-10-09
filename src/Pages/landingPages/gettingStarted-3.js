@@ -24,7 +24,7 @@ const GettingStartedThree = () => {
     <>
       <Nav />
       <div className="flex flex-col items-center justify-center min-h-screen mx-auto space-y-4 bg-gray-100">
-        <div className="flex flex-col items-center justify-center p-12 bg-white rounded-lg space-y-12 ">
+        <div className="flex flex-col items-center justify-center p-8 bg-white rounded-lg space-y-12 ">
           {hasSubmitted && (
             <div className="p-8 border border-green-500 rounded-full">
               <Done
@@ -39,7 +39,7 @@ const GettingStartedThree = () => {
             </p>
           )}
 
-          <form className="space-y-8" onSubmit={handleSubmit}>
+          <form className="space-y-8 text-center" onSubmit={handleSubmit}>
             {hasError && (
               <p className="text-red-500">
                 Enter 11 digits of your Phone Number
@@ -73,12 +73,13 @@ const GettingStartedThree = () => {
               </button>
             )}
             {hasSubmitted && (
-              <Link
-                to="/getting-started-four"
-                type="submit"
-                className="w-full p-4 rounded-lg bg-green-500 text-white text-center hover:-translate-y-1"
-              >
-                Continue
+              <Link to="/getting-started-four" type="submit">
+                <button
+                  type="submit"
+                  className="w-full p-4 px-8 rounded-lg bg-green-500 text-white hover:bg-green-600 hover:-translate-y-1"
+                >
+                  Continue
+                </button>
               </Link>
             )}
           </form>

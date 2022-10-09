@@ -49,10 +49,10 @@ const Timer = (props) => {
   return (
     <>
       {!due ? (
-        <div className="flex flex-row items-center justify-center space-x-4">
+        <div className="flex flex-row items-center justify-center space-x-4 ">
           <div className="flex flex-col items-center p-4 space-y-2 border-r border-gray-300">
             <h1
-              className={`text-${props.size} font-bold md:text-${props.sizeMD} text-${props.color}`}
+              className={`text-${props.size}  font-extrabold md:text-${props.sizeMD} text-${props.color}`}
             >
               {timerDays}
             </h1>
@@ -60,7 +60,7 @@ const Timer = (props) => {
           </div>
           <div className="flex flex-col items-center p-4 space-y-2 border-r border-gray-300">
             <h1
-              className={`text-${props.size} font-bold md:text-${props.sizeMD} text-${props.color}`}
+              className={`text-${props.size} font-extrabold md:text-${props.sizeMD} text-${props.color}`}
             >
               {timerHours}
             </h1>
@@ -68,7 +68,7 @@ const Timer = (props) => {
           </div>
           <div className="flex flex-col items-center p-4 space-y-2 border-r border-gray-300">
             <h1
-              className={`text-${props.size} font-bold md:text-${props.sizeMD} text-${props.color}`}
+              className={`text-${props.size} font-extrabold md:text-${props.sizeMD} text-${props.color}`}
             >
               {timerMinutes}
             </h1>
@@ -76,7 +76,7 @@ const Timer = (props) => {
           </div>
           <div className="flex flex-col items-center p-4 space-y-2">
             <h1
-              className={`text-${props.size} font-bold md:text-${props.sizeMD} text-${props.color}`}
+              className={`text-${props.size} font-extrabold md:text-${props.sizeMD} text-${props.color}`}
             >
               {timerSeconds}
             </h1>

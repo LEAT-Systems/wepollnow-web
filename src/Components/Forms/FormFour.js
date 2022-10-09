@@ -69,18 +69,18 @@ const FormFour = (props) => {
             >
               {({ values }) => (
                 <Form>
-                  <div className="flex flex-col p-8 space-y-4">
+                  <div className="flex flex-col md:p-8 space-y-4">
                     <div className="h-64 px-4 space-y-2 overflow-y-scroll scrollable">
                       {/*  */}
                       {/* ================= 1.  Gender    ================*/}
                       {/*  */}
-                      <div className="space-y-1">
+                      <div className="space-y-1 pt-4">
                         <FormLabel no="i" title=" Select your Gender" />
                         <p className="text-red-600">
                           <ErrorMessage name="gender" />
                         </p>
-                        <div className="flex flex-row items-center justify-between space-x-4 p-2">
-                          <div className="flex flex-row items-center space-x-2 p-4 border rounded w-full">
+                        <div className="flex flex-row items-center justify-between space-x-4 md:p-2">
+                          <div className="flex flex-row items-center space-x-2 p-3 md:p-4 border rounded w-full">
                             <Field
                               type="radio"
                               name="gender"
@@ -89,7 +89,7 @@ const FormFour = (props) => {
                             />
                             <p>Male</p>
                           </div>
-                          <div className="flex flex-row items-center space-x-2 p-4 border rounded w-full">
+                          <div className="flex flex-row items-center space-x-2 p-3 md:p-4 border rounded w-full">
                             <Field
                               type="radio"
                               name="gender"
@@ -108,8 +108,8 @@ const FormFour = (props) => {
                         <p className="text-red-600">
                           <ErrorMessage name="religion" />
                         </p>
-                        <div className="flex flex-row items-center justify-between space-x-4 p-2">
-                          <div className="flex flex-row items-center space-x-2 p-4 border rounded w-full">
+                        <div className="flex flex-row items-center justify-between space-x-4 md:p-2">
+                          <div className="flex flex-row items-center space-x-2 p-3 md:p-4 border rounded w-full">
                             <Field
                               type="radio"
                               name="religion"
@@ -118,7 +118,7 @@ const FormFour = (props) => {
                             />
                             <p>Christianity</p>
                           </div>
-                          <div className="flex flex-row items-center space-x-2 p-4 border rounded w-full">
+                          <div className="flex flex-row items-center space-x-2 p-3 md:p-4 border rounded w-full">
                             <Field
                               type="radio"
                               name="religion"
@@ -128,8 +128,8 @@ const FormFour = (props) => {
                             <p>Islam</p>
                           </div>
                         </div>
-                        <div className="flex flex-row items-center justify-between space-x-4 p-2">
-                          <div className="flex flex-row items-center space-x-2 p-4 border rounded w-full">
+                        <div className="flex flex-row items-center justify-between space-x-4 md:p-2 mt-2 md:mt-0">
+                          <div className="flex flex-row items-center space-x-2 p-3 md:p-4 border rounded w-full">
                             <Field
                               type="radio"
                               name="religion"
@@ -138,7 +138,7 @@ const FormFour = (props) => {
                             />
                             <p>Traditional</p>
                           </div>
-                          <div className="flex flex-row items-center space-x-2 p-4 border rounded w-full">
+                          <div className="flex flex-row items-center space-x-2 p-3 md:p-4 border rounded w-full">
                             <Field
                               type="radio"
                               name="religion"
@@ -161,7 +161,7 @@ const FormFour = (props) => {
                           <ErrorMessage name="selectOneOpt" />
                         </p>
                         <div className="flex flex-col md:flex-row items-center justify-between md:space-x-4 md:p-2 space-y-2 md:space-y-0">
-                          <div className="flex flex-row items-center space-x-2 p-4 border rounded w-full">
+                          <div className="flex flex-row items-center space-x-2 p-3 md:p-4 border rounded w-full">
                             <Field
                               type="radio"
                               name="selectOneOpt"
@@ -170,7 +170,7 @@ const FormFour = (props) => {
                             />
                             <p>Student</p>
                           </div>
-                          <div className="flex flex-row items-center space-x-2 p-4 border rounded w-full">
+                          <div className="flex flex-row items-center space-x-2 p-3 md:p-4 border rounded w-full">
                             <Field
                               type="radio"
                               name="selectOneOpt"
@@ -179,7 +179,7 @@ const FormFour = (props) => {
                             />
                             <p>Unemployed</p>
                           </div>
-                          <div className="flex flex-row items-center space-x-2 p-4 border rounded w-full">
+                          <div className="flex flex-row items-center space-x-2 p-3 md:p-4 border rounded w-full">
                             <Field
                               type="radio"
                               name="selectOneOpt"
@@ -209,7 +209,7 @@ const FormFour = (props) => {
                               value="Living with family"
                               className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
                             />
-                            <p>Living with family</p>
+                            <p className="text-sm">Living with family</p>
                           </div>
                           <div className="flex flex-row items-center space-x-2 p-4 border rounded w-full">
                             <Field
@@ -218,7 +218,7 @@ const FormFour = (props) => {
                               value="Living with friends"
                               className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
                             />
-                            <p>Living with friends</p>
+                            <p className="text-sm">Living with friends</p>
                           </div>
                           <div className="flex flex-row items-center space-x-2 p-4 border rounded w-full">
                             <Field
@@ -227,7 +227,7 @@ const FormFour = (props) => {
                               value="Living on your own"
                               className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
                             />
-                            <p>Living on your own</p>
+                            <p className="text-sm">Living on your own</p>
                           </div>
                         </div>
                       </div>

@@ -18,7 +18,7 @@ const NotFound = React.lazy(() => import("./UI/NotFound"));
 const AboutPage = React.lazy(() => import("./Pages/landingPages/about"));
 const BlogPage = React.lazy(() => import("./Pages/blogPages/blog"));
 const Test = React.lazy(() => import("./Pages/test"));
-const FormFive = React.lazy(() => import("./Components/Forms/FormFive"));
+const FormFive = React.lazy(() => import("./Components/Forms/VoteForm/FormFive"));
 const AllPolls = React.lazy(() => import("./Pages/Polls/All_polls"));
 const FormComponent = React.lazy(() =>
   import("././Components/Forms/FormComponent")

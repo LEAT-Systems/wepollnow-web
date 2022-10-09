@@ -7,7 +7,7 @@ import logo from "../../../images/logo.png";
 import YouTubeIcon from "@mui/icons-material/YouTube";
 // import { Modal } from "@mui/material";
 
-const Nav = () => {
+const Nav = (props) => {
   const [data, setData] = useState();
   const [show, setShow] = useState(false);
   const [dismiss, setDismiss] = useState(false);
@@ -48,41 +48,15 @@ const Nav = () => {
     setHasSubmitted(false);
   }, 2000);
 
-  // Handling state for dismiss button of modal
-  const handleClick = () => {
-    setDismiss(true);
-  };
-
-  // Modal content
-  // const message = (
-  //   <div className="flex flex-col items-center justify-center min-h-screen mx-auto space-y-4">
-  //     <div className="bg-gray-50 rounded-lg space-y-8 px-24 py-12">
-  //       <h1 className="text-6xl text-black">Successful</h1>
-  //       <div className="flex flex-row items-end justify-end">
-  //         <button
-  //           onClick={handleClick}
-  //           className="bg-black text-white py-2 px-4 rounded-lg"
-  //         >
-  //           Close
-  //         </button>
-  //       </div>
-  //     </div>
-  //   </div>
-  // );
-
   return (
     <React.Fragment>
-      {/* {hasSubmitted && (
-        <Modal children={message} open={dismiss ? false : true} />
-      )} */}
       {/* Top Navigation */}
       <div
-        className={`container flex flex-row items-center justify-between px-12 py-8 mx-auto border-b border-gray-200`}
+        className={`flex flex-row items-center justify-between px-12 md:px-24 py-8 mx-auto border-b border-gray-200 bg-[#${props.bg}]`}
       >
         <Link to="/">
           <img src={logo} alt="logo" />
         </Link>
-        {/* <Link to="/test">TEST</Link> */}
         <div>
           <button
             className={show ? "open p-3" : "hamburger focus:outline-none"}
