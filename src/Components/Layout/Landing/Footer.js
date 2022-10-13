@@ -34,28 +34,24 @@ const Footer = () => {
             className="flex flex-row space-x-2"
           >
             <TwitterIcon />
-            <span>Twitter</span>
           </a>
           <a
             href="https://instagram.com/wepollnow"
             className="flex flex-row space-x-2"
           >
             <InstagramIcon />
-            <span>Instagram</span>
           </a>
           <a
             href="https://facebook.com/wepollnow"
             className="flex flex-row space-x-2"
           >
             <FaceBookIcon />
-            <span>Facebook</span>
           </a>
           <a
             href="https://linkedin.com/wepollnow"
             className="flex flex-row space-x-2"
           >
             <LinkedinIcon />
-            <span>Linkedin</span>
           </a>
         </div>
       </div>
