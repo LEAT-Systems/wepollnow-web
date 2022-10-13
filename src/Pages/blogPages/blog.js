@@ -1,35 +1,34 @@
 import React from "react";
 import Nav from "../../Components/Layout/Landing/mainNav";
-import votingg from "../../images/votingg.jpg";
-import avatar from "../../images/avatar.svg";
+import votingg from "../../images/image_5.png";
+import avatar from "../../images/image_4.png";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import CommentIcon from "@mui/icons-material/Comment";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import Footer from "../../Components/Layout/Landing/Footer";
+import image from "../../images/blog_img.png";
 
 const BlogPage = () => {
   return (
     <>
       <Nav />
-      <div className="flex flex-col md:flex-row  items-center justify-between px-4 md:px-24 py-8 mx-auto bg-gray-100">
+      <div className="flex flex-col items-center justify-between px-4 py-8 mx-auto bg-[#EDFFF0] md:flex-row md:px-24">
         <div className="flex flex-col space-y-2 ">
-          <p className="text-xs font-bold underline">Our Blog</p>
-          <h1 className="md:max-w-xl text-5xl md:text-6xl font-bold">
+          <p className="text-xs font-bold underline md:text-lg decoration-yellow-500 decoration-[5px]">
+            Our Blog
+          </p>
+          <h1 className="text-5xl font-bold md:max-w-xl md:text-6xl">
             We keep you informed with the latest update.
           </h1>
         </div>
-        <div className="hidden md:block">
-          <img
-            src={votingg}
-            className="w-[20rem] h-[20rem] rounded-full"
-            alt={"Voter"}
-          />
+        <div className="hidden md:block bg-overlay">
+          <img src={image} className="" alt={"Voter"} />
         </div>
       </div>
 
       {/* ITEM 1 */}
-      <div className="container flex flex-col space-y-6 md:space-y-0 md:flex-row items-center justify-between max-w-5xl mx-auto mt-24 space-x-4">
-        <div className="flex flex-col space-y-2 px-4">
+      <div className="container flex flex-col items-center justify-between max-w-5xl mx-auto mt-24 space-x-4 space-y-6 md:space-y-0 md:flex-row">
+        <div className="flex flex-col px-4 space-y-2">
           <img src={votingg} alt={"Voter"} />
           <div className="flex flex-row space-x-4">
             <img className="w-6 h-6 rounded-full" src={avatar} alt="" />

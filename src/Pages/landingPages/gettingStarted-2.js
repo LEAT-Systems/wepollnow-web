@@ -29,14 +29,14 @@ const GettingStartedTwo = () => {
             <p>{countDownDate}</p>
           </Badge>
           <div className="flex flex-row items-center justify-center">
-            <h2 className="max-w-4xl p-8 text-2xl md:text-5xl font-extrabold text-center">
+            <h1 className="max-w-4xl p-8 text-2xl font-bold text-center md:text-5xl">
               Let's{" "}
               <span className="underline underline-offset-4 decoration-yellow-500 decoration-[5px]">
                 change
               </span>{" "}
               the narrative.
               <br /> Make your vote count.
-            </h2>
+            </h1>
           </div>
           <div className="md:pt-8">
             <Link
@@ -49,8 +49,8 @@ const GettingStartedTwo = () => {
 
           {/* Small screen controls */}
           <div></div>
-          <div className="flex flex-row items-center justify-center lg:hidden space-x-4 border border-green-500 p-4 rounded-lg px-12">
-            <Link to="/" className=" bg-green-400 text-white rounded-full">
+          <div className="flex flex-row items-center justify-center p-4 px-12 space-x-4 border border-green-500 rounded-lg lg:hidden">
+            <Link to="/" className="text-white bg-green-400 rounded-full ">
               <KeyboardArrowLeftIcon />
             </Link>
             <div className="flex flex-row items-center justify-center space-x-3">
@@ -73,7 +73,7 @@ const GettingStartedTwo = () => {
             </div>
             <Link
               to="/getting-started-three"
-              className=" bg-green-400 text-white rounded-full"
+              className="text-white bg-green-400 rounded-full "
             >
               <KeyboardArrowRightIcon />
             </Link>
@@ -82,7 +82,7 @@ const GettingStartedTwo = () => {
           {/* Large screen controls */}
 
           <div className="absolute flex-col items-start justify-center hidden lg:flex lg:ml-[1200px] space-y-4 ">
-            <Link to="/" className=" bg-green-200 rounded-full">
+            <Link to="/" className="bg-green-200 rounded-full ">
               <KeyboardArrowUpIcon />
             </Link>
             <div className="flex flex-col items-center justify-center px-2 space-y-3">
@@ -92,7 +92,7 @@ const GettingStartedTwo = () => {
               ></NavLink>
               <NavLink
                 to="/getting-started-two"
-                className="inline-block w-2 h-2 mr-2  bg-black rounded-full"
+                className="inline-block w-2 h-2 mr-2 bg-black rounded-full"
               ></NavLink>
               <NavLink
                 to="getting-started-three"
@@ -105,7 +105,7 @@ const GettingStartedTwo = () => {
             </div>
             <Link
               to="/getting-started-three"
-              className=" bg-green-200 rounded-full"
+              className="bg-green-200 rounded-full "
             >
               <KeyboardArrowDownIcon />
             </Link>
@@ -126,9 +126,9 @@ const GettingStartedTwo = () => {
         <section>
           <div className="relative flex flex-col max-w-6xl px-6 mx-auto my-32 text-gray-900 md:flex-row md:px-0">
             <div className="pr-0 text-black bg-[#FFF1F4] top-48 md:right-0 md:py-20 md:pl-20 md:p-0 md:absolute max-w-3xl space-y-8">
-              <div className="px-4 md:px-0 py-4 md:py-0">
+              <div className="px-4 py-4 md:px-0 md:py-0">
                 <p className="text-lg font-bold underline">About WepollNow</p>
-                <h1 className=" text-2xl md:text-5xl font-bold">
+                <h1 className="text-2xl font-bold md:text-5xl">
                   Creating a better Society by making every vote count.
                 </h1>
                 <p className="text-lg">
@@ -141,7 +141,7 @@ const GettingStartedTwo = () => {
                   <br /> Together, We can make Nigeria Great!
                 </p>
               </div>
-              <div className="pt-8 md:pt-4 text-center md:text-left py-4">
+              <div className="py-4 pt-8 text-center md:pt-4 md:text-left">
                 <Link to="/about">
                   <button className="p-4 w-1/3 rounded-lg bg-[#E2345A] px-4 text-white font-bold hover:bg-black">
                     Learn More
@@ -149,7 +149,7 @@ const GettingStartedTwo = () => {
                 </Link>
               </div>
             </div>
-            <div className=" p-8 hidden md:flex">
+            <div className="hidden p-8 md:flex">
               <img src={image} alt="" />
             </div>
           </div>

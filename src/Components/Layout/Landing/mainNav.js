@@ -80,14 +80,14 @@ const Nav = (props) => {
         <div className="flex flex-col items-center justify-center mx-auto space-y-8 md:mx-0 md:px-48">
           <div className="space-y-8 text-center md:text-left md:mt-10 md:mx-auto">
             <div>
-              <Link to="/" className="text-5xl font-bold stroke md:text-8xl">
+              <Link to="/" className="text-5xl font-bold stroke md:text-7xl">
                 <h1>Home</h1>
               </Link>
             </div>
             <div>
               <Link
                 to="/about"
-                className="text-5xl font-bold stroke md:text-8xl"
+                className="text-5xl font-bold stroke md:text-7xl"
               >
                 <h1>About</h1>
               </Link>
@@ -95,9 +95,17 @@ const Nav = (props) => {
             <div>
               <Link
                 to="/blog"
-                className="text-5xl font-bold stroke md:text-8xl"
+                className="text-4xl font-bold stroke md:text-7xl"
               >
                 <h1>Blog</h1>
+              </Link>
+            </div>
+            <div>
+              <Link
+                to="/blog"
+                className="text-4xl font-bold stroke md:text-7xl"
+              >
+                <h1>Polls</h1>
               </Link>
             </div>
           </div>
@@ -115,14 +123,14 @@ const Nav = (props) => {
           </div>
         </div>
 
-        <div className="flex flex-col items-center justify-center mx-auto border-t md:border-0 border-gray-200">
+        <div className="flex flex-col items-center justify-center mx-auto border-t border-gray-200 md:border-0">
           <div className="space-y-4">
             {hasSubmitted && (
-              <div className="bg-green-500 p-4 rounded-lg text-white">
+              <div className="p-4 text-white bg-green-500 rounded-lg">
                 Action was Successful. We will get back to you
               </div>
             )}
-            <h4 className="text-xl md:text-2xl mt-8 md:mt-0 font-bold text-left text-white md:text-left ">
+            <h4 className="mt-8 text-xl font-bold text-left text-white md:text-2xl md:mt-0 md:text-left ">
               Get in touch
             </h4>
             <form className="space-y-2" onSubmit={handleSubmit}>

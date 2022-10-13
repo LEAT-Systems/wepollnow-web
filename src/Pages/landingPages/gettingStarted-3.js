@@ -23,12 +23,12 @@ const GettingStartedThree = () => {
   return (
     <>
       <Nav />
-      <div className="flex flex-col items-center justify-center min-h-screen mx-auto space-y-4 bg-gray-100">
-        <div className="flex flex-col items-center justify-center p-8 bg-white rounded-lg space-y-12 ">
+      <div className="flex flex-col items-center justify-center min-h-screen mx-auto space-y-4 bg-center bg-no-repeat bg-hero-pattern">
+        <div className="flex flex-col items-center justify-center p-8 space-y-12 border border-green-500 rounded-lg ">
           {hasSubmitted && (
             <div className="p-8 border border-green-500 rounded-full">
               <Done
-                className="animate-pulse text-green-500 text-center"
+                className="text-center text-green-500 animate-pulse"
                 fontSize="large"
               />
             </div>
@@ -46,7 +46,7 @@ const GettingStartedThree = () => {
               </p>
             )}
             {hasSubmitted && (
-              <p className="text-black font-bold">
+              <p className="font-bold text-black">
                 Successfully Submitted. Proceed by Clicking the button below.
               </p>
             )}
@@ -56,25 +56,25 @@ const GettingStartedThree = () => {
                 name="phone"
                 ref={numberRef}
                 required
-                placeholder="Phone Number"
+                placeholder="Enter Phone Number"
                 className={`${
                   hasError
-                    ? "border border-red-500 w-full p-4 rounded focus:border-0"
-                    : "w-full p-4 border-b border-gray-400 focus:border-0"
+                    ? "border border-red-500 w-full p-4 rounded focus:border-0 bg-transparent"
+                    : "w-full p-4 border-b border-gray-400 focus:border-0 bg-transparent"
                 } `}
               />
             )}
             {!hasSubmitted && (
               <button
                 type="submit"
-                className="w-full p-4 rounded-lg bg-green-500 text-white hover:bg-green-600 hover:-translate-y-1"
+                className="w-full p-4 text-white bg-green-500 rounded-lg hover:bg-green-600 hover:-translate-y-1"
               >
                 Submit
               </button>
             )}
             {hasSubmitted && (
               <Link to="/getting-started-four">
-                <button className="w-full mt-4 p-4 px-8 rounded-lg bg-green-500 text-white hover:bg-green-600 hover:-translate-y-1">
+                <button className="w-full p-4 px-8 mt-8 text-white bg-green-500 rounded-lg hover:bg-green-600 hover:-translate-y-1">
                   Continue
                 </button>
               </Link>

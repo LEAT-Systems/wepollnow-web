@@ -2,15 +2,28 @@ import React from "react";
 // import FormThree from "../Components/Forms/FormThree";
 // import FormOne from "../Components/Forms/FormOne";
 // import FormTwo from "../Components/Forms/FormTwo";
-import FormComponent from "../Components/Forms/FormComponent";
-
+// import FormComponent from "../Components/Forms/FormComponent";
+import FormTwo from "../Components/Forms/VoteForm/FormTwo";
+import VoteSuccess from "../Components/Forms/VoteForm/VoteSuccess";
+import Login from "../Components/Layout/Admin/Pages/Login";
+import BlogSingle from "./blogPages/blogSingle";
+import Header from "../Components/Layout/Admin/Components/Header";
+import Dashboard from "../Components/Layout/Admin/Pages/Dashboard";
+import Polls from "../Components/Layout/Admin/Pages/ManagePolls";
+import PollsPageContentOne from "../Components/Layout/Admin/PageContent/PollsPageContentOne";
+import PollsPageContentTwo from "../Components/Layout/Admin/PageContent/PollsPageContentTwo";
+//
 const Test = () => {
   return (
     <>
+      {/* <Polls /> */}
+      {/* <BlogSingle /> */}
+      <PollsPageContentOne />
+      {/* <Dashboard /> */}
       {/* <FormOne /> */}
       {/* <FormTwo /> */}
       {/* <FormThree /> */}
-      <FormComponent />
+      {/* <FormComponent /> */}
     </>
   );
 };

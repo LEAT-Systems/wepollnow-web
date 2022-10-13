@@ -8,13 +8,13 @@ import Footer from "../../Components/Layout/Landing/Footer";
 const AllPolls = () => {
   return (
     <>
-      <Nav />
-      <div className="flex flex-col items-center justify-center space-y-8 p-[60px] bg-[#f2f2f2]">
-        <h2 className="text-4xl max-w-3xl font-bold text-center">
-          Search the Polls You Want to Participate
+      <Nav bg="EDFFF0" />
+      <div className="flex flex-col items-center justify-center space-y-8 p-[60px] bg-[#EDFFF0]">
+        <h2 className="text-4xl max-w-3xl font-extrabold text-center">
+          Select the Polls You Want to Participate in...
         </h2>
         <input
-          className="border-b border-gray-500 bg-[#f2f2f2] w-1/2 p-4"
+          className="border-b bg-transparent fontAwesome border-gray-500  w-1/2 p-4"
           placeholder="&#xf002; Search for Poll by state or Poll type. Example: Osun Guber or Presidential..."
         />
       </div>
@@ -23,13 +23,20 @@ const AllPolls = () => {
           {Polls.map((item) => {
             return (
               <div className="flex flex-col items-center justify-center space-x-4 space-y-2 p-4 ">
-                <div className="bg-gray-100 items-center justify-center flex flex-col py-12 space-y-2">
-                  <p className="font-bold text-xl">{item.description}</p>
+                <div className="bg-polls-pattern items-center justify-center flex flex-col py-12 space-y-2 px-4 md:px-0 rounded-lg">
+                  <p className="font-bold text-xl text-white">
+                    {item.description}
+                  </p>
                   <label className="bg-gray-200 px-4 rounded-lg">
                     {item.date}
                   </label>
                   <div className="px-2">
-                    <Timer date={item.date} size="4xl" />
+                    <Timer
+                      date={item.date}
+                      size="4xl"
+                      pcolor="white"
+                      color="white"
+                    />
                   </div>
                 </div>
               </div>

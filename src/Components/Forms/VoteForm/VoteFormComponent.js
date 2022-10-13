@@ -2,6 +2,7 @@ import React from "react";
 import { useState } from "react";
 import Confirm from "./Confirm";
 import Message from "./Message";
+import FormFive from "./FormFive";
 
 // From local Storage
 const phone = localStorage.getItem("phoneNumber");
@@ -14,7 +15,6 @@ const FormComponent = () => {
   const [data, setData] = useState({
     // Local Storage
     phone: phone,
-
     // Form 1
     castedVote: "",
   });
@@ -60,8 +60,8 @@ const FormComponent = () => {
 
   //   Components with props
   const steps = [
-    <FormOne next={handleNextStep} data={data} />,
-    <FormTwo next={handleNextStep} prev={handlePrevStep} data={data} />,
+    <FormFive next={handleNextStep} data={data} />,
+    <Confirm next={handleNextStep} prev={handlePrevStep} data={data} />,
     <Message state={hasError} message={errorMessage} />,
   ];
 

@@ -2,6 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
+.active {
+  @apply border-r-4 border-green-500;
+}
+
+.animate {
+  @apply transition duration-700 ease-in-out hover:scale-110;
+}
+.btn-stay {
+  @apply bg-green-500 p-2 text-white rounded-md px-4;
+}
+.btn-leave {
+  @apply bg-red-500 p-2 text-white  rounded-md px-4;
+}
 /* Hamburger Menu */
 .hamburger {
   cursor: pointer;
@@ -49,10 +62,6 @@
   -webkit-text-stroke-color: white;
 }
 
-.active button {
-  background: #529dfe;
-}
-
 .scrollable::-webkit-scrollbar,
 body::-webkit-scrollbar {
   width: 5px;
@@ -74,10 +83,8 @@ body::-webkit-scrollbar-thumb {
   left: 30%;
 }
 
-h1,
-h2,
-h3 {
-  font-family: "Monserrat", sans-serif;
+h1 {
+  font-family: "Montserrat", sans-serif;
 }
 
 .fontAwesome {
