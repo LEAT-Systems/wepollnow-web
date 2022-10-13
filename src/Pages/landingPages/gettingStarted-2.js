@@ -156,9 +156,9 @@ const GettingStartedTwo = () => {
         </section>
 
         {/*Mini Blog section  */}
-        <div>
+        {/* <div>
           <ArticleData />
-        </div>
+        </div> */}
 
         {/* Footer Section */}
         <div className="mt-12 md:mt-48">
