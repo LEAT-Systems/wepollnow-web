@@ -11,18 +11,20 @@ import image from "../../images/blog_img.png";
 const BlogPage = () => {
   return (
     <>
-      <Nav />
-      <div className="flex flex-col items-center justify-between px-4 py-8 mx-auto bg-[#EDFFF0] md:flex-row md:px-24">
+      <Nav bg="EDFFF0" />
+      <div className="flex flex-col items-center justify-between px-4 md:px-0 py-8 mx-auto bg-[#EDFFF0] md:flex-row h-[265px]">
         <div className="flex flex-col space-y-2 ">
-          <p className="text-xs font-bold underline md:text-lg decoration-yellow-500 decoration-[5px]">
-            Our Blog
-          </p>
-          <h1 className="text-5xl font-bold md:max-w-xl md:text-6xl">
-            We keep you informed with the latest update.
-          </h1>
+          <div className="px-12">
+            <p className="text-xs font-bold underline md:text-lg decoration-yellow-500 decoration-[5px]">
+              Our Blog
+            </p>
+            <h1 className="text-5xl font-bold md:max-w-xl md:text-6xl">
+              We keep you informed with the latest update.
+            </h1>
+          </div>
         </div>
-        <div className="hidden md:block bg-overlay">
-          <img src={image} className="" alt={"Voter"} />
+        <div className="z-10 hidden md:flex -mt-36">
+          <img src={image} className="w-[100%] h-[80%]" alt={"Voter"} />
         </div>
       </div>
 

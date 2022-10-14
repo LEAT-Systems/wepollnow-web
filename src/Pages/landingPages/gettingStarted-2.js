@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import PollsSingle from "../../Pages/Polls/PollsSingle";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
@@ -12,16 +12,107 @@ import image from "../../images/image_2.png";
 import Footer from "../../Components/Layout/Landing/Footer";
 import Socials from "../../Components/Layout/Landing/Socials";
 import { countDownDate } from "../../UI/MagicVars";
-import ArticleData from "../blogPages/blogSingle";
 import calendar from "../../images/calendar.png";
+import text_logo from "../../images/text_logo.png";
+import Done from "@mui/icons-material/Done";
+import { Modal } from "@mui/material";
+import Close from "../../images/CloseButton.png";
 
 //
 const GettingStartedTwo = () => {
+  const [open, setOpen] = useState(false);
+  const [hasError, setHasError] = useState(false);
+  const [hasSubmitted, setHasSubmitted] = useState(false);
+  const numberRef = useRef();
+
+  // Submit form values
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const val = numberRef.current.value.trim();
+    if (!(val.length === 11)) {
+      setHasError(true);
+      return;
+    }
+    localStorage.setItem("phoneNumber", val);
+    setHasSubmitted(true);
+    setHasError(false);
+    numberRef.current.value = "";
+  };
+  const handleOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  // Modal Content
+  const ModalContent = (
+    <div className="flex flex-col items-center justify-center min-h-screen mx-auto space-y-4">
+      <div className="flex flex-col items-end justify-center p-8 space-y-4 bg-white rounded-lg ">
+        <div className="flex flex-row items-end justify-end">
+          <button type="button" onClick={handleClose}>
+            <img src={Close} alt="close" />
+          </button>
+        </div>
+
+        {!hasSubmitted && (
+          <p className="text-xl font-semibold">
+            Input your phone number to proceed
+          </p>
+        )}
+
+        <form
+          className="w-full flex flex-col items-center justify-center space-y-8 text-center"
+          onSubmit={handleSubmit}
+        >
+          {hasError && (
+            <p className="text-red-500">Enter 11 digits of your Phone Number</p>
+          )}
+          {hasSubmitted && (
+            <p className="font-bold text-black text-3xl max-w-lg">
+              Successfully Submitted. Proceed by Clicking the button below.
+            </p>
+          )}
+          {!hasSubmitted && (
+            <input
+              type="number"
+              name="phone"
+              ref={numberRef}
+              required
+              placeholder="Enter Phone Number"
+              className={`${
+                hasError
+                  ? "border border-red-500 w-full p-4 rounded focus:border-0 bg-transparent"
+                  : "w-full p-4 border-b border-gray-400 focus:border-0 bg-transparent"
+              } `}
+            />
+          )}
+          {!hasSubmitted && (
+            <button
+              type="submit"
+              className="w-full p-4 text-white bg-green-500 rounded-lg hover:bg-green-600 hover:-translate-y-1"
+            >
+              Submit
+            </button>
+          )}
+          {hasSubmitted && (
+            <Link to="/getting-started-three">
+              <button className="w-full p-4 px-24 animate mt-8 text-white bg-green-500 rounded-lg hover:bg-green-600">
+                Continue
+              </button>
+            </Link>
+          )}
+        </form>
+      </div>
+    </div>
+  );
+
   return (
     <>
       <Nav />
+      <Modal open={open} children={ModalContent} />
       <div className="relative flex flex-col">
-        {<Socials />}
+        {<Socials marginTop="48" />}
         <div className="relative flex flex-col items-center justify-center space-y-4 mt-12 bg-hero-pattern bg-no-repeat lg:pb-[10rem] bg-top bg-opacity-5 md:py-8 pb-24">
           <p className="font-extrabold">Presidential Poll</p>
           <Badge className="flex flex-row space-x-3">
@@ -39,12 +130,12 @@ const GettingStartedTwo = () => {
             </h1>
           </div>
           <div className="md:pt-8">
-            <Link
-              to="/getting-started-three"
-              className="w-full p-4 px-8 text-white bg-green-500 rounded-lg hover:bg-green-600"
+            <button
+              onClick={handleOpen}
+              className="animate w-full p-4 px-8 text-white bg-green-500 rounded-lg hover:bg-green-600"
             >
               Vote Now
-            </Link>
+            </button>
           </div>
 
           {/* Small screen controls */}
@@ -54,22 +145,22 @@ const GettingStartedTwo = () => {
               <KeyboardArrowLeftIcon />
             </Link>
             <div className="flex flex-row items-center justify-center space-x-3">
-              <NavLink
+              <Link
                 to="/"
                 className="inline-block w-2 h-2 bg-gray-300 rounded-full"
-              ></NavLink>
-              <NavLink
+              ></Link>
+              <Link
                 to="/getting-started-two"
                 className="inline-block w-2 h-2 mr-2 bg-black rounded-full"
-              ></NavLink>
-              <NavLink
+              ></Link>
+              <Link
                 to="getting-started-three"
                 className="inline-block w-2 h-2 mr-2 bg-gray-300 rounded-full"
-              ></NavLink>
-              <NavLink
+              ></Link>
+              <Link
                 to="/email"
                 className="inline-block w-2 h-2 mr-2 bg-gray-300 rounded-full"
-              ></NavLink>
+              ></Link>
             </div>
             <Link
               to="/getting-started-three"
@@ -86,22 +177,22 @@ const GettingStartedTwo = () => {
               <KeyboardArrowUpIcon />
             </Link>
             <div className="flex flex-col items-center justify-center px-2 space-y-3">
-              <NavLink
+              <Link
                 to="/"
                 className="inline-block w-2 h-2 mr-2 bg-gray-200 rounded-full"
-              ></NavLink>
-              <NavLink
+              ></Link>
+              <Link
                 to="/getting-started-two"
                 className="inline-block w-2 h-2 mr-2 bg-black rounded-full"
-              ></NavLink>
-              <NavLink
+              ></Link>
+              <Link
                 to="getting-started-three"
                 className="inline-block w-2 h-2 mr-2 bg-gray-200 rounded-full"
-              ></NavLink>
-              <NavLink
+              ></Link>
+              <Link
                 to="/email"
                 className="inline-block w-2 h-2 mr-2 bg-gray-200 rounded-full"
-              ></NavLink>
+              ></Link>
             </div>
             <Link
               to="/getting-started-three"
@@ -111,11 +202,12 @@ const GettingStartedTwo = () => {
             </Link>
           </div>
         </div>
-
-        <div className="flex flex-row items-center justify-center lg:-mt-24">
-          <h1 className="text-[150px] logo text-center md:text-[200px] lg:text-[350px] font-bold text-gray-300 md:ml-8">
-            VOTE
-          </h1>
+        <div className="hidden md:flex flex-row items-center justify-center pb-12">
+          <img
+            src={text_logo}
+            alt="vote"
+            className="w-[65%] -mt-[120px] h-[200px]"
+          />
         </div>
 
         {/* Mini poll section */}
@@ -123,11 +215,22 @@ const GettingStartedTwo = () => {
           <PollsSingle />
         </div>
 
-        <section>
-          <div className="relative flex flex-col max-w-6xl px-6 mx-auto my-32 text-gray-900 md:flex-row md:px-0">
-            <div className="pr-0 text-black bg-[#FFF1F4] top-48 md:right-0 md:py-20 md:pl-20 md:p-0 md:absolute max-w-3xl space-y-8">
-              <div className="px-4 py-4 md:px-0 md:py-0">
-                <p className="text-lg font-bold underline">About WepollNow</p>
+        <section className="w-full">
+          <div className="relative flex flex-col w-full mx-auto my-32 text-gray-900 md:flex-row md:px-0">
+            {/* <div className="hidden md:flex">
+              <img src={image} alt="" />
+            </div> */}
+            {/* top-48 bg-[#FFF1F4] */}
+            <div className="pr-0 text-black md:right-0 md:py-20 md:pl-20 md:p-0 md:absolute max-w-4xl space-y-8">
+              <div className="hidden md:flex">
+                <img src={image} alt="" />
+              </div>
+            </div>
+            <div className="max-w-3xl mt-36 bg-[#FFF1F4]/30 p-8 z-10 backdrop-blur-md">
+              <div className="px-4 py-4 md:px-0 md:py-0 space-y-4">
+                <p className="text-lg font-bold underline decoration-[#F9C033] decoration-4">
+                  About Us
+                </p>
                 <h1 className="text-2xl font-bold md:text-5xl">
                   Creating a better Society by making every vote count.
                 </h1>
@@ -143,14 +246,11 @@ const GettingStartedTwo = () => {
               </div>
               <div className="py-4 pt-8 text-center md:pt-4 md:text-left">
                 <Link to="/about">
-                  <button className="p-4 w-1/3 rounded-lg bg-[#E2345A] px-4 text-white font-bold hover:bg-black">
+                  <button className="p-4 w-1/2 md:w-1/4 rounded-lg bg-green-500 px-4 text-white font-bold hover:bg-black">
                     Learn More
                   </button>
                 </Link>
               </div>
-            </div>
-            <div className="hidden p-8 md:flex">
-              <img src={image} alt="" />
             </div>
           </div>
         </section>

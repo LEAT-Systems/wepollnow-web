@@ -13,13 +13,13 @@ const FormTwo = (props) => {
     props.next(values);
   };
 
-  const handlerFunc = (e) => {
-    if (e.target.value !== "") {
-      setIsTouched(true);
-    } else {
-      setIsTouched(false);
-    }
-  };
+  // const handlerFunc = (e) => {
+  //   if (e.target.value !== "") {
+  //     setIsTouched(true);
+  //   } else {
+  //     setIsTouched(false);
+  //   }
+  // };
 
   console.log(isTouched);
   // Configuring the indicators
@@ -38,7 +38,7 @@ const FormTwo = (props) => {
     <>
       <Nav />
       <div className="flex flex-row items-center justify-center mx-auto py-4  px-4 md:px-0">
-        <div className="w-full md:w-1/2 text-lg text-gray-700 border rounded-lg">
+        <div className="w-full md:w-3/4 text-lg text-gray-700  rounded-lg">
           <header className="flex flex-col space-y-2 w-full p-4 border-b">
             <div className="flex flex-row items-center justify-center space-x-4">
               <div className="inline-flex items-center justify-center rounded-full p-4 bg-gray-200 text-black w-5 h-5">
@@ -68,11 +68,6 @@ const FormTwo = (props) => {
                 4
               </div>
             </div>
-            <p className="text-center font-semibold">
-              <span className="px-4 text-white bg-gradient-to-r from-blue-500 to-green-500 rounded-full text-sm">
-                Form Two: 3 Questions
-              </span>{" "}
-            </p>
           </header>
           {/*  */}
           <section>
@@ -84,7 +79,7 @@ const FormTwo = (props) => {
               {({ values }) => (
                 <Form>
                   <div className="flex flex-col space-y-4 p-2 md:p-8">
-                    <div className="relative overflow-y-scroll space-y-4 h-64 scrollable px-2 md:px-4">
+                    <div className="space-y-4 h-full  px-2 md:px-4">
                       <div className=" md:p-2 rounded-md space-y-4">
                         <FormLabel
                           no="i"
@@ -135,9 +130,12 @@ const FormTwo = (props) => {
                           <ErrorMessage name="ageRange" />
                         </p>
                         <div className="flex flex-row items-center justify-between space-x-4 md:p-2">
-                          <div className="flex flex-row items-center space-x-2 px-4 p-3 md:p-4 border rounded w-full">
+                          <label
+                            htmlFor="ageRange1"
+                            className="flex flex-row items-center space-x-2 px-4 p-3 md:p-4 border rounded w-full"
+                          >
                             <Field
-                              onClick={handlerFunc}
+                              id="ageRange1"
                               type="radio"
                               name="ageRange"
                               value="18-25"
@@ -145,51 +143,63 @@ const FormTwo = (props) => {
                               className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
                             />
                             <p>18-25</p>
-                          </div>
-                          <div className="flex flex-row items-center space-x-2 p-3 md:p-4 border rounded w-full">
+                          </label>
+                          <label
+                            htmlFor="ageRange2"
+                            className="flex flex-row items-center space-x-2 p-3 md:p-4 border rounded w-full"
+                          >
                             <Field
-                              onClick={handlerFunc}
+                              id="ageRange2"
                               type="radio"
                               name="ageRange"
                               value="25-35"
                               className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
                             />
                             <p>25-35</p>
-                          </div>
+                          </label>
                         </div>
                         <div className="flex flex-row items-center justify-between space-x-4 md:p-2 mt-2 md:mt-0">
-                          <div className="flex flex-row items-center space-x-2 px-4 p-3 md:p-4 border rounded w-full">
+                          <label
+                            htmlFor="ageRange3"
+                            className="flex flex-row items-center space-x-2 px-4 p-3 md:p-4 border rounded w-full"
+                          >
                             <Field
-                              onClick={handlerFunc}
+                              id="ageRange3"
                               type="radio"
                               name="ageRange"
                               value="35-45"
                               className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
                             />
                             <p>35-45</p>
-                          </div>
-                          <div className="flex flex-row items-center space-x-2 p-3 md:p-4 border rounded w-full">
+                          </label>
+                          <label
+                            htmlFor="ageRange4"
+                            className="flex flex-row items-center space-x-2 p-3 md:p-4 border rounded w-full"
+                          >
                             <Field
-                              onClick={handlerFunc}
+                              id="ageRange4"
                               type="radio"
                               name="ageRange"
                               value="45-50"
                               className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
                             />
                             <p>45-50</p>
-                          </div>
+                          </label>
                         </div>
                         <div className="flex flex-row items-center justify-between space-x-4 md:p-2 mt-2 md:mt-0">
-                          <div className="flex flex-row items-center space-x-2 p-3 md:p-4 border rounded w-full">
+                          <label
+                            htmlFor="ageRange5"
+                            className="flex flex-row items-center space-x-2 p-3 md:p-4 border rounded w-full"
+                          >
                             <Field
-                              onClick={handlerFunc}
+                              id="ageRange5"
                               type="radio"
                               name="ageRange"
                               value="50 and above"
                               className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
                             />
                             <p>50 and above</p>
-                          </div>
+                          </label>
                         </div>
                       </div>
                     </div>

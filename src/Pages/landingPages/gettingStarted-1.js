@@ -2,7 +2,6 @@ import React, { useRef, useState } from "react";
 import Nav from "../../Components/Layout/Landing/mainNav";
 import Badge from "../../UI/Badge";
 import Socials from "../../Components/Layout/Landing/Socials";
-import { NavLink } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { countDownDate } from "../../UI/MagicVars";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
@@ -10,6 +9,7 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import calendar from "../../images/calendar.png";
+import text_logo from "../../images/text_logo.png";
 const Timer = React.lazy(() => import("../../UI/Timer"));
 
 //
@@ -43,7 +43,7 @@ const GettingStartedOne = () => {
     <>
       <Nav />
       <div className="relative flex flex-col mt-12 ">
-        {<Socials />}
+        {<Socials marginTop="36" />}
         <div className="relative flex flex-col items-center bg-no-repeat bg-top bg-opacity-5 justify-center space-y-8 bg-hero-pattern lg:pb-[10rem]">
           <p className="font-extrabold">Gubernatorial Poll</p>
           <Badge className="flex flex-row space-x-3">
@@ -80,22 +80,22 @@ const GettingStartedOne = () => {
               <KeyboardArrowLeftIcon />
             </Link>
             <div className="flex flex-row items-center justify-center space-x-3">
-              <NavLink
+              <Link
                 to="/"
                 className="inline-block w-2 h-2 bg-black rounded-full"
-              ></NavLink>
-              <NavLink
+              ></Link>
+              <Link
                 to="/getting-started-two"
                 className="inline-block w-2 h-2 mr-2 bg-gray-300 rounded-full"
-              ></NavLink>
-              <NavLink
-                to="getting-started-three"
+              ></Link>
+              <Link
+                to="getting-started-four"
                 className="inline-block w-2 h-2 mr-2 bg-gray-300 rounded-full"
-              ></NavLink>
-              <NavLink
+              ></Link>
+              <Link
                 to="/email"
                 className="inline-block w-2 h-2 mr-2 bg-gray-300 rounded-full"
-              ></NavLink>
+              ></Link>
             </div>
             <Link
               to="/getting-started-two"
@@ -110,22 +110,22 @@ const GettingStartedOne = () => {
               <KeyboardArrowUpIcon />
             </Link>
             <div className="flex flex-col items-center justify-center px-2 space-y-3">
-              <NavLink
+              <Link
                 to="/"
                 className="inline-block w-2 h-2 mr-2 bg-black rounded-full"
-              ></NavLink>
-              <NavLink
+              ></Link>
+              <Link
                 to="/getting-started-two"
                 className="inline-block w-2 h-2 mr-2 bg-gray-200 rounded-full"
-              ></NavLink>
-              <NavLink
-                to="getting-started-three"
+              ></Link>
+              <Link
+                to="getting-started-four"
                 className="inline-block w-2 h-2 mr-2 bg-gray-200 rounded-full"
-              ></NavLink>
-              <NavLink
+              ></Link>
+              <Link
                 to="/email"
                 className="inline-block w-2 h-2 mr-2 bg-gray-200 rounded-full"
-              ></NavLink>
+              ></Link>
             </div>
             <Link
               to="/getting-started-two"
@@ -136,10 +136,12 @@ const GettingStartedOne = () => {
           </div>
         </div>
       </div>
-      <div className="flex flex-col items-center justify-center md:-mt-24">
-        <h1 className="text-[150px] text-center logo md:text-[200px] lg:text-[350px] font-bold text-[#D2D2D2] md:ml-8">
-          VOTE
-        </h1>
+      <div className="hidden md:flex flex-row items-center justify-center pb-12">
+        <img
+          src={text_logo}
+          alt="vote"
+          className="w-[65%] -mt-[120px] h-[200px]"
+        />
       </div>
     </>
   );

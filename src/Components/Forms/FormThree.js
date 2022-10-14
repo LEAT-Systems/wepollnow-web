@@ -24,7 +24,7 @@ const FormThree = (props) => {
     <>
       <Nav />
       <div className="flex flex-row items-center justify-center px-4 py-4 mx-auto md:px-0">
-        <div className="w-full text-lg text-gray-700 border rounded-lg md:w-1/2">
+        <div className="w-full text-lg text-gray-700  md:w-3/4">
           <header className="flex flex-col w-full p-8 space-y-2 border-b">
             <div className="flex flex-row items-center justify-center space-x-4">
               <div className="inline-flex items-center justify-center w-5 h-5 p-4 text-black bg-gray-200 rounded-full">
@@ -53,11 +53,6 @@ const FormThree = (props) => {
                 4
               </div>
             </div>
-            <p className="font-semibold text-center">
-              <span className="px-4 text-white bg-gradient-to-r from-blue-500 to-green-500 rounded-full text-sm">
-                Form Three: 3 Questions
-              </span>{" "}
-            </p>
           </header>
 
           {/*  */}
@@ -70,7 +65,7 @@ const FormThree = (props) => {
               {({ values }) => (
                 <Form>
                   <div className="flex flex-col md:p-8 space-y-4">
-                    <div className="h-64 px-4 space-y-2 overflow-y-scroll scrollable">
+                    <div className="h-full px-4 space-y-2">
                       {/*  */}
                       {/* Do you have a PVC */}
                       <div className="space-y-1 py-4">
@@ -79,129 +74,162 @@ const FormThree = (props) => {
                           <ErrorMessage name="pvc" />
                         </p>
                         <div className="flex flex-row items-center justify-between space-x-4 md:p-2">
-                          <div className="flex flex-row items-center space-x-2 p-3 md:p-4 border rounded w-full">
+                          <label
+                            htmlFor="pvc"
+                            className="flex flex-row items-center space-x-2 p-3 md:p-4 border rounded w-full"
+                          >
                             <Field
+                              id="pvc"
                               type="radio"
                               name="pvc"
                               value="yes"
                               className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
                             />
                             <p>Yes</p>
-                          </div>
-                          <div className="flex flex-row items-center space-x-2 p-3 md:p-4 border rounded w-full">
+                          </label>
+                          <label
+                            htmlFor="pvc2"
+                            className="flex flex-row items-center space-x-2 p-3 md:p-4 border rounded w-full"
+                          >
                             <Field
+                              id="pvc2"
                               type="radio"
                               name="pvc"
                               value="25"
                               className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
                             />
                             <p>No</p>
-                          </div>
+                          </label>
                         </div>
                       </div>
 
                       {/* Marital Status */}
 
                       <div className="pt-4">
-                        <FormLabel
-                          no="i"
-                          title="What is your marital status?"
-                        />
-
+                        <FormLabel title="What is your marital status?" />
                         <p className="text-red-600">
                           <ErrorMessage name="employmentStatus" />
                         </p>
                         <div className="flex flex-row items-center justify-between space-x-4 md:p-2">
-                          <div className="flex flex-row items-center space-x-2 p-3 md:p-4 border rounded w-full">
+                          <label
+                            htmlFor="maritalStatus"
+                            className="flex flex-row items-center space-x-2 p-3 md:p-4 border rounded w-full"
+                          >
                             <Field
+                              id="maritalStatus"
                               type="radio"
                               name="maritalStatus"
                               value="single"
                               className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
                             />
                             <p>Single</p>
-                          </div>
-                          <div className="flex flex-row items-center space-x-2 p-3 md:p-4 border rounded w-full">
+                          </label>
+                          <label
+                            htmlFor="maritalStatus2"
+                            className="flex flex-row items-center space-x-2 p-3 md:p-4 border rounded w-full"
+                          >
                             <Field
+                              id="maritalStatus2"
                               type="radio"
                               name="maritalStatus"
                               value="married"
                               className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
                             />
                             <p>Married</p>
-                          </div>
+                          </label>
                         </div>
                         <div className="flex flex-row items-center justify-between space-x-4 md:p-2 mt-2 md:mt-0">
-                          <div className="flex flex-row items-center space-x-2 p-3 md:p-4 border rounded w-full">
+                          <label
+                            htmlFor="maritalStatus3"
+                            className="flex flex-row items-center space-x-2 p-3 md:p-4 border rounded w-full"
+                          >
                             <Field
+                              id="maritalStatus3"
                               type="radio"
                               name="maritalStatus"
                               value="divorced"
                               className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
                             />
                             <p>Divorced</p>
-                          </div>
-                          <div className="flex flex-row items-center space-x-2 p-3 md:p-4 border rounded w-full">
+                          </label>
+                          <label
+                            htmlFor="maritalStatus4"
+                            className="flex flex-row items-center space-x-2 p-3 md:p-4 border rounded w-full"
+                          >
                             <Field
+                              id="maritalStatus4"
                               type="radio"
                               name="maritalStatus"
                               value="widowed"
                               className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
                             />
                             <p className="">Widowed</p>
-                          </div>
+                          </label>
                         </div>
                       </div>
 
                       {/* Employment Status */}
 
                       <div className="pt-4">
-                        <FormLabel
-                          no="i"
-                          title=" What best describes your employment status?"
-                        />
+                        <FormLabel title=" What best describes your employment status?" />
                         <p className="text-red-600">
                           <ErrorMessage name="employmentStatus" />
                         </p>
                         <div className="flex flex-row items-center justify-between space-x-4 md:p-2">
-                          <div className="flex flex-row items-center space-x-2 p-3 md:p-4 border rounded w-full">
+                          <label
+                            htmlFor="employmentStatus"
+                            className="flex flex-row items-center space-x-2 p-3 md:p-4 border rounded w-full"
+                          >
                             <Field
+                              id="employmentStatus"
                               type="radio"
                               name="employmentStatus"
                               value="student"
                               className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
                             />
                             <p>Student</p>
-                          </div>
-                          <div className="flex flex-row items-center space-x-2 p-3 md:p-4 border rounded w-full">
+                          </label>
+                          <label
+                            htmlFor="employmentStatus2"
+                            className="flex flex-row items-center space-x-2 p-3 md:p-4 border rounded w-full"
+                          >
                             <Field
+                              id="employmentStatus2"
                               type="radio"
                               name="employmentStatus"
                               value="employed"
                               className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
                             />
                             <p className="">Employed</p>
-                          </div>
+                          </label>
                         </div>
                         <div className="flex flex-row items-center justify-between space-x-4 md:p-2 mt-2 md:mt-0">
-                          <div className="flex flex-row items-center space-x-2 p-3 md:p-4 border rounded w-full">
+                          <label
+                            htmlFor="employmentStatus3"
+                            className="flex flex-row items-center space-x-2 p-3 md:p-4 border rounded w-full"
+                          >
                             <Field
+                              id="employmentStatus3"
                               type="radio"
                               name="employmentStatus"
                               value="unemployed"
                               className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
                             />
                             <p>Unemployed</p>
-                          </div>
-                          <div className="flex flex-row items-center space-x-2 p-4 md:p-4 border rounded w-full">
+                          </label>
+                          <label
+                            htmlFor="employmentStatus4"
+                            className="flex flex-row items-center space-x-2 p-4 md:p-4 border rounded w-full"
+                          >
                             <Field
+                              id="employmentStatus4"
                               type="radio"
                               name="employmentStatus"
                               value="self-employed"
                               className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
                             />
-                            <p className="text-sm">Self-employed</p>
-                          </div>
+                            <p>Self-employed</p>
+                          </label>
                         </div>
                       </div>
                     </div>

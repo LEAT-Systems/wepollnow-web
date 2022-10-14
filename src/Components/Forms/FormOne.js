@@ -30,7 +30,7 @@ const FormOne = (props) => {
     <>
       <Nav />
       <div className="flex flex-row items-center justify-center px-4 py-4 mx-auto md:px-0">
-        <div className="w-full text-lg text-gray-700 border rounded-lg md:w-2/4">
+        <div className="w-full text-lg text-gray-700 rounded-lg md:w-3/4">
           <header className="flex flex-col w-full p-6 space-y-4 border-b md:space-y-2">
             <div className="flex flex-row items-center justify-center space-x-4">
               {formisCompleted ? (
@@ -60,11 +60,6 @@ const FormOne = (props) => {
                 4
               </div>
             </div>
-            <p className="font-semibold text-center">
-              <span className="px-4 text-white bg-gradient-to-r from-blue-500 to-green-500 rounded-full text-sm">
-                Form One: 4 Questions
-              </span>{" "}
-            </p>
           </header>
 
           {/*  */}
@@ -77,7 +72,7 @@ const FormOne = (props) => {
               {() => (
                 <Form>
                   <div className="flex flex-col md:p-8 space-y-4">
-                    <div className="h-64 px-4 space-y-4 overflow-y-scroll scrollable">
+                    <div className="h-full px-4 space-y-4 ">
                       {/* Email Address */}
 
                       <div className="flex flex-col md:p-2 space-y-1">
@@ -100,24 +95,32 @@ const FormOne = (props) => {
                           title="Are you a first time voter? "
                         />
                         <div className="flex flex-row items-center justify-between space-x-4 md:p-2">
-                          <div className="flex flex-row items-center p-3 md:p-4 border space-x-2 rounded w-full">
+                          <label
+                            htmlFor="firstTimeVoter"
+                            className="flex flex-row items-center p-3 md:p-4 border space-x-2 rounded w-full"
+                          >
                             <Field
+                              id="firstTimeVoter"
                               type="radio"
                               name="firstTimeVoter"
                               value="yes"
                               className="w-4 h-4 border-gray-300"
                             />
                             <p>Yes</p>
-                          </div>
-                          <div className="flex flex-row items-center space-x-2 p-3 md:p-4 border rounded w-full">
+                          </label>
+                          <label
+                            htmlFor="firstTimeVoterTwo"
+                            className="flex flex-row items-center space-x-2 p-3 md:p-4 border rounded w-full"
+                          >
                             <Field
+                              id="firstTimeVoterTwo"
                               type="radio"
                               name="firstTimeVoter"
                               value="no"
                               className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
                             />
                             <p>No</p>
-                          </div>
+                          </label>
                         </div>
                       </div>
 
@@ -126,24 +129,32 @@ const FormOne = (props) => {
                       <div className="space-y-1">
                         <FormLabel no="i" title="Are you a Diaspora voter? " />
                         <div className="flex flex-row items-center justify-between space-x-4 md:p-2">
-                          <div className="flex flex-row items-center p-4 border rounded w-full space-x-2">
+                          <label
+                            htmlFor="diasporaVoter"
+                            className="flex flex-row items-center p-4 border rounded w-full space-x-2"
+                          >
                             <Field
+                              id="diasporaVoter"
                               type="radio"
                               name="diasporaVoter"
                               value="yes"
                               className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
                             />
                             <p>Yes</p>
-                          </div>
-                          <div className="flex flex-row items-center  p-4 border rounded w-full space-x-2">
+                          </label>
+                          <label
+                            htmlFor="diasporaVoterTwo"
+                            className="flex flex-row items-center  p-4 border rounded w-full space-x-2"
+                          >
                             <Field
+                              id="diasporaVoterTwo"
                               type="radio"
                               name="diasporaVoter"
                               value="no"
                               className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
                             />
                             <p>No</p>
-                          </div>
+                          </label>
                         </div>
                       </div>
 
@@ -151,7 +162,6 @@ const FormOne = (props) => {
 
                       <div className="flex flex-col md:p-2 space-y-1">
                         <FormLabel
-                          no="i"
                           title="Select state of voting residence (Not applicable for
                           Diaspora Voters) "
                         />
@@ -162,7 +172,7 @@ const FormOne = (props) => {
                           as="select"
                           name="stateOfVotingRes"
                           placeholder="Select State of Voting Residence"
-                          className="w-full h-12 px-4 mb-2 text-lg text-gray-700 rounded-md placeholder-gray-600 border focus:shadow-outline"
+                          className="w-full h-12 px-4 mb-2 text-lg text-gray-700 rounded-md placeholder-gray-600 border "
                         >
                           <option value="ebonyi">1</option>
                           <option value="ekiti">2</option>

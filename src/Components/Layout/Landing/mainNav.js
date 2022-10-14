@@ -57,7 +57,7 @@ const Nav = (props) => {
         <Link to="/">
           <img src={logo} alt="logo" />
         </Link>
-        <div>
+        <div className="relative z-30">
           <button
             className={show ? "open p-3" : "hamburger focus:outline-none"}
             onClick={() => {
@@ -74,7 +74,7 @@ const Nav = (props) => {
         className={
           !show
             ? "hidden"
-            : "flex flex-col md:flex-row items-center justify-center py-12 bg-black mx-auto space-y-12"
+            : "flex relative z-30 flex-col md:flex-row items-center justify-center py-12 bg-black mx-auto space-y-12"
         }
       >
         <div className="flex flex-col items-center justify-center mx-auto space-y-8 md:mx-0 md:px-48">
@@ -123,8 +123,8 @@ const Nav = (props) => {
           </div>
         </div>
 
-        <div className="flex flex-col items-center justify-center mx-auto border-t border-gray-200 md:border-0">
-          <div className="space-y-4">
+        <div className="flex flex-col items-center justify-center mx-auto border-t w-[65%] border-gray-200 md:border-0">
+          <div className="space-y-4 w-[100%] md:w-[65%]">
             {hasSubmitted && (
               <div className="p-4 text-white bg-green-500 rounded-lg">
                 Action was Successful. We will get back to you
@@ -140,7 +140,7 @@ const Nav = (props) => {
                   required
                   type="text"
                   ref={nameRef}
-                  className="p-4 text-white placeholder-gray-200 bg-black border rounded w-[300px] md:w-[400px] lg:w-[500px] hover:bg-gray-900"
+                  className="p-4 text-white placeholder-gray-200 bg-black border rounded w-full  hover:bg-gray-900"
                   placeholder="Enter Your Name"
                 />
               </div>
@@ -150,7 +150,7 @@ const Nav = (props) => {
                   required
                   type="email"
                   ref={emailRef}
-                  className="p-4 text-white placeholder-gray-200 bg-black border rounded w-[300px] md:w-[400px] lg:w-[500px] hover:bg-gray-900"
+                  className="p-4 text-white w-full placeholder-gray-200 bg-black border rounded hover:bg-gray-900"
                   placeholder="Enter Your Email"
                 />
               </div>
@@ -160,7 +160,7 @@ const Nav = (props) => {
                   required
                   type="text"
                   ref={messageRef}
-                  className="p-4 text-white placeholder-gray-200 bg-black border rounded w-[300px] md:w-[400px] lg:w-[500px] hover:bg-gray-900 h-32"
+                  className="p-4 text-white w-full placeholder-gray-200 bg-black border rounded  hover:bg-gray-900 h-32"
                   placeholder="Enter Your Message"
                 />
               </div>

@@ -14,9 +14,7 @@ const GettingStartedTwo = React.lazy(() =>
 const GettingStartedThree = React.lazy(() =>
   import("./Pages/landingPages/gettingStarted-3")
 );
-const GettingStartedFour = React.lazy(() =>
-  import("./Pages/landingPages/gettingStarted-4")
-);
+
 const NotFound = React.lazy(() => import("./UI/NotFound"));
 const AboutPage = React.lazy(() => import("./Pages/landingPages/about"));
 const BlogPage = React.lazy(() => import("./Pages/blogPages/blog"));
@@ -75,11 +73,6 @@ function App() {
         {/* GETTING STARTED THREE ROUTE */}
         <Route path="/getting-started-three" exact>
           <GettingStartedThree />
-        </Route>
-
-        {/* GETTING STARTED FOUR ROUTE */}
-        <Route path="/getting-started-four" exact>
-          <GettingStartedFour />
         </Route>
 
         {/* ABOUT PAGE ROUTE */}
