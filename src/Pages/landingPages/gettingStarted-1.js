@@ -35,7 +35,7 @@ const GettingStartedOne = () => {
 
   // Message to display before timeout
   const message = hasSubmitted && (
-    <p className="text-white px-2 rounded-full font-bold bg-green-500">
+    <p className="px-2 font-bold text-white bg-green-500 rounded-full">
       Action Successful
     </p>
   );
@@ -43,7 +43,7 @@ const GettingStartedOne = () => {
     <>
       <Nav />
       <div className="relative flex flex-col mt-12 ">
-        {<Socials marginTop="36" />}
+        {<Socials top="36" />}
         <div className="relative flex flex-col items-center bg-no-repeat bg-top bg-opacity-5 justify-center space-y-8 bg-hero-pattern lg:pb-[10rem]">
           <p className="font-extrabold">Gubernatorial Poll</p>
           <Badge className="flex flex-row space-x-3">
@@ -52,7 +52,7 @@ const GettingStartedOne = () => {
           </Badge>
           <Timer date={countDownDate} size="4xl" sizeMD="6xl" />
           <div>
-            <p className="max-w-xs text-center md:max-w-xl text-xl">
+            <p className="max-w-xs text-xl text-center md:max-w-xl">
               We would love to keep you informed as the date draws closer
             </p>
           </div>
@@ -75,8 +75,8 @@ const GettingStartedOne = () => {
             </form>
           </div>
           {/* Small screen controls */}
-          <div className="flex flex-row items-center justify-center lg:hidden space-x-4 border border-green-500 p-4 rounded-lg px-12">
-            <Link to="/" className=" bg-green-500 text-white rounded-full">
+          <div className="flex flex-row items-center justify-center p-4 px-12 space-x-4 border border-green-500 rounded-lg lg:hidden">
+            <Link to="/" className="text-white bg-green-500 rounded-full ">
               <KeyboardArrowLeftIcon />
             </Link>
             <div className="flex flex-row items-center justify-center space-x-3">
@@ -99,14 +99,14 @@ const GettingStartedOne = () => {
             </div>
             <Link
               to="/getting-started-two"
-              className=" bg-green-500 text-white rounded-full"
+              className="text-white bg-green-500 rounded-full "
             >
               <KeyboardArrowRightIcon />
             </Link>
           </div>
           {/* Large screen controls */}
           <div className="absolute flex-col items-start justify-center hidden lg:flex lg:ml-[1200px] space-y-4 ">
-            <Link to="/" className=" bg-green-200 rounded-full">
+            <Link to="/" className="bg-green-200 rounded-full ">
               <KeyboardArrowUpIcon />
             </Link>
             <div className="flex flex-col items-center justify-center px-2 space-y-3">
@@ -129,14 +129,14 @@ const GettingStartedOne = () => {
             </div>
             <Link
               to="/getting-started-two"
-              className=" bg-green-200 rounded-full"
+              className="bg-green-200 rounded-full "
             >
               <KeyboardArrowDownIcon />
             </Link>
           </div>
         </div>
       </div>
-      <div className="hidden md:flex flex-row items-center justify-center pb-12">
+      <div className="flex-row items-center justify-center hidden pb-12 md:flex">
         <img
           src={text_logo}
           alt="vote"
