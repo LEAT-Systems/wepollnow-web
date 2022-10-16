@@ -43,8 +43,8 @@ const GettingStartedOne = () => {
     <>
       <Nav />
       <div className="relative flex flex-col mt-12 ">
-        <div className="top-48">
-          <Socials top="48" />
+        <div className="top-36">
+          <Socials top="36" />
         </div>
         <div className="relative flex flex-col items-center bg-no-repeat bg-top bg-opacity-5 justify-center space-y-8 bg-hero-pattern lg:pb-[10rem]">
           <p className="font-extrabold">Gubernatorial Poll</p>
