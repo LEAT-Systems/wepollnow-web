@@ -102,7 +102,7 @@ const Nav = (props) => {
             </div>
             <div>
               <Link
-                to="/blog"
+                to="/polls"
                 className="text-4xl font-bold stroke md:text-7xl"
               >
                 <h1>Polls</h1>
@@ -140,7 +140,7 @@ const Nav = (props) => {
                   required
                   type="text"
                   ref={nameRef}
-                  className="p-4 text-white placeholder-gray-200 bg-black border rounded w-full  hover:bg-gray-900"
+                  className="w-full p-4 text-white placeholder-gray-200 bg-black border rounded hover:bg-gray-900"
                   placeholder="Enter Your Name"
                 />
               </div>
@@ -150,7 +150,7 @@ const Nav = (props) => {
                   required
                   type="email"
                   ref={emailRef}
-                  className="p-4 text-white w-full placeholder-gray-200 bg-black border rounded hover:bg-gray-900"
+                  className="w-full p-4 text-white placeholder-gray-200 bg-black border rounded hover:bg-gray-900"
                   placeholder="Enter Your Email"
                 />
               </div>
@@ -160,7 +160,7 @@ const Nav = (props) => {
                   required
                   type="text"
                   ref={messageRef}
-                  className="p-4 text-white w-full placeholder-gray-200 bg-black border rounded  hover:bg-gray-900 h-32"
+                  className="w-full h-32 p-4 text-white placeholder-gray-200 bg-black border rounded hover:bg-gray-900"
                   placeholder="Enter Your Message"
                 />
               </div>

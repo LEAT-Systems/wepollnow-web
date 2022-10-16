@@ -10,8 +10,8 @@ const AllPolls = () => {
   return (
     <>
       <Nav bg="EDFFF0" />
-      <div className=" flex flex-row items-center justify-between md:px-24 px-6 py-8 mx-auto bg-[#EDFFF0]">
-        <div className="flex flex-col space-y-2 ">
+      <div className=" flex flex-row items-center justify-between mx-auto bg-[#EDFFF0]">
+        <div className="flex flex-col px-12 space-y-2">
           <p className="text-xs md:text-lg font-bold underline underline-offset-4 decoration-yellow-500 decoration-[5px]">
             Upcoming Polls
           </p>
@@ -19,20 +19,20 @@ const AllPolls = () => {
             Be abreast with all upcoming polls
           </h1>
         </div>
-        <div className="z-10 hidden md:flex">
-          <img src={image} className="w-[30rem] h-[20rem]" alt={"Voter"} />
+        <div className="z-10 hidden md:flex -mt-36">
+          <img src={image} className="w-full h-[500px]" alt={"Voter"} />
         </div>
       </div>
       <Link to="/getting-started-phone-required">
-        <div className="flex flex-col md:flex-row items-center justify-between px-8 mt-12">
+        <div className="flex flex-col items-center justify-between px-8 mt-12 md:flex-row">
           {Polls.map((item) => {
             return (
-              <div className="flex flex-col items-center justify-center space-x-4 space-y-2 p-4 ">
-                <div className="bg-polls-pattern items-center justify-center flex flex-col py-12 space-y-2 px-4 md:px-0 rounded-lg">
-                  <p className="font-bold text-xl text-white">
+              <div className="flex flex-col items-center justify-center p-4 space-x-4 space-y-2 ">
+                <div className="flex flex-col items-center justify-center px-4 py-12 space-y-2 rounded-lg bg-polls-pattern md:px-0">
+                  <p className="text-xl font-bold text-white">
                     {item.description}
                   </p>
-                  <label className="bg-gray-200 px-4 rounded-lg">
+                  <label className="px-4 bg-gray-200 rounded-lg">
                     {item.date}
                   </label>
                   <div className="px-2">

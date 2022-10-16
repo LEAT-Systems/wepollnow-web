@@ -1,18 +1,16 @@
 import React from "react";
-import SwipeDownIcon from "@mui/icons-material/SwipeDown";
 import Instagram from "@mui/icons-material/Instagram";
 import YouTube from "@mui/icons-material/YouTube";
 import Facebook from "@mui/icons-material/Facebook";
-import { Tooltip } from "@mui/material";
 
 //
 const Socials = (props) => {
   return (
     <>
       <div
-        className={`absolute z-10 hidden md:flex flex-col items-center justify-center px-4 mt-${props.marginTop} space-y-4 md:px-12 lg:px-24`}
+        className={`absolute z-10 hidden md:flex flex-col items-center top-${props.top} justify-center px-4 mt-${props.marginTop} pt-${props.paddingTop} space-y-4 md:px-12 lg:px-24`}
       >
-        <div className="flex flex-col space-y-4 text-[#707070]">
+        <div className={`flex flex-col space-y-4 text-[#707070]`}>
           <a href="https://instagram.com/wepollnow">
             <Instagram />
           </a>

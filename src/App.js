@@ -1,5 +1,7 @@
 import React, { Suspense } from "react";
 import { Route, Switch } from "react-router-dom";
+import VoteFormTwo from "./Components/Forms/VoteForm/VoteFormTwo";
+import VoteSuccess from "./Components/Forms/VoteForm/VoteSuccess";
 
 import Loading from "./UI/Loading";
 
@@ -20,7 +22,7 @@ const AboutPage = React.lazy(() => import("./Pages/landingPages/about"));
 const BlogPage = React.lazy(() => import("./Pages/blogPages/blog"));
 const Test = React.lazy(() => import("./Pages/test"));
 const FormFive = React.lazy(() =>
-  import("./Components/Forms/VoteForm/FormFive")
+  import("./Components/Forms/VoteForm/VoteForm")
 );
 const AllPolls = React.lazy(() => import("./Pages/Polls/allPolls"));
 const FormComponent = React.lazy(() =>
@@ -83,6 +85,14 @@ function App() {
         {/* CONTACT PAGE ROUTE */}
         <Route path="/blog" exact>
           <BlogPage />
+        </Route>
+        {/* CONTACT PAGE ROUTE */}
+        <Route path="/vote/vote-form-next" exact>
+          <VoteFormTwo />
+        </Route>
+        {/* CONTACT PAGE ROUTE */}
+        <Route path="/vote/voteSuccess" exact>
+          <VoteSuccess />
         </Route>
 
         {/* TEST PAGE ROUTE */}

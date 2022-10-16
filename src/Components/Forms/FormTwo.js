@@ -37,34 +37,34 @@ const FormTwo = (props) => {
   return (
     <>
       <Nav />
-      <div className="flex flex-row items-center justify-center mx-auto py-4  px-4 md:px-0">
-        <div className="w-full md:w-3/4 text-lg text-gray-700  rounded-lg">
-          <header className="flex flex-col space-y-2 w-full p-4 border-b">
+      <div className="flex flex-row items-center justify-center px-4 py-4 mx-auto md:px-0">
+        <div className="w-full text-lg text-gray-700 rounded-lg md:w-3/4">
+          <header className="flex flex-col w-full p-4 space-y-2 border-b">
             <div className="flex flex-row items-center justify-center space-x-4">
-              <div className="inline-flex items-center justify-center rounded-full p-4 bg-gray-200 text-black w-5 h-5">
+              <div className="inline-flex items-center justify-center w-5 h-5 p-4 text-black bg-gray-200 rounded-full">
                 1
               </div>
-              <hr className="border-dashed border border-black w-12" />
+              <hr className="w-12 border border-black " />
               {formisCompleted ? (
-                <div className="inline-flex items-center justify-center rounded-full p-4 bg-green-600 text-white w-5 h-5">
+                <div className="inline-flex items-center justify-center w-5 h-5 p-4 text-white bg-green-600 rounded-full">
                   <Done />
                 </div>
               ) : (
-                <div className="inline-flex items-center justify-center rounded-full p-4 bg-black text-white w-5 h-5">
+                <div className="inline-flex items-center justify-center w-5 h-5 p-4 text-white bg-black rounded-full">
                   2
                 </div>
               )}
 
               <hr
-                className={`w-12 border-black border-dashed border ${
+                className={`w-12 border-black  border ${
                   formisCompleted && "border-green-500"
                 }`}
               />
-              <div className="inline-flex items-center justify-center rounded-full p-4 bg-gray-100 text-black w-5 h-5">
+              <div className="inline-flex items-center justify-center w-5 h-5 p-4 text-black bg-gray-100 rounded-full">
                 3
               </div>
-              <hr className="border-dashed border border-black w-12" />
-              <div className="inline-flex items-center justify-center rounded-full p-4 bg-gray-100 text-black w-5 h-5">
+              <hr className="w-12 border border-black " />
+              <div className="inline-flex items-center justify-center w-5 h-5 p-4 text-black bg-gray-100 rounded-full">
                 4
               </div>
             </div>
@@ -78,9 +78,9 @@ const FormTwo = (props) => {
             >
               {({ values }) => (
                 <Form>
-                  <div className="flex flex-col space-y-4 p-2 md:p-8">
-                    <div className="space-y-4 h-full  px-2 md:px-4">
-                      <div className=" md:p-2 rounded-md space-y-4">
+                  <div className="flex flex-col p-2 space-y-4 md:p-8">
+                    <div className="h-full px-2 space-y-4 md:px-4">
+                      <div className="space-y-4 rounded-md md:p-2">
                         <FormLabel
                           no="i"
                           title=" Select L.G.A of voting residence(Not applicable for
@@ -93,7 +93,7 @@ const FormTwo = (props) => {
                           <Field
                             as="select"
                             name="LGAofVotingRes"
-                            className="mt-1 block w-full border rounded border-gray-300 bg-white py-3 px-3"
+                            className="block w-full px-3 py-3 mt-1 bg-white border border-gray-300 rounded"
                           >
                             <option value="">Select an option</option>
                             <option value="Umuahia">Umuahia</option>
@@ -104,7 +104,7 @@ const FormTwo = (props) => {
 
                       {/* State of Origin  */}
 
-                      <div className="md:p-2 space-y-2">
+                      <div className="space-y-2 md:p-2">
                         <FormLabel no="i" title=" Select State of Origin" />
                         <p className="text-red-600">
                           <ErrorMessage name="stateOfOrigin" />
@@ -113,7 +113,7 @@ const FormTwo = (props) => {
                           <Field
                             as="select"
                             name="stateOfOrigin"
-                            className="mt-1 block w-full border rounded border-gray-300 bg-white py-3 px-3"
+                            className="block w-full px-3 py-3 mt-1 bg-white border border-gray-300 rounded"
                           >
                             <option value="">Select an option</option>
                             <option value="Abia">Abia</option>
@@ -132,7 +132,7 @@ const FormTwo = (props) => {
                         <div className="flex flex-row items-center justify-between space-x-4 md:p-2">
                           <label
                             htmlFor="ageRange1"
-                            className="flex flex-row items-center space-x-2 px-4 p-3 md:p-4 border rounded w-full"
+                            className="flex flex-row items-center w-full p-3 px-4 space-x-2 border rounded md:p-4"
                           >
                             <Field
                               id="ageRange1"
@@ -146,7 +146,7 @@ const FormTwo = (props) => {
                           </label>
                           <label
                             htmlFor="ageRange2"
-                            className="flex flex-row items-center space-x-2 p-3 md:p-4 border rounded w-full"
+                            className="flex flex-row items-center w-full p-3 space-x-2 border rounded md:p-4"
                           >
                             <Field
                               id="ageRange2"
@@ -158,10 +158,10 @@ const FormTwo = (props) => {
                             <p>25-35</p>
                           </label>
                         </div>
-                        <div className="flex flex-row items-center justify-between space-x-4 md:p-2 mt-2 md:mt-0">
+                        <div className="flex flex-row items-center justify-between mt-2 space-x-4 md:p-2 md:mt-0">
                           <label
                             htmlFor="ageRange3"
-                            className="flex flex-row items-center space-x-2 px-4 p-3 md:p-4 border rounded w-full"
+                            className="flex flex-row items-center w-full p-3 px-4 space-x-2 border rounded md:p-4"
                           >
                             <Field
                               id="ageRange3"
@@ -174,7 +174,7 @@ const FormTwo = (props) => {
                           </label>
                           <label
                             htmlFor="ageRange4"
-                            className="flex flex-row items-center space-x-2 p-3 md:p-4 border rounded w-full"
+                            className="flex flex-row items-center w-full p-3 space-x-2 border rounded md:p-4"
                           >
                             <Field
                               id="ageRange4"
@@ -186,10 +186,10 @@ const FormTwo = (props) => {
                             <p>45-50</p>
                           </label>
                         </div>
-                        <div className="flex flex-row items-center justify-between space-x-4 md:p-2 mt-2 md:mt-0">
+                        <div className="flex flex-row items-center justify-between mt-2 space-x-4 md:p-2 md:mt-0">
                           <label
                             htmlFor="ageRange5"
-                            className="flex flex-row items-center space-x-2 p-3 md:p-4 border rounded w-full"
+                            className="flex flex-row items-center w-full p-3 space-x-2 border rounded md:p-4"
                           >
                             <Field
                               id="ageRange5"
@@ -204,17 +204,17 @@ const FormTwo = (props) => {
                       </div>
                     </div>
                   </div>
-                  <section className="space-x-6 w-full py-6 border-t px-6">
+                  <section className="w-full px-6 py-6 space-x-6 border-t">
                     <button
                       onClick={() => props.prev(values)}
                       type="button"
-                      className="p-2 px-4 border bg-transparent border-black text-black rounded-md ml-6 hover:border-red-500"
+                      className="p-2 px-4 ml-6 text-black bg-transparent border border-black rounded-md hover:border-red-500"
                     >
                       Previous
                     </button>
                     <button
                       type="submit"
-                      className="p-2 px-8 bg-green-500 text-white rounded-md hover:-translate-y-1 hover:bg-green-600"
+                      className="p-2 px-8 text-white bg-green-500 rounded-md hover:-translate-y-1 hover:bg-green-600"
                     >
                       Next
                     </button>

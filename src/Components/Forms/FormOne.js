@@ -44,18 +44,18 @@ const FormOne = (props) => {
               )}
 
               <hr
-                className={`w-12 border-black border-dashed border ${
+                className={`w-12 border-black border ${
                   formisCompleted && "border-green-500"
                 }`}
               />
               <div className="inline-flex items-center justify-center w-5 h-5 p-4 text-black bg-gray-100 rounded-full">
                 2
               </div>
-              <hr className="w-12 border-black border-dashed border" />
+              <hr className="w-12 border border-black" />
               <div className="inline-flex items-center justify-center w-5 h-5 p-4 text-black bg-gray-100 rounded-full">
                 3
               </div>
-              <hr className="w-12 border-black border-dashed border" />
+              <hr className="w-12 border border-black" />
               <div className="inline-flex items-center justify-center w-5 h-5 p-4 text-black bg-gray-100 rounded-full">
                 4
               </div>
@@ -71,11 +71,11 @@ const FormOne = (props) => {
             >
               {() => (
                 <Form>
-                  <div className="flex flex-col md:p-8 space-y-4">
+                  <div className="flex flex-col space-y-4 md:p-8">
                     <div className="h-full px-4 space-y-4 ">
                       {/* Email Address */}
 
-                      <div className="flex flex-col md:p-2 space-y-1">
+                      <div className="flex flex-col space-y-1 md:p-2">
                         <FormLabel no="i" title="Enter Email " />
                         <p className="text-red-600">
                           <ErrorMessage name="email" />
@@ -83,7 +83,7 @@ const FormOne = (props) => {
                         <Field
                           name="email"
                           placeholder="Enter Email Address"
-                          className="w-full  h-12 px-4 mb-2 text-lg text-gray-700 rounded-md placeholder-gray-600 border focus:shadow-outline"
+                          className="w-full h-12 px-4 mb-2 text-lg text-gray-700 placeholder-gray-600 border rounded-md focus:shadow-outline"
                         />
                       </div>
 
@@ -97,7 +97,7 @@ const FormOne = (props) => {
                         <div className="flex flex-row items-center justify-between space-x-4 md:p-2">
                           <label
                             htmlFor="firstTimeVoter"
-                            className="flex flex-row items-center p-3 md:p-4 border space-x-2 rounded w-full"
+                            className="flex flex-row items-center w-full p-3 space-x-2 border rounded md:p-4"
                           >
                             <Field
                               id="firstTimeVoter"
@@ -110,7 +110,7 @@ const FormOne = (props) => {
                           </label>
                           <label
                             htmlFor="firstTimeVoterTwo"
-                            className="flex flex-row items-center space-x-2 p-3 md:p-4 border rounded w-full"
+                            className="flex flex-row items-center w-full p-3 space-x-2 border rounded md:p-4"
                           >
                             <Field
                               id="firstTimeVoterTwo"
@@ -131,7 +131,7 @@ const FormOne = (props) => {
                         <div className="flex flex-row items-center justify-between space-x-4 md:p-2">
                           <label
                             htmlFor="diasporaVoter"
-                            className="flex flex-row items-center p-4 border rounded w-full space-x-2"
+                            className="flex flex-row items-center w-full p-4 space-x-2 border rounded"
                           >
                             <Field
                               id="diasporaVoter"
@@ -144,7 +144,7 @@ const FormOne = (props) => {
                           </label>
                           <label
                             htmlFor="diasporaVoterTwo"
-                            className="flex flex-row items-center  p-4 border rounded w-full space-x-2"
+                            className="flex flex-row items-center w-full p-4 space-x-2 border rounded"
                           >
                             <Field
                               id="diasporaVoterTwo"
@@ -160,7 +160,7 @@ const FormOne = (props) => {
 
                       {/* Select State of voting residence */}
 
-                      <div className="flex flex-col md:p-2 space-y-1">
+                      <div className="flex flex-col space-y-1 md:p-2">
                         <FormLabel
                           title="Select state of voting residence (Not applicable for
                           Diaspora Voters) "
@@ -172,7 +172,7 @@ const FormOne = (props) => {
                           as="select"
                           name="stateOfVotingRes"
                           placeholder="Select State of Voting Residence"
-                          className="w-full h-12 px-4 mb-2 text-lg text-gray-700 rounded-md placeholder-gray-600 border "
+                          className="w-full h-12 px-4 mb-2 text-lg text-gray-700 placeholder-gray-600 border rounded-md "
                         >
                           <option value="ebonyi">1</option>
                           <option value="ekiti">2</option>

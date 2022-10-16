@@ -7,8 +7,8 @@ const AboutPage = () => {
   return (
     <>
       <Nav bg="EDFFF0" />
-      <div className="flex flex-row items-center justify-between py-8 mx-auto bg-[#EDFFF0] ">
-        <div className="flex flex-col space-y-2 px-12">
+      <div className="flex flex-row items-center justify-between mx-auto bg-[#EDFFF0] ">
+        <div className="flex flex-col px-12 space-y-2">
           <p className="text-xs md:text-lg font-bold underline underline-2 underline-offset-2 decoration-yellow-500 decoration-[5px]">
             About Wepollnow
           </p>
@@ -16,8 +16,8 @@ const AboutPage = () => {
             Creating a better Society by making every vote count.
           </h1>
         </div>
-        <div className="z-10 hidden md:flex -mt-36">
-          <img src={image} className="w-[100%] h-[80%]" alt={"Voter"} />
+        <div className="z-10 hidden -mt-36 md:flex">
+          <img src={image} className="w-[100%] h-[85%]" alt={"Voter"} />
         </div>
       </div>
       <div className="flex flex-row items-center justify-center max-w-3xl px-8 mx-auto mt-24">

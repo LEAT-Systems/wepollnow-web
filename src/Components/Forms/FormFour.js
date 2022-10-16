@@ -28,21 +28,21 @@ const FormFour = (props) => {
     <>
       <Nav />
       <div className="flex flex-row items-center justify-center px-4 py-4 mx-auto md:px-0">
-        <div className="w-full text-lg text-gray-700  md:w-3/4">
+        <div className="w-full text-lg text-gray-700 md:w-3/4">
           <header className="flex flex-col w-full p-6 space-y-1 border-b">
             <div className="flex flex-row items-center justify-center space-x-4">
               <div className="inline-flex items-center justify-center w-5 h-5 p-4 text-black bg-gray-200 rounded-full">
                 1
               </div>
-              <hr className="w-12 border-black border-dashed border-1" />
+              <hr className="w-12 border-black border-1" />
               <div className="inline-flex items-center justify-center w-5 h-5 p-4 text-black bg-gray-200 rounded-full">
                 2
               </div>
-              <hr className="w-12 border-black border-dashed border-1" />
+              <hr className="w-12 border-black border-1" />
               <div className="inline-flex items-center justify-center w-5 h-5 p-4 text-black bg-gray-200 rounded-full">
                 3
               </div>
-              <hr className="w-12 border-black border-dashed border-1" />
+              <hr className="w-12 border-black border-1" />
               {formisCompleted ? (
                 <div className="inline-flex items-center justify-center w-5 h-5 p-4 text-white bg-green-600 rounded-full">
                   <Done />
@@ -64,12 +64,12 @@ const FormFour = (props) => {
             >
               {({ values }) => (
                 <Form>
-                  <div className="flex flex-col md:p-8 space-y-4">
+                  <div className="flex flex-col space-y-4 md:p-8">
                     <div className="h-full px-4 space-y-2">
                       {/*  */}
                       {/* ================= 1.  Gender    ================*/}
                       {/*  */}
-                      <div className="space-y-1 pt-4">
+                      <div className="pt-4 space-y-1">
                         <FormLabel no="i" title=" Select your Gender" />
                         <p className="text-red-600">
                           <ErrorMessage name="gender" />
@@ -77,7 +77,7 @@ const FormFour = (props) => {
                         <div className="flex flex-row items-center justify-between space-x-4 md:p-2">
                           <label
                             htmlFor="gender"
-                            className="flex flex-row items-center space-x-2 p-3 md:p-4 border rounded w-full"
+                            className="flex flex-row items-center w-full p-3 space-x-2 border rounded md:p-4"
                           >
                             <Field
                               id="gender"
@@ -90,7 +90,7 @@ const FormFour = (props) => {
                           </label>
                           <label
                             htmlFor="gender2"
-                            className="flex flex-row items-center space-x-2 p-3 md:p-4 border rounded w-full"
+                            className="flex flex-row items-center w-full p-3 space-x-2 border rounded md:p-4"
                           >
                             <Field
                               id="gender2"
@@ -114,7 +114,7 @@ const FormFour = (props) => {
                         <div className="flex flex-row items-center justify-between space-x-4 md:p-2">
                           <label
                             htmlFor="religion"
-                            className="flex flex-row items-center space-x-2 p-3 md:p-4 border rounded w-full"
+                            className="flex flex-row items-center w-full p-3 space-x-2 border rounded md:p-4"
                           >
                             <Field
                               id="religion"
@@ -127,7 +127,7 @@ const FormFour = (props) => {
                           </label>
                           <label
                             htmlFor="religion2"
-                            className="flex flex-row items-center space-x-2 p-3 md:p-4 border rounded w-full"
+                            className="flex flex-row items-center w-full p-3 space-x-2 border rounded md:p-4"
                           >
                             <Field
                               id="religion2"
@@ -139,10 +139,10 @@ const FormFour = (props) => {
                             <p>Islam</p>
                           </label>
                         </div>
-                        <div className="flex flex-row items-center justify-between space-x-4 md:p-2 mt-2 md:mt-0">
+                        <div className="flex flex-row items-center justify-between mt-2 space-x-4 md:p-2 md:mt-0">
                           <label
                             htmlFor="religion3"
-                            className="flex flex-row items-center space-x-2 p-3 md:p-4 border rounded w-full"
+                            className="flex flex-row items-center w-full p-3 space-x-2 border rounded md:p-4"
                           >
                             <Field
                               id="religion3"
@@ -155,7 +155,7 @@ const FormFour = (props) => {
                           </label>
                           <label
                             htmlFor="religion4"
-                            className="flex flex-row items-center space-x-2 p-3 md:p-4 border rounded w-full"
+                            className="flex flex-row items-center w-full p-3 space-x-2 border rounded md:p-4"
                           >
                             <Field
                               id="religion4"
@@ -176,10 +176,10 @@ const FormFour = (props) => {
                         <p className="text-red-600">
                           <ErrorMessage name="selectOneOpt" />
                         </p>
-                        <div className="flex flex-col md:flex-row items-center justify-between md:space-x-4 md:p-2 space-y-2 md:space-y-0">
+                        <div className="flex flex-col items-center justify-between space-y-2 md:flex-row md:space-x-4 md:p-2 md:space-y-0">
                           <label
                             htmlFor="selectOneOpt"
-                            className="flex flex-row items-center space-x-2 p-3 md:p-4 border rounded w-full"
+                            className="flex flex-row items-center w-full p-3 space-x-2 border rounded md:p-4"
                           >
                             <Field
                               id="selectOneOpt"
@@ -192,7 +192,7 @@ const FormFour = (props) => {
                           </label>
                           <label
                             htmlFor="selectOneOpt2"
-                            className="flex flex-row items-center space-x-2 p-3 md:p-4 border rounded w-full"
+                            className="flex flex-row items-center w-full p-3 space-x-2 border rounded md:p-4"
                           >
                             <Field
                               id="selectOneOpt2"
@@ -205,7 +205,7 @@ const FormFour = (props) => {
                           </label>
                           <label
                             htmlFor="selectOneOpt3"
-                            className="flex flex-row items-center space-x-2 p-3 md:p-4 border rounded w-full"
+                            className="flex flex-row items-center w-full p-3 space-x-2 border rounded md:p-4"
                           >
                             <Field
                               id="selectOneOpt3"
@@ -226,10 +226,10 @@ const FormFour = (props) => {
                         <p className="text-red-600">
                           <ErrorMessage name="accomodationStatus" />
                         </p>
-                        <div className="flex flex-col md:flex-row items-center justify-between md:space-x-4 md:p-2 space-y-2 md:space-y-0">
+                        <div className="flex flex-col items-center justify-between space-y-2 md:flex-row md:space-x-4 md:p-2 md:space-y-0">
                           <label
                             htmlFor="accomodationStatus"
-                            className="flex flex-row items-center space-x-2 p-4 border rounded w-full"
+                            className="flex flex-row items-center w-full p-4 space-x-2 border rounded"
                           >
                             <Field
                               id="accomodationStatus"
@@ -242,7 +242,7 @@ const FormFour = (props) => {
                           </label>
                           <label
                             htmlFor="accomodationStatus2"
-                            className="flex flex-row items-center space-x-2 p-4 border rounded w-full"
+                            className="flex flex-row items-center w-full p-4 space-x-2 border rounded"
                           >
                             <Field
                               id="accomodationStatus2"
@@ -255,7 +255,7 @@ const FormFour = (props) => {
                           </label>
                           <label
                             htmlFor="accomodationStatus3"
-                            className="flex flex-row items-center space-x-2 p-4 border rounded w-full"
+                            className="flex flex-row items-center w-full p-4 space-x-2 border rounded"
                           >
                             <Field
                               id="accomodationStatus3"
@@ -274,7 +274,7 @@ const FormFour = (props) => {
                     <button
                       type="button"
                       onClick={() => props.prev(values)}
-                      className="p-2 px-8 border bg-transparent border-black text-black rounded-md ml-8 hover:border-red-500"
+                      className="p-2 px-8 ml-8 text-black bg-transparent border border-black rounded-md hover:border-red-500"
                     >
                       Previous
                     </button>

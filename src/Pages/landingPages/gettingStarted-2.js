@@ -14,7 +14,6 @@ import Socials from "../../Components/Layout/Landing/Socials";
 import { countDownDate } from "../../UI/MagicVars";
 import calendar from "../../images/calendar.png";
 import text_logo from "../../images/text_logo.png";
-import Done from "@mui/icons-material/Done";
 import { Modal } from "@mui/material";
 import Close from "../../images/CloseButton.png";
 
@@ -62,14 +61,14 @@ const GettingStartedTwo = () => {
         )}
 
         <form
-          className="w-full flex flex-col items-center justify-center space-y-8 text-center"
+          className="flex flex-col items-center justify-center w-full space-y-8 text-center"
           onSubmit={handleSubmit}
         >
           {hasError && (
             <p className="text-red-500">Enter 11 digits of your Phone Number</p>
           )}
           {hasSubmitted && (
-            <p className="font-bold text-black text-3xl max-w-lg">
+            <p className="max-w-lg text-3xl font-bold text-black">
               Successfully Submitted. Proceed by Clicking the button below.
             </p>
           )}
@@ -97,7 +96,7 @@ const GettingStartedTwo = () => {
           )}
           {hasSubmitted && (
             <Link to="/getting-started-three">
-              <button className="w-full p-4 px-24 animate mt-8 text-white bg-green-500 rounded-lg hover:bg-green-600">
+              <button className="w-full p-4 px-24 mt-8 text-white bg-green-500 rounded-lg animate hover:bg-green-600">
                 Continue
               </button>
             </Link>
@@ -112,7 +111,9 @@ const GettingStartedTwo = () => {
       <Nav />
       <Modal open={open} children={ModalContent} />
       <div className="relative flex flex-col">
-        {<Socials marginTop="48" />}
+        <div className="top-48">
+          <Socials top="48" />
+        </div>
         <div className="relative flex flex-col items-center justify-center space-y-4 mt-12 bg-hero-pattern bg-no-repeat lg:pb-[10rem] bg-top bg-opacity-5 md:py-8 pb-24">
           <p className="font-extrabold">Presidential Poll</p>
           <Badge className="flex flex-row space-x-3">
@@ -132,7 +133,7 @@ const GettingStartedTwo = () => {
           <div className="md:pt-8">
             <button
               onClick={handleOpen}
-              className="animate w-full p-4 px-8 text-white bg-green-500 rounded-lg hover:bg-green-600"
+              className="w-full p-4 px-8 text-white bg-green-500 rounded-lg animate hover:bg-green-600"
             >
               Vote Now
             </button>
@@ -202,7 +203,7 @@ const GettingStartedTwo = () => {
             </Link>
           </div>
         </div>
-        <div className="hidden md:flex flex-row items-center justify-center pb-12">
+        <div className="flex-row items-center justify-center hidden pb-12 md:flex">
           <img
             src={text_logo}
             alt="vote"
@@ -217,17 +218,13 @@ const GettingStartedTwo = () => {
 
         <section className="w-full">
           <div className="relative flex flex-col w-full mx-auto my-32 text-gray-900 md:flex-row md:px-0">
-            {/* <div className="hidden md:flex">
-              <img src={image} alt="" />
-            </div> */}
-            {/* top-48 bg-[#FFF1F4] */}
-            <div className="pr-0 text-black md:right-0 md:py-20 md:pl-20 md:p-0 md:absolute max-w-4xl space-y-8">
+            <div className="max-w-4xl pr-0 space-y-8 text-black md:right-0 md:py-20 md:pl-20 md:p-0 md:absolute">
               <div className="hidden md:flex">
                 <img src={image} alt="" />
               </div>
             </div>
             <div className="max-w-3xl mt-36 bg-[#FFF1F4]/30 p-8 z-10 backdrop-blur-md">
-              <div className="px-4 py-4 md:px-0 md:py-0 space-y-4">
+              <div className="px-4 py-4 space-y-4 md:px-0 md:py-0">
                 <p className="text-lg font-bold underline decoration-[#F9C033] decoration-4">
                   About Us
                 </p>
@@ -246,7 +243,7 @@ const GettingStartedTwo = () => {
               </div>
               <div className="py-4 pt-8 text-center md:pt-4 md:text-left">
                 <Link to="/about">
-                  <button className="p-4 w-1/2 md:w-1/4 rounded-lg bg-green-500 px-4 text-white font-bold hover:bg-black">
+                  <button className="w-1/2 p-4 px-4 font-bold text-white bg-green-500 rounded-lg md:w-1/4 hover:bg-black">
                     Learn More
                   </button>
                 </Link>

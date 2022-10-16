@@ -24,17 +24,17 @@ const FormThree = (props) => {
     <>
       <Nav />
       <div className="flex flex-row items-center justify-center px-4 py-4 mx-auto md:px-0">
-        <div className="w-full text-lg text-gray-700  md:w-3/4">
+        <div className="w-full text-lg text-gray-700 md:w-3/4">
           <header className="flex flex-col w-full p-8 space-y-2 border-b">
             <div className="flex flex-row items-center justify-center space-x-4">
               <div className="inline-flex items-center justify-center w-5 h-5 p-4 text-black bg-gray-200 rounded-full">
                 1
               </div>
-              <hr className="w-12 border-black border-dashed border" />
+              <hr className="w-12 border border-black" />
               <div className="inline-flex items-center justify-center w-5 h-5 p-4 text-black bg-gray-200 rounded-full">
                 2
               </div>
-              <hr className="w-12 border-black border-dashed border" />
+              <hr className="w-12 border border-black" />
               {formisCompleted ? (
                 <div className="inline-flex items-center justify-center w-5 h-5 p-4 text-white bg-green-600 rounded-full">
                   <Done />
@@ -45,7 +45,7 @@ const FormThree = (props) => {
                 </div>
               )}
               <hr
-                className={`w-12 border-black border-dashed border ${
+                className={`w-12 border-black  border ${
                   formisCompleted && "border-green-500"
                 }`}
               />
@@ -64,11 +64,11 @@ const FormThree = (props) => {
             >
               {({ values }) => (
                 <Form>
-                  <div className="flex flex-col md:p-8 space-y-4">
+                  <div className="flex flex-col space-y-4 md:p-8">
                     <div className="h-full px-4 space-y-2">
                       {/*  */}
                       {/* Do you have a PVC */}
-                      <div className="space-y-1 py-4">
+                      <div className="py-4 space-y-1">
                         <FormLabel no="i" title="Do you have a PVC?" />
                         <p className="text-red-600">
                           <ErrorMessage name="pvc" />
@@ -76,7 +76,7 @@ const FormThree = (props) => {
                         <div className="flex flex-row items-center justify-between space-x-4 md:p-2">
                           <label
                             htmlFor="pvc"
-                            className="flex flex-row items-center space-x-2 p-3 md:p-4 border rounded w-full"
+                            className="flex flex-row items-center w-full p-3 space-x-2 border rounded md:p-4"
                           >
                             <Field
                               id="pvc"
@@ -89,7 +89,7 @@ const FormThree = (props) => {
                           </label>
                           <label
                             htmlFor="pvc2"
-                            className="flex flex-row items-center space-x-2 p-3 md:p-4 border rounded w-full"
+                            className="flex flex-row items-center w-full p-3 space-x-2 border rounded md:p-4"
                           >
                             <Field
                               id="pvc2"
@@ -113,7 +113,7 @@ const FormThree = (props) => {
                         <div className="flex flex-row items-center justify-between space-x-4 md:p-2">
                           <label
                             htmlFor="maritalStatus"
-                            className="flex flex-row items-center space-x-2 p-3 md:p-4 border rounded w-full"
+                            className="flex flex-row items-center w-full p-3 space-x-2 border rounded md:p-4"
                           >
                             <Field
                               id="maritalStatus"
@@ -126,7 +126,7 @@ const FormThree = (props) => {
                           </label>
                           <label
                             htmlFor="maritalStatus2"
-                            className="flex flex-row items-center space-x-2 p-3 md:p-4 border rounded w-full"
+                            className="flex flex-row items-center w-full p-3 space-x-2 border rounded md:p-4"
                           >
                             <Field
                               id="maritalStatus2"
@@ -138,10 +138,10 @@ const FormThree = (props) => {
                             <p>Married</p>
                           </label>
                         </div>
-                        <div className="flex flex-row items-center justify-between space-x-4 md:p-2 mt-2 md:mt-0">
+                        <div className="flex flex-row items-center justify-between mt-2 space-x-4 md:p-2 md:mt-0">
                           <label
                             htmlFor="maritalStatus3"
-                            className="flex flex-row items-center space-x-2 p-3 md:p-4 border rounded w-full"
+                            className="flex flex-row items-center w-full p-3 space-x-2 border rounded md:p-4"
                           >
                             <Field
                               id="maritalStatus3"
@@ -154,7 +154,7 @@ const FormThree = (props) => {
                           </label>
                           <label
                             htmlFor="maritalStatus4"
-                            className="flex flex-row items-center space-x-2 p-3 md:p-4 border rounded w-full"
+                            className="flex flex-row items-center w-full p-3 space-x-2 border rounded md:p-4"
                           >
                             <Field
                               id="maritalStatus4"
@@ -178,7 +178,7 @@ const FormThree = (props) => {
                         <div className="flex flex-row items-center justify-between space-x-4 md:p-2">
                           <label
                             htmlFor="employmentStatus"
-                            className="flex flex-row items-center space-x-2 p-3 md:p-4 border rounded w-full"
+                            className="flex flex-row items-center w-full p-3 space-x-2 border rounded md:p-4"
                           >
                             <Field
                               id="employmentStatus"
@@ -191,7 +191,7 @@ const FormThree = (props) => {
                           </label>
                           <label
                             htmlFor="employmentStatus2"
-                            className="flex flex-row items-center space-x-2 p-3 md:p-4 border rounded w-full"
+                            className="flex flex-row items-center w-full p-3 space-x-2 border rounded md:p-4"
                           >
                             <Field
                               id="employmentStatus2"
@@ -203,10 +203,10 @@ const FormThree = (props) => {
                             <p className="">Employed</p>
                           </label>
                         </div>
-                        <div className="flex flex-row items-center justify-between space-x-4 md:p-2 mt-2 md:mt-0">
+                        <div className="flex flex-row items-center justify-between mt-2 space-x-4 md:p-2 md:mt-0">
                           <label
                             htmlFor="employmentStatus3"
-                            className="flex flex-row items-center space-x-2 p-3 md:p-4 border rounded w-full"
+                            className="flex flex-row items-center w-full p-3 space-x-2 border rounded md:p-4"
                           >
                             <Field
                               id="employmentStatus3"
@@ -219,7 +219,7 @@ const FormThree = (props) => {
                           </label>
                           <label
                             htmlFor="employmentStatus4"
-                            className="flex flex-row items-center space-x-2 p-4 md:p-4 border rounded w-full"
+                            className="flex flex-row items-center w-full p-4 space-x-2 border rounded md:p-4"
                           >
                             <Field
                               id="employmentStatus4"
@@ -238,7 +238,7 @@ const FormThree = (props) => {
                     <button
                       type="button"
                       onClick={() => props.prev(values)}
-                      className="ml-8 p-2 px-4 border bg-transparent border-black text-black rounded-md hover:border-red-500"
+                      className="p-2 px-4 ml-8 text-black bg-transparent border border-black rounded-md hover:border-red-500"
                     >
                       Previous
                     </button>
