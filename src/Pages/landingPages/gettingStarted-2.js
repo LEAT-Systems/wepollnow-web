@@ -223,7 +223,7 @@ const GettingStartedTwo = () => {
                 <img src={image} alt="" />
               </div>
             </div>
-            <div className="max-w-3xl mt-36 bg-[#FFF1F4]/30 p-8 z-10 backdrop-blur-md">
+            <div className="max-w-3xl mt-[120px] bg-[#FFF1F4]/30 p-8 z-10 backdrop-blur-md">
               <div className="px-4 py-4 space-y-4 md:px-0 md:py-0">
                 <p className="text-lg font-bold underline decoration-[#F9C033] decoration-4">
                   About Us
