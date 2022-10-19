@@ -31,7 +31,6 @@ const VoteFormTwo = () => {
   const [textValue, setTextValue] = useState("");
   const [hasError, setHasError] = useState(false);
   const [error, setErrorMessage] = useState(false);
-  const [hasSubmitted, setHasSubmitted] = useState(false);
 
   const radioChangeHandler = (e) => {
     const questionOne = e.target.value;
@@ -57,16 +56,15 @@ const VoteFormTwo = () => {
           }),
         }
       );
-      setHasSubmitted(true);
 
-      if (!response.ok) {
+      // redirecting the user or throwing error
+      if (response.ok) {
+        history.push("/vote/voteSuccess", { replace: true });
+      } else {
         throw new Error("A problem Occured");
       }
 
-      // redirecting the user
-      if (hasSubmitted) {
-        history.push("/vote/voteSuccess", { replace: true });
-      }
+      // Handling Error
     } catch (error) {
       setHasError(true);
       setErrorMessage(error.message);
@@ -78,7 +76,11 @@ const VoteFormTwo = () => {
       <div className="flex flex-row items-center justify-center min-h-screen px-4 py-4 mx-auto md:px-0">
         <div className="w-full text-lg text-gray-700 border rounded-lg shadow-lg md:w-[700px]">
           <form className="w-full p-8" onSubmit={sendToAPI}>
-            {hasError && <p className="text-red">{error}. Try again</p>}
+            {hasError && (
+              <p className="font-bold text-center text-red-500">
+                Error '{error}' occured. Please Try again.
+              </p>
+            )}
             <div className="flex flex-col items-center justify-center space-y-4">
               <p className="font-semibold text-center">
                 Great...!!! To finish up, would you mind telling us which of

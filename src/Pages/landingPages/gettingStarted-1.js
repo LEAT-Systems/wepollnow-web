@@ -9,7 +9,7 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import calendar from "../../images/calendar.png";
-import text_logo from "../../images/text_logo.png";
+import text_logo from "../../images/watermark.png";
 const Timer = React.lazy(() => import("../../UI/Timer"));
 
 //
@@ -46,7 +46,7 @@ const GettingStartedOne = () => {
         <div className="top-36">
           <Socials top="36" />
         </div>
-        <div className="relative flex flex-col items-center bg-no-repeat bg-top bg-opacity-5 justify-center space-y-8 bg-hero-pattern lg:pb-[10rem]">
+        <div className="relative flex flex-col items-center bg-no-repeat bg-top bg-opacity-5 justify-center space-y-4 md:space-y-8 bg-contain bg-hero-pattern lg:pb-[10rem]">
           <p className="font-extrabold">Gubernatorial Poll</p>
           <Badge className="flex flex-row space-x-3">
             <img src={calendar} alt="calendarMonth" />
@@ -62,7 +62,7 @@ const GettingStartedOne = () => {
           <div className="relative text-gray-700">
             <form onSubmit={handleSubmit}>
               <input
-                className="w-[300px] md:w-[500px] pl-4 h-10 text-base placeholder-gray-600 border rounded-lg focus:shadow-outline p-6"
+                className="w-[300px] md:w-[500px] pl-4 h-10 text-base placeholder-gray-600 border rounded-lg focus:shadow-outline md:p-6"
                 type="email"
                 placeholder="Enter Email Address"
                 ref={emailRef}
@@ -77,7 +77,7 @@ const GettingStartedOne = () => {
             </form>
           </div>
           {/* Small screen controls */}
-          <div className="flex flex-row items-center justify-center p-4 px-12 space-x-4 border border-green-500 rounded-lg lg:hidden">
+          <div className="hidden flex-row items-center justify-center p-4 px-12 space-x-4 border border-green-500 rounded-lg lg:hidden">
             <Link to="/" className="text-white bg-green-500 rounded-full ">
               <KeyboardArrowLeftIcon />
             </Link>
@@ -90,14 +90,8 @@ const GettingStartedOne = () => {
                 to="/getting-started-two"
                 className="inline-block w-2 h-2 mr-2 bg-gray-300 rounded-full"
               ></Link>
-              <Link
-                to="getting-started-four"
-                className="inline-block w-2 h-2 mr-2 bg-gray-300 rounded-full"
-              ></Link>
-              <Link
-                to="/email"
-                className="inline-block w-2 h-2 mr-2 bg-gray-300 rounded-full"
-              ></Link>
+              <Link className="inline-block w-2 h-2 mr-2 bg-gray-300 rounded-full"></Link>
+              <Link className="inline-block w-2 h-2 mr-2 bg-gray-300 rounded-full"></Link>
             </div>
             <Link
               to="/getting-started-two"
@@ -107,7 +101,7 @@ const GettingStartedOne = () => {
             </Link>
           </div>
           {/* Large screen controls */}
-          <div className="absolute flex-col items-start justify-center hidden lg:flex lg:ml-[1200px] space-y-4 ">
+          <div className="absolute flex-col items-start justify-center flex lg:ml-[1200px] space-y-4 ">
             <Link to="/" className="bg-green-200 rounded-full ">
               <KeyboardArrowUpIcon />
             </Link>
@@ -120,14 +114,8 @@ const GettingStartedOne = () => {
                 to="/getting-started-two"
                 className="inline-block w-2 h-2 mr-2 bg-gray-200 rounded-full"
               ></Link>
-              <Link
-                to="getting-started-four"
-                className="inline-block w-2 h-2 mr-2 bg-gray-200 rounded-full"
-              ></Link>
-              <Link
-                to="/email"
-                className="inline-block w-2 h-2 mr-2 bg-gray-200 rounded-full"
-              ></Link>
+              <Link className="inline-block w-2 h-2 mr-2 bg-gray-200 rounded-full"></Link>
+              <Link className="inline-block w-2 h-2 mr-2 bg-gray-200 rounded-full"></Link>
             </div>
             <Link
               to="/getting-started-two"
@@ -138,11 +126,11 @@ const GettingStartedOne = () => {
           </div>
         </div>
       </div>
-      <div className="flex-row items-center justify-center hidden pb-12 md:flex">
+      <div className="flex-row items-center justify-center  pb-12 flex">
         <img
           src={text_logo}
           alt="vote"
-          className="w-[65%] -mt-[120px] h-[200px]"
+          className="w-[65%] md:-mt-[120px] h-24 md:h-[200px]"
         />
       </div>
     </>

@@ -56,7 +56,6 @@ const FormFive = () => {
   const [open, setOpen] = useState(false);
   const [hasError, setHasError] = useState(false);
   const [error, setErrorMessage] = useState(false);
-  const [hasSubmitted, setHasSubmitted] = useState(false);
 
   //
   const handleSubmit = (e) => {
@@ -87,14 +86,15 @@ const FormFive = () => {
           }),
         }
       );
-      if (!response.ok) {
+
+      // redirect or throw error
+      if (response.ok) {
+        history.push("/vote/vote-form-next", { replace: true });
+      } else {
         throw new Error("A problem Occured");
       }
-      setHasSubmitted(true);
-      // redirecting the user
-      if (hasSubmitted) {
-        history.push("/vote/vote-form-next", { replace: true });
-      }
+
+      // catch error
     } catch (error) {
       setHasError(true);
       setErrorMessage(error.message);

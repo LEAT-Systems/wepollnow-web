@@ -48,46 +48,41 @@ const Timer = (props) => {
 
   return (
     <>
-      {!due ? (
-        <div className="flex flex-row items-center justify-center space-x-4 ">
-          <div className="flex flex-col items-center p-4 space-y-2 border-r border-gray-300">
-            <h1
-              className={`text-${props.size}  font-extrabold md:text-${props.sizeMD} text-${props.color}`}
-            >
-              {timerDays}
-            </h1>
-            <p className={`text-${props.pcolor}`}>Days</p>
-          </div>
-          <div className="flex flex-col items-center p-4 space-y-2 border-r border-gray-300">
-            <h1
-              className={`text-${props.size} font-extrabold md:text-${props.sizeMD} text-${props.color}`}
-            >
-              {timerHours}
-            </h1>
-            <p className={`text-${props.pcolor}`}>Hours</p>
-          </div>
-          <div className="flex flex-col items-center p-4 space-y-2 border-r border-gray-300">
-            <h1
-              className={`text-${props.size} font-extrabold md:text-${props.sizeMD} text-${props.color}`}
-            >
-              {timerMinutes}
-            </h1>
-            <p className={`text-${props.pcolor}`}>Minutes</p>
-          </div>
-          <div className="flex flex-col items-center p-4 space-y-2">
-            <h1
-              className={`text-${props.size} font-extrabold md:text-${props.sizeMD} text-${props.color}`}
-            >
-              {timerSeconds}
-            </h1>
-            <p className={`text-${props.pcolor}`}>Seconds</p>
-          </div>
+      <div className="flex flex-row items-center justify-center space-x-4">
+        <div className="flex flex-col items-center p-4 space-y-2 border-r border-gray-300 w-full">
+          <h1
+            className={`text-${props.size}  font-extrabold md:text-${props.sizeMD} text-${props.color}`}
+          >
+            {timerDays}
+          </h1>
+          <p className={`text-${props.pcolor}`}>Days</p>
         </div>
-      ) : (
-        <p className="p-6 text-3xl font-bold border-4 border-blue-200 rounded-lg md:text-6xl">
-          Election is Ongoing...
-        </p>
-      )}
+        <div className="flex flex-col items-center p-4 space-y-2 border-r border-gray-300">
+          <h1
+            className={`text-${props.size} font-extrabold md:text-${props.sizeMD} text-${props.color}`}
+          >
+            {timerHours}
+          </h1>
+          <p className={`text-${props.pcolor}`}>Hours</p>
+        </div>
+        <div className="flex flex-col items-center p-4 space-y-2 border-r border-gray-300">
+          <h1
+            className={`text-${props.size} font-extrabold md:text-${props.sizeMD} text-${props.color}`}
+          >
+            {timerMinutes}
+          </h1>
+          <p className={`text-${props.pcolor}`}>Minutes</p>
+        </div>
+        <div className="flex flex-col items-center p-4 space-y-2">
+          <h1
+            className={`text-${props.size} font-extrabold md:text-${props.sizeMD} text-${props.color}`}
+          >
+            {timerSeconds}
+          </h1>
+          <p className={`text-${props.pcolor}`}>Seconds</p>
+        </div>
+        
+      </div>
     </>
   );
 };
