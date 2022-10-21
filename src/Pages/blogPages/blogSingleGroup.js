@@ -10,7 +10,12 @@ const BlogSingleGroupPage = () => {
   return (
     <>
       {/* ITEM 1 */}
-      <div className="flex flex-col items-center justify-center max-w-3/4 mx-auto mt-24 space-x-4 space-y-6 md:space-y-0 md:flex-row">
+      <div className="flex flex-col items-start justify-start mx-auto mt-24 md:px-24">
+        <p className="text-[16px] font-bold underline underline-offset-2 decoration-yellow-500 decoration-4">
+          Latest Update
+        </p>
+      </div>
+      <div className="flex flex-col items-center justify-center max-w-3/4 mx-auto mt-4 space-x-4 space-y-6 md:space-y-0 md:flex-row">
         <div className="flex flex-col px-4 space-y-2">
           <img src={votingg} alt={"Voter"} className="rounded-md" />
           <div className="flex flex-row space-x-4">

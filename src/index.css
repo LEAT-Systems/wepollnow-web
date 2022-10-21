@@ -58,8 +58,12 @@
 
 .stroke {
   color: black;
-  -webkit-text-stroke-width: 2px;
-  -webkit-text-stroke-color: white;
+  text-shadow: 1px 1px 0 #fff, -1px -1px 0 #fff, 1px -1px 0 #fff,
+    -1px 1px 0 #fff, 1px 1px 0 #fff;
+}
+.input::placeholder {
+  font-family: "Montserrat", sans-serif;
+  opacity: 1; /* Firefox */
 }
 
 .scrollable::-webkit-scrollbar,
@@ -85,10 +89,15 @@ body::-webkit-scrollbar-thumb {
 
 h1 {
   font-family: "Montserrat", sans-serif;
+  @apply font-extrabold;
 }
 
+p {
+  font-family: "Montserrat", sans-serif;
+  @apply font-extralight;
+}
 .fontAwesome {
-  font-family: "Manrope", FontAwesome, sans-serif;
+  font-family: "Montserrat", FontAwesome, sans-serif;
 }
 
 /* Swiper JS styles */
@@ -115,4 +124,10 @@ input:focus {
   .iti__flag {
     background-image: url("images/flags@2x.png");
   }
+}
+.PhoneInputInput {
+  @apply p-2 w-full border rounded !important;
+}
+.PhoneInputInput:focus {
+  @apply p-2 w-full border-0 rounded-md !important;
 }

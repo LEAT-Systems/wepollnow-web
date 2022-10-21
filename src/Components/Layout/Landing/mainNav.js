@@ -1,11 +1,10 @@
 import React from "react";
 import { useState, useRef } from "react";
 import { Link } from "react-router-dom";
-import FaceBookIcon from "@mui/icons-material/Facebook";
-import InstagramIcon from "@mui/icons-material/Instagram";
 import logo from "../../../images/logo.png";
-import YouTubeIcon from "@mui/icons-material/YouTube";
-// import { Modal } from "@mui/material";
+import facebook from "../../../images/navIcons/Facebook.png";
+import instagram from "../../../images/navIcons/IG.png";
+import youtube from "../../../images/navIcons/YouTube.png";
 
 const Nav = (props) => {
   const [data, setData] = useState();
@@ -50,7 +49,8 @@ const Nav = (props) => {
 
   return (
     <React.Fragment>
-      {/* Top Navigation */}
+      {/*=======================   Top Navigation ============================*/}
+
       <div
         className={`flex flex-row items-center justify-between px-4 md:px-24 py-8 mx-auto border-b border-gray-200 bg-[#${props.bg}]`}
       >
@@ -69,25 +69,27 @@ const Nav = (props) => {
           </button>
         </div>
       </div>
-      {/* Collapsible Nav */}
+
+      {/* =======================  Collapsible Nav ============================*/}
+
       <div
         className={
           !show
             ? "hidden"
-            : "flex relative z-30 flex-col md:flex-row items-center justify-center py-12 bg-black mx-auto space-y-12"
+            : "flex relative z-30 flex-col md:flex-row items-start justify-start md:items-center md:justify-center py-12 bg-black mx-auto space-y-12"
         }
       >
-        <div className="flex flex-col items-center justify-center mx-auto space-y-8 md:mx-0 md:px-48">
-          <div className="space-y-8 text-center md:text-left md:mt-10 md:mx-auto">
+        <div className="flex flex-col items-start justify-start md:items-center px-4 md:justify-center mx-auto space-y-8 md:mx-0 md:px-36">
+          <div className="space-y-8 text-start md:text-left md:mt-10 md:mx-auto">
             <div>
-              <Link to="/" className="text-5xl font-bold stroke md:text-7xl">
+              <Link to="/" className="text-4xl font-bold stroke md:text-7xl">
                 <h1>Home</h1>
               </Link>
             </div>
             <div>
               <Link
                 to="/about"
-                className="text-5xl font-bold stroke md:text-7xl"
+                className="text-4xl font-bold stroke md:text-7xl"
               >
                 <h1>About</h1>
               </Link>
@@ -111,14 +113,14 @@ const Nav = (props) => {
           </div>
 
           <div className="flex flex-row items-center justify-between mx-auto space-x-6 md:-ml-1">
-            <div className="p-4 text-center bg-gray-200 rounded-full">
-              <InstagramIcon />
+            <div>
+              <img src={instagram} alt="instagram" />
             </div>
-            <div className="p-4 text-center bg-gray-200 rounded-full">
-              <YouTubeIcon />
+            <div>
+              <img src={youtube} alt="youtube" />
             </div>
-            <div className="p-4 text-center bg-gray-200 rounded-full">
-              <FaceBookIcon />
+            <div>
+              <img src={facebook} alt="facebook" />
             </div>
           </div>
         </div>
@@ -130,17 +132,17 @@ const Nav = (props) => {
                 Action was Successful. We will get back to you
               </div>
             )}
-            <h4 className="mt-8 text-xl font-bold text-left text-white md:text-2xl md:mt-0 md:text-left ">
+            <p className="mt-8 text-lg font-bold text-left text-white md:text-xl md:mt-0 md:text-left ">
               Get in touch
-            </h4>
-            <form className="space-y-2" onSubmit={handleSubmit}>
+            </p>
+            <form className="space-y-4" onSubmit={handleSubmit}>
               <div>
                 <p className="text-white">Name</p>
                 <input
                   required
                   type="text"
                   ref={nameRef}
-                  className="w-full p-4 text-white placeholder-gray-200 bg-black border rounded hover:bg-gray-900"
+                  className="input w-full p-4 text-white placeholder-gray-200 bg-black border rounded hover:bg-gray-900"
                   placeholder="Enter Your Name"
                 />
               </div>
@@ -150,7 +152,7 @@ const Nav = (props) => {
                   required
                   type="email"
                   ref={emailRef}
-                  className="w-full p-4 text-white placeholder-gray-200 bg-black border rounded hover:bg-gray-900"
+                  className="input w-full p-4 text-white placeholder-gray-200 bg-black border rounded hover:bg-gray-900"
                   placeholder="Enter Your Email"
                 />
               </div>
@@ -160,7 +162,7 @@ const Nav = (props) => {
                   required
                   type="text"
                   ref={messageRef}
-                  className="w-full h-32 p-4 text-white placeholder-gray-200 bg-black border rounded hover:bg-gray-900"
+                  className="input w-full h-32 p-4 text-white placeholder-gray-200 bg-black border rounded hover:bg-gray-900"
                   placeholder="Enter Your Message"
                 />
               </div>
@@ -169,7 +171,7 @@ const Nav = (props) => {
                   type="submit"
                   className="w-full p-4 transition bg-white rounded text-dark hover:-translate-y-1"
                 >
-                  Send Message
+                  <p className="font-bold">Send Message</p>
                 </button>
               </div>
             </form>

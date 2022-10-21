@@ -13,8 +13,8 @@ import { Navigation } from "swiper";
 
 export default function PollsSwiper() {
   return (
-    <div className="container flex flex-col  mx-auto">
-      <p className="text-xl px-4 font-bold underline underline-offset-2 decoration-yellow-500 decoration-4">
+    <div className="container flex flex-col mt-12 md:mt-0  mx-auto">
+      <p className="text-[16px] px-1 font-bold underline underline-offset-2 decoration-yellow-500 decoration-4">
         Upcoming Polls
       </p>
       <Swiper
@@ -39,7 +39,7 @@ export default function PollsSwiper() {
         {Polls.map((item) => {
           return (
             <SwiperSlide key={item.id}>
-              <div className="flex flex-col md:flex-row items-center justify-center p-4 px-4 space-x-12 space-y-2 md:px-0">
+              <div className="flex flex-col md:flex-row items-center justify-center p-4 px-12 space-x-12 space-y-2 md:px-0">
                 <div className="flex flex-col items-center justify-center px-4  w-full py-12 space-y-2 rounded-lg bg-polls-pattern md:px-0">
                   <p className="text-xl font-bold text-white">
                     {item.description}

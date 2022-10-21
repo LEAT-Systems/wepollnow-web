@@ -160,7 +160,7 @@ const FormFive = () => {
   );
   return (
     <>
-      <Nav bg="EDFFF0" />
+      <Nav bg="FFEDF1" />
       <Modal open={open} children={ModalContent} />
       <div className="flex flex-row items-center justify-center  bg-[#EDFFF0]">
         <div className="flex flex-col items-center justify-center p-16 space-y-4">

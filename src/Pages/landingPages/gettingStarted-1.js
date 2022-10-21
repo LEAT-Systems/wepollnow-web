@@ -1,8 +1,10 @@
 import React, { useRef, useState } from "react";
 import Nav from "../../Components/Layout/Landing/mainNav";
 import Badge from "../../UI/Badge";
-import Socials from "../../Components/Layout/Landing/Socials";
 import { Link } from "react-router-dom";
+import Instagram from "@mui/icons-material/Instagram";
+import YouTube from "@mui/icons-material/YouTube";
+import Facebook from "@mui/icons-material/Facebook";
 import { countDownDate } from "../../UI/MagicVars";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
@@ -43,18 +45,31 @@ const GettingStartedOne = () => {
     <>
       <Nav />
       <div className="relative flex flex-col mt-12 ">
-        <div className="top-36">
-          <Socials top="36" />
+        <div
+          className={`absolute z-10 flex flex-col items-center top-[400px] md:top-[100px] justify-center px-4 space-y-4 md:px-12 lg:px-24`}
+        >
+          <div className={`flex flex-col space-y-4 text-[#707070]`}>
+            <a href="https://instagram.com/wepollnow">
+              <Instagram />
+            </a>
+            <a href="https://youtube.com/wepollnow">
+              <YouTube />
+            </a>
+            <a href="https://facebook.com/wepollnow">
+              <Facebook />
+            </a>
+          </div>
         </div>
-        <div className="relative flex flex-col items-center bg-no-repeat bg-top bg-opacity-5 justify-center space-y-4 md:space-y-8 bg-contain bg-hero-pattern lg:pb-[10rem]">
-          <p className="font-extrabold">Gubernatorial Poll</p>
-          <Badge className="flex flex-row space-x-3">
+
+        <div className="relative flex flex-col items-center bg-no-repeat bg-top bg-opacity-5 justify-center space-y-1 md:space-y-4 bg-contain bg-hero-pattern lg:pb-[10rem]">
+          <p className="font-bold">Gubernatorial Poll</p>
+          <Badge className="flex flex-row space-x-3" bg="[#EDFFF0]">
             <img src={calendar} alt="calendarMonth" />
-            <p>{countDownDate}</p>
+            <p className="text-sm">{countDownDate}</p>
           </Badge>
           <Timer date={countDownDate} size="4xl" sizeMD="6xl" />
           <div>
-            <p className="max-w-xs text-xl text-center md:max-w-xl">
+            <p className="max-w-xs text-md text-center md:max-w-xl">
               We would love to keep you informed as the date draws closer
             </p>
           </div>
@@ -70,7 +85,7 @@ const GettingStartedOne = () => {
               />
               <button
                 type="submit"
-                className="absolute inset-y-0 right-0 flex items-center px-4 font-bold text-white bg-green-600 rounded-r-lg hover:bg-green-500 focus:bg-gray-700"
+                className="absolute inset-y-0 right-0 flex items-center px-4 font-semibold text-white bg-green-600 rounded-r-lg hover:bg-green-500 focus:bg-gray-700"
               >
                 Notify Me
               </button>
@@ -101,7 +116,7 @@ const GettingStartedOne = () => {
             </Link>
           </div>
           {/* Large screen controls */}
-          <div className="absolute flex-col items-start justify-center flex lg:ml-[1200px] space-y-4 ">
+          <div className="absolute flex-col items-start justify-center flex -mr-[300px] md:mr-0 pt-[450px] md:pt-0 md:ml-[1000px] lg:ml-[1200px] space-y-4 ">
             <Link to="/" className="bg-green-200 rounded-full ">
               <KeyboardArrowUpIcon />
             </Link>
@@ -130,7 +145,7 @@ const GettingStartedOne = () => {
         <img
           src={text_logo}
           alt="vote"
-          className="w-[65%] md:-mt-[120px] h-24 md:h-[200px]"
+          className="w-[65%] mt-4 md:-mt-[120px] h-24 md:h-[200px]"
         />
       </div>
     </>

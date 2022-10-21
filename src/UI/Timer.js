@@ -49,7 +49,7 @@ const Timer = (props) => {
   return (
     <>
       <div className="flex flex-row items-center justify-center space-x-4">
-        <div className="flex flex-col items-center p-4 space-y-2 border-r border-gray-300 w-full">
+        <div className="flex flex-col items-center p-2 md:p-4 space-y-2 border-r border-gray-300 w-full">
           <h1
             className={`text-${props.size}  font-extrabold md:text-${props.sizeMD} text-${props.color}`}
           >
@@ -57,7 +57,7 @@ const Timer = (props) => {
           </h1>
           <p className={`text-${props.pcolor}`}>Days</p>
         </div>
-        <div className="flex flex-col items-center p-4 space-y-2 border-r border-gray-300">
+        <div className="flex flex-col items-center p-2 md:p-4 space-y-2 border-r border-gray-300">
           <h1
             className={`text-${props.size} font-extrabold md:text-${props.sizeMD} text-${props.color}`}
           >
@@ -65,7 +65,7 @@ const Timer = (props) => {
           </h1>
           <p className={`text-${props.pcolor}`}>Hours</p>
         </div>
-        <div className="flex flex-col items-center p-4 space-y-2 border-r border-gray-300">
+        <div className="flex flex-col items-center p-2 md:p-4 space-y-2 border-r border-gray-300">
           <h1
             className={`text-${props.size} font-extrabold md:text-${props.sizeMD} text-${props.color}`}
           >
@@ -73,7 +73,7 @@ const Timer = (props) => {
           </h1>
           <p className={`text-${props.pcolor}`}>Minutes</p>
         </div>
-        <div className="flex flex-col items-center p-4 space-y-2">
+        <div className="flex flex-col items-center p-2 md:p-4 space-y-2 mx-auto">
           <h1
             className={`text-${props.size} font-extrabold md:text-${props.sizeMD} text-${props.color}`}
           >
@@ -81,7 +81,6 @@ const Timer = (props) => {
           </h1>
           <p className={`text-${props.pcolor}`}>Seconds</p>
         </div>
-        
       </div>
     </>
   );
