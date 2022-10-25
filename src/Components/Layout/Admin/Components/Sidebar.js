@@ -11,7 +11,7 @@ const SideBar = () => {
   return (
     <div className="flex flex-col w-[100px] min-h-screen bg-white border-r border-gray-200 space-y-8">
       {/*  */}
-      <NavLink to="/wepollnow/dashboard" activeClassName="active">
+      <NavLink to="/dashboard" activeClassName="active">
         <div className="flex flex-col items-center justify-center mt-4 animate">
           <div className="p-2 bg-green-200 rounded-md">
             <SpeedIcon />
@@ -21,7 +21,7 @@ const SideBar = () => {
       </NavLink>
 
       {/*  */}
-      <NavLink to="/wepollnow/polls">
+      <NavLink to="/polls">
         <div className="flex flex-col items-center justify-center animate">
           <div className="p-2 bg-green-200 rounded-md">
             <PollIcon />
@@ -31,7 +31,7 @@ const SideBar = () => {
       </NavLink>
 
       {/*  */}
-      <NavLink to="/wepollnow/surveys">
+      <NavLink to="/surveys">
         <div className="flex flex-col items-center justify-center animate">
           <div className="p-2 bg-green-200 rounded-md">
             <CoPresentIcon />
@@ -41,7 +41,7 @@ const SideBar = () => {
       </NavLink>
 
       {/*  */}
-      <NavLink to="/wepollnow/blog">
+      <NavLink to="/blog">
         <div className="flex flex-col items-center justify-center animate">
           <div className="p-2 bg-green-200 rounded-md">
             <MenuBookIcon />
@@ -51,7 +51,7 @@ const SideBar = () => {
       </NavLink>
 
       {/*  */}
-      <NavLink to="/wepollnow/account">
+      <NavLink to="/account">
         <div className="flex flex-col items-center justify-center animate">
           <div className="p-2 bg-green-200 rounded-md">
             <SettingsSuggestIcon />

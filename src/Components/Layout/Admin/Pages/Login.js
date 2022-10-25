@@ -19,7 +19,7 @@ const Login = () => {
                 className="w-full p-3 bg-transparent border border-black rounded"
                 placeholder="Enter Password"
               />
-              <button className="w-full p-3 text-white bg-green-500 rounded-lg hover:translate-y-1">
+              <button className="w-full p-3 text-white bg-green-500 rounded-lg hover:opacity-90 cursor-pointer">
                 Login
               </button>
             </form>
