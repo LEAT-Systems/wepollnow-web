@@ -1,62 +1,51 @@
 import React from "react";
-import SpeedIcon from "@mui/icons-material/Speed";
-import SettingsSuggestIcon from "@mui/icons-material/SettingsSuggest";
-import PollIcon from "@mui/icons-material/Poll";
-import CoPresentIcon from "@mui/icons-material/CoPresent";
-import MenuBookIcon from "@mui/icons-material/MenuBook";
+import AutoAwesomeMosaicIcon from "@mui/icons-material/AutoAwesomeMosaic";
+import AssessmentIcon from "@mui/icons-material/Assessment";
+import AssignmentIcon from '@mui/icons-material/Assignment';
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { NavLink } from "react-router-dom";
 
 //
 const SideBar = () => {
   return (
-    <div className="flex flex-col w-[100px] min-h-screen bg-white border-r border-gray-200 space-y-8">
+    <div className='flex flex-col w-[82px] min-h-screen bg-deepgray border-r border-gray-200 space-y-8'>
       {/*  */}
-      <NavLink to="/dashboard" activeClassName="active">
-        <div className="flex flex-col items-center justify-center mt-4 animate">
-          <div className="p-2 bg-green-200 rounded-md">
-            <SpeedIcon />
+      <NavLink to='/dashboard' activeClassName='active'>
+        <div className='flex flex-col items-center justify-center mt-4'>
+          <div className='rounded-md'>
+            <AutoAwesomeMosaicIcon className='sidebar-icons' />
           </div>
-          <p>Dashboard</p>
+          <p className='font-semibold text-sm text-white'>Home</p>
         </div>
       </NavLink>
 
       {/*  */}
-      <NavLink to="/polls">
-        <div className="flex flex-col items-center justify-center animate">
-          <div className="p-2 bg-green-200 rounded-md">
-            <PollIcon />
+      <NavLink to='/polls'>
+        <div className='flex flex-col items-center justify-center animate'>
+          <div className='rounded-md'>
+            <AssessmentIcon className='sidebar-icons' />
           </div>
-          <p>Polls</p>
+          <p className='font-semibold text-sm text-white'>Polls</p>
         </div>
       </NavLink>
 
       {/*  */}
-      <NavLink to="/surveys">
-        <div className="flex flex-col items-center justify-center animate">
-          <div className="p-2 bg-green-200 rounded-md">
-            <CoPresentIcon />
+      <NavLink to='/surveys'>
+        <div className='flex flex-col items-center justify-center animate'>
+          <div className='rounded-md'>
+            <AssignmentIcon className='sidebar-icons' />
           </div>
-          <p>Surveys</p>
+          <p className='font-semibold text-sm text-white'>Surveys</p>
         </div>
       </NavLink>
 
       {/*  */}
-      <NavLink to="/blog">
-        <div className="flex flex-col items-center justify-center animate">
-          <div className="p-2 bg-green-200 rounded-md">
-            <MenuBookIcon />
+      <NavLink to='/account'>
+        <div className='flex flex-col items-center justify-center animate'>
+          <div className='rounded-md'>
+            <AccountCircleIcon className='sidebar-icons' />
           </div>
-          <p>Blog</p>
-        </div>
-      </NavLink>
-
-      {/*  */}
-      <NavLink to="/account">
-        <div className="flex flex-col items-center justify-center animate">
-          <div className="p-2 bg-green-200 rounded-md">
-            <SettingsSuggestIcon />
-          </div>
-          <p>Account</p>
+          <p className='font-semibold text-sm text-white'>Account</p>
         </div>
       </NavLink>
     </div>

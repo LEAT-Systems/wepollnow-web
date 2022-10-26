@@ -13,7 +13,11 @@ module.exports = {
       spacing: {
         98: "31rem",
       },
-    }
+      colors: {
+        deepgray: "rgb(46, 6, 15)",
+        transparentWhite: "rgba(245, 241, 241, 0.2)",
+      },
+    },
   },
 
   plugins: [],
