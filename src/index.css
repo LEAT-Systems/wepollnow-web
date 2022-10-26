@@ -2,19 +2,55 @@
 @tailwind components;
 @tailwind utilities;
 
-.active {
-  @apply border-r-4 border-green-500;
+/* ==============================    LAYER BASE ======================================== */
+
+@layer base {
+  h1 {
+    font-family: "Montserrat", sans-serif;
+    @apply font-extrabold;
+  }
+  p,
+  h4,
+  label,
+  select,
+  input::placeholder {
+    font-family: "Montserrat", sans-serif;
+    @apply font-extralight;
+  }
+  input:focus {
+    outline: none;
+  }
 }
 
-.animate {
-  @apply transition duration-700 ease-in-out hover:scale-110;
+/* ==============================    LAYER COMPONENTS  ======================================== */
+
+@layer components {
+  .active {
+    @apply border-r-4 border-green-500;
+  }
+  button {
+    font-family: "Montserrat", sans-serif;
+    @apply font-bold;
+  }
+  .animate {
+    @apply transition duration-700 ease-in-out hover:scale-110;
+  }
+  .btn-stay {
+    @apply bg-[#08BC26] p-2 text-white rounded-md px-4 w-full;
+  }
+  .btn-leave {
+    @apply bg-red-500 p-2 text-white  rounded-md px-4;
+  }
+  .leading-custom {
+    line-height: 44px;
+  }
+  .leading-custom-two {
+    line-height: 59.4px;
+  }
 }
-.btn-stay {
-  @apply bg-green-500 p-2 text-white rounded-md px-4;
-}
-.btn-leave {
-  @apply bg-red-500 p-2 text-white  rounded-md px-4;
-}
+
+/* ==============================    CUSTOM CSS  ======================================== */
+
 /* Hamburger Menu */
 .hamburger {
   cursor: pointer;
@@ -87,47 +123,19 @@ body::-webkit-scrollbar-thumb {
   left: 30%;
 }
 
-h1 {
-  font-family: "Montserrat", sans-serif;
-  @apply font-extrabold;
-}
-
-p {
-  font-family: "Montserrat", sans-serif;
-  @apply font-extralight;
-}
 .fontAwesome {
   font-family: "Montserrat", FontAwesome, sans-serif;
 }
 
 /* Swiper JS styles */
 .swiper-button-prev {
-  color: white !important;
+  color: #fff !important;
 }
+
 .swiper-button-next {
   color: #fff !important;
-  z-index: 999999;
 }
 .swiper {
   width: 100%;
   height: 100%;
-}
-input:focus {
-  outline: 1px solid #eee;
-}
-
-.iti__flag {
-  background-image: url("images/flags.png");
-}
-
-@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
-  .iti__flag {
-    background-image: url("images/flags@2x.png");
-  }
-}
-.PhoneInputInput {
-  @apply p-2 w-full border rounded !important;
-}
-.PhoneInputInput:focus {
-  @apply p-2 w-full border-0 rounded-md !important;
 }

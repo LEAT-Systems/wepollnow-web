@@ -6,6 +6,8 @@ module.exports = {
       backgroundImage: (theme) => ({
         "hero-pattern": "url('images/ng_1.png')",
         "polls-pattern": "url('images/bg_polls.png')",
+        "hero-container-pattern": "url('images/hero-bg.png')",
+        "btn-prev": "url('images/prev.png')",
       }),
     },
   },

@@ -1,20 +1,24 @@
 import React, { createRef, useId } from "react";
 import { useState, useRef, useEffect } from "react";
+import {
+  formatPhoneNumber,
+  formatPhoneNumberIntl,
+  isPossiblePhoneNumber,
+  isValidPhoneNumber,
+  parsePhoneNumber,
+} from "react-phone-number-input";
 import { Link } from "react-router-dom";
 import "react-phone-number-input/style.css";
 import PhoneInput from "react-phone-number-input";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import Instagram from "@mui/icons-material/Instagram";
-import YouTube from "@mui/icons-material/YouTube";
-import Facebook from "@mui/icons-material/Facebook";
+import Slide from "@mui/material/Slide";
 import Nav from "../../Components/Layout/Landing/mainNav";
-import Badge from "../../UI/Badge";
 import image from "../../images/image_2.png";
+import instagram from "../../images/landingIcons/IG.png";
+import youtube from "../../images/landingIcons/YU.png";
+import facebook from "../../images/landingIcons/FB.png";
 import Footer from "../../Components/Layout/Landing/Footer";
-import Socials from "../../Components/Layout/Landing/Socials";
-import { countDownDate } from "../../UI/MagicVars";
-import calendar from "../../images/calendar.png";
 import text_logo from "../../images/watermark.png";
 import { Modal } from "@mui/material";
 import Close from "../../images/CloseButton.png";
@@ -22,35 +26,40 @@ import PollsSwiper from "../Polls/PollsSwiper";
 import BlogSingleGroupPage from "../blogPages/blogSingleGroup";
 
 //
-const GettingStartedTwo = React.forwardRef((props, ref) => {
+const GettingStartedTwo = () => {
   const [open, setOpen] = useState(false);
   const [hasError, setHasError] = useState(false);
   const [hasSubmitted, setHasSubmitted] = useState(false);
-  const phoneRef = useRef();
-  const [value, setValue] = useState();
-  console.log(value);
+  const [value, setValue] = useState(null);
+
   // Submit form values
   const handleSubmit = (e) => {
     e.preventDefault();
-    const val = phoneRef.current.value.trim();
-    if (!(val.length === 11)) {
+
+    if (value === null) {
       setHasError(true);
       return;
     }
-    localStorage.setItem("phoneNumber", val);
-    setHasSubmitted(true);
-    setHasError(false);
-    phoneRef.current.value = "";
+    if (value !== null) {
+      // Getting the phone number and country
+      const intformatedPhoneNumber = formatPhoneNumberIntl(value);
+      const countryEntered = parsePhoneNumber(value).country;
+      localStorage.setItem("phoneNumber", {
+        intformatedPhoneNumber,
+        countryEntered,
+      });
+      setHasSubmitted(true);
+      setHasError(false);
+    }
   };
 
-  //
+  // open and close the modal
   const handleOpen = () => {
     setOpen(true);
   };
   const handleClose = () => {
     setOpen(false);
   };
-  // const modalContent =
 
   // ================================   JSX   ==========================================
   return (
@@ -59,169 +68,146 @@ const GettingStartedTwo = React.forwardRef((props, ref) => {
       <Modal
         open={open}
         children={
-          <div className="flex flex-col items-center justify-center min-h-screen mx-auto space-y-4">
-            <div className="flex flex-col items-end justify-center p-8 space-y-6 bg-white rounded-lg ">
-              <div className="flex flex-row items-end justify-end">
-                <button type="button" onClick={handleClose}>
-                  <img src={Close} alt="close" />
-                </button>
-              </div>
-
-              {!hasSubmitted && (
-                <p className="text-xl font-semibold">
-                  Input your phone number to proceed
-                </p>
-              )}
-
-              <form
-                className="flex flex-col items-center justify-center w-full space-y-8 text-center"
-                onSubmit={handleSubmit}
-              >
-                {hasError && (
-                  <p className="text-red-500">
-                    Enter 11 digits of your Phone Number
-                  </p>
-                )}
-                {hasSubmitted && (
-                  <p className="max-w-lg text-3xl font-bold text-black">
-                    Successfully Submitted. Proceed by Clicking the button
-                    below.
-                  </p>
-                )}
-                {!hasSubmitted && (
-                  <PhoneInput
-                    countryCallingCodeEditable={false}
-                    international
-                    defaultCountry="NG"
-                    placeholder="Enter phone number"
-                    value={value}
-                    onChange={setValue}
-                  />
-                )}
-                {!hasSubmitted && (
-                  <button
-                    type="submit"
-                    className="w-full p-4 text-white bg-green-500 rounded-lg hover:bg-green-600 hover:-translate-y-1"
-                  >
-                    Submit
+          <Slide direction="up" in={open} mountOnEnter unmountOnExit>
+            <div className="flex flex-col items-center justify-center min-h-screen mx-auto px-4 md:px-0 space-y-4">
+              <div className="flex flex-col w-full md:w-1/3 items-end justify-center p-8 space-y-6 bg-white rounded-lg ">
+                <div className="flex flex-row items-end justify-end">
+                  <button type="button" onClick={handleClose}>
+                    <img src={Close} alt="close" />
                   </button>
+                </div>
+
+                {!hasSubmitted && (
+                  <p className="text-xl text-center font-semibold">
+                    Input your phone number to proceed
+                  </p>
+                )}
+                {hasError && (
+                  <p className="text-red-500 mx-auto">
+                    Please enter your correct Phone Number
+                  </p>
                 )}
                 {hasSubmitted && (
-                  <Link to="/getting-started-three">
-                    <button className="w-full p-4 px-24 mt-8 text-white bg-green-500 rounded-lg animate hover:bg-green-600">
-                      Continue
-                    </button>
-                  </Link>
+                  <p className="text-center text-xl font-normal text-black">
+                    Yayy!!.. You are good to go, kindly proceed below...
+                  </p>
                 )}
-              </form>
+                <form
+                  className="flex flex-col items-center justify-center w-full space-y-8 text-center"
+                  onSubmit={handleSubmit}
+                >
+                  {!hasSubmitted && (
+                    <div
+                      className={`${
+                        hasError ? "border-red-500" : ""
+                      } border p-2 rounded w-full`}
+                    >
+                      <PhoneInput
+                        countryCallingCodeEditable={false}
+                        international
+                        defaultCountry="NG"
+                        placeholder="Phone number"
+                        value={value}
+                        onChange={setValue}
+                      />
+                    </div>
+                  )}
+                  {!hasSubmitted && (
+                    <button
+                      type="submit"
+                      className="w-full p-4 text-white bg-[#08BC26]  rounded-lg  hover:-translate-y-1"
+                    >
+                      Submit
+                    </button>
+                  )}
+                  {hasSubmitted && (
+                    <Link to="/getting-started-three">
+                      <button className="w-full p-4  mt-8 text-white text-center bg-[#08BC26]  rounded-lg animate ">
+                        Proceed
+                      </button>
+                    </Link>
+                  )}
+                </form>
+              </div>
             </div>
-          </div>
+          </Slide>
         }
       />
       <div className="relative flex flex-col">
         <div
-          className={`absolute z-10 flex flex-col items-center top-[400px] md:top-[170px] justify-center px-4 space-y-4 md:px-12 lg:px-24`}
+          className={`absolute z-10 flex flex-col items-center top-[440px] md:top-56 justify-center space-y-4 left-8 md:left-16`}
         >
           <div className={`flex flex-col space-y-4 text-[#707070]`}>
             <a href="https://instagram.com/wepollnow">
-              <Instagram />
+              <img src={instagram} alt="instagram_link" />
             </a>
             <a href="https://youtube.com/wepollnow">
-              <YouTube />
+              <img src={youtube} alt="youtube_link" />
             </a>
             <a href="https://facebook.com/wepollnow">
-              <Facebook />
+              <img src={facebook} alt="facebook_link" />
             </a>
           </div>
         </div>
         <div className="relative flex flex-col items-center justify-center space-y-2 mt-12 bg-contain bg-hero-pattern bg-no-repeat lg:pb-[10rem] bg-top bg-opacity-5 md:py-8 pb-24">
-          <p className="font-extrabold">Presidential Poll</p>
-          <Badge className="flex flex-row space-x-3" bg="[#EDFFF0]">
+          <p className="font-extrabold text-[18px]">Presidential Poll</p>
+          <span
+            className={`inline-flex items-center justify-center space-x-1 px-4 py-1 text-xs border-[#08C127] border md:text-lg font-semibold leading-none text-black bg-[#D3E6D7] rounded-md`}
+          >
             <p className="text-sm">Ongoing</p>
-          </Badge>
-          <div className="flex flex-row items-center justify-center" id="div">
-            <h1 className="max-w-4xl p-8 text-4xl  text-center md:text-5xl">
-              Let's{" "}
-              <span className="underline underline-offset-4 decoration-yellow-500 decoration-[5px]">
-                change
-              </span>{" "}
-              the narrative.
-              <br /> Make your vote count.
-            </h1>
+          </span>
+          <div className="flex flex-row items-center justify-center ">
+            <div className="max-w-4xl p-8 text-4xl text-[#082B0E] md:space-y-4 text-center md:text-[54px]">
+              <h1>
+                {" "}
+                Let's{" "}
+                <span className="underline underline-offset-4 decoration-yellow-500 decoration-[6px]">
+                  change
+                </span>{" "}
+                the narrative.
+              </h1>
+              <h1>Make your vote count.</h1>
+            </div>
           </div>
           <div className="md:pt-8">
             <button
               onClick={handleOpen}
-              className="w-full p-4 px-8 text-white bg-green-500 rounded-lg animate hover:bg-green-600"
+              className="w-full p-4 px-8 text-white bg-[#08BC26] rounded-lg animate"
             >
               Vote Now
             </button>
           </div>
-
-          {/* Small screen controls */}
-          {/* <div className="flex flex-row items-center justify-center p-4 px-12 space-x-4 border border-green-500 rounded-lg lg:hidden">
-            <Link to="/" className="text-white bg-green-400 rounded-full ">
-              <KeyboardArrowLeftIcon />
-            </Link>
-            <div className="flex flex-row items-center justify-center space-x-3">
-              <Link
-                to="/"
-                className="inline-block w-2 h-2 bg-gray-300 rounded-full"
-              ></Link>
-              <Link
-                to="/getting-started-two"
-                className="inline-block w-2 h-2 mr-2 bg-black rounded-full"
-              ></Link>
-              <Link
-                to="getting-started-three"
-                className="inline-block w-2 h-2 mr-2 bg-gray-300 rounded-full"
-              ></Link>
-              <Link
-                to="/email"
-                className="inline-block w-2 h-2 mr-2 bg-gray-300 rounded-full"
-              ></Link>
-            </div>
-            <Link
-              to="/getting-started-three"
-              className="text-white bg-green-400 rounded-full "
-            >
-              <KeyboardArrowRightIcon />
-            </Link>
-          </div> */}
-
           {/* Large screen controls */}
-
-          <div className="absolute flex-col items-start justify-center flex -mr-[300px] md:mr-0 pt-[500px] md:pt-0 md:ml-[1000px] lg:ml-[1200px] space-y-4 ">
-            <Link to="/" className="bg-green-200 rounded-full ">
-              <KeyboardArrowUpIcon />
-            </Link>
-            <div className="flex flex-col items-center justify-center px-2 space-y-3">
-              <Link
-                to="/"
-                className="inline-block w-2 h-2 mr-2 bg-gray-200 rounded-full"
-              ></Link>
-              <Link
-                to="/getting-started-two"
-                className="inline-block w-2 h-2 mr-2 bg-black rounded-full"
-              ></Link>
+          <div className="absolute right-6 md:right-16 top-96 md:top-36">
+            <div className="flex flex-col items-center justify-center space-y-4 ">
+              <Link to="/" className="bg-[#EDFFF0] rounded-full p-1 ">
+                <KeyboardArrowUpIcon />
+              </Link>
+              <div className="flex flex-col items-center justify-center px-2 space-y-2">
+                <Link
+                  to="/"
+                  className="inline-block w-2 h-2  bg-gray-200 rounded-full"
+                ></Link>
+                <Link
+                  to="/getting-started-two"
+                  className="inline-block w-2 h-2  bg-black rounded-full"
+                ></Link>
+                <div
+                  onClick={handleOpen}
+                  className="inline-block  hover:cursor-pointer w-2 h-2 bg-gray-200 rounded-full"
+                ></div>
+                <div className="inline-block w-2 h-2 bg-gray-200 rounded-full"></div>
+              </div>
               <div
                 onClick={handleOpen}
-                className="inline-block  hover:cursor-pointer w-2 h-2 mr-2 bg-gray-200 rounded-full"
-              ></div>
-              <Link
-                to="/email"
-                className="inline-block w-2 h-2 mr-2 bg-gray-200 rounded-full"
-              ></Link>
-            </div>
-            <div
-              onClick={handleOpen}
-              className="bg-green-200 rounded-full hover:cursor-pointer "
-            >
-              <KeyboardArrowDownIcon />
+                className="bg-[#EDFFF0] rounded-full hover:cursor-pointer p-1 "
+              >
+                <KeyboardArrowDownIcon />
+              </div>
             </div>
           </div>
         </div>
-        <div className="flex-row items-center justify-center pb-12 flex">
+        <div className="flex-row items-center justify-center pb-12 mt-8 md:mt-0 flex">
           <img
             src={text_logo}
             alt="vote"
@@ -235,33 +221,30 @@ const GettingStartedTwo = React.forwardRef((props, ref) => {
         </div>
 
         <section className="w-full">
-          <div className="relative flex flex-col w-full mx-auto md:my-6 text-gray-900 md:flex-row md:px-0">
+          <div className="relative flex flex-col px-4 w-full mx-auto md:my-6 text-gray-900 md:flex-row md:px-0">
             <div className="max-w-4xl pr-0 md:space-y-8 text-black md:right-0 md:py-20 md:pl-20 md:p-0 md:absolute">
-              <div className="hidden md:flex">
-                <img src={image} alt="" />
+              <div className="flex md:px-0">
+                <img src={image} alt="" className="mt-12 md:mt-0 rounded" />
               </div>
             </div>
-            <div className="max-w-3xl mt-[110px] bg-[#FFF1F4]/30 p-8 z-10 backdrop-blur-md">
-              <div className="md:p-24 space-y-4">
+            <div className="max-w-3xl -mt-8 rounded-lg md:rounded px-6 md:mt-[110px] bg-[#FFF1F4]/60 p-8 z-10 backdrop-blur-md">
+              <div className="md:p-16 md:space-y-4">
                 <p className="text-lg font-bold underline decoration-[#F9C033] decoration-4">
                   About Us
                 </p>
-                <h1 className="text-2xl md:text-5xl">
+                <h1 className="text-2xl md:text-3xl">
                   Creating a better Society by making every vote count.
                 </h1>
-                <p className="text-lg">
+                <p className="text-md">
                   We are a dedicated group that is passionate about making the
                   society a better place by ensuring that we simulate polls and
                   ensure that all your votes count. We liase with civil bodies
                   in the real world to also monitor the electoral processes at
                   your polling Units and stations to ensure a free and fair
                   election for everyone.
-                  <br /> Together, We can make Nigeria Great!
                 </p>
-              </div>
-              <div className="py-4 pt-8 text-center md:pt-4 md:text-left md:px-6">
                 <Link to="/about">
-                  <button className="w-1/2 animate p-4 px-4 font-bold text-white bg-green-500 rounded-lg md:w-1/4 hover:bg-black">
+                  <button className="w-1/2 mt-4 animate p-4 px-4 font-bold text-white bg-[#08BC26]  rounded-lg md:w-1/4 hover:bg-black">
                     Learn More
                   </button>
                 </Link>
@@ -282,6 +265,6 @@ const GettingStartedTwo = React.forwardRef((props, ref) => {
       </div>
     </>
   );
-});
+};
 
 export default GettingStartedTwo;

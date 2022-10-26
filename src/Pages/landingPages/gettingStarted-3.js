@@ -16,7 +16,7 @@ const GettingStartedThree = () => {
           </h2>
           <div>
             <Link to="/register">
-              <button className="p-4 px-8 text-white bg-green-500 rounded hover:bg-green-600 animate">
+              <button className="p-4 px-8 text-white bg-[#08BC26] rounded animate">
                 Let's Proceed
               </button>
             </Link>
