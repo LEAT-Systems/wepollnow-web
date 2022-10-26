@@ -7,10 +7,10 @@ const Login = () => {
         <img src={LOGO} alt='LOGO' className='w-44 pb-9' />
         <div className='w-full px-4 py-4 text-lg text-gray-700 border border-gray-500 rounded-lg shadow-2xl md:w-98 shadow-gray-200'>
           <div className='p-6 space-y-4'>
-            <h1 className='text-2xl md:text-3xl text-center font-extrabold text-black'>
+            <h1 className='text-xl md:text-2xl text-center font-extrabold text-black'>
               Welcome Back
             </h1>
-            <p className='text-lg text-center md:text-xl text-gray-600 font-semibold'>
+            <p className='text-base text-center md:text-lg text-gray-600 font-semibold'>
               Enter your credentials below to Login
             </p>
             <form className='py-4'>
