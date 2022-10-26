@@ -52,7 +52,7 @@ const Nav = (props) => {
       {/*=======================   Top Navigation ============================*/}
 
       <div
-        className={`flex flex-row items-center justify-between px-4 md:px-24 py-8 mx-auto border-b border-gray-200 bg-[#${props.bg}]`}
+        className={`flex flex-row items-center justify-between px-4 md:px-24 border-b border-gray-200  py-8 mx-auto  bg-[#${props.bg}] bg-${props.bgImg} `}
       >
         <Link to="/">
           <img src={logo} alt="logo" />

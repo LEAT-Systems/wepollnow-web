@@ -2,31 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
-/* .active {
-  @apply after:content-[''] relative after:absolute
-  after:w-1 after:h-1 bg-green-400  after:top-0 right-0;
-} */
-
 .active {
-  @apply relative bg-transparentWhite py-4 px-2 first:pt-[.1rem] before:absolute before:top-[1.1rem] before:right-0 before:content-[""] before:bg-green-500 before:h-[2.7rem] before:w-[.3rem] before:rounded-[1rem]
-}
-
-.sidebar-icons {
-  @apply text-gray-200
-}
-
-.sidebar-icons.active {
-  @apply text-white
+  @apply border-r-4 border-green-500;
 }
 
 .animate {
-  @apply transition duration-700 ease-in-out /* hover:scale-110 */;
+  @apply transition duration-700 ease-in-out hover:scale-110;
 }
-
 .btn-stay {
   @apply bg-green-500 p-2 text-white rounded-md px-4;
 }
-
 .btn-leave {
   @apply bg-red-500 p-2 text-white  rounded-md px-4;
 }
@@ -102,47 +87,19 @@ body::-webkit-scrollbar-thumb {
   left: 30%;
 }
 
-h1 {
-  font-family: "Montserrat", sans-serif;
-  @apply font-extrabold;
-}
-
-p {
-  font-family: "Montserrat", sans-serif;
-  @apply font-extralight;
-}
 .fontAwesome {
   font-family: "Montserrat", FontAwesome, sans-serif;
 }
 
 /* Swiper JS styles */
 .swiper-button-prev {
-  color: white !important;
+  color: #fff !important;
 }
+
 .swiper-button-next {
   color: #fff !important;
-  z-index: 999999;
 }
 .swiper {
   width: 100%;
   height: 100%;
-}
-input:focus {
-  outline: 1px solid #eee;
-}
-
-.iti__flag {
-  background-image: url("images/flags.png");
-}
-
-@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
-  .iti__flag {
-    background-image: url("images/flags@2x.png");
-  }
-}
-.PhoneInputInput {
-  @apply p-2 w-full border rounded !important;
-}
-.PhoneInputInput:focus {
-  @apply p-2 w-full border-0 rounded-md !important;
 }
