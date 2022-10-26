@@ -2,55 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ==============================    LAYER BASE ======================================== */
-
-@layer base {
-  h1 {
-    font-family: "Montserrat", sans-serif;
-    @apply font-extrabold;
-  }
-  p,
-  h4,
-  label,
-  select,
-  input::placeholder {
-    font-family: "Montserrat", sans-serif;
-    @apply font-extralight;
-  }
-  input:focus {
-    outline: none;
-  }
+.active {
+  @apply border-r-4 border-green-500;
 }
 
-/* ==============================    LAYER COMPONENTS  ======================================== */
-
-@layer components {
-  .active {
-    @apply border-r-4 border-green-500;
-  }
-  button {
-    font-family: "Montserrat", sans-serif;
-    @apply font-bold;
-  }
-  .animate {
-    @apply transition duration-700 ease-in-out hover:scale-110;
-  }
-  .btn-stay {
-    @apply bg-[#08BC26] p-2 text-white rounded-md px-4 w-full;
-  }
-  .btn-leave {
-    @apply bg-red-500 p-2 text-white  rounded-md px-4;
-  }
-  .leading-custom {
-    line-height: 44px;
-  }
-  .leading-custom-two {
-    line-height: 59.4px;
-  }
+.animate {
+  @apply transition duration-700 ease-in-out hover:scale-110;
 }
-
-/* ==============================    CUSTOM CSS  ======================================== */
-
+.btn-stay {
+  @apply bg-green-500 p-2 text-white rounded-md px-4;
+}
+.btn-leave {
+  @apply bg-red-500 p-2 text-white  rounded-md px-4;
+}
 /* Hamburger Menu */
 .hamburger {
   cursor: pointer;
