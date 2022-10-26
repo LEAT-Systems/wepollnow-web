@@ -9,7 +9,6 @@ import DashboardContent from "../PageContent/Dashboard";
 const Dashboard = () => {
   return (
     <>
-      <Header />
       <Wrapper>
         <SideBar />
         <PageContent children={<DashboardContent />} />
