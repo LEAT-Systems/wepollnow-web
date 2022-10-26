@@ -118,7 +118,7 @@ function App() {
         {/* =========================  ADMIN ROUTES  ========================== */}
 
         {/* Login Page */}
-        <Route path="/wepollnow/" exact>
+        <Route path="/login" exact>
           <Login />
         </Route>
         <Route path="/wepollnow/login" exact>
@@ -126,39 +126,39 @@ function App() {
         </Route>
 
         {/* Dashboard Landing */}
-        <Route path="/wepollnow/dashboard" exact>
+        <Route path="/dashboard" exact>
           <Dashboard />
         </Route>
 
         {/* Polls Page */}
 
-        <Route path="/wepollnow/polls" exact>
+        <Route path="/polls" exact>
           <ManagePolls />
         </Route>
 
         {/* Polls result*/}
-        <Route Route path="/wepollnow/polls/polls_result" exact>
+        <Route Route path="/polls/polls_result" exact>
           <PollsResult />
         </Route>
 
         {/* surveys */}
 
-        <Route path="/wepollnow/surveys" exact>
+        <Route path="/surveys" exact>
           <Survey />
         </Route>
 
-        <Route path="/wepollnow/surveys/manageSurvey" exact>
+        <Route path="/surveys/manageSurvey" exact>
           <ManageSurvey />
         </Route>
 
         {/* blog */}
 
-        <Route path="/wepollnow/blog" exact>
+        <Route path="/blog" exact>
           <Blog />
         </Route>
 
         {/* account */}
-        <Route path="/wepollnow/account" exact>
+        <Route path="/account" exact>
           <Account />
         </Route>
         {/*=========================  NOT FOUND ROUTE ========================*/}
