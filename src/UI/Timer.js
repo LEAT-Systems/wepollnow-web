@@ -1,12 +1,14 @@
 import React from "react";
 import { useState, useEffect, useRef } from "react";
+import { createContext } from "react";
+
+export const timerContext = createContext();
 
 const Timer = (props) => {
   const [timerDays, setTimerDays] = useState("00");
   const [timerHours, setTimerHours] = useState("00");
   const [timerMinutes, setTimerMinutes] = useState("00");
   const [timerSeconds, setTimerSeconds] = useState("00");
-  const [due, setIsDue] = useState(false);
 
   // Would be gotten from DB
 
@@ -27,7 +29,6 @@ const Timer = (props) => {
       if (distance < 0) {
         // Stop timer
         clearInterval(interval.current);
-        setIsDue(true);
       } else {
         setTimerDays(days);
         setTimerHours(hours);
@@ -48,34 +49,34 @@ const Timer = (props) => {
 
   return (
     <>
-      <div className="flex flex-row items-center justify-center space-x-4">
-        <div className="flex flex-col items-center p-2 md:p-4 space-y-2 border-r border-gray-300 w-full">
-          <h1
-            className={`text-${props.size}  font-extrabold md:text-${props.sizeMD} text-${props.color}`}
+      <div className="flex flex-row items-center justify-center space-x-1">
+        <div className="flex flex-col items-center p-4 space-y-2 border-r border-gray-300 w-full">
+          <p
+            className={`text-${props.size}  font-extrabold md:text-${props.sizelg} text-${props.color}`}
           >
             {timerDays}
-          </h1>
+          </p>
           <p className={`text-${props.pcolor}`}>Days</p>
         </div>
-        <div className="flex flex-col items-center p-2 md:p-4 space-y-2 border-r border-gray-300">
+        <div className="flex flex-col items-center p-4 space-y-2 border-r border-gray-300">
           <h1
-            className={`text-${props.size} font-extrabold md:text-${props.sizeMD} text-${props.color}`}
+            className={`text-${props.size} font-extrabold md:text-${props.sizelg} text-${props.color}`}
           >
             {timerHours}
           </h1>
-          <p className={`text-${props.pcolor}`}>Hours</p>
+          <p className={`text-${props.pcolor} font-light`}>Hours</p>
         </div>
-        <div className="flex flex-col items-center p-2 md:p-4 space-y-2 border-r border-gray-300">
+        <div className="flex flex-col items-center p-4 space-y-2 border-r border-gray-300">
           <h1
-            className={`text-${props.size} font-extrabold md:text-${props.sizeMD} text-${props.color}`}
+            className={`text-${props.size} font-extrabold md:text-${props.sizelg} text-${props.color}`}
           >
             {timerMinutes}
           </h1>
           <p className={`text-${props.pcolor}`}>Minutes</p>
         </div>
-        <div className="flex flex-col items-center p-2 md:p-4 space-y-2 mx-auto">
+        <div className="flex flex-col items-center p-4 space-y-2">
           <h1
-            className={`text-${props.size} font-extrabold md:text-${props.sizeMD} text-${props.color}`}
+            className={`text-${props.size} font-extrabold md:text-${props.sizelg} text-${props.color}`}
           >
             {timerSeconds}
           </h1>

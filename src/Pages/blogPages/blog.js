@@ -6,19 +6,19 @@ import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import CommentIcon from "@mui/icons-material/Comment";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import Footer from "../../Components/Layout/Landing/Footer";
-import image from "../../images/blog_img.png";
+import image from "../../images/blogImg.png";
 
 const BlogPage = () => {
   return (
     <>
-      <Nav bg="EDFFF0" />
-      <div className="flex flex-col items-center justify-between px-4 md:px-0 py-8 mx-auto bg-[#EDFFF0] md:flex-row h-[265px]">
-        <div className="flex flex-col space-y-2 ">
-          <div className="px-12">
-            <p className="text-xs font-bold underline md:text-lg decoration-yellow-500 decoration-[5px]">
+      <Nav bg="FCEBEE" bgImg="hero-container-pattern" />
+      <div className="flex flex-col items-center justify-between px-4 md:px-0 mx-auto bg-[#FCEBEE] bg-hero-container-pattern md:flex-row h-[265px]">
+        <div className="flex flex-col">
+          <div className="px-24 space-y-6 -mt-8">
+            <p className="md:text-[16px] font-bold underline decoration-yellow-500 decoration-[5px]">
               Our Blog
             </p>
-            <h1 className="text-5xl font-bold md:max-w-xl md:text-6xl">
+            <h1 className="md:text-[40px] font-extrabold md:max-w-xl leading-custom">
               We keep you informed with the latest update.
             </h1>
           </div>
@@ -31,7 +31,7 @@ const BlogPage = () => {
       {/* ITEM 1 */}
       <div className="container flex flex-col items-center justify-between max-w-5xl mx-auto mt-24 space-x-4 space-y-6 md:space-y-0 md:flex-row">
         <div className="flex flex-col px-4 space-y-2">
-          <img src={votingg} alt={"Voter"} />
+          <img src={votingg} alt={"Voter"} className="rounded" />
           <div className="flex flex-row space-x-4">
             <img className="w-6 h-6 rounded-full" src={avatar} alt="" />
             <p className="font-bold">Olumide Adebayo</p>
@@ -56,7 +56,7 @@ const BlogPage = () => {
           </div>
         </div>
         <div className="flex flex-col space-y-2">
-          <img src={votingg} alt={"Voter"} />
+          <img src={votingg} alt={"Voter"} className="rounded" />
           <div className="flex flex-row space-x-4">
             <img className="w-6 h-6 rounded-full" src={avatar} alt={"Voter"} />
             <p className="font-bold">Olumide Adebayo</p>
@@ -81,7 +81,7 @@ const BlogPage = () => {
           </div>
         </div>
         <div className="flex flex-col space-y-2">
-          <img src={votingg} alt={"Voter"} />
+          <img src={votingg} alt={"Voter"} className="rounded" />
           <div className="flex flex-row space-x-4">
             <img className="w-6 h-6 rounded-full" src={avatar} alt={"Voter"} />
             <p className="font-bold">Olumide Adebayo</p>
