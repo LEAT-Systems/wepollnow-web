@@ -5,6 +5,7 @@ import * as Yup from "yup";
 import DoneIcon from "@mui/icons-material/Done";
 import Nav from "../Layout/Landing/mainNav";
 import FormLabel from "../../UI/FormLabel";
+import { states } from "./states";
 
 const FormOne = (props) => {
   const [formisCompleted, setFormIsCompleted] = useState(false);
@@ -13,18 +14,18 @@ const FormOne = (props) => {
   };
 
   // Configuring the indicators
-  const { email, firstTimeVoter, diasporaVoter, stateOfVotingRes } = props.data;
+  const { email, firstTimeVoter, diasporaVoter, stateOfOrigin } = props.data;
   useEffect(() => {
-    if (diasporaVoter && stateOfVotingRes && email && firstTimeVoter !== "") {
+    if (diasporaVoter && stateOfOrigin && email && firstTimeVoter !== "") {
       setFormIsCompleted(true);
     }
-  }, [email, stateOfVotingRes, diasporaVoter, firstTimeVoter]);
+  }, [email, stateOfOrigin, diasporaVoter, firstTimeVoter]);
 
   // Validation Schema
   const formOneValidationSchema = Yup.object({
     email: Yup.string().email().required().label("* This"),
     firstTimeVoter: Yup.string().required().label("* This"),
-    stateOfVotingRes: Yup.string().required().label("*This"),
+    stateOfOrigin: Yup.string().required().label("*This"),
   });
   return (
     <>
@@ -34,30 +35,30 @@ const FormOne = (props) => {
           <header className="flex flex-col w-full p-6 space-y-4 border-b md:space-y-2">
             <div className="flex flex-row items-center justify-center space-x-4">
               {formisCompleted ? (
-                <div className="inline-flex items-center justify-center w-5 h-5 p-4 text-white bg-green-600 rounded-full">
+                <div className="inline-flex items-center justify-center w-5 h-5 p-4 text-white bg-[#08C127] rounded-full">
                   <DoneIcon />
                 </div>
               ) : (
-                <div className="inline-flex items-center justify-center w-5 h-5 p-4 text-white bg-black rounded-full">
-                  1
+                <div className="inline-flex text-[14px] items-center justify-center w-5 h-5 p-4 text-white bg-black rounded-full">
+                  <p>1</p>
                 </div>
               )}
 
               <hr
-                className={`w-12 border-black border ${
+                className={`w-12 border-gray-300 border ${
                   formisCompleted && "border-green-500"
                 }`}
               />
-              <div className="inline-flex items-center justify-center w-5 h-5 p-4 text-black bg-gray-100 rounded-full">
-                2
+              <div className="inline-flex text-[14px] items-center justify-center w-5 h-5 p-4 text-black bg-gray-100 rounded-full">
+                <p>2</p>
               </div>
-              <hr className="w-12 border border-black" />
+              <hr className="w-12 border border-gray-300" />
               <div className="inline-flex items-center justify-center w-5 h-5 p-4 text-black bg-gray-100 rounded-full">
-                3
+                <p className="text-[14px]"> 3</p>
               </div>
-              <hr className="w-12 border border-black" />
-              <div className="inline-flex items-center justify-center w-5 h-5 p-4 text-black bg-gray-100 rounded-full">
-                4
+              <hr className="w-12 border border-gray-300" />
+              <div className="inline-flex text-[14px] items-center justify-center w-5 h-5 p-4 text-black bg-gray-100 rounded-full">
+                <p>4</p>
               </div>
             </div>
           </header>
@@ -83,7 +84,7 @@ const FormOne = (props) => {
                         <Field
                           name="email"
                           placeholder="Enter Email Address"
-                          className="w-full h-12 px-4 mb-2 text-lg text-gray-700 placeholder-gray-600 border rounded-md focus:shadow-outline"
+                          className="w-full p-4 px-4 mb-2 text-lg text-gray-700 placeholder-gray-600 border rounded-md accent-green-500 focus:shadow-outline"
                         />
                       </div>
 
@@ -158,26 +159,28 @@ const FormOne = (props) => {
                         </div>
                       </div>
 
-                      {/* Select State of voting residence */}
+                      {/* State of Origin  */}
 
-                      <div className="flex flex-col space-y-1 md:p-2">
-                        <FormLabel
-                          title="Select state of voting residence (Not applicable for
-                          Diaspora Voters) "
-                        />
+                      <div className="space-y-2 md:p-2">
+                        <FormLabel no="i" title=" Select State of Origin" />
                         <p className="text-red-600">
-                          <ErrorMessage name="stateOfVotingRes" />
+                          <ErrorMessage name="stateOfOrigin" />
                         </p>
-                        <Field
-                          as="select"
-                          name="stateOfVotingRes"
-                          placeholder="Select State of Voting Residence"
-                          className="w-full h-12 px-4 mb-2 text-lg text-gray-700 placeholder-gray-600 border rounded-md "
-                        >
-                          <option value="ebonyi">1</option>
-                          <option value="ekiti">2</option>
-                          <option value="oyo">3</option>
-                        </Field>
+                        <div className="flex flex-row items-start justify-between">
+                          <Field
+                            as="select"
+                            name="stateOfOrigin"
+                            className="block w-full px-3 py-3 mt-1 bg-white border border-gray-300 rounded"
+                          >
+                            {states.map((item) => {
+                              return (
+                                <option key={item.id} value={item.id}>
+                                  {item.name}
+                                </option>
+                              );
+                            })}
+                          </Field>
+                        </div>
                       </div>
 
                       {/*  */}
@@ -186,7 +189,7 @@ const FormOne = (props) => {
                   <footer className="w-full p-4 border-t">
                     <button
                       type="submit"
-                      className="p-2 px-8 ml-8 text-white bg-green-500 rounded-md hover:-translate-y-1 hover:bg-green-600"
+                      className="p-2 px-8 ml-8 transition duration-500 text-white bg-[#08C127] rounded-md hover:-translate-y-1"
                     >
                       Next
                     </button>

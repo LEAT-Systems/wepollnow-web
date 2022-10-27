@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 const GettingStartedThree = () => {
   return (
-    <Fragment>
+    <div className="w-screen h-screen mx-auto">
       <Nav />
       <div className="flex flex-col items-center justify-center mt-12">
         <div className="py-24 text-center">
@@ -24,7 +24,7 @@ const GettingStartedThree = () => {
         </div>
       </div>
       <Footer />
-    </Fragment>
+    </div>
   );
 };
 

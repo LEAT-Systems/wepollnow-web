@@ -121,9 +121,7 @@ const FormFive = () => {
 
         <div className="flex flex-col items-center justify-center px-4 space-y-4">
           {hasError && (
-            <p className="font-bold text-red-500">
-              {error} error occured. Try Again.
-            </p>
+            <p className="font-bold text-red-500">{error}. Try Again.</p>
           )}
           <img src={cautionIcon} alt="caution" />
           <p className="p-1 px-4 text-xl font-extrabold text-center text-black md:text-2xl">
@@ -148,7 +146,7 @@ const FormFive = () => {
               </button>
               <button
                 type="submit"
-                className="p-2 px-6 text-white bg-green-500 rounded-md hover:bg-green-600 hover:-translate-y-1"
+                className="p-2 px-6 text-white bg-[#08c127] transition duration-500 rounded-md hover:-translate-y-1"
               >
                 {`Confirm`}
               </button>
@@ -162,15 +160,15 @@ const FormFive = () => {
     <>
       <Nav bg="FFEDF1" />
       <Modal open={open} children={ModalContent} />
-      <div className="flex flex-row items-center justify-center  bg-[#EDFFF0]">
+      <div className="flex flex-row items-center justify-center  bg-[#FFEDF1]">
         <div className="flex flex-col items-center justify-center p-16 space-y-4">
-          <p className="text-3xl font-bold text-center">
+          <h1 className="text-4xl font-extrabold text-center">
             Select the party you'd like to vote
-          </p>
+          </h1>
           <input
             className="w-full h-12 px-4 mb-2 text-lg text-gray-700 placeholder-gray-600 bg-transparent border-b fontAwesome"
             type="text"
-            placeholder="&#xF002; Search Party or Candidate Name"
+            placeholder="&#xf002; Search Party or Candidate Name"
             onChange={(e) => {
               return setQuery(e.target.value.toLowerCase());
             }}
@@ -187,7 +185,10 @@ const FormFive = () => {
                   return (
                     <div
                       key={item.id}
-                      className="p-4 border border-gray-200 rounded-md md:p-6"
+                      className={`p-4 border border-gray-200 rounded-md md:p-6 ${
+                        castedVote === item.partyName ? "bg-[#EDFFF0]" : ""
+                      }
+                      `}
                     >
                       <label htmlFor={item.id}>
                         <div className="flex flex-row items-center justify-between pb-2 border-b border-gray-200">
@@ -211,7 +212,9 @@ const FormFive = () => {
                           />
                         </div>
                         <div className="flex flex-row items-center justify-between ">
-                          <section className="flex flex-col items-start justify-start w-full p-4 space-y-2">
+                          <section
+                            className={`flex flex-col items-start justify-start w-full p-4 space-y-2`}
+                          >
                             <div className="flex flex-row items-start justify-start space-x-4">
                               <img
                                 src={candidate}
@@ -246,7 +249,7 @@ const FormFive = () => {
                             }
                             className={`${
                               castedVote === item.partyName
-                                ? "bg-green-500 cursor-pointer"
+                                ? "bg-[#08c127] cursor-pointer"
                                 : "bg-gray-500 cursor-not-allowed disabled"
                             } px-4 md:px-8 text-white rounded p-2 text-sm md:text-lg`}
                           >
