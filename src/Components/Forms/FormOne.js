@@ -5,6 +5,7 @@ import * as Yup from "yup";
 import DoneIcon from "@mui/icons-material/Done";
 import Nav from "../Layout/Landing/mainNav";
 import FormLabel from "../../UI/FormLabel";
+import { states } from "./states";
 
 const FormOne = (props) => {
   const [formisCompleted, setFormIsCompleted] = useState(false);
@@ -171,9 +172,13 @@ const FormOne = (props) => {
                             name="stateOfOrigin"
                             className="block w-full px-3 py-3 mt-1 bg-white border border-gray-300 rounded"
                           >
-                            <option value="">Select an option</option>
-                            <option value="Abia">Abia</option>
-                            <option value="Akwa Ibom">Akwa Ibom</option>
+                            {states.map((item) => {
+                              return (
+                                <option key={item.id} value={item.id}>
+                                  {item.name}
+                                </option>
+                              );
+                            })}
                           </Field>
                         </div>
                       </div>

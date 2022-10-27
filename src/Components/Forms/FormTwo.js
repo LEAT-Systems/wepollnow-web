@@ -5,6 +5,7 @@ import * as Yup from "yup";
 import Done from "@mui/icons-material/Done";
 import Nav from "../Layout/Landing/mainNav";
 import FormLabel from "../../UI/FormLabel";
+import { states } from "./states";
 
 const FormTwo = (props) => {
   const [formisCompleted, setFormIsCompleted] = useState(false);
@@ -87,9 +88,13 @@ const FormTwo = (props) => {
                           placeholder="Select State of Voting Residence"
                           className="w-full p-4 px-4 mb-2 text-lg text-gray-700 placeholder-gray-600 border rounded-md "
                         >
-                          <option value="ebonyi">1</option>
-                          <option value="ekiti">2</option>
-                          <option value="oyo">3</option>
+                          {states.map((item) => {
+                            return (
+                              <option key={item.id} value={item.id}>
+                                {item.name}
+                              </option>
+                            );
+                          })}
                         </Field>
                       </div>
                       {/* LGA of voting residence */}

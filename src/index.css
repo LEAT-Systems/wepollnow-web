@@ -82,6 +82,9 @@ input[type="radio"]:checked {
   font-family: "Montserrat", sans-serif;
   opacity: 1; /* Firefox */
 }
+input[type="select"] option {
+  background: "#08c127" !important;
+}
 
 .scrollable::-webkit-scrollbar,
 body::-webkit-scrollbar {
