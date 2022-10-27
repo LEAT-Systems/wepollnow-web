@@ -40,13 +40,13 @@ const GettingStartedOne = () => {
     </p>
   );
   return (
-    <>
+    <div className="w-screen h-screen">
       <Nav />
       <div className="relative flex flex-col mt-12 ">
         <div
-          className={`absolute z-10 flex flex-col items-center left-4 md:left-0 top-[300px] md:top-48 justify-center px-4 space-y-4 md:px-12 lg:px-24`}
+          className={`absolute z-10 flex flex-col items-center left-4 md:left-16 top-[300px] md:top-48 justify-center`}
         >
-          <div className={`flex flex-col space-y-4 text-[#707070]`}>
+          <div className={`flex flex-col space-y-4`}>
             <a href="https://instagram.com/wepollnow">
               <img src={instagram} alt="instagram_link" />
             </a>
@@ -77,7 +77,7 @@ const GettingStartedOne = () => {
             pcolor="black"
           />
           <div>
-            <p className="max-w-xs text-md text-center md:max-w-xl">
+            <p className="max-w-xs text-center text-md md:max-w-xl">
               We would love to keep you informed as the date draws closer
             </p>
           </div>
@@ -115,7 +115,7 @@ const GettingStartedOne = () => {
                   to="/getting-started-two"
                   className="inline-block w-2 h-2 bg-gray-200 rounded-full"
                 ></Link>
-                <Link className="inline-block w-2 h-2  bg-gray-200 rounded-full"></Link>
+                <Link className="inline-block w-2 h-2 bg-gray-200 rounded-full"></Link>
                 <Link className="inline-block w-2 h-2 bg-gray-200 rounded-full"></Link>
               </div>
               <Link
@@ -127,15 +127,15 @@ const GettingStartedOne = () => {
             </div>
           </div>
         </div>
+        <div className="flex flex-col items-center justify-center">
+          <img
+            src={text_logo}
+            alt="vote"
+            className="w-[65%] mt-4 md:-mt-[140px] h-24 md:h-[200px]"
+          />
+        </div>
       </div>
-      <div className="flex-row items-center justify-center  pb-12 flex">
-        <img
-          src={text_logo}
-          alt="vote"
-          className="w-[65%] mt-4 md:-mt-[120px] h-24 md:h-[200px]"
-        />
-      </div>
-    </>
+    </div>
   );
 };
 

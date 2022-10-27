@@ -90,7 +90,7 @@ const Confirm = (props) => {
             <Formik initialValues={props.data} onSubmit={handleSubmit}>
               {({ values }) => (
                 <Form>
-                  <div className="flex flex-row justify-end items-end w-full p-2 space-x-4  md:px-6 md:py-4">
+                  <div className="flex flex-row items-end justify-end w-full p-2 space-x-4 md:px-6 md:py-4">
                     <button
                       type="button"
                       onClick={() => props.prev(values)}
@@ -103,7 +103,7 @@ const Confirm = (props) => {
                       className={
                         hasError
                           ? "hidden"
-                          : "p-2 px-6 bg-green-500 hover:bg-green-600 text-white rounded-md hover:-translate-y-1"
+                          : "p-2 px-6 bg-[#08C127] transition duration-500 text-white rounded-md hover:-translate-y-1"
                       }
                     >
                       {`Confirm`}

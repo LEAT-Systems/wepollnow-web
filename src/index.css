@@ -5,7 +5,24 @@
 .active {
   @apply border-r-4 border-green-500;
 }
-
+select,
+input::placeholder {
+  font-family: "Montserrat", sans-serif;
+}
+h1 {
+  @apply font-extrabold;
+  font-family: "Montserrat", sans-serif;
+}
+h2,
+p {
+  font-family: "Montserrat", sans-serif;
+}
+input:focus {
+  outline: none;
+}
+input[type="radio"]:checked {
+  accent-color: green;
+}
 .animate {
   @apply transition duration-700 ease-in-out hover:scale-110;
 }

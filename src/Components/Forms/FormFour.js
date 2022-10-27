@@ -31,18 +31,18 @@ const FormFour = (props) => {
         <div className="w-full text-lg text-gray-700 md:w-3/4">
           <header className="flex flex-col w-full p-6 space-y-1 border-b">
             <div className="flex flex-row items-center justify-center space-x-4">
-              <div className="inline-flex items-center justify-center w-5 h-5 p-4 text-black bg-gray-200 rounded-full">
-                1
+              <div className="inline-flex items-center justify-center w-5 h-5 p-4 text-white rounded-full bg-[#08C127]">
+                <Done />
               </div>
-              <hr className="w-12 border-black border-1" />
-              <div className="inline-flex items-center justify-center w-5 h-5 p-4 text-black bg-gray-200 rounded-full">
-                2
+              <hr className="w-12 border-[#08C127] border" />
+              <div className="inline-flex items-center justify-center w-5 h-5 p-4 text-white rounded-full bg-[#08C127]">
+                <Done />
               </div>
-              <hr className="w-12 border-black border-1" />
-              <div className="inline-flex items-center justify-center w-5 h-5 p-4 text-black bg-gray-200 rounded-full">
-                3
+              <hr className="w-12 border-[#08C127] border" />
+              <div className="inline-flex items-center justify-center w-5 h-5 p-4 text-white rounded-full bg-[#08C127]">
+                <Done />
               </div>
-              <hr className="w-12 border-black border-1" />
+              <hr className="w-12 border-[#08C127] border" />
               {formisCompleted ? (
                 <div className="inline-flex items-center justify-center w-5 h-5 p-4 text-white bg-green-600 rounded-full">
                   <Done />
@@ -238,7 +238,9 @@ const FormFour = (props) => {
                               value="Living with family"
                               className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
                             />
-                            <p className="text-sm">Living with family</p>
+                            <p className="text-sm md:text-lg">
+                              Living with family
+                            </p>
                           </label>
                           <label
                             htmlFor="accomodationStatus2"
@@ -251,7 +253,9 @@ const FormFour = (props) => {
                               value="Living with friends"
                               className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
                             />
-                            <p className="text-sm">Living with friends</p>
+                            <p className="text-sm md:text-lg">
+                              Living with friends
+                            </p>
                           </label>
                           <label
                             htmlFor="accomodationStatus3"
@@ -264,7 +268,9 @@ const FormFour = (props) => {
                               value="Living on your own"
                               className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
                             />
-                            <p className="text-sm">Living on your own</p>
+                            <p className="text-sm md:text-lg">
+                              Living on your own
+                            </p>
                           </label>
                         </div>
                       </div>
@@ -281,7 +287,7 @@ const FormFour = (props) => {
                     <button
                       onClick={() => props.next(values)}
                       type="button"
-                      className="p-2 px-8 text-white bg-green-500 rounded-md hover:-translate-y-1 hover:bg-green-600"
+                      className="p-2 px-8 text-white transition duration-500 bg-[#08C127] rounded-md hover:-translate-y-1"
                     >
                       Submit
                     </button>
