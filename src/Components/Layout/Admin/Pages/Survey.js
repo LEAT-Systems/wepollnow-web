@@ -9,7 +9,6 @@ import SurveyContent from "../PageContent/SurveyContent";
 const Survey = () => {
   return (
     <>
-      <Header />
       <Wrapper>
         <SideBar />
         <PageContent children={<SurveyContent />} />
