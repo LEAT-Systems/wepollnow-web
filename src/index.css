@@ -1,0 +1,178 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* .active {
+  @apply after:content-[''] relative after:absolute
+  after:w-1 after:h-1 bg-green-400  after:top-0 right-0;
+} */
+
+.active {
+  @apply relative bg-transparentWhite py-4 px-2 first:pt-[.1rem] before:absolute before:top-[1.1rem] before:right-0 before:content-[""] before:bg-green-500 before:h-[2.7rem] before:w-[.3rem] before:rounded-[1rem]
+}
+
+.sidebar-icons {
+  @apply text-gray-200
+}
+
+.sidebar-icons.active {
+  @apply text-white
+}
+
+.animate {
+  @apply transition duration-700 ease-in-out /* hover:scale-110 */;
+}
+
+.btn-stay {
+  @apply bg-green-500 p-2 text-white rounded-md px-4;
+}
+
+.btn-leave {
+  @apply bg-red-500 p-2 text-white  rounded-md px-4;
+}
+/* Hamburger Menu */
+.hamburger {
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+  transition: all 0.25s;
+  position: relative;
+}
+
+.hamburger-top,
+.hamburger-middle,
+.hamburger-bottom {
+  position: absolute;
+  width: 24px;
+  height: 2px;
+  top: 0px;
+  left: 0px;
+  background: #000;
+  transform: rotate (0);
+  transition: all 0.5s;
+}
+
+.hamburger-middle {
+  transform: translateY(7px);
+}
+.hamburger-bottom {
+  transform: translateY(14px);
+}
+.open {
+  transform: rotate(90deg);
+}
+.open .hamburger-top {
+  transform: rotate(45deg);
+}
+.open .hamburger-middle {
+  display: none;
+}
+.open .hamburger-bottom {
+  transform: rotate(135deg);
+}
+
+.stroke {
+  color: black;
+  text-shadow: 1px 1px 0 #fff, -1px -1px 0 #fff, 1px -1px 0 #fff,
+    -1px 1px 0 #fff, 1px 1px 0 #fff;
+}
+.input::placeholder {
+  font-family: "Montserrat", sans-serif;
+  opacity: 1; /* Firefox */
+}
+
+.scrollable::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  width: 5px;
+}
+.scrollable::-webkit-scrollbar-track,
+body::-webkit-scrollbar-track {
+  background: #eee;
+}
+.scrollable::-webkit-scrollbar-thumb,
+body::-webkit-scrollbar-thumb {
+  background-color: #000;
+  border-radius: 10px;
+  /* border: 3px solid #000; */
+}
+
+.bg-hero {
+  width: 200px;
+  height: 300px;
+  left: 30%;
+}
+
+h1 {
+  font-family: "Montserrat", sans-serif;
+  @apply font-extrabold;
+}
+
+p {
+  font-family: "Montserrat", sans-serif;
+  @apply font-extralight;
+}
+.fontAwesome {
+  font-family: "Montserrat", FontAwesome, sans-serif;
+}
+
+/* Swiper JS styles */
+.swiper-button-prev {
+  color: white !important;
+}
+.swiper-button-next {
+  color: #fff !important;
+  z-index: 999999;
+}
+.swiper {
+  width: 100%;
+  height: 100%;
+}
+input:focus {
+  outline: 1px solid #eee;
+}
+
+.iti__flag {
+  background-image: url("images/flags.png");
+}
+
+/* Table header */ 
+.table-head {
+  @apply px-6 py-3 font-extrabold text-xl normal-case
+}
+
+.table-row {
+  @apply border-b  even:bg-slate-200 odd:bg-white 
+}
+
+
+/* Search */
+.searchInp {
+  @apply flex
+}
+
+.searchInp input{
+ @apply border-x-0 border-t-0 border-b rounded-md rounded-tl-none rounded-bl-none text-[1rem] pr-4 py-5 h-12 w-[22rem] focus:outline-none
+}
+
+.searchIcons {
+ @apply h-12 w-12 grid place-items-center cursor-pointer border-b
+}
+
+.searchResult {
+  @apply bg-white w-[22rem] h-[22rem] shadow-md overflow-hidden overflow-y-auto
+}
+
+.searchResult::-webkit-scrollbar {
+  display: none;
+}
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .iti__flag {
+    background-image: url("images/flags@2x.png");
+  }
+}
+.PhoneInputInput {
+  @apply p-2 w-full border rounded !important;
+}
+.PhoneInputInput:focus {
+  @apply p-2 w-full border-0 rounded-md !important;
+}
