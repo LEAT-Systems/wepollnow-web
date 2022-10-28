@@ -5,6 +5,7 @@ import * as Yup from "yup";
 import Done from "@mui/icons-material/Done";
 import Nav from "../Layout/Landing/mainNav";
 import FormLabel from "../../UI/FormLabel";
+import { states } from "./states";
 
 const FormTwo = (props) => {
   const [formisCompleted, setFormIsCompleted] = useState(false);
@@ -13,25 +14,16 @@ const FormTwo = (props) => {
     props.next(values);
   };
 
-  // const handlerFunc = (e) => {
-  //   if (e.target.value !== "") {
-  //     setIsTouched(true);
-  //   } else {
-  //     setIsTouched(false);
-  //   }
-  // };
-
-  console.log(isTouched);
   // Configuring the indicators
-  const { LGAofVotingRes, stateOfOrigin, ageRange } = props.data;
+  const { LGAofVotingRes, stateOfVotingRes, ageRange } = props.data;
   useEffect(() => {
-    if (LGAofVotingRes && stateOfOrigin && ageRange !== "") {
+    if (LGAofVotingRes && stateOfVotingRes && ageRange !== "") {
       setFormIsCompleted(true);
     }
-  }, [LGAofVotingRes, stateOfOrigin, ageRange]);
+  }, [LGAofVotingRes, stateOfVotingRes, ageRange]);
   const formTwoValidationSchema = Yup.object({
     LGAofVotingRes: Yup.string().required().label("* This"),
-    stateOfOrigin: Yup.string().required().label("* This"),
+    stateOfVotingRes: Yup.string().required().label("* This"),
     // ageRange
   });
   return (
@@ -41,17 +33,17 @@ const FormTwo = (props) => {
         <div className="w-full text-lg text-gray-700 rounded-lg md:w-3/4">
           <header className="flex flex-col w-full p-4 space-y-2 border-b">
             <div className="flex flex-row items-center justify-center space-x-4">
-              <div className="inline-flex items-center justify-center w-5 h-5 p-4 text-black bg-gray-200 rounded-full">
-                1
+              <div className="inline-flex text-[14px] items-center w-5 h-5 p-4 text-white bg-[#08C127] rounded-full text-[14px] justify-center">
+                <Done />
               </div>
-              <hr className="w-12 border border-black " />
+              <hr className="w-12 border border-[#08C127] " />
               {formisCompleted ? (
-                <div className="inline-flex items-center justify-center w-5 h-5 p-4 text-white bg-green-600 rounded-full">
+                <div className="inline-flex  text-[14px] items-center justify-center w-5 h-5 p-4 text-white bg-[#08C127] rounded-full">
                   <Done />
                 </div>
               ) : (
-                <div className="inline-flex items-center justify-center w-5 h-5 p-4 text-white bg-black rounded-full">
-                  2
+                <div className="inline-flex  text-[14px] items-center justify-center w-5 h-5 p-4 text-white bg-black rounded-full">
+                  <p>2</p>
                 </div>
               )}
 
@@ -60,12 +52,12 @@ const FormTwo = (props) => {
                   formisCompleted && "border-green-500"
                 }`}
               />
-              <div className="inline-flex items-center justify-center w-5 h-5 p-4 text-black bg-gray-100 rounded-full">
-                3
+              <div className="inline-flex text-[14px] items-center justify-center w-5 h-5 p-4 text-black bg-gray-100 rounded-full">
+                <p>3</p>
               </div>
               <hr className="w-12 border border-black " />
-              <div className="inline-flex items-center justify-center w-5 h-5 p-4 text-black bg-gray-100 rounded-full">
-                4
+              <div className="inline-flex text-[14px] items-center justify-center w-5 h-5 p-4 text-black bg-gray-100 rounded-full">
+                <p>4</p>
               </div>
             </div>
           </header>
@@ -80,10 +72,36 @@ const FormTwo = (props) => {
                 <Form>
                   <div className="flex flex-col p-2 space-y-4 md:p-8">
                     <div className="h-full px-2 space-y-4 md:px-4">
+                      {/* Select State of voting residence */}
+
+                      <div className="flex flex-col space-y-1 md:p-2">
+                        <FormLabel
+                          title="Select state of voting residence (Not applicable for
+                          Diaspora Voters) "
+                        />
+                        <p className="text-red-600">
+                          <ErrorMessage name="stateOfVotingRes" />
+                        </p>
+                        <Field
+                          as="select"
+                          name="stateOfVotingRes"
+                          placeholder="Select State of Voting Residence"
+                          className="w-full p-4 px-4 mb-2 text-lg text-gray-700 placeholder-gray-600 border rounded-md "
+                        >
+                          {states.map((item) => {
+                            return (
+                              <option key={item.id} value={item.id}>
+                                {item.name}
+                              </option>
+                            );
+                          })}
+                        </Field>
+                      </div>
+                      {/* LGA of voting residence */}
                       <div className="space-y-4 rounded-md md:p-2">
                         <FormLabel
                           no="i"
-                          title=" Select L.G.A of voting residence(Not applicable for
+                          title=" Select L.G.A of voting residence (Not applicable for
                           diaspora Voters)"
                         />
                         <p className="text-red-600">
@@ -98,26 +116,6 @@ const FormTwo = (props) => {
                             <option value="">Select an option</option>
                             <option value="Umuahia">Umuahia</option>
                             <option value="Uyo">Uyo</option>
-                          </Field>
-                        </div>
-                      </div>
-
-                      {/* State of Origin  */}
-
-                      <div className="space-y-2 md:p-2">
-                        <FormLabel no="i" title=" Select State of Origin" />
-                        <p className="text-red-600">
-                          <ErrorMessage name="stateOfOrigin" />
-                        </p>
-                        <div className="flex flex-row items-start justify-between">
-                          <Field
-                            as="select"
-                            name="stateOfOrigin"
-                            className="block w-full px-3 py-3 mt-1 bg-white border border-gray-300 rounded"
-                          >
-                            <option value="">Select an option</option>
-                            <option value="Abia">Abia</option>
-                            <option value="Akwa Ibom">Akwa Ibom</option>
                           </Field>
                         </div>
                       </div>
@@ -214,7 +212,7 @@ const FormTwo = (props) => {
                     </button>
                     <button
                       type="submit"
-                      className="p-2 px-8 text-white bg-green-500 rounded-md hover:-translate-y-1 hover:bg-green-600"
+                      className="p-2 px-8 text-white transition duration-500 bg-[#08C127] rounded-md hover:-translate-y-1"
                     >
                       Next
                     </button>

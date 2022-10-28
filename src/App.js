@@ -58,75 +58,75 @@ function App() {
       <Switch>
         {/* //////////////////////////   LANDING PAGE ROUTES    //////////////////////////////////// */}
         {/* FALLBACK URL ROUTE */}
-        <Route path='/' exact>
+        <Route path="/" exact>
           <GettingStartedOne />
         </Route>
 
         {/* GETTING STARTED ONE ROUTE */}
-        <Route path='/getting-started-one' exact>
+        <Route path="/getting-started-one" exact>
           <GettingStartedOne />
         </Route>
 
         {/* GETTING STARTED TWO ROUTE */}
-        <Route path='/getting-started-two' exact>
+        <Route path="/getting-started-two" exact>
           <GettingStartedTwo />
         </Route>
 
         {/* GETTING STARTED THREE ROUTE */}
-        <Route path='/getting-started-three' exact>
+        <Route path="/getting-started-three" exact>
           <GettingStartedThree />
         </Route>
 
         {/* ABOUT PAGE ROUTE */}
-        <Route path='/about' exact>
+        <Route path="/about" exact>
           <AboutPage />
         </Route>
 
         {/* CONTACT PAGE ROUTE */}
-        <Route path='/blog' exact>
+        <Route path="/blog" exact>
           <BlogPage />
         </Route>
         {/* CONTACT PAGE ROUTE */}
-        <Route path='/vote/vote-form-next' exact>
+        <Route path="/vote/vote-form-next" exact>
           <VoteFormTwo />
         </Route>
         {/* CONTACT PAGE ROUTE */}
-        <Route path='/vote/voteSuccess' exact>
+        <Route path="/vote/voteSuccess" exact>
           <VoteSuccess />
         </Route>
 
         {/* TEST PAGE ROUTE */}
-        <Route path='/test' exact>
+        <Route path="/test" exact>
           <Test />
         </Route>
 
         {/* ALL POLLS PAGE ROUTE */}
-        <Route path='/polls' exact>
+        <Route path="/polls" exact>
           <AllPolls />
         </Route>
 
         {/* REGISTRATION ROUTE */}
-        <Route path='/register' exact>
+        <Route path="/register" exact>
           <FormComponent />
         </Route>
 
         {/* Some Other Page */}
-        <Route path='/vote' exact>
+        <Route path="/vote" exact>
           <FormFive />
         </Route>
 
         {/* =========================  ADMIN ROUTES  ========================== */}
 
         {/* Login Page */}
-        <Route path='/login' exact>
+        <Route path="/login" exact>
           <Login />
         </Route>
-        <Route path='/wepollnow/login' exact>
+        <Route path="/wepollnow/login" exact>
           <Login />
         </Route>
 
         {/* Dashboard Landing */}
-        <Route path='/dashboard' exact>
+        <Route path="/dashboard" exact>
           <Dashboard />
         </Route>
 
@@ -137,32 +137,32 @@ function App() {
         </Route>
 
         {/* Polls result*/}
-        <Route Route path='/polls/polls_result' exact>
+        <Route Route path="/polls/polls_result" exact>
           <PollsResult />
         </Route>
 
         {/* surveys */}
 
-        <Route path='/surveys' exact>
+        <Route path="/surveys" exact>
           <Survey />
         </Route>
 
-        <Route path='/surveys/manageSurvey' exact>
+        <Route path="/surveys/manageSurvey" exact>
           <ManageSurvey />
         </Route>
 
         {/* blog */}
 
-        <Route path='/blog' exact>
+        <Route path="/blog" exact>
           <Blog />
         </Route>
 
         {/* account */}
-        <Route path='/account' exact>
+        <Route path="/account" exact>
           <Account />
         </Route>
         {/*=========================  NOT FOUND ROUTE ========================*/}
-        <Route path='*'>
+        <Route path="*">
           <NotFound />
         </Route>
       </Switch>

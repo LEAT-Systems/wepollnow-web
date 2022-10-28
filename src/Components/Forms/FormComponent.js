@@ -25,11 +25,11 @@ const FormComponent = () => {
     email: "",
     firstTimeVoter: "",
     diasporaVoter: "",
-    stateOfVotingRes: "",
+    stateOfOrigin: "",
 
     // // Form 2
     LGAofVotingRes: "",
-    stateOfOrigin: "",
+    stateOfVotingRes: "",
     ageRange: "",
 
     // // Form 3

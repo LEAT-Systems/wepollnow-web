@@ -12,12 +12,12 @@ const FormThree = (props) => {
     props.next(values);
   };
   // Configuring the indicators
-  const { pvc, gender, employmentStatus } = props.data;
+  const { pvc, maritalStatus, employmentStatus } = props.data;
   useEffect(() => {
-    if (pvc && employmentStatus && gender !== "") {
+    if (pvc && employmentStatus && maritalStatus !== "") {
       setFormIsCompleted(true);
     }
-  }, [gender, pvc, employmentStatus]);
+  }, [maritalStatus, pvc, employmentStatus]);
 
   const formThreeValidationSchema = Yup.object({});
   return (
@@ -27,16 +27,16 @@ const FormThree = (props) => {
         <div className="w-full text-lg text-gray-700 md:w-3/4">
           <header className="flex flex-col w-full p-8 space-y-2 border-b">
             <div className="flex flex-row items-center justify-center space-x-4">
-              <div className="inline-flex items-center justify-center w-5 h-5 p-4 text-black bg-gray-200 rounded-full">
-                1
+              <div className="inline-flex items-center justify-center w-5 h-5 p-4 text-white bg-[#08C127] rounded-full">
+                <Done />
               </div>
-              <hr className="w-12 border border-black" />
-              <div className="inline-flex items-center justify-center w-5 h-5 p-4 text-black bg-gray-200 rounded-full">
-                2
+              <hr className="w-12 border border-[#08C127]" />
+              <div className="inline-flex items-center justify-center w-5 h-5 p-4 text-white bg-[#08C127] rounded-full">
+                <Done />
               </div>
-              <hr className="w-12 border border-black" />
+              <hr className="w-12 border border-[#08C127]" />
               {formisCompleted ? (
-                <div className="inline-flex items-center justify-center w-5 h-5 p-4 text-white bg-green-600 rounded-full">
+                <div className="inline-flex items-center justify-center w-5 h-5 p-4 text-white bg-[#08C127] rounded-full">
                   <Done />
                 </div>
               ) : (
@@ -245,7 +245,7 @@ const FormThree = (props) => {
                     <button
                       onClick={() => props.next(values)}
                       type="button"
-                      className="p-2 px-8 text-white bg-green-500 rounded-md hover:bg-green-600 hover:-translate-y-1"
+                      className="p-2 px-8 text-white transition duration-500 bg-[#08C127] rounded-md hover:-translate-y-1"
                     >
                       Next
                     </button>

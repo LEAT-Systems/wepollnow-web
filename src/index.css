@@ -19,14 +19,30 @@
   @apply text-white
 }
 
-.animate {
-  @apply transition duration-700 ease-in-out /* hover:scale-110 */;
+select,
+input::placeholder {
+  font-family: "Montserrat", sans-serif;
 }
-
+h1 {
+  @apply font-extrabold;
+  font-family: "Montserrat", sans-serif;
+}
+h2,
+p {
+  font-family: "Montserrat", sans-serif;
+}
+input:focus {
+  outline: none;
+}
+input[type="radio"]:checked {
+  accent-color: green;
+}
+.animate {
+  @apply transition duration-700 ease-in-out hover:scale-110;
+}
 .btn-stay {
   @apply bg-green-500 p-2 text-white rounded-md px-4;
 }
-
 .btn-leave {
   @apply bg-red-500 p-2 text-white  rounded-md px-4;
 }
@@ -80,6 +96,9 @@
   font-family: "Montserrat", sans-serif;
   opacity: 1; /* Firefox */
 }
+input[type="select"] option {
+  background: "#08c127" !important;
+}
 
 .scrollable::-webkit-scrollbar,
 body::-webkit-scrollbar {
@@ -102,26 +121,17 @@ body::-webkit-scrollbar-thumb {
   left: 30%;
 }
 
-h1 {
-  font-family: "Montserrat", sans-serif;
-  @apply font-extrabold;
-}
-
-p {
-  font-family: "Montserrat", sans-serif;
-  @apply font-extralight;
-}
 .fontAwesome {
   font-family: "Montserrat", FontAwesome, sans-serif;
 }
 
 /* Swiper JS styles */
 .swiper-button-prev {
-  color: white !important;
+  color: #fff !important;
 }
+
 .swiper-button-next {
   color: #fff !important;
-  z-index: 999999;
 }
 .swiper {
   width: 100%;
