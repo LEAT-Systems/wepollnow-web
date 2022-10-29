@@ -1,10 +1,12 @@
 /** @format */
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Tables from "../../Tables";
 import Header from "../../Header";
 import SearchBar from "../Search/SearchBar";
 import Data from '../../Data.json'
+// import { getTableData } from "../api";
+import { jsonData } from "../api";
 //
 const PollsPageContentOne = () => {
   // const [open, setOpen] = useState(false);
@@ -15,15 +17,33 @@ const PollsPageContentOne = () => {
   // const handleClose = () => {
   //   setOpen(false);
   // };
+
+  const [ tableData, setTableData ] = useState([])
+  const [ serchResult, setSearchResult ] = useState([])
+
+  useEffect(() => {
+    /* For the api */
+    // getTableData().then(json => {
+    //   setTableData(json)
+    //   return json
+    // }).then(json => {
+    //   setSearchResult(json)
+    // })
+
+    /* For our demo json object */
+      setTableData(jsonData);
+      setSearchResult(jsonData);
+
+  }, [])
   return (
     <>
       {/* ===========  Modal: This is a MUI Component   =========== */}
       <Header />
       <div className='flex flex-row justify-between px-4 mt-4'>
         <h3 className='font-bold text-2xl capitalize p-4'>Manage polls</h3>
-        <nav>
+        <header>
           <SearchBar placeholder='Search' data={Data} />
-        </nav>
+        </header>
       </div>
       <Tables data={Data} />
     </>

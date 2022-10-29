@@ -1,3 +1,5 @@
+/** @format */
+
 import React from "react";
 import SideBar from "../../Sidebar";
 import Header from "../../Header";
@@ -11,7 +13,9 @@ const Survey = () => {
     <>
       <Wrapper>
         <SideBar />
-        <PageContent children={<SurveyContent />} />
+        <main className='ml-[82px] w-screen'>
+          <PageContent children={<SurveyContent />} />
+        </main>
       </Wrapper>
     </>
   );

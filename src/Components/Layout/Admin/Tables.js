@@ -57,12 +57,12 @@ const Tables = (data) => {
                   </span>
                 </div>
                 <div className='text-black'>
-                  <span class='material-symbols-outlined text-[1.3rem]'>
+                  <span className='material-symbols-outlined text-[1.3rem]'>
                     inventory_2
                   </span>
                 </div>
                 <div className='text-red-500'>
-                  <span class='material-symbols-outlined text-[1.5rem]'>
+                  <span className='material-symbols-outlined text-[1.5rem]'>
                     delete
                   </span>
                 </div>
@@ -89,12 +89,12 @@ const Tables = (data) => {
                   </span>
                 </div>
                 <div className='text-black'>
-                  <span class='material-symbols-outlined text-[1.3rem]'>
+                  <span className='material-symbols-outlined text-[1.3rem]'>
                     inventory_2
                   </span>
                 </div>
                 <div className='text-red-500'>
-                  <span class='material-symbols-outlined text-[1.5rem]'>
+                  <span className='material-symbols-outlined text-[1.5rem]'>
                     delete
                   </span>
                 </div>
@@ -121,12 +121,12 @@ const Tables = (data) => {
                   </span>
                 </div>
                 <div className='text-black'>
-                  <span class='material-symbols-outlined text-[1.3rem]'>
+                  <span className='material-symbols-outlined text-[1.3rem]'>
                     inventory_2
                   </span>
                 </div>
                 <div className='text-red-500'>
-                  <span class='material-symbols-outlined text-[1.5rem]'>
+                  <span className='material-symbols-outlined text-[1.5rem]'>
                     delete
                   </span>
                 </div>
@@ -153,12 +153,12 @@ const Tables = (data) => {
                   </span>
                 </div>
                 <div className='text-black'>
-                  <span class='material-symbols-outlined text-[1.3rem]'>
+                  <span className='material-symbols-outlined text-[1.3rem]'>
                     inventory_2
                   </span>
                 </div>
                 <div className='text-red-500'>
-                  <span class='material-symbols-outlined text-[1.5rem]'>
+                  <span className='material-symbols-outlined text-[1.5rem]'>
                     delete
                   </span>
                 </div>
