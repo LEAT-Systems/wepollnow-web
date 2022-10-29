@@ -1,6 +1,5 @@
-import React, { useEffect } from "react";
-import { useState } from "react";
-import Tables from "../Components/Tables";
+import React from "react";
+import Tables from "../../Tables";
 import PeopleOutlineIcon from "@mui/icons-material/PeopleOutline";
 import CalendarMonth from "@mui/icons-material/CalendarMonth";
 import { Link } from "react-router-dom";

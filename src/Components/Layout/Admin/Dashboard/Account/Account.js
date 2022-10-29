@@ -1,8 +1,8 @@
 import React from "react";
-import SideBar from "../Components/Sidebar";
-import PageContent from "../Components/Content";
-import Wrapper from "../Components/BodyWrapper";
-import AccountSettings from "../PageContent/AccountSettings";
+import SideBar from "../../Sidebar";
+import PageContent from "../../Content";
+import Wrapper from "../../BodyWrapper";
+import AccountSettings from "./AccountSettings";
 //
 const Account = () => {
   return (

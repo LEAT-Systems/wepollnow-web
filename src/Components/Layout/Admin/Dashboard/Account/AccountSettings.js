@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import EditIcon from "@mui/icons-material/Edit";
-import Header from "../Components/Header";
+import Header from "../../Header";
 
 //
 const AccountSettings = () => {

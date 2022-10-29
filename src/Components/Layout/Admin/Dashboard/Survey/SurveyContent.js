@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import NavigateNext from "@mui/icons-material/NavigateNext";
-import Header from "../Components/Header";
+import Header from "../../Header";
 
 const SurveyContent = () => {
   return (

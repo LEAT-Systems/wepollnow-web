@@ -31,26 +31,26 @@ const FormComponent = React.lazy(() =>
 
 // =====================   Admin imports
 const PollsResult = React.lazy(() =>
-  import("./Components/Layout/Admin/Pages/PollsResult")
+  import("./Components/Layout/Admin/Dashboard/Polls/PollsResult")
 );
 const ManageSurvey = React.lazy(() =>
-  import("./Components/Layout/Admin/Pages/ManageSurvey")
+  import("./Components/Layout/Admin/Dashboard/Survey/ManageSurvey")
 );
 const ManagePolls = React.lazy(() =>
-  import("./Components/Layout/Admin/Pages/ManagePolls")
+  import("./Components/Layout/Admin/Dashboard/Polls/ManagePolls")
 );
-const Blog = React.lazy(() => import("./Components/Layout/Admin/Pages/Blog"));
+const Blog = React.lazy(() => import("./Components/Layout/Admin/Dashboard/Account/Blog"));
 
 const Account = React.lazy(() =>
-  import("./Components/Layout/Admin/Pages/Account")
+  import("./Components/Layout/Admin/Dashboard/Account/Account")
 );
 const Survey = React.lazy(() =>
-  import("./Components/Layout/Admin/Pages/Survey")
+  import("./Components/Layout/Admin/Dashboard/Survey/Survey")
 );
 const Dashboard = React.lazy(() =>
-  import("./Components/Layout/Admin/Pages/Dashboard")
+  import("./Components/Layout/Admin/Dashboard/Home/Home")
 );
-const Login = React.lazy(() => import("./Components/Layout/Admin/Pages/Login"));
+const Login = React.lazy(() => import("./Components/Layout/Admin/Dashboard/Login/Login"));
 
 function App() {
   return (
@@ -132,7 +132,7 @@ function App() {
 
         {/* Polls Page */}
 
-        <Route path="/polls" exact>
+        <Route path='/Managepolls' exact>
           <ManagePolls />
         </Route>
 

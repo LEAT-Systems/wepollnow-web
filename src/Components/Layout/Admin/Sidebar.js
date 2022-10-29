@@ -20,7 +20,7 @@ const SideBar = () => {
       </NavLink>
 
       {/*  */}
-      <NavLink to='/polls'>
+      <NavLink to='/Managepolls'>
         <div className='flex flex-col items-center justify-center animate'>
           <div className='rounded-md'>
             <AssessmentIcon className='sidebar-icons' />

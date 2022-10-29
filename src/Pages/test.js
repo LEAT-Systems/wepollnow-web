@@ -1,20 +1,21 @@
 import React from "react";
+import PollsSingle from "./Polls/PollsSingle";
 // import FormThree from "../Components/Forms/FormThree";
 // import FormOne from "../Components/Forms/FormOne";
 // import FormTwo from "../Components/Forms/FormTwo";
 // import FormComponent from "../Components/Forms/FormComponent";
-import PollsSwiper from "./Polls/PollsSwiper";
-import FormTwo from "../Components/Forms/VoteForm/VoteFormTwo";
-import Login from "../Components/Layout/Admin/Pages/Login";
-import BlogSingle from "./blogPages/blogSinglePost";
-import Header from "../Components/Layout/Admin/Components/Header";
-import Dashboard from "../Components/Layout/Admin/Pages/Dashboard";
-import Polls from "../Components/Layout/Admin/Pages/ManagePolls";
-import PollsPageContentOne from "../Components/Layout/Admin/PageContent/PollsPageContentOne";
-import PollsPageContentTwo from "../Components/Layout/Admin/PageContent/PollsPageContentTwo";
-import VoteSuccess from "../Components/Forms/VoteForm/VoteSuccess";
-import PollsSingle from "./Polls/PollsSingle";
-//
+// import PollsSwiper from "./Polls/PollsSwiper";
+// import FormTwo from "../Components/Forms/VoteForm/VoteFormTwo";
+// import Login from "../Components/Layout/Admin/Dashboard/Login/Login";
+// import BlogSingle from "./blogPages/blogSinglePost";
+// import Header from "../Components/Layout/Admin/Header";
+// import Dashboard from "../Components/Layout/Admin/Dashboard/Home/Home";
+// import Polls from "../Components/Layout/Admin/Dashboard/Polls/ManagePolls";
+// import PollsPageContentOne from "../Components/Layout/Admin/Dashboard/Polls/PollsPageContentOne";
+// import PollsPageContentTwo from "../Components/Layout/Admin/Dashboard/Polls/PollsPageContentTwo";
+// import VoteSuccess from "../Components/Forms/VoteForm/VoteSuccess";
+
+
 const Test = () => {
   return (
     <>

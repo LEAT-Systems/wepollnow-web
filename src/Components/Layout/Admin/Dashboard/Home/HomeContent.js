@@ -2,9 +2,9 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import PeopleOutlineIcon from "@mui/icons-material/PeopleOutline";
 import InsightsIcon from "@mui/icons-material/Insights";
-import Tables from "../Components/Tables";
+import Tables from "../../Tables";
 import VisibilityIcon from "@mui/icons-material/Visibility";
-import Header from "../Components/Header";
+import Header from "../../Header";
 
 const DashboardContent = () => {
   const [greeting, setGreeting] = useState("");

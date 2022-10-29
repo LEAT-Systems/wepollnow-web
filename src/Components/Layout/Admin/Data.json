@@ -1,0 +1,164 @@
+[
+  {
+    "id": 1,
+    "symbol": "PP",
+    "poll": "Presidential Poll",
+    "state": "Lagos",
+    "date-created": "22/10/2022",
+    "poll-date": "22/05/2022",
+    "status": "Concluded"
+  },
+  {
+    "id": 2,
+    "symbol": "AC",
+    "poll": " Gubernational Poll",
+    "state": "Lagos",
+    "date-created": "22/10/2022",
+    "poll-date": "22/05/2022",
+    "status": "Concluded"
+  },
+  {
+    "id": 3,
+    "symbol": "AC",
+    "poll": " Gubernational Poll",
+    "state": "Lagos",
+    "date-created": "22/10/2022",
+    "poll-date": "22/05/2022",
+    "status": "Concluded"
+  },
+  {
+    "id": 4,
+    "symbol": "AC",
+    "poll": " Gubernational Poll",
+    "state": "Lagos",
+    "date-created": "22/10/2022",
+    "poll-date": "22/05/2022",
+    "status": "Concluded"
+  },
+  {
+    "id": 5,
+    "symbol": "PP",
+    "poll": "Presidential Poll",
+    "state": "Lagos",
+    "date-created": "22/10/2022",
+    "poll-date": "22/05/2022",
+    "status": "Concluded"
+  },
+  {
+    "id": 6,
+    "symbol": "PP",
+    "poll": "Presidential Poll",
+    "state": "Lagos",
+    "date-created": "22/10/2022",
+    "poll-date": "22/05/2022",
+    "status": "Concluded"
+  },
+  {
+    "id": 7,
+    "symbol": "AC",
+    "poll": "Gubernational Poll",
+    "state": "Lagos",
+    "date-created": "22/10/2022",
+    "poll-date": "22/05/2022",
+    "status": "Concluded"
+  },
+  {
+    "id": 8,
+    "symbol": "PP",
+    "poll": "Presidential Poll",
+    "state": "Lagos",
+    "date-created": "22/10/2022",
+    "poll-date": "22/05/2022",
+    "status": "Concluded"
+  },
+  {
+    "id": 9,
+    "symbol": "PP",
+    "poll": "Presidential Poll",
+    "state": "Lagos",
+    "date-created": "22/10/2022",
+    "poll-date": "22/05/2022",
+    "status": "Concluded"
+  },
+  {
+    "id": 10,
+    "symbol": "PP",
+    "poll": "Presidential Poll",
+    "state": "Lagos",
+    "date-created": "22/10/2022",
+    "poll-date": "22/05/2022",
+    "status": "Concluded"
+  },
+  {
+    "id": 11,
+    "symbol": "AC",
+    "poll": " Gubernational Poll",
+    "state": "Lagos",
+    "date-created": "22/10/2022",
+    "poll-date": "22/05/2022",
+    "status": "Concluded"
+  },
+  {
+    "id": 12,
+    "symbol": "PP",
+    "poll": "Presidential Poll",
+    "state": "Lagos",
+    "date-created": "22/10/2022",
+    "poll-date": "22/05/2022",
+    "status": "Concluded"
+  },
+  {
+    "id": 13,
+    "symbol": "PP",
+    "poll": "Presidential Poll",
+    "state": "Lagos",
+    "date-created": "22/10/2022",
+    "poll-date": "22/05/2022",
+    "status": "Concluded"
+  },
+  {
+    "id": 14,
+    "symbol": "AC",
+    "poll": " Gubernational Poll",
+    "state": "Lagos",
+    "date-created": "22/10/2022",
+    "poll-date": "22/05/2022",
+    "status": "Concluded"
+  },
+  {
+    "id": 15,
+    "symbol": "PP",
+    "poll": "Presidential Poll",
+    "state": "Lagos",
+    "date-created": "22/10/2022",
+    "poll-date": "22/05/2022",
+    "status": "Concluded"
+  },
+  {
+    "id": 16,
+    "symbol": "PP",
+    "poll": "Presidential Poll",
+    "state": "Lagos",
+    "date-created": "22/10/2022",
+    "poll-date": "22/05/2022",
+    "status": "Concluded"
+  },
+  {
+    "id": 17,
+    "symbol": "PP",
+    "poll": "Presidential Poll",
+    "state": "Lagos",
+    "date-created": "22/10/2022",
+    "poll-date": "22/05/2022",
+    "status": "Concluded"
+  },
+  {
+    "id": 18,
+    "symbol": "AC",
+    "poll": " Gubernational Poll",
+    "state": "Lagos",
+    "date-created": "22/10/2022",
+    "poll-date": "22/05/2022",
+    "status": "Concluded"
+  }
+]
