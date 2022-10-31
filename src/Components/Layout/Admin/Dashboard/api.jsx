@@ -7,7 +7,9 @@ export const getTableData = async () => {
   return response.data
 }
 
-export const jsonData = () => {
+const jsonData = () => {
   const response = JSON.stringify(Data)
   return response
 }
+
+export default jsonData

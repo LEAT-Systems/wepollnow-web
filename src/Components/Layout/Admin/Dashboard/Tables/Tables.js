@@ -1,17 +1,21 @@
-import React from "react";
+/** @format */
 
-const Tables = (data) => {
+import React from "react";
+import TableBody from "./TableBody";
+
+const Tables = ({ data }) => {   
+
   return (
-    <div className='relative overflow-x-auto shadow-md sm:rounded-lg px-12 my-14'>
+    <div className='relative overflow-x-auto sm:rounded-lg px-12 my-14'>
+      <div className='flex flex-row justify-between my-4'>
+        <span className='capitalize text-2xl text-gray-900 py-3 font-extrabold '>
+          Created polls
+        </span>
+        <button className='text-white bg-green-500 px-4 cursor-pointer w-fit rounded-lg py-3'>
+          Create Polls
+        </button>
+      </div>
       <div className='relative overflow-x-auto shadow-md sm:rounded-lg'>
-        <div className='flex flex-row justify-between'>
-          <span className='capitalize text-2xl text-gray-900 py-3 font-extrabold '>
-            Created polls
-          </span>
-          <button className='text-white bg-green-500 p-4 cursor-pointer w-fit rounded-lg py-3'>
-            Create Polls
-          </button>
-        </div>
         <table className='w-full text-sm text-left text-gray-500'>
           <thead className='text-xs text-gray-700 uppercase'>
             <tr>
@@ -35,39 +39,20 @@ const Tables = (data) => {
               </th>
             </tr>
           </thead>
-          <tbody>
-            <tr className='table-row'>
-              <th
-                scope='row'
-                className='px-6 py-4 font-medium text-gray-900 whitespace-nowrap '
-              >
-                <span className='text-white font-bold capitalize bg-green-900 mr-4 rounded-xl p-[.6rem]'>
-                  PP
-                </span>{" "}
-                Presidential Poll
-              </th>
-              <td className='px-6 py-4'>Nationwide</td>
-              <td className='px-6 py-4'>22/05/2022</td>
-              <td className='px-6 py-4'>22/05/2022</td>
-              <td className='px-6 py-4'>Concluded</td>
-              <td className='flex flex-row px-6 py-4 space-x-2'>
-                <div className='text-blue-500'>
-                  <span className='material-symbols-outlined text-[1.5rem]'>
-                    edit_note
-                  </span>
-                </div>
-                <div className='text-black'>
-                  <span className='material-symbols-outlined text-[1.3rem]'>
-                    inventory_2
-                  </span>
-                </div>
-                <div className='text-red-500'>
-                  <span className='material-symbols-outlined text-[1.5rem]'>
-                    delete
-                  </span>
-                </div>
-              </td>
-            </tr>
+          {data.map((data) => {
+            return <TableBody key={data.id} tableData={data} />;
+          })}
+        </table>
+      </div>
+    </div>
+  );
+};
+
+export default Tables;
+
+/* 
+
+          
             <tr className='table-row'>
               <th
                 scope='row'
@@ -164,11 +149,5 @@ const Tables = (data) => {
                 </div>
               </td>
             </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  );
-};
 
-export default Tables;
+*/
