@@ -135,7 +135,7 @@ const GettingStartedThree = () => {
           <img
             src={text_logo}
             alt="vote"
-            className="w-[65%] mt-4 md:-mt-[140px] h-24 md:h-[200px]"
+            className="w-full md:w-[65%] mt-4 md:-mt-[140px] h-24 md:h-[200px]"
           />
         </div>
       </div>
