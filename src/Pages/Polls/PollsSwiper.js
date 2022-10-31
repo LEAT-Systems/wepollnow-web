@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Polls } from "./pollsObject";
 import Timer from "../../UI/Timer";
@@ -9,12 +9,12 @@ import { Navigation } from "swiper";
 
 //
 //
-//
 
 const PollsSwiper = () => {
+  const history = useHistory();
   return (
     <div className="relative">
-      <div className="container flex flex-col mt-12 md:mt-0 md:px-16 mx-auto">
+      <div className="container flex flex-col mx-auto mt-12 md:mt-0 md:px-16">
         <p className="text-[16px] px-4 md:px-1 font-bold underline underline-offset-2 decoration-yellow-500 decoration-4">
           Upcoming Polls
         </p>
@@ -43,10 +43,17 @@ const PollsSwiper = () => {
             const distance = new Date(item.date).getTime() - now;
             due = distance < 0;
 
+            // Storing Polltype clicked on button into local storage
+            const setDescription = item.description;
+            const handler = () => {
+              localStorage.setItem("pollType", setDescription);
+              history.push("/vote", { replace: true });
+            };
+
             return (
               <SwiperSlide key={item.id}>
-                <div className="flex flex-col md:flex-row items-center justify-center p-4 space-y-2 md:px-0">
-                  <div className="flex flex-col items-center justify-center w-full py-12 h-72 space-y-4 rounded-lg bg-polls-pattern">
+                <div className="flex flex-col items-center justify-center p-4 space-y-2 md:flex-row md:px-0">
+                  <div className="flex flex-col items-center justify-center w-full py-12 space-y-4 rounded-lg h-72 bg-polls-pattern">
                     <p className="text-xl font-bold text-white">
                       {item.description}
                     </p>
@@ -62,7 +69,9 @@ const PollsSwiper = () => {
                           color="white"
                         />
                       ) : (
-                        <button className="btn-stay">Vote Now</button>
+                        <button onClick={handler} className="btn-stay animate">
+                          Vote Now
+                        </button>
                       )}
                     </div>
                   </div>

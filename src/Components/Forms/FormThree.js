@@ -68,7 +68,7 @@ const FormThree = (props) => {
                     <div className="h-full px-4 space-y-2">
                       {/*  */}
                       {/* Do you have a PVC */}
-                      <div className="py-4 space-y-1">
+                      <div className="py-4 space-y-1 pt-8 md:pt-0">
                         <FormLabel no="i" title="Do you have a PVC?" />
                         <p className="text-red-600">
                           <ErrorMessage name="pvc" />
@@ -170,7 +170,7 @@ const FormThree = (props) => {
 
                       {/* Employment Status */}
 
-                      <div className="pt-4">
+                      <div className="pt-4 pb-8 md:pb-0">
                         <FormLabel title=" What best describes your employment status?" />
                         <p className="text-red-600">
                           <ErrorMessage name="employmentStatus" />
@@ -228,7 +228,7 @@ const FormThree = (props) => {
                               value="self-employed"
                               className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
                             />
-                            <p>Self-employed</p>
+                            <p className="text-sm md:text-lg">Self-employed</p>
                           </label>
                         </div>
                       </div>
@@ -238,14 +238,14 @@ const FormThree = (props) => {
                     <button
                       type="button"
                       onClick={() => props.prev(values)}
-                      className="p-2 px-4 ml-8 text-black bg-transparent border border-black rounded-md hover:border-red-500"
+                      className="p-2 px-4 md:ml-8 text-black bg-transparent border border-black rounded-md animateBack"
                     >
                       Previous
                     </button>
                     <button
                       onClick={() => props.next(values)}
                       type="button"
-                      className="p-2 px-8 text-white transition duration-500 bg-[#08C127] rounded-md hover:-translate-y-1"
+                      className="p-2 px-8 text-white bg-[#08C127] rounded-md animate"
                     >
                       Next
                     </button>

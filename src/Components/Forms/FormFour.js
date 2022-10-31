@@ -69,7 +69,7 @@ const FormFour = (props) => {
                       {/*  */}
                       {/* ================= 1.  Gender    ================*/}
                       {/*  */}
-                      <div className="pt-4 space-y-1">
+                      <div className="space-y-1 pt-8 md:pt-0">
                         <FormLabel no="i" title=" Select your Gender" />
                         <p className="text-red-600">
                           <ErrorMessage name="gender" />
@@ -221,7 +221,7 @@ const FormFour = (props) => {
 
                       {/* ================= 4. Accomodation status =============== */}
 
-                      <div className="pt-4">
+                      <div className="pt-4 pb-8 md:pb-0">
                         <FormLabel title="What best describes your accomodation status?" />
                         <p className="text-red-600">
                           <ErrorMessage name="accomodationStatus" />
@@ -280,14 +280,14 @@ const FormFour = (props) => {
                     <button
                       type="button"
                       onClick={() => props.prev(values)}
-                      className="p-2 px-8 ml-8 text-black bg-transparent border border-black rounded-md hover:border-red-500"
+                      className="p-2 px-4 md:ml-8 text-black bg-transparent border border-black rounded-md animateBack"
                     >
                       Previous
                     </button>
                     <button
                       onClick={() => props.next(values)}
                       type="button"
-                      className="p-2 px-8 text-white transition duration-500 bg-[#08C127] rounded-md hover:-translate-y-1"
+                      className="p-2 px-6 text-white  bg-[#08C127] rounded-md animate"
                     >
                       Submit
                     </button>

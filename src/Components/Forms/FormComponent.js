@@ -13,7 +13,6 @@ const phone = localStorage.getItem("phoneNumber");
 
 //
 const FormComponent = () => {
-  const [userIp, setUserIp] = useState("");
   const [currentStep, setCurrentStep] = useState(0);
   const [hasError, setHasError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
@@ -44,21 +43,10 @@ const FormComponent = () => {
     accomodationStatus: "",
   });
 
-  //   Getting the User IP Address
-  const getData = async () => {
-    const res = await axios.get("https://geolocation-db.com/json/");
-    setUserIp(res.data.IPv4);
-  };
+  // storing state data in a variable
+  const finalData = { ...data };
 
-  //   Executing the axios call in an effect
-  useEffect(() => {
-    getData();
-  }, []);
-
-  //   Storing the userIp in the final data state to be sent to DB
-  const finalData = { ...data, userIp };
-
-  //   Next Step
+  //  function to handle Next Step
   const handleNextStep = (newData, final = false) => {
     setData((prev) => ({ ...prev, ...newData }));
 
@@ -85,7 +73,6 @@ const FormComponent = () => {
               Religion: formData.Religion,
               SelectOneOpt: formData.SelectOneOpt,
               AccomodationStatus: formData.AccomodationStatus,
-              userIp: formData.userIp,
             }),
           }
         );

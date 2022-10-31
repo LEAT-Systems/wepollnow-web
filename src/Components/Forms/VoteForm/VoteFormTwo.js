@@ -46,7 +46,7 @@ const VoteFormTwo = () => {
     e.preventDefault();
     try {
       const response = await fetch(
-        "https://pollit-test-default-rtdb.firebaseio.com/post_survey.json",
+        "https://wepollnow-default-rtdb.firebaseio.com/post_survey.json",
         {
           method: "POST",
           body: JSON.stringify({
