@@ -8,9 +8,11 @@ import PollsPageContentOne from "./PollsPageContentOne";
 const ManagePolls = () => {
   return (
     <>
-      <Wrapper>
+      <Wrapper className='w-[100vw]'>
         <SideBar />
-        <PageContent children={<PollsPageContentOne />} />
+        <main className='ml-[82px] w-screen'>
+          <PageContent children={<PollsPageContentOne />} />
+        </main>
       </Wrapper>
     </>
   );

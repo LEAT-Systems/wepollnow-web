@@ -19,11 +19,11 @@ const Header = () => {
     <>
       <div className='flex flex-row items-center justify-between w-full py-4 px-8 border-b'>
         <Link to='/wepollnow/dashboard'>
-          <img src={logo} alt='' className='ml-4' />
+          <img src={logo} alt='logo' className='pl-4' />
         </Link>
         <button
           onClick={handleOpen}
-          className='flex flex-row p-2 px-2 border border-2 border-white rounded-lg animate '
+          className='flex flex-row p-2 px-2 border border-white rounded-lg animate '
         >
           <LogoutIcon sx={{ color: "#000" }} />
           <p className='text-black'>Logout</p>

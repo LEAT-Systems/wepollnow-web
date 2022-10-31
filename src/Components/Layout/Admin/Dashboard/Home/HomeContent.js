@@ -2,9 +2,10 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import PeopleOutlineIcon from "@mui/icons-material/PeopleOutline";
 import InsightsIcon from "@mui/icons-material/Insights";
-import Tables from "../../Tables";
+import Tables from "../Tables/Tables";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import Header from "../../Header";
+import Data from "../../Data.json"
 
 const DashboardContent = () => {
   const [greeting, setGreeting] = useState("");
@@ -84,7 +85,7 @@ const DashboardContent = () => {
               <VisibilityIcon />
             </div>
           </div>
-          <Tables />
+          <Tables data={Data} />
         </div>
       </div>
     </>

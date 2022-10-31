@@ -1,5 +1,5 @@
 import React from "react";
-import Tables from "../../Tables";
+import Tables from "../Tables/Tables";
 import PeopleOutlineIcon from "@mui/icons-material/PeopleOutline";
 import CalendarMonth from "@mui/icons-material/CalendarMonth";
 import { Link } from "react-router-dom";
@@ -15,7 +15,7 @@ const PollsPageContentTwo = () => {
         <div className="flex flex-col space-y-2">
           <h2 className="text-2xl font-bold">Polls Result</h2>
           <div className="relative flex flex-row items-center justify-start px-2 space-x-2 border border-yellow-500 rounded">
-            <Link to="/wepollnow/polls">
+            <Link to="/dashboard/polls">
               <p className="font-bold text-gray-300">Manage Polls</p>
             </Link>
             <NavigateNextIcon />

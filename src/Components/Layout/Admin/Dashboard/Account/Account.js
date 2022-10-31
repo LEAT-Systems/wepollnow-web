@@ -1,3 +1,5 @@
+/** @format */
+
 import React from "react";
 import SideBar from "../../Sidebar";
 import PageContent from "../../Content";
@@ -9,7 +11,9 @@ const Account = () => {
     <>
       <Wrapper>
         <SideBar />
-        <PageContent children={<AccountSettings />} />
+        <main className='ml-[82px] w-screen'>
+          <PageContent children={<AccountSettings />} />
+        </main>
       </Wrapper>
     </>
   );

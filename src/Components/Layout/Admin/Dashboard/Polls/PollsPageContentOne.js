@@ -1,11 +1,14 @@
-/** @format */
-
-import React, { useEffect } from "react";
-import Tables from "../../Tables";
+import React, { useEffect, useState } from "react";
+import Tables from "../Tables/Tables";
+import FilteredTable from "../Tables/FilteredTable"
 import Header from "../../Header";
-import SearchBar from "../Search/SearchBar";
 import Data from '../../Data.json'
-//
+import PollsHeader from "./PollsHeader";
+import Grid from "./Grid";
+// import { getTableData } from "../api";
+
+
+
 const PollsPageContentOne = () => {
   // const [open, setOpen] = useState(false);
 
@@ -15,22 +18,48 @@ const PollsPageContentOne = () => {
   // const handleClose = () => {
   //   setOpen(false);
   // };
+
+  const [ tableData, setTableData ] = useState([])
+  const [ searchResult, setSearchResult ] = useState([])
+
+  useEffect(() => {
+    /* For the api */
+    // getTableData().then(json => {
+    //   setTableData(json)
+    //   return json
+    // }).then(json => {
+    //   setSearchResult(json)
+    // })
+
+    /* For our demo json object */
+    setTableData(Data);
+    setSearchResult(Data);
+
+  }, []);
+
   return (
-    <>
-      {/* ===========  Modal: This is a MUI Component   =========== */}
+    <main className='flex flex-col justify-center w-[98%]'>
       <Header />
-      <div className='flex flex-row justify-between px-4 mt-4'>
-        <h3 className='font-bold text-2xl capitalize p-4'>Manage polls</h3>
-        <nav>
-          <SearchBar placeholder='Search' data={Data} />
-        </nav>
-      </div>
-      <Tables data={Data} />
-    </>
+      <PollsHeader setSearchResult={setSearchResult} tableData={tableData} />
+      <Grid />
+      {/* <FilteredTable searchResult={searchResult} /> */}
+      {/* <Tables data={Data} /> */}
+    </main>
   );
 };
 
 export default PollsPageContentOne;
+
+
+
+
+
+
+
+
+
+
+
 
 // <Modal open={open}>
 //   <div className='flex flex-col items-center justify-center min-h-screen px-4 py-4 mx-auto md:px-0'>

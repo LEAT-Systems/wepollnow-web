@@ -1,3 +1,5 @@
+/** @format */
+
 import React from "react";
 import SideBar from "../../Sidebar";
 import Header from "../../Header";
@@ -12,7 +14,7 @@ const Survey = () => {
       <Header />
       <Wrapper>
         <SideBar />
-        <PageContent children={<ManageSurveyContent />} />
+          <PageContent children={<ManageSurveyContent />} />
       </Wrapper>
     </>
   );

@@ -1,4 +1,5 @@
 /**
+ * @format
  * @type {import('tailwindcss').Config}
  */
 
@@ -18,6 +19,9 @@ module.exports = {
       colors: {
         deepgray: "rgb(46, 6, 15)",
         transparentWhite: "rgba(245, 241, 241, 0.2)",
+      },
+      screens: {
+        xxl: "1500px",
       },
     },
   },
