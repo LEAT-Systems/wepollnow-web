@@ -33,7 +33,7 @@ const VoteSuccess = () => {
 
   // message to be displayed on success toast
   const message = (
-    <div className="flex flex-row items-center justify-center px-4 mx-auto md:px-0">
+    <div className="flex flex-row items-center justify-center px-4 mx-auto mt-24 md:px-0">
       <div
         className={`flex flex-row items-center justify-between p-3 px-4 w-full md:w-1/3 border rounded-md`}
       >
