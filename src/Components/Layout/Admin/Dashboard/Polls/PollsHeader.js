@@ -10,34 +10,34 @@ const PollsHeader = ({ setSearchResult, tableData }) => {
     <div>
       <>
         <header className='flex flex-row justify-between mt-4 my-auto place-items-center px-6 items-center'>
-          <h3 className='font-bold text-2xl capitalize p-4'>Manage polls</h3>
-          <div className='flex '>
+          <h3 className='font-bold text-lg md:text-2xl capitalize p-4'>Manage polls</h3>
+          <div className='flex'>
             <SearchBar
               placeholder='Search'
               tableData={tableData}
               setSearchResult={setSearchResult}
             />
-            <nav className='pl-3 pr-4 h-full m-auto'>
+            <nav className='pl-3 pr-4 h-full m-auto hidden md:flex'>
               <span
-                className={`icons bg-blue-100 border border-1 p-3 cursor-pointer rounded-xl text-xl w-[2rem] h-full mr-2`}
+                className={`icons bg-blue-100 border border-1 p-3 cursor-pointer rounded-xl text-sm md:text-xl h-full mr-2`}
               >
-                <Tune/>
+                <Tune />
               </span>
               <span
-                className={`icons border border-1 rounded-xl p-3 cursor-pointer text-xl w-[2rem] h-full`}
+                className={`icons border border-1 rounded-xl p-3 cursor-pointer text-sm md:text-xl h-full`}
               >
                 <FilterList />
               </span>
             </nav>
 
-            <nav className='pl-3 h-full m-auto'>
+            <nav className='pl-3 h-full m-auto hidden md:flex'>
               <span
-                className={`icons border border-1 rounded-xl p-3 cursor-pointer text-xl w-[2rem] h-full mr-2`}
+                className={`icons border border-1 rounded-xl p-3 cursor-pointer text-sm md:text-xl  h-full mr-2`}
               >
                 <Tune />
               </span>
               <span
-                className={`icons border border-1 rounded-xl p-3 cursor-pointer text-xl w-[2rem] h-full`}
+                className={`icons border border-1 rounded-xl p-3 cursor-pointer text-sm md:text-xl  h-full`}
               >
                 <FilterList />
               </span>

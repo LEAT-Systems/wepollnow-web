@@ -137,6 +137,7 @@ body::-webkit-scrollbar-thumb {
 .swiper {
   width: 100%;
   height: 100%;
+  color: #fcf0f0;
 }
 input:focus {
   outline: 1px solid #eee;
@@ -162,11 +163,11 @@ input:focus {
 }
 
 .searchInp input{
- @apply border-x-0 border-t-0 border-b rounded-md rounded-tl-none rounded-bl-none text-[1rem] pr-4 py-5 h-12 w-[22rem] focus:outline-none
+ @apply border-x-0 border-t-0 border-b rounded-md rounded-tl-none rounded-bl-none text-[1rem] pr-4 py-3 md:py-5 h-6 md:h-12 w-[10rem] md:w-[22rem] focus:outline-none pl-1 md:pl-0
 }
 
 .searchIcons {
- @apply h-12 w-12 grid place-items-center cursor-pointer border-b
+ @apply h-6 md:h-12 w-6 md:w-12 grid place-items-center cursor-pointer border-b
 }
 
 .searchResult {
