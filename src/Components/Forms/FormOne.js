@@ -14,18 +14,18 @@ const FormOne = (props) => {
   };
 
   // Configuring the indicators
-  const { email, firstTimeVoter, diasporaVoter, stateOfOrigin } = props.data;
+  const { email, firstTimeVoter, diasporaVoter, stateOfVotingRes } = props.data;
   useEffect(() => {
-    if (diasporaVoter && stateOfOrigin && email && firstTimeVoter !== "") {
+    if (diasporaVoter && stateOfVotingRes && email && firstTimeVoter !== "") {
       setFormIsCompleted(true);
     }
-  }, [email, stateOfOrigin, diasporaVoter, firstTimeVoter]);
+  }, [email, stateOfVotingRes, diasporaVoter, firstTimeVoter]);
 
   // Validation Schema
   const formOneValidationSchema = Yup.object({
     email: Yup.string().email().required().label("* This"),
     firstTimeVoter: Yup.string().required().label("* This"),
-    stateOfOrigin: Yup.string().required().label("*This"),
+    stateOfVotingRes: Yup.string().required().label("*This"),
   });
   return (
     <>
@@ -76,7 +76,7 @@ const FormOne = (props) => {
                     <div className="h-full px-4 space-y-4 ">
                       {/* Email Address */}
 
-                      <div className="flex flex-col space-y-1 md:p-2">
+                      <div className="flex flex-col space-y-1 md:p-2 pt-8 md:pt-0">
                         <FormLabel no="i" title="Enter Email " />
                         <p className="text-red-600">
                           <ErrorMessage name="email" />
@@ -91,34 +91,31 @@ const FormOne = (props) => {
                       {/* First Time Voter */}
 
                       <div className="space-y-1">
-                        <FormLabel
-                          no="i"
-                          title="Are you a first time voter? "
-                        />
+                        <FormLabel no="i" title="Are you a first time voter?" />
                         <div className="flex flex-row items-center justify-between space-x-4 md:p-2">
                           <label
                             htmlFor="firstTimeVoter"
-                            className="flex flex-row items-center w-full p-3 space-x-2 border rounded md:p-4"
+                            className={`flex radio flex-row items-center w-full p-3 space-x-2 border rounded md:p-4`}
                           >
                             <Field
                               id="firstTimeVoter"
                               type="radio"
                               name="firstTimeVoter"
                               value="yes"
-                              className="w-4 h-4 border-gray-300"
+                              className="w-4 h-4 radio"
                             />
                             <p>Yes</p>
                           </label>
                           <label
                             htmlFor="firstTimeVoterTwo"
-                            className="flex flex-row items-center w-full p-3 space-x-2 border rounded md:p-4"
+                            className={`flex flex-row items-center w-full p-3 space-x-2 border rounded md:p-4 radio`}
                           >
                             <Field
                               id="firstTimeVoterTwo"
                               type="radio"
                               name="firstTimeVoter"
                               value="no"
-                              className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
+                              className="w-4 h-4"
                             />
                             <p>No</p>
                           </label>
@@ -159,28 +156,30 @@ const FormOne = (props) => {
                         </div>
                       </div>
 
-                      {/* State of Origin  */}
+                      {/* Select State of voting residence */}
 
-                      <div className="space-y-2 md:p-2">
-                        <FormLabel no="i" title=" Select State of Origin" />
+                      <div className="flex flex-col space-y-1 md:p-2  pb-8 md:pb-0">
+                        <FormLabel
+                          title="Select state of voting residence (Not applicable for
+                          Diaspora Voters) "
+                        />
                         <p className="text-red-600">
-                          <ErrorMessage name="stateOfOrigin" />
+                          <ErrorMessage name="stateOfVotingRes" />
                         </p>
-                        <div className="flex flex-row items-start justify-between">
-                          <Field
-                            as="select"
-                            name="stateOfOrigin"
-                            className="block w-full px-3 py-3 mt-1 bg-white border border-gray-300 rounded"
-                          >
-                            {states.map((item) => {
-                              return (
-                                <option key={item.id} value={item.id}>
-                                  {item.name}
-                                </option>
-                              );
-                            })}
-                          </Field>
-                        </div>
+                        <Field
+                          as="select"
+                          name="stateOfVotingRes"
+                          placeholder="Select State of Voting Residence"
+                          className="w-full p-4 px-4 mb-2 text-lg text-gray-700 placeholder-gray-600 border rounded-md "
+                        >
+                          {states.map((item) => {
+                            return (
+                              <option key={item.id} value={item.id}>
+                                {item.name}
+                              </option>
+                            );
+                          })}
+                        </Field>
                       </div>
 
                       {/*  */}
@@ -189,7 +188,7 @@ const FormOne = (props) => {
                   <footer className="w-full p-4 border-t">
                     <button
                       type="submit"
-                      className="p-2 px-8 ml-8 transition duration-500 text-white bg-[#08C127] rounded-md hover:-translate-y-1"
+                      className="p-2 px-8 md:ml-8 text-white bg-[#08C127] rounded-md animate"
                     >
                       Next
                     </button>

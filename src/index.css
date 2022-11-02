@@ -42,14 +42,27 @@ input:focus {
 input[type="radio"]:checked {
   accent-color: green;
 }
+.radio:checked ~ label {
+  @apply bg-green-400;
+}
+label:hover {
+  @apply bg-[#EDFFF0];
+}
+input[type="radio"]:checked {
+  @apply bg-green-50;
+}
+
 .animate {
-  @apply transition duration-700 ease-in-out hover:scale-110;
+  @apply transition duration-700 ease-in-out hover:bg-[#06931e] hover:rounded-full;
+}
+.animateBack {
+  @apply transition duration-700 ease-in-out hover:rounded-full;
 }
 .btn-stay {
-  @apply bg-green-500 p-2 text-white rounded-md px-4;
+  @apply bg-[#08C127] p-3 text-white rounded-md px-8;
 }
 .btn-leave {
-  @apply bg-red-500 p-2 text-white  rounded-md px-4;
+  @apply bg-red-500 p-3 text-white  rounded-md px-4;
 }
 /* Hamburger Menu */
 .hamburger {
@@ -85,12 +98,14 @@ input[type="radio"]:checked {
 }
 .open .hamburger-top {
   transform: rotate(45deg);
+  @apply bg-white;
 }
 .open .hamburger-middle {
   display: none;
 }
 .open .hamburger-bottom {
   transform: rotate(135deg);
+  @apply bg-white;
 }
 
 .stroke {
@@ -136,7 +151,7 @@ body::-webkit-scrollbar-thumb {
 }
 
 .fontAwesome {
-  font-family: "Montserrat", FontAwesome, sans-serif;
+  font-family: "Arial", FontAwesome !important;
 }
 
 /* Swiper JS styles */

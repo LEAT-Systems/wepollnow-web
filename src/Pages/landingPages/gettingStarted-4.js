@@ -12,7 +12,7 @@ import calendar from "../../images/calendar.png";
 import text_logo from "../../images/voteWatermark.png";
 
 //
-const GettingStartedTwo = () => {
+const GettingStartedFour = () => {
   const [hasSubmitted, setHasSubmitted] = useState(false);
   const [show, setShow] = useState(false);
   const emailRef = useRef();
@@ -59,7 +59,7 @@ const GettingStartedTwo = () => {
         </div>
 
         <div className="relative flex flex-col items-center bg-no-repeat bg-top bg-opacity-5 justify-center space-y-4 md:space-y-4 bg-contain bg-hero-pattern lg:pb-[10rem]">
-          <p className="font-bold">Senatorial Poll</p>
+          <p className="font-bold">Local Government Poll</p>
           <Badge
             className="flex flex-row space-x-3"
             bg="[#EDFFF0]"
@@ -78,13 +78,12 @@ const GettingStartedTwo = () => {
                 </span>{" "}
                 the narrative.
               </h1>
-              <h1>Credible elections for all.</h1>
+              <h1>Make your vote count.</h1>
             </div>
           </div>
           <div>
             <p className="max-w-xs text-center text-md md:max-w-xl">
-              We would love to keep you informed on all oncoming senatorial
-              polls
+              We would love to keep you informed on all Local Government Polls
             </p>
           </div>
           {show ? message : ""}
@@ -110,20 +109,20 @@ const GettingStartedTwo = () => {
           <div className="absolute right-6 md:right-16 top-[430px] md:top-36">
             <div className="flex flex-col items-center justify-center space-y-4 ">
               <Link
-                to="/getting-started-one"
+                to="/getting-started-three"
                 className="bg-[#EDFFF0] rounded-full p-1 "
               >
                 <KeyboardArrowUpIcon />
               </Link>
               <div className="flex flex-col items-center justify-center px-2 space-y-2">
                 <div className="inline-block w-2 h-2 bg-gray-200 rounded-full"></div>
+                <div className="inline-block w-2 h-2 bg-gray-200 rounded-full"></div>
+                <div className="inline-block w-2 h-2 bg-gray-200 rounded-full"></div>
                 <div className="inline-block w-2 h-2 bg-black rounded-full"></div>
-                <div className="inline-block w-2 h-2 bg-gray-200 rounded-full"></div>
-                <div className="inline-block w-2 h-2 bg-gray-200 rounded-full"></div>
                 <div className="inline-block w-2 h-2 bg-gray-200 rounded-full"></div>
               </div>
               <Link
-                to="/getting-started-three"
+                to="/getting-started-five"
                 className="bg-[#EDFFF0] rounded-full p-1"
               >
                 <KeyboardArrowDownIcon />
@@ -135,7 +134,7 @@ const GettingStartedTwo = () => {
           <img
             src={text_logo}
             alt="vote"
-            className="w-full md:w-[55%] mt-4 md:-mt-[140px] h-full md:h-[200px]"
+            className="w-full md:w-[65%] mt-4 md:-mt-[140px] h-full md:h-[200px]"
           />
         </div>
       </div>
@@ -143,4 +142,4 @@ const GettingStartedTwo = () => {
   );
 };
 
-export default GettingStartedTwo;
+export default GettingStartedFour;

@@ -13,7 +13,7 @@ const BlogSingle = () => {
   return (
     <>
       <Nav />
-      <div className="flex flex-col items-center justify-between space-x-8 md:px-24 md:flex-row">
+      <div className="w-screen flex flex-col items-center justify-between space-x-8 md:px-24 md:flex-row">
         {/* Main Reading Bar */}
         <div className="flex flex-col items-start justify-start w-2/3 pt-4 space-y-4">
           <div className="flex flex-row space-x-2">
@@ -25,7 +25,7 @@ const BlogSingle = () => {
             <img src={avatar} alt="avatar" className="w-6 h-6" />
             <p>Olumide Adebayo</p>
           </div>
-          <h3 className="max-w-2xl text-xl text-3xl font-bold ">
+          <h3 className="max-w-2xl text-xl md:text-3xl font-bold ">
             FEC approves N27.4b contracts for Works, Housing, FCT ministries
           </h3>
           <div className="flex flex-row space-x-4">

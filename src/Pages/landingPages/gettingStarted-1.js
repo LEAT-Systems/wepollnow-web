@@ -9,7 +9,7 @@ import instagram from "../../images/landingIcons/IG.png";
 import youtube from "../../images/landingIcons/YU.png";
 import facebook from "../../images/landingIcons/FB.png";
 import calendar from "../../images/calendar.png";
-import text_logo from "../../images/watermark.png";
+import text_logo from "../../images/voteWatermark.png";
 const Timer = React.lazy(() => import("../../UI/Timer"));
 
 //
@@ -40,11 +40,11 @@ const GettingStartedOne = () => {
     </p>
   );
   return (
-    <div className="w-screen h-screen">
+    <div className="w-screen h-screen overflow-x-hidden">
       <Nav />
       <div className="relative flex flex-col mt-12 ">
         <div
-          className={`absolute z-10 flex flex-col items-center left-4 md:left-16 top-[300px] md:top-48 justify-center`}
+          className={`absolute z-10 flex flex-col items-center left-4 md:left-16 top-[450px] md:top-48 justify-center`}
         >
           <div className={`flex flex-col space-y-4`}>
             <a href="https://instagram.com/wepollnow">
@@ -67,18 +67,25 @@ const GettingStartedOne = () => {
             border="#EDFFF0"
           >
             <img src={calendar} alt="calendarMonth" />
-            <p className="text-sm">{countDownDate}</p>
+            <p className="text-sm">Oncoming</p>
           </Badge>
-          <Timer
-            date={countDownDate}
-            size="5xl"
-            sizelg="6xl"
-            color="black"
-            pcolor="black"
-          />
+          <div className="flex flex-row items-center justify-center ">
+            <div className="max-w-4xl p-8 text-4xl text-[#082B0E] md:space-y-4 text-center md:text-[54px]">
+              <h1>
+                {" "}
+                Let's{" "}
+                <span className="underline underline-offset-4 decoration-yellow-500 decoration-[6px]">
+                  change
+                </span>{" "}
+                the narrative.
+              </h1>
+              <h1>Make your vote count.</h1>
+            </div>
+          </div>
           <div>
-            <p className="max-w-xs text-center text-md md:max-w-xl">
-              We would love to keep you informed as the date draws closer
+            <p className="max-w-xs text-center text-md md:max-w-2xl">
+              We would love to keep you informed on all on-coming gubernatorial
+              polls
             </p>
           </div>
           {show ? message : ""}
@@ -101,22 +108,17 @@ const GettingStartedOne = () => {
           </div>
 
           {/* Large screen controls */}
-          <div className="absolute right-6 md:right-16 top-[280px] md:top-36">
+          <div className="absolute right-6 md:right-16 top-[430px] md:top-36">
             <div className="flex flex-col items-center justify-center space-y-4 ">
               <Link to="/" className="bg-[#EDFFF0] rounded-full p-1 ">
                 <KeyboardArrowUpIcon />
               </Link>
               <div className="flex flex-col items-center justify-center px-2 space-y-2">
-                <Link
-                  to="/"
-                  className="inline-block w-2 h-2 bg-black rounded-full"
-                ></Link>
-                <Link
-                  to="/getting-started-two"
-                  className="inline-block w-2 h-2 bg-gray-200 rounded-full"
-                ></Link>
-                <Link className="inline-block w-2 h-2 bg-gray-200 rounded-full"></Link>
-                <Link className="inline-block w-2 h-2 bg-gray-200 rounded-full"></Link>
+                <div className="inline-block w-2 h-2 bg-black rounded-full"></div>
+                <div className="inline-block w-2 h-2 bg-gray-200 rounded-full"></div>
+                <div className="inline-block w-2 h-2 bg-gray-200 rounded-full"></div>
+                <div className="inline-block w-2 h-2 bg-gray-200 rounded-full"></div>
+                <div className="inline-block w-2 h-2 bg-gray-200 rounded-full"></div>
               </div>
               <Link
                 to="/getting-started-two"
@@ -131,7 +133,7 @@ const GettingStartedOne = () => {
           <img
             src={text_logo}
             alt="vote"
-            className="w-[65%] mt-4 md:-mt-[140px] h-24 md:h-[200px]"
+            className="w-full md:w-[65%] mt-4 md:-mt-[140px] h-full md:h-24 md:h-[200px]"
           />
         </div>
       </div>

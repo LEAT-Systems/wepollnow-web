@@ -1,16 +1,22 @@
-import { useState, useRef } from "react";
+import { Suspense, useEffect, useState } from "react";
 import Nav from "../../Layout/Landing/mainNav";
 import Badge from "../../../UI/Badge";
 import vice from "../../../images/vice_candidate_apc.png";
 import partyLogo from "../../../images/apc.png";
 import candidate from "../../../images/candidate_apc.png";
 import Footer from "../../Layout/Landing/Footer";
-import { Modal } from "@mui/material";
+import { Modal, Slide } from "@mui/material";
 import cautionIcon from "../../../images/errorImg.png";
 import close from "../../../images/CloseButton.png";
 import { useHistory } from "react-router-dom";
+import searchIcon from "../../../images/search.png";
+import Loading from "../../../UI/Loading";
 
-//
+// Getting phone number and selected poll from local storage
+const phone = localStorage.getItem("phoneNumber");
+const selectedPoll = localStorage.getItem("pollType");
+
+// Dummy data
 const Parties = [
   {
     id: "All Progressive Congress (APC)",
@@ -43,11 +49,9 @@ const Parties = [
     vBadge: "Running Mate",
     partyName: "Peoples Democratic Party (PDP)",
     candidate: "Atiku Abubakar",
-    runningMate: "Ifeanyi Okowa",
+    runningMate: "Ifeanyi O.",
   },
 ];
-// Getting phone number from local storage
-const phone = localStorage.getItem("phoneNumber");
 
 const FormFive = () => {
   const history = useHistory();
@@ -56,7 +60,31 @@ const FormFive = () => {
   const [open, setOpen] = useState(false);
   const [hasError, setHasError] = useState(false);
   const [error, setErrorMessage] = useState(false);
+  const [apiData, setApiData] = useState([]);
 
+  useEffect(() => {
+    // sending selected poll to api
+    const sendData = async () => {
+      try {
+        const response = await fetch(
+          "https://wepollnow-default-rtdb.firebaseio.com/preferredPoll.json",
+          {
+            method: "POST",
+            body: JSON.stringify({
+              phoneNumber: phone,
+              pollType: selectedPoll,
+            }),
+          }
+        );
+        console.log(response);
+      } catch (error) {
+        setHasError(true);
+        setErrorMessage(error.message);
+      }
+    };
+    // Will get data from api and store in this state below to render on page
+    setApiData(Parties);
+  });
   //
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -77,7 +105,7 @@ const FormFive = () => {
     e.preventDefault();
     try {
       const response = await fetch(
-        "https://pollit-test-default-rtdb.firebaseio.com/votes.json",
+        "https://wepollnow-default-rtdb.firebaseio.com/votes.json",
         {
           method: "POST",
           body: JSON.stringify({
@@ -109,52 +137,54 @@ const FormFive = () => {
     );
 
   const ModalContent = (
-    <div className="flex flex-row items-center justify-center min-h-screen px-4 py-4 mx-auto md:px-0">
-      <div className="w-full text-lg text-gray-700 border bg-white rounded-lg shadow-lg md:w-[500px]">
-        <header className="w-full p-4">
-          <div className="flex flex-row items-end justify-end">
-            <button onClick={handleClose}>
-              <img src={close} alt="closeIcon" />
-            </button>
-          </div>
-        </header>
+    <Slide direction="up" in={open} mountOnEnter unmountOnExit>
+      <div className="flex flex-row items-center justify-center min-h-screen px-8 mx-auto md:px-0">
+        <div className="w-full text-lg text-gray-700 border bg-white rounded-lg py-4 px-4 shadow-lg md:w-[500px]">
+          <header className="w-full p-4">
+            <div className="flex flex-row items-end justify-end">
+              <button onClick={handleClose}>
+                <img src={close} alt="closeIcon" />
+              </button>
+            </div>
+          </header>
 
-        <div className="flex flex-col items-center justify-center px-4 space-y-4">
-          {hasError && (
-            <p className="font-bold text-red-500">{error}. Try Again.</p>
-          )}
-          <img src={cautionIcon} alt="caution" />
-          <p className="p-1 px-4 text-xl font-extrabold text-center text-black md:text-2xl">
-            Confirm Action
-          </p>
-          <p className="text-center">
-            You are attempting to cast your vote for{" "}
-            <span className="font-bold">{castedVote}.</span> Kindly confirm your
-            action.
-          </p>
+          <div className="flex flex-col items-center justify-center px-4 space-y-4">
+            {hasError && (
+              <p className="font-bold text-red-500">{error}. Try Again.</p>
+            )}
+            <img src={cautionIcon} alt="caution" />
+            <p className="p-1 px-4 text-xl font-extrabold text-center text-black md:text-2xl">
+              Confirm Action
+            </p>
+            <p className="text-sm text-center md:text-sm">
+              You are attempting to cast your vote for{" "}
+              <span className="font-bold">{castedVote}.</span> Kindly confirm
+              your action.
+            </p>
+          </div>
+
+          <section>
+            <div className="flex flex-row items-end justify-end w-full p-2 space-x-4 md:p-6">
+              <form onSubmit={sendToAPI} className="space-x-4">
+                <button
+                  onClick={handleClose}
+                  type="button"
+                  className="p-2 px-6 ml-6 text-black bg-transparent border border-black rounded-md animateBack"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  className="p-2 px-6 text-white bg-[#08c127] rounded-md animate"
+                >
+                  {`Confirm`}
+                </button>
+              </form>
+            </div>
+          </section>
         </div>
-
-        <section>
-          <div className="flex flex-row items-end justify-end w-full p-2 space-x-4 md:p-6">
-            <form onSubmit={sendToAPI} className="space-x-4">
-              <button
-                onClick={handleClose}
-                type="button"
-                className="p-2 px-6 ml-6 text-black bg-transparent border border-black rounded-md hover:border-red-500"
-              >
-                Cancel
-              </button>
-              <button
-                type="submit"
-                className="p-2 px-6 text-white bg-[#08c127] transition duration-500 rounded-md hover:-translate-y-1"
-              >
-                {`Confirm`}
-              </button>
-            </form>
-          </div>
-        </section>
       </div>
-    </div>
+    </Slide>
   );
   return (
     <>
@@ -165,14 +195,17 @@ const FormFive = () => {
           <h1 className="text-4xl font-extrabold text-center">
             Select the party you'd like to vote
           </h1>
-          <input
-            className="w-full h-12 px-4 mb-2 text-lg text-gray-700 placeholder-gray-600 bg-transparent border-b fontAwesome"
-            type="text"
-            placeholder="&#xf002; Search Party or Candidate Name"
-            onChange={(e) => {
-              return setQuery(e.target.value.toLowerCase());
-            }}
-          />
+          <div className="flex flex-row items-center w-full">
+            <img src={searchIcon} alt="search" className="pb-2" />
+            <input
+              className="w-full h-12 px-4 mb-2 text-lg text-gray-700 placeholder-gray-600 bg-transparent border-b fontAwesome"
+              type="text"
+              placeholder="Search Party or Candidate Name"
+              onChange={(e) => {
+                return setQuery(e.target.value.toLowerCase());
+              }}
+            />
+          </div>
         </div>
       </div>
 
@@ -181,83 +214,87 @@ const FormFive = () => {
           <form onSubmit={handleSubmit}>
             <div className="flex flex-col space-y-4 md:p-8">
               <div className="px-4 space-y-4">
-                {search(Parties).map((item) => {
+                {search(apiData).map((item) => {
                   return (
-                    <div
-                      key={item.id}
-                      className={`p-4 border border-gray-200 rounded-md md:p-6 ${
-                        castedVote === item.partyName ? "bg-[#EDFFF0]" : ""
-                      }
+                    <Suspense fallback={Loading}>
+                      <div
+                        key={item.id}
+                        className={`p-4 border border-gray-200 rounded-md md:p-6 ${
+                          castedVote === item.partyName ? "bg-[#EDFFF0]" : ""
+                        }
                       `}
-                    >
-                      <label htmlFor={item.id}>
-                        <div className="flex flex-row items-center justify-between pb-2 border-b border-gray-200">
-                          <div className="flex flex-row space-x-2 font-semibold">
-                            <img
-                              src={item.partyLogo}
-                              className="w-5 h-5 rounded md:h-8 md:w-8"
-                              alt=""
+                      >
+                        <label htmlFor={item.id}>
+                          <div className="flex flex-row items-center justify-between pb-2 border-b border-gray-200">
+                            <div className="flex flex-row space-x-2 font-semibold">
+                              <img
+                                src={item.partyLogo}
+                                className="w-5 h-5 rounded md:h-8 md:w-8"
+                                alt=""
+                              />
+                              <p className="text-sm md:text-lg">
+                                {item.partyName}
+                              </p>
+                            </div>
+
+                            <input
+                              id={item.id}
+                              name="party"
+                              type="radio"
+                              value={item.partyName}
+                              onChange={checkHandler}
+                              className="w-5 h-5 text-gray-600 border-gray-300 focus:ring-gray-500"
                             />
-                            <p className="text-sm md:text-lg">
-                              {item.partyName}
-                            </p>
                           </div>
-                          <input
-                            id={item.id}
-                            name="party"
-                            type="radio"
-                            value={item.partyName}
-                            onChange={checkHandler}
-                            className="w-5 h-5 text-gray-600 border-gray-300 focus:ring-gray-500"
-                          />
-                        </div>
-                        <div className="flex flex-row items-center justify-between ">
-                          <section
-                            className={`flex flex-col items-start justify-start w-full p-4 space-y-2`}
-                          >
-                            <div className="flex flex-row items-start justify-start space-x-4">
-                              <img
-                                src={candidate}
-                                className="w-8 h-8 rounded"
-                                alt=""
-                              />
-                              <p className="text-sm md:text-lg">
-                                {item.candidate}
-                              </p>
-                              <Badge>{item.cBadge}</Badge>
-                            </div>
-                            <div className="flex flex-row items-start justify-start space-x-4">
-                              <img
-                                src={vice}
-                                className="w-8 h-8 rounded"
-                                alt=""
-                              />
-                              <p className="text-sm md:text-lg">
-                                {item.runningMate}
-                              </p>
-                              <Badge>
+                          <div className="flex flex-row items-center justify-between ">
+                            <section
+                              className={`flex flex-col items-start justify-start w-full p-4 space-y-2`}
+                            >
+                              <div className="flex flex-row items-start justify-start space-x-4">
+                                <img
+                                  src={candidate}
+                                  className="w-8 h-8 rounded"
+                                  alt=""
+                                />
                                 <p className="text-xs md:text-lg">
-                                  {item.vBadge}
+                                  {item.candidate}
                                 </p>
-                              </Badge>
-                            </div>
-                          </section>
-                          <button
-                            type="submit"
-                            disabled={
-                              castedVote !== item.partyName ? true : false
-                            }
-                            className={`${
-                              castedVote === item.partyName
-                                ? "bg-[#08c127] cursor-pointer"
-                                : "bg-gray-500 cursor-not-allowed disabled"
-                            } px-4 md:px-8 text-white rounded p-2 text-sm md:text-lg`}
-                          >
-                            Vote
-                          </button>
-                        </div>
-                      </label>
-                    </div>
+                                <Badge>
+                                  <p className="text-[8px]">{item.cBadge}</p>
+                                </Badge>
+                              </div>
+                              <div className="flex flex-row items-start justify-start space-x-4">
+                                <img
+                                  src={vice}
+                                  className="w-8 h-8 rounded"
+                                  alt=""
+                                />
+                                <p className="text-xs md:text-lg">
+                                  {item.runningMate}
+                                </p>
+                                <Badge bg="#EDFFF0">
+                                  <p className="text-[8px]">{item.vBadge}</p>
+                                </Badge>
+                              </div>
+                            </section>
+
+                            <button
+                              type="submit"
+                              disabled={
+                                castedVote !== item.partyName ? true : false
+                              }
+                              className={`${
+                                castedVote === item.partyName
+                                  ? "bg-[#08c127] cursor-pointer"
+                                  : "bg-gray-500 cursor-not-allowed disabled"
+                              } px-4 md:px-8 text-white rounded p-2 text-sm md:text-lg`}
+                            >
+                              Vote
+                            </button>
+                          </div>
+                        </label>
+                      </div>
+                    </Suspense>
                   );
                 })}
               </div>

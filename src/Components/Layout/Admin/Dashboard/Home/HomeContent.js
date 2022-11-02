@@ -134,7 +134,7 @@ const DashboardContent = () => {
                     <span className='capitalize text-sm'>{data.status[1]}</span>
                   </div>
 
-                  <div className='flex flex-col justify-center items-center h-full bg-[#ebf5ed] py-3 px-6 rounded-lg'>
+                  <div className='flex flex-col justgiify-center items-center h-full bg-[#ebf5ed] py-3 px-6 rounded-lg'>
                     <span className='font-extrabold text-2xl'>
                       {data.status.length - 1}
                     </span>
