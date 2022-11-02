@@ -6,16 +6,8 @@ import TableBody from "./TableBody";
 const Tables = ({ data }) => {   
 
   return (
-    <div className='relative overflow-x-auto sm:rounded-lg px-12 my-14'>
-      <div className='flex flex-row justify-between my-4'>
-        <span className='capitalize text-2xl text-gray-900 py-3 font-extrabold '>
-          Created polls
-        </span>
-        <button className='text-white bg-green-500 px-4 cursor-pointer w-fit rounded-lg py-3'>
-          Create Polls
-        </button>
-      </div>
-      <div className='relative overflow-x-auto shadow-md sm:rounded-lg'>
+    <div className='relative overflow-auto scrollable sm:rounded-lg w-full'>
+      <div className='relative shadow-md sm:rounded-lg'>
         <table className='w-full text-sm text-left text-gray-500'>
           <thead className='text-xs text-gray-700 uppercase'>
             <tr>
@@ -39,9 +31,11 @@ const Tables = ({ data }) => {
               </th>
             </tr>
           </thead>
-          {data.map((data) => {
-            return <TableBody key={data.id} tableData={data} />;
-          })}
+          <tbody>
+            {data.map((data) => {
+              return <TableBody key={data.id} tableData={data} />;
+            })}
+          </tbody>
         </table>
       </div>
     </div>

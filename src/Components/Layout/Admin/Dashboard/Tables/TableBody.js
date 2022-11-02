@@ -1,11 +1,11 @@
 /** @format */
 
+import { DeleteOutline, Inventory2Outlined, NoteAltOutlined } from "@mui/icons-material";
 import React from "react";
 
 const TableBody = ({ tableData }) => {
   console.log(tableData);
   return (
-    <tbody>
       <tr className='table-row'>
         <th
           scope='row'
@@ -21,24 +21,23 @@ const TableBody = ({ tableData }) => {
         <td className='px-6 py-4'>{tableData.poll__date}</td>
         <td className='px-6 py-4'>{tableData.status}</td>
         <td className='flex flex-row px-6 py-4 space-x-2'>
-          <div className='text-blue-500'>
-            <span className='material-symbols-outlined text-[1.5rem]'>
-              edit_note
+          <div className='text-blue-500 cursor-pointer'>
+            <span className='material-symbols-outlined text-[1.1rem] md:text-[1.5rem]'>
+              <NoteAltOutlined fontSize='initial' />
             </span>
           </div>
-          <div className='text-black'>
-            <span className='material-symbols-outlined text-[1.3rem]'>
-              inventory_2
+          <div className='text-black cursor-pointer'>
+            <span className='material-symbols-outlined text-[1rem] md:text-[1.4rem]'>
+              <Inventory2Outlined fontSize='initial' />
             </span>
           </div>
-          <div className='text-red-500'>
-            <span className='material-symbols-outlined text-[1.5rem]'>
-              delete
+          <div className='text-red-500 cursor-pointer'>
+            <span className='material-symbols-outlined text-[1.16rem] md:text-[1.55rem]'>
+              <DeleteOutline fontSize='initial' />
             </span>
           </div>
         </td>
       </tr>
-    </tbody>
   );
 };
 

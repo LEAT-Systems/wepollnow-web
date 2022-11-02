@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import RemoveIcon from "@mui/icons-material/Remove";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 
+/* Not used by Vincent */
+
 const ManageSurveyContent = () => {
   return (
     <>

@@ -8,7 +8,7 @@ import { NavLink } from "react-router-dom";
 //
 const SideBar = () => {
   return (
-    <div className='flex flex-col w-[82px] h-screen bg-deepgray border-r border-gray-200 space-y-8 fixed overflow-auto'>
+    <div className='hidden md:flex flex-col w-[82px] h-screen bg-deepgray border-r border-gray-200 space-y-8 fixed'>
       {/*  */}
       <NavLink to='/dashboard' activeClassName='active'>
         <div className='flex flex-col items-center justify-center mt-4'>
@@ -21,7 +21,7 @@ const SideBar = () => {
 
       {/*  */}
       <NavLink to='/Managepolls'>
-        <div className='flex flex-col items-center justify-center animate'>
+        <div className='flex flex-col items-center justify-center transition duration-700 ease-in-out'>
           <div className='rounded-md'>
             <AssessmentIcon className='sidebar-icons' />
           </div>
@@ -31,7 +31,7 @@ const SideBar = () => {
 
       {/*  */}
       <NavLink to='/surveys'>
-        <div className='flex flex-col items-center justify-center animate'>
+        <div className='flex flex-col items-center justify-center transition duration-700 ease-in-out'>
           <div className='rounded-md'>
             <AssignmentIcon className='sidebar-icons' />
           </div>
@@ -41,7 +41,7 @@ const SideBar = () => {
 
       {/*  */}
       <NavLink to='/account'>
-        <div className='flex flex-col items-center justify-center animate'>
+        <div className='flex flex-col items-center justify-center transition duration-700 ease-in-out'>
           <div className='rounded-md'>
             <AccountCircleIcon className='sidebar-icons' />
           </div>

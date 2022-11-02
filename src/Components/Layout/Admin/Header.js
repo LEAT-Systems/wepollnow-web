@@ -1,3 +1,5 @@
+/** @format */
+
 import React from "react";
 import logo from "../../../images/logo.png";
 import { useState } from "react";
@@ -17,16 +19,23 @@ const Header = () => {
   };
   return (
     <>
-      <div className='flex flex-row items-center justify-between w-full py-4 px-8 border-b'>
-        <Link to='/wepollnow/dashboard'>
+      <div className='flex flex-row items-center justify-between w-full py-4 px-3 md:px-4 border-b'>
+        <Link to='/dashboard'>
           <img src={logo} alt='logo' className='pl-4' />
         </Link>
         <button
           onClick={handleOpen}
-          className='flex flex-row p-2 px-2 border border-white rounded-lg animate '
+          className='flex flex-row items-center justify-center py-3 px-3 md:px-4 border border-gray-200 rounded-lg cursor-pointer text-sm md:text-base bg-[#fcf0f0] text-red-500 my-auto'
         >
-          <LogoutIcon sx={{ color: "#000" }} />
-          <p className='text-black'>Logout</p>
+          <LogoutIcon
+            sx={{
+              color: "text-red-500",
+              fontSize: "1.2rem",
+              marginRight: ".2rem",
+            }}
+          />
+
+          <p className='text-red-500'>Logout</p>
         </button>
       </div>
 
