@@ -54,7 +54,7 @@ const Confirm = (props) => {
 
   return (
     <>
-      <div className="flex flex-row items-center bg-[#7F7F7F] justify-center min-h-screen px-4 py-4 mx-auto md:px-0">
+      <div className="flex flex-row items-center bg-[#7F7F7F] justify-center min-h-screen px-8  py-8 mx-auto md:px-0">
         <div className="w-full text-lg text-gray-700 bg-white border rounded-lg shadow-lg md:w-1/3">
           <header className="w-full p-8">
             <div className="flex flex-row items-end justify-end">
@@ -68,12 +68,12 @@ const Confirm = (props) => {
                 )}
               </Formik>
             </div>
-            <div className="flex flex-col items-center justify-center space-y-3">
+            <div className="flex flex-col items-center justify-center space-y-2">
               <img src={errorIcon} alt="error" />
               <h3 className="text-xl font-bold text-center md:text-2xl">
                 Confirm Action
               </h3>
-              <p className="px-4 p-1 text-xs text-gray-500 max-w-md font-semibold text-center leading-normal md:text-[18px]">
+              <p className="px-4 p-1 text-xs text-gray-500 max-w-md text-center leading-normal md:text-[16px]">
                 Kindly ensure all your details are correct before proceeding to
                 confirm submission.
               </p>
@@ -94,7 +94,7 @@ const Confirm = (props) => {
                     <button
                       type="button"
                       onClick={() => props.prev(values)}
-                      className="p-2 px-6 ml-6 text-black bg-transparent border border-black rounded-md hover:border-red-500"
+                      className="p-2 px-6 ml-6 text-black bg-transparent border border-black rounded-md animateBack"
                     >
                       {hasError ? "Go Back" : "Cancel"}
                     </button>
@@ -103,7 +103,7 @@ const Confirm = (props) => {
                       className={
                         hasError
                           ? "hidden"
-                          : "p-2 px-6 bg-[#08C127] transition duration-500 text-white rounded-md hover:-translate-y-1"
+                          : "p-2 px-6 bg-[#08C127] text-white rounded-md animate"
                       }
                     >
                       {`Confirm`}

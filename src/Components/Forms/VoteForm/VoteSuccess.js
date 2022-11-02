@@ -9,33 +9,51 @@ import twitter from "../../../images/twitter.png";
 import mail from "../../../images/mail.png";
 import copyIcon from "../../../images/copy.png";
 import { Link } from "react-router-dom";
+import { Slide } from "@mui/material";
+import Swiper from "swiper";
+import { SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/navigation";
+import { Navigation } from "swiper";
 
 const VoteSuccess = () => {
   const [copied, setCopied] = useState(false);
-  const [show, setShow] = useState(false);
 
   // text to be copied to clipboard
   const linkToBeCopied = "https://pollit-ashy.vercel.app/";
   const clipBoardHandler = () => {
     navigator.clipboard.writeText(linkToBeCopied);
     setCopied(true);
-    setShow(true);
   };
 
-  // timeout to hide message
+  // timeout to hide success message
   setTimeout(() => {
-    setShow(false);
-  }, 10000);
+    setCopied(false);
+  }, 5000);
 
-  // message to be displayed on clipboard
-  const message = copied && (
-    <p className={`px-2 border border-green-500 rounded`}>
-      Copied to Clipboard
-    </p>
+  // message to be displayed on success toast
+  const message = (
+    <div className="flex flex-row items-center justify-center px-4 mx-auto mt-24 md:px-0">
+      <div
+        className={`flex flex-row items-center justify-between p-3 px-4 w-full md:w-1/3 border rounded-md`}
+      >
+        <div className="flex flex-row items-center space-x-3">
+          <img src={copyIcon} className="w-4 h-4" alt="copiedIcon" />
+          <p>Copied to clipboard</p>
+        </div>
+        <div>
+          <img src={doneIcon} alt="success" />
+        </div>
+      </div>
+    </div>
   );
+
   return (
-    <>
+    <div>
       <Nav />
+      <Slide direction="down" in={copied} mountOnEnter unmountOnExit>
+        {message}
+      </Slide>
       <div className="flex flex-row items-center justify-center min-h-screen px-4 py-4 mx-auto md:px-0">
         <div className="w-full px-4 py-4 text-lg text-gray-700 border rounded-lg md:w-2/4">
           <header className="w-full py-4 md:p-8">
@@ -45,11 +63,11 @@ const VoteSuccess = () => {
                 Yay...!!! Your vote has been recorded successfully. Kindly Share
                 poll with friends.
               </p>
-              {show ? message : ""}
+
               <div className="flex flex-row items-center justify-center space-x-4">
                 <button
                   onClick={clipBoardHandler}
-                  className="flex flex-row items-center justify-center space-x-1 p-2 bg-[#EDFFF0] rounded-md"
+                  className="flex flex-row  border border-[#08c127] items-center justify-center space-x-1 p-2 bg-[#EDFFF0] rounded-md"
                 >
                   <img src={copyIcon} alt="" className="w-4 h-4" />
                   <p className="text-xs md:text-lg">Copy Link</p>
@@ -89,7 +107,7 @@ const VoteSuccess = () => {
               <Link to="/">
                 <button
                   type="button"
-                  className="p-2 px-6 ml-6 text-black bg-transparent border border-black rounded-md hover:border-red-500"
+                  className="p-2 px-6 ml-6 text-black bg-transparent border border-black rounded-md animateBack"
                 >
                   Go Home
                 </button>
@@ -97,7 +115,7 @@ const VoteSuccess = () => {
               <Link to="/polls">
                 <button
                   type="submit"
-                  className="p-2 px-6 text-white bg-green-500 rounded-md hover:bg-green-600 hover:-translate-y-1"
+                  className="p-2 px-6 text-white animate bg-[#08C127] rounded-md"
                 >
                   More Polls
                 </button>
@@ -106,7 +124,7 @@ const VoteSuccess = () => {
           </section>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

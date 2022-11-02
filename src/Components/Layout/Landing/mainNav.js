@@ -5,16 +5,28 @@ import logo from "../../../images/logo.png";
 import facebook from "../../../images/navIcons/Facebook.png";
 import instagram from "../../../images/navIcons/IG.png";
 import youtube from "../../../images/navIcons/YouTube.png";
+import EastIcon from "@mui/icons-material/East";
+import back from "../../../images/backArrow.png";
+import { Modal, Slide } from "@mui/material";
 
 const Nav = (props) => {
   const [data, setData] = useState();
   const [show, setShow] = useState(false);
-  const [dismiss, setDismiss] = useState(false);
+  const [hidden, setHidden] = useState(true);
   const [hasSubmitted, setHasSubmitted] = useState(false);
   const nameRef = useRef();
   const emailRef = useRef();
   const messageRef = useRef();
 
+  const closeHandler = () => {
+    setShow(false);
+  };
+  const handlerToToggle = () => {
+    setHidden(false);
+  };
+  const handlerToCollaspe = () => {
+    setHidden(true);
+  };
   // Handle submission handler
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -45,21 +57,213 @@ const Nav = (props) => {
   // Dismissing success message on form
   setTimeout(() => {
     setHasSubmitted(false);
-  }, 2000);
+  }, 5000);
+
+  const desktopContainer = (
+    <div className="hidden md:flex flex-col items-start justify-start md:items-center  md:justify-center px-6 md:mx-auto space-y-8 md:px-36">
+      <div className="space-y-8 text-start md:text-left md:mt-10">
+        <div>
+          <Link to="/" className="text-4xl font-bold stroke md:text-7xl">
+            <h1>Home</h1>
+          </Link>
+        </div>
+        <div>
+          <Link to="/about" className="text-4xl font-bold stroke md:text-7xl">
+            <h1>About</h1>
+          </Link>
+        </div>
+        <div>
+          <Link to="/blog" className="text-4xl font-bold stroke md:text-7xl">
+            <h1>Blog</h1>
+          </Link>
+        </div>
+        <div>
+          <Link to="/polls" className="text-4xl font-bold stroke md:text-7xl">
+            <h1>Polls</h1>
+          </Link>
+        </div>
+      </div>
+
+      <div className="flex flex-row items-center justify-between mx-auto space-x-6 md:-ml-1">
+        <div>
+          <img src={instagram} alt="instagram" />
+        </div>
+        <div>
+          <img src={youtube} alt="youtube" />
+        </div>
+        <div>
+          <img src={facebook} alt="facebook" />
+        </div>
+      </div>
+    </div>
+  );
+  const mobileNavLinkContainer = (
+    <div className="flex md:hidden flex-col items-start justify-start md:items-center  md:justify-center px-6 md:mx-auto space-y-8 md:px-36">
+      <div className="space-y-8 text-start md:text-left md:mt-10">
+        <div>
+          <Link to="/" className="text-4xl font-bold stroke md:text-7xl">
+            <h1>Home</h1>
+          </Link>
+        </div>
+        <div>
+          <Link to="/about" className="text-4xl font-bold stroke md:text-7xl">
+            <h1>About</h1>
+          </Link>
+        </div>
+        <div>
+          <Link to="/blog" className="text-4xl font-bold stroke md:text-7xl">
+            <h1>Blog</h1>
+          </Link>
+        </div>
+        <div>
+          <Link to="/polls" className="text-4xl font-bold stroke md:text-7xl">
+            <h1>Polls</h1>
+          </Link>
+        </div>
+      </div>
+
+      <div className="flex flex-row items-center justify-between mx-auto space-x-6 md:-ml-1">
+        <div>
+          <img src={instagram} alt="instagram" />
+        </div>
+        <div>
+          <img src={youtube} alt="youtube" />
+        </div>
+        <div>
+          <img src={facebook} alt="facebook" />
+        </div>
+      </div>
+    </div>
+  );
+
+  const mobileForm = (
+    <div className="flex md:hidden flex-col py-0 w-[100%] px-4 border-gray-200 md:border-0">
+      <div className="space-y-4 w-[100%] md:w-[65%]">
+        {hasSubmitted && (
+          <div className="p-4 text-white text-center bg-green-500 rounded-lg">
+            <p>Action was Successful. We will get back to you.</p>
+          </div>
+        )}
+        <button
+          onClick={handlerToCollaspe}
+          className="flex flex-row items-center space-x-2"
+        >
+          <img src={back} alt="img" />
+          <p className="text-lg font-bold text-left text-white md:text-xl md:mt-0 md:text-left ">
+            Back
+          </p>
+        </button>
+        <form className="space-y-4" onSubmit={handleSubmit}>
+          <div>
+            <p className="text-white">Name</p>
+            <input
+              required
+              type="text"
+              ref={nameRef}
+              className="input w-full p-4 text-white placeholder-gray-200 bg-black border rounded hover:bg-gray-900"
+              placeholder="Enter Your Name"
+            />
+          </div>
+          <div>
+            <p className="text-white">Email</p>
+            <input
+              required
+              type="email"
+              ref={emailRef}
+              className="input w-full p-4 text-white placeholder-gray-200 bg-black border rounded hover:bg-gray-900"
+              placeholder="Enter Your Email"
+            />
+          </div>
+          <div>
+            <p className="text-white">Message</p>
+            <textarea
+              required
+              type="text"
+              ref={messageRef}
+              className="input w-full h-32 p-4 text-white placeholder-gray-200 bg-black border rounded hover:bg-gray-900"
+              placeholder="Enter Your Message"
+            />
+          </div>
+          <div>
+            <button
+              type="submit"
+              className="w-full p-4 transition bg-white rounded text-dark hover:-translate-y-1"
+            >
+              <p className="font-bold">Send Message</p>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  );
+  const desktopForm = (
+    <div className=" hidden md:flex flex-col items-center justify-center mx-auto w-[65%] border-gray-200 md:border-0">
+      <div className="space-y-4 w-[100%] md:w-[65%]">
+        {hasSubmitted && (
+          <div className="p-4 text-white text-center bg-green-500 rounded-lg">
+            <p>Action was Successful. We will get back to you.</p>
+          </div>
+        )}
+        <p className="mt-8 text-lg font-bold text-left text-white md:text-xl md:mt-0 md:text-left ">
+          Get in touch
+        </p>
+        <form className="space-y-4" onSubmit={handleSubmit}>
+          <div>
+            <p className="text-white">Name</p>
+            <input
+              required
+              type="text"
+              ref={nameRef}
+              className="input w-full p-4 text-white placeholder-gray-200 bg-black border rounded hover:bg-gray-900"
+              placeholder="Enter Your Name"
+            />
+          </div>
+          <div>
+            <p className="text-white">Email</p>
+            <input
+              required
+              type="email"
+              ref={emailRef}
+              className="input w-full p-4 text-white placeholder-gray-200 bg-black border rounded hover:bg-gray-900"
+              placeholder="Enter Your Email"
+            />
+          </div>
+          <div>
+            <p className="text-white">Message</p>
+            <textarea
+              required
+              type="text"
+              ref={messageRef}
+              className="input w-full h-32 p-4 text-white placeholder-gray-200 bg-black border rounded hover:bg-gray-900"
+              placeholder="Enter Your Message"
+            />
+          </div>
+          <div>
+            <button
+              type="submit"
+              className="w-full p-4 transition bg-white rounded text-dark hover:-translate-y-1"
+            >
+              <p className="font-bold">Send Message</p>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  );
 
   return (
     <React.Fragment>
       {/*=======================   Top Navigation ============================*/}
 
       <div
-        className={`flex flex-row items-center justify-between px-4 md:px-24 border-b border-gray-200  py-8 mx-auto  bg-[#${props.bg}] bg-${props.bgImg} `}
+        className={`flex flex-row items-center justify-between px-6 md:px-24 border-b border-gray-200  py-8 mx-auto  bg-[#${props.bg}] bg-${props.bgImg} `}
       >
         <Link to="/">
           <img src={logo} alt="logo" />
         </Link>
         <div className="relative z-30">
           <button
-            className={show ? "open p-3" : "hamburger focus:outline-none"}
+            className={show ? "open p-3 z-30" : "hamburger focus:outline-none"}
             onClick={() => {
               setShow(!show);
             }}
@@ -71,113 +275,49 @@ const Nav = (props) => {
       </div>
 
       {/* =======================  Collapsible Nav ============================*/}
-
-      <div
-        className={
-          !show
-            ? "hidden"
-            : "flex relative z-30 flex-col md:flex-row items-start justify-start md:items-center md:justify-center py-12 bg-black mx-auto space-y-12"
-        }
-      >
-        <div className="flex flex-col items-start justify-start md:items-center px-4 md:justify-center mx-auto space-y-8 md:mx-0 md:px-36">
-          <div className="space-y-8 text-start md:text-left md:mt-10 md:mx-auto">
-            <div>
-              <Link to="/" className="text-4xl font-bold stroke md:text-7xl">
-                <h1>Home</h1>
-              </Link>
-            </div>
-            <div>
-              <Link
-                to="/about"
-                className="text-4xl font-bold stroke md:text-7xl"
+      <Modal
+        className="relative"
+        open={show}
+        children={
+          <Slide direction="up" in={show} mountOnEnter unmountOnExit>
+            <div
+              className={
+                !show
+                  ? "hidden"
+                  : "flex relative h-screen flex-col md:flex-row items-start pt-6 pb-8 justify-start md:items-center md:justify-center bg-black mx-auto space-y-12"
+              }
+            >
+              <button
+                onClick={closeHandler}
+                className="open absolute z-30 top-8 right-12 md:top-12 md:right-24"
               >
-                <h1>About</h1>
-              </Link>
-            </div>
-            <div>
-              <Link
-                to="/blog"
-                className="text-4xl font-bold stroke md:text-7xl"
-              >
-                <h1>Blog</h1>
-              </Link>
-            </div>
-            <div>
-              <Link
-                to="/polls"
-                className="text-4xl font-bold stroke md:text-7xl"
-              >
-                <h1>Polls</h1>
-              </Link>
-            </div>
-          </div>
-
-          <div className="flex flex-row items-center justify-between mx-auto space-x-6 md:-ml-1">
-            <div>
-              <img src={instagram} alt="instagram" />
-            </div>
-            <div>
-              <img src={youtube} alt="youtube" />
-            </div>
-            <div>
-              <img src={facebook} alt="facebook" />
-            </div>
-          </div>
-        </div>
-
-        <div className="flex flex-col items-center justify-center mx-auto border-t w-[65%] border-gray-200 md:border-0">
-          <div className="space-y-4 w-[100%] md:w-[65%]">
-            {hasSubmitted && (
-              <div className="p-4 text-white bg-green-500 rounded-lg">
-                Action was Successful. We will get back to you
-              </div>
-            )}
-            <p className="mt-8 text-lg font-bold text-left text-white md:text-xl md:mt-0 md:text-left ">
-              Get in touch
-            </p>
-            <form className="space-y-4" onSubmit={handleSubmit}>
-              <div>
-                <p className="text-white">Name</p>
-                <input
-                  required
-                  type="text"
-                  ref={nameRef}
-                  className="input w-full p-4 text-white placeholder-gray-200 bg-black border rounded hover:bg-gray-900"
-                  placeholder="Enter Your Name"
-                />
-              </div>
-              <div>
-                <p className="text-white">Email</p>
-                <input
-                  required
-                  type="email"
-                  ref={emailRef}
-                  className="input w-full p-4 text-white placeholder-gray-200 bg-black border rounded hover:bg-gray-900"
-                  placeholder="Enter Your Email"
-                />
-              </div>
-              <div>
-                <p className="text-white">Message</p>
-                <textarea
-                  required
-                  type="text"
-                  ref={messageRef}
-                  className="input w-full h-32 p-4 text-white placeholder-gray-200 bg-black border rounded hover:bg-gray-900"
-                  placeholder="Enter Your Message"
-                />
-              </div>
-              <div>
+                <span className="hamburger-top"></span>
+                <span className="hamburger-bottom"></span>
+              </button>
+              {/* show this container when on mobile view */}
+              {hidden && mobileNavLinkContainer}
+              {/* show this container when on desktop view */}
+              {desktopContainer}
+              {/* show this form when on mobile view */}
+              {!hidden && mobileForm}
+              {/* show this container when on mobile view */}
+              {show && (
                 <button
-                  type="submit"
-                  className="w-full p-4 transition bg-white rounded text-dark hover:-translate-y-1"
+                  onClick={handlerToToggle}
+                  className={!hidden ? "hidden" : ""}
                 >
-                  <p className="font-bold">Send Message</p>
+                  <div className="flex flex-row items-center space-x-2 md:hidden mt-8 px-6 text-lg font-bold text-left text-white md:text-xl md:mt-0 md:text-left ">
+                    <p>Get in touch</p>
+                    <EastIcon />
+                  </div>
                 </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
+              )}
+              {/* show this container when on desktop view */}
+              {desktopForm}
+            </div>
+          </Slide>
+        }
+      />
     </React.Fragment>
   );
 };
