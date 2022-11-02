@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+  /* color: #fceaea; concluded color  */
+  /* color: #fff9eb; scheduled color  */
+  /* color: #ebf5ed; ongoing color  */
+  /* color: #082a0f; primary color  */
+
 /* .active {
   @apply after:content-[''] relative after:absolute
   after:w-1 after:h-1 bg-green-400  after:top-0 right-0;
@@ -103,7 +108,8 @@ input[type="select"] option {
 
 .scrollable::-webkit-scrollbar,
 body::-webkit-scrollbar {
-  width: 5px;
+  width: .4rem;
+  height: .4rem;
 }
 .scrollable::-webkit-scrollbar-track,
 body::-webkit-scrollbar-track {
@@ -111,11 +117,18 @@ body::-webkit-scrollbar-track {
 }
 .scrollable::-webkit-scrollbar-thumb,
 body::-webkit-scrollbar-thumb {
-  background-color: #000;
+  background-color: #082a0f;
   border-radius: 10px;
   /* border: 3px solid #000; */
 }
 
+.hide-scrollbar::-webkit-scrollbar {
+  /* Chrome, Safari, Opera */
+  display: none;
+  /* IE, Edge, Firefox */
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
 .bg-hero {
   width: 200px;
   height: 300px;
@@ -137,7 +150,6 @@ body::-webkit-scrollbar-thumb {
 .swiper {
   width: 100%;
   height: 100%;
-  color: #fcf0f0;
 }
 input:focus {
   outline: 1px solid #eee;
@@ -149,11 +161,11 @@ input:focus {
 
 /* Table header */ 
 .table-head {
-  @apply px-6 py-3 font-extrabold text-xl normal-case
+  @apply px-6 py-3 font-bold lg:font-[700] text-base normal-case min-w-fit whitespace-nowrap
 }
 
 .table-row {
-  @apply border-b  even:bg-slate-200 odd:bg-white 
+  @apply border-b even:bg-slate-200 odd:bg-white 
 }
 
 

@@ -1,13 +1,33 @@
+/** @format */
+
 import React, { useEffect } from "react";
 import { useState } from "react";
-import PeopleOutlineIcon from "@mui/icons-material/PeopleOutline";
-import InsightsIcon from "@mui/icons-material/Insights";
 import Tables from "../Tables/Tables";
-import VisibilityIcon from "@mui/icons-material/Visibility";
 import Header from "../../Header";
-import Data from "../../Data.json"
+import Data from "../../Data.json";
+import {
+  ArrowForward,
+  ArrowForwardIos,
+  ArrowUpward,
+  People,
+  PieChart,
+} from "@mui/icons-material";
+import Grid from "../Polls/Grid";
 
 const DashboardContent = () => {
+  const data = [
+    {
+      id: 3,
+      status: ["Upcoming", "Scheduled", "Concluded"],
+      users: "235,436",
+      daily_hits: 45,
+      total_hits: 523,
+      daily_users: 89,
+    },
+  ];
+
+  console.log(data);
+
   const [greeting, setGreeting] = useState("");
   const date = new Date();
   const hrs = date.getHours();
@@ -27,67 +47,126 @@ const DashboardContent = () => {
   return (
     <>
       <Header />
-      <div className='flex flex-row max-h-screen'>
-        <div className='flex flex-col p-4 space-y-2'>
-          <h2 className='text-2xl font-bold'>Good {greeting}</h2>
-          <p className='texl-sm'>Here is the latest update on Wepollnow</p>
-        </div>
-      </div>
-      <div className='flex flex-row items-center justify-between w-full p-8 mx-auto -mt-6 space-x-12'>
-        <div className='flex flex-col items-start justify-center w-1/3 h-[150px] space-y-2 bg-yellow-500 rounded-lg shadow-2xl'>
-          <div className='flex flex-row items-center justify-center px-3 space-x-3'>
-            <div className='p-2 bg-white rounded-lg'>
-              <PeopleOutlineIcon fontSize='large' />
-            </div>
-            <div className='flex flex-col items-start justify-start '>
-              <p className='text-2xl font-bold'>523 </p>
-              <p className='text-xs'>Daily Hits</p>
-            </div>
+      <main className='max-h-screen px-4 md:px-6 lg:px-12 text-[#082a0f]'>
+        <div className='flex flex-row'>
+          <div className='flex flex-col py-4 space-y-2'>
+            <h2 className='text-xl md:text-3xl font-semibold'>
+              Good {greeting}
+            </h2>
+            <p className='texl-sm font-medium md:font-bold'>
+              Here is the latest update on Wepollnow
+            </p>
           </div>
         </div>
-        <div className='flex flex-col items-start justify-center w-1/3 h-[150px] space-y-2 bg-green-500 rounded-lg shadow-2xl'>
-          <div className='flex flex-row items-center justify-center px-3 space-x-3'>
-            <div className='p-2 bg-white rounded-lg'>
-              <PeopleOutlineIcon fontSize='large' />
-            </div>
-            <div className='flex flex-col items-start justify-start '>
-              <p className='text-2xl font-bold'>709,346 </p>
-              <p className='text-xs'>Users</p>
-            </div>
-          </div>
-        </div>
-        <div className='flex flex-col items-start justify-start px-12 py-8 text-white bg-[#EF4444] rounded-lg shadow-2xl'>
-          <p className='font-bold underline'>Polls Info</p>
-          <div className='flex flex-row items-center justify-center space-x-4'>
-            <div className='flex flex-col text-center'>
-              <p className='text-2xl font-bold'>2</p>
-              <p>Ongoing</p>
-            </div>
-            <div className='flex flex-col px-2 text-center border-l border-gray-200'>
-              <p className='text-2xl font-bold'>36</p>
-              <p>Scheduled</p>
-            </div>
-            <div className='flex flex-col px-2 text-center border-l border-gray-200'>
-              <p className='text-2xl font-bold'>53</p>
-              <p>Concluded</p>
-            </div>
-          </div>
-        </div>
-      </div>
 
-      {/* Data Table */}
-      <div className='w-full px-8'>
-        <div className='flex flex-col p-8 border rounded-lg '>
-          <div className='flex flex-row items-center justify-between p-2'>
-            <p>Polls</p>
-            <div className='flex flex-row items-center justify-center px-2 space-x-1 border border-gray-200 rounded-lg'>
-              <div className='p-1'>View All</div>
-              <VisibilityIcon />
-            </div>
+        {/* CARDS */}
+        <div className='grid grid-cols-1 md:grid-cols-2 xxl:grid-cols-3 gap-8 place-items-center w-full mx-auto my-14'>
+          {/* First Card */}
+          {data.map((data) => (
+            <>
+              <div className='flex flex-row items-center relative border-2 border-gray-400 bg-white rounded-lg p-5 w-full h-[9rem]'>
+                <span className='rounded-2xl bg-[#e7f9ea] p-4 mr-4 items-start'>
+                  <PieChart sx={{ color: "green", fontSize: "3rem" }} />
+                </span>
+                <div className='flex flex-col items-start'>
+                  <span className='text-2xl font-extrabold pb-1'>
+                    {JSON.stringify(data.total_hits)}
+                    {console.log(data?.hits)}
+                  </span>
+                  <span className='font-bold text-gray-500 text-[.75rem] capitalize flex-1'>
+                    Daily hits
+                  </span>
+                </div>
+
+                <div className='absolute bottom-4 right-4 flex bg-[#e7f9ea] text-green-500 p-1 rounded-lg border'>
+                  <ArrowUpward
+                    sx={{ fontsize: "0.2rem", margin: "auto .1rem auto auto" }}
+                    fontSize='0.1rem'
+                  />
+                  <h3 className='bg-[#e7f9ea] text-[.7rem] my-auto'>
+                    + {data.daily_hits} today
+                  </h3>
+                </div>
+              </div>
+
+              {/* Second Card  */}
+              <div className='flex flex-row items-center relative border-2 border-gray-400 bg-white rounded-lg p-5 w-full h-[9rem]'>
+                <span className='rounded-2xl bg-[#e7f9ea] p-4 mr-4 items-start'>
+                  <People sx={{ color: "green", fontSize: "3rem" }} />
+                </span>
+                <div className='flex flex-col items-start'>
+                  <span className='text-2xl font-extrabold pb-1'>
+                    {data.users}
+                  </span>
+                  <span className='font-bold text-gray-500 text-[.75rem] capitalize flex-1'>
+                    users
+                  </span>
+                </div>
+
+                <div className='absolute bottom-4 right-4 flex bg-[#e7f9ea] text-green-500 p-1 rounded-lg border'>
+                  <ArrowUpward
+                    sx={{ fontsize: "0.2rem", margin: "auto .1rem auto auto" }}
+                    fontSize='0.1rem'
+                  />
+                  <h3 className='bg-[#e7f9ea] text-[.7rem] my-auto'>
+                    + {data.daily_users} today
+                  </h3>
+                </div>
+              </div>
+
+              {/* Third Card */}
+              <div className='block border-2 border-gray-400 bg-white text-[#082a0f] rounded-lg px-4 py-3 w-full h-[9rem]'>
+                <h2 className='capitalize font-extrabold text-lg pb-3'>
+                  Polls info
+                </h2>
+                <div className='grid grid-cols-3 gap-4 w-full'>
+                  <div className='flex flex-col justify-center items-center h-full bg-[#ebf5ed] py-3 px-6 rounded-lg'>
+                    <span className='font-extrabold text-2xl'>
+                      {data.status.length}
+                    </span>
+                    <span className='capitalize text-sm'>{data.status[0]}</span>
+                  </div>
+
+                  <div className='flex flex-col justify-center items-center h-full bg-[#ebf5ed] py-3 px-6 rounded-lg'>
+                    <span className='font-extrabold text-2xl'>
+                      {data.status.length}
+                    </span>
+                    <span className='capitalize text-sm'>{data.status[1]}</span>
+                  </div>
+
+                  <div className='flex flex-col justify-center items-center h-full bg-[#ebf5ed] py-3 px-6 rounded-lg'>
+                    <span className='font-extrabold text-2xl'>
+                      {data.status.length}
+                    </span>
+                    <span className='capitalize text-sm'>{data.status[2]}</span>
+                  </div>
+                </div>
+              </div>
+            </>
+          ))}
+        </div>
+
+        {/* Data Table */}
+        <div className='flex flex-col text-[#082a0f] border-2 rounded-lg px-6'>
+          <div className='flex flex-row justify-between pt-4 px-2'>
+            <h2 className='font-extrabold text-[#082a0f] text-lg'>Polls</h2>
+            <button className='capitalize font-bold px-4 py-3 text-base w-fit border rounded-md my-auto'>
+              View All
+              <ArrowForwardIos
+                sx={{
+                  fontSize: "1rem",
+                  margin: "-0.2rem 0 auto .6rem",
+                  padding: ".15rem",
+                  borderRadius: ".3rem",
+                  border: "2px solid gray",
+                }}
+                fontSize='inherit'
+              />
+            </button>
           </div>
           <Tables data={Data} />
         </div>
-      </div>
+      </main>
     </>
   );
 };
