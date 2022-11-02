@@ -1,12 +1,25 @@
 /** @format */
-
+import React, { useState } from "react";
 import { BorderColorOutlined, Tune } from "@mui/icons-material";
-import React from "react";
 import Header from "../../Header";
 import Progress from "./Progress";
+import { Modal } from "@mui/material";
+import { useEffect } from "react";
 
 
 const SurveyContent = () => {
+  useEffect(() => {
+
+  })
+    const [open, setOpen] = useState(false);
+
+    const handleOpen = () => {
+      setOpen(true);
+    };
+
+    const handleClose = () => {
+      setOpen(false);
+    };
   return (
     <>
       <Header />
@@ -22,7 +35,10 @@ const SurveyContent = () => {
             <span className='border border-1 flex rounded-xl items-center justify-center py-2 px-3 cursor-pointer text-sm md:text-base h-full mr-3'>
               <Tune />
             </span>
-            <button className='flex items-center justify-center py-2 px-3 border border-gray-200 rounded-xl cursor-pointer text-sm md:text-base my-auto'>
+            <button
+              className='flex items-center justify-center py-2 px-3 border border-gray-200 rounded-xl cursor-pointer text-sm md:text-base my-auto'
+              onClick={handleOpen}
+            >
               Edit
               <BorderColorOutlined
                 sx={{
@@ -89,8 +105,14 @@ const SurveyContent = () => {
             </div>
           </div>
         </div>
-
       </main>
+
+      <Modal open={open} onClose={handleClose}>
+        <div className='flex flex-col items-center justify-center px-4 py-4 mx-auto md:px-0 h-[10rem] w-[10rem] bg-white'>
+          Edit your Survey
+          <button onClick={handleClose}>Close</button>
+        </div>
+      </Modal>
     </>
   );
 };
