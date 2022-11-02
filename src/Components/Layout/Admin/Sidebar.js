@@ -21,7 +21,7 @@ const SideBar = () => {
 
       {/*  */}
       <NavLink to='/Managepolls'>
-        <div className='flex flex-col items-center justify-center animate'>
+        <div className='flex flex-col items-center justify-center transition duration-700 ease-in-out'>
           <div className='rounded-md'>
             <AssessmentIcon className='sidebar-icons' />
           </div>
@@ -31,7 +31,7 @@ const SideBar = () => {
 
       {/*  */}
       <NavLink to='/surveys'>
-        <div className='flex flex-col items-center justify-center animate'>
+        <div className='flex flex-col items-center justify-center transition duration-700 ease-in-out'>
           <div className='rounded-md'>
             <AssignmentIcon className='sidebar-icons' />
           </div>
@@ -41,7 +41,7 @@ const SideBar = () => {
 
       {/*  */}
       <NavLink to='/account'>
-        <div className='flex flex-col items-center justify-center animate'>
+        <div className='flex flex-col items-center justify-center transition duration-700 ease-in-out'>
           <div className='rounded-md'>
             <AccountCircleIcon className='sidebar-icons' />
           </div>

@@ -6,6 +6,8 @@
   /* color: #fff9eb; scheduled color  */
   /* color: #ebf5ed; ongoing color  */
   /* color: #082a0f; primary color  */
+  /* color: #08c127; progress color  */
+  /* color: #e7f9ea; progress background color  */
 
 /* .active {
   @apply after:content-[''] relative after:absolute
