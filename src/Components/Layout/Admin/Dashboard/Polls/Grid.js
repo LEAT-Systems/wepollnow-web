@@ -7,14 +7,14 @@ import {
   Inventory2Outlined,
   NoteAltOutlined,
 } from "@mui/icons-material";
-
 import Data from "../../Data.json";
-console.log(window.innerWidth);
-const Grid = () => {
+
+const Grid = ({ handleOpen }) => {
   return (
-    <main className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xxl:grid-cols-4 px-4 md:px-6 lg:px-12 my-9 md:my-14 gap-6'>
+    <main className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xxl:grid-cols-4 my-9 md:my-14 gap-6'>
       {/* Button to create new poll */}
-      <div className='flex flex-col justify-center items-center hover:cursor-pointer text-3xl-font-bold border-2 border-gray-300 py-2  gap-4 rounded-lg transition duration-700 ease-in-out hover:scale-90'>
+      <div className='flex flex-col justify-center items-center hover:cursor-pointer text-3xl-font-bold border-2 border-gray-300 py-2  gap-4 rounded-lg transition duration-700 ease-in-out hover:scale-90'
+      onClick={handleOpen}>
         <span className='text-[1.1rem] ml-2 hover:cursor-pointer p-3 border-4 border-solid border- border-[#082a0f] rounded-full'>
           <AddOutlined className='text-[#082a0f]' fontSize='large' />
         </span>
