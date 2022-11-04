@@ -2,7 +2,7 @@ import React, { useRef, useState } from "react";
 import Nav from "../../Components/Layout/Landing/mainNav";
 import Badge from "../../UI/Badge";
 import { Link } from "react-router-dom";
-import { countDownDate } from "../../UI/MagicVars";
+import ModalComponent from "./GettingStartedModal";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import instagram from "../../images/landingIcons/IG.png";
@@ -10,12 +10,23 @@ import youtube from "../../images/landingIcons/YU.png";
 import facebook from "../../images/landingIcons/FB.png";
 import calendar from "../../images/calendar.png";
 import text_logo from "../../images/voteWatermark.png";
+import GettingStartedContent from "./GettingStartedContent";
+import SuccessToast from "../../UI/SuccessToast";
 
 //
 const GettingStartedTwo = () => {
   const [hasSubmitted, setHasSubmitted] = useState(false);
   const [show, setShow] = useState(false);
   const emailRef = useRef();
+  const [open, setOpen] = useState(false);
+
+  // open and close the modal
+  const handleOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   // Form submit handler for the email
   const handleSubmit = (e) => {
@@ -33,14 +44,14 @@ const GettingStartedTwo = () => {
   }, 2000);
 
   // Message to display before timeout
-  const message = hasSubmitted && (
-    <p className="px-2 font-bold text-white bg-green-500 rounded-full">
-      Action Successful
-    </p>
+  const message = (
+    <SuccessToast children={"Successfully submitted"} enter={show} />
   );
   return (
     <div className="w-screen h-screen overflow-x-hidden">
       <Nav />
+      {show ? message : ""}
+      <ModalComponent open={open} handleClose={handleClose} />
       <div className="relative flex flex-col mt-12 ">
         <div
           className={`absolute z-10 flex flex-col items-center left-4 md:left-16 top-[450px] md:top-48 justify-center`}
@@ -59,7 +70,9 @@ const GettingStartedTwo = () => {
         </div>
 
         <div className="relative flex flex-col items-center bg-no-repeat bg-top bg-opacity-5 justify-center space-y-4 md:space-y-4 bg-contain bg-hero-pattern lg:pb-[10rem]">
-          <p className="font-bold">Senatorial Poll</p>
+          <h1 className="text-xl font-extrabold md:text-3xl">
+            Senatorial Polls
+          </h1>
           <Badge
             className="flex flex-row space-x-3"
             bg="[#EDFFF0]"
@@ -87,7 +100,6 @@ const GettingStartedTwo = () => {
               polls
             </p>
           </div>
-          {show ? message : ""}
           <div className="relative text-gray-700">
             <form onSubmit={handleSubmit}>
               <input
@@ -138,6 +150,8 @@ const GettingStartedTwo = () => {
             className="w-full md:w-[55%] mt-4 md:-mt-[140px] h-full md:h-[200px]"
           />
         </div>
+
+        <GettingStartedContent prompt={handleOpen} />
       </div>
     </div>
   );

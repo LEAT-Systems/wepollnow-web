@@ -8,9 +8,8 @@ import FormLabel from "../../UI/FormLabel";
 import { states } from "./states";
 
 const FormTwo = (props) => {
-  const [loading, setLoading] = useState(true);
   const [formisCompleted, setFormIsCompleted] = useState(false);
-  const [data, setData] = useState("");
+  const [data, setData] = useState([]);
 
   const handleSubmit = (values) => {
     props.next(values);
@@ -24,21 +23,18 @@ const FormTwo = (props) => {
   const selectedId = stateOfVotingRes;
 
   // Loading LGA of voting residence from API
-  var requestOptions = {
-    method: "GET",
-    redirect: "follow",
-  };
+  useEffect(() => {
+    async function getData() {
+      const response = await fetch(
+        `https://wepollnow.azurewebsites.net/utilities/lga/${selectedId}`
+      );
+      const body = await response.json();
+      setData(body);
+    }
+    getData();
+  }, []);
 
-  fetch(
-    "https://wepollnowbackend.azurewebsites.net/utilities/lga/",
-    requestOptions
-  )
-    .then((response) => response.text())
-    .then((result) => console.log(result))
-    .catch((error) => console.log("error", error));
-
-  console.log(stateOfVotingRes);
-
+  console.log("DATA", data);
   //
   useEffect(() => {
     if (LGAofVotingRes && stateOfOrigin && ageRange !== "") {
@@ -98,9 +94,37 @@ const FormTwo = (props) => {
                 <Form>
                   <div className="flex flex-col p-2 space-y-2 md:p-8">
                     <div className="h-full px-2 space-y-4 md:px-4">
+                      {/* LGA of voting residence */}
+
+                      <div className="pt-4 space-y-2 rounded-md md:p-2">
+                        <FormLabel
+                          no="i"
+                          title=" Select L.G.A of voting residence (Not applicable for
+                          diaspora Voters)"
+                        />
+                        <p className="text-red-600">
+                          <ErrorMessage name="LGAofVotingRes" />
+                        </p>
+                        <div className="flex flex-row items-start justify-between">
+                          <Field
+                            as="select"
+                            name="LGAofVotingRes"
+                            className="block w-full px-3 py-3 mt-1 bg-white border border-gray-300 rounded"
+                          >
+                            {data.map((item) => {
+                              return (
+                                <option key={item.id} value={item.id}>
+                                  {item.name}
+                                </option>
+                              );
+                            })}
+                          </Field>
+                        </div>
+                      </div>
+
                       {/* State of Origin  */}
 
-                      <div className="space-y-2 md:p-2 pt-4">
+                      <div className="space-y-2 md:p-2">
                         <FormLabel no="i" title=" Select State of Origin" />
                         <p className="text-red-600">
                           <ErrorMessage name="stateOfOrigin" />
@@ -121,33 +145,10 @@ const FormTwo = (props) => {
                           </Field>
                         </div>
                       </div>
-                      {/* LGA of voting residence */}
-
-                      <div className="space-y-2 rounded-md -pt-4 md:p-2">
-                        <FormLabel
-                          no="i"
-                          title=" Select L.G.A of voting residence (Not applicable for
-                          diaspora Voters)"
-                        />
-                        <p className="text-red-600">
-                          <ErrorMessage name="LGAofVotingRes" />
-                        </p>
-                        <div className="flex flex-row items-start justify-between">
-                          <Field
-                            as="select"
-                            name="LGAofVotingRes"
-                            className="block w-full px-3 py-3 mt-1 bg-white border border-gray-300 rounded"
-                          >
-                            <option value="">Select an option</option>
-                            <option value="Umuahia">Umuahia</option>
-                            <option value="Uyo">Uyo</option>
-                          </Field>
-                        </div>
-                      </div>
 
                       {/* Age Range */}
 
-                      <div className="md:p-2">
+                      <div className="pb-8 md:p-2">
                         <FormLabel no="i" title="Select Your Age Range" />
                         <p className="text-red-600">
                           <ErrorMessage name="ageRange" />
@@ -209,10 +210,10 @@ const FormTwo = (props) => {
                             <p>45-50</p>
                           </label>
                         </div>
-                        <div className="flex flex-row items-center justify-between mt-2 space-x-4 md:p-2 pb-8 md:pb-0 md:mt-0">
+                        <div className="flex flex-row items-center justify-between mt-2 space-x-4 md:p-2 md:pb-0 md:mt-0">
                           <label
                             htmlFor="ageRange5"
-                            className="flex flex-row items-center w-full p-3 space-x-2 border rounded  md:p-4"
+                            className="flex flex-row items-center w-full p-3 space-x-2 border rounded md:p-4"
                           >
                             <Field
                               id="ageRange5"
@@ -231,7 +232,7 @@ const FormTwo = (props) => {
                     <button
                       onClick={() => props.prev(values)}
                       type="button"
-                      className="p-2 px-4 md:ml-6 text-black bg-transparent border border-black rounded-md animateBack"
+                      className="p-2 px-4 text-black bg-transparent border border-black rounded-md md:ml-6 animateBack"
                     >
                       Previous
                     </button>
