@@ -9,7 +9,7 @@ import {
 } from "@mui/icons-material";
 import Data from "../../Data.json";
 
-const Grid = ({ handleOpen }) => {
+const Grid = ({ handleOpen, data }) => {
   return (
     <main className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xxl:grid-cols-4 my-9 md:my-14 gap-6'>
       {/* Button to create new poll */}
@@ -24,7 +24,7 @@ const Grid = ({ handleOpen }) => {
       </div>
 
       {/* existing polls from API */}
-      {Data.map(
+      {data.map(
         ({ date__created, poll, poll__date, location, symbol, id, status }) => (
           <div
             className='border-2 border-gray-300 py-2 block gap-4 rounded-lg'

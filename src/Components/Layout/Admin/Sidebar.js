@@ -8,7 +8,7 @@ import { NavLink } from "react-router-dom";
 //
 const SideBar = () => {
   return (
-    <div className='hidden md:flex flex-col w-[82px] h-screen bg-deepgray border-r border-gray-200 space-y-8 fixed'>
+    <div className='hidden lg:flex flex-col w-[82px] h-screen bg-deepgray border-r border-gray-200 space-y-8 fixed'>
       {/*  */}
       <NavLink to='/dashboard' activeClassName='active'>
         <div className='flex flex-col items-center justify-center mt-4'>

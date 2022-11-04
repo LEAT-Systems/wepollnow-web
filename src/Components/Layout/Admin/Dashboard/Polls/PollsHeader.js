@@ -23,73 +23,139 @@ const PollsHeader = ({
   }
 
   const filterActive =
-    "icons hover:bg-blue-100 bg-blue-100 border border-1 p-2 cursor-pointer rounded-xl text-sm md:text-xl h-full mr-2";
+    "hover:bg-blue-100 bg-blue-100 border border-1 py-2 px-2 cursor-pointer rounded-xl text-sm md:text-xl mr-1";
   
   const filterNotActive =
-    "icons hover:bg-blue-100 border border-1 p-2 cursor-pointer rounded-xl text-sm md:text-xl h-full mr-2";
+    "hover:bg-blue-100 border border-1 py-2 px-2 cursor-pointer rounded-xl text-sm md:text-xl mr-1";
   
   const viewActive =
-    "bg-blue-100 hover:bg-blue-100 border border-1 rounded-xl p-2 cursor-pointer text-sm md:text-xl  h-full mr-2";
+    "bg-blue-100 hover:bg-blue-100 border border-1 rounded-xl py-2 px-2 cursor-pointer text-sm md:text-xl mr-1";
   
   const viewNotActive =
-    "hover:bg-blue-100 border border-1 rounded-xl p-2 cursor-pointer text-sm md:text-xl  h-full mr-2";
+    "hover:bg-blue-100 border border-1 rounded-xl py-2 px-2 cursor-pointer text-sm md:text-xl mr-1";
 
   return (
     <div>
       <>
-        <header className='flex flex-row justify-between mt-4 my-auto place-items-center px-6 items-center'>
-          <h3 className='font-bold text-lg md:text-2xl capitalize p-4'>
+        <header className='flex flex-col md:flex-row justify-start md:justify-between mt-4 my-auto place-items-start md:place-items-center items-start w-full md:items-center'>
+          <h3 className='font-bold text-xl lg:text-2xl md:text-[1.4rem] capitalize py-4 pl-0 w-full'>
             Manage polls
           </h3>
-          <div className='flex'>
-            <SearchBar
-              placeholder='Search'
-              tableData={tableData}
-              setSearchResult={setSearchResult}
-            />
-            <nav className='pl-3 pr-4 h-full m-auto hidden md:flex'>
-              <span
-                className={
-                  filterIsActive === 1 ? filterActive : filterNotActive
-                }
-                onClick={() => {
-                  handleFilterActive(1);
-                }}
-              >
-                <TuneRounded sx={{ fontSize: "1.9rem" }} />
-              </span>
-              <span
-                className={
-                  filterIsActive === 2 ? filterActive : filterNotActive
-                }
-                onClick={() => {
-                  handleFilterActive(2);
-                }}
-              >
-                <FilterListRounded sx={{ fontSize: "1.9rem" }} />
-              </span>
-            </nav>
+          <div className='flex w-full justify-between md:justify-end'>
+            <div className='w-[90%] sm:w-3/4'>
+              <SearchBar
+                placeholder='Search'
+                tableData={tableData}
+                setSearchResult={setSearchResult}
+              />
+            </div>
 
-            <nav className='pl-3 h-full m-auto hidden md:flex'>
-              <span
-                className={active === 0 ? viewActive : viewNotActive}
-                onClick={() => {
-                  handleActive(0);
-                  handleList();
-                }}
-              >
-                <ViewColumnRounded sx={{ fontSize: "1.9rem" }} />
-              </span>
-              <span
-                className={active === 1 ? viewActive : viewNotActive}
-                onClick={() => {
-                  handleActive(1);
-                  handleGrid();
-                }}
-              >
-                <GridViewRounded sx={{ fontSize: "1.7rem" }} />
-              </span>
-            </nav>
+            <div className='flex w-full justify-end items-center mr-6'>
+              <nav className='pl-3 pr-2 md:pr-2 flex'>
+                <span
+                  className={
+                    filterIsActive === 1 ? filterActive : filterNotActive
+                  }
+                  onClick={() => {
+                    handleFilterActive(1);
+                  }}
+                >
+                  <TuneRounded
+                    sx={{
+                      fontSize: "1.4rem",
+
+                      /* Media Queries */
+                      "@media screen and (min-width: 640px)": {
+                        fontSize: "1.5rem",
+                      },
+                      "@media screen and (min-width: 768px)": {
+                        fontSize: "1.7rem",
+                      },
+                      "@media screen and (min-width: 1024px)": {
+                        fontSize: "1.9rem",
+                      },
+                    }}
+                    sm
+                  />
+                </span>
+                <span
+                  className={
+                    filterIsActive === 2 ? filterActive : filterNotActive
+                  }
+                  onClick={() => {
+                    handleFilterActive(2);
+                  }}
+                >
+                  <FilterListRounded
+                    sx={{
+                      fontSize: "1.4rem",
+
+                      /* Media Queries */
+                      "@media screen and (min-width: 640px)": {
+                        fontSize: "1.5rem",
+                      },
+                      "@media screen and (min-width: 768px)": {
+                        fontSize: "1.7rem",
+                      },
+                      "@media screen and (min-width: 1024px)": {
+                        fontSize: "1.9rem",
+                      },
+                    }}
+                  />
+                </span>
+              </nav>
+
+              <nav className='pl-1 md:pl-3 flex sm:w-3'>
+                <span
+                  className={active === 0 ? viewActive : viewNotActive}
+                  onClick={() => {
+                    handleActive(0);
+                    handleList();
+                  }}
+                >
+                  <ViewColumnRounded
+                    sx={{
+                      fontSize: "1.4rem",
+
+                      /* Media Queries */
+                      "@media screen and (min-width: 640px)": {
+                        fontSize: "1.5rem",
+                      },
+                      "@media screen and (min-width: 768px)": {
+                        fontSize: "1.7rem",
+                      },
+                      "@media screen and (min-width: 1024px)": {
+                        fontSize: "1.9rem",
+                      },
+                    }}
+                  />
+                </span>
+                <span
+                  className={active === 1 ? viewActive : viewNotActive}
+                  onClick={() => {
+                    handleActive(1);
+                    handleGrid();
+                  }}
+                >
+                  <GridViewRounded
+                    sx={{
+                      fontSize: "1.2rem",
+
+                      /* Media Queries */
+                      "@media screen and (min-width: 640px)": {
+                        fontSize: "1.3rem",
+                      },
+                      "@media screen and (min-width: 768px)": {
+                        fontSize: "1.5rem",
+                      },
+                      "@media screen and (min-width: 1024px)": {
+                        fontSize: "1.7rem",
+                      },
+                    }}
+                  />
+                </span>
+              </nav>
+            </div>
           </div>
         </header>
       </>
@@ -98,3 +164,4 @@ const PollsHeader = ({
 };
 
 export default PollsHeader;
+
