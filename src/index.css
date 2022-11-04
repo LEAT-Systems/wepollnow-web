@@ -30,6 +30,11 @@ select,
 input::placeholder {
   font-family: "Montserrat", sans-serif;
 }
+
+select, input, button {
+  @apply focus:outline-gray-300 outline-gray-300 focus:outline-1 outline-1
+}
+
 h1 {
   @apply font-extrabold;
   font-family: "Montserrat", sans-serif;
@@ -47,25 +52,38 @@ input[type="radio"]:checked {
 .radio:checked ~ label {
   @apply bg-green-400;
 }
-label:hover {
+/* label:hover {
   @apply bg-[#EDFFF0];
-}
+} */
 input[type="radio"]:checked {
   @apply bg-green-50;
+}
+
+.custom__select {
+  @apply text-[#616b62] font-medium text-base capitalize h-full w-full border-2 rounded-md py-4 px-3 appearance-none
+}
+
+
+.custom__select__container {
+  @apply font-medium text-base w-full relative after:content-[""] after:absolute after:top-[3.7rem] after:right-1 after:-translate-y-2/4 after:-translate-x-2/4 after:border-x-transparent after:border-solid after:border-[0.5em] after:border-t-[#333] after:border-b-transparent after:pointer-events-none
 }
 
 .animate {
   @apply transition duration-700 ease-in-out hover:bg-[#06931e] hover:rounded-full;
 }
+
 .animateBack {
   @apply transition duration-700 ease-in-out hover:rounded-full;
 }
+
 .btn-stay {
   @apply bg-[#08C127] p-3 text-white rounded-md px-8;
 }
+
 .btn-leave {
   @apply bg-red-500 p-3 text-white  rounded-md px-4;
 }
+
 /* Hamburger Menu */
 .hamburger {
   cursor: pointer;
@@ -92,19 +110,24 @@ input[type="radio"]:checked {
 .hamburger-middle {
   transform: translateY(7px);
 }
+
 .hamburger-bottom {
   transform: translateY(14px);
 }
+
 .open {
   transform: rotate(90deg);
 }
+
 .open .hamburger-top {
   transform: rotate(45deg);
   @apply bg-white;
 }
+
 .open .hamburger-middle {
   display: none;
 }
+
 .open .hamburger-bottom {
   transform: rotate(135deg);
   @apply bg-white;
@@ -115,10 +138,12 @@ input[type="radio"]:checked {
   text-shadow: 1px 1px 0 #fff, -1px -1px 0 #fff, 1px -1px 0 #fff,
     -1px 1px 0 #fff, 1px 1px 0 #fff;
 }
+
 .input::placeholder {
   font-family: "Montserrat", sans-serif;
   opacity: 1; /* Firefox */
 }
+
 input[type="select"] option {
   background: "#08c127" !important;
 }
@@ -128,10 +153,12 @@ body::-webkit-scrollbar {
   width: .4rem;
   height: .4rem;
 }
+
 .scrollable::-webkit-scrollbar-track,
 body::-webkit-scrollbar-track {
   background: #eee;
 }
+
 .scrollable::-webkit-scrollbar-thumb,
 body::-webkit-scrollbar-thumb {
   background-color: #082a0f;
@@ -146,6 +173,7 @@ body::-webkit-scrollbar-thumb {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
 .bg-hero {
   width: 200px;
   height: 300px;
@@ -164,10 +192,12 @@ body::-webkit-scrollbar-thumb {
 .swiper-button-next {
   color: #fff !important;
 }
+
 .swiper {
   width: 100%;
   height: 100%;
 }
+
 input:focus {
   outline: 1px solid #eee;
 }
@@ -188,15 +218,15 @@ input:focus {
 
 /* Search */
 .searchInp {
-  @apply flex
+  @apply flex w-full
 }
 
 .searchInp input{
- @apply border-x-0 border-t-0 border-b rounded-md rounded-tl-none rounded-bl-none text-[1rem] pr-4 py-3 md:py-5 h-6 md:h-12 w-[10rem] md:w-[22rem] focus:outline-none pl-1 md:pl-0
+ @apply border-x-0 border-t-0 border-b rounded-md rounded-tl-none rounded-bl-none text-[1rem] pr-4 py-5 md:py-5 h-8 md:h-12 w-full lg:w-[22rem] md:w-[16rem] focus:outline-none pl-1 md:pl-0
 }
 
 .searchIcons {
- @apply h-6 md:h-12 w-6 md:w-12 grid place-items-center cursor-pointer border-b
+ @apply  pt-3 pb-1 md:pb-1 h-full md:h-12 w-6 md:w-12 grid place-items-center cursor-pointer border-b 
 }
 
 .searchResult {
@@ -206,14 +236,17 @@ input:focus {
 .searchResult::-webkit-scrollbar {
   display: none;
 }
+
 @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
   .iti__flag {
     background-image: url("images/flags@2x.png");
   }
 }
+
 .PhoneInputInput {
   @apply p-2 w-full border rounded !important;
 }
+
 .PhoneInputInput:focus {
   @apply p-2 w-full border-0 rounded-md !important;
 }

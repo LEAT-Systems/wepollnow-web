@@ -12,7 +12,7 @@ const Survey = () => {
     <>
       <Wrapper>
         <SideBar />
-        <main className='ml-auto md:ml-[82px] w-screen'>
+        <main className='ml-auto lg:ml-[82px] w-screen'>
            <PageContent children={<ManageSurveyContent />} />
         </main>
       </Wrapper>
