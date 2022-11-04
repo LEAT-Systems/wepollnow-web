@@ -10,8 +10,7 @@ import { Navigation } from "swiper";
 //
 //
 
-const PollsSwiper = () => {
-  const history = useHistory();
+const PollsSwiper = (props) => {
   return (
     <div className="relative">
       <div className="container flex flex-col mx-auto mt-12 md:mt-0 md:px-16">
@@ -47,7 +46,6 @@ const PollsSwiper = () => {
             const setDescription = item.description;
             const handler = () => {
               localStorage.setItem("pollType", setDescription);
-              history.push("/vote", { replace: true });
             };
 
             return (
@@ -69,7 +67,11 @@ const PollsSwiper = () => {
                           color="white"
                         />
                       ) : (
-                        <button onClick={handler} className="btn-stay animate">
+                        <button
+                          onClick={props.onPop}
+                          className="btn-stay animate"
+                          onBlur={handler}
+                        >
                           Vote Now
                         </button>
                       )}

@@ -3,7 +3,7 @@ export const Polls = [
     id: `gub-${Math.random().toString(36).slice(2)}`,
     type: "Presidential",
     description: "Presidential Poll",
-    date: "October 17, 2022",
+    date: "February 25, 2023",
     isActive: "no",
   },
   {
