@@ -1,1 +1,1 @@
-export const countDownDate = "November 3, 2022";
+export const countDownDate = "February 25, 2023";
