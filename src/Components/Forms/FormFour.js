@@ -69,7 +69,7 @@ const FormFour = (props) => {
                       {/*  */}
                       {/* ================= 1.  Gender    ================*/}
                       {/*  */}
-                      <div className="space-y-1 pt-8 md:pt-0">
+                      <div className="pt-8 space-y-1 md:pt-0">
                         <FormLabel no="i" title=" Select your Gender" />
                         <p className="text-red-600">
                           <ErrorMessage name="gender" />
@@ -188,7 +188,7 @@ const FormFour = (props) => {
                               value="student"
                               className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
                             />
-                            <p>Student</p>
+                            <p>Home owner</p>
                           </label>
                           <label
                             htmlFor="selectOneOpt2"
@@ -201,7 +201,7 @@ const FormFour = (props) => {
                               value="unemployed"
                               className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
                             />
-                            <p>Unemployed</p>
+                            <p>Renting</p>
                           </label>
                           <label
                             htmlFor="selectOneOpt3"
@@ -214,7 +214,7 @@ const FormFour = (props) => {
                               value="employed"
                               className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
                             />
-                            <p>Employed</p>
+                            <p>None</p>
                           </label>
                         </div>
                       </div>
@@ -280,7 +280,7 @@ const FormFour = (props) => {
                     <button
                       type="button"
                       onClick={() => props.prev(values)}
-                      className="p-2 px-4 md:ml-8 text-black bg-transparent border border-black rounded-md animateBack"
+                      className="p-2 px-4 text-black bg-transparent border border-black rounded-md md:ml-8 animateBack"
                     >
                       Previous
                     </button>

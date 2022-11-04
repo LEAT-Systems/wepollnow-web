@@ -2,20 +2,28 @@ import React from "react";
 import Nav from "../Layout/Landing/mainNav";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 const Message = (props) => {
+  const [message, setMessage] = useState();
+  const [state, setState] = useState("");
   const history = useHistory();
+
+  useEffect(() => {
+    setState(props.state);
+    setMessage(props.message);
+  }, []);
   return (
     <div>
       <Nav />
       <div className="flex flex-row items-center justify-center min-h-screen px-8 mx-auto">
-        <div className="z-10 flex flex-row p-12 border rounded-lg shadow-xl w-1/3 border-gray-200">
-          {!props.state ? (
+        <div className="z-10 flex flex-row w-1/3 p-12 border border-gray-200 rounded-lg shadow-xl">
+          {!state ? (
             history.push("/vote", { replace: true })
           ) : (
             <div className="flex flex-col items-center justify-center mx-auto space-y-4">
-              <h1 className="text-xl md:text-lg font-semibold text-center text-red-500 ">
-                {props.message}. An Error Occured.
+              <h1 className="text-xl font-semibold text-center text-red-500 md:text-lg ">
+                {message}. An Error Occured.
                 <br /> Check internet connection.
               </h1>
               <div className="flex flex-row items-center justify-center space-x-4">
