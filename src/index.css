@@ -2,12 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
-  /* color: #fceaea; concluded color  */
-  /* color: #fff9eb; scheduled color  */
-  /* color: #ebf5ed; ongoing color  */
-  /* color: #082a0f; primary color  */
-  /* color: #08c127; progress color  */
-  /* color: #e7f9ea; progress background color  */
+:root {
+  --color-concluded: #fceaea;
+  --color-scheduled: #fff9eb;
+  --color-ongoing: #ebf5ed;
+  --color-progress: #08c127;
+  --bg-progress: #e7f9ea;
+  --color-primary: #082a0f;
+  --color-secondary: ;
+
+  --radio-hover: #212c22;
+  --radio-border-checked: ;
+  --radio-border: #616b62;
+  --radio-outline: #062d0d;
+}
+
+
 
 /* .active {
   @apply after:content-[''] relative after:absolute
@@ -48,6 +58,7 @@ input:focus {
 }
 input[type="radio"]:checked {
   accent-color: green;
+  color: rgb(156 163 175);
 }
 .radio:checked ~ label {
   @apply bg-green-400;
@@ -63,9 +74,24 @@ input[type="radio"]:checked {
   @apply text-[#616b62] font-medium text-base capitalize h-full w-full border-2 rounded-md py-4 px-3 appearance-none
 }
 
-
 .custom__select__container {
   @apply font-medium text-base w-full relative after:content-[""] after:absolute after:top-[3.7rem] after:right-1 after:-translate-y-2/4 after:-translate-x-2/4 after:border-x-transparent after:border-solid after:border-[0.5em] after:border-t-[#333] after:border-b-transparent after:pointer-events-none
+}
+
+/* Modals style */
+
+.modal__header__title {
+  @apply flex mb-2
+}
+
+.modal__header__title > h4 {
+  @apply font-bold text-sm mr-2 whitespace-nowrap
+}
+.modal__header__title > p {
+  @apply w-full h-[1px] text-[1px] font-[100] bg-gray-400 my-auto
+}
+.modal__header__title > span {
+  @apply w-[.99rem] h-[.8rem] ml-2 my-auto rounded-full bg-gray-400
 }
 
 .animate {
@@ -212,7 +238,7 @@ input:focus {
 }
 
 .table-row {
-  @apply border-b even:bg-slate-200 odd:bg-white 
+  @apply border-b even:bg-[#edfff0] odd:bg-white 
 }
 
 
