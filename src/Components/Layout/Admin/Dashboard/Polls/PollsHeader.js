@@ -1,6 +1,12 @@
 /** @format */
 
-import { FilterListRounded, GridViewRounded, TuneRounded, ViewColumnRounded } from "@mui/icons-material";
+import {
+  FilterListRounded,
+  GridViewRounded,
+  TuneRounded,
+  ViewColumnRounded,
+} from "@mui/icons-material";
+import { Modal } from "@mui/material";
 import React, { useState } from "react";
 import SearchBar from "../Search/SearchBar";
 
@@ -9,28 +15,29 @@ const PollsHeader = ({
   tableData,
   handleGrid,
   handleList,
+  handleOpenRefineResult,
 }) => {
-  const [active, setActive] = useState(0)
+  const [active, setActive] = useState(0);
   const [filterIsActive, setFilterIsActive] = useState(0);
 
   const handleActive = (index) => {
-    setActive(index)
-  }
+    setActive(index);
+  };
 
   const handleFilterActive = (index) => {
     setFilterIsActive(index);
     console.log(index);
-  }
+  };
 
   const filterActive =
     "hover:bg-blue-100 bg-blue-100 border border-1 py-2 px-2 cursor-pointer rounded-xl text-sm md:text-xl mr-1";
-  
+
   const filterNotActive =
     "hover:bg-blue-100 border border-1 py-2 px-2 cursor-pointer rounded-xl text-sm md:text-xl mr-1";
-  
+
   const viewActive =
     "bg-blue-100 hover:bg-blue-100 border border-1 rounded-xl py-2 px-2 cursor-pointer text-sm md:text-xl mr-1";
-  
+
   const viewNotActive =
     "hover:bg-blue-100 border border-1 rounded-xl py-2 px-2 cursor-pointer text-sm md:text-xl mr-1";
 
@@ -53,11 +60,13 @@ const PollsHeader = ({
             <div className='flex w-full justify-end items-center mr-6'>
               <nav className='pl-3 pr-2 md:pr-2 flex'>
                 <span
+                  title='Filter Result'
                   className={
                     filterIsActive === 1 ? filterActive : filterNotActive
                   }
                   onClick={() => {
                     handleFilterActive(1);
+                    handleOpenRefineResult()
                   }}
                 >
                   <TuneRounded
@@ -164,4 +173,3 @@ const PollsHeader = ({
 };
 
 export default PollsHeader;
-
