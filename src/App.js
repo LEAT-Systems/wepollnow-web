@@ -2,6 +2,7 @@ import React, { Suspense } from "react";
 import { Route, Switch } from "react-router-dom";
 import VoteFormTwo from "./Components/Forms/VoteForm/VoteFormTwo";
 import VoteSuccess from "./Components/Forms/VoteForm/VoteSuccess";
+import BarChart from "./Components/Layout/Admin/Dashboard/Charts/BarChart";
 
 import Loading from "./UI/Loading";
 
@@ -185,6 +186,11 @@ function App() {
         <Route path="/account" exact>
           <Account />
         </Route>
+
+        <Route path='/barChart' exact>
+          <BarChart />
+        </Route>
+      
         {/*=========================  NOT FOUND ROUTE ========================*/}
         <Route path="*">
           <NotFound />
