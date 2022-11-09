@@ -13,6 +13,8 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^0.27.2",
     "chart.js": "^3.9.1",
+    "chart.js-plugin-labels-dv": "^3.3.0",
+    "chartjs-plugin-datalabels": "^2.1.0",
     "flowbite": "^1.5.3",
     "formik": "^2.2.9",
     "naija-state-local-government": "^1.1.2",
