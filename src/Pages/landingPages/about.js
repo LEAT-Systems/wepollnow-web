@@ -6,9 +6,9 @@ import image from "../../images/image_2.png";
 const AboutPage = () => {
   return (
     <div className="w-screen h-screen">
-      <Nav bg="FCEBEE" bgImg="hero-container-pattern" />
+      <Nav bg="FCEBEE" bgImg="hero-container-pattern" hamburgerBg="FCEBEE" />
       <div className="flex flex-row items-center justify-between mx-auto bg-[#FCEBEE] bg-hero-container-pattern">
-        <div className="flex flex-col px-4 md:px-24 space-y-2">
+        <div className="flex flex-col px-4 space-y-2 md:px-24">
           <p className="text-xs md:text-lg font-bold underline underline-2 underline-offset-2 decoration-yellow-500 decoration-[5px]">
             About Wepollnow
           </p>
@@ -16,11 +16,11 @@ const AboutPage = () => {
             Creating a better Society by making every vote count.
           </h1>
         </div>
-        <div className="z-10 md:-mt-36 flex">
+        <div className="z-10 flex md:-mt-36">
           <img src={image} className="w-[100%] h-[85%]" alt={"Voter"} />
         </div>
       </div>
-      <div className="flex flex-row items-center justify-center max-w-3xl px-8 mx-auto mt-24 pb-12">
+      <div className="flex flex-row items-center justify-center max-w-3xl px-8 pb-12 mx-auto mt-24">
         <p className="text-sm md:text-[16px] text-justify md:font-extralight ">
           We are a dedicated group that is passionate about making the society a
           better place by ensuring that we simulate polls and ensure that all

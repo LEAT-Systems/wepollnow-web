@@ -2,12 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
-  /* color: #fceaea; concluded color  */
-  /* color: #fff9eb; scheduled color  */
-  /* color: #ebf5ed; ongoing color  */
-  /* color: #082a0f; primary color  */
-  /* color: #08c127; progress color  */
-  /* color: #e7f9ea; progress background color  */
+/* color: #fceaea; concluded color  */
+/* color: #fff9eb; scheduled color  */
+/* color: #ebf5ed; ongoing color  */
+/* color: #082a0f; primary color  */
+/* color: #08c127; progress color  */
+/* color: #e7f9ea; progress background color  */
 
 /* .active {
   @apply after:content-[''] relative after:absolute
@@ -15,15 +15,15 @@
 } */
 
 .active {
-  @apply relative bg-transparentWhite py-4 px-2 first:pt-[.1rem] before:absolute before:top-[1.1rem] before:right-0 before:content-[""] before:bg-green-500 before:h-[2.7rem] before:w-[.3rem] before:rounded-[1rem]
+  @apply relative bg-transparentWhite py-4 px-2 first:pt-[.1rem] before:absolute before:top-[1.1rem] before:right-0 before:content-[""] before:bg-green-500 before:h-[2.7rem] before:w-[.3rem] before:rounded-[1rem];
 }
 
 .sidebar-icons {
-  @apply text-gray-200
+  @apply text-gray-200;
 }
 
 .sidebar-icons.active {
-  @apply text-white
+  @apply text-white;
 }
 
 select,
@@ -70,10 +70,10 @@ input[type="radio"]:checked {
 .hamburger {
   cursor: pointer;
   width: 24px;
-  height: 24px;
+  height: 20px;
   transition: all 0.25s;
   position: relative;
-  color: #082a0f
+  color: #082a0f;
 }
 
 .hamburger-top,
@@ -81,7 +81,7 @@ input[type="radio"]:checked {
 .hamburger-bottom {
   position: absolute;
   width: 24px;
-  height: 2px;
+  height: 1px;
   top: 0px;
   left: 0px;
   background: #000;
@@ -125,8 +125,8 @@ input[type="select"] option {
 
 .scrollable::-webkit-scrollbar,
 body::-webkit-scrollbar {
-  width: .4rem;
-  height: .4rem;
+  width: 0.4rem;
+  height: 0.4rem;
 }
 .scrollable::-webkit-scrollbar-track,
 body::-webkit-scrollbar-track {
@@ -176,31 +176,30 @@ input:focus {
   background-image: url("images/flags.png");
 }
 
-/* Table header */ 
+/* Table header */
 .table-head {
-  @apply px-6 py-3 font-bold lg:font-[700] text-base normal-case min-w-fit whitespace-nowrap
+  @apply px-6 py-3 font-bold lg:font-[700] text-base normal-case min-w-fit whitespace-nowrap;
 }
 
 .table-row {
-  @apply border-b even:bg-slate-200 odd:bg-white 
+  @apply border-b even:bg-slate-200 odd:bg-white;
 }
-
 
 /* Search */
 .searchInp {
-  @apply flex
+  @apply flex;
 }
 
-.searchInp input{
- @apply border-x-0 border-t-0 border-b rounded-md rounded-tl-none rounded-bl-none text-[1rem] pr-4 py-3 md:py-5 h-6 md:h-12 w-[10rem] md:w-[22rem] focus:outline-none pl-1 md:pl-0
+.searchInp input {
+  @apply border-x-0 border-t-0 border-b rounded-md rounded-tl-none rounded-bl-none text-[1rem] pr-4 py-3 md:py-5 h-6 md:h-12 w-[10rem] md:w-[22rem] focus:outline-none pl-1 md:pl-0;
 }
 
 .searchIcons {
- @apply h-6 md:h-12 w-6 md:w-12 grid place-items-center cursor-pointer border-b
+  @apply h-6 md:h-12 w-6 md:w-12 grid place-items-center cursor-pointer border-b;
 }
 
 .searchResult {
-  @apply bg-white w-[22rem] h-[22rem] shadow-md overflow-hidden overflow-y-auto
+  @apply bg-white w-[22rem] h-[22rem] shadow-md overflow-hidden overflow-y-auto;
 }
 
 .searchResult::-webkit-scrollbar {
@@ -212,8 +211,8 @@ input:focus {
   }
 }
 .PhoneInputInput {
-  @apply p-2 w-full border rounded !important;
+  @apply p-2 w-full rounded !important;
 }
 .PhoneInputInput:focus {
-  @apply p-2 w-full border-0 rounded-md !important;
+  @apply p-2 w-full outline-none rounded-md !important;
 }

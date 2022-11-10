@@ -10,43 +10,55 @@ import { states } from "./states";
 const FormTwo = (props) => {
   const [formisCompleted, setFormIsCompleted] = useState(false);
   const [data, setData] = useState([]);
+  const [error, setError] = useState(false);
+  const [disable, setDisable] = useState(false);
 
+  // Handling next step of form
   const handleSubmit = (values) => {
     props.next(values);
   };
 
   // Destructuring for Configuring the indicators
-  const { LGAofVotingRes, stateOfOrigin, stateOfVotingRes, ageRange } =
+  const { stateOfOrigin, diasporaVoter, stateOfVotingRes, ageRange } =
     props.data;
 
-  // Selected ID from previous Form
+  console.log(diasporaVoter);
+
+  // Selected ID from previous Form for API consumption
   const selectedId = stateOfVotingRes;
+  console.log("SelectedID:", selectedId);
 
-  // Loading LGA of voting residence from API
   useEffect(() => {
-    async function getData() {
-      const response = await fetch(
-        `https://wepollnow.azurewebsites.net/utilities/lga/${selectedId}`
-      );
-      const body = await response.json();
-      setData(body);
+    // Check to disable LGA of voting residence
+    if (diasporaVoter === "yes") {
+      setDisable(true);
     }
-    getData();
-  }, []);
-
-  console.log("DATA", data);
-  //
-  useEffect(() => {
-    if (LGAofVotingRes && stateOfOrigin && ageRange !== "") {
+    // Loading LGA of voting residence from API with selected ID
+    try {
+      async function getData() {
+        const response = await fetch(
+          `https://wepollnow.azurewebsites.net/utilities/lga/${selectedId}`
+        );
+        const body = await response.json();
+        setData(body);
+        console.log("Body:", body);
+        if (!response.ok) {
+          throw new Error("An error occured");
+        }
+      }
+      getData();
+    } catch (error) {
+      setError(error);
+    }
+    // Configuring indicators
+    if (stateOfOrigin && ageRange !== "") {
       setFormIsCompleted(true);
     }
-  }, [LGAofVotingRes, stateOfOrigin, ageRange]);
+  }, [stateOfOrigin, ageRange, selectedId, stateOfVotingRes, diasporaVoter]);
 
-  // validation Schema
+  //  Formik-Yup validation Schema
   const formTwoValidationSchema = Yup.object({
-    LGAofVotingRes: Yup.string().required().label("* This"),
-    stateOfVotingRes: Yup.string().required().label("* This"),
-    // ageRange
+    //
   });
   return (
     <>
@@ -105,12 +117,20 @@ const FormTwo = (props) => {
                         <p className="text-red-600">
                           <ErrorMessage name="LGAofVotingRes" />
                         </p>
+                        <p className="text-xs text-blue-300">
+                          {disable === true &&
+                            "* Field is disabled because you are a diaspora voter."}
+                        </p>
                         <div className="flex flex-row items-start justify-between">
                           <Field
+                            disabled={disable === true ? true : false}
                             as="select"
                             name="LGAofVotingRes"
-                            className="block w-full px-3 py-3 mt-1 bg-white border border-gray-300 rounded"
+                            className={`block w-full px-3 py-3 mt-1 bg-white border border-gray-300 rounded ${
+                              disable === true ? "cursor-not-allowed" : ""
+                            }`}
                           >
+                            <option value={null}>--Select an option--</option>
                             {data.map((item) => {
                               return (
                                 <option key={item.id} value={item.id}>
@@ -135,6 +155,7 @@ const FormTwo = (props) => {
                             name="stateOfOrigin"
                             className="block w-full px-3 py-3 mt-1 bg-white border border-gray-300 rounded"
                           >
+                            <option value={null}>-- Select an option--</option>
                             {states.map((item) => {
                               return (
                                 <option key={item.id} value={item.id}>

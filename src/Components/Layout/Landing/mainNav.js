@@ -60,7 +60,7 @@ const Nav = (props) => {
   }, 5000);
 
   const desktopContainer = (
-    <div className="hidden md:flex flex-col items-start justify-start md:items-center  md:justify-center px-6 md:mx-auto space-y-8 md:px-36">
+    <div className="flex-col items-start justify-start hidden px-6 space-y-8 md:flex md:items-center md:justify-center md:mx-auto md:px-36">
       <div className="space-y-8 text-start md:text-left md:mt-10">
         <div>
           <Link to="/" className="text-4xl font-bold stroke md:text-7xl">
@@ -98,7 +98,7 @@ const Nav = (props) => {
     </div>
   );
   const mobileNavLinkContainer = (
-    <div className="flex md:hidden flex-col items-start justify-start md:items-center  md:justify-center px-6 md:mx-auto space-y-8 md:px-36">
+    <div className="flex flex-col items-start justify-start px-6 space-y-8 md:hidden md:items-center md:justify-center md:mx-auto md:px-36">
       <div className="space-y-8 text-start md:text-left md:mt-10">
         <div>
           <Link to="/" className="text-4xl font-bold stroke md:text-7xl">
@@ -140,7 +140,7 @@ const Nav = (props) => {
     <div className="flex md:hidden flex-col py-0 w-[100%] px-4 border-gray-200 md:border-0">
       <div className="space-y-4 w-[100%] md:w-[65%]">
         {hasSubmitted && (
-          <div className="p-4 text-white text-center bg-green-500 rounded-lg">
+          <div className="p-4 text-center text-white bg-green-500 rounded-lg">
             <p>Action was Successful. We will get back to you.</p>
           </div>
         )}
@@ -160,7 +160,7 @@ const Nav = (props) => {
               required
               type="text"
               ref={nameRef}
-              className="input w-full p-4 text-white placeholder-gray-200 bg-black border rounded hover:bg-gray-900"
+              className="w-full p-4 text-white placeholder-gray-200 bg-black border rounded input hover:bg-gray-900"
               placeholder="Enter Your Name"
             />
           </div>
@@ -170,7 +170,7 @@ const Nav = (props) => {
               required
               type="email"
               ref={emailRef}
-              className="input w-full p-4 text-white placeholder-gray-200 bg-black border rounded hover:bg-gray-900"
+              className="w-full p-4 text-white placeholder-gray-200 bg-black border rounded input hover:bg-gray-900"
               placeholder="Enter Your Email"
             />
           </div>
@@ -180,7 +180,7 @@ const Nav = (props) => {
               required
               type="text"
               ref={messageRef}
-              className="input w-full h-32 p-4 text-white placeholder-gray-200 bg-black border rounded hover:bg-gray-900"
+              className="w-full h-32 p-4 text-white placeholder-gray-200 bg-black border rounded input hover:bg-gray-900"
               placeholder="Enter Your Message"
             />
           </div>
@@ -200,7 +200,7 @@ const Nav = (props) => {
     <div className=" hidden md:flex flex-col items-center justify-center mx-auto w-[65%] border-gray-200 md:border-0">
       <div className="space-y-4 w-[100%] md:w-[65%]">
         {hasSubmitted && (
-          <div className="p-4 text-white text-center bg-green-500 rounded-lg">
+          <div className="p-4 text-center text-white bg-green-500 rounded-lg">
             <p>Action was Successful. We will get back to you.</p>
           </div>
         )}
@@ -214,7 +214,7 @@ const Nav = (props) => {
               required
               type="text"
               ref={nameRef}
-              className="input w-full p-4 text-white placeholder-gray-200 bg-black border rounded hover:bg-gray-900"
+              className="w-full p-4 text-white placeholder-gray-200 bg-black border rounded input hover:bg-gray-900"
               placeholder="Enter Your Name"
             />
           </div>
@@ -224,7 +224,7 @@ const Nav = (props) => {
               required
               type="email"
               ref={emailRef}
-              className="input w-full p-4 text-white placeholder-gray-200 bg-black border rounded hover:bg-gray-900"
+              className="w-full p-4 text-white placeholder-gray-200 bg-black border rounded input hover:bg-gray-900"
               placeholder="Enter Your Email"
             />
           </div>
@@ -234,7 +234,7 @@ const Nav = (props) => {
               required
               type="text"
               ref={messageRef}
-              className="input w-full h-32 p-4 text-white placeholder-gray-200 bg-black border rounded hover:bg-gray-900"
+              className="w-full h-32 p-4 text-white placeholder-gray-200 bg-black border rounded input hover:bg-gray-900"
               placeholder="Enter Your Message"
             />
           </div>
@@ -256,21 +256,27 @@ const Nav = (props) => {
       {/*=======================   Top Navigation ============================*/}
 
       <div
-        className={`flex flex-row items-center justify-between px-6 md:px-24 border-b border-gray-200  py-8 mx-auto  bg-[#${props.bg}] bg-${props.bgImg} `}
+        className={`px-6 md:px-24 mx-auto  bg-[#${props.bg}] bg-${props.bgImg} `}
       >
-        <Link to="/">
-          <img src={logo} alt="logo" />
-        </Link>
-        <div className="relative z-30">
-          <button
-            className={show ? "open p-3 z-30" : "hamburger focus:outline-none"}
-            onClick={() => {
-              setShow(!show);
-            }}
+        <div className="flex flex-row items-center justify-between py-8 border-b border-gray-200">
+          <Link to="/">
+            <img src={logo} alt="logo" />
+          </Link>
+          <div
+            className={`relative z-30 p-2 inline-flex items-center justify-center bg-[#${props.hamburgerBg}] rounded-full`}
           >
-            <span className="hamburger-top"></span>
-            <span className="hamburger-bottom"></span>
-          </button>
+            <button
+              className={
+                show ? "open  p-2 z-30" : "hamburger w-8 h-8 focus:outline-none"
+              }
+              onClick={() => {
+                setShow(!show);
+              }}
+            >
+              <span className="hamburger-top"></span>
+              <span className="hamburger-bottom"></span>
+            </button>
+          </div>
         </div>
       </div>
 
@@ -289,7 +295,7 @@ const Nav = (props) => {
             >
               <button
                 onClick={closeHandler}
-                className="open absolute z-30 top-8 right-12 md:top-12 md:right-24"
+                className="absolute z-30 open top-8 right-12 md:top-12 md:right-24"
               >
                 <span className="hamburger-top"></span>
                 <span className="hamburger-bottom"></span>
@@ -306,7 +312,7 @@ const Nav = (props) => {
                   onClick={handlerToToggle}
                   className={!hidden ? "hidden" : ""}
                 >
-                  <div className="flex flex-row items-center space-x-2 md:hidden mt-8 px-6 text-lg font-bold text-left text-white md:text-xl md:mt-0 md:text-left ">
+                  <div className="flex flex-row items-center px-6 mt-8 space-x-2 text-lg font-bold text-left text-white md:hidden md:text-xl md:mt-0 md:text-left ">
                     <p>Get in touch</p>
                     <EastIcon />
                   </div>

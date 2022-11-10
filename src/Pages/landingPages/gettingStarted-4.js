@@ -146,7 +146,7 @@ const GettingStartedFour = () => {
           <img
             src={text_logo}
             alt="vote"
-            className="w-full md:w-[65%] mt-4 md:-mt-[140px] h-24 md:h-[200px]"
+            className="w-full md:w-[65%] mt-4 md:-mt-[140px] h-full md:h-[200px]"
           />
         </div>
         <GettingStartedContent prompt={handleOpen} />

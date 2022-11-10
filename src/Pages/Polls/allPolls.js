@@ -8,9 +8,9 @@ import Timer from "../../UI/Timer";
 const AllPolls = () => {
   return (
     <div className="w-screen h-screen overflow-x-hidden">
-      <Nav bg="FCEBEE" bgImg="hero-container-pattern" />
+      <Nav bg="FCEBEE" bgImg="hero-container-pattern" hamburgerBg="FCEBEE" />
       <div className="flex flex-row items-center justify-between mx-auto bg-[#FCEBEE] bg-hero-container-pattern">
-        <div className="flex flex-col px-4 md:px-24 space-y-2">
+        <div className="flex flex-col px-4 space-y-2 md:px-24">
           <p className="text-xs md:text-lg font-bold underline underline-2 underline-offset-2 decoration-yellow-500 decoration-[5px]">
             Upcoming Polls
           </p>
@@ -18,14 +18,14 @@ const AllPolls = () => {
             Be abreast with all upcoming polls
           </h1>
         </div>
-        <div className="z-10 md:-mt-36 flex">
+        <div className="z-10 flex md:-mt-36">
           <img src={image} className="w-full md:h-[500px]" alt={"Voter"} />
         </div>
       </div>
 
       {/* ==============   GRID FOR ARRANGING ITEMS  ===================*/}
 
-      <div className="grid gap-y-4 gap-x-12 md:px-24  md:gap-x-12 grid-cols-1 md:grid-cols-3 mt-12 pb-12">
+      <div className="grid grid-cols-1 pb-12 mt-12 gap-y-4 gap-x-12 md:px-24 md:gap-x-12 md:grid-cols-3">
         {Polls.map((item) => {
           return (
             <div

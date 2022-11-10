@@ -15,7 +15,6 @@ import PollsSingle from "./Polls/PollsSingle";
 // import PollsPageContentTwo from "../Components/Layout/Admin/Dashboard/Polls/PollsPageContentTwo";
 // import VoteSuccess from "../Components/Forms/VoteForm/VoteSuccess";
 
-
 const Test = () => {
   return (
     <>
@@ -28,7 +27,7 @@ const Test = () => {
       {/* <FormTwo /> */}
       {/* <FormThree /> */}
       {/* <FormComponent /> */}
-      <PollsSingle />
+      {/* <PollsSingle /> */}
     </>
   );
 };

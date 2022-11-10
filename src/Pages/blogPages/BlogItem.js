@@ -10,7 +10,7 @@ const BlogItem = () => {
   return (
     <div>
       {/* ITEMS */}
-      <div className="grid grid-cols-1 px-4 mt-4 md:pb-24 gap-y-12 md:gap-y-0 gap-x-12 md:px-24 md:gap-x-12 md:grid-cols-3">
+      <div className="grid grid-cols-1 px-4 mt-4 space-y-12 md:space-y-0 md:pb-24 gap-y-12 md:gap-y-0 gap-x-12 md:px-24 md:gap-x-12 md:grid-cols-3">
         {DUMMY_DATA.map((data) => {
           return (
             <Link to={"/blog-single"} key={data.id}>
@@ -19,7 +19,7 @@ const BlogItem = () => {
                   <img
                     src={data.articleImg}
                     alt="Voter"
-                    className="w-full rounded"
+                    className="w-full rounded md:object-cover"
                   />
                   <div className="absolute bottom-0 right-0 z-30">
                     <img src={anchor} alt="anchorIcon" className="rounded-br" />

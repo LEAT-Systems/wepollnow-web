@@ -73,14 +73,13 @@ const GettingStartedTwo = () => {
           <h1 className="text-xl font-extrabold md:text-3xl">
             Senatorial Polls
           </h1>
-          <Badge
-            className="flex flex-row space-x-3"
-            bg="[#EDFFF0]"
-            border="#EDFFF0"
+          <div
+            className={`inline-flex items-center justify-center space-x-1 px-4 py-1 text-xs border-[#08C127] border md:text-lg font-semibold leading-none text-black bg-[#D3E6D7] rounded-md`}
           >
             <img src={calendar} alt="calendarMonth" />
             <p className="text-sm">Oncoming</p>
-          </Badge>
+          </div>
+
           <div className="flex flex-row items-center justify-center ">
             <div className="max-w-4xl p-8 text-4xl text-[#082B0E] md:space-y-4 text-center md:text-[54px]">
               <h1>

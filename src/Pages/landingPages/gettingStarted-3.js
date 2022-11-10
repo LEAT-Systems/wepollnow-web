@@ -15,7 +15,6 @@ import SuccessToast from "../../UI/SuccessToast";
 
 //
 const GettingStartedThree = () => {
-  const [hasSubmitted, setHasSubmitted] = useState(false);
   const [show, setShow] = useState(false);
   const emailRef = useRef();
   const [open, setOpen] = useState(false);
@@ -33,7 +32,6 @@ const GettingStartedThree = () => {
     e.preventDefault();
     const val = emailRef.current.value.trim();
     localStorage.setItem("email", val);
-    setHasSubmitted(true);
     emailRef.current.value = "";
     setShow(true);
   };
