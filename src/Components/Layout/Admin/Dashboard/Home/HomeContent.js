@@ -6,13 +6,11 @@ import Tables from "../Tables/Tables";
 import Header from "../../Header";
 import Data from "../../Data.json";
 import {
-  ArrowForward,
   ArrowForwardIos,
   ArrowUpward,
   People,
   PieChart,
 } from "@mui/icons-material";
-import Grid from "../Polls/Grid";
 
 const DashboardContent = () => {
   const data = [
@@ -25,8 +23,6 @@ const DashboardContent = () => {
       daily_users: 89,
     },
   ];
-
-  console.log(data);
 
   const [greeting, setGreeting] = useState("");
   const date = new Date();
@@ -60,7 +56,7 @@ const DashboardContent = () => {
         </div>
 
         {/* CARDS */}
-        <div className='grid grid-cols-1 md:grid-cols-2 xxl:grid-cols-3 gap-8 place-items-center w-full mx-auto my-14'>
+        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 place-items-center w-full mx-auto my-14'>
           {/* First Card */}
           {data.map((data) => (
             <>

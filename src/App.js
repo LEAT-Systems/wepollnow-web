@@ -1,7 +1,9 @@
+import PieChart from "./Components/Layout/Admin/Dashboard/Charts/PieChart";
 import React, { Suspense } from "react";
 import { Route, Switch, useLocation } from "react-router-dom";
 import VoteFormTwo from "./Components/Forms/VoteForm/VoteFormTwo";
 import VoteSuccess from "./Components/Forms/VoteForm/VoteSuccess";
+import BarChart from "./Components/Layout/Admin/Dashboard/Charts/BarChart";
 import BlogSingle from "./Pages/blogPages/blogSinglePost";
 
 import Loading from "./UI/Loading";
@@ -193,6 +195,14 @@ function App() {
         <Route path="/account" exact>
           <Account />
         </Route>
+
+        <Route path='/barChart' exact>
+          <BarChart />
+        </Route>
+        <Route path='/pieChart' exact>
+          <PieChart />
+        </Route>
+      
         {/*=========================  NOT FOUND ROUTE ========================*/}
         <Route path="*">
           <NotFound />
