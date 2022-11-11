@@ -3,12 +3,12 @@ import TableBody from "./TableBody";
 import Data from "../../Data.json"
 
 JSON.stringify(Data)
-const FilteredTable = () => {
-  const results = Data.map((data) => { 
-      return <TableBody key={data.id} tablleData={data} />
-});
+const FilteredTable = ({ searchResult }) => {
+  const results = searchResult.map((data) => {
+    return <TableBody key={data.id} tableData={data} />;
+  });
 
-  // console.log(JSON.stringify(Data));
+
   const table = results?.length ? (
     results
   ) : (
