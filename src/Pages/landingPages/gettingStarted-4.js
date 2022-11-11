@@ -72,11 +72,7 @@ const GettingStartedFour = () => {
           <h1 className="text-xl font-extrabold md:text-3xl">
             Local Government Polls
           </h1>
-          <Badge
-            className="flex flex-row space-x-3"
-            bg="[#EDFFF0]"
-            border="#EDFFF0"
-          >
+          <Badge bg="EDFFF0" border="08C127">
             <img src={calendar} alt="calendarMonth" />
             <p className="text-sm">Oncoming</p>
           </Badge>
@@ -146,7 +142,7 @@ const GettingStartedFour = () => {
           <img
             src={text_logo}
             alt="vote"
-            className="w-full md:w-[65%] mt-4 md:-mt-[140px] h-full md:h-[200px]"
+            className="w-full md:w-[55%] md:-mt-[140px] h-full md:max-w-[30%] md:min-w-[55%] md:h-[200px]"
           />
         </div>
         <GettingStartedContent prompt={handleOpen} />

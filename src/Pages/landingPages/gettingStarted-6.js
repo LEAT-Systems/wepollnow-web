@@ -4,9 +4,9 @@ import { Link } from "react-router-dom";
 
 const GettingStartedSix = () => {
   return (
-    <div className="w-screen h-screen overflow-x-hidden">
+    <div className="w-screen  min-h-[100vh] border overflow-x-hidden">
       <Nav />
-      <div className="flex flex-col items-center justify-center">
+      <div className="flex flex-col justify-center min-h-[100vh]  items-center">
         <div className="text-center py-36">
           <h2 className="max-w-4xl p-8 text-xl">
             We would love to get some information about you.

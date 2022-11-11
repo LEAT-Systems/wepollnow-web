@@ -8,7 +8,11 @@
   @apply after:content-[''] relative after:absolute
   after:w-1 after:h-1 bg-green-400  after:top-0 right-0;
 } */
-
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
 .active {
   @apply relative bg-transparentWhite py-4 px-2 first:pt-[.1rem] before:absolute before:top-[1.1rem] before:right-0 before:content-[""] before:bg-green-500 before:h-[2.7rem] before:w-[.3rem] before:rounded-[1rem];
 }
@@ -159,24 +163,6 @@ input[type="select"] option {
   background: "#08c127" !important;
 }
 
-.scrollable::-webkit-scrollbar,
-body::-webkit-scrollbar {
-  width: 0.4rem;
-  height: 0.4rem;
-}
-
-.scrollable::-webkit-scrollbar-track,
-body::-webkit-scrollbar-track {
-  background: #eee;
-}
-
-.scrollable::-webkit-scrollbar-thumb,
-body::-webkit-scrollbar-thumb {
-  background-color: #082a0f;
-  border-radius: 10px;
-  /* border: 3px solid #000; */
-}
-
 .hide-scrollbar::-webkit-scrollbar {
   /* Chrome, Safari, Opera */
   display: none;
@@ -213,10 +199,6 @@ input:focus {
   outline: 1px solid #eee;
 }
 
-.iti__flag {
-  background-image: url("images/flags.png");
-}
-
 /* Table header */
 .table-head {
   @apply px-6 py-3 font-bold lg:font-[700] text-base normal-case min-w-fit whitespace-nowrap;
@@ -232,11 +214,6 @@ input:focus {
   display: none;
 }
 
-@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
-  .iti__flag {
-    background-image: url("images/flags@2x.png");
-  }
-}
 
 .PhoneInputInput {
   @apply p-2 w-full rounded !important;
@@ -244,4 +221,14 @@ input:focus {
 
 .PhoneInputInput:focus {
   @apply p-2 w-full outline-none rounded-md !important;
+}
+
+.fade-enter {
+  opacity: 0;
+  z-index: 1;
+}
+
+.fade-enter.fade-enter-active {
+  opacity: 1;
+  transition: opacity 250ms ease-in;
 }

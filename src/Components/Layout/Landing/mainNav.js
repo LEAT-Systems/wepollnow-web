@@ -7,6 +7,7 @@ import instagram from "../../../images/navIcons/IG.png";
 import youtube from "../../../images/navIcons/YouTube.png";
 import EastIcon from "@mui/icons-material/East";
 import back from "../../../images/backArrow.png";
+import hamburger from "../../../images/hamburger.png";
 import { Modal, Slide } from "@mui/material";
 
 const Nav = (props) => {
@@ -258,23 +259,17 @@ const Nav = (props) => {
       <div
         className={`px-6 md:px-24 mx-auto  bg-[#${props.bg}] bg-${props.bgImg} `}
       >
-        <div className="flex flex-row items-center justify-between py-8 border-b border-gray-200">
+        <div className="flex flex-row items-center justify-between py-3 border-b border-gray-200">
           <Link to="/">
             <img src={logo} alt="logo" />
           </Link>
-          <div
-            className={`relative z-30 p-2 inline-flex items-center justify-center bg-[#${props.hamburgerBg}] rounded-full`}
-          >
+          <div className={`relative z-30 items-center justify-center`}>
             <button
-              className={
-                show ? "open  p-2 z-30" : "hamburger w-8 h-8 focus:outline-none"
-              }
               onClick={() => {
                 setShow(!show);
               }}
             >
-              <span className="hamburger-top"></span>
-              <span className="hamburger-bottom"></span>
+              <img src={hamburger} alt="hamburgerButton" className="" />
             </button>
           </div>
         </div>

@@ -1,5 +1,5 @@
 import React from "react";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import Done from "@mui/icons-material/Done";
@@ -12,32 +12,26 @@ const FormTwo = (props) => {
   const [data, setData] = useState([]);
   const [error, setError] = useState(false);
   const [disable, setDisable] = useState(false);
+  const [selectedState, setSelectedState] = useState("");
 
   // Handling next step of form
   const handleSubmit = (values) => {
     props.next(values);
   };
 
+  const handleChange = (e) => {
+    setSelectedState(e.currentTarget.value);
+  };
+
   // Destructuring for Configuring the indicators
-  const { stateOfOrigin, diasporaVoter, stateOfVotingRes, ageRange } =
-    props.data;
+  let { diasporaVoter, stateOfVotingRes, ageRange } = props.data;
 
-  console.log(diasporaVoter);
-
-  // Selected ID from previous Form for API consumption
-  const selectedId = stateOfVotingRes;
-  console.log("SelectedID:", selectedId);
-
-  useEffect(() => {
-    // Check to disable LGA of voting residence
-    if (diasporaVoter === "yes") {
-      setDisable(true);
-    }
-    // Loading LGA of voting residence from API with selected ID
+  // Loading LGA of voting residence from API with selected ID
+  if (selectedState) {
     try {
       async function getData() {
         const response = await fetch(
-          `https://wepollnow.azurewebsites.net/utilities/lga/${selectedId}`
+          `https://wepollnow.azurewebsites.net/utilities/lga/${selectedState}`
         );
         const body = await response.json();
         setData(body);
@@ -50,16 +44,29 @@ const FormTwo = (props) => {
     } catch (error) {
       setError(error);
     }
+  }
+
+  useEffect(() => {
+    // Check to disable LGA of voting residence
+    if (diasporaVoter === "yes") {
+      setDisable(true);
+    }
+
     // Configuring indicators
-    if (stateOfOrigin && ageRange !== "") {
+    if (stateOfVotingRes && ageRange !== "") {
       setFormIsCompleted(true);
     }
-  }, [stateOfOrigin, ageRange, selectedId, stateOfVotingRes, diasporaVoter]);
+  }, [ageRange, stateOfVotingRes, diasporaVoter]);
 
   //  Formik-Yup validation Schema
-  const formTwoValidationSchema = Yup.object({
-    //
-  });
+  let formTwoValidationSchema;
+  if (diasporaVoter !== "yes") {
+    formTwoValidationSchema = Yup.object({
+      // stateOfVotingRes: Yup.string().required().label("* This"),
+      // LGAofVotingRes: Yup.string().required().label("* This"),
+    });
+  }
+
   return (
     <>
       <Nav />
@@ -104,11 +111,48 @@ const FormTwo = (props) => {
             >
               {({ values }) => (
                 <Form>
-                  <div className="flex flex-col p-2 space-y-2 md:p-8">
-                    <div className="h-full px-2 space-y-4 md:px-4">
+                  <div className="flex flex-col space-y-2 md:p-8">
+                    <div className="h-full space-y-4 md:px-4">
+                      {/*  */}
+                      {/* Select State of voting residence */}
+
+                      <div className="flex flex-col space-y-1 md:pb-0">
+                        <FormLabel
+                          title="Select state of voting residence (Not applicable for
+                          Diaspora Voters) "
+                        />
+                        <p className="text-red-600">
+                          <ErrorMessage name="stateOfVotingRes" />
+                        </p>
+                        <p className="text-xs text-red-300">
+                          {disable &&
+                            "* Field is disabled because you are a diaspora voter"}
+                        </p>
+
+                        <Field
+                          as="select"
+                          disabled={disable ? true : false}
+                          onChange={handleChange}
+                          name="stateOfVotingRes"
+                          placeholder="Select State of Voting Residence"
+                          className={`block w-full px-3 py-3 mt-1 bg-white border border-gray-300 rounded ${
+                            disable === true ? "cursor-not-allowed" : ""
+                          }`}
+                        >
+                          <option value={null}> -- Select an option -- </option>
+                          {states.map((item) => {
+                            return (
+                              <option key={item.id} value={item.id}>
+                                {item.name}
+                              </option>
+                            );
+                          })}
+                        </Field>
+                      </div>
+
                       {/* LGA of voting residence */}
 
-                      <div className="pt-4 space-y-2 rounded-md md:p-2">
+                      <div className="flex flex-col space-y-1 md:pb-0">
                         <FormLabel
                           no="i"
                           title=" Select L.G.A of voting residence (Not applicable for
@@ -117,7 +161,7 @@ const FormTwo = (props) => {
                         <p className="text-red-600">
                           <ErrorMessage name="LGAofVotingRes" />
                         </p>
-                        <p className="text-xs text-blue-300">
+                        <p className="text-xs text-red-300">
                           {disable === true &&
                             "* Field is disabled because you are a diaspora voter."}
                         </p>
@@ -142,39 +186,14 @@ const FormTwo = (props) => {
                         </div>
                       </div>
 
-                      {/* State of Origin  */}
-
-                      <div className="space-y-2 md:p-2">
-                        <FormLabel no="i" title=" Select State of Origin" />
-                        <p className="text-red-600">
-                          <ErrorMessage name="stateOfOrigin" />
-                        </p>
-                        <div className="flex flex-row items-start justify-between pb-8 md:pb-0">
-                          <Field
-                            as="select"
-                            name="stateOfOrigin"
-                            className="block w-full px-3 py-3 mt-1 bg-white border border-gray-300 rounded"
-                          >
-                            <option value={null}>-- Select an option--</option>
-                            {states.map((item) => {
-                              return (
-                                <option key={item.id} value={item.id}>
-                                  {item.name}
-                                </option>
-                              );
-                            })}
-                          </Field>
-                        </div>
-                      </div>
-
                       {/* Age Range */}
 
-                      <div className="pb-8 md:p-2">
+                      <div className="flex flex-col pb-8 space-y-4 md:pb-0 ">
                         <FormLabel no="i" title="Select Your Age Range" />
                         <p className="text-red-600">
                           <ErrorMessage name="ageRange" />
                         </p>
-                        <div className="flex flex-row items-center justify-between space-x-4 md:p-2">
+                        <div className="flex flex-row items-center justify-between space-x-4">
                           <label
                             htmlFor="ageRange1"
                             className="flex flex-row items-center w-full p-3 px-4 space-x-2 border rounded md:p-4"
@@ -203,7 +222,7 @@ const FormTwo = (props) => {
                             <p>25-35</p>
                           </label>
                         </div>
-                        <div className="flex flex-row items-center justify-between mt-2 space-x-4 md:p-2 md:mt-0">
+                        <div className="flex flex-row items-center justify-between mt-2 space-x-4 md:mt-0">
                           <label
                             htmlFor="ageRange3"
                             className="flex flex-row items-center w-full p-3 px-4 space-x-2 border rounded md:p-4"
@@ -231,7 +250,7 @@ const FormTwo = (props) => {
                             <p>45-50</p>
                           </label>
                         </div>
-                        <div className="flex flex-row items-center justify-between mt-2 space-x-4 md:p-2 md:pb-0 md:mt-0">
+                        <div className="flex flex-row items-center justify-between mt-2 space-x-4 md:space-y-4 md:pb-0 md:mt-0">
                           <label
                             htmlFor="ageRange5"
                             className="flex flex-row items-center w-full p-3 space-x-2 border rounded md:p-4"

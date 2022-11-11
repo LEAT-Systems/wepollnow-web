@@ -73,12 +73,10 @@ const GettingStartedTwo = () => {
           <h1 className="text-xl font-extrabold md:text-3xl">
             Senatorial Polls
           </h1>
-          <div
-            className={`inline-flex items-center justify-center space-x-1 px-4 py-1 text-xs border-[#08C127] border md:text-lg font-semibold leading-none text-black bg-[#D3E6D7] rounded-md`}
-          >
+          <Badge bg="EDFFF0" border="08C127">
             <img src={calendar} alt="calendarMonth" />
             <p className="text-sm">Oncoming</p>
-          </div>
+          </Badge>
 
           <div className="flex flex-row items-center justify-center ">
             <div className="max-w-4xl p-8 text-4xl text-[#082B0E] md:space-y-4 text-center md:text-[54px]">
@@ -146,7 +144,7 @@ const GettingStartedTwo = () => {
           <img
             src={text_logo}
             alt="vote"
-            className="w-full md:w-[55%] mt-4 md:-mt-[140px] h-full md:h-[200px]"
+            className="w-full md:w-[55%] md:-mt-[140px] h-full md:max-w-[30%] md:min-w-[55%] md:h-[200px]"
           />
         </div>
 

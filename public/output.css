@@ -562,7 +562,11 @@ video {
 }
 
 .text-9xl {
-  font-size: 4rem;
+  font-size: 3rem;
+  line-height: 1;
+}
+.text-4xl {
+  font-size: 25px;
   line-height: 1;
 }
 

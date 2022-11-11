@@ -5,13 +5,6 @@ import BlogItem from "./BlogItem";
 const BlogSingleGroupPage = () => {
   return (
     <div className="mt-12 md:mt-48">
-      {/* page header */}
-      <div className="flex flex-col items-start justify-start px-4 mx-auto md:px-24">
-        <p className="text-[16px]  font-bold underline underline-offset-2 decoration-yellow-500 decoration-4">
-          Latest Update
-        </p>
-      </div>
-
       {/* Blog Item */}
       <BlogItem />
 

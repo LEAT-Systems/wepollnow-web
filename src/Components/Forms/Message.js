@@ -21,7 +21,7 @@ const Message = (props) => {
       <div className="flex flex-row items-center justify-center min-h-screen px-8 mx-auto">
         <div className="z-10 flex flex-row w-full p-1 border border-gray-200 rounded-lg shadow-xl md:w-1/3">
           {!state ? (
-            history.push("/vote", { replace: true })
+            history.push("/polls", { replace: true })
           ) : (
             <div className="flex flex-col items-center justify-center py-24 mx-auto space-y-4 md:py-12">
               <h1 className="text-xl font-semibold text-center text-red-500 md:text-lg ">

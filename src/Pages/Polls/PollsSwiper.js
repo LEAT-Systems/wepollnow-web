@@ -1,5 +1,5 @@
-import React, { useRef, useState } from "react";
-import { Link, useHistory } from "react-router-dom";
+import React from "react";
+import { Link } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Polls } from "./pollsObject";
 import Timer from "../../UI/Timer";
@@ -82,7 +82,7 @@ const PollsSwiper = (props) => {
                       {!due ? (
                         <Timer
                           date={item.date}
-                          size="3xl"
+                          size="2xl"
                           pcolor="white"
                           color="white"
                         />
