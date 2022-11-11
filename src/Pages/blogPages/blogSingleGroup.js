@@ -7,7 +7,6 @@ const BlogSingleGroupPage = () => {
     <div className="mt-12 md:mt-48">
       {/* Blog Item */}
       <BlogItem />
-
       {/* View more */}
       <div className="flex flex-row items-center justify-center pt-12">
         <Link to="/blog">
