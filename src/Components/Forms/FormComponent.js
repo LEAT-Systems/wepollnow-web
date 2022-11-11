@@ -29,7 +29,7 @@ const FormComponent = () => {
     stateOfVotingRes: "",
 
     // Form 2
-    stateOfOrigin: "",
+    stateOfOrigin: undefined,
     LGAofVotingRes: "",
     ageRange: "",
 
@@ -50,6 +50,7 @@ const FormComponent = () => {
 
   // storing state data in a variable
   const finalData = { ...data };
+  console.log(finalData);
 
   //  function to handle Next Step by spreading previous data to new data
   const handleNextStep = (newData, final = false) => {

@@ -20,15 +20,40 @@ const AboutPage = () => {
           <img src={image} className="w-[100%] h-[85%]" alt={"Voter"} />
         </div>
       </div>
-      <div className="flex flex-row items-center justify-center max-w-3xl px-8 pb-12 mx-auto mt-24">
-        <p className="text-sm md:text-[16px] text-justify md:font-extralight ">
-          We are a dedicated group that is passionate about making the society a
-          better place by ensuring that we simulate polls and ensure that all
-          your votes count. We liase with civil bodies in the real world to also
-          monitor the electoral processes at your polling Units and stations to
-          ensure a free and fair election for everyone.
-          <br /> Together, We can make Nigeria Great!
-        </p>
+
+      <div className="flex flex-col items-center justify-center max-w-3xl px-8 pb-12 mx-auto mt-24 space-y-4">
+        <div className="flex flex-col space-y-2">
+          <p className="text-xs md:text-lg font-bold underline underline-2 underline-offset-2 decoration-yellow-500 decoration-[5px]">
+            Who We Are
+          </p>
+          <p className="text-sm md:text-[16px] text-justify md:font-extralight ">
+            WePollNow is an independent research and analytics group dedicated
+            to bringing data into the conversations that help African citizens
+            make informed decisions that affect policy in multi-sectors.
+          </p>
+        </div>
+        <div className="flex flex-col space-y-2">
+          <p className="text-xs md:text-lg font-bold underline underline-2 underline-offset-2 decoration-yellow-500 decoration-[5px]">
+            Our Vision
+          </p>
+          <p className="text-sm md:text-[16px] text-justify md:font-extralight ">
+            Our vision is for WePollNow data to be a highly valued and
+            significant public resource that will be used by millions of people
+            - in Africa and the rest of the world - to aid in having informed
+            public discourse and making intelligent business decisions.
+          </p>
+        </div>
+        <div className="flex flex-col space-y-2">
+          <p className="text-xs md:text-lg font-bold underline underline-2 underline-offset-2 decoration-yellow-500 decoration-[5px]">
+            Our Mission
+          </p>
+          <p>
+            Our mission is to be a continuous source of highly accurate data,
+            supplying valuable insights into what the people of Africa are
+            thinking, and helping to shape what the world thinks of African
+            people as a whole.
+          </p>
+        </div>
       </div>
       <Footer />
     </div>

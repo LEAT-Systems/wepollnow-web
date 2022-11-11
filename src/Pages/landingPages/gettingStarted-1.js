@@ -34,7 +34,7 @@ const GettingStartedOne = () => {
       <ModalComponent open={open} handleClose={handleClose} />
       <div className="relative flex flex-col">
         <div
-          className={`absolute z-10 flex flex-col items-center top-[350px] md:top-56 justify-center space-y-4 left-8 md:left-16`}
+          className={`absolute z-10 flex flex-col items-center top-[450px] md:top-56 justify-center space-y-4 left-8 md:left-16`}
         >
           <div className={`flex flex-col space-y-4 text-[#707070]`}>
             <a href="https://instagram.com/wepollnow">
@@ -53,12 +53,19 @@ const GettingStartedOne = () => {
             Presidential Poll
           </p>
           <div
-            className={`inline-flex items-center justify-center space-x-1 px-4 py-1 text-xs bg-[#FFFAED] border-[#f9c833] border md:text-lg font-semibold leading-none text-black bg-[#D3E6D7] rounded-md`}
+            className={`inline-flex items-center justify-center space-x-1 px-4 py-1 text-xs bg-[#FFFDF1] border-[#f9c833] border md:text-lg font-semibold leading-none text-black rounded-md`}
           >
             <img src={calendar} alt="calendarMonth" />
             <p className="text-sm">February 25, 2023</p>
           </div>
-          <Timer date={countDownDate} size="9xl" color="black" pcolor="black" />
+          <div className="md:p-6">
+            <Timer
+              date={countDownDate}
+              size="9xl"
+              color="black"
+              pcolor="black"
+            />
+          </div>
           <p>Proceed to vote by clicking the button below</p>
           <div className="md:pt-8">
             <button
@@ -69,7 +76,7 @@ const GettingStartedOne = () => {
             </button>
           </div>
           {/* Large screen controls */}
-          <div className="absolute right-6 md:right-16 top-72 md:top-36">
+          <div className="absolute right-6 md:right-16 top-[376px] md:top-36">
             <div className="flex flex-col items-center justify-center space-y-4 ">
               <div className="bg-[#EDFFF0] rounded-full p-1 ">
                 <KeyboardArrowUpIcon />
@@ -90,11 +97,11 @@ const GettingStartedOne = () => {
             </div>
           </div>
         </div>
-        <div className="flex flex-row items-center justify-center pb-12 mt-8 md:mt-0">
+        <div className="flex flex-col items-center justify-center">
           <img
             src={text_logo}
             alt="vote"
-            className="w-full md:w-[65%] -mt-[140px] h-full md:h-[230px]"
+            className="w-full md:w-[55%] md:-mt-[140px] h-full md:max-w-[30%] md:min-w-[55%] md:h-[200px]"
           />
         </div>
       </div>

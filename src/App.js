@@ -1,5 +1,5 @@
 import React, { Suspense } from "react";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, useLocation } from "react-router-dom";
 import VoteFormTwo from "./Components/Forms/VoteForm/VoteFormTwo";
 import VoteSuccess from "./Components/Forms/VoteForm/VoteSuccess";
 import BlogSingle from "./Pages/blogPages/blogSinglePost";
@@ -49,7 +49,9 @@ const ManageSurvey = React.lazy(() =>
 const ManagePolls = React.lazy(() =>
   import("./Components/Layout/Admin/Dashboard/Polls/ManagePolls")
 );
-const Blog = React.lazy(() => import("./Components/Layout/Admin/Dashboard/Account/Blog"));
+const Blog = React.lazy(() =>
+  import("./Components/Layout/Admin/Dashboard/Account/Blog")
+);
 
 const Account = React.lazy(() =>
   import("./Components/Layout/Admin/Dashboard/Account/Account")
@@ -60,7 +62,9 @@ const Survey = React.lazy(() =>
 const Dashboard = React.lazy(() =>
   import("./Components/Layout/Admin/Dashboard/Home/Home")
 );
-const Login = React.lazy(() => import("./Components/Layout/Admin/Dashboard/Login/Login"));
+const Login = React.lazy(() =>
+  import("./Components/Layout/Admin/Dashboard/Login/Login")
+);
 
 function App() {
   return (
@@ -160,7 +164,7 @@ function App() {
 
         {/* Polls Page */}
 
-        <Route path='/Managepolls' exact>
+        <Route path="/Managepolls" exact>
           <ManagePolls />
         </Route>
 

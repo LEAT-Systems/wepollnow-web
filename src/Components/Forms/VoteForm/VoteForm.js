@@ -259,7 +259,7 @@ const FormFive = () => {
                                 <p className="text-xs md:text-lg">
                                   {item.candidate}
                                 </p>
-                                <Badge>
+                                <Badge border="08C127" bg="EDFFF0">
                                   <p className="text-[8px]">{item.cBadge}</p>
                                 </Badge>
                               </div>
@@ -272,7 +272,7 @@ const FormFive = () => {
                                 <p className="text-xs md:text-lg">
                                   {item.runningMate}
                                 </p>
-                                <Badge bg="#EDFFF0">
+                                <Badge bg="EDFFF0" border="08C127">
                                   <p className="text-[8px]">{item.vBadge}</p>
                                 </Badge>
                               </div>

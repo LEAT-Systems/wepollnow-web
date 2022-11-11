@@ -9,38 +9,26 @@ import { states } from "./states";
 
 const FormOne = (props) => {
   // destructuring to configure the form arrow indicators
-  let { email, firstTimeVoter, diasporaVoter, stateOfVotingRes } = props.data;
+  let { email, firstTimeVoter, diasporaVoter, stateOfOrigin } = props.data;
   const [formisCompleted, setFormIsCompleted] = useState(false);
   const [isDiaspora, setIsDiaspora] = useState();
-  const [disable, setDisable] = useState(diasporaVoter);
 
   // Handles next step of form
   const handleSubmit = (values) => {
     props.next(values);
   };
 
-  // Listening to onClick event on diaspora voter radio field
-  const handlerToBlur = (e) => {
-    e.preventDefault();
-    setIsDiaspora(e.currentTarget.value);
-    if (isDiaspora === "yes") {
-      setDisable(true);
-    }
-    if (isDiaspora === "no") {
-      setDisable(false);
-    }
-  };
-
   // Configuring the indicators
   useEffect(() => {
-    if (diasporaVoter && email && firstTimeVoter !== "") {
+    if (diasporaVoter && email && stateOfOrigin && firstTimeVoter !== "") {
       setFormIsCompleted(true);
     }
-  }, [email, stateOfVotingRes, diasporaVoter, firstTimeVoter]);
+  }, [email, stateOfOrigin, diasporaVoter, firstTimeVoter]);
 
   // Yup form Validation Schema
   const formOneValidationSchema = Yup.object({
     email: Yup.string().email().required().label("* This"),
+    stateOfOrigin: Yup.string().required().label("* This"),
     firstTimeVoter: Yup.string().required().label("* This"),
   });
   return (
@@ -153,7 +141,6 @@ const FormOne = (props) => {
                               type="radio"
                               name="diasporaVoter"
                               value="yes"
-                              onClick={handlerToBlur}
                               className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
                             />
                             <p>Yes</p>
@@ -169,45 +156,35 @@ const FormOne = (props) => {
                               type="radio"
                               name="diasporaVoter"
                               value="no"
-                              onClick={handlerToBlur}
                               className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
                             />
                             <p>No</p>
                           </label>
                         </div>
                       </div>
-                      {/* Select State of voting residence */}
+                      {/* State of Origin  */}
 
-                      <div className="flex flex-col pb-8 space-y-1 md:pb-0">
-                        <FormLabel
-                          title="Select state of voting residence (Not applicable for
-                          Diaspora Voters) "
-                        />
+                      <div className="space-y-2 md:p-2">
+                        <FormLabel no="i" title=" Select State of Origin" />
                         <p className="text-red-600">
-                          <ErrorMessage name="stateOfVotingRes" />
+                          <ErrorMessage name="stateOfOrigin" />
                         </p>
-                        <p className="text-xs text-blue-300">
-                          {disable &&
-                            "* Field is disabled because you are a diaspora voter"}
-                        </p>
-                        <Field
-                          disabled={disable ? true : false}
-                          as="select"
-                          name="stateOfVotingRes"
-                          placeholder="Select State of Voting Residence"
-                          className={`w-full p-4 px-4 mb-2 text-lg text-gray-700 placeholder-gray-600 border rounded-md ${
-                            disable && "cursor-not-allowed"
-                          }`}
-                        >
-                          <option value={null}> -- Select an option -- </option>
-                          {states.map((item) => {
-                            return (
-                              <option key={item.id} value={item.id}>
-                                {item.name}
-                              </option>
-                            );
-                          })}
-                        </Field>
+                        <div className="flex flex-row items-start justify-between pb-8 md:pb-0">
+                          <Field
+                            as="select"
+                            name="stateOfOrigin"
+                            className="block w-full px-3 py-3 mt-1 bg-white border border-gray-300 rounded"
+                          >
+                            <option value={null}>-- Select an option--</option>
+                            {states.map((item) => {
+                              return (
+                                <option key={item.id} value={item.id}>
+                                  {item.name}
+                                </option>
+                              );
+                            })}
+                          </Field>
+                        </div>
                       </div>
                     </div>
                   </div>

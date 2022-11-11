@@ -238,9 +238,7 @@ const FormFour = (props) => {
                               value="Living with family"
                               className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
                             />
-                            <p className="text-sm md:text-lg">
-                              Living with family
-                            </p>
+                            <p className="text-lg">Living with family</p>
                           </label>
                           <label
                             htmlFor="accomodationStatus2"
@@ -253,9 +251,7 @@ const FormFour = (props) => {
                               value="Living with friends"
                               className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
                             />
-                            <p className="text-sm md:text-lg">
-                              Living with friends
-                            </p>
+                            <p className="text-lg">Living with friends</p>
                           </label>
                           <label
                             htmlFor="accomodationStatus3"
@@ -268,9 +264,7 @@ const FormFour = (props) => {
                               value="Living on your own"
                               className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
                             />
-                            <p className="text-sm md:text-lg">
-                              Living on your own
-                            </p>
+                            <p className="text-lg">Living on your own</p>
                           </label>
                         </div>
                       </div>
