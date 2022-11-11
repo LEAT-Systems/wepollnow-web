@@ -1,6 +1,5 @@
 import React from "react";
 import SideBar from "../../Sidebar";
-import Header from "../../Header";
 import PageContent from "../../Content";
 import Wrapper from "../../BodyWrapper";
 import PollsPageContentTwo from "./PollsPageContentTwo";
@@ -9,10 +8,11 @@ import PollsPageContentTwo from "./PollsPageContentTwo";
 const PollsResult = () => {
   return (
     <>
-      <Header />
-      <Wrapper>
+      <Wrapper className='w-[100vw]'>
         <SideBar />
+        <main className='ml-0 lg:ml-[82px] w-screen'>
         <PageContent children={<PollsPageContentTwo />} />
+        </main>
       </Wrapper>
     </>
   );
