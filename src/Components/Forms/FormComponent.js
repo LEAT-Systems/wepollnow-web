@@ -1,6 +1,4 @@
-import React, { useEffect } from "react";
-import { useState } from "react";
-import axios from "axios";
+import React, { useState } from "react";
 import FormOne from "./FormOne";
 import FormTwo from "./FormTwo";
 import FormThree from "./FormThree";
@@ -9,29 +7,33 @@ import Message from "./Message";
 import FormFour from "./FormFour";
 
 // From local Storage
-const phone = localStorage.getItem("phoneNumber");
-
+const localData = localStorage.getItem("phoneDetails");
+const phoneDetails = JSON.parse(localData);
+const { phoneNo, country } = phoneDetails;
+const fakeID = `user-${Math.random().toString(36).slice(2)}`;
 //
 const FormComponent = () => {
   const [currentStep, setCurrentStep] = useState(0);
   const [hasError, setHasError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const [uniqueID, setUniqueID] = useState(null);
   const [data, setData] = useState({
     // Local Storage
-    phone: phone,
+    phone: phoneNo,
+    country: country,
 
     // Form 1
     email: "",
     firstTimeVoter: "",
-    diasporaVoter: "",
-    stateOfOrigin: "",
-
-    // // Form 2
-    LGAofVotingRes: "",
+    diasporaVoter: "" || false,
     stateOfVotingRes: "",
+
+    // Form 2
+    stateOfOrigin: "",
+    LGAofVotingRes: "",
     ageRange: "",
 
-    // // Form 3
+    // Form 3
     pvc: "",
     maritalStatus: "",
     employmentStatus: "",
@@ -43,42 +45,51 @@ const FormComponent = () => {
     accomodationStatus: "",
   });
 
+  // Storing uniqueID from state to localStorage
+  localStorage.setItem("userID", uniqueID);
+
   // storing state data in a variable
   const finalData = { ...data };
 
-  //  function to handle Next Step
+  //  function to handle Next Step by spreading previous data to new data
   const handleNextStep = (newData, final = false) => {
     setData((prev) => ({ ...prev, ...newData }));
 
     // Make API Request Handler
     const makeRequest = async (formData) => {
       try {
-        await fetch(
-          "https://pollit-test-default-rtdb.firebaseio.com/logs.json",
+        const response = await fetch(
+          "https://wepollnow-default-rtdb.firebaseio.com/users.json",
           {
             method: "POST",
             body: JSON.stringify({
               phone: formData.phone,
+              country: formData.country,
               email: formData.email,
               firstTimeVoter: formData.firstTimeVoter,
               diasporaVoter: formData.diasporaVoter,
-              stateOfVotingResidence: formData.stateOfVotingResidence,
-              LGAofVotingResidence: formData.LGAofVotingResidence,
-              StateOfOrigin: formData.StateOfOrigin,
+              stateOfVotingResidence: formData.stateOfVotingRes,
+              LGAofVotingResidence: formData.LGAofVotingRes,
+              StateOfOrigin: formData.stateOfOrigin,
               ageRange: formData.ageRange,
               pvc: formData.pvc,
               maritalStatus: formData.maritalStatus,
               employmentStatus: formData.employmentStatus,
-              Gender: formData.Gender,
-              Religion: formData.Religion,
-              SelectOneOpt: formData.SelectOneOpt,
-              AccomodationStatus: formData.AccomodationStatus,
+              Gender: formData.gender,
+              Religion: formData.religion,
+              SelectOneOpt: formData.selectOneOpt,
+              AccomodationStatus: formData.accomodationStatus,
             }),
           }
         );
+        if (response.ok) {
+          setUniqueID(fakeID);
+        } else {
+          throw new Error("Something went wrong");
+        }
       } catch (error) {
         setHasError(true);
-        setErrorMessage(error.message);
+        setErrorMessage(error);
       }
     };
 
@@ -95,7 +106,7 @@ const FormComponent = () => {
     setCurrentStep((prev) => prev - 1);
   };
 
-  //   Components with props
+  //   Component steps with props
   const steps = [
     <FormOne next={handleNextStep} data={data} />,
     <FormTwo next={handleNextStep} prev={handlePrevStep} data={data} />,

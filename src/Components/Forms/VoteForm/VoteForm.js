@@ -93,6 +93,7 @@ const FormFive = () => {
 
   const handleClose = () => {
     setOpen(false);
+    setHasError(false);
   };
   //
   const checkHandler = (e) => {
@@ -216,9 +217,8 @@ const FormFive = () => {
               <div className="px-4 space-y-4">
                 {search(apiData).map((item) => {
                   return (
-                    <Suspense fallback={Loading}>
+                    <Suspense fallback={Loading} key={item.id}>
                       <div
-                        key={item.id}
                         className={`p-4 border border-gray-200 rounded-md md:p-6 ${
                           castedVote === item.partyName ? "bg-[#EDFFF0]" : ""
                         }

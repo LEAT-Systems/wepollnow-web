@@ -4,6 +4,7 @@ import { Route, Switch } from "react-router-dom";
 import VoteFormTwo from "./Components/Forms/VoteForm/VoteFormTwo";
 import VoteSuccess from "./Components/Forms/VoteForm/VoteSuccess";
 import BarChart from "./Components/Layout/Admin/Dashboard/Charts/BarChart";
+import BlogSingle from "./Pages/blogPages/blogSinglePost";
 
 import Loading from "./UI/Loading";
 
@@ -108,9 +109,12 @@ function App() {
           <AboutPage />
         </Route>
 
-        {/* CONTACT PAGE ROUTE */}
+        {/* BLOG PAGE ROUTE */}
         <Route path="/blog" exact>
           <BlogPage />
+        </Route>
+        <Route path="/blog-single" exact>
+          <BlogSingle />
         </Route>
         {/* CONTACT PAGE ROUTE */}
         <Route path="/vote/vote-form-next" exact>

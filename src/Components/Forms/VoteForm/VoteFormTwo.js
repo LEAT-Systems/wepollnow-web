@@ -122,7 +122,7 @@ const VoteFormTwo = () => {
               <div className="flex flex-row items-end justify-end w-full p-2 space-x-4 md:p-6">
                 <button
                   type="submit"
-                  className="w-full p-3 text-white bg-green-500 rounded-md hover:bg-green-600 hover:-translate-y-1"
+                  className="w-full p-3 text-white rounded-md bg-[#02c127] animate"
                 >
                   {`Confirm`}
                 </button>

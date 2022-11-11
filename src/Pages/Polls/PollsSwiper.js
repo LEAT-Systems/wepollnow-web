@@ -6,12 +6,12 @@ import Timer from "../../UI/Timer";
 import "swiper/css";
 import "swiper/css/navigation";
 import { Navigation } from "swiper";
+import calendar from "../../images/calendar.png";
 
 //
 //
 
-const PollsSwiper = () => {
-  const history = useHistory();
+const PollsSwiper = (props) => {
   return (
     <div className="relative">
       <div className="container flex flex-col mx-auto mt-12 md:mt-0 md:px-16">
@@ -24,6 +24,7 @@ const PollsSwiper = () => {
             // when window width is >= 640px
             640: {
               slidesPerView: 1,
+              navigation: false,
             },
             // when window width is >= 768px
             768: {
@@ -47,19 +48,36 @@ const PollsSwiper = () => {
             const setDescription = item.description;
             const handler = () => {
               localStorage.setItem("pollType", setDescription);
-              history.push("/vote", { replace: true });
             };
 
             return (
               <SwiperSlide key={item.id}>
                 <div className="flex flex-col items-center justify-center p-4 space-y-2 md:flex-row md:px-0">
                   <div className="flex flex-col items-center justify-center w-full py-12 space-y-4 rounded-lg h-72 bg-polls-pattern">
-                    <p className="text-xl font-bold text-white">
-                      {item.description}
-                    </p>
-                    <label className="px-4 bg-gray-200 rounded-lg">
-                      {due ? "Ongoing" : item.date}
-                    </label>
+                    {!due && (
+                      <p className="text-xl font-bold text-white">
+                        {item.description}
+                      </p>
+                    )}
+                    <div
+                      className={`flex flex-row items-center justify-center space-x-2 px-4 p-1 ${
+                        due
+                          ? "bg-[#EDFFF0] border-[#08c127]"
+                          : "bg-[#FFFAED] border-[#f9c833]"
+                      } border rounded-md`}
+                    >
+                      {!due && <img src={calendar} alt="calendarIcon" />}
+                      <label className="text-[14px]">
+                        <p className="font-normal">
+                          {due ? "Ongoing" : item.date}
+                        </p>
+                      </label>
+                    </div>
+                    {due && (
+                      <p className="text-xl font-bold text-white">
+                        {item.description}
+                      </p>
+                    )}
                     <div className="px-2">
                       {!due ? (
                         <Timer
@@ -69,7 +87,11 @@ const PollsSwiper = () => {
                           color="white"
                         />
                       ) : (
-                        <button onClick={handler} className="btn-stay animate">
+                        <button
+                          onClick={props.onPop}
+                          className="btn-stay animate"
+                          onBlur={handler}
+                        >
                           Vote Now
                         </button>
                       )}

@@ -1,52 +1,42 @@
-import React, { useRef, useState } from "react";
-import Nav from "../../Components/Layout/Landing/mainNav";
-import Badge from "../../UI/Badge";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import Timer from "../../UI/Timer";
 import { countDownDate } from "../../UI/MagicVars";
+import { Link } from "react-router-dom";
+import "react-phone-number-input/style.css";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import Nav from "../../Components/Layout/Landing/mainNav";
 import instagram from "../../images/landingIcons/IG.png";
 import youtube from "../../images/landingIcons/YU.png";
 import facebook from "../../images/landingIcons/FB.png";
-import calendar from "../../images/calendar.png";
 import text_logo from "../../images/voteWatermark.png";
-const Timer = React.lazy(() => import("../../UI/Timer"));
+import GettingStartedContent from "./GettingStartedContent";
+import ModalComponent from "./GettingStartedModal";
+import calendar from "../../images/calendar.png";
 
 //
 const GettingStartedOne = () => {
-  const [hasSubmitted, setHasSubmitted] = useState(false);
-  const [show, setShow] = useState(false);
-  const emailRef = useRef();
+  const [open, setOpen] = useState(false);
 
-  // Form submit handler for the email
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const val = emailRef.current.value.trim();
-    localStorage.setItem("email", val);
-    setHasSubmitted(true);
-    emailRef.current.value = "";
-    setShow(true);
+  // open and close the modal
+  const handleOpen = () => {
+    setOpen(true);
+    localStorage.setItem("pollType", "Presidential Poll");
+  };
+  const handleClose = () => {
+    setOpen(false);
   };
 
-  // Time out to clear message
-  setTimeout(() => {
-    setShow(false);
-  }, 2000);
-
-  // Message to display before timeout
-  const message = hasSubmitted && (
-    <p className="px-2 font-bold text-white bg-green-500 rounded-full">
-      Action Successful
-    </p>
-  );
+  // ================================   JSX   ==========================================
   return (
-    <div className="w-screen h-screen overflow-x-hidden">
+    <div className="items-center justify-center w-screen h-screen overflow-x-hidden">
       <Nav />
-      <div className="relative flex flex-col mt-12 ">
+      <ModalComponent open={open} handleClose={handleClose} />
+      <div className="relative flex flex-col">
         <div
-          className={`absolute z-10 flex flex-col items-center left-4 md:left-16 top-[450px] md:top-48 justify-center`}
+          className={`absolute z-10 flex flex-col items-center top-[350px] md:top-56 justify-center space-y-4 left-8 md:left-16`}
         >
-          <div className={`flex flex-col space-y-4`}>
+          <div className={`flex flex-col space-y-4 text-[#707070]`}>
             <a href="https://instagram.com/wepollnow">
               <img src={instagram} alt="instagram_link" />
             </a>
@@ -58,61 +48,32 @@ const GettingStartedOne = () => {
             </a>
           </div>
         </div>
-
-        <div className="relative flex flex-col items-center bg-no-repeat bg-top bg-opacity-5 justify-center space-y-4 md:space-y-4 bg-contain bg-hero-pattern lg:pb-[10rem]">
-          <p className="font-bold">Gubernatorial Poll</p>
-          <Badge
-            className="flex flex-row space-x-3"
-            bg="[#EDFFF0]"
-            border="#EDFFF0"
+        <div className="relative flex flex-col items-center justify-center space-y-2 mt-12 bg-contain bg-hero-pattern bg-no-repeat lg:pb-[10rem] bg-top bg-opacity-5 md:py-8 pb-24">
+          <p className="text-xl font-extrabold md:text-3xl">
+            Presidential Poll
+          </p>
+          <div
+            className={`inline-flex items-center justify-center space-x-1 px-4 py-1 text-xs bg-[#FFFAED] border-[#f9c833] border md:text-lg font-semibold leading-none text-black bg-[#D3E6D7] rounded-md`}
           >
             <img src={calendar} alt="calendarMonth" />
-            <p className="text-sm">Oncoming</p>
-          </Badge>
-          <div className="flex flex-row items-center justify-center ">
-            <div className="max-w-4xl p-8 text-4xl text-[#082B0E] md:space-y-4 text-center md:text-[54px]">
-              <h1>
-                {" "}
-                Let's{" "}
-                <span className="underline underline-offset-4 decoration-yellow-500 decoration-[6px]">
-                  change
-                </span>{" "}
-                the narrative.
-              </h1>
-              <h1>Make your vote count.</h1>
-            </div>
+            <p className="text-sm">February 25, 2023</p>
           </div>
-          <div>
-            <p className="max-w-xs text-center text-md md:max-w-2xl">
-              We would love to keep you informed on all on-coming gubernatorial
-              polls
-            </p>
+          <Timer date={countDownDate} size="9xl" color="black" pcolor="black" />
+          <p>Proceed to vote by clicking the button below</p>
+          <div className="md:pt-8">
+            <button
+              onClick={handleOpen}
+              className="w-full p-4 px-8 text-white bg-[#08BC26] rounded-lg animate"
+            >
+              Vote Now
+            </button>
           </div>
-          {show ? message : ""}
-          <div className="relative text-gray-700">
-            <form onSubmit={handleSubmit}>
-              <input
-                className="w-[300px] md:w-[500px] pl-4 h-10 text-base placeholder-gray-600 border rounded-lg focus:shadow-outline md:p-6"
-                type="email"
-                placeholder="Enter Email Address"
-                ref={emailRef}
-                required
-              />
-              <button
-                type="submit"
-                className="absolute inset-y-0 right-0 flex items-center px-4 font-semibold text-white bg-[#08C127] rounded-r-lg hover:bg-green-500 focus:bg-gray-700"
-              >
-                Notify Me
-              </button>
-            </form>
-          </div>
-
           {/* Large screen controls */}
-          <div className="absolute right-6 md:right-16 top-[430px] md:top-36">
+          <div className="absolute right-6 md:right-16 top-72 md:top-36">
             <div className="flex flex-col items-center justify-center space-y-4 ">
-              <Link to="/" className="bg-[#EDFFF0] rounded-full p-1 ">
+              <div className="bg-[#EDFFF0] rounded-full p-1 ">
                 <KeyboardArrowUpIcon />
-              </Link>
+              </div>
               <div className="flex flex-col items-center justify-center px-2 space-y-2">
                 <div className="inline-block w-2 h-2 bg-black rounded-full"></div>
                 <div className="inline-block w-2 h-2 bg-gray-200 rounded-full"></div>
@@ -122,21 +83,22 @@ const GettingStartedOne = () => {
               </div>
               <Link
                 to="/getting-started-two"
-                className="bg-[#EDFFF0] rounded-full p-1"
+                className="bg-[#EDFFF0] rounded-full hover:cursor-pointer md:p-1 "
               >
                 <KeyboardArrowDownIcon />
               </Link>
             </div>
           </div>
         </div>
-        <div className="flex flex-col items-center justify-center">
+        <div className="flex flex-row items-center justify-center pb-12 mt-8 md:mt-0">
           <img
             src={text_logo}
             alt="vote"
-            className="w-full md:w-[65%] mt-4 md:-mt-[140px] h-full md:h-24 md:h-[200px]"
+            className="w-full md:w-[65%] -mt-[140px] h-full md:h-[230px]"
           />
         </div>
       </div>
+      <GettingStartedContent prompt={handleOpen} />
     </div>
   );
 };

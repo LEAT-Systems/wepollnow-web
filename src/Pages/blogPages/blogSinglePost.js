@@ -8,24 +8,31 @@ import anchor from "../../images/anchor.png";
 import img_2 from "../../images/image_3.png";
 import backarrow from "../../images/backArrow.png";
 import Footer from "../../Components/Layout/Landing/Footer";
+import { useHistory, Link } from "react-router-dom";
+import { DUMMY_DATA } from "./DummyData";
 
 const BlogSingle = () => {
+  const history = useHistory();
+  const backHandler = () => {
+    history.goBack();
+  };
   return (
     <>
       <Nav />
-      <div className="w-screen flex flex-col items-center justify-between space-x-8 md:px-24 md:flex-row">
+      <div className="flex flex-col items-center justify-between mx-auto space-x-8 md:px-24 md:flex-row">
         {/* Main Reading Bar */}
-        <div className="flex flex-col items-start justify-start w-2/3 pt-4 space-y-4">
-          <div className="flex flex-row space-x-2">
+
+        <div className="flex flex-col items-start justify-start w-full px-8 pt-4 pb-12 space-y-4 md:-mt-48 md:w-2/3">
+          <button onClick={backHandler} className="flex flex-row space-x-2">
             <img src={backarrow} alt="back_button" />
             <p>Back</p>
-          </div>
+          </button>
           <img src={img_2} className="w-[700px] md:h-[460px]" />
           <div className="flex flex-row space-x-2">
             <img src={avatar} alt="avatar" className="w-6 h-6" />
             <p>Olumide Adebayo</p>
           </div>
-          <h3 className="max-w-2xl text-xl md:text-3xl font-bold ">
+          <h3 className="max-w-2xl text-xl font-bold md:text-3xl ">
             FEC approves N27.4b contracts for Works, Housing, FCT ministries
           </h3>
           <div className="flex flex-row space-x-4">
@@ -64,68 +71,56 @@ const BlogSingle = () => {
           </div>
         </div>
         {/* Side Bar */}
-        <div className="flex flex-col items-center justify-center w-full mx-auto space-y-4 md:justify-start md:px-0 md:w-1/3 md:-mt-24 ">
-          <div className="pt-12 space-y-2 md:pt-0">
-            <p className="font-bold">Latest Posts</p>
-            <div className="relative">
-              <img src={img_2} className="rounded-xl" />
-              <img
-                src={anchor}
-                className="absolute bottom-0 w-8 h-8 mr-6 rounded-br-lg right-1 md:right-0"
-              />
-            </div>
-            <div className="flex flex-row space-x-2">
-              <img src={avatar} alt="avatar" className="w-6 h-6" />
-              <p>Olumide Adebayo</p>
-            </div>
-            <h3 className="max-w-sm font-bold md:max-w-2xl md:text-xl">
-              FEC approves N27.4b contracts for Works, Housing, FCT ministries
-            </h3>
-            <div className="flex flex-row space-x-4">
-              <div className="flex flex-row items-center justify-center space-x-2">
-                <CommentIcon />
-                <p>56</p>
-              </div>
-              <div className="flex flex-row items-center justify-center space-x-2">
-                <AccessTimeIcon />
-                <p className="text-sm">4 mins</p>
-              </div>
-              <div className="flex flex-row items-center justify-center space-x-2">
-                <CalendarMonthIcon />
-                <p>Oct, 22 2019</p>
-              </div>
-            </div>
-          </div>
-          <div className="pt-12 space-y-2 md:pt-0">
-            <div className="relative">
-              <img src={img_2} className="rounded-lg" />
-              <img
-                src={anchor}
-                className="absolute bottom-0 w-8 h-8 mr-6 rounded-br-lg right-1 md:right-0"
-              />
-            </div>
-            <div className="flex flex-row space-x-2">
-              <img src={avatar} alt="avatar" className="w-6 h-6" />
-              <p>Olumide Adebayo</p>
-            </div>
-            <h3 className="max-w-sm font-bold md:max-w-2xl md:text-xl">
-              FEC approves N27.4b contracts for Works, Housing, FCT ministries
-            </h3>
-            <div className="flex flex-row space-x-4">
-              <div className="flex flex-row items-center justify-center space-x-2">
-                <CommentIcon />
-                <p>56</p>
-              </div>
-              <div className="flex flex-row items-center justify-center space-x-2">
-                <AccessTimeIcon />
-                <p className="text-sm">4 mins</p>
-              </div>
-              <div className="flex flex-row items-center justify-center space-x-2">
-                <CalendarMonthIcon />
-                <p>Oct, 22 2019</p>
-              </div>
-            </div>
-          </div>
+        <div className="grid grid-cols-1 pt-8 mx-auto md:space-y-4 md:pb-24 gap-y-12 md:gap-y-0">
+          <p className="font-bold">Latest Posts</p>
+          {DUMMY_DATA.map((data) => {
+            return (
+              <Link to={"/blog-single"} key={data.id}>
+                <div className="flex flex-col space-y-1">
+                  <div className="relative w-full">
+                    <img
+                      src={data.articleImg}
+                      alt="Voter"
+                      className="w-full rounded md:object-cover"
+                    />
+                    <div className="absolute bottom-0 right-0 z-30">
+                      <img
+                        src={anchor}
+                        alt="anchorIcon"
+                        className="rounded-br"
+                      />
+                    </div>
+                  </div>
+                  <div className="flex flex-row space-x-4">
+                    <img
+                      className="w-6 h-6 rounded-full"
+                      src={data.authorImg}
+                      alt=""
+                    />
+                    <p className="font-bold">{data.author}</p>
+                  </div>
+
+                  <h4 className="max-w-sm font-bold text-md">
+                    {data.postCaption}
+                  </h4>
+                  <div className="flex flex-row space-x-4">
+                    <div className="flex flex-row items-center justify-start space-x-2">
+                      <CommentIcon />
+                      <p>{data.comment}</p>
+                    </div>
+                    <div className="flex flex-row items-center justify-center space-x-2">
+                      <AccessTimeIcon />
+                      <p className="text-sm">{data.timePosted}</p>
+                    </div>
+                    <div className="flex flex-row items-start justify-center space-x-2">
+                      <CalendarMonthIcon />
+                      <p>{data.datePosted}</p>
+                    </div>
+                  </div>
+                </div>
+              </Link>
+            );
+          })}
         </div>
       </div>
       <Footer />

@@ -8,49 +8,57 @@ import FormLabel from "../../UI/FormLabel";
 import { states } from "./states";
 
 const FormTwo = (props) => {
-  const [loading, setLoading] = useState(true);
   const [formisCompleted, setFormIsCompleted] = useState(false);
-  const [data, setData] = useState("");
+  const [data, setData] = useState([]);
+  const [error, setError] = useState(false);
+  const [disable, setDisable] = useState(false);
 
+  // Handling next step of form
   const handleSubmit = (values) => {
     props.next(values);
   };
 
   // Destructuring for Configuring the indicators
-  const { LGAofVotingRes, stateOfOrigin, stateOfVotingRes, ageRange } =
+  const { stateOfOrigin, diasporaVoter, stateOfVotingRes, ageRange } =
     props.data;
 
-  // Selected ID from previous Form
+  console.log(diasporaVoter);
+
+  // Selected ID from previous Form for API consumption
   const selectedId = stateOfVotingRes;
+  console.log("SelectedID:", selectedId);
 
-  // Loading LGA of voting residence from API
-  var requestOptions = {
-    method: "GET",
-    redirect: "follow",
-  };
-
-  fetch(
-    "https://wepollnowbackend.azurewebsites.net/utilities/lga/",
-    requestOptions
-  )
-    .then((response) => response.text())
-    .then((result) => console.log(result))
-    .catch((error) => console.log("error", error));
-
-  console.log(stateOfVotingRes);
-
-  //
   useEffect(() => {
-    if (LGAofVotingRes && stateOfOrigin && ageRange !== "") {
+    // Check to disable LGA of voting residence
+    if (diasporaVoter === "yes") {
+      setDisable(true);
+    }
+    // Loading LGA of voting residence from API with selected ID
+    try {
+      async function getData() {
+        const response = await fetch(
+          `https://wepollnow.azurewebsites.net/utilities/lga/${selectedId}`
+        );
+        const body = await response.json();
+        setData(body);
+        console.log("Body:", body);
+        if (!response.ok) {
+          throw new Error("An error occured");
+        }
+      }
+      getData();
+    } catch (error) {
+      setError(error);
+    }
+    // Configuring indicators
+    if (stateOfOrigin && ageRange !== "") {
       setFormIsCompleted(true);
     }
-  }, [LGAofVotingRes, stateOfOrigin, ageRange]);
+  }, [stateOfOrigin, ageRange, selectedId, stateOfVotingRes, diasporaVoter]);
 
-  // validation Schema
+  //  Formik-Yup validation Schema
   const formTwoValidationSchema = Yup.object({
-    LGAofVotingRes: Yup.string().required().label("* This"),
-    stateOfVotingRes: Yup.string().required().label("* This"),
-    // ageRange
+    //
   });
   return (
     <>
@@ -98,9 +106,45 @@ const FormTwo = (props) => {
                 <Form>
                   <div className="flex flex-col p-2 space-y-2 md:p-8">
                     <div className="h-full px-2 space-y-4 md:px-4">
+                      {/* LGA of voting residence */}
+
+                      <div className="pt-4 space-y-2 rounded-md md:p-2">
+                        <FormLabel
+                          no="i"
+                          title=" Select L.G.A of voting residence (Not applicable for
+                          diaspora Voters)"
+                        />
+                        <p className="text-red-600">
+                          <ErrorMessage name="LGAofVotingRes" />
+                        </p>
+                        <p className="text-xs text-blue-300">
+                          {disable === true &&
+                            "* Field is disabled because you are a diaspora voter."}
+                        </p>
+                        <div className="flex flex-row items-start justify-between">
+                          <Field
+                            disabled={disable === true ? true : false}
+                            as="select"
+                            name="LGAofVotingRes"
+                            className={`block w-full px-3 py-3 mt-1 bg-white border border-gray-300 rounded ${
+                              disable === true ? "cursor-not-allowed" : ""
+                            }`}
+                          >
+                            <option value={null}>--Select an option--</option>
+                            {data.map((item) => {
+                              return (
+                                <option key={item.id} value={item.id}>
+                                  {item.name}
+                                </option>
+                              );
+                            })}
+                          </Field>
+                        </div>
+                      </div>
+
                       {/* State of Origin  */}
 
-                      <div className="space-y-2 md:p-2 pt-4">
+                      <div className="space-y-2 md:p-2">
                         <FormLabel no="i" title=" Select State of Origin" />
                         <p className="text-red-600">
                           <ErrorMessage name="stateOfOrigin" />
@@ -111,6 +155,7 @@ const FormTwo = (props) => {
                             name="stateOfOrigin"
                             className="block w-full px-3 py-3 mt-1 bg-white border border-gray-300 rounded"
                           >
+                            <option value={null}>-- Select an option--</option>
                             {states.map((item) => {
                               return (
                                 <option key={item.id} value={item.id}>
@@ -121,33 +166,10 @@ const FormTwo = (props) => {
                           </Field>
                         </div>
                       </div>
-                      {/* LGA of voting residence */}
-
-                      <div className="space-y-2 rounded-md -pt-4 md:p-2">
-                        <FormLabel
-                          no="i"
-                          title=" Select L.G.A of voting residence (Not applicable for
-                          diaspora Voters)"
-                        />
-                        <p className="text-red-600">
-                          <ErrorMessage name="LGAofVotingRes" />
-                        </p>
-                        <div className="flex flex-row items-start justify-between">
-                          <Field
-                            as="select"
-                            name="LGAofVotingRes"
-                            className="block w-full px-3 py-3 mt-1 bg-white border border-gray-300 rounded"
-                          >
-                            <option value="">Select an option</option>
-                            <option value="Umuahia">Umuahia</option>
-                            <option value="Uyo">Uyo</option>
-                          </Field>
-                        </div>
-                      </div>
 
                       {/* Age Range */}
 
-                      <div className="md:p-2">
+                      <div className="pb-8 md:p-2">
                         <FormLabel no="i" title="Select Your Age Range" />
                         <p className="text-red-600">
                           <ErrorMessage name="ageRange" />
@@ -209,10 +231,10 @@ const FormTwo = (props) => {
                             <p>45-50</p>
                           </label>
                         </div>
-                        <div className="flex flex-row items-center justify-between mt-2 space-x-4 md:p-2 pb-8 md:pb-0 md:mt-0">
+                        <div className="flex flex-row items-center justify-between mt-2 space-x-4 md:p-2 md:pb-0 md:mt-0">
                           <label
                             htmlFor="ageRange5"
-                            className="flex flex-row items-center w-full p-3 space-x-2 border rounded  md:p-4"
+                            className="flex flex-row items-center w-full p-3 space-x-2 border rounded md:p-4"
                           >
                             <Field
                               id="ageRange5"
@@ -231,7 +253,7 @@ const FormTwo = (props) => {
                     <button
                       onClick={() => props.prev(values)}
                       type="button"
-                      className="p-2 px-4 md:ml-6 text-black bg-transparent border border-black rounded-md animateBack"
+                      className="p-2 px-4 text-black bg-transparent border border-black rounded-md md:ml-6 animateBack"
                     >
                       Previous
                     </button>
