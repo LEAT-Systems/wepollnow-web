@@ -30,7 +30,7 @@ const ModalComponent = (props) => {
       const intformatedPhoneNumber = formatPhoneNumberIntl(value);
       const countryEntered = parsePhoneNumber(value).country;
       localStorage.setItem(
-        "phoneNumber",
+        "phoneDetails",
         JSON.stringify({
           phoneNo: intformatedPhoneNumber,
           country: countryEntered,
@@ -53,11 +53,11 @@ const ModalComponent = (props) => {
                   <img src={Close} alt="close" />
                 </button>
               </div>
-
-              <p className="text-xl font-semibold text-center">
-                Input your phone number to proceed
-              </p>
-
+              <div className="flex flex-row items-center justify-center mx-auto">
+                <p className="text-xl font-semibold text-center">
+                  Input your phone number to proceed
+                </p>
+              </div>
               {hasError && (
                 <p className="mx-auto text-red-500">
                   Please enter your correct Phone Number

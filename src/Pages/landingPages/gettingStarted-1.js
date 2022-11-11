@@ -12,6 +12,7 @@ import facebook from "../../images/landingIcons/FB.png";
 import text_logo from "../../images/voteWatermark.png";
 import GettingStartedContent from "./GettingStartedContent";
 import ModalComponent from "./GettingStartedModal";
+import calendar from "../../images/calendar.png";
 
 //
 const GettingStartedOne = () => {
@@ -28,7 +29,7 @@ const GettingStartedOne = () => {
 
   // ================================   JSX   ==========================================
   return (
-    <div className="w-screen h-screen mx-auto overflow-x-hidden">
+    <div className="items-center justify-center w-screen h-screen overflow-x-hidden">
       <Nav />
       <ModalComponent open={open} handleClose={handleClose} />
       <div className="relative flex flex-col">
@@ -51,11 +52,12 @@ const GettingStartedOne = () => {
           <p className="text-xl font-extrabold md:text-3xl">
             Presidential Poll
           </p>
-          <span
-            className={`inline-flex items-center justify-center space-x-1 px-4 py-1 text-xs border-[#08C127] border md:text-lg font-semibold leading-none text-black bg-[#D3E6D7] rounded-md`}
+          <div
+            className={`inline-flex items-center justify-center space-x-1 px-4 py-1 text-xs bg-[#FFFAED] border-[#f9c833] border md:text-lg font-semibold leading-none text-black bg-[#D3E6D7] rounded-md`}
           >
-            <p className="text-sm">Ongoing</p>
-          </span>
+            <img src={calendar} alt="calendarMonth" />
+            <p className="text-sm">February 25, 2023</p>
+          </div>
           <Timer date={countDownDate} size="9xl" color="black" pcolor="black" />
           <p>Proceed to vote by clicking the button below</p>
           <div className="md:pt-8">
@@ -95,9 +97,8 @@ const GettingStartedOne = () => {
             className="w-full md:w-[65%] -mt-[140px] h-full md:h-[230px]"
           />
         </div>
-
-        <GettingStartedContent prompt={handleOpen} />
       </div>
+      <GettingStartedContent prompt={handleOpen} />
     </div>
   );
 };

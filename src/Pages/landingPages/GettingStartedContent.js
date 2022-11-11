@@ -5,7 +5,6 @@ import image from "../../images/image_2.png";
 import Footer from "../../Components/Layout/Landing/Footer";
 import PollsSwiper from "../Polls/PollsSwiper";
 import BlogSingleGroupPage from "../blogPages/blogSingleGroup";
-import { useSlotProps } from "@mui/base";
 
 //
 const GettingStartedContent = (props) => {
@@ -17,7 +16,7 @@ const GettingStartedContent = (props) => {
       </div>
       {/* About section */}
       <div className="w-screen">
-        <div className="relative flex flex-col w-screen mx-auto text-gray-900 md:my-6 md:flex-row md:px-0">
+        <div className="relative flex flex-col w-screen mx-auto md:my-6 md:flex-row md:px-0">
           <div className="right-0 max-w-4xl text-black md:space-y-8 md:right-0 md:py-20 md:p-0 md:absolute">
             <div className="flex md:px-0">
               <img src={image} alt="" className="mt-12 rounded md:mt-0" />
@@ -50,7 +49,7 @@ const GettingStartedContent = (props) => {
       </div>
 
       {/*Mini Blog section  */}
-      <div className="pb-12 md:pb-24 md:pt-24">
+      <div className="pb-12 md:pb-24">
         <BlogSingleGroupPage />
       </div>
 

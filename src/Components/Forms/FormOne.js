@@ -8,24 +8,40 @@ import FormLabel from "../../UI/FormLabel";
 import { states } from "./states";
 
 const FormOne = (props) => {
+  // destructuring to configure the form arrow indicators
+  let { email, firstTimeVoter, diasporaVoter, stateOfVotingRes } = props.data;
   const [formisCompleted, setFormIsCompleted] = useState(false);
+  const [isDiaspora, setIsDiaspora] = useState();
+  const [disable, setDisable] = useState(diasporaVoter);
+
+  // Handles next step of form
   const handleSubmit = (values) => {
     props.next(values);
   };
 
+  // Listening to onClick event on diaspora voter radio field
+  const handlerToBlur = (e) => {
+    e.preventDefault();
+    setIsDiaspora(e.currentTarget.value);
+    if (isDiaspora === "yes") {
+      setDisable(true);
+    }
+    if (isDiaspora === "no") {
+      setDisable(false);
+    }
+  };
+
   // Configuring the indicators
-  const { email, firstTimeVoter, diasporaVoter, stateOfVotingRes } = props.data;
   useEffect(() => {
-    if (diasporaVoter && stateOfVotingRes && email && firstTimeVoter !== "") {
+    if (diasporaVoter && email && firstTimeVoter !== "") {
       setFormIsCompleted(true);
     }
   }, [email, stateOfVotingRes, diasporaVoter, firstTimeVoter]);
 
-  // Validation Schema
+  // Yup form Validation Schema
   const formOneValidationSchema = Yup.object({
     email: Yup.string().email().required().label("* This"),
     firstTimeVoter: Yup.string().required().label("* This"),
-    stateOfVotingRes: Yup.string().required().label("*This"),
   });
   return (
     <>
@@ -76,7 +92,7 @@ const FormOne = (props) => {
                     <div className="h-full px-4 space-y-4 ">
                       {/* Email Address */}
 
-                      <div className="flex flex-col space-y-1 md:p-2 pt-8 md:pt-0">
+                      <div className="flex flex-col pt-8 space-y-1 md:p-2 md:pt-0">
                         <FormLabel no="i" title="Enter Email " />
                         <p className="text-red-600">
                           <ErrorMessage name="email" />
@@ -123,10 +139,11 @@ const FormOne = (props) => {
                       </div>
 
                       {/* Diaspora Voter */}
-
                       <div className="space-y-1">
                         <FormLabel no="i" title="Are you a Diaspora voter? " />
                         <div className="flex flex-row items-center justify-between space-x-4 md:p-2">
+                          {/*  */}
+                          {/* DIASPORA VOTER OPTION : 'YES'  */}
                           <label
                             htmlFor="diasporaVoter"
                             className="flex flex-row items-center w-full p-4 space-x-2 border rounded"
@@ -136,10 +153,13 @@ const FormOne = (props) => {
                               type="radio"
                               name="diasporaVoter"
                               value="yes"
+                              onClick={handlerToBlur}
                               className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
                             />
                             <p>Yes</p>
                           </label>
+
+                          {/* DIASPORA VOTER OPTION : 'NO'  */}
                           <label
                             htmlFor="diasporaVoterTwo"
                             className="flex flex-row items-center w-full p-4 space-x-2 border rounded"
@@ -149,16 +169,16 @@ const FormOne = (props) => {
                               type="radio"
                               name="diasporaVoter"
                               value="no"
+                              onClick={handlerToBlur}
                               className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
                             />
                             <p>No</p>
                           </label>
                         </div>
                       </div>
-
                       {/* Select State of voting residence */}
 
-                      <div className="flex flex-col space-y-1 md:p-2  pb-8 md:pb-0">
+                      <div className="flex flex-col pb-8 space-y-1 md:pb-0">
                         <FormLabel
                           title="Select state of voting residence (Not applicable for
                           Diaspora Voters) "
@@ -166,12 +186,20 @@ const FormOne = (props) => {
                         <p className="text-red-600">
                           <ErrorMessage name="stateOfVotingRes" />
                         </p>
+                        <p className="text-xs text-blue-300">
+                          {disable &&
+                            "* Field is disabled because you are a diaspora voter"}
+                        </p>
                         <Field
+                          disabled={disable ? true : false}
                           as="select"
                           name="stateOfVotingRes"
                           placeholder="Select State of Voting Residence"
-                          className="w-full p-4 px-4 mb-2 text-lg text-gray-700 placeholder-gray-600 border rounded-md "
+                          className={`w-full p-4 px-4 mb-2 text-lg text-gray-700 placeholder-gray-600 border rounded-md ${
+                            disable && "cursor-not-allowed"
+                          }`}
                         >
+                          <option value={null}> -- Select an option -- </option>
                           {states.map((item) => {
                             return (
                               <option key={item.id} value={item.id}>
@@ -181,8 +209,6 @@ const FormOne = (props) => {
                           })}
                         </Field>
                       </div>
-
-                      {/*  */}
                     </div>
                   </div>
                   <footer className="w-full p-4 border-t">
