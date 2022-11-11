@@ -1,3 +1,4 @@
+import PieChart from "./Components/Layout/Admin/Dashboard/Charts/PieChart";
 import React, { Suspense } from "react";
 import { Route, Switch } from "react-router-dom";
 import VoteFormTwo from "./Components/Forms/VoteForm/VoteFormTwo";
@@ -189,6 +190,9 @@ function App() {
 
         <Route path='/barChart' exact>
           <BarChart />
+        </Route>
+        <Route path='/pieChart' exact>
+          <PieChart />
         </Route>
       
         {/*=========================  NOT FOUND ROUTE ========================*/}
