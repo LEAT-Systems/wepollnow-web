@@ -18,10 +18,9 @@ const BlogSingle = () => {
   return (
     <>
       <Nav />
-      <div className="flex flex-col items-center justify-center md:px-24 md:flex-row md:min-w-[80%]">
+      <div className="flex flex-col items-center justify-center md:px-24 md:flex-row ">
         {/* Main Reading Bar */}
-
-        <div className="flex flex-col items-start justify-start w-full px-8 pt-4 pb-12 space-y-4 md:w-full">
+        <div className="flex md:max-w-[80%] md:min-w-[40%] flex-col items-start justify-start w-full px-8 pt-4 pb-12 space-y-4 md:w-full">
           <button onClick={backHandler} className="flex flex-row space-x-2">
             <img src={backarrow} alt="back_button" />
             <p>Back</p>
@@ -70,7 +69,7 @@ const BlogSingle = () => {
           </div>
         </div>
         {/* Side Bar */}
-        <div className="grid grid-cols-1 -mt-16 md:space-y-4 md:gap-y-0">
+        <div className="grid grid-cols-1 space-y-6 md:-mt-16 md:space-y-4 md:gap-y-0">
           <p className="text-[14px] font-bold">Latest Posts</p>
           {DUMMY_DATA.map((data) => {
             return (
@@ -123,7 +122,7 @@ const BlogSingle = () => {
             );
           })}
         </div>
-        {/* <div className="grid grid-cols-1 pt-8 mx-auto md:space-y-4 w-full  md:pb-24 gap-y-12 md:gap-y-0">
+        {/* <div className="grid w-full grid-cols-1 pt-8 mx-auto md:space-y-4 md:pb-24 gap-y-12 md:gap-y-0">
           <p className="font-bold">Latest Posts</p>
           {DUMMY_DATA.map((data) => {
             return (
