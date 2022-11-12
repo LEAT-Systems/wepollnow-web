@@ -2,17 +2,27 @@
 @tailwind components;
 @tailwind utilities;
 
+/* This colors doesn't affect anything, so please don't touch */
+customColors {
+color: #fceaea; /* concluded color */
+color: #fff9eb; /* scheduled color */
+color: #ebf5ed; /* ongoing color */
+color: #082a0f; /* primary color */
+color: #08c127; /* progress color */
+color: #e7f9ea; /* progress background color */
+}
 
 
 /* .active {
   @apply after:content-[''] relative after:absolute
   after:w-1 after:h-1 bg-green-400  after:top-0 right-0;
 } */
-* {
-  margin: 0px;
-  padding: 0px;
-  box-sizing: border-box;
+
+
+*, body, html {
+  font-family: "Montserrat", sans-serif;
 }
+
 .active {
   @apply relative bg-transparentWhite py-4 px-2 first:pt-[.1rem] before:absolute before:top-[1.1rem] before:right-0 before:content-[""] before:bg-green-500 before:h-[2.7rem] before:w-[.3rem] before:rounded-[1rem];
 }
@@ -38,17 +48,21 @@ h1 {
   @apply font-extrabold;
   font-family: "Montserrat", sans-serif;
 }
+
 h2,
 p {
   font-family: "Montserrat", sans-serif;
 }
+
 input:focus {
   outline: none;
 }
+
 input[type="radio"]:checked {
   accent-color: green;
   color: rgb(156 163 175);
 }
+
 .radio:checked ~ label {
   @apply bg-green-400;
 }
@@ -76,9 +90,11 @@ input[type="radio"]:checked {
 .modal__header__title > h4 {
   @apply font-bold text-sm mr-2 whitespace-nowrap
 }
+
 .modal__header__title > p {
   @apply w-full h-[1px] text-[1px] font-[100] bg-gray-400 my-auto
 }
+
 .modal__header__title > span {
   @apply w-[.99rem] h-[.8rem] ml-2 my-auto rounded-full bg-gray-400
 }
@@ -163,6 +179,24 @@ input[type="select"] option {
   background: "#08c127" !important;
 }
 
+.scrollable::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  width: 0.4rem;
+  height: 0.4rem;
+}
+
+.scrollable::-webkit-scrollbar-track,
+body::-webkit-scrollbar-track {
+  background: #eee;
+}
+
+.scrollable::-webkit-scrollbar-thumb,
+body::-webkit-scrollbar-thumb {
+  background-color: #082a0f;
+  border-radius: 10px;
+  /* border: 3px solid #000; */
+}
+
 .hide-scrollbar::-webkit-scrollbar {
   /* Chrome, Safari, Opera */
   display: none;
@@ -199,21 +233,42 @@ input:focus {
   outline: 1px solid #eee;
 }
 
+.iti__flag {
+  background-image: url("images/ng_1.png");
+}
+
 /* Table header */
 .table-head {
   @apply px-6 py-3 font-bold lg:font-[700] text-base normal-case min-w-fit whitespace-nowrap;
 }
 
 
+/* Search */
+.searchInp {
+  @apply flex w-full
+}
+
+.searchInp input{
+ @apply border-x-0 border-t-0 border-b rounded-md rounded-tl-none rounded-bl-none text-[1rem] pr-4 py-5 md:py-5 h-8 md:h-12 w-full lg:w-[22rem] md:w-[16rem] focus:outline-none pl-1 md:pl-0
+}
+
+.searchIcons {
+ @apply  pt-3 pb-1 md:pb-1 h-full md:h-12 w-6 md:w-12 grid place-items-center cursor-pointer border-b 
+}
 
 .searchResult {
-  @apply bg-white w-[22rem] h-[22rem] shadow-md overflow-hidden overflow-y-auto;
+  @apply bg-white w-[22rem] h-[22rem] shadow-md overflow-hidden overflow-y-auto
 }
 
 .searchResult::-webkit-scrollbar {
   display: none;
 }
 
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .iti__flag {
+    background-image: url("./images/ng_new.png");
+  }
+}
 
 .PhoneInputInput {
   @apply p-2 w-full rounded !important;
@@ -221,14 +276,4 @@ input:focus {
 
 .PhoneInputInput:focus {
   @apply p-2 w-full outline-none rounded-md !important;
-}
-
-.fade-enter {
-  opacity: 0;
-  z-index: 1;
-}
-
-.fade-enter.fade-enter-active {
-  opacity: 1;
-  transition: opacity 250ms ease-in;
 }
