@@ -9,6 +9,7 @@ import EastIcon from "@mui/icons-material/East";
 import back from "../../../images/backArrow.png";
 import hamburger from "../../../images/hamburger.png";
 import { Modal, Slide } from "@mui/material";
+import hamburgerSmall from "../../../images/hamburgSmall.png";
 
 const Nav = (props) => {
   const [data, setData] = useState();
@@ -269,7 +270,16 @@ const Nav = (props) => {
                 setShow(!show);
               }}
             >
-              <img src={hamburger} alt="hamburgerButton" className="" />
+              <img
+                src={hamburger}
+                alt="hamburgerButton"
+                className="hidden md:flex"
+              />
+              <img
+                src={hamburgerSmall}
+                alt="hamburgerButton"
+                className="flex md:hidden"
+              />
             </button>
           </div>
         </div>

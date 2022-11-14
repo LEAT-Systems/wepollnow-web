@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+=======
 /* This colors doesn't affect anything, so please don't touch */
 customColors {
 color: #fceaea; /* concluded color */
@@ -40,8 +41,10 @@ input::placeholder {
   font-family: "Montserrat", sans-serif;
 }
 
-select, input, button {
-  @apply focus:outline-gray-300 outline-gray-300 focus:outline-1 outline-1
+select,
+input,
+button {
+  @apply focus:outline-gray-300 outline-gray-300 focus:outline-1 outline-1;
 }
 
 h1 {
@@ -74,29 +77,29 @@ input[type="radio"]:checked {
 }
 
 .custom__select {
-  @apply text-[#616b62] font-medium text-base capitalize h-full w-full border-2 rounded-md py-4 px-3 appearance-none
+  @apply text-[#616b62] font-medium text-base capitalize h-full w-full border-2 rounded-md py-4 px-3 appearance-none;
 }
 
 .custom__select__container {
-  @apply font-medium text-base w-full relative after:content-[""] after:absolute after:top-[3.7rem] after:right-1 after:-translate-y-2/4 after:-translate-x-2/4 after:border-x-transparent after:border-solid after:border-[0.5em] after:border-t-[#333] after:border-b-transparent after:pointer-events-none
+  @apply font-medium text-base w-full relative after:content-[""] after:absolute after:top-[3.7rem] after:right-1 after:-translate-y-2/4 after:-translate-x-2/4 after:border-x-transparent after:border-solid after:border-[0.5em] after:border-t-[#333] after:border-b-transparent after:pointer-events-none;
 }
 
 /* Modals style */
 
 .modal__header__title {
-  @apply flex mb-2
+  @apply flex mb-2;
 }
 
 .modal__header__title > h4 {
-  @apply font-bold text-sm mr-2 whitespace-nowrap
+  @apply font-bold text-sm mr-2 whitespace-nowrap;
 }
 
 .modal__header__title > p {
-  @apply w-full h-[1px] text-[1px] font-[100] bg-gray-400 my-auto
+  @apply w-full h-[1px] text-[1px] font-[100] bg-gray-400 my-auto;
 }
 
 .modal__header__title > span {
-  @apply w-[.99rem] h-[.8rem] ml-2 my-auto rounded-full bg-gray-400
+  @apply w-[.99rem] h-[.8rem] ml-2 my-auto rounded-full bg-gray-400;
 }
 
 .animate {
@@ -242,6 +245,7 @@ input:focus {
   @apply px-6 py-3 font-bold lg:font-[700] text-base normal-case min-w-fit whitespace-nowrap;
 }
 
+=======
 
 /* Search */
 .searchInp {
@@ -264,11 +268,6 @@ input:focus {
   display: none;
 }
 
-@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
-  .iti__flag {
-    background-image: url("./images/ng_new.png");
-  }
-}
 
 .PhoneInputInput {
   @apply p-2 w-full rounded !important;

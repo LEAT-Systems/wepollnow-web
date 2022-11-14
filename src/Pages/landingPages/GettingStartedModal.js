@@ -10,7 +10,6 @@ import Slide from "@mui/material/Slide";
 import { Modal } from "@mui/material";
 import Close from "../../images/CloseButton.png";
 import tooltipIcon from "../../images/tooltip.png";
-import ToolTip from "../../UI/Tooltip";
 
 const ModalComponent = (props) => {
   const history = useHistory();

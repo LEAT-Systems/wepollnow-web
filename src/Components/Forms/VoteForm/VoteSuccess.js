@@ -11,11 +11,6 @@ import mail from "../../../images/mail.png";
 import copyIcon from "../../../images/copy.png";
 import { Link } from "react-router-dom";
 import { Slide } from "@mui/material";
-import Swiper from "swiper";
-import { SwiperSlide } from "swiper/react";
-import "swiper/css";
-import "swiper/css/navigation";
-import { Navigation } from "swiper";
 
 const VoteSuccess = () => {
   const [copied, setCopied] = useState(false);
