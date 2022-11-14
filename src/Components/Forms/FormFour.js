@@ -83,7 +83,7 @@ const FormFour = (props) => {
                               id="gender"
                               type="radio"
                               name="gender"
-                              value="male"
+                              value="1"
                               className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
                             />
                             <p>Male</p>
@@ -96,7 +96,7 @@ const FormFour = (props) => {
                               id="gender2"
                               type="radio"
                               name="gender"
-                              value="female"
+                              value="2"
                               className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
                             />
                             <p>Female</p>
@@ -120,7 +120,7 @@ const FormFour = (props) => {
                               id="religion"
                               type="radio"
                               name="religion"
-                              value="christianity"
+                              value="1"
                               className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
                             />
                             <p>Christianity</p>
@@ -133,7 +133,7 @@ const FormFour = (props) => {
                               id="religion2"
                               type="radio"
                               name="religion"
-                              value="islam"
+                              value="2"
                               className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
                             />
                             <p>Islam</p>
@@ -148,7 +148,7 @@ const FormFour = (props) => {
                               id="religion3"
                               type="radio"
                               name="religion"
-                              value="traditional"
+                              value="3"
                               className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
                             />
                             <p>Traditional</p>
@@ -161,7 +161,7 @@ const FormFour = (props) => {
                               id="religion4"
                               type="radio"
                               name="religion"
-                              value="other"
+                              value="4"
                               className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
                             />
                             <p>Other</p>
@@ -185,7 +185,7 @@ const FormFour = (props) => {
                               id="selectOneOpt"
                               type="radio"
                               name="selectOneOpt"
-                              value="student"
+                              value="1"
                               className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
                             />
                             <p>Home owner</p>
@@ -198,7 +198,7 @@ const FormFour = (props) => {
                               id="selectOneOpt2"
                               type="radio"
                               name="selectOneOpt"
-                              value="unemployed"
+                              value="2"
                               className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
                             />
                             <p>Renting</p>
@@ -211,7 +211,7 @@ const FormFour = (props) => {
                               id="selectOneOpt3"
                               type="radio"
                               name="selectOneOpt"
-                              value="employed"
+                              value="3"
                               className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
                             />
                             <p>None</p>
@@ -235,7 +235,7 @@ const FormFour = (props) => {
                               id="accomodationStatus"
                               type="radio"
                               name="accomodationStatus"
-                              value="Living with family"
+                              value="1"
                               className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
                             />
                             <p className="text-lg">Living with family</p>
@@ -248,7 +248,7 @@ const FormFour = (props) => {
                               id="accomodationStatus2"
                               type="radio"
                               name="accomodationStatus"
-                              value="Living with friends"
+                              value="2"
                               className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
                             />
                             <p className="text-lg">Living with friends</p>
@@ -261,7 +261,7 @@ const FormFour = (props) => {
                               id="accomodationStatus3"
                               type="radio"
                               name="accomodationStatus"
-                              value="Living on your own"
+                              value="3"
                               className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
                             />
                             <p className="text-lg">Living on your own</p>

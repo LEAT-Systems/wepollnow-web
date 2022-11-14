@@ -31,7 +31,31 @@ export const DUMMY_DATA = [
     authorImg: a3,
     author: "Rufus Kayode",
     postCaption:
-      "Presdient Buhari commends INEC initiatives to end vote buying in 2023 ",
+      "President Buhari commends INEC initiatives to end vote buying in 2023 ",
+    views: "8",
+    timePosted: "1 mins",
+    datePosted: "Nov, 22 2022",
+    postMessage: "Lorem Ipsum Lorem Ipsum Lorem Ipsum",
+  },
+  {
+    id: "004",
+    articleImg: a3,
+    authorImg: a3,
+    author: "Rufus Kayode",
+    postCaption:
+      "President Buhari commends INEC initiatives to end vote buying in 2023 ",
+    views: "8",
+    timePosted: "1 mins",
+    datePosted: "Nov, 22 2022",
+    postMessage: "Lorem Ipsum Lorem Ipsum Lorem Ipsum",
+  },
+  {
+    id: "005",
+    articleImg: a3,
+    authorImg: a3,
+    author: "Rufus Kayode",
+    postCaption:
+      "President Buhari commends INEC initiatives to end vote buying in 2023 ",
     views: "8",
     timePosted: "1 mins",
     datePosted: "Nov, 22 2022",

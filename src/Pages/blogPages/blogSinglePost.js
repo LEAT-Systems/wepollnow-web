@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Nav from "../../Components/Layout/Landing/mainNav";
 import anchor from "../../images/anchor.png";
 import calendar from "../../images/calendar.png";
@@ -12,6 +12,15 @@ import { DUMMY_DATA } from "./DummyData";
 
 const BlogSingle = () => {
   const history = useHistory();
+  const [data, setData] = useState([]);
+
+  // Setting data from API here
+  useEffect(() => {
+    setData(DUMMY_DATA);
+  }, []);
+
+  // TO check if API data contents is empty
+  const isEmpty = data.length === 0;
   const backHandler = () => {
     history.goBack();
   };
@@ -26,7 +35,11 @@ const BlogSingle = () => {
               <img src={backarrow} alt="back_button" />
               <p>Back</p>
             </button>
-            <img src={img_2} className="w-[700px] md:h-[460px]" />
+            <img
+              src={img_2}
+              className="w-[700px] md:h-[460px]"
+              alt="post_image"
+            />
             <div className="flex flex-row space-x-2">
               <img src={img_2} alt="avatar" className="w-6 h-6" />
               <p>Olumide Adebayo</p>
@@ -72,11 +85,20 @@ const BlogSingle = () => {
           </div>
           {/* Side Bar */}
           <div className="grid grid-cols-1 space-y-6 md:-mt-16 md:space-y-4 md:gap-y-0">
-            <p className="text-[14px] font-bold">Latest Posts</p>
-            {DUMMY_DATA.map((data) => {
+            {!isEmpty && <p className="text-[14px] font-bold">Latest Posts</p>}
+            {isEmpty && (
+              <div className="flex flex-row justify-center md:-pt-98">
+                <div className="border-8 border-[#EAB308] w-2/3 p-12">
+                  <p className="text-sm md:text-2xl">
+                    Latest posts not available at the moment...
+                  </p>
+                </div>
+              </div>
+            )}
+            {data.slice(0, 3).map((data) => {
               return (
-                <div className="w-full ">
-                  <Link to={"/blog-single"} key={data.id}>
+                <div className="w-full" key={data.id}>
+                  <Link to={"/blog-single"}>
                     <div className="flex flex-col w-full space-y-1 md:h-full">
                       <div className="relative">
                         <img
@@ -96,7 +118,7 @@ const BlogSingle = () => {
                         <img
                           className="w-6 h-6 rounded-full"
                           src={data.authorImg}
-                          alt=""
+                          alt="authorImg"
                         />
                         <p className="font-normal">{data.author}</p>
                       </div>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Nav from "../../Components/Layout/Landing/mainNav";
 import calendar from "../../images/calendar.png";
@@ -10,6 +10,16 @@ import anchor from "../../images/anchor.png";
 import { DUMMY_DATA } from "./DummyData";
 
 const BlogPage = () => {
+  const [data, setData] = useState([]);
+
+  // Setting data from API here
+  useEffect(() => {
+    setData(DUMMY_DATA);
+  }, []);
+
+  // TO check if API data contents is empty
+  const isEmpty = data.length === 0;
+
   return (
     <div className="w-screen h-screen overflow-x-hidden">
       <Nav bg="FCEBEE" bgImg="hero-container-pattern" hamburgerBg="FCEBEE" />
@@ -26,10 +36,19 @@ const BlogPage = () => {
           <img src={image} className="w-[100%] h-[80%]" alt={"Voter"} />
         </div>
       </div>
-
+      {/* Rendering the empty container */}
+      {isEmpty && (
+        <div className="flex flex-row items-center justify-center mt-48">
+          <div className="border-8 border-[#EAB308] w-2/3 p-12">
+            <p className="text-sm md:text-2xl">
+              No post available at the moment...
+            </p>
+          </div>
+        </div>
+      )}
       {/* ITEMS */}
-      <div className="grid min-h-screen grid-cols-1 px-4 mt-4 md:space-y-0 gap-y-12 md:gap-y-0 gap-x-12 md:px-24 md:gap-x-12 md:grid-cols-3 md:mt-24">
-        {DUMMY_DATA.map((data) => {
+      <div className="grid min-h-screen grid-cols-1 px-4 mt-12 mb-12 md:mb-24 md:space-y-0 gap-y-12 md:gap-y-12 gap-x-12 md:px-24 md:gap-x-12 md:grid-cols-3 md:mt-24">
+        {data.map((data) => {
           return (
             <div className="w-full" key={data.id}>
               <Link to={"/blog-single"}>

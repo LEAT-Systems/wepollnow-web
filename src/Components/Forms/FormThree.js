@@ -68,7 +68,7 @@ const FormThree = (props) => {
                     <div className="h-full px-4 space-y-2">
                       {/*  */}
                       {/* Do you have a PVC */}
-                      <div className="py-4 space-y-1 pt-8 md:pt-0">
+                      <div className="py-4 pt-8 space-y-1 md:pt-0">
                         <FormLabel no="i" title="Do you have a PVC?" />
                         <p className="text-red-600">
                           <ErrorMessage name="pvc" />
@@ -82,7 +82,7 @@ const FormThree = (props) => {
                               id="pvc"
                               type="radio"
                               name="pvc"
-                              value="yes"
+                              value="true"
                               className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
                             />
                             <p>Yes</p>
@@ -95,7 +95,7 @@ const FormThree = (props) => {
                               id="pvc2"
                               type="radio"
                               name="pvc"
-                              value="25"
+                              value="false"
                               className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
                             />
                             <p>No</p>
@@ -119,7 +119,7 @@ const FormThree = (props) => {
                               id="maritalStatus"
                               type="radio"
                               name="maritalStatus"
-                              value="single"
+                              value="1"
                               className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
                             />
                             <p>Single</p>
@@ -132,7 +132,7 @@ const FormThree = (props) => {
                               id="maritalStatus2"
                               type="radio"
                               name="maritalStatus"
-                              value="married"
+                              value="2"
                               className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
                             />
                             <p>Married</p>
@@ -147,7 +147,7 @@ const FormThree = (props) => {
                               id="maritalStatus3"
                               type="radio"
                               name="maritalStatus"
-                              value="divorced"
+                              value="3"
                               className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
                             />
                             <p>Divorced</p>
@@ -160,7 +160,7 @@ const FormThree = (props) => {
                               id="maritalStatus4"
                               type="radio"
                               name="maritalStatus"
-                              value="widowed"
+                              value="4"
                               className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
                             />
                             <p className="">Widowed</p>
@@ -184,7 +184,7 @@ const FormThree = (props) => {
                               id="employmentStatus"
                               type="radio"
                               name="employmentStatus"
-                              value="student"
+                              value="1"
                               className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
                             />
                             <p>Student</p>
@@ -197,7 +197,7 @@ const FormThree = (props) => {
                               id="employmentStatus2"
                               type="radio"
                               name="employmentStatus"
-                              value="employed"
+                              value="2"
                               className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
                             />
                             <p className="">Employed</p>
@@ -212,7 +212,7 @@ const FormThree = (props) => {
                               id="employmentStatus3"
                               type="radio"
                               name="employmentStatus"
-                              value="unemployed"
+                              value="3"
                               className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
                             />
                             <p>Unemployed</p>
@@ -225,7 +225,7 @@ const FormThree = (props) => {
                               id="employmentStatus4"
                               type="radio"
                               name="employmentStatus"
-                              value="self-employed"
+                              value="4"
                               className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
                             />
                             <p className="text-sm md:text-lg">Self-employed</p>
@@ -238,7 +238,7 @@ const FormThree = (props) => {
                     <button
                       type="button"
                       onClick={() => props.prev(values)}
-                      className="p-2 px-4 md:ml-8 text-black bg-transparent border border-black rounded-md animateBack"
+                      className="p-2 px-4 text-black bg-transparent border border-black rounded-md md:ml-8 animateBack"
                     >
                       Previous
                     </button>

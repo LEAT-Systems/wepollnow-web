@@ -1,5 +1,6 @@
 import React from "react";
-import PollsSingle from "./Polls/PollsSingle";
+// import SliderSocial from "../Components/Forms/VoteForm/Slider";
+
 // import FormThree from "../Components/Forms/FormThree";
 // import FormOne from "../Components/Forms/FormOne";
 // import FormTwo from "../Components/Forms/FormTwo";
@@ -17,8 +18,7 @@ import PollsSingle from "./Polls/PollsSingle";
 
 const Test = () => {
   return (
-    <>
-      {/* <Polls /> */}
+    <div className="w-[70%] px-48 mx-auto">
       {/* <BlogSingle /> */}
       {/* <PollsPageContentOne /> */}
       {/* <PollsSwiper /> */}
@@ -28,7 +28,7 @@ const Test = () => {
       {/* <FormThree /> */}
       {/* <FormComponent /> */}
       {/* <PollsSingle /> */}
-    </>
+    </div>
   );
 };
 
@@ -59,3 +59,56 @@ export default Test;
 // };
 
 // export default GettingStartedThree;
+
+// import React from "react";
+// import Nav from "../../Layout/Landing/mainNav";
+// import { Link } from "react-router-dom";
+// import SwiperSlideSocials from "./SocialSwiper";
+// import doneIcon from "../../../images/doneIcon.png";
+
+// const VoteSuccess = () => {
+//   return (
+//     <div>
+//       <Nav />
+//       <div className="flex flex-row items-center justify-center min-h-screen px-4 py-4 mx-auto md:px-0">
+//         <div className="w-full px-4 py-4 text-lg text-gray-700 border rounded-lg md:w-2/4">
+//           <header className="w-full py-4 md:p-8">
+//             <div className="flex flex-col items-center justify-center space-y-4">
+//               <img src={doneIcon} alt="success" />
+//               <p className="p-1 px-4 text-sm text-center text-black md:text-xl">
+//                 Yay...!!! Your vote has been recorded successfully.
+//                 <br />
+//                 Kindly Share poll with friends.
+//               </p>
+
+//               <SwiperSlideSocials />
+//             </div>
+//           </header>
+
+//           <section>
+//             <div className="flex flex-row items-end justify-end w-full p-2 space-x-4 md:px-16 md:p-8">
+//               <Link to="/">
+//                 <button
+//                   type="button"
+//                   className="p-2 px-6 ml-6 text-black bg-transparent border border-black rounded-md animateBack"
+//                 >
+//                   Go Home
+//                 </button>
+//               </Link>
+//               <Link to="/polls">
+//                 <button
+//                   type="submit"
+//                   className="p-2 px-6 text-white animate bg-[#08C127] rounded-md"
+//                 >
+//                   More Polls
+//                 </button>
+//               </Link>
+//             </div>
+//           </section>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default VoteSuccess;
