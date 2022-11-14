@@ -23,9 +23,9 @@ const SearchBar = ({ tableData, setSearchResult, placeholder }) => {
       return isInObject;
     });
 
-    console.log(`Target is ${target}`);
-    console.log("Is it in the newTableData?");
-    console.log(newTableData);
+    // console.log(`Target is ${target}`);
+    // console.log("Is it in the newTableData?");
+    // console.log(newTableData);
 
     /* Update search result with the new table data */
     setSearchResult(newTableData);

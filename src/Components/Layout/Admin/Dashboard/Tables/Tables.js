@@ -1,11 +1,15 @@
-/** @format */
-
 import React from "react";
 import TableBody from "./TableBody";
 
 const Tables = ({ data }) => {  
   const results = data.map((data) => {
-    return <TableBody key={data.id} tableData={data} />;
+    return (
+      <TableBody
+        key={data.id}
+        id={data.id}
+        tableData={data}
+      />
+    );
   });
 
   return (
