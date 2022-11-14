@@ -13,7 +13,7 @@ const AllPolls = (props) => {
 
   // Setting data from API here
   useEffect(() => {
-    setData([]);
+    setData(Polls);
   }, []);
 
   // TO check if contents are empty

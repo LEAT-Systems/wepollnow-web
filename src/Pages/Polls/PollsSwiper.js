@@ -16,7 +16,7 @@ const PollsSwiper = (props) => {
 
   // Setting data from API here
   useEffect(() => {
-    setData([]);
+    setData(Polls);
   }, []);
 
   // TO check if API data contents is empty
