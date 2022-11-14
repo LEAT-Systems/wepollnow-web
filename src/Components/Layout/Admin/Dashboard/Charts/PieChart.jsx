@@ -3,53 +3,58 @@
 import React from "react";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Pie } from "react-chartjs-2";
-import ChartDataLabels from 'chartjs-plugin-datalabels'
+import ChartDataLabels from "chartjs-plugin-datalabels";
 
-ChartJS.register(ArcElement, Tooltip, Legend, ChartDataLabels);
-ChartJS.defaults.set('plugins.datalabels', {
-  color: "#FE777B"
-})
+ChartJS.register(ArcElement, Tooltip, Legend);
+
 const data = {
   labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
   datasets: [
     {
       label: [
-        "# of Votes",
-        "12254 of Votes",
-        "#3245 of Votes",
-        "326534 of Votes",
-        "0000 of Votes",
+        "APC",
+        "PDP",
+        "LP",
+        "ADC",
+        "AAC",
+        "APGA",
+        "AUN",
+        "BNPP",
+        "CNC",
+        "DPC",
       ],
-      data: [12, 19, 3, 5, 2, 3],
+      data: [18, 15, 20, 24, 30],
       backgroundColor: [
-        "rgba(255, 99, 132, 0.2)",
-        "rgba(54, 162, 235, 0.2)",
-        "rgba(255, 206, 86, 0.2)",
-        "rgba(75, 192, 192, 0.2)",
-        "rgba(153, 102, 255, 0.2)",
-        "rgba(255, 159, 64, 0.2)",
+        "rgb(206, 243, 212)",
+        "rgb(173, 234, 183)",
+        "rgb(131, 224, 147)",
+        "rgb(49, 203, 75)",
+        "rgb(7, 161, 32)",
       ],
-      borderColor: [
-        "rgba(255, 99, 132, 1)",
-        "rgba(54, 162, 235, 1)",
-        "rgba(255, 206, 86, 1)",
-        "rgba(75, 192, 192, 1)",
-        "rgba(153, 102, 255, 1)",
-        "rgba(255, 159, 64, 1)",
-      ],
-      borderWidth: 1,
+      borderColor: [null],
+      borderWidth: 0,
     },
   ],
 };
 
+const colors = data.datasets[0].data.map((item) => {
+  console.log(item);
+  if (item <= parseInt(Math.min(...data.datasets[0].data)) + 7) {
+    console.log(item + ": ", parseInt(Math.min(...data.datasets[0].data)) + 7);
+    return "#000";
+  } else {
+    return "#fff";
+  }
+});
+
+// console.log(colors);
 
 export default function PieChart() {
-  
-  
   return (
     <div className='w-full h-full relative inline-block'>
       <Pie
         data={data}
+        plugins={[ChartDataLabels]}
         options={{
           maintainAspectRatio: false,
           responsive: true,
@@ -58,7 +63,6 @@ export default function PieChart() {
               position: "right",
               align: "center",
               labels: {
-                color: "#082a0f",
                 boxWidth: 10,
                 boxHeight: 7,
                 usePointStyle: true,
@@ -69,11 +73,22 @@ export default function PieChart() {
             },
             /* Formatting Pie DataLabel display ontop */
             datalabels: {
+              color: colors,
+              labels: (arg) => {
+                return arg.label;
+              },
               formatter: function (value, context) {
-                var sumOfDataArr = data.datasets[0].data.reduce((accumulator, value) => {
+                const sumOfDataArr = data.datasets[0].data.reduce(
+                  (accumulator, value) => {
                     return accumulator + value;
-                  });
-                return (Math.round(value * 100 / sumOfDataArr))  + "%";
+                  }
+                );
+                const percentage = Math.round((value * 100) / sumOfDataArr);
+                if (percentage > 7) {
+                  return `${percentage}%`;
+                } else {
+                  return (value = "");
+                }
               },
             },
           },
@@ -82,5 +97,3 @@ export default function PieChart() {
     </div>
   );
 }
-
-
