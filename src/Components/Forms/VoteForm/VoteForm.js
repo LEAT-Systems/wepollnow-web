@@ -117,7 +117,7 @@ const FormFive = () => {
       );
 
       // redirect or throw error
-      if (response.ok) {
+      if (response.ok === true) {
         history.push("/vote/vote-form-next", { replace: true });
       } else {
         throw new Error("A problem Occured");

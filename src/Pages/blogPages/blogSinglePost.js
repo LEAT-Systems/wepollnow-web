@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import Nav from "../../Components/Layout/Landing/mainNav";
 import anchor from "../../images/anchor.png";
 import calendar from "../../images/calendar.png";
@@ -13,23 +13,23 @@ import { DUMMY_DATA } from "./DummyData";
 const BlogSingle = () => {
   const history = useHistory();
   const [data, setData] = useState([]);
-
-  // Setting data from API here
-  useEffect(() => {
-    setData(DUMMY_DATA);
-  }, []);
-
-  // TO check if API data contents is empty
-  const isEmpty = data.length === 0;
+  const [isEmpty, setIsEmpty] = useState(false);
   const backHandler = () => {
     history.goBack();
   };
+
+  useEffect(() => {
+    setData(DUMMY_DATA);
+    if (data.length === 0) {
+      setIsEmpty(true);
+    }
+  }, []);
   return (
     <>
       <Nav />
       <div className="flex flex-col items-center justify-center md:px-24 md:flex-row ">
         {/* Main Reading Bar */}
-        <div className="flex flex-row max-w-[1410px] items-center justify-center">
+        <div className="flex flex-col md:flex-row max-w-[1410px] items-center justify-center">
           <div className="flex md:max-w-[80%] md:min-w-[40%] flex-col items-start justify-start w-full px-8 pt-4 pb-12 space-y-4 md:w-full">
             <button onClick={backHandler} className="flex flex-row space-x-2">
               <img src={backarrow} alt="back_button" />
@@ -85,9 +85,9 @@ const BlogSingle = () => {
           </div>
           {/* Side Bar */}
           <div className="grid grid-cols-1 space-y-6 md:-mt-16 md:space-y-4 md:gap-y-0">
-            {!isEmpty && <p className="text-[14px] font-bold">Latest Posts</p>}
-            {isEmpty && (
-              <div className="flex flex-row justify-center md:-pt-98">
+            {isEmpty && <p className="text-[14px] font-bold">Latest Posts</p>}
+            {!isEmpty && (
+              <div className="flex flex-row justify-center md:-pt-98 mb-8">
                 <div className="border-8 border-[#EAB308] w-2/3 p-12">
                   <p className="text-sm md:text-2xl">
                     Latest posts not available at the moment...
@@ -97,8 +97,8 @@ const BlogSingle = () => {
             )}
             {data.slice(0, 3).map((data) => {
               return (
-                <div className="w-full" key={data.id}>
-                  <Link to={"/blog-single"}>
+                <div className="w-full ">
+                  <Link to={"/blog-single"} key={data.id}>
                     <div className="flex flex-col w-full space-y-1 md:h-full">
                       <div className="relative">
                         <img
@@ -147,57 +147,6 @@ const BlogSingle = () => {
             })}
           </div>
         </div>
-        {/* <div className="grid w-full grid-cols-1 pt-8 mx-auto md:space-y-4 md:pb-24 gap-y-12 md:gap-y-0">
-          <p className="font-bold">Latest Posts</p>
-          {DUMMY_DATA.map((data) => {
-            return (
-              <Link to={"/blog-single"} key={data.id}>
-                <div className="flex flex-col space-y-1">
-                  <div className="relative w-full">
-                    <img
-                      src={data.articleImg}
-                      alt="Voter"
-                      className="w-full rounded md:object-cover"
-                    />
-                    <div className="absolute bottom-0 right-0 z-30">
-                      <img
-                        src={anchor}
-                        alt="anchorIcon"
-                        className="rounded-br"
-                      />
-                    </div>
-                  </div>
-                  <div className="flex flex-row space-x-4">
-                    <img
-                      className="w-6 h-6 rounded-full"
-                      src={data.authorImg}
-                      alt=""
-                    />
-                    <p className="font-bold">{data.author}</p>
-                  </div>
-
-                  <h4 className="max-w-sm font-bold text-md">
-                    {data.postCaption}
-                  </h4>
-                  <div className="flex flex-row space-x-4">
-                    <div className="flex flex-row items-center justify-start space-x-2">
-                      <CommentIcon />
-                      <p>{data.comment}</p>
-                    </div>
-                    <div className="flex flex-row items-center justify-center space-x-2">
-                      <AccessTimeIcon />
-                      <p className="text-sm">{data.timePosted}</p>
-                    </div>
-                    <div className="flex flex-row items-start justify-center space-x-2">
-                      <CalendarMonthIcon />
-                      <p>{data.datePosted}</p>
-                    </div>
-                  </div>
-                </div>
-              </Link>
-            );
-          })}
-        </div> */}
       </div>
       <Footer />
     </>

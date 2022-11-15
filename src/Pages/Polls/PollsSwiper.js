@@ -43,13 +43,14 @@ const PollsSwiper = (props) => {
         {/* If not empty, swiper with all poll shows */}
         <Swiper
           breakpoints={{
-            // when window width is >= 640px
-            640: {
-              slidesPerView: 1,
-              navigation: false,
-            },
             // when window width is >= 768px
             768: {
+              slidesPerView: 1,
+            },
+            1025: {
+              slidesPerView: 2,
+            },
+            1300: {
               slidesPerView: 3,
             },
           }}
