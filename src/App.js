@@ -7,8 +7,7 @@ import BarChart from "./Components/Layout/Admin/Dashboard/Charts/BarChart";
 import BlogSingle from "./Pages/blogPages/blogSinglePost";
 
 import Loading from "./UI/Loading";
-import ManageAdmin from "./Components/Layout/Admin/manageAdmin";
-import Password from "./Components/Layout/Admin/Password";
+import Password from "./Components/Layout/Admin/Dashboard/Account/Password";
 
 // Lazy loads of components
 
@@ -159,7 +158,7 @@ function App() {
         </Route>
 
         {/* Dashboard Landing */}
-        <Route path='/dashboard' exact>
+        <Route path='/dashboard/home' exact>
           <Dashboard />
         </Route>
 
@@ -195,15 +194,13 @@ function App() {
           <Account />
         </Route>
 
-        <Route path='/dashboard/manageAdmin' exact>
-          <ManageAdmin />
+        <Route path='/dashboard/account/settings' exact>
+          <Account />
         </Route>
 
-        <Route path='/dashboard/password' exact>
+        <Route path='/dashboard/account/Managepassword' exact>
           <Password />
         </Route>
-
-
 
         {/*=========================  NOT FOUND ROUTE ========================*/}
         <Route path='*'>
