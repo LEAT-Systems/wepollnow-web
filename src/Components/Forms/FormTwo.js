@@ -19,8 +19,6 @@ const FormTwo = (props) => {
     props.next(values);
   };
 
-  console.log(selectedState);
-
   // Loading LGA of voting residence from API with selected ID
   useEffect(() => {
     if (selectedState !== undefined) {
@@ -117,9 +115,12 @@ const FormTwo = (props) => {
                       {/*  */}
                       {/* Select State of voting residence */}
                       <div className="flex flex-col space-y-1 md:pb-0 mt-8 md:mt-0">
+                        <p className="text-sm font-bold">
+                          Where will you be voting from?
+                        </p>
                         <FormLabel
                           title="Select state of voting residence (Not applicable for
-                          Diaspora Voters) "
+                          Diaspora Residents) "
                         />
                         <p className="text-red-600">
                           <ErrorMessage name="stateOfVotingRes" />
@@ -158,7 +159,7 @@ const FormTwo = (props) => {
                         <FormLabel
                           no="i"
                           title=" Select L.G.A of voting residence (Not applicable for
-                          diaspora Voters)"
+                          Diaspora Residents)"
                         />
                         <p className="text-red-600">
                           <ErrorMessage name="LGAofVotingRes" />

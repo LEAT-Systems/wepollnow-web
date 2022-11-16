@@ -14,9 +14,9 @@ const fakeID = `user-${Math.random().toString(36).slice(2)}`;
 //
 const FormComponent = () => {
   const [currentStep, setCurrentStep] = useState(0);
-  const [hasError, setHasError] = useState(false);
+  const [hasError, setHasError] = useState();
   const [errorMessage, setErrorMessage] = useState("");
-  const [uniqueID, setUniqueID] = useState(null);
+  const [uniqueID, setUniqueID] = useState("");
   const [data, setData] = useState({
     // Local Storage
     phone: phoneNo,
@@ -82,17 +82,19 @@ const FormComponent = () => {
             }),
           }
         );
-        if (response.ok) {
-          setUniqueID(fakeID);
+        if (!response.ok) {
+          setHasError(true);
+          throw new Error("Something Occured");
         } else {
-          throw new Error("Something went wrong");
+          setUniqueID(fakeID);
         }
+
+        // Catch block
       } catch (error) {
         setHasError(true);
-        setErrorMessage(error);
+        setErrorMessage(error.message);
       }
     };
-
     // if on final page, send data to API
     if (final) {
       makeRequest(finalData);

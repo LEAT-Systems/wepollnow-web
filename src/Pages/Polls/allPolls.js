@@ -13,7 +13,7 @@ const AllPolls = (props) => {
 
   // Setting data from API here
   useEffect(() => {
-    setData([]);
+    setData(Polls);
   }, []);
 
   // TO check if contents are empty
@@ -63,7 +63,10 @@ const AllPolls = (props) => {
           };
 
           return (
-            <div className="flex flex-col items-center justify-center p-4 space-y-2 md:flex-row md:px-0">
+            <div
+              className="flex flex-col items-center justify-center p-4 space-y-2 md:flex-row md:px-0"
+              key={item.id}
+            >
               <div className="flex flex-col items-center justify-center w-full py-12 space-y-4 rounded-lg h-72 bg-polls-pattern">
                 {!due && (
                   <p className="text-xl font-bold text-white">

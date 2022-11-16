@@ -247,10 +247,6 @@ input:focus {
 
 =======
 
-/* Search */
-.searchInp {
-  @apply flex w-full
-}
 
 .searchInp input{
  @apply border-x-0 border-t-0 border-b rounded-md rounded-tl-none rounded-bl-none text-[1rem] pr-4 py-5 md:py-5 h-8 md:h-12 w-full lg:w-[22rem] md:w-[16rem] focus:outline-none pl-1 md:pl-0

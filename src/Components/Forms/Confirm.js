@@ -86,7 +86,7 @@ const Confirm = (props) => {
             <Formik initialValues={props.data} onSubmit={handleSubmit}>
               {({ values }) => (
                 <Form>
-                  <div className="flex flex-row items-end justify-end w-full p-2 mb-6 space-x-4 md:px-6 md:py-4">
+                  <div className="flex flex-row items-end justify-end w-full p-2 space-x-4 md:px-6 md:py-4">
                     <button
                       type="button"
                       onClick={() => props.prev(values)}

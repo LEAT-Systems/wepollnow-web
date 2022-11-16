@@ -228,7 +228,7 @@ const FormThree = (props) => {
                               value="4"
                               className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
                             />
-                            <p className="text-sm md:text-lg">Self-employed</p>
+                            <p className="md:text-lg">Self-employed</p>
                           </label>
                         </div>
                       </div>
