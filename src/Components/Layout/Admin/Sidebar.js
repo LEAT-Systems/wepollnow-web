@@ -10,7 +10,7 @@ const SideBar = () => {
   return (
     <div className='hidden lg:flex flex-col w-[82px] h-screen bg-deepgray border-r border-gray-200 space-y-8 fixed'>
       {/*  */}
-      <NavLink to='/dashboard' activeClassName='active'>
+      <NavLink to='/dashboard/home' activeClassName='active'>
         <div className='flex flex-col items-center justify-center mt-4'>
           <div className='rounded-md'>
             <AutoAwesomeMosaicIcon className='sidebar-icons' />

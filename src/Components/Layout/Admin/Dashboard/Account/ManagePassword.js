@@ -1,18 +1,26 @@
-import React, { useEffect } from "react";
-import { useState } from "react";
+/** @format */
+
+import * as React from "react";
 import EditIcon from "@mui/icons-material/Edit";
-import Header from "../../Header";
+import SubHeader from "../../SubHeader";
 
-//
-const AccountSettings = () => {
-  const [greeting, setGreeting] = useState("");
-  const date = new Date();
-  const hrs = date.getHours();
-
+const data = [
+  {
+    id: 1,
+    route: "/dashboard/account/settings",
+    linkText: "Admins",
+  },
+  {
+    id: 2,
+    route: "/dashboard/account/managePassword",
+    linkText: "Password",
+  },
+];
+const Password = () => {
   return (
-    <>
-      <Header />
-      <div className='flex flex-col items-center justify-center max-h-screen px-4 py-4 mx-auto mt-2 md:px-0'>
+    <main className='max-h-screen px-4 md:px-6 lg:px-12 text-[#082a0f]'>
+      <SubHeader data={data} />
+      <main className='flex flex-col items-center justify-center max-h-screen px-4 py-4 mx-auto mt-2 md:px-0'>
         <div className='w-full px-4 py-4 bg-white border border-gray-500 rounded-lg md:w-2/4'>
           <div className='flex flex-row items-center justify-between p-3 border-b'>
             <p className='text-xl font-bold'>Change Password</p>
@@ -82,9 +90,9 @@ const AccountSettings = () => {
             </form>
           </div>
         </div>
-      </div>
-    </>
+      </main>
+    </main>
   );
 };
 
-export default AccountSettings;
+export default Password;
