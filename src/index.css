@@ -242,6 +242,10 @@ input:focus {
   @apply px-6 py-3 font-bold lg:font-[700] text-base normal-case min-w-fit whitespace-nowrap;
 }
 
+.table-row {
+  @apply border-b even:bg-[#edfff0] odd:bg-white
+}
+
 
 /* Search */
 .searchInp {
