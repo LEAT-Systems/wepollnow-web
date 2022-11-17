@@ -8,6 +8,7 @@ import BlogSingle from "./Pages/blogPages/blogSinglePost";
 
 import Loading from "./UI/Loading";
 import Password from "./Components/Layout/Admin/Dashboard/Account/Password";
+import Candidate from "./Components/Layout/Admin/Dashboard/Polls/Candidate/Candidate";
 
 // Lazy loads of components
 
@@ -166,6 +167,14 @@ function App() {
 
         <Route path='/dashboard/polls' exact>
           <ManagePolls />
+        </Route>
+
+        <Route path='/dashboard/polls/polls' exact>
+          <ManagePolls />
+        </Route>
+        
+        <Route path='/dashboard/polls/candidates' exact>
+          <Candidate />
         </Route>
 
         {/* Polls result*/}
