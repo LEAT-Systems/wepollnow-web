@@ -1,15 +1,14 @@
-/** @format */
-
 import {
   FilterListRounded,
   GridViewRounded,
   TuneRounded,
   ViewColumnRounded,
 } from "@mui/icons-material";
-import { Modal } from "@mui/material";
 import React, { useState } from "react";
 import SearchBar from "../Search/SearchBar";
-
+import LinkIcon from '../../assets/Filter@2x.png'
+import FilterIcon from '../../assets/Filter@2x-1.png'
+import GridIcon from '../../assets/grid-2.png'
 const PollsHeader = ({
   setSearchResult,
   tableData,
@@ -30,16 +29,16 @@ const PollsHeader = ({
   };
 
   const filterActive =
-    "hover:bg-blue-100 bg-blue-100 border border-1 py-2 px-2 cursor-pointer rounded-xl text-sm md:text-xl mr-1";
+    "hover:bg-blue-100 bg-blue-100 cursor-pointer  mr-1 w-[2.2rem]";
 
   const filterNotActive =
-    "hover:bg-blue-100 border border-1 py-2 px-2 cursor-pointer rounded-xl text-sm md:text-xl mr-1";
+    "hover:bg-blue-100 cursor-pointer mr-1 w-[2.2rem]";
 
   const viewActive =
-    "bg-blue-100 hover:bg-blue-100 border border-1 rounded-xl py-2 px-2 cursor-pointer text-sm md:text-xl mr-1";
+    "bg-blue-100 hover:bg-blue-100 cursor-pointer mr-1 w-[2.2rem] border rounded-sm p-2";
 
   const viewNotActive =
-    "hover:bg-blue-100 border border-1 rounded-xl py-2 px-2 cursor-pointer text-sm md:text-xl mr-1";
+    "hover:bg-blue-100 cursor-pointer mr-1 w-[2.2rem] border rounded-sm p-2";
 
   return (
     <div>
@@ -48,7 +47,7 @@ const PollsHeader = ({
           <h3 className='font-bold text-xl lg:text-2xl md:text-[1.4rem] capitalize py-4 pl-0 w-full'>
             Manage polls
           </h3>
-          <div className='flex w-full justify-between md:justify-end'>
+          <div className='flex w-full justify-between md:justify-end items-center'>
             <div className='w-[90%] sm:w-3/4'>
               <SearchBar
                 placeholder='Search'
@@ -57,35 +56,10 @@ const PollsHeader = ({
               />
             </div>
 
-            <div className='flex w-full justify-end items-center mr-6'>
-              <nav className='pl-3 pr-2 md:pr-2 flex'>
-                <span
-                  title='Filter Result'
-                  className={
-                    filterIsActive === 1 ? filterActive : filterNotActive
-                  }
-                  onClick={() => {
-                    handleFilterActive(1);
-                    handleOpenRefineResult()
-                  }}
-                >
-                  <TuneRounded
-                    sx={{
-                      fontSize: "1.4rem",
-
-                      /* Media Queries */
-                      "@media screen and (min-width: 640px)": {
-                        fontSize: "1.5rem",
-                      },
-                      "@media screen and (min-width: 768px)": {
-                        fontSize: "1.7rem",
-                      },
-                      "@media screen and (min-width: 1024px)": {
-                        fontSize: "1.9rem",
-                      },
-                    }}
-                    sm
-                  />
+            <div className='flex w-full justify-end items-end h-full'>
+              <nav className='flex w-full h-full ml-3 mr-2 md:mr-2 my-auto'>
+                <span title='Filter Result' className={filterNotActive}>
+                  <img src={LinkIcon} alt='Account' className='w-full' />
                 </span>
                 <span
                   className={
@@ -93,28 +67,14 @@ const PollsHeader = ({
                   }
                   onClick={() => {
                     handleFilterActive(2);
+                    handleOpenRefineResult();
                   }}
                 >
-                  <FilterListRounded
-                    sx={{
-                      fontSize: "1.4rem",
-
-                      /* Media Queries */
-                      "@media screen and (min-width: 640px)": {
-                        fontSize: "1.5rem",
-                      },
-                      "@media screen and (min-width: 768px)": {
-                        fontSize: "1.7rem",
-                      },
-                      "@media screen and (min-width: 1024px)": {
-                        fontSize: "1.9rem",
-                      },
-                    }}
-                  />
+                  <img src={FilterIcon} alt='Account' className='w-full' />
                 </span>
               </nav>
 
-              <nav className='pl-1 md:pl-3 flex sm:w-3'>
+              <nav className='flex'>
                 <span
                   className={active === 0 ? viewActive : viewNotActive}
                   onClick={() => {
@@ -122,22 +82,7 @@ const PollsHeader = ({
                     handleList();
                   }}
                 >
-                  <ViewColumnRounded
-                    sx={{
-                      fontSize: "1.4rem",
-
-                      /* Media Queries */
-                      "@media screen and (min-width: 640px)": {
-                        fontSize: "1.5rem",
-                      },
-                      "@media screen and (min-width: 768px)": {
-                        fontSize: "1.7rem",
-                      },
-                      "@media screen and (min-width: 1024px)": {
-                        fontSize: "1.9rem",
-                      },
-                    }}
-                  />
+                  <img src={GridIcon} alt='Account' className='w-full' />
                 </span>
                 <span
                   className={active === 1 ? viewActive : viewNotActive}
@@ -146,22 +91,7 @@ const PollsHeader = ({
                     handleGrid();
                   }}
                 >
-                  <GridViewRounded
-                    sx={{
-                      fontSize: "1.2rem",
-
-                      /* Media Queries */
-                      "@media screen and (min-width: 640px)": {
-                        fontSize: "1.3rem",
-                      },
-                      "@media screen and (min-width: 768px)": {
-                        fontSize: "1.5rem",
-                      },
-                      "@media screen and (min-width: 1024px)": {
-                        fontSize: "1.7rem",
-                      },
-                    }}
-                  />
+                  <img src={GridIcon} alt='Account' className='w-full p-1' />
                 </span>
               </nav>
             </div>

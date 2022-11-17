@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-=======
+
 /* This colors doesn't affect anything, so please don't touch */
 customColors {
 color: #fceaea; /* concluded color */
@@ -245,7 +245,10 @@ input:focus {
   @apply px-6 py-3 font-bold lg:font-[700] text-base normal-case min-w-fit whitespace-nowrap;
 }
 
-=======
+.table-row {
+  @apply border-b even:bg-[#edfff0] odd:bg-white
+}
+
 
 
 .searchInp input{

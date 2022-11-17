@@ -39,7 +39,7 @@ const Tables = ({ data }) => {
                 </th>
               </tr>
             </thead>
-            <tbody>{results}</tbody>
+            <tbody className='border-t border-b'>{results}</tbody>
           </table>
         ) : (
           <div className='flex justify-center items-center font-bold text-lg md:text-xl text-[#333] capitalize py-5'>
