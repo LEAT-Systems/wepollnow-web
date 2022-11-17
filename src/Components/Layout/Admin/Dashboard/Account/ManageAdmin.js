@@ -7,6 +7,9 @@ import { TuneRounded, FilterListRounded } from "@mui/icons-material";
 import SearchBar from "../Search/SearchBar";
 import FilterModal from "../Modals/FilterModal";
 import ManageAdminTable from "./ManageAdminTable";
+import LinkIcon from "../../assets/Filter@2x.png";
+import FilterIcon from "../../assets/Filter@2x-1.png";
+import GridIcon from "../../assets/grid-2.png";
 
 const data = [
   {
@@ -74,10 +77,9 @@ const ManageAdmin = () => {
   };
 
   const filterActive =
-    "hover:bg-blue-100 bg-blue-100 border border-1 py-2 px-2 cursor-pointer rounded-xl text-sm md:text-xl mr-1";
+    "hover:bg-blue-100 bg-blue-100 cursor-pointer  mr-1 w-[2.2rem]";
 
-  const filterNotActive =
-    "hover:bg-blue-100 border border-1 py-2 px-2 cursor-pointer rounded-xl text-sm md:text-xl mr-1";
+  const filterNotActive = "hover:bg-blue-100 cursor-pointer mr-1 w-[2.2rem]";
 
   return (
     <main className='max-h-screen px-4 md:px-6 lg:px-12 text-[#082a0f]'>
@@ -86,8 +88,8 @@ const ManageAdmin = () => {
         <h3 className='font-bold text-xl lg:text-2xl md:text-[1.4rem] capitalize py-4 pl-0 w-full'>
           Manage Admins
         </h3>
-        <div className='flex w-full justify-between md:justify-end'>
-          <div className='w-[90%] sm:w-3/4'>
+        <div className='flex justify-start md:justify-end items-center'>
+          <div className='w-[90%] sm:w-3/4 flex justify-start'>
             <SearchBar
               placeholder='Search'
               tableData={tableData}
@@ -95,59 +97,24 @@ const ManageAdmin = () => {
             />
           </div>
 
-          <div className='flex w-full justify-end items-center mr-6'>
-            <div className='flex w-full justify-end items-center mr-6'>
-              <nav className='pl-3 pr-2 md:pr-2 flex'>
-                <span
-                  title='Filter Result'
-                  className='border border-1 py-1 px-1 rounded-xl text-sm md:text-xl mr-1'
-                >
-                  <TuneRounded
-                    sx={{
-                      fontSize: "1.4rem",
-
-                      /* Media Queries */
-                      "@media screen and (min-width: 640px)": {
-                        fontSize: "1.5rem",
-                      },
-                      "@media screen and (min-width: 768px)": {
-                        fontSize: "1.7rem",
-                      },
-                      "@media screen and (min-width: 1024px)": {
-                        fontSize: "1.8rem",
-                      },
-                    }}
-                    sm
-                  />
-                </span>
-                <span
-                  className={
-                    filterIsActive === 2 ? filterActive : filterNotActive
-                  }
-                  onClick={() => {
-                    handleFilterActive(2);
-                    handleOpenRefineResult();
-                  }}
-                >
-                  <FilterListRounded
-                    sx={{
-                      fontSize: "1.4rem",
-
-                      /* Media Queries */
-                      "@media screen and (min-width: 640px)": {
-                        fontSize: "1.5rem",
-                      },
-                      "@media screen and (min-width: 768px)": {
-                        fontSize: "1.7rem",
-                      },
-                      "@media screen and (min-width: 1024px)": {
-                        fontSize: "1.9rem",
-                      },
-                    }}
-                  />
-                </span>
-              </nav>
-            </div>
+          <div className='flex h-12 items-end justify-start md:justify-end'>
+            <nav className='flex'>
+              <span title='Search' className='mr-1 w-[2.2rem]'>
+                <img src={LinkIcon} alt='Account' className='w-full' />
+              </span>
+              <span
+                title='Filter Table'
+                className={
+                  filterIsActive === 2 ? filterActive : filterNotActive
+                }
+                onClick={() => {
+                  handleFilterActive(2);
+                  handleOpenRefineResult();
+                }}
+              >
+                <img src={FilterIcon} alt='Account' className='w-full' />
+              </span>
+            </nav>
           </div>
         </div>
       </header>

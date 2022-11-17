@@ -1,8 +1,6 @@
-/** @format */
-
-import { DeleteOutline, NoteAltOutlined } from "@mui/icons-material";
 import React from "react";
-import { NavLink } from "react-router-dom/cjs/react-router-dom.min";
+import Edit from "../../assets/edit@2x.png";
+import Delete from "../../assets/trash@2x.png";
 
 const ManageAdminTableRow = ({ tableData }) => {
   return (
@@ -21,14 +19,10 @@ const ManageAdminTableRow = ({ tableData }) => {
       <td className='px-6 py-4 cursor-pointer'>{tableData.status}</td>
       <td className='flex flex-row px-6 py-4 space-x-2'>
         <div className='text-blue-500 cursor-pointer'>
-          <span className='material-symbols-outlined text-[1.1rem] md:text-[1.5rem]'>
-            <NoteAltOutlined fontSize='initial' />
-          </span>
+          <img src={Edit} alt='Edit' className='w-[1.1rem] h-[1.1rem]' />
         </div>
         <div className='text-red-500 cursor-pointer'>
-          <span className='material-symbols-outlined text-[1.16rem] md:text-[1.55rem]'>
-            <DeleteOutline fontSize='initial' />
-          </span>
+          <img src={Delete} alt='Trash' className='w-[1.1rem] h-[1.1rem]' />
         </div>
       </td>
     </tr>

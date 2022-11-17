@@ -81,7 +81,7 @@ const PollsPageContentOne = () => {
 
       <div className='px-4 md:px-6 lg:px-12'>
         <SubHeader data={SubHeaderData} />
-        <div className='px-2 md:px-6 pr-0 sm:pr-14 md:pr-20 w-full'>
+        <div className='w-full'>
           <PollsHeader
             setSearchResult={setSearchResult}
             tableData={tableData}
