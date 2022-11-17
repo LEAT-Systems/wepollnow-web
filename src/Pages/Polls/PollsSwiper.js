@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Polls } from "./pollsObject";
@@ -12,6 +12,16 @@ import calendar from "../../images/calendar.png";
 //
 
 const PollsSwiper = (props) => {
+  const [data, setData] = useState([]);
+
+  // Setting data from API here
+  useEffect(() => {
+    setData(Polls);
+  }, []);
+
+  // TO check if API data contents is empty
+  const isEmpty = data.length === 0;
+
   return (
     <div className="relative">
       <div className="container flex flex-col mx-auto mt-12 md:mt-0 md:px-16">
@@ -19,15 +29,28 @@ const PollsSwiper = (props) => {
           Upcoming Polls
         </p>
 
+        {/* Rendering the empty container */}
+        {isEmpty && (
+          <div className="flex flex-row items-center justify-center mt-12">
+            <div className="border-8 border-[#EAB308] w-2/3 p-12">
+              <p className="text-sm md:text-2xl">
+                No polls available at the moment...
+              </p>
+            </div>
+          </div>
+        )}
+
+        {/* If not empty, swiper with all poll shows */}
         <Swiper
           breakpoints={{
-            // when window width is >= 640px
-            640: {
-              slidesPerView: 1,
-              navigation: false,
-            },
             // when window width is >= 768px
             768: {
+              slidesPerView: 1,
+            },
+            1025: {
+              slidesPerView: 2,
+            },
+            1300: {
               slidesPerView: 3,
             },
           }}
@@ -37,8 +60,8 @@ const PollsSwiper = (props) => {
           modules={[Navigation]}
           navigation={true}
         >
-          {Polls.map((item) => {
-            // Here, I'm calculating the poll date from the current date so i could render items conditionally
+          {data.map((item) => {
+            // Here, I'm calculating the poll date from the current date so i could render poll items conditionally
             let due;
             const now = new Date().getTime();
             const distance = new Date(item.date).getTime() - now;
@@ -104,7 +127,7 @@ const PollsSwiper = (props) => {
         </Swiper>
         <div className="flex flex-row items-center justify-center mt-6">
           <Link to="/polls">
-            <button className="p-4 px-8 font-semibold text-white bg-[#08BC26]  rounded-lg animate">
+            <button className="p-4 px-8 font-semibold text-white bg-[#08C127] rounded-lg animate">
               View All Polls
             </button>
           </Link>

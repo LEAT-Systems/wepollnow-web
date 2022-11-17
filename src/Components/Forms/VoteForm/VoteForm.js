@@ -117,7 +117,7 @@ const FormFive = () => {
       );
 
       // redirect or throw error
-      if (response.ok) {
+      if (response.ok === true) {
         history.push("/vote/vote-form-next", { replace: true });
       } else {
         throw new Error("A problem Occured");
@@ -136,6 +136,8 @@ const FormFive = () => {
     data.filter((data) =>
       keys.some((key) => data[key].toLowerCase().includes(query))
     );
+
+  const hasContent = search(apiData).length;
 
   const ModalContent = (
     <Slide direction="up" in={open} mountOnEnter unmountOnExit>
@@ -188,13 +190,13 @@ const FormFive = () => {
     </Slide>
   );
   return (
-    <>
+    <div>
       <Nav bg="FFEDF1" />
       <Modal open={open} children={ModalContent} />
       <div className="flex flex-row items-center justify-center  bg-[#FFEDF1]">
         <div className="flex flex-col items-center justify-center p-16 space-y-4">
-          <h1 className="text-4xl font-extrabold text-center">
-            Select the party you'd like to vote
+          <h1 className="text-4xl font-extrabold max-w-2xl leading-[48px] text-center">
+            Select the party you'd like to vote in the {selectedPoll}
           </h1>
           <div className="flex flex-row items-center w-full">
             <img src={searchIcon} alt="search" className="pb-2" />
@@ -210,100 +212,113 @@ const FormFive = () => {
         </div>
       </div>
 
-      <div className="flex flex-row items-center justify-center py-4 mx-auto md:px-4">
+      <div className="flex flex-row items-center justify-center min-h-[100vh] py-4 mx-auto md:px-4">
         <div className="w-full text-lg text-gray-700 md:w-3/4 ">
           <form onSubmit={handleSubmit}>
             <div className="flex flex-col space-y-4 md:p-8">
               <div className="px-4 space-y-4">
-                {search(apiData).map((item) => {
-                  return (
-                    <Suspense fallback={Loading} key={item.id}>
-                      <div
-                        className={`p-4 border border-gray-200 rounded-md md:p-6 ${
-                          castedVote === item.partyName ? "bg-[#EDFFF0]" : ""
-                        }
+                {hasContent !== 0 &&
+                  search(apiData).map((item) => {
+                    return (
+                      <Suspense fallback={Loading} key={item.id}>
+                        <div
+                          className={`p-4 border border-gray-200 rounded-md md:p-6 ${
+                            castedVote === item.partyName ? "bg-[#EDFFF0]" : ""
+                          }
                       `}
-                      >
-                        <label htmlFor={item.id}>
-                          <div className="flex flex-row items-center justify-between pb-2 border-b border-gray-200">
-                            <div className="flex flex-row space-x-2 font-semibold">
-                              <img
-                                src={item.partyLogo}
-                                className="w-5 h-5 rounded md:h-8 md:w-8"
-                                alt=""
+                        >
+                          <label htmlFor={item.id}>
+                            <div className="flex flex-row items-center justify-between pb-2 border-b border-gray-200">
+                              <div className="flex flex-row space-x-2 font-semibold">
+                                <img
+                                  src={item.partyLogo}
+                                  className="w-5 h-5 rounded md:h-8 md:w-8"
+                                  alt=""
+                                />
+                                <p className="text-sm md:text-lg">
+                                  {item.partyName}
+                                </p>
+                              </div>
+
+                              <input
+                                id={item.id}
+                                name="party"
+                                type="radio"
+                                value={item.partyName}
+                                onChange={checkHandler}
+                                className="w-5 h-5 text-gray-600 border-gray-300 focus:ring-gray-500"
                               />
-                              <p className="text-sm md:text-lg">
-                                {item.partyName}
-                              </p>
                             </div>
+                            <div className="flex flex-row items-center justify-between ">
+                              <section
+                                className={`flex flex-col items-start justify-start w-full p-4 space-y-2`}
+                              >
+                                <div className="flex flex-row items-start justify-start space-x-4">
+                                  <img
+                                    src={candidate}
+                                    className="w-8 h-8 rounded"
+                                    alt=""
+                                  />
+                                  <p className="text-xs md:text-lg">
+                                    {item.candidate}
+                                  </p>
+                                  <Badge border="08C127" bg="EDFFF0">
+                                    <p className="text-[8px]">{item.cBadge}</p>
+                                  </Badge>
+                                </div>
+                                <div className="flex flex-row items-start justify-start space-x-4">
+                                  <img
+                                    src={vice}
+                                    className="w-8 h-8 rounded"
+                                    alt=""
+                                  />
+                                  <p className="text-xs md:text-lg">
+                                    {item.runningMate}
+                                  </p>
+                                  <Badge bg="EDFFF0" border="08C127">
+                                    <p className="text-[8px]">{item.vBadge}</p>
+                                  </Badge>
+                                </div>
+                              </section>
 
-                            <input
-                              id={item.id}
-                              name="party"
-                              type="radio"
-                              value={item.partyName}
-                              onChange={checkHandler}
-                              className="w-5 h-5 text-gray-600 border-gray-300 focus:ring-gray-500"
-                            />
-                          </div>
-                          <div className="flex flex-row items-center justify-between ">
-                            <section
-                              className={`flex flex-col items-start justify-start w-full p-4 space-y-2`}
-                            >
-                              <div className="flex flex-row items-start justify-start space-x-4">
-                                <img
-                                  src={candidate}
-                                  className="w-8 h-8 rounded"
-                                  alt=""
-                                />
-                                <p className="text-xs md:text-lg">
-                                  {item.candidate}
-                                </p>
-                                <Badge border="08C127" bg="EDFFF0">
-                                  <p className="text-[8px]">{item.cBadge}</p>
-                                </Badge>
-                              </div>
-                              <div className="flex flex-row items-start justify-start space-x-4">
-                                <img
-                                  src={vice}
-                                  className="w-8 h-8 rounded"
-                                  alt=""
-                                />
-                                <p className="text-xs md:text-lg">
-                                  {item.runningMate}
-                                </p>
-                                <Badge bg="EDFFF0" border="08C127">
-                                  <p className="text-[8px]">{item.vBadge}</p>
-                                </Badge>
-                              </div>
-                            </section>
+                              <button
+                                type="submit"
+                                disabled={
+                                  castedVote !== item.partyName ? true : false
+                                }
+                                className={`${
+                                  castedVote === item.partyName
+                                    ? "bg-[#08c127] cursor-pointer"
+                                    : "bg-gray-500 cursor-not-allowed disabled"
+                                } px-4 md:px-8 text-white rounded p-2 text-sm md:text-lg`}
+                              >
+                                Vote
+                              </button>
+                            </div>
+                          </label>
+                        </div>
+                      </Suspense>
+                    );
+                  })}
+                {hasContent === 0 && (
+                  <div className="flex flex-row items-center justify-between p-8 border border-red-500 rounded -mt-48">
+                    <div className="flex flex-row space-x-2">
+                      <p className="text-sm md:text-lg">
+                        No data found based on your search. You can search by
+                        party or candidate name.
+                      </p>
+                    </div>
 
-                            <button
-                              type="submit"
-                              disabled={
-                                castedVote !== item.partyName ? true : false
-                              }
-                              className={`${
-                                castedVote === item.partyName
-                                  ? "bg-[#08c127] cursor-pointer"
-                                  : "bg-gray-500 cursor-not-allowed disabled"
-                              } px-4 md:px-8 text-white rounded p-2 text-sm md:text-lg`}
-                            >
-                              Vote
-                            </button>
-                          </div>
-                        </label>
-                      </div>
-                    </Suspense>
-                  );
-                })}
+                    <img src={cautionIcon} alt="errorIcon" />
+                  </div>
+                )}
               </div>
             </div>
           </form>
         </div>
       </div>
       <Footer />
-    </>
+    </div>
   );
 };
 

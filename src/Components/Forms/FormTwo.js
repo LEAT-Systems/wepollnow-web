@@ -1,5 +1,5 @@
 import React from "react";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import Done from "@mui/icons-material/Done";
@@ -10,45 +10,44 @@ import { states } from "./states";
 const FormTwo = (props) => {
   const [formisCompleted, setFormIsCompleted] = useState(false);
   const [data, setData] = useState([]);
-  const [error, setError] = useState(false);
+  const [error, setError] = useState();
   const [disable, setDisable] = useState(false);
-  const [selectedState, setSelectedState] = useState("");
+  const [selectedState, setSelectedState] = useState();
 
   // Handling next step of form
   const handleSubmit = (values) => {
     props.next(values);
   };
 
-  const handleChange = (e) => {
-    setSelectedState(e.currentTarget.value);
-  };
+  // Loading LGA of voting residence from API with selected ID
+  useEffect(() => {
+    if (selectedState !== undefined) {
+      try {
+        async function getData() {
+          const response = await fetch(
+            `https://wepollnow.azurewebsites.net/utilities/lga/${selectedState}`
+          );
+          const body = await response.json();
+          setData(body);
+          if (!response.ok) {
+            throw new Error("An error occured");
+          }
+        }
+        getData();
+      } catch (error) {
+        setError(error.message);
+      }
+    } else {
+      return;
+    }
+  }, [selectedState]);
 
   // Destructuring for Configuring the indicators
   let { diasporaVoter, stateOfVotingRes, ageRange } = props.data;
 
-  // Loading LGA of voting residence from API with selected ID
-  if (selectedState) {
-    try {
-      async function getData() {
-        const response = await fetch(
-          `https://wepollnow.azurewebsites.net/utilities/lga/${selectedState}`
-        );
-        const body = await response.json();
-        setData(body);
-        console.log("Body:", body);
-        if (!response.ok) {
-          throw new Error("An error occured");
-        }
-      }
-      getData();
-    } catch (error) {
-      setError(error);
-    }
-  }
-
   useEffect(() => {
     // Check to disable LGA of voting residence
-    if (diasporaVoter === "yes") {
+    if (diasporaVoter === "true") {
       setDisable(true);
     }
 
@@ -60,7 +59,7 @@ const FormTwo = (props) => {
 
   //  Formik-Yup validation Schema
   let formTwoValidationSchema;
-  if (diasporaVoter !== "yes") {
+  if (diasporaVoter !== "true") {
     formTwoValidationSchema = Yup.object({
       // stateOfVotingRes: Yup.string().required().label("* This"),
       // LGAofVotingRes: Yup.string().required().label("* This"),
@@ -115,24 +114,28 @@ const FormTwo = (props) => {
                     <div className="h-full space-y-4 md:px-4">
                       {/*  */}
                       {/* Select State of voting residence */}
-
-                      <div className="flex flex-col space-y-1 md:pb-0">
+                      <div className="flex flex-col space-y-1 md:pb-0 mt-8 md:mt-0">
+                        <p className="text-sm font-bold">
+                          Where will you be voting from?
+                        </p>
                         <FormLabel
                           title="Select state of voting residence (Not applicable for
-                          Diaspora Voters) "
+                          Diaspora Residents) "
                         />
                         <p className="text-red-600">
                           <ErrorMessage name="stateOfVotingRes" />
                         </p>
-                        <p className="text-xs text-red-300">
+                        <p className="text-xs text-green-500">
                           {disable &&
-                            "* Field is disabled because you are a diaspora voter"}
+                            "* Field is disabled because you are a diaspora resident"}
                         </p>
 
                         <Field
                           as="select"
+                          onBlur={() =>
+                            setSelectedState(values.stateOfVotingRes)
+                          }
                           disabled={disable ? true : false}
-                          onChange={handleChange}
                           name="stateOfVotingRes"
                           placeholder="Select State of Voting Residence"
                           className={`block w-full px-3 py-3 mt-1 bg-white border border-gray-300 rounded ${
@@ -156,14 +159,18 @@ const FormTwo = (props) => {
                         <FormLabel
                           no="i"
                           title=" Select L.G.A of voting residence (Not applicable for
-                          diaspora Voters)"
+                          Diaspora Residents)"
                         />
                         <p className="text-red-600">
                           <ErrorMessage name="LGAofVotingRes" />
                         </p>
-                        <p className="text-xs text-red-300">
+                        <p className="text-xs text-green-500">
                           {disable === true &&
-                            "* Field is disabled because you are a diaspora voter."}
+                            "* Field is disabled because you are a diaspora resident."}
+                        </p>
+                        <p className="text-xs text-red-300">
+                          {!error === "" &&
+                            `${error} Check internet connection.`}
                         </p>
                         <div className="flex flex-row items-start justify-between">
                           <Field
@@ -202,7 +209,7 @@ const FormTwo = (props) => {
                               id="ageRange1"
                               type="radio"
                               name="ageRange"
-                              value="18-25"
+                              value="1"
                               placeholder="18-25"
                               className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
                             />
@@ -216,7 +223,7 @@ const FormTwo = (props) => {
                               id="ageRange2"
                               type="radio"
                               name="ageRange"
-                              value="25-35"
+                              value="2"
                               className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
                             />
                             <p>25-35</p>
@@ -231,7 +238,7 @@ const FormTwo = (props) => {
                               id="ageRange3"
                               type="radio"
                               name="ageRange"
-                              value="35-45"
+                              value="3"
                               className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
                             />
                             <p>35-45</p>
@@ -244,7 +251,7 @@ const FormTwo = (props) => {
                               id="ageRange4"
                               type="radio"
                               name="ageRange"
-                              value="45-50"
+                              value="4"
                               className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
                             />
                             <p>45-50</p>
@@ -259,7 +266,7 @@ const FormTwo = (props) => {
                               id="ageRange5"
                               type="radio"
                               name="ageRange"
-                              value="50 and above"
+                              value="5"
                               className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
                             />
                             <p>50 and above</p>

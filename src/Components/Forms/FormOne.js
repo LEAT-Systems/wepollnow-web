@@ -95,7 +95,7 @@ const FormOne = (props) => {
                       {/* First Time Voter */}
 
                       <div className="space-y-1">
-                        <FormLabel no="i" title="Are you a first time voter?" />
+                        <FormLabel no="i" title="Are you a First Time Voter?" />
                         <div className="flex flex-row items-center justify-between space-x-4 md:p-2">
                           <label
                             htmlFor="firstTimeVoter"
@@ -105,7 +105,7 @@ const FormOne = (props) => {
                               id="firstTimeVoter"
                               type="radio"
                               name="firstTimeVoter"
-                              value="yes"
+                              value="true"
                               className="w-4 h-4 radio"
                             />
                             <p>Yes</p>
@@ -118,7 +118,7 @@ const FormOne = (props) => {
                               id="firstTimeVoterTwo"
                               type="radio"
                               name="firstTimeVoter"
-                              value="no"
+                              value="false"
                               className="w-4 h-4"
                             />
                             <p>No</p>
@@ -128,7 +128,10 @@ const FormOne = (props) => {
 
                       {/* Diaspora Voter */}
                       <div className="space-y-1">
-                        <FormLabel no="i" title="Are you a Diaspora voter? " />
+                        <FormLabel
+                          no="i"
+                          title="Are you a Diaspora Resident? "
+                        />
                         <div className="flex flex-row items-center justify-between space-x-4 md:p-2">
                           {/*  */}
                           {/* DIASPORA VOTER OPTION : 'YES'  */}
@@ -140,7 +143,7 @@ const FormOne = (props) => {
                               id="diasporaVoter"
                               type="radio"
                               name="diasporaVoter"
-                              value="yes"
+                              value="true"
                               className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
                             />
                             <p>Yes</p>
@@ -155,7 +158,7 @@ const FormOne = (props) => {
                               id="diasporaVoterTwo"
                               type="radio"
                               name="diasporaVoter"
-                              value="no"
+                              value="false"
                               className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
                             />
                             <p>No</p>
@@ -173,7 +176,7 @@ const FormOne = (props) => {
                           <Field
                             as="select"
                             name="stateOfOrigin"
-                            className="block w-full px-3 py-3 mt-1 bg-white border border-gray-300 rounded"
+                            className="block w-full p-4 px-3 py-3 mt-1 bg-white border border-gray-300 rounded"
                           >
                             <option value={null}>-- Select an option--</option>
                             {states.map((item) => {

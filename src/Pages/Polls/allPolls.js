@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Nav from "../../Components/Layout/Landing/mainNav";
 import { Polls } from "./pollsObject";
 import Footer from "../../Components/Layout/Landing/Footer";
@@ -9,12 +9,21 @@ import { useHistory } from "react-router-dom";
 
 const AllPolls = (props) => {
   const history = useHistory();
+  const [data, setData] = useState([]);
+
+  // Setting data from API here
+  useEffect(() => {
+    setData(Polls);
+  }, []);
+
+  // TO check if contents are empty
+  const isEmpty = data.length === 0;
   return (
     <div className="w-screen h-screen overflow-x-hidden">
       <Nav bg="FCEBEE" bgImg="hero-container-pattern" hamburgerBg="FCEBEE" />
       <div className="flex flex-row items-center justify-between mx-auto bg-[#FCEBEE] bg-hero-container-pattern">
         <div className="flex flex-col px-4 space-y-2 md:px-24">
-          <p className="text-xs md:text-lg font-bold underline underline-2 underline-offset-2 decoration-yellow-500 decoration-[5px]">
+          <p className="text-xs md:text-lg font-bold underline underline-2 underline-offset-2 decoration-yellow-500 decoration-[6px]">
             Available Polls
           </p>
           <h1 className="max-w-full md:max-w-xl leading-none md:leading-tight text-[16px] md:text-5xl font-extrabold">
@@ -27,9 +36,17 @@ const AllPolls = (props) => {
       </div>
 
       {/* ==============   GRID FOR ARRANGING ITEMS  ===================*/}
-
-      <div className="grid grid-cols-1 pb-12 mt-12 gap-y-4 gap-x-12 md:px-24 md:gap-x-12 md:grid-cols-3">
-        {Polls.map((item) => {
+      {isEmpty && (
+        <div className="flex flex-row items-center justify-center mt-48">
+          <div className="border-8 border-[#EAB308] w-2/3 p-12">
+            <p className="text-sm md:text-2xl">
+              No polls available at the moment...
+            </p>
+          </div>
+        </div>
+      )}
+      <div className="grid grid-cols-1 pb-12 md:mb-12 mt-12 gap-y-4 gap-x-12 md:px-24 md:gap-x-12 md:grid-cols-3 h-screen">
+        {data.map((item) => {
           // Here, I'm calculating the poll date from the current date so i could render items conditionally
           let due;
           const now = new Date().getTime();
@@ -46,7 +63,10 @@ const AllPolls = (props) => {
           };
 
           return (
-            <div className="flex flex-col items-center justify-center p-4 space-y-2 md:flex-row md:px-0">
+            <div
+              className="flex flex-col items-center justify-center p-4 space-y-2 md:flex-row md:px-0"
+              key={item.id}
+            >
               <div className="flex flex-col items-center justify-center w-full py-12 space-y-4 rounded-lg h-72 bg-polls-pattern">
                 {!due && (
                   <p className="text-xl font-bold text-white">

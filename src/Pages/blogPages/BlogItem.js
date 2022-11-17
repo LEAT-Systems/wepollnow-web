@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import calendar from "../../images/calendar.png";
 import anchor from "../../images/anchor.png";
 import eye from "../../images/eye.png";
@@ -7,6 +7,15 @@ import { DUMMY_DATA } from "./DummyData";
 import { Link } from "react-router-dom";
 
 const BlogItem = () => {
+  const [data, setData] = useState([]);
+
+  // Setting data from API here
+  useEffect(() => {
+    setData(DUMMY_DATA);
+  }, []);
+
+  // TO check if contents are empty
+  const isEmpty = data.length === 0;
   return (
     <div className=" w-full md:w-[1410px] m-auto ">
       <div className="flex flex-col items-start justify-start px-4 mx-auto md:px-24">
@@ -15,8 +24,9 @@ const BlogItem = () => {
         </p>
       </div>
       {/* ITEMS */}
-      <div className="grid grid-cols-1 px-4 mt-4  md:space-y-0 gap-y-12 md:gap-y-0 gap-x-12 md:px-24 md:gap-x-12 md:grid-cols-3">
-        {DUMMY_DATA.map((data) => {
+      <div className="grid grid-cols-1 px-4 mt-4 md:space-y-0 gap-y-12 md:gap-y-0 gap-x-12 md:px-24 md:gap-x-12 md:grid-cols-3">
+        {isEmpty && <p className="text-sm md:text-lg">No posts to show</p>}
+        {data.slice(0, 3).map((data) => {
           return (
             <div className="w-full" key={data.id}>
               <Link to={"/blog-single"}>
@@ -49,15 +59,19 @@ const BlogItem = () => {
                   </p>
                   <div className="flex flex-row space-x-4">
                     <div className="flex flex-row items-center justify-start space-x-2">
-                      <img src={eye} alt="calendarIcon" />
+                      <img src={eye} alt="eyeIcon" />
                       <p className="text-xs">{data.views}</p>
                     </div>
                     <div className="flex flex-row items-center justify-start space-x-2 text-xs">
-                      <img src={time} alt="calendarIcon" />
+                      <img src={time} alt="timeIcon" />
                       <p className="text-xs">{data.timePosted}</p>
                     </div>
                     <div className="flex flex-row items-center justify-start space-x-2 text-xs">
-                      <img src={calendar} alt="calendarIcon" />
+                      <img
+                        src={calendar}
+                        alt="calendarIcon"
+                        className="w-3 h-3"
+                      />
                       <p className="text-xs">{data.datePosted}</p>
                     </div>
                   </div>

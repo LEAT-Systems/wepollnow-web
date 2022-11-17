@@ -14,9 +14,9 @@ const fakeID = `user-${Math.random().toString(36).slice(2)}`;
 //
 const FormComponent = () => {
   const [currentStep, setCurrentStep] = useState(0);
-  const [hasError, setHasError] = useState(false);
+  const [hasError, setHasError] = useState();
   const [errorMessage, setErrorMessage] = useState("");
-  const [uniqueID, setUniqueID] = useState(null);
+  const [uniqueID, setUniqueID] = useState("");
   const [data, setData] = useState({
     // Local Storage
     phone: phoneNo,
@@ -25,11 +25,11 @@ const FormComponent = () => {
     // Form 1
     email: "",
     firstTimeVoter: "",
-    diasporaVoter: "" || false,
+    diasporaVoter: "",
     stateOfVotingRes: "",
 
     // Form 2
-    stateOfOrigin: undefined,
+    stateOfOrigin: "",
     LGAofVotingRes: "",
     ageRange: "",
 
@@ -50,7 +50,6 @@ const FormComponent = () => {
 
   // storing state data in a variable
   const finalData = { ...data };
-  console.log(finalData);
 
   //  function to handle Next Step by spreading previous data to new data
   const handleNextStep = (newData, final = false) => {
@@ -67,33 +66,35 @@ const FormComponent = () => {
               phone: formData.phone,
               country: formData.country,
               email: formData.email,
-              firstTimeVoter: formData.firstTimeVoter,
-              diasporaVoter: formData.diasporaVoter,
-              stateOfVotingResidence: formData.stateOfVotingRes,
-              LGAofVotingResidence: formData.LGAofVotingRes,
-              StateOfOrigin: formData.stateOfOrigin,
-              ageRange: formData.ageRange,
-              pvc: formData.pvc,
-              maritalStatus: formData.maritalStatus,
-              employmentStatus: formData.employmentStatus,
-              Gender: formData.gender,
-              Religion: formData.religion,
-              SelectOneOpt: formData.selectOneOpt,
-              AccomodationStatus: formData.accomodationStatus,
+              first_time_voter: formData.firstTimeVoter,
+              diaspora_voter: formData.diasporaVoter,
+              state_of_origin_id: formData.stateOfOrigin,
+              resident_state_id: formData.stateOfVotingRes,
+              resident_lga_id: formData.LGAofVotingRes,
+              age_range: formData.ageRange,
+              valid_voters_card: formData.pvc,
+              marital_status: formData.maritalStatus,
+              employment_status: formData.employmentStatus,
+              gender: formData.gender,
+              religion: formData.religion,
+              property_status: formData.selectOneOpt,
+              accomodation_status: formData.accomodationStatus,
             }),
           }
         );
-        if (response.ok) {
-          setUniqueID(fakeID);
+        if (!response.ok) {
+          setHasError(true);
+          throw new Error("Something Occured");
         } else {
-          throw new Error("Something went wrong");
+          setUniqueID(fakeID);
         }
+
+        // Catch block
       } catch (error) {
         setHasError(true);
-        setErrorMessage(error);
+        setErrorMessage(error.message);
       }
     };
-
     // if on final page, send data to API
     if (final) {
       makeRequest(finalData);

@@ -56,11 +56,11 @@ const PollsSingle = () => {
         Upcoming Polls
       </p>
 
-      <div className="grid gap-y-4 gap-x-12 grid-cols-3 mt-12 px-16">
+      <div className="grid grid-cols-3 px-16 mt-12 gap-y-4 gap-x-12">
         {Polls.map((item) => {
           return (
             <div className="flex flex-col items-center justify-center p-4 space-x-4 space-y-2">
-              <div className="flex flex-col items-center justify-center px-4 py-12 space-y-2 rounded-lg bg-polls-pattern md:px-0 w-full">
+              <div className="flex flex-col items-center justify-center w-full px-4 py-12 space-y-2 rounded-lg bg-polls-pattern md:px-0">
                 <p className="text-xl font-bold text-white">
                   {item.description}
                 </p>
@@ -82,7 +82,7 @@ const PollsSingle = () => {
                   </button>
                 ) : (
                   <div className="flex flex-row items-center justify-center">
-                    <div className="flex flex-col items-center p-4 space-y-2 border-r border-gray-300 w-full">
+                    <div className="flex flex-col items-center w-full p-4 space-y-2 border-r border-gray-300">
                       <h1
                         className={`text-sm  font-extrabold md:text-[34px] text-white`}
                       >
