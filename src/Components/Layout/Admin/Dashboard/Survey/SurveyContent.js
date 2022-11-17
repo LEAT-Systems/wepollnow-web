@@ -1,6 +1,7 @@
 /** @format */
 import React, { useState } from "react";
-import { AddOutlined, BorderColorOutlined, Close, Delete, DeleteForever, DeleteOutline, DeleteOutlined, Tune } from "@mui/icons-material";
+import { AddOutlined, BorderColorOutlined, Close, Delete } from "@mui/icons-material";
+import LinkIcon from "../../assets/Filter@2x.png";
 import Header from "../../Header";
 import Progress from "./Progress";
 import { Modal } from "@mui/material";
@@ -36,8 +37,8 @@ const SurveyContent = () => {
           </div>
 
           <nav className='pl-3 h-full my-auto flex text-gray-500'>
-            <span className='border border-1 flex rounded-lg items-center justify-center py-2 px-3 cursor-pointer text-sm md:text-base h-full mr-3 hover:bg-blue-100'>
-              <Tune />
+            <span className='mr-1 w-[2.6rem]'>
+              <img src={LinkIcon} alt='Account' className='w-full' />
             </span>
             <button
               className={open ? EditActiveStyle : EditNotActiveStyle}
