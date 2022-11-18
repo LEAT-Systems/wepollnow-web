@@ -44,7 +44,7 @@ const RadioButton = ({ refineResult, handleCloseRefineResult }) => {
 
           <form className='flex flex-col justify-start items-center w-full my-2'>
             {/* First Form */}
-            <div className='flex flex-col my-2 justify-start items-start w-full gap-3 px-8 py-4 bg-[#edfff0] rounded-xl'>
+            <div className='flex flex-col my-2 justify-start items-start w-full gap-3 px-6 py-4 bg-[#edfff0] rounded-xl'>
               <div className='w-full'>
                 {/* Title */}
                 <div className='flex items-center w-full border-b-2 border-solid border-gray-300 mb-3 pb-2'>
@@ -58,7 +58,7 @@ const RadioButton = ({ refineResult, handleCloseRefineResult }) => {
                 >
                   <RadioGroup>
                     <FormControlLabel
-                      value='male'
+                      value='default'
                       className='text-[#616b62] font-medium'
                       control={
                         <Radio
@@ -70,10 +70,10 @@ const RadioButton = ({ refineResult, handleCloseRefineResult }) => {
                           }}
                         />
                       }
-                      label='Male'
+                      label='Table View - Default'
                     />
                     <FormControlLabel
-                      value='female'
+                      value='state'
                       className='text-[#616b62] font-medium'
                       control={
                         <Radio
@@ -85,7 +85,7 @@ const RadioButton = ({ refineResult, handleCloseRefineResult }) => {
                           }}
                         />
                       }
-                      label='Female'
+                      label='Table View - State'
                     />
                   </RadioGroup>
                 </FormControl>
