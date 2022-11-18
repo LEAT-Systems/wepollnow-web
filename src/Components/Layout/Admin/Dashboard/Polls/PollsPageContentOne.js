@@ -92,8 +92,8 @@ const PollsPageContentOne = () => {
         </div>
 
         {/* Data Table */}
-        <div className='flex flex-col text-[#082a0f] px-6 my-6 md:mt-14 mb-6'>
-          <div className='flex flex-row justify-between pt-4 px-2 mb-10'>
+        <div className='flex flex-col text-[#082a0f] my-1'>
+          <div className='flex flex-row justify-between pt-4 px-2 mb-3'>
             <h2 className='font-extrabold text-[#082a0f] text-lg'>Polls</h2>
             <button
               className={open ? isActiveClass : isNotActiveClass}

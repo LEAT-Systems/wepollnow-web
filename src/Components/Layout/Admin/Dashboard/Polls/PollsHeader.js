@@ -36,7 +36,7 @@ const PollsHeader = ({
     "hover:bg-blue-100 cursor-pointer mr-1 w-[2.2rem] border rounded-sm p-2 flex justify-center";
 
   return (
-    <header className='flex flex-col md:flex-row justify-start md:justify-between mt-4 my-auto place-items-start md:place-items-center items-start w-full md:items-center'>
+    <header className='flex flex-col md:flex-row justify-start md:justify-between my-4 place-items-start md:place-items-center items-start w-full md:items-center'>
       <h3 className='font-bold text-xl lg:text-2xl md:text-[1.4rem] capitalize py-4 pl-0 w-full'>
         Manage polls
       </h3>
