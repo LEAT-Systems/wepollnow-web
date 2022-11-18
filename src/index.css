@@ -25,7 +25,7 @@ color: #e7f9ea; /* progress background color */
 }
 
 .active {
-  @apply relative bg-transparentWhite py-4 px-2 first:pt-[.1rem] before:absolute before:top-[1.1rem] before:right-0 before:content-[""] before:bg-green-500 before:h-[2.7rem] before:w-[.3rem] before:rounded-[1rem];
+  @apply relative bg-transparentWhite px-2 before:absolute before:-translate-y-1/2 before:top-1/2 before:right-0 before:content-[""] before:bg-green-500 before:h-[2.7rem] before:w-[.3rem] before:rounded-[1rem];
 }
 
 .sidebar-icons {
@@ -246,7 +246,7 @@ input:focus {
 }
 
 .table-row {
-  @apply border-b even:bg-[#edfff0] odd:bg-white
+  @apply border-b even:bg-[#f2f7f3] odd:bg-white
 }
 
 
