@@ -1,3 +1,5 @@
+/** @format */
+
 import React, { useEffect, useState } from "react";
 import Tables from "../Tables/Tables";
 import Header from "../../Header";
@@ -12,12 +14,12 @@ import SubHeader from "../../SubHeader";
 const SubHeaderData = [
   {
     id: 1,
-    route: "/dashboard/polls/polls",
+    route: "/admin/polls/polls",
     linkText: "Polls",
   },
   {
     id: 2,
-    route: "/dashboard/polls/candidates",
+    route: "/admin/polls/candidates",
     linkText: "Candidates",
   },
 ];
@@ -92,8 +94,8 @@ const PollsPageContentOne = () => {
         </div>
 
         {/* Data Table */}
-        <div className='flex flex-col text-[#082a0f] px-6 my-6 md:mt-14 mb-6'>
-          <div className='flex flex-row justify-between pt-4 px-2 mb-10'>
+        <div className='flex flex-col text-[#082a0f] my-1'>
+          <div className='flex flex-row justify-between pt-4 px-2 mb-3'>
             <h2 className='font-extrabold text-[#082a0f] text-lg'>Polls</h2>
             <button
               className={open ? isActiveClass : isNotActiveClass}

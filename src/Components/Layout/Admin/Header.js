@@ -20,7 +20,7 @@ const Header = () => {
   return (
     <>
       <div className='flex flex-row items-center justify-between w-full py-4 px-3 md:px-4 border-b'>
-        <Link to='/dashboard'>
+        <Link to='/admin'>
           <img src={logo} alt='logo' className='pl-4' />
         </Link>
         <button

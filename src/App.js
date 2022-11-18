@@ -1,14 +1,13 @@
-import PieChart from "./Components/Layout/Admin/Dashboard/Charts/PieChart";
 import React, { Suspense } from "react";
-import { Route, Switch, useLocation } from "react-router-dom";
+import {  Switch } from "react-router-dom";
 import VoteFormTwo from "./Components/Forms/VoteForm/VoteFormTwo";
 import VoteSuccess from "./Components/Forms/VoteForm/VoteSuccess";
-import BarChart from "./Components/Layout/Admin/Dashboard/Charts/BarChart";
 import BlogSingle from "./Pages/blogPages/blogSinglePost";
+import decode from 'jwt-decode'
 
 import Loading from "./UI/Loading";
-import Password from "./Components/Layout/Admin/Dashboard/Account/Password";
-import Candidate from "./Components/Layout/Admin/Dashboard/Polls/Candidate/Candidate";
+import PublicRoutes from "./PublicRoutes";
+import PrivateRoutes from "./PrivateRoute";
 
 // Lazy loads of components
 
@@ -70,151 +69,263 @@ const Login = React.lazy(() =>
   import("./Components/Layout/Admin/Dashboard/Login/Login")
 );
 
+const Password = React.lazy(() =>
+  import("./Components/Layout/Admin/Dashboard/Account/Password")
+);
+
+const Candidate = React.lazy(() =>
+  import("./Components/Layout/Admin/Dashboard/Polls/Candidate/Candidate")
+);
+
+
 function App() {
+
+  const getToken = () => {
+    const token = localStorage.getItem('token');
+    const refreshToken = localStorage.getItem('refreshToken');
+    try {
+      decode(token);
+      decode(refreshToken);
+      console.log([decode(token), decode(refreshToken)]);
+      return true;
+    } catch (error) {
+      return false
+    }
+  }
+
+  const isAuthenticated = getToken();
+
   return (
     <Suspense fallback={<Loading />}>
       <Switch>
         {/* //////////////////////////   LANDING PAGE ROUTES    //////////////////////////////////// */}
         {/* FALLBACK URL ROUTE */}
-        <Route path='/' exact>
+        <PublicRoutes isAuthenticated={isAuthenticated} path='/' exact>
           <GettingStartedOne />
-        </Route>
+        </PublicRoutes>
 
-        {/* GETTING STARTED ONE ROUTE */}
-        <Route path='/getting-started-one' exact>
+        {/* GETTING STARTED ONE Routes */}
+        <PublicRoutes
+          isAuthenticated={isAuthenticated}
+          path='/getting-started-one'
+          exact
+        >
           <GettingStartedOne />
-        </Route>
+        </PublicRoutes>
 
-        {/* GETTING STARTED TWO ROUTE */}
-        <Route path='/getting-started-two' exact>
+        {/* GETTING STARTED TWO Routes */}
+        <PublicRoutes
+          isAuthenticated={isAuthenticated}
+          path='/getting-started-two'
+          exact
+        >
           <GettingStartedTwo />
-        </Route>
+        </PublicRoutes>
 
-        {/* GETTING STARTED THREE ROUTE */}
-        <Route path='/getting-started-three' exact>
+        {/* GETTING STARTED THREE Routes */}
+        <PublicRoutes
+          isAuthenticated={isAuthenticated}
+          path='/getting-started-three'
+          exact
+        >
           <GettingStartedThree />
-        </Route>
+        </PublicRoutes>
 
-        {/* GETTING STARTED FOUR ROUTE */}
-        <Route path='/getting-started-four' exact>
+        {/* GETTING STARTED FOUR Routes */}
+        <PublicRoutes
+          isAuthenticated={isAuthenticated}
+          path='/getting-started-four'
+          exact
+        >
           <GettingStartedFour />
-        </Route>
+        </PublicRoutes>
 
-        {/* GETTING STARTED FIVE ROUTE */}
-        <Route path='/getting-started-five' exact>
+        {/* GETTING STARTED FIVE Routes */}
+        <PublicRoutes
+          isAuthenticated={isAuthenticated}
+          path='/getting-started-five'
+          exact
+        >
           <GettingStartedFive />
-        </Route>
+        </PublicRoutes>
 
-        {/* GETTING STARTED THREE ROUTE */}
-        <Route path='/getting-started-six' exact>
+        {/* GETTING STARTED THREE Routes */}
+        <PublicRoutes
+          isAuthenticated={isAuthenticated}
+          path='/getting-started-six'
+          exact
+        >
           <GettingStartedSix />
-        </Route>
+        </PublicRoutes>
 
-        {/* ABOUT PAGE ROUTE */}
-        <Route path='/about' exact>
+        {/* ABOUT PAGE Routes */}
+        <PublicRoutes isAuthenticated={isAuthenticated} path='/about' exact>
           <AboutPage />
-        </Route>
+        </PublicRoutes>
 
-        {/* BLOG PAGE ROUTE */}
-        <Route path='/blog' exact>
+        {/* BLOG PAGE Routes */}
+        <PublicRoutes isAuthenticated={isAuthenticated} path='/blog' exact>
           <BlogPage />
-        </Route>
-        <Route path='/blog-single' exact>
+        </PublicRoutes>
+
+        <PublicRoutes
+          isAuthenticated={isAuthenticated}
+          path='/blog-single'
+          exact
+        >
           <BlogSingle />
-        </Route>
-        {/* CONTACT PAGE ROUTE */}
-        <Route path='/vote/vote-form-next' exact>
+        </PublicRoutes>
+
+        {/* CONTACT PAGE Routes */}
+        <PublicRoutes
+          isAuthenticated={isAuthenticated}
+          path='/vote/vote-form-next'
+          exact
+        >
           <VoteFormTwo />
-        </Route>
-        {/* CONTACT PAGE ROUTE */}
-        <Route path='/vote/voteSuccess' exact>
+        </PublicRoutes>
+
+        {/* CONTACT PAGE Routes */}
+        <PublicRoutes
+          isAuthenticated={isAuthenticated}
+          path='/vote/voteSuccess'
+          exact
+        >
           <VoteSuccess />
-        </Route>
+        </PublicRoutes>
 
-        {/* TEST PAGE ROUTE */}
-        <Route path='/test' exact>
+        {/* TEST PAGE Routes */}
+        <PublicRoutes isAuthenticated={isAuthenticated} path='/test' exact>
           <Test />
-        </Route>
+        </PublicRoutes>
 
-        {/* ALL POLLS PAGE ROUTE */}
-        <Route path='/polls' exact>
+        {/* ALL POLLS PAGE Routes */}
+        <PublicRoutes isAuthenticated={isAuthenticated} path='/polls' exact>
           <AllPolls />
-        </Route>
+        </PublicRoutes>
 
-        {/* REGISTRATION ROUTE */}
-        <Route path='/register' exact>
+        {/* REGISTRATION Routes */}
+        <PublicRoutes isAuthenticated={isAuthenticated} path='/register' exact>
           <FormComponent />
-        </Route>
+        </PublicRoutes>
 
         {/* Some Other Page */}
-        <Route path='/vote' exact>
+        <PublicRoutes isAuthenticated={isAuthenticated} path='/vote' exact>
           <FormFive />
-        </Route>
+        </PublicRoutes>
 
         {/* =========================  ADMIN ROUTES  ========================== */}
 
         {/* Login Page */}
-        <Route path='/login' exact>
+        <PublicRoutes
+          isAuthenticated={isAuthenticated}
+          path='/admin/login'
+          exact
+        >
           <Login />
-        </Route>
+        </PublicRoutes>
 
         {/* Dashboard Landing */}
-        <Route path='/dashboard/home' exact>
+        <PrivateRoutes
+          isAuthenticated={isAuthenticated}
+          path='/admin/home'
+          exact
+        >
           <Dashboard />
-        </Route>
+        </PrivateRoutes>
 
         {/* Polls Page */}
 
-        <Route path='/dashboard/polls' exact>
+        <PrivateRoutes
+          isAuthenticated={isAuthenticated}
+          path='/admin/polls'
+          exact
+        >
           <ManagePolls />
-        </Route>
+        </PrivateRoutes>
 
-        <Route path='/dashboard/polls/polls' exact>
+        <PrivateRoutes
+          isAuthenticated={isAuthenticated}
+          path='/admin/polls/polls'
+          exact
+        >
           <ManagePolls />
-        </Route>
-        
-        <Route path='/dashboard/polls/candidates' exact>
+        </PrivateRoutes>
+
+        <PrivateRoutes
+          isAuthenticated={isAuthenticated}
+          path='/admin/polls/candidates'
+          exact
+        >
           <Candidate />
-        </Route>
+        </PrivateRoutes>
 
         {/* Polls result*/}
-        <Route Route path='/dashboard/polls/poll_result' exact>
+        <PrivateRoutes
+          isAuthenticated={isAuthenticated}
+          path='/admin/polls/poll_result'
+          exact
+        >
           <PollsResult />
-        </Route>
+        </PrivateRoutes>
 
         {/* surveys */}
 
-        <Route path='/dashboard/surveys' exact>
+        <PrivateRoutes
+          isAuthenticated={isAuthenticated}
+          path='/admin/surveys'
+          exact
+        >
           <Survey />
-        </Route>
+        </PrivateRoutes>
 
-        <Route path='/dashboard/surveys/manageSurvey' exact>
+        <PrivateRoutes
+          isAuthenticated={isAuthenticated}
+          path='/admin/surveys/manageSurvey'
+          exact
+        >
           <ManageSurvey />
-        </Route>
+        </PrivateRoutes>
 
         {/* blog */}
 
-        <Route path='/dashboard/blog' exact>
+        <PrivateRoutes
+          isAuthenticated={isAuthenticated}
+          path='/admin/blog'
+          exact
+        >
           <Blog />
-        </Route>
+        </PrivateRoutes>
 
         {/* account */}
-        <Route path='/dashboard/account' exact>
+        <PrivateRoutes
+          isAuthenticated={isAuthenticated}
+          path='/admin/account'
+          exact
+        >
           <Account />
-        </Route>
+        </PrivateRoutes>
 
-        <Route path='/dashboard/account/settings' exact>
+        <PrivateRoutes
+          isAuthenticated={isAuthenticated}
+          path='/admin/account/settings'
+          exact
+        >
           <Account />
-        </Route>
+        </PrivateRoutes>
 
-        <Route path='/dashboard/account/Managepassword' exact>
+        <PrivateRoutes
+          isAuthenticated={isAuthenticated}
+          path='/admin/account/Managepassword'
+          exact
+        >
           <Password />
-        </Route>
+        </PrivateRoutes>
 
-        {/*=========================  NOT FOUND ROUTE ========================*/}
-        <Route path='*'>
+        {/*=========================  NOT FOUND ROUTES ========================*/}
+        <PublicRoutes isAuthenticated={isAuthenticated} path='*'>
           <NotFound />
-        </Route>
+        </PublicRoutes>
       </Switch>
     </Suspense>
   );
