@@ -11,7 +11,7 @@ import BlogIcon from "./assets/document-text@2x-1.png";
 
 const SideBar = () => {
   return (
-    <div className='hidden lg:flex flex-col w-[89px] h-screen bg-deepgray border-r border-gray-200 fixed'>
+    <div className='hidden lg:flex flex-col w-[89px] h-screen bg-deepgray border-r border-gray-200 fixed pt-8'>
       {/*  */}
       <NavLink to='/dashboard/home' activeClassName='active' className='py-3'>
         <div className='flex flex-col items-center justify-center'>
