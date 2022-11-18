@@ -13,7 +13,7 @@ const SideBar = () => {
   return (
     <div className='hidden lg:flex flex-col w-[89px] h-screen bg-deepgray border-r border-gray-200 fixed pt-8'>
       {/*  */}
-      <NavLink to='/dashboard/home' activeClassName='active' className='py-3'>
+      <NavLink to='/admin/home' activeClassName='active' className='py-3'>
         <div className='flex flex-col items-center justify-center'>
           <div className='rounded-md'>
             <img
@@ -27,7 +27,7 @@ const SideBar = () => {
       </NavLink>
 
       {/*  */}
-      <NavLink to='/dashboard/polls' className='py-3'>
+      <NavLink to='/admin/polls' className='py-3'>
         <div className='flex flex-col items-center justify-center transition duration-700 ease-in-out'>
           <div className='rounded-md'>
             <img
@@ -41,7 +41,7 @@ const SideBar = () => {
       </NavLink>
 
       {/*  */}
-      <NavLink to='/dashboard/surveys' className='py-3'>
+      <NavLink to='/admin/surveys' className='py-3'>
         <div className='flex flex-col items-center justify-center transition duration-700 ease-in-out'>
           <div className='rounded-md'>
             <img
@@ -55,7 +55,7 @@ const SideBar = () => {
       </NavLink>
 
       {/*  */}
-      <NavLink to='/dashboard/account' className='py-3'>
+      <NavLink to='/admin/account' className='py-3'>
         <div className='flex flex-col items-center justify-center transition duration-700 ease-in-out'>
           <div className='rounded-md'>
             <img

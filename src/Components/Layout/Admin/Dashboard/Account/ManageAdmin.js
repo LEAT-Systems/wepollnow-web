@@ -15,12 +15,12 @@ import Header from "../../Header";
 const data = [
   {
     id: 1,
-    route: "/dashboard/account/settings",
+    route: "/admin/account/settings",
     linkText: "Admins",
   },
   {
     id: 2,
-    route: "/dashboard/account/managePassword",
+    route: "/admin/account/managePassword",
     linkText: "Password",
   },
 ];

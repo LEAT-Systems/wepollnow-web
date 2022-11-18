@@ -1,3 +1,5 @@
+/** @format */
+
 import React, { useEffect, useState } from "react";
 import Tables from "../Tables/Tables";
 import Header from "../../Header";
@@ -12,12 +14,12 @@ import SubHeader from "../../SubHeader";
 const SubHeaderData = [
   {
     id: 1,
-    route: "/dashboard/polls/polls",
+    route: "/admin/polls/polls",
     linkText: "Polls",
   },
   {
     id: 2,
-    route: "/dashboard/polls/candidates",
+    route: "/admin/polls/candidates",
     linkText: "Candidates",
   },
 ];

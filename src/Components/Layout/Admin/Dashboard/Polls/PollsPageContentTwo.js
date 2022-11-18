@@ -1,16 +1,21 @@
+/** @format */
+
 import React, { useState } from "react";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
-import { ArrowUpward, CalendarMonthOutlined, People, Save } from "@mui/icons-material";
+import {
+  ArrowUpward,
+  CalendarMonthOutlined,
+  People,
+  Save,
+} from "@mui/icons-material";
 import Header from "../../Header";
 import BarChart from "../Charts/BarChart";
 import PieChart from "../Charts/PieChart";
 import DropDown from "../DropDown/DropDown";
 import Tables from "../Tables/Tables";
 import Grid from "./Grid";
-import Data from '../../Data.json'
+import Data from "../../Data.json";
 import { NavLink } from "react-router-dom";
-
-
 
 const PollsPageContentTwo = () => {
   const [open, setOpen] = useState(false);
@@ -48,17 +53,16 @@ const PollsPageContentTwo = () => {
     setOpen(!open);
   };
 
-
   const data = [
     {
-        id: 3,
-        status: ["Upcoming", "Scheduled", "Concluded"],
-        users: "235,436",
-        daily_hits: 45,
-        total_hits: 523,
-        daily_users: 89,
-      },
-    ];
+      id: 3,
+      status: ["Upcoming", "Scheduled", "Concluded"],
+      users: "235,436",
+      daily_hits: 45,
+      total_hits: 523,
+      daily_users: 89,
+    },
+  ];
   return (
     <>
       <Header />
@@ -69,7 +73,7 @@ const PollsPageContentTwo = () => {
               Polls Result
             </h2>
             <div className='flex flex-row items-center justify-start text-base'>
-              <NavLink to='/dashboard/polls' activeClassName={null}>
+              <NavLink to='/admin/polls' activeClassName={null}>
                 <p className='font-bold text-[#616b62]'>Manage Polls</p>
               </NavLink>
               <NavigateNextIcon

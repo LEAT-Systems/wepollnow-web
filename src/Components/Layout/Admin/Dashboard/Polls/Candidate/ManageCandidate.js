@@ -1,3 +1,5 @@
+/** @format */
+
 import React from "react";
 import SubHeader from "../../../SubHeader";
 import { useState, useEffect } from "react";
@@ -8,16 +10,15 @@ import FilterIcon from "../../../assets/Filter@2x-1.png";
 import ManageCandidateTable from "./ManageCandidateTable";
 import Header from "../../../Header";
 
-
 const SubHeaderData = [
   {
     id: 1,
-    route: "/dashboard/polls/polls",
+    route: "/admin/polls/polls",
     linkText: "Polls",
   },
   {
     id: 2,
-    route: "/dashboard/polls/candidates",
+    route: "/admin/polls/candidates",
     linkText: "Candidates",
   },
 ];
@@ -49,15 +50,14 @@ const Candidate = () => {
   const [searchResult, setSearchResult] = useState([]);
   const [open, setOpen] = useState(false);
 
-
-    /* handle for create new poll */
-    const handleOpen = () => {
-      setOpen(!open);
-    };
-    const handleClose = () => {
-      setOpen(!open);
+  /* handle for create new poll */
+  const handleOpen = () => {
+    setOpen(!open);
   };
-  
+  const handleClose = () => {
+    setOpen(!open);
+  };
+
   /* handle for refine results */
   const handleOpenRefineResult = () => {
     setRefineResult(!refineResult);
