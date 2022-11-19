@@ -1,51 +1,70 @@
-import React from "react";
-import AutoAwesomeMosaicIcon from "@mui/icons-material/AutoAwesomeMosaic";
-import AssessmentIcon from "@mui/icons-material/Assessment";
-import AssignmentIcon from '@mui/icons-material/Assignment';
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import { NavLink } from "react-router-dom";
+/** @format */
 
-//
+import React from "react";
+import { NavLink } from "react-router-dom";
+import HomeIcon from "./assets/grid-5@2x-1.png";
+import PollIcon from "./assets/chart-2@2x-1.png";
+import SurveyIcon from "./assets/note@2x-1.png";
+import AccountIcon from "./assets/profile-circle@2x-1.png";
+import AccountIcon2 from "./assets/profile-circle@2x.png";
+import BlogIcon from "./assets/document-text@2x-1.png";
+
 const SideBar = () => {
   return (
-    <div className='hidden lg:flex flex-col w-[82px] h-screen bg-deepgray border-r border-gray-200 space-y-8 fixed'>
+    <div className='hidden lg:flex flex-col w-[89px] h-screen bg-deepgray border-r border-gray-200 fixed pt-8'>
       {/*  */}
-      <NavLink to='/dashboard' activeClassName='active'>
-        <div className='flex flex-col items-center justify-center mt-4'>
+      <NavLink to='/admin/home' activeClassName='active' className='py-3'>
+        <div className='flex flex-col items-center justify-center'>
           <div className='rounded-md'>
-            <AutoAwesomeMosaicIcon className='sidebar-icons' />
+            <img
+              src={HomeIcon}
+              alt='Account'
+              className='w-[1.3rem] h-[1.3rem] sidebar-icons'
+            />
           </div>
-          <p className='font-semibold text-sm text-white'>Home</p>
+          <p className='text-[0.76rem] pt-1 text-white'>Home</p>
         </div>
       </NavLink>
 
       {/*  */}
-      <NavLink to='/dashboard/polls'>
+      <NavLink to='/admin/polls' className='py-3'>
         <div className='flex flex-col items-center justify-center transition duration-700 ease-in-out'>
           <div className='rounded-md'>
-            <AssessmentIcon className='sidebar-icons' />
+            <img
+              src={PollIcon}
+              alt='Account'
+              className='w-[1.3rem] h-[1.3rem] sidebar-icons'
+            />
           </div>
-          <p className='font-semibold text-sm text-white'>Polls</p>
+          <p className='text-[0.76rem] pt-1 text-white'>Polls</p>
         </div>
       </NavLink>
 
       {/*  */}
-      <NavLink to='/dashboard/surveys'>
+      <NavLink to='/admin/surveys' className='py-3'>
         <div className='flex flex-col items-center justify-center transition duration-700 ease-in-out'>
           <div className='rounded-md'>
-            <AssignmentIcon className='sidebar-icons' />
+            <img
+              src={SurveyIcon}
+              alt='Account'
+              className='w-[1.3rem] h-[1.3rem] sidebar-icons'
+            />
           </div>
-          <p className='font-semibold text-sm text-white'>Surveys</p>
+          <p className='text-[0.76rem] pt-1 text-white'>Surveys</p>
         </div>
       </NavLink>
 
       {/*  */}
-      <NavLink to='/dashboard/account'>
+      <NavLink to='/admin/account' className='py-3'>
         <div className='flex flex-col items-center justify-center transition duration-700 ease-in-out'>
           <div className='rounded-md'>
-            <AccountCircleIcon className='sidebar-icons' />
+            <img
+              src={AccountIcon}
+              alt='Account'
+              className='w-[1.6rem] h-[1.6rem] sidebar-icons'
+            />
           </div>
-          <p className='font-semibold text-sm text-white'>Account</p>
+          <p className='text-[0.76rem] pt-1 text-white'>Account</p>
         </div>
       </NavLink>
     </div>
