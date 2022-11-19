@@ -45,13 +45,28 @@ const CreatePollModal = ({ open, handleClose }) => {
                   <option>Governorship Poll</option>
                 </select>
               </label>
+            </div>
+
+            {/*  */}
+            <div className='flex flex-col md:flex-row my-2 justify-center items-center w-full gap-3 md:gap-5'>
+              
 
               <label className='w-full relative'>
-                Date
+               Start Date
                 <input
                   type='date'
-                  name='date'
-                  id='date'
+                  name='start__data'
+                  id='start__data'
+                  className='font-medium text-base text-[#616b62] uppercase h-full w-full border-2 border-gray-300 rounded-md py-3 px-3'
+                  placeholder='DD/MM/YY'
+                />
+              </label>
+              <label className='w-full relative'>
+                End Date
+                <input
+                  type='date'
+                  name='end__date'
+                  id='end__date'
                   className='font-medium text-base text-[#616b62] uppercase h-full w-full border-2 border-gray-300 rounded-md py-3 px-3'
                   placeholder='DD/MM/YY'
                 />
