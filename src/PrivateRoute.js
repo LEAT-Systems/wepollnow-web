@@ -1,21 +1,20 @@
 /** @format */
 
+import { useEffect } from "react";
 import { Route, Redirect } from "react-router-dom";
+import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
 
 function PrivateRoutes({ children, isAuthenticated, ...rest }) {
+  let location = useLocation();
+
   return (
     <Route
       {...rest}
-      render={({ location }) =>
+      render={() =>
         !isAuthenticated ? (
           children
         ) : (
-          <Redirect
-            to={{
-              pathname: "/admin/home",
-              state: { from: location },
-            }}
-          />
+          <Redirect to="/admin/login" />
         )
       }
     />
