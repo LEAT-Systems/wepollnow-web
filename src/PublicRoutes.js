@@ -1,6 +1,6 @@
 import { Route, Redirect } from "react-router-dom";
 
-function PrivateRoutes({ children, isAuthenticated, ...rest }) {
+function PublicRoutes({ children, isAuthenticated, ...rest }) {
   console.log("isAuthenticated: ", isAuthenticated)
   console.log("children: ", children);
   return (
@@ -22,4 +22,4 @@ function PrivateRoutes({ children, isAuthenticated, ...rest }) {
    );
 }
 
-export default PrivateRoutes;
+export default PublicRoutes;
