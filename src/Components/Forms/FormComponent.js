@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
 import FormOne from "./FormOne";
 import FormTwo from "./FormTwo";
 import FormThree from "./FormThree";
@@ -13,10 +14,13 @@ const { phoneNo, country } = phoneDetails;
 const fakeID = `user-${Math.random().toString(36).slice(2)}`;
 //
 const FormComponent = () => {
+  const history = useHistory();
   const [currentStep, setCurrentStep] = useState(0);
   const [hasError, setHasError] = useState();
-  const [errorMessage, setErrorMessage] = useState("");
-  const [uniqueID, setUniqueID] = useState("");
+  const [errorMessageEmail, setErrorMessageEmail] = useState("");
+  const [errorMessagePhone, setErrorMessagePhone] = useState("");
+  const [HTTPerror, setHTTPerror] = useState(false);
+  const [sendAsDiaspora, setSendAsDiaspora] = useState(false);
   const [data, setData] = useState({
     // Local Storage
     phone: phoneNo,
@@ -45,9 +49,14 @@ const FormComponent = () => {
     accomodationStatus: "",
   });
 
-  // Storing uniqueID from state to localStorage
-  localStorage.setItem("userID", uniqueID);
+  useEffect(() => {
+    let { stateOfVotingRes, LGAofVotingRes } = data;
+    if (stateOfVotingRes || LGAofVotingRes === "") {
+      setSendAsDiaspora(true);
+    }
+  }, []);
 
+  console.log(sendAsDiaspora);
   // storing state data in a variable
   const finalData = { ...data };
 
@@ -56,45 +65,85 @@ const FormComponent = () => {
     setData((prev) => ({ ...prev, ...newData }));
 
     // Make API Request Handler
-    const makeRequest = async (formData) => {
-      try {
-        const response = await fetch(
-          "https://wepollnow-default-rtdb.firebaseio.com/users.json",
-          {
-            method: "POST",
-            body: JSON.stringify({
-              phone: formData.phone,
-              country: formData.country,
-              email: formData.email,
-              first_time_voter: formData.firstTimeVoter,
-              diaspora_voter: formData.diasporaVoter,
-              state_of_origin_id: formData.stateOfOrigin,
-              resident_state_id: formData.stateOfVotingRes,
-              resident_lga_id: formData.LGAofVotingRes,
-              age_range: formData.ageRange,
-              valid_voters_card: formData.pvc,
-              marital_status: formData.maritalStatus,
-              employment_status: formData.employmentStatus,
-              gender: formData.gender,
-              religion: formData.religion,
-              property_status: formData.selectOneOpt,
-              accomodation_status: formData.accomodationStatus,
-            }),
-          }
-        );
-        if (!response.ok) {
-          setHasError(true);
-          throw new Error("Something Occured");
-        } else {
-          setUniqueID(fakeID);
-        }
+    let requestOptions;
 
-        // Catch block
-      } catch (error) {
+    const makeRequest = async (formData) => {
+      {
+        sendAsDiaspora === true
+          ? (requestOptions = {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json; charset=UTF-8",
+              },
+              body: JSON.stringify({
+                phone: formData.phone,
+                country: formData.country,
+                email: formData.email,
+                first_time_voter: formData.firstTimeVoter,
+                diaspora_voter: formData.diasporaVoter,
+                state_of_origin_id: parseInt(formData.stateOfOrigin),
+                age_range: parseInt(formData.ageRange),
+                valid_voters_card: formData.pvc,
+                marital_status: parseInt(formData.maritalStatus),
+                employment_status: parseInt(formData.employmentStatus),
+                gender: parseInt(formData.gender),
+                religion: parseInt(formData.religion),
+                property_status: parseInt(formData.selectOneOpt),
+                accomodation_status: parseInt(formData.accomodationStatus),
+              }),
+            })
+          : (requestOptions = {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json; charset=UTF-8",
+              },
+              body: JSON.stringify({
+                phone: formData.phone,
+                country: formData.country,
+                email: formData.email,
+                first_time_voter: formData.firstTimeVoter,
+                diaspora_voter: formData.diasporaVoter,
+                state_of_origin_id: parseInt(formData.stateOfOrigin),
+                resident_state_id: parseInt(formData.stateOfVotingRes),
+                resident_lga_id: parseInt(formData.LGAofVotingRes),
+                age_range: parseInt(formData.ageRange),
+                valid_voters_card: formData.pvc,
+                marital_status: parseInt(formData.maritalStatus),
+                employment_status: parseInt(formData.employmentStatus),
+                gender: parseInt(formData.gender),
+                religion: parseInt(formData.religion),
+                property_status: parseInt(formData.selectOneOpt),
+                accomodation_status: parseInt(formData.accomodationStatus),
+              }),
+            });
+      }
+
+      const response = await fetch(
+        "https://wepollnow.azurewebsites.net/voters/",
+        requestOptions
+      );
+      const result = await response.text();
+      const JSONdata = await JSON.parse(result);
+      const emailHasError = JSONdata?.error?.email?.[0];
+      const phoneHasError = JSONdata?.error?.phone?.[0];
+      if (!response.ok) {
         setHasError(true);
-        setErrorMessage(error.message);
+        setHTTPerror("Something isn't right...");
+      }
+      if (!response.ok && emailHasError !== "") {
+        setHasError(true);
+        setErrorMessageEmail(emailHasError);
+      }
+      if (!response.ok && phoneHasError !== "") {
+        setHasError(true);
+        setErrorMessagePhone(phoneHasError);
+      }
+      if (response.ok === true) {
+        localStorage.setItem("uniqueID", JSONdata.id);
+        history.push("/polls", { replace: true });
       }
     };
+
     // if on final page, send data to API
     if (final) {
       makeRequest(finalData);
@@ -115,7 +164,12 @@ const FormComponent = () => {
     <FormThree next={handleNextStep} prev={handlePrevStep} data={data} />,
     <FormFour next={handleNextStep} prev={handlePrevStep} data={data} />,
     <Confirm next={handleNextStep} prev={handlePrevStep} data={data} />,
-    <Message state={hasError} message={errorMessage} />,
+    <Message
+      state={hasError}
+      messageOne={errorMessagePhone}
+      messageTwo={errorMessageEmail}
+      httpError={HTTPerror}
+    />,
   ];
 
   return <div>{steps[currentStep]}</div>;

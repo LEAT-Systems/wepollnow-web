@@ -10,7 +10,7 @@ const copy = <span dangerouslySetInnerHTML={{ __html: "&copy;" }} />;
 const Footer = () => {
   return (
     <>
-      <div className="flex static space-y-12 md:space-y-0 flex-col md:flex-row items-center justify-between bg-[#0A290F] py-16 md:py-[75px] px-8 md:px-[100px]">
+      <div className="flex space-y-12 md:space-y-0 flex-col md:flex-row items-center justify-between bg-[#0A290F] py-16 md:py-[75px] px-8 md:px-[100px]">
         <Link to="/">
           <img src={logo} alt="logo" />
         </Link>

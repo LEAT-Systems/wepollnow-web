@@ -7,17 +7,32 @@ import Timer from "../../UI/Timer";
 import calendar from "../../images/calendar.png";
 import { useHistory } from "react-router-dom";
 
-const AllPolls = (props) => {
+const AllPolls = () => {
   const history = useHistory();
   const [data, setData] = useState([]);
-
+  const id = localStorage.getItem("uniqueID");
+  // TO check if poll contents are empty
+  const isEmpty = data.length === 0;
   // Setting data from API here
   useEffect(() => {
-    setData(Polls);
-  }, []);
+    let formData = new FormData();
+    formData.append("user_id", `${id}`);
+    const requestOptions = {
+      method: "GET",
+      body: null,
+    };
+    const getData = async () => {
+      const response = await fetch(
+        "https://wepollnow.azurewebsites.net/poll/user_polls/",
+        requestOptions
+      );
+      const result = await response.text();
+      const JSONdata = await JSON.parse(result);
+      setData(JSONdata);
+    };
+    getData();
+  }, [id]);
 
-  // TO check if contents are empty
-  const isEmpty = data.length === 0;
   return (
     <div className="w-screen h-screen overflow-x-hidden">
       <Nav bg="FCEBEE" bgImg="hero-container-pattern" hamburgerBg="FCEBEE" />
@@ -34,7 +49,6 @@ const AllPolls = (props) => {
           <img src={image} className="w-full md:h-[500px]" alt={"Voter"} />
         </div>
       </div>
-
       {/* ==============   GRID FOR ARRANGING ITEMS  ===================*/}
       {isEmpty && (
         <div className="flex flex-row items-center justify-center mt-48">
@@ -45,16 +59,16 @@ const AllPolls = (props) => {
           </div>
         </div>
       )}
-      <div className="grid grid-cols-1 pb-12 md:mb-12 mt-12 gap-y-4 gap-x-12 md:px-24 md:gap-x-12 md:grid-cols-3 h-screen">
+      <div className="grid min-h-screen grid-cols-1 pb-12 mt-12 md:mt-0 md:mb-12 gap-y-4 gap-x-12 md:px-24 md:gap-x-12 md:grid-cols-3">
         {data.map((item) => {
           // Here, I'm calculating the poll date from the current date so i could render items conditionally
           let due;
           const now = new Date().getTime();
-          const distance = new Date(item.date).getTime() - now;
+          const distance = new Date(item.poll_date).getTime() - now;
           due = distance < 0;
 
           // Storing Polltype clicked on button into local storage
-          const setDescription = item.description;
+          const setDescription = item.poll_name;
           const handler = () => {
             localStorage.setItem("pollType", setDescription);
           };
@@ -70,7 +84,7 @@ const AllPolls = (props) => {
               <div className="flex flex-col items-center justify-center w-full py-12 space-y-4 rounded-lg h-72 bg-polls-pattern">
                 {!due && (
                   <p className="text-xl font-bold text-white">
-                    {item.description}
+                    {item.poll_name}
                   </p>
                 )}
                 <div
@@ -82,18 +96,20 @@ const AllPolls = (props) => {
                 >
                   {!due && <img src={calendar} alt="calendarIcon" />}
                   <label className="text-[14px]">
-                    <p className="font-normal">{due ? "Ongoing" : item.date}</p>
+                    <p className="font-normal">
+                      {due ? "Ongoing" : item.poll_date}
+                    </p>
                   </label>
                 </div>
                 {due && (
                   <p className="text-xl font-bold text-white">
-                    {item.description}
+                    {item.poll_name}
                   </p>
                 )}
                 <div className="px-2">
                   {!due ? (
                     <Timer
-                      date={item.date}
+                      date={item.poll_date}
                       size="2xl"
                       pcolor="white"
                       color="white"

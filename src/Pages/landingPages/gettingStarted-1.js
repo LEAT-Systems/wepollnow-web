@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Timer from "../../UI/Timer";
 import { countDownDate } from "../../UI/MagicVars";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import "react-phone-number-input/style.css";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
@@ -15,13 +15,21 @@ import ModalComponent from "./GettingStartedModal";
 import calendar from "../../images/calendar.png";
 
 //
+const uniqueID = localStorage.getItem("uniqueID");
+
 const GettingStartedOne = () => {
+  const history = useHistory();
   const [open, setOpen] = useState(false);
 
   // open and close the modal
   const handleOpen = () => {
-    setOpen(true);
-    localStorage.setItem("pollType", "Presidential Poll");
+    if (uniqueID !== "" && uniqueID !== undefined && uniqueID !== null) {
+      history.push("/vote", { replace: true });
+      // make API request with unique ID
+    } else {
+      localStorage.setItem("pollType", "presidential_poll");
+      setOpen(true);
+    }
   };
   const handleClose = () => {
     setOpen(false);
@@ -34,7 +42,7 @@ const GettingStartedOne = () => {
       <ModalComponent open={open} handleClose={handleClose} />
       <div className="relative flex flex-col">
         <div
-          className={`absolute z-10 flex flex-col items-center top-[450px] md:top-56 justify-center space-y-4 left-8 md:left-16`}
+          className={`absolute z-10 flex flex-col items-center top-[550px] md:top-56 justify-center space-y-4 left-8 md:left-16`}
         >
           <div className={`flex flex-col space-y-4 text-[#707070]`}>
             <a href="https://instagram.com/wepollnow">
@@ -48,7 +56,7 @@ const GettingStartedOne = () => {
             </a>
           </div>
         </div>
-        <div className="relative flex flex-col items-center justify-center space-y-2 mt-12 bg-contain bg-hero-pattern bg-no-repeat lg:pb-[10rem] bg-top bg-opacity-5 md:py-8 pb-24">
+        <div className="relative flex flex-col items-center justify-center space-y-8 mt-12 bg-contain bg-hero-pattern bg-no-repeat lg:pb-[10rem] bg-top bg-opacity-5 md:py-8 pb-24">
           <p className="text-xl font-extrabold md:text-3xl">
             Presidential Poll
           </p>
@@ -76,7 +84,7 @@ const GettingStartedOne = () => {
             </button>
           </div>
           {/* Large screen controls */}
-          <div className="absolute right-6 md:right-16 top-[376px] md:top-36">
+          <div className="absolute right-6 md:right-16 top-[450px] md:top-36">
             <div className="flex flex-col items-center justify-center space-y-4 ">
               <div className="bg-[#EDFFF0] rounded-full p-1 ">
                 <KeyboardArrowUpIcon />

@@ -12,9 +12,11 @@ import { Modal, Slide } from "@mui/material";
 import hamburgerSmall from "../../../images/hamburgSmall.png";
 
 const Nav = (props) => {
-  const [data, setData] = useState();
   const [show, setShow] = useState(false);
+  const [errorMessageEmail, setErrorMessageEmail] = useState("");
   const [hidden, setHidden] = useState(true);
+  const [hasError, setHasError] = useState();
+  const [hasHTTPError, setHasHTTPError] = useState("");
   const [hasSubmitted, setHasSubmitted] = useState(false);
   const nameRef = useRef();
   const emailRef = useRef();
@@ -38,16 +40,44 @@ const Nav = (props) => {
     let email = emailRef.current.value.trim();
     let message = messageRef.current.value.trim();
 
-    // preparing the data into setData() in useState()
-    setData({
-      dataID: "Navigation Bar Form Data",
-      userNames: name,
-      userEmail: email,
-      message: message,
-    });
-
-    // getting the data() value from useState and Sending the data to API endpoint
-    localStorage.setItem("Contact Form", JSON.stringify(data));
+    console.log(name, email, message);
+    const sendToAPI = async () => {
+      try {
+        const requestOptions = {
+          method: "POST",
+          body: JSON.stringify({
+            email: email,
+            name: name,
+            message: message,
+          }),
+          headers: {
+            "Content-Type": "application/json; charset=UTF-8",
+          },
+        };
+        const response = await fetch(
+          "https://wepollnow.azurewebsites.net/utilities/subscribe/",
+          requestOptions
+        );
+        const result = await response.text();
+        const JSONdata = await JSON.parse(result);
+        const emailHasError = JSONdata?.error?.email?.[0];
+        if (!response.ok && emailHasError !== "") {
+          setHasError(true);
+          setErrorMessageEmail(emailHasError);
+        }
+        console.log("JSONDATA", JSONdata);
+        console.log("RESULT", result);
+        if (!response.ok) {
+          setHasError(true);
+          throw new Error("Something Isn't right");
+        } else {
+          setShow(true);
+        }
+      } catch (error) {
+        setHasHTTPError(error.message);
+      }
+    };
+    sendToAPI();
     setHasSubmitted(true);
 
     // clear form
@@ -138,12 +168,62 @@ const Nav = (props) => {
     </div>
   );
 
-  const mobileForm = (
+  const form = (
+    <form className="space-y-4" onSubmit={handleSubmit}>
+      <div>
+        <p className="text-white">Name</p>
+        <input
+          required
+          type="text"
+          ref={nameRef}
+          className="w-full p-4 text-white placeholder-gray-200 bg-black border rounded input hover:bg-gray-900"
+          placeholder="Enter Your Name"
+        />
+      </div>
+      <div>
+        <p className="text-white">Email</p>
+        <input
+          required
+          type="email"
+          ref={emailRef}
+          className="w-full p-4 text-white placeholder-gray-200 bg-black border rounded input hover:bg-gray-900"
+          placeholder="Enter Your Email"
+        />
+      </div>
+      <div>
+        <p className="text-white">Message</p>
+        <textarea
+          required
+          type="text"
+          ref={messageRef}
+          className="w-full h-32 p-4 text-white placeholder-gray-200 bg-black border rounded input hover:bg-gray-900"
+          placeholder="Enter Your Message"
+        />
+      </div>
+      <div>
+        <button
+          type="submit"
+          className="w-full p-4 transition bg-white rounded text-dark hover:-translate-y-1"
+        >
+          <p className="font-bold">Send Message</p>
+        </button>
+      </div>
+    </form>
+  );
+
+  const mobileFormContainer = (
     <div className="flex md:hidden flex-col py-0 w-[100%] px-4 border-gray-200 md:border-0">
       <div className="space-y-4 w-[100%] md:w-[65%]">
-        {hasSubmitted && (
+        {hasSubmitted && hasError === false && (
           <div className="p-4 text-center text-white bg-green-500 rounded-lg">
             <p>Action was Successful. We will get back to you.</p>
+          </div>
+        )}
+        {hasSubmitted && errorMessageEmail === "" && (
+          <div className="p-4 text-center text-white bg-red-500 rounded-lg">
+            <p>
+              Error: {errorMessageEmail} {hasHTTPError}
+            </p>
           </div>
         )}
         <button
@@ -155,100 +235,29 @@ const Nav = (props) => {
             Back
           </p>
         </button>
-        <form className="space-y-4" onSubmit={handleSubmit}>
-          <div>
-            <p className="text-white">Name</p>
-            <input
-              required
-              type="text"
-              ref={nameRef}
-              className="w-full p-4 text-white placeholder-gray-200 bg-black border rounded input hover:bg-gray-900"
-              placeholder="Enter Your Name"
-            />
-          </div>
-          <div>
-            <p className="text-white">Email</p>
-            <input
-              required
-              type="email"
-              ref={emailRef}
-              className="w-full p-4 text-white placeholder-gray-200 bg-black border rounded input hover:bg-gray-900"
-              placeholder="Enter Your Email"
-            />
-          </div>
-          <div>
-            <p className="text-white">Message</p>
-            <textarea
-              required
-              type="text"
-              ref={messageRef}
-              className="w-full h-32 p-4 text-white placeholder-gray-200 bg-black border rounded input hover:bg-gray-900"
-              placeholder="Enter Your Message"
-            />
-          </div>
-          <div>
-            <button
-              type="submit"
-              className="w-full p-4 transition bg-white rounded text-dark hover:-translate-y-1"
-            >
-              <p className="font-bold">Send Message</p>
-            </button>
-          </div>
-        </form>
+        {form}
       </div>
     </div>
   );
-  const desktopForm = (
+  const desktopFormContainer = (
     <div className=" hidden md:flex flex-col items-center justify-center mx-auto w-[65%] border-gray-200 md:border-0">
       <div className="space-y-4 w-[100%] md:w-[65%]">
-        {hasSubmitted && (
+        {hasSubmitted && hasError === false && (
           <div className="p-4 text-center text-white bg-green-500 rounded-lg">
             <p>Action was Successful. We will get back to you.</p>
+          </div>
+        )}
+        {hasSubmitted && errorMessageEmail === "" && (
+          <div className="p-4 text-center text-white bg-red-500 rounded-lg">
+            <p>
+              Error: {errorMessageEmail} {hasHTTPError}
+            </p>
           </div>
         )}
         <p className="mt-8 text-lg font-bold text-left text-white md:text-xl md:mt-0 md:text-left ">
           Get in touch
         </p>
-        <form className="space-y-4" onSubmit={handleSubmit}>
-          <div>
-            <p className="text-white">Name</p>
-            <input
-              required
-              type="text"
-              ref={nameRef}
-              className="w-full p-4 text-white placeholder-gray-200 bg-black border rounded input hover:bg-gray-900"
-              placeholder="Enter Your Name"
-            />
-          </div>
-          <div>
-            <p className="text-white">Email</p>
-            <input
-              required
-              type="email"
-              ref={emailRef}
-              className="w-full p-4 text-white placeholder-gray-200 bg-black border rounded input hover:bg-gray-900"
-              placeholder="Enter Your Email"
-            />
-          </div>
-          <div>
-            <p className="text-white">Message</p>
-            <textarea
-              required
-              type="text"
-              ref={messageRef}
-              className="w-full h-32 p-4 text-white placeholder-gray-200 bg-black border rounded input hover:bg-gray-900"
-              placeholder="Enter Your Message"
-            />
-          </div>
-          <div>
-            <button
-              type="submit"
-              className="w-full p-4 transition bg-white rounded text-dark hover:-translate-y-1"
-            >
-              <p className="font-bold">Send Message</p>
-            </button>
-          </div>
-        </form>
+        {form}
       </div>
     </div>
   );
@@ -310,7 +319,7 @@ const Nav = (props) => {
               {/* show this container when on desktop view */}
               {desktopContainer}
               {/* show this form when on mobile view */}
-              {!hidden && mobileForm}
+              {!hidden && mobileFormContainer}
               {/* show this container when on mobile view */}
               {show && (
                 <button
@@ -324,7 +333,7 @@ const Nav = (props) => {
                 </button>
               )}
               {/* show this container when on desktop view */}
-              {desktopForm}
+              {desktopFormContainer}
             </div>
           </Slide>
         }
