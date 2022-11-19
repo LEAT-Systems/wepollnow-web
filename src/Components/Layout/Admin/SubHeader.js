@@ -10,7 +10,7 @@ const SubHeader = ({ data }) => {
         {data.map(({ id, route, linkText }) => {
           return (
             <li
-              className='font-bold text-[#082b0e] inline-block p-5 mr-1 relative'
+              className='font-bold text-[#082b0e] inline-block p-4 mr-1 relative'
               key={id}
             >
               <NavLink
