@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState, useContext } from "react";
 import LOGO from "../../../../../images/logo.png";
 import axios from "../../../../../api/axios";
 import AuthContext from "../../../../../AuthProvider";
+import { Redirect } from "react-router-dom/cjs/react-router-dom.min";
 
 
 const Login = () => {
@@ -68,7 +69,7 @@ const Login = () => {
   return (
     <>
       {success ? (
-        <span>You're In</span>
+        <Redirect to='/admin/home' />
       ) : (
         <div className='flex flex-col items-center justify-center min-h-screen px-4 py-4 mx-auto md:px-0'>
           <img src={LOGO} alt='LOGO' className='w-44 pb-9' />
@@ -85,8 +86,8 @@ const Login = () => {
                   ref={errRef}
                   className={
                     error
-                      ? " p-4 w-full text-red-500 block"
-                      : " p-4 w-full text-blue-500 hidden"
+                      ? " p-4 w-full font-bold text-red-500 block text-center"
+                      : "hidden"
                   }
                   aria-live='assertive'
                 >
@@ -106,6 +107,7 @@ const Login = () => {
                   ref={adminRef}
                   onChange={(e) => setEmail(e.target.value)}
                   value={email}
+                  autoComplete='on'
                 />
                 <label htmlFor='password' className='font-semibold'>
                   Password
@@ -115,7 +117,7 @@ const Login = () => {
                   className='w-full py-3 px-4 bg-transparent border border-black rounded mb-6 mt-1 font-semibold'
                   placeholder='Enter Password'
                   id='password'
-                  
+                  autoComplete='on'
                   aria-required
                   onChange={(e) => setPassword(e.target.value)}
                   value={password}
