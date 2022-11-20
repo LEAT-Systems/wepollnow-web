@@ -4,6 +4,7 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Fade from '@mui/material/Fade';
 import {  ArrowDropDown, LibraryBooks } from "@mui/icons-material";
+import MENU from '../../assets/menu.jpg';
 
 export default function DropDown({ handleList, handleGrid, handleBar, handlePie }) {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -26,8 +27,10 @@ export default function DropDown({ handleList, handleGrid, handleBar, handlePie 
         onClick={handleClick}
         sx={{ padding: ".6rem .6rem", color: "#616b62" }}
       >
-        <LibraryBooks
-          sx={{ fontSize: "1.2rem", marginRight: "auto .3rem auto auto" }}
+        <img
+          src={MENU}
+          alt='menu'
+          className='w-[1.2rem] h-[1.2rem] bg-transparent mr-[.3rem] my-auto'
         />
         <ArrowDropDown sx={{ fontSize: "1rem", margin: "auto" }} />
       </Button>
@@ -60,7 +63,11 @@ export default function DropDown({ handleList, handleGrid, handleBar, handlePie 
               },
             }}
           >
-            <LibraryBooks sx={{ fontSize: "1.2rem", marginRight: "1rem" }} />
+            <img
+              src={MENU}
+              alt='menu'
+              className='w-[1.2rem] h-[1.2rem] bg-transparent mr-[1rem]'
+            />
             Table View - Default
           </MenuItem>
           <MenuItem
@@ -75,7 +82,11 @@ export default function DropDown({ handleList, handleGrid, handleBar, handlePie 
               color: "#616b62",
             }}
           >
-            <LibraryBooks sx={{ fontSize: "1.2rem", marginRight: "1rem" }} />
+            <img
+              src={MENU}
+              alt='menu'
+              className='w-[1.2rem] h-[1.2rem] bg-transparent mr-[1rem]'
+            />
             Table View - States
           </MenuItem>
           <MenuItem
@@ -90,7 +101,11 @@ export default function DropDown({ handleList, handleGrid, handleBar, handlePie 
               color: "#616b62",
             }}
           >
-            <LibraryBooks sx={{ fontSize: "1.2rem", marginRight: "1rem" }} />
+            <img
+              src={MENU}
+              alt='menu'
+              className='w-[1.2rem] h-[1.2rem] bg-transparent mr-[1rem]'
+            />
             Bar Chart
           </MenuItem>
           <MenuItem
@@ -104,7 +119,11 @@ export default function DropDown({ handleList, handleGrid, handleBar, handlePie 
               color: "#616b62",
             }}
           >
-            <LibraryBooks sx={{ fontSize: "1.2rem", marginRight: "1rem" }} />
+            <img
+              src={MENU}
+              alt='menu'
+              className='w-[1.2rem] h-[1.2rem] bg-transparent mr-[1rem]'
+            />
             Pie Chart
           </MenuItem>
         </div>

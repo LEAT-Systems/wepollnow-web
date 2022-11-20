@@ -1,5 +1,3 @@
-/** @format */
-
 import React, { useEffect, useState } from "react";
 import Tables from "../Tables/Tables";
 import Header from "../../Header";
@@ -7,9 +5,10 @@ import Data from "../../Data.json";
 import PollsHeader from "./PollsHeader";
 import Grid from "./Grid";
 import FilterModal from "../Modals/FilterModal";
-import CreatePollModal from "../Modals/CreatePollModal";
+import AddPollModal from "../Modals/AddPollModal";
 // import { getTableData } from "../api";
 import SubHeader from "../../SubHeader";
+import CreatePollModal from "../Modals/CreatePollModal";
 
 const SubHeaderData = [
   {
@@ -113,6 +112,7 @@ const PollsPageContentOne = () => {
         </div>
 
         {/*************************** Create Poll Overlay *****************************/}
+        {/* <AddPollModal openModal={open} handleCloseAddPoll={handleClose} /> */}
         <CreatePollModal open={open} handleClose={handleClose} />
 
         {/*************************** Filter Result Overlay *****************************/}

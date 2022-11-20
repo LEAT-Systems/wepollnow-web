@@ -4,11 +4,12 @@ import React from "react";
 import SubHeader from "../../../SubHeader";
 import { useState, useEffect } from "react";
 import SearchBar from "../../Search/SearchBar";
-import FilterModal from "../../Modals/FilterModal";
 import LinkIcon from "../../../assets/Filter@2x.png";
 import FilterIcon from "../../../assets/Filter@2x-1.png";
 import ManageCandidateTable from "./ManageCandidateTable";
 import Header from "../../../Header";
+import AddCandidateModal from "../../Modals/AddCandidate";
+import FilterModal from "../../Modals/FilterModal";
 
 const SubHeaderData = [
   {
@@ -45,26 +46,30 @@ const dataTable = [
 ];
 const Candidate = () => {
   const [filterIsActive, setFilterIsActive] = useState(0);
+  const [addCandidate, setAddCandidate] = useState(false);
   const [refineResult, setRefineResult] = useState(false);
   const [tableData, setTableData] = useState([]);
   const [searchResult, setSearchResult] = useState([]);
   const [open, setOpen] = useState(false);
 
-  /* handle for create new poll */
-  const handleOpen = () => {
-    setOpen(!open);
+  /* handle for create new Candidate */
+  const handleOpenAddCandidate = () => {
+    setAddCandidate(!addCandidate);
   };
-  const handleClose = () => {
-    setOpen(!open);
+
+  const handleCloseAddCandidate = () => {
+    setAddCandidate(!addCandidate);
   };
 
   /* handle for refine results */
   const handleOpenRefineResult = () => {
     setRefineResult(!refineResult);
   };
+
   const handleCloseRefineResult = () => {
     setRefineResult(!refineResult);
   };
+
 
   useEffect(() => {
     /* For our demo json object */
@@ -130,7 +135,7 @@ const Candidate = () => {
             </h2>
             <button
               className='flex items-center justify-center rounded-md py-3 px-5 h-full cursor-pointer text-sm bg-green-500 text-white capitalize transition-all duration-400 ease-in-out hover:bg-green-500 hover:text-white hover:rounded-full'
-              onClick={handleOpen}
+              onClick={handleOpenAddCandidate}
             >
               Add candidate
             </button>
@@ -138,6 +143,10 @@ const Candidate = () => {
           <ManageCandidateTable data={searchResult} />
         </div>
 
+        <AddCandidateModal
+          addCandidate={addCandidate}
+          handleCloseAddCandidate={handleCloseAddCandidate}
+        />
         <FilterModal
           refineResult={refineResult}
           handleCloseRefineResult={handleCloseRefineResult}

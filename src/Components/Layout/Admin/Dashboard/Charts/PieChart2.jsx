@@ -4,7 +4,6 @@ import React from "react";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Pie } from "react-chartjs-2";
 import ChartDataLabels from "chartjs-plugin-datalabels";
-import "chart.js-plugin-labels-dv"
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -44,26 +43,20 @@ const colors = data.datasets[0].data.map((item) => {
 
 // console.log(colors);
 
-export default function PieChart() {
+export default function PieChart2() {
   return (
-    <div className='w-full h-full relative inline-block'>
+    <div className='w-full h-[30rem] relative inline-block'>
       <Pie
+        height={75}
+        width={150}
         data={data}
         plugins={[ChartDataLabels]}
         options={{
           maintainAspectRatio: false,
           responsive: true,
           plugins: {
-            labels: {
-              render: 'value',
-              fontColor: data.datasets[0].backgroundColor,
-              fontStyle: 'bolder',
-              position: 'outside',
-              textMargin: 20,
-            },
             legend: {
               position: "right",
-              align: "center",
               labels: {
                 boxWidth: 10,
                 boxHeight: 7,

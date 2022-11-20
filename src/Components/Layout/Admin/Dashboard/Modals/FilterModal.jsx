@@ -11,7 +11,7 @@ import {
   RadioGroup,
 } from "@mui/material";
 
-const RadioButton = ({ refineResult, handleCloseRefineResult }) => {
+const FilterModal = ({ refineResult, handleCloseRefineResult }) => {
   return (
     <div className='w-full'>
       <Modal
@@ -822,4 +822,4 @@ const RadioButton = ({ refineResult, handleCloseRefineResult }) => {
   );
 };
 
-export default RadioButton;
+export default FilterModal;

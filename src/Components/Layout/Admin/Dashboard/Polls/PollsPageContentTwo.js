@@ -11,6 +11,7 @@ import {
 import Header from "../../Header";
 import BarChart from "../Charts/BarChart";
 import PieChart from "../Charts/PieChart";
+import PieChart2 from "../Charts/PieChart2";
 import DropDown from "../DropDown/DropDown";
 import Tables from "../Tables/Tables";
 import Grid from "./Grid";
@@ -182,7 +183,7 @@ const PollsPageContentTwo = () => {
               ) : isBar ? (
                 <BarChart />
               ) : isPie ? (
-                <PieChart />
+                <PieChart2 />
               ) : (
                 <Tables data={Data} />
               )}

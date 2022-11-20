@@ -27,7 +27,7 @@ const data = {
   datasets: [
     {
       label: "Age 18-29",
-      backgroundColor: "rgb(206, 243, 212)",
+      backgroundColor: "#f9c033",
       borderColor: "none",
       borderWidth: 0,
       barPercentage: 1.0,
@@ -35,7 +35,7 @@ const data = {
     },
     {
       label: "Age 30-39",
-      backgroundColor: "rgb(173, 234, 183)",
+      backgroundColor: "#e2345a",
       borderColor: "blue",
       borderWidth: 0,
       barPercentage: 1.0,
@@ -43,7 +43,7 @@ const data = {
     },
     {
       label: "Age 40-49",
-      backgroundColor: "rgb(131, 224, 147)",
+      backgroundColor: "#2e5aac",
       borderColor: "none",
       borderWidth: 0,
       barPercentage: 1.0,
@@ -51,7 +51,7 @@ const data = {
     },
     {
       label: "Age 50-59",
-      backgroundColor: "rgb(49, 203, 75)",
+      backgroundColor: "purple",
       borderColor: "none",
       borderWidth: 0,
       barPercentage: 1.0,
@@ -59,7 +59,7 @@ const data = {
     },
     {
       label: "Above 59-69",
-      backgroundColor: "rgb(7, 161, 32)",
+      backgroundColor: "#08c127",
       borderColor: "none",
       borderWidth: 0,
       barPercentage: 1.0,

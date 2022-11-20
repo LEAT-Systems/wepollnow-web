@@ -9,16 +9,12 @@ import { AuthProvider } from "./AuthProvider";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <StrictMode>
-
+    <AuthProvider>
     <BrowserRouter>
       <IdProvider>
         <App />
       </IdProvider>
-    </BrowserRouter>
-    <AuthProvider>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>    
+    </BrowserRouter>    
     </AuthProvider>
   </StrictMode>
 );
