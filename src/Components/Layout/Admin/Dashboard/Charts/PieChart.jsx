@@ -4,6 +4,7 @@ import React from "react";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Pie } from "react-chartjs-2";
 import ChartDataLabels from "chartjs-plugin-datalabels";
+import "chart.js-plugin-labels-dv"
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -24,13 +25,7 @@ const data = {
         "DPC",
       ],
       data: [18, 15, 20, 24, 30],
-      backgroundColor: [
-        "rgb(206, 243, 212)",
-        "rgb(173, 234, 183)",
-        "rgb(131, 224, 147)",
-        "rgb(49, 203, 75)",
-        "rgb(7, 161, 32)",
-      ],
+      backgroundColor: ["#f9c033", "#e2345a", "#2e5aac", "purple", "#08c127"],
       borderColor: [null],
       borderWidth: 0,
     },
@@ -59,6 +54,13 @@ export default function PieChart() {
           maintainAspectRatio: false,
           responsive: true,
           plugins: {
+            labels: {
+              render: 'value',
+              fontColor: data.datasets[0].backgroundColor,
+              fontStyle: 'bolder',
+              position: 'outside',
+              textMargin: 20,
+            },
             legend: {
               position: "right",
               align: "center",
