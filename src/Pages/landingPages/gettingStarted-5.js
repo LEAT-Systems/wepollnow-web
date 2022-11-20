@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import Nav from "../../Components/Layout/Landing/mainNav";
 import Badge from "../../UI/Badge";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import instagram from "../../images/landingIcons/IG.png";
@@ -13,16 +13,27 @@ import GettingStartedContent from "./GettingStartedContent";
 import ModalComponent from "./GettingStartedModal";
 import SuccessToast from "../../UI/SuccessToast";
 
-//
+//local storage
+const uniqueID = localStorage.getItem("uniqueID");
+
 const GettingStartedFive = () => {
+  const history = useHistory();
   const [show, setShow] = useState(false);
   const emailRef = useRef();
   const [open, setOpen] = useState(false);
 
-  // open and close the modal
+  // open modal
   const handleOpen = () => {
-    setOpen(true);
+    if (uniqueID !== "" && uniqueID !== undefined && uniqueID !== null) {
+      history.push("/vote", { replace: true });
+      // make API request with unique ID
+    } else {
+      localStorage.setItem("pollType", "presidential_poll");
+      setOpen(true);
+    }
   };
+
+  // close modal
   const handleClose = () => {
     setOpen(false);
   };

@@ -13,14 +13,29 @@ import calendar from "../../images/calendar.png";
 
 const PollsSwiper = (props) => {
   const [data, setData] = useState([]);
-
-  // Setting data from API here
-  useEffect(() => {
-    setData(Polls);
-  }, []);
+  const id = localStorage.getItem("uniqueID");
 
   // TO check if API data contents is empty
   const isEmpty = data.length === 0;
+  // Setting data from API here
+  useEffect(() => {
+    let formData = new FormData();
+    formData.append("user_id", `${id}`);
+    const requestOptions = {
+      method: "GET",
+      body: null,
+    };
+    const getData = async () => {
+      const response = await fetch(
+        "https://wepollnow.azurewebsites.net/poll/user_polls/",
+        requestOptions
+      );
+      const result = await response.text();
+      const JSONdata = await JSON.parse(result);
+      setData(JSONdata);
+    };
+    getData();
+  }, [id]);
 
   return (
     <div className="relative">
@@ -64,11 +79,11 @@ const PollsSwiper = (props) => {
             // Here, I'm calculating the poll date from the current date so i could render poll items conditionally
             let due;
             const now = new Date().getTime();
-            const distance = new Date(item.date).getTime() - now;
+            const distance = new Date(item.poll_date).getTime() - now;
             due = distance < 0;
 
             // Storing Polltype clicked on button into local storage
-            const setDescription = item.description;
+            const setDescription = item.poll_name;
             const handler = () => {
               localStorage.setItem("pollType", setDescription);
             };
@@ -79,7 +94,7 @@ const PollsSwiper = (props) => {
                   <div className="flex flex-col items-center justify-center w-full py-12 space-y-4 rounded-lg h-72 bg-polls-pattern">
                     {!due && (
                       <p className="text-xl font-bold text-white">
-                        {item.description}
+                        {item.poll_name}
                       </p>
                     )}
                     <div
@@ -92,19 +107,19 @@ const PollsSwiper = (props) => {
                       {!due && <img src={calendar} alt="calendarIcon" />}
                       <label className="text-[14px]">
                         <p className="font-normal">
-                          {due ? "Ongoing" : item.date}
+                          {due ? "Ongoing" : item.poll_date}
                         </p>
                       </label>
                     </div>
                     {due && (
                       <p className="text-xl font-bold text-white">
-                        {item.description}
+                        {item.poll_name}
                       </p>
                     )}
                     <div className="px-2">
                       {!due ? (
                         <Timer
-                          date={item.date}
+                          date={item.poll_date}
                           size="2xl"
                           pcolor="white"
                           color="white"

@@ -6,6 +6,7 @@ import Done from "@mui/icons-material/Done";
 import Nav from "../Layout/Landing/mainNav";
 import FormLabel from "../../UI/FormLabel";
 import { states } from "./states";
+import spinner from "../../images/spinner.gif";
 
 const FormTwo = (props) => {
   const [formisCompleted, setFormIsCompleted] = useState(false);
@@ -13,11 +14,17 @@ const FormTwo = (props) => {
   const [error, setError] = useState();
   const [disable, setDisable] = useState(false);
   const [selectedState, setSelectedState] = useState();
+  const [tooltipStatus, setTooltipStatus] = useState(0);
 
   // Handling next step of form
   const handleSubmit = (values) => {
     props.next(values);
   };
+
+  let isLoading;
+  if (selectedState !== undefined) {
+    isLoading = data.length === 0;
+  }
 
   // Loading LGA of voting residence from API with selected ID
   useEffect(() => {
@@ -61,8 +68,8 @@ const FormTwo = (props) => {
   let formTwoValidationSchema;
   if (diasporaVoter !== "true") {
     formTwoValidationSchema = Yup.object({
-      // stateOfVotingRes: Yup.string().required().label("* This"),
-      // LGAofVotingRes: Yup.string().required().label("* This"),
+      stateOfVotingRes: Yup.string().required().label("* This"),
+      LGAofVotingRes: Yup.string().required().label("* This"),
     });
   }
 
@@ -114,10 +121,32 @@ const FormTwo = (props) => {
                     <div className="h-full space-y-4 md:px-4">
                       {/*  */}
                       {/* Select State of voting residence */}
-                      <div className="flex flex-col space-y-1 md:pb-0 mt-8 md:mt-0">
-                        <p className="text-sm font-bold">
-                          Where will you be voting from?
+                      <div className="relative flex flex-col mt-8 space-y-1 md:pb-0 md:mt-0">
+                        <p
+                          onMouseEnter={() => setTooltipStatus(1)}
+                          onMouseLeave={() => setTooltipStatus(0)}
+                          className="hover:cursor-pointer text-xs font-bold underline underline-2 underline-offset-2 decoration-yellow-500 decoration-[3px]"
+                        >
+                          Which state and LGA will you be voting from?
                         </p>
+
+                        {/* ========== TOOLTIP =================*/}
+                        {tooltipStatus === 1 && (
+                          <div
+                            role="tooltip"
+                            className="absolute text-white transition duration-150 ease-in-out bg-green-600 rounded shadow-lg -top-12"
+                          >
+                            <p className="p-2 text-xs font-normal">
+                              This is basically where you would be residing to
+                              vote and <span className="font-bold">NOT</span>{" "}
+                              your{" "}
+                              <span className="font-bold">
+                                State & LGA of Origin.
+                              </span>
+                            </p>
+                          </div>
+                        )}
+                        {/* ========================================= */}
                         <FormLabel
                           title="Select state of voting residence (Not applicable for
                           Diaspora Residents) "
@@ -145,7 +174,10 @@ const FormTwo = (props) => {
                           <option value={null}> -- Select an option -- </option>
                           {states.map((item) => {
                             return (
-                              <option key={item.id} value={item.id}>
+                              <option
+                                key={item.id}
+                                value={disable === true ? null : item.id}
+                              >
                                 {item.name}
                               </option>
                             );
@@ -161,6 +193,7 @@ const FormTwo = (props) => {
                           title=" Select L.G.A of voting residence (Not applicable for
                           Diaspora Residents)"
                         />
+
                         <p className="text-red-600">
                           <ErrorMessage name="LGAofVotingRes" />
                         </p>
@@ -172,6 +205,16 @@ const FormTwo = (props) => {
                           {!error === "" &&
                             `${error} Check internet connection.`}
                         </p>
+                        {isLoading && (
+                          <div className="flex flex-row items-center justify-start space-x-2">
+                            <p>Loading data...</p>
+                            <img
+                              src={spinner}
+                              alt="spinner"
+                              className="w-8 h-8"
+                            />
+                          </div>
+                        )}
                         <div className="flex flex-row items-start justify-between">
                           <Field
                             disabled={disable === true ? true : false}
@@ -195,7 +238,7 @@ const FormTwo = (props) => {
 
                       {/* Age Range */}
 
-                      <div className="flex flex-col pb-8 space-y-4 md:pb-0 ">
+                      <div className="flex flex-col pb-8 space-y-2 md:pb-0 ">
                         <FormLabel no="i" title="Select Your Age Range" />
                         <p className="text-red-600">
                           <ErrorMessage name="ageRange" />

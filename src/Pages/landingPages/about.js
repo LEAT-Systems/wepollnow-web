@@ -47,7 +47,7 @@ const AboutPage = () => {
           <p className="text-xs md:text-lg font-bold underline underline-2 underline-offset-2 decoration-yellow-500 decoration-[5px]">
             Our Mission
           </p>
-          <p>
+          <p className="text-sm md:text-[16px] text-justify md:font-extralight ">
             Our mission is to be a continuous source of highly accurate data,
             supplying valuable insights into what the people of Africa are
             thinking, and helping to shape what the world thinks of African
