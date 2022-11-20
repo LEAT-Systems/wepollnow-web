@@ -7,10 +7,10 @@ import Header from "../../Header";
 import Data from "../../Data.json";
 import {
   ArrowForwardIos,
-  ArrowUpward,
-  People,
-  PieChart,
+  ArrowUpward
 } from "@mui/icons-material";
+import Chart from "../../assets/Chart.jpg"
+import People from "../../assets/People.jpg"
 
 const DashboardContent = () => {
   const data = [
@@ -61,8 +61,12 @@ const DashboardContent = () => {
           {data.map((data) => (
             <>
               <div className='flex flex-row items-center relative border-2 border-gray-400 bg-white rounded-lg p-5 w-full h-[9rem]'>
-                <span className='rounded-2xl bg-[#e7f9ea] p-4 mr-4 items-start'>
-                  <PieChart sx={{ color: "green", fontSize: "3rem" }} />
+                <span className='rounded-2xl bg-[#e7f9ea] mr-4 items-start'>
+                  <img
+                    src={Chart}
+                    alt='Account'
+                    className='w-[3.5rem] h-[3.5rem] bg-transparent'
+                  />
                 </span>
                 <div className='flex flex-col items-start'>
                   <span className='text-2xl font-extrabold pb-1'>
@@ -87,8 +91,12 @@ const DashboardContent = () => {
 
               {/* Second Card  */}
               <div className='flex flex-row items-center relative border-2 border-gray-400 bg-white rounded-lg p-5 w-full h-[9rem]'>
-                <span className='rounded-2xl bg-[#e7f9ea] p-4 mr-4 items-start'>
-                  <People sx={{ color: "green", fontSize: "3rem" }} />
+                <span className='rounded-2xl bg-[#e7f9ea] mr-4 items-start'>
+                  <img
+                    src={People}
+                    alt='Account'
+                    className='w-[3.5rem] h-[3.5rem] bg-transparent'
+                  />
                 </span>
                 <div className='flex flex-col items-start'>
                   <span className='text-2xl font-extrabold pb-1'>
@@ -116,21 +124,21 @@ const DashboardContent = () => {
                   Polls info
                 </h2>
                 <div className='grid grid-cols-3 gap-4 w-full'>
-                  <div className='flex flex-col justify-center items-center h-full bg-[#ebf5ed] py-3 px-6 rounded-lg'>
+                  <div className='flex flex-col justify-center items-center h-full bg-[#edfff0] py-3 px-6 rounded-lg'>
                     <span className='font-extrabold text-2xl'>
                       {data.status.length}
                     </span>
                     <span className='capitalize text-sm'>{data.status[0]}</span>
                   </div>
 
-                  <div className='flex flex-col justify-center items-center h-full bg-[#ebf5ed] py-3 px-6 rounded-lg'>
+                  <div className='flex flex-col justify-center items-center h-full bg-[#fffaed] py-3 px-6 rounded-lg'>
                     <span className='font-extrabold text-2xl'>
                       {data.users.toString().length}
                     </span>
                     <span className='capitalize text-sm'>{data.status[1]}</span>
                   </div>
 
-                  <div className='flex flex-col justgiify-center items-center h-full bg-[#ebf5ed] py-3 px-6 rounded-lg'>
+                  <div className='flex flex-col justgiify-center items-center h-full bg-[#ffedf1] py-3 px-6 rounded-lg'>
                     <span className='font-extrabold text-2xl'>
                       {data.status.length - 1}
                     </span>
@@ -144,9 +152,9 @@ const DashboardContent = () => {
 
         {/* Data Table */}
         <div className='flex flex-col text-[#082a0f] border-2 rounded-lg px-6'>
-          <div className='flex flex-row justify-between pt-4 px-2'>
+          <div className='flex flex-row justify-between pt-4 px-2 mb-3'>
             <h2 className='font-extrabold text-[#082a0f] text-lg'>Polls</h2>
-            <button className='capitalize font-bold px-4 py-3 text-base w-fit border rounded-md my-auto'>
+            <button className='capitalize font-bold px-3 py-2 text-base w-fit border rounded-md my-auto'>
               View All
               <ArrowForwardIos
                 sx={{
