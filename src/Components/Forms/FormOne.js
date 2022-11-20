@@ -7,6 +7,7 @@ import Nav from "../Layout/Landing/mainNav";
 import FormLabel from "../../UI/FormLabel";
 import { states } from "./states";
 
+
 const FormOne = (props) => {
   // destructuring to configure the form arrow indicators
   let { email, firstTimeVoter, diasporaVoter, stateOfOrigin } = props.data;

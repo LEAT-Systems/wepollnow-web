@@ -13,9 +13,9 @@ import searchIcon from "../../../images/search.png";
 import Loading from "../../../UI/Loading";
 
 // Getting phone number and selected poll from local storage
-const phone = localStorage.getItem("phoneNumber");
 const selectedPoll = localStorage.getItem("pollType");
-
+const uniqueID = localStorage.getItem("uniqueID");
+console.log(uniqueID);
 // Dummy data
 const Parties = [
   {
@@ -62,6 +62,7 @@ const FormFive = () => {
   const [error, setErrorMessage] = useState(false);
   const [apiData, setApiData] = useState([]);
 
+  // This loads once page mounts
   useEffect(() => {
     // sending selected poll to api
     const sendData = async () => {
@@ -71,7 +72,8 @@ const FormFive = () => {
           {
             method: "POST",
             body: JSON.stringify({
-              phoneNumber: phone,
+              // userID will be needed too
+              user_id: uniqueID,
               pollType: selectedPoll,
             }),
           }
@@ -110,7 +112,7 @@ const FormFive = () => {
         {
           method: "POST",
           body: JSON.stringify({
-            phone: phone,
+            user_id: uniqueID,
             castedVote: castedVote,
           }),
         }
@@ -301,7 +303,7 @@ const FormFive = () => {
                     );
                   })}
                 {hasContent === 0 && (
-                  <div className="flex flex-row items-center justify-between p-8 border border-red-500 rounded -mt-48">
+                  <div className="flex flex-row items-center justify-between p-8 -mt-48 border border-red-500 rounded">
                     <div className="flex flex-row space-x-2">
                       <p className="text-sm md:text-lg">
                         No data found based on your search. You can search by

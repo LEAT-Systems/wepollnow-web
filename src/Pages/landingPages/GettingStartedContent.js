@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import "react-phone-number-input/style.css";
 import image from "../../images/image_3.jpg";
 import Footer from "../../Components/Layout/Landing/Footer";

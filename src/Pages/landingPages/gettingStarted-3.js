@@ -1,4 +1,5 @@
 import React, { useRef, useState } from "react";
+import { useHistory } from "react-router-dom";
 import Nav from "../../Components/Layout/Landing/mainNav";
 import Badge from "../../UI/Badge";
 import { Link } from "react-router-dom";
@@ -14,14 +15,23 @@ import ModalComponent from "./GettingStartedModal";
 import SuccessToast from "../../UI/SuccessToast";
 
 //
+const uniqueID = localStorage.getItem("uniqueID");
+
 const GettingStartedThree = () => {
+  const history = useHistory();
   const [show, setShow] = useState(false);
   const emailRef = useRef();
   const [open, setOpen] = useState(false);
 
   // open and close the modal
   const handleOpen = () => {
-    setOpen(true);
+    if (uniqueID !== "" && uniqueID !== undefined && uniqueID !== null) {
+      history.push("/vote", { replace: true });
+      // make API request with unique ID
+    } else {
+      localStorage.setItem("pollType", "presidential_poll");
+      setOpen(true);
+    }
   };
   const handleClose = () => {
     setOpen(false);

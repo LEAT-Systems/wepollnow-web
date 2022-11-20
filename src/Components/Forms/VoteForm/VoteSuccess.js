@@ -16,7 +16,8 @@ const VoteSuccess = () => {
   const [copied, setCopied] = useState(false);
 
   // text to be copied to clipboard
-  const linkToBeCopied = "https://pollit-ashy.vercel.app/";
+  const linkToBeCopied =
+    "I just voted for my preferred candidate in the wepollnow e-Nigeria opinion polls. You can give your candidate a vote by using this link. https://pollit-ashy.vercel.app/";
   const clipBoardHandler = () => {
     navigator.clipboard.writeText(linkToBeCopied);
     setCopied(true);

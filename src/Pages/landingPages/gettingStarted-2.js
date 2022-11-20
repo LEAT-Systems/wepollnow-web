@@ -1,4 +1,5 @@
 import React, { useRef, useState } from "react";
+import { useHistory } from "react-router-dom";
 import Nav from "../../Components/Layout/Landing/mainNav";
 import Badge from "../../UI/Badge";
 import { Link } from "react-router-dom";
@@ -14,28 +15,59 @@ import GettingStartedContent from "./GettingStartedContent";
 import SuccessToast from "../../UI/SuccessToast";
 
 //
+const uniqueID = localStorage.getItem("uniqueID");
+
 const GettingStartedTwo = () => {
-  const [hasSubmitted, setHasSubmitted] = useState(false);
+  const [error, setHasError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [emailAddress, setEmailAddress] = useState("");
+  const history = useHistory();
   const [show, setShow] = useState(false);
   const emailRef = useRef();
   const [open, setOpen] = useState(false);
 
   // open and close the modal
   const handleOpen = () => {
-    setOpen(true);
+    if (uniqueID !== "" && uniqueID !== undefined && uniqueID !== null) {
+      history.push("/vote", { replace: true });
+      // make API request with unique ID and poll_type
+    } else {
+      localStorage.setItem("pollType", "presidential_poll");
+      setOpen(true);
+    }
   };
   const handleClose = () => {
     setOpen(false);
   };
 
+  const sendToAPI = async () => {
+    const params = {
+      method: "POST",
+      body: JSON.stringify({ email: emailAddress }),
+      headers: {
+        "Content-Type": "application/json; charset=UTF-8",
+      },
+    };
+    const response = await fetch(
+      "https://wepollnow.azurewebsites.net/subscribe",
+      params
+    );
+    const result = await response.text();
+    const JSONdata = await JSON.parse(result);
+    console.log(JSONdata);
+    console.log(result);
+    if (!response.ok) {
+      throw new Error("A problem Occured");
+    } else {
+      setShow(true);
+    }
+  };
   // Form submit handler for the email
   const handleSubmit = (e) => {
     e.preventDefault();
-    const val = emailRef.current.value.trim();
-    localStorage.setItem("email", val);
-    setHasSubmitted(true);
+    setEmailAddress(emailRef.current.value.trim());
+    sendToAPI();
     emailRef.current.value = "";
-    setShow(true);
   };
 
   // Time out to clear message
@@ -45,7 +77,10 @@ const GettingStartedTwo = () => {
 
   // Message to display before timeout
   const message = (
-    <SuccessToast children={"Successfully submitted"} enter={show} />
+    <SuccessToast
+      children={`${error} ? ${errorMessage} : Successfully submitted`}
+      enter={show}
+    />
   );
   return (
     <div className="w-screen h-screen overflow-x-hidden">

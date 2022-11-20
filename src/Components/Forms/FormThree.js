@@ -85,7 +85,7 @@ const FormThree = (props) => {
                               value="true"
                               className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
                             />
-                            <p>Yes</p>
+                            <p className="text-[14px] md:text-[18px]">Yes</p>
                           </label>
                           <label
                             htmlFor="pvc2"
@@ -98,7 +98,7 @@ const FormThree = (props) => {
                               value="false"
                               className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
                             />
-                            <p>No</p>
+                            <p className="text-[14px] md:text-[18px]">No</p>
                           </label>
                         </div>
                       </div>
@@ -122,7 +122,7 @@ const FormThree = (props) => {
                               value="1"
                               className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
                             />
-                            <p>Single</p>
+                            <p className="text-[14px] md:text-[18px]">Single</p>
                           </label>
                           <label
                             htmlFor="maritalStatus2"
@@ -135,7 +135,9 @@ const FormThree = (props) => {
                               value="2"
                               className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
                             />
-                            <p>Married</p>
+                            <p className="text-[14px] md:text-[18px]">
+                              Married
+                            </p>
                           </label>
                         </div>
                         <div className="flex flex-row items-center justify-between mt-2 space-x-4 md:p-2 md:mt-0">
@@ -150,7 +152,9 @@ const FormThree = (props) => {
                               value="3"
                               className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
                             />
-                            <p>Divorced</p>
+                            <p className="text-[14px] md:text-[18px]">
+                              Divorced
+                            </p>
                           </label>
                           <label
                             htmlFor="maritalStatus4"
@@ -163,7 +167,9 @@ const FormThree = (props) => {
                               value="4"
                               className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
                             />
-                            <p className="">Widowed</p>
+                            <p className="text-[14px] md:text-[18px] ">
+                              Widowed
+                            </p>
                           </label>
                         </div>
                       </div>
@@ -187,7 +193,9 @@ const FormThree = (props) => {
                               value="1"
                               className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
                             />
-                            <p>Student</p>
+                            <p className="text-[14px] md:text-[18px]">
+                              Student
+                            </p>
                           </label>
                           <label
                             htmlFor="employmentStatus2"
@@ -200,7 +208,9 @@ const FormThree = (props) => {
                               value="2"
                               className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
                             />
-                            <p className="">Employed</p>
+                            <p className="text-[14px] md:text-[18px]">
+                              Employed
+                            </p>
                           </label>
                         </div>
                         <div className="flex flex-row items-center justify-between mt-2 space-x-4 md:p-2 md:mt-0">
@@ -215,7 +225,9 @@ const FormThree = (props) => {
                               value="3"
                               className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
                             />
-                            <p>Unemployed</p>
+                            <p className="text-[14px] md:text-[18px]">
+                              Unemployed
+                            </p>
                           </label>
                           <label
                             htmlFor="employmentStatus4"
@@ -228,7 +240,9 @@ const FormThree = (props) => {
                               value="4"
                               className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
                             />
-                            <p className="md:text-lg">Self-employed</p>
+                            <p className="text-[14px] md:text-[18px]">
+                              Self-employed
+                            </p>
                           </label>
                         </div>
                       </div>
