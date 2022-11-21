@@ -12,12 +12,18 @@ import calendar from "../../images/calendar.png";
 import text_logo from "../../images/voteWatermark.png";
 import GettingStartedContent from "./GettingStartedContent";
 import ModalComponent from "./GettingStartedModal";
-import SuccessToast from "../../UI/SuccessToast";
+import doneIcon from "../../images/doneIcon.png";
+import errorIcon from "../../images/errorImg.png";
+import Toast from "../../UI/SuccessToast";
 
 //
 const uniqueID = localStorage.getItem("uniqueID");
 
 const GettingStartedFour = () => {
+  const [error, setHasError] = useState(false);
+  const [hasHTTPError, setHasHTTPError] = useState("");
+  const [hasSubmitted, setHasSubmitted] = useState();
+  const [errorMessageEmail, setErrorMessageEmail] = useState();
   const history = useHistory();
   const [show, setShow] = useState(false);
   const emailRef = useRef();
@@ -25,11 +31,11 @@ const GettingStartedFour = () => {
 
   // open and close the modal
   const handleOpen = () => {
-    if (uniqueID !== "" && uniqueID !== undefined && uniqueID !== null) {
-      history.push("/vote", { replace: true });
-      // make API request with unique ID
-    } else {
-      localStorage.setItem("pollType", "presidential_poll");
+    if (uniqueID !== "" || uniqueID !== undefined || uniqueID !== null) {
+      history.push("/polls", { replace: true });
+      // make API request with unique ID and poll_type
+    }
+    if (uniqueID === null) {
       setOpen(true);
     }
   };
@@ -37,28 +43,81 @@ const GettingStartedFour = () => {
     setOpen(false);
   };
 
-  // Form submit handler for the email
   const handleSubmit = (e) => {
     e.preventDefault();
-    const val = emailRef.current.value.trim();
-    localStorage.setItem("email", val);
+
+    // Collecting the email data with refs
+    let email = emailRef.current.value.trim();
+
+    const sendToAPI = async () => {
+      try {
+        const requestOptions = {
+          method: "POST",
+          body: JSON.stringify({
+            email: email,
+          }),
+          headers: {
+            "Content-Type": "application/json; charset=UTF-8",
+          },
+        };
+        const response = await fetch(
+          "https://wepollnow.azurewebsites.net/utilities/subscriber/",
+          requestOptions
+        );
+        const result = await response.text();
+        const JSONdata = await JSON.parse(result);
+        const emailHasError = JSONdata?.email?.[0];
+        console.log(response);
+        if (emailHasError === "Enter a valid email address.") {
+          setHasError(true);
+          setShow(true);
+          setErrorMessageEmail(emailHasError);
+        }
+        console.log("JSONDATA", JSONdata);
+        console.log("RESULT", result);
+        if (emailHasError !== "Enter a valid email address.") {
+          setShow(true);
+          setHasError(false);
+          setHasSubmitted(true);
+        }
+      } catch (error) {
+        setHasHTTPError(error.message);
+      }
+    };
+
+    sendToAPI();
+
+    // clear form
     emailRef.current.value = "";
-    setShow(true);
   };
 
-  // Time out to clear message
-  setTimeout(() => {
+  // clear message
+  const closeHandler = () => {
+    setHasError(false);
     setShow(false);
-  }, 2000);
+  };
 
   // Message to display before timeout
-  const message = (
-    <SuccessToast children={"Successfully submitted"} enter={show} />
+  const msgToast = (
+    <Toast
+      children={
+        error === true ? (
+          <p>{errorMessageEmail}</p>
+        ) : (
+          <p>Successfully submitted</p>
+        )
+      }
+      enter={show}
+      img={error === true ? errorIcon : doneIcon}
+      border={error === true ? `red-500` : `green-500`}
+      onClose={closeHandler}
+    />
   );
+
   return (
     <div className="w-screen h-screen overflow-x-hidden">
       <Nav />
-      {show ? message : ""}
+      {msgToast}
       <ModalComponent open={open} handleClose={handleClose} />
       <div className="relative flex flex-col mt-12 ">
         <div
@@ -81,10 +140,12 @@ const GettingStartedFour = () => {
           <h1 className="text-xl font-extrabold md:text-3xl">
             Local Government Polls
           </h1>
-          <Badge bg="EDFFF0" border="08C127">
+          <div
+            className={`inline-flex items-center justify-center space-x-1 px-4 py-1 text-xs bg-[#EDFFF0] border-[#08c127] border md:text-lg font-semibold leading-none text-black rounded-md`}
+          >
             <img src={calendar} alt="calendarMonth" />
             <p className="text-sm">Oncoming</p>
-          </Badge>
+          </div>
           <div className="flex flex-row items-center justify-center ">
             <div className="max-w-4xl p-8 text-4xl text-[#082B0E] md:space-y-4 text-center md:text-[54px]">
               <h1>
@@ -103,7 +164,6 @@ const GettingStartedFour = () => {
               We would love to keep you informed on all House of Assembly Polls
             </p>
           </div>
-          {show ? message : ""}
           <div className="relative text-gray-700">
             <form onSubmit={handleSubmit}>
               <input

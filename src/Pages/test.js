@@ -1,4 +1,6 @@
 import React from "react";
+import { Editor } from "react-draft-wysiwyg";
+import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 // import SliderSocial from "../Components/Forms/VoteForm/Slider";
 
 // import FormThree from "../Components/Forms/FormThree";
@@ -18,7 +20,7 @@ import React from "react";
 
 const Test = () => {
   return (
-    <div className="w-[70%] px-48 mx-auto">
+    <div className="w-[80%] h-[75%] mx-auto border ">
       {/* <BlogSingle /> */}
       {/* <PollsPageContentOne /> */}
       {/* <PollsSwiper /> */}
@@ -28,6 +30,13 @@ const Test = () => {
       {/* <FormThree /> */}
       {/* <FormComponent /> */}
       {/* <PollsSingle /> */}
+      <Editor
+        // editorState={editorState}
+        toolbarClassName="toolbarClassName"
+        wrapperClassName="wrapperClassName"
+        editorClassName="editorClassName"
+        // onEditorStateChange={this.onEditorStateChange}
+      />
     </div>
   );
 };

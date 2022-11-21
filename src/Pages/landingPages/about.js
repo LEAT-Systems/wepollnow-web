@@ -13,7 +13,7 @@ const AboutPage = () => {
             About Wepollnow
           </p>
           <h1 className="max-w-full md:max-w-xl text-[16px] md:text-5xl font-extrabold">
-            Creating a better Society by making every vote count.
+            Creating a better Society by making every opinion count.
           </h1>
         </div>
         <div className="z-10 flex md:-mt-36">

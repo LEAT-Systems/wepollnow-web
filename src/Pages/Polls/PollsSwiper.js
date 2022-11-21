@@ -22,7 +22,7 @@ const PollsSwiper = (props) => {
     let formData = new FormData();
     formData.append("user_id", `${id}`);
     const requestOptions = {
-      method: "GET",
+      method: "POST",
       body: null,
     };
     const getData = async () => {
@@ -125,6 +125,7 @@ const PollsSwiper = (props) => {
                           color="white"
                         />
                       ) : (
+                        // Im forwarding the onPop property to ...component when the button is clicked
                         <button
                           onClick={props.onPop}
                           className="btn-stay animate"

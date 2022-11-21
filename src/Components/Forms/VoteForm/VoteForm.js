@@ -15,7 +15,6 @@ import Loading from "../../../UI/Loading";
 // Getting phone number and selected poll from local storage
 const selectedPoll = localStorage.getItem("pollType");
 const uniqueID = localStorage.getItem("uniqueID");
-console.log(uniqueID);
 // Dummy data
 const Parties = [
   {
@@ -27,7 +26,7 @@ const Parties = [
     viceCandidateImg: vice,
     partyName: "All Progressive Congress (APC)",
     candidate: "Bola Ahmed Tinubu",
-    runningMate: "Kashim S.",
+    runningMate: "Kashim Shettima Mustapha",
   },
   {
     id: "Labour Party (LP)",
@@ -37,8 +36,8 @@ const Parties = [
     cBadge: "Candidate",
     vBadge: "Running Mate",
     partyName: "Labour Party (LP)",
-    candidate: "Peter Obi",
-    runningMate: "Datti",
+    candidate: "Peter Gregory Obi",
+    runningMate: "Mohammed Aliyu Datti ",
   },
   {
     id: "Peoples Democratic Party (PDP)",
@@ -49,7 +48,7 @@ const Parties = [
     vBadge: "Running Mate",
     partyName: "Peoples Democratic Party (PDP)",
     candidate: "Atiku Abubakar",
-    runningMate: "Ifeanyi O.",
+    runningMate: "Ifeanyi Okowa",
   },
 ];
 
@@ -265,7 +264,7 @@ const FormFive = () => {
                                     {item.candidate}
                                   </p>
                                   <Badge border="08C127" bg="EDFFF0">
-                                    <p className="text-[8px]">{item.cBadge}</p>
+                                    <p className="text-[10px]">{item.cBadge}</p>
                                   </Badge>
                                 </div>
                                 <div className="flex flex-row items-start justify-start space-x-4">
@@ -278,7 +277,7 @@ const FormFive = () => {
                                     {item.runningMate}
                                   </p>
                                   <Badge bg="EDFFF0" border="08C127">
-                                    <p className="text-[8px]">{item.vBadge}</p>
+                                    <p className="text-[10px]">{item.vBadge}</p>
                                   </Badge>
                                 </div>
                               </section>

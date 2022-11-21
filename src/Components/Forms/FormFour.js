@@ -64,8 +64,6 @@ const FormFour = (props) => {
             >
               {({ values }) => (
                 <Form>
-                  {console.log(values)}
-
                   <div className="flex flex-col space-y-4 md:p-8">
                     <div className="h-full px-4 space-y-2">
                       {/*  */}

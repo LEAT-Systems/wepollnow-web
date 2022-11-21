@@ -40,7 +40,6 @@ const Nav = (props) => {
     let email = emailRef.current.value.trim();
     let message = messageRef.current.value.trim();
 
-    console.log(name, email, message);
     const sendToAPI = async () => {
       try {
         const requestOptions = {
@@ -55,12 +54,12 @@ const Nav = (props) => {
           },
         };
         const response = await fetch(
-          "https://wepollnow.azurewebsites.net/utilities/subscribe/",
+          "https://wepollnow.azurewebsites.net/utilities/contact/",
           requestOptions
         );
         const result = await response.text();
         const JSONdata = await JSON.parse(result);
-        const emailHasError = JSONdata?.error?.email?.[0];
+        const emailHasError = JSONdata?.email?.[0];
         if (!response.ok && emailHasError !== "") {
           setHasError(true);
           setErrorMessageEmail(emailHasError);
@@ -72,13 +71,14 @@ const Nav = (props) => {
           throw new Error("Something Isn't right");
         } else {
           setShow(true);
+          setHasSubmitted(true);
         }
       } catch (error) {
         setHasHTTPError(error.message);
       }
     };
+
     sendToAPI();
-    setHasSubmitted(true);
 
     // clear form
     nameRef.current.value = "";
@@ -214,15 +214,15 @@ const Nav = (props) => {
   const mobileFormContainer = (
     <div className="flex md:hidden flex-col py-0 w-[100%] px-4 border-gray-200 md:border-0">
       <div className="space-y-4 w-[100%] md:w-[65%]">
-        {hasSubmitted && hasError === false && (
+        {hasSubmitted && hasError !== false && (
           <div className="p-4 text-center text-white bg-green-500 rounded-lg">
             <p>Action was Successful. We will get back to you.</p>
           </div>
         )}
-        {hasSubmitted && errorMessageEmail === "" && (
+        {errorMessageEmail !== "" && (
           <div className="p-4 text-center text-white bg-red-500 rounded-lg">
             <p>
-              Error: {errorMessageEmail} {hasHTTPError}
+              {hasHTTPError}: {errorMessageEmail}
             </p>
           </div>
         )}
@@ -242,15 +242,15 @@ const Nav = (props) => {
   const desktopFormContainer = (
     <div className=" hidden md:flex flex-col items-center justify-center mx-auto w-[65%] border-gray-200 md:border-0">
       <div className="space-y-4 w-[100%] md:w-[65%]">
-        {hasSubmitted && hasError === false && (
+        {hasSubmitted && hasError !== false && (
           <div className="p-4 text-center text-white bg-green-500 rounded-lg">
             <p>Action was Successful. We will get back to you.</p>
           </div>
         )}
-        {hasSubmitted && errorMessageEmail === "" && (
+        {errorMessageEmail !== "" && (
           <div className="p-4 text-center text-white bg-red-500 rounded-lg">
             <p>
-              Error: {errorMessageEmail} {hasHTTPError}
+              {hasHTTPError}: {errorMessageEmail}
             </p>
           </div>
         )}
