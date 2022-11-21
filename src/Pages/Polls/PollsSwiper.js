@@ -125,6 +125,7 @@ const PollsSwiper = (props) => {
                           color="white"
                         />
                       ) : (
+                        // Im forwarding the onPop property to ...component when the button is clicked
                         <button
                           onClick={props.onPop}
                           className="btn-stay animate"
