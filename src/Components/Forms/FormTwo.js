@@ -125,21 +125,21 @@ const FormTwo = (props) => {
                         <p
                           onMouseEnter={() => setTooltipStatus(1)}
                           onMouseLeave={() => setTooltipStatus(0)}
-                          className="hover:cursor-pointer text-xs font-bold underline underline-2 underline-offset-2 decoration-yellow-500 decoration-[3px]"
+                          className="hover:cursor-pointer text-md font-bold underline underline-2 underline-offset-2 decoration-yellow-500 decoration-[3px]"
                         >
-                          Which state and LGA will you be voting from?
+                          Which state will you be voting in?
                         </p>
 
                         {/* ========== TOOLTIP =================*/}
                         {tooltipStatus === 1 && (
                           <div
                             role="tooltip"
-                            className="absolute text-white transition duration-150 ease-in-out bg-green-600 rounded shadow-lg -top-12"
+                            className="absolute text-white transition duration-150 ease-in-out bg-black rounded shadow-lg -top-12"
                           >
                             <p className="p-2 text-xs font-normal">
-                              This is basically where you would be residing to
-                              vote and <span className="font-bold">NOT</span>{" "}
-                              your{" "}
+                              This is basically the location where you would be
+                              residing to vote and{" "}
+                              <span className="font-bold">NOT</span> your{" "}
                               <span className="font-bold">
                                 State & LGA of Origin.
                               </span>
@@ -148,7 +148,7 @@ const FormTwo = (props) => {
                         )}
                         {/* ========================================= */}
                         <FormLabel
-                          title="Select state of voting residence (Not applicable for
+                          title="Select state of voting location (Not applicable for
                           Diaspora Residents) "
                         />
                         <p className="text-red-600">
@@ -166,7 +166,6 @@ const FormTwo = (props) => {
                           }
                           disabled={disable ? true : false}
                           name="stateOfVotingRes"
-                          placeholder="Select State of Voting Residence"
                           className={`block w-full px-3 py-3 mt-1 bg-white border border-gray-300 rounded ${
                             disable === true ? "cursor-not-allowed" : ""
                           }`}
@@ -190,7 +189,7 @@ const FormTwo = (props) => {
                       <div className="flex flex-col space-y-1 md:pb-0">
                         <FormLabel
                           no="i"
-                          title=" Select L.G.A of voting residence (Not applicable for
+                          title=" Select L.G.A of voting location (Not applicable for
                           Diaspora Residents)"
                         />
 

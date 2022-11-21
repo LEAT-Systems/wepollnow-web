@@ -57,7 +57,7 @@ const Footer = () => {
       </div>
       <div className="flex flex-row items-center justify-center bg-[#08C127] py-8 px-12 text-white">
         <p className="text-center">
-          WepollNow copyright {copy} 2022. All rights reserved.
+          WepollNow {copy} 2022. All rights reserved.
         </p>
       </div>
     </>

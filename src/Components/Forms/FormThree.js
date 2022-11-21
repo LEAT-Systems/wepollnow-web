@@ -177,7 +177,7 @@ const FormThree = (props) => {
                       {/* Employment Status */}
 
                       <div className="pt-4 pb-8 md:pb-0">
-                        <FormLabel title=" What best describes your employment status?" />
+                        <FormLabel title=" What best describes your status?" />
                         <p className="text-red-600">
                           <ErrorMessage name="employmentStatus" />
                         </p>

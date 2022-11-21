@@ -97,8 +97,8 @@ const BlogSingle = () => {
             )}
             {data.slice(0, 3).map((data) => {
               return (
-                <div className="w-full ">
-                  <Link to={"/blog-single"} key={data.id}>
+                <div className="w-full" key={data.id}>
+                  <Link to={"/blog-single"}>
                     <div className="flex flex-col w-full space-y-1 md:h-full">
                       <div className="relative">
                         <img

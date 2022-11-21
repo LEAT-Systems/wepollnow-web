@@ -7,13 +7,14 @@ import Confirm from "./Confirm";
 import Message from "./Message";
 import FormFour from "./FormFour";
 
-// From local Storage
-const localData = localStorage.getItem("phoneDetails");
-const phoneDetails = JSON.parse(localData);
-const { phoneNo, country } = phoneDetails;
-const fakeID = `user-${Math.random().toString(36).slice(2)}`;
 //
 const FormComponent = () => {
+  // From local Storage
+  const localData = localStorage.getItem("phoneDetails");
+  const phoneDetails = JSON.parse(localData);
+  const { phoneNo, country } = phoneDetails;
+
+  // hooks
   const history = useHistory();
   const [currentStep, setCurrentStep] = useState(0);
   const [hasError, setHasError] = useState();
@@ -49,6 +50,7 @@ const FormComponent = () => {
     accomodationStatus: "",
   });
 
+  // Checking a user is a diaspora voter from these two values
   useEffect(() => {
     let { stateOfVotingRes, LGAofVotingRes } = data;
     if (stateOfVotingRes || LGAofVotingRes === "") {
@@ -56,7 +58,6 @@ const FormComponent = () => {
     }
   }, []);
 
-  console.log(sendAsDiaspora);
   // storing state data in a variable
   const finalData = { ...data };
 
@@ -66,7 +67,6 @@ const FormComponent = () => {
 
     // Make API Request Handler
     let requestOptions;
-
     const makeRequest = async (formData) => {
       {
         sendAsDiaspora === true
@@ -82,6 +82,9 @@ const FormComponent = () => {
                 first_time_voter: formData.firstTimeVoter,
                 diaspora_voter: formData.diasporaVoter,
                 state_of_origin_id: parseInt(formData.stateOfOrigin),
+                // NOT PASSING THESE VALUES BECAUSE A DIASPORA VOTER. THIS IS THE API SPECIFICATION
+                // resident_state_id: parseInt(formData.stateOfVotingRes),
+                // resident_lga_id: parseInt(formData.LGAofVotingRes),
                 age_range: parseInt(formData.ageRange),
                 valid_voters_card: formData.pvc,
                 marital_status: parseInt(formData.maritalStatus),
@@ -124,8 +127,8 @@ const FormComponent = () => {
       );
       const result = await response.text();
       const JSONdata = await JSON.parse(result);
-      const emailHasError = JSONdata?.error?.email?.[0];
-      const phoneHasError = JSONdata?.error?.phone?.[0];
+      const emailHasError = JSONdata?.email?.[0];
+      const phoneHasError = JSONdata?.phone?.[0];
       if (!response.ok) {
         setHasError(true);
         setHTTPerror("Something isn't right...");
