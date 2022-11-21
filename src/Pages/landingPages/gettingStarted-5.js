@@ -27,12 +27,15 @@ const GettingStartedFive = () => {
   const emailRef = useRef();
   const [open, setOpen] = useState(false);
 
+  console.log(uniqueID);
+
   // open and close the modal
   const handleOpen = () => {
-    if (uniqueID !== "" && uniqueID !== undefined && uniqueID !== null) {
+    if (uniqueID !== "" || uniqueID !== undefined || uniqueID !== null) {
       history.push("/polls", { replace: true });
       // make API request with unique ID and poll_type
-    } else {
+    }
+    if (uniqueID === null) {
       setOpen(true);
     }
   };
