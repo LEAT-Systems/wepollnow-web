@@ -18,7 +18,7 @@ const AllPolls = () => {
     let formData = new FormData();
     formData.append("user_id", `${id}`);
     const requestOptions = {
-      method: "GET",
+      method: "POST",
       body: null,
     };
     const getData = async () => {
@@ -59,7 +59,7 @@ const AllPolls = () => {
           </div>
         </div>
       )}
-      <div className="grid min-h-screen grid-cols-1 pb-12 mt-12 md:mt-0 md:mb-12 gap-y-4 gap-x-12 md:px-24 md:gap-x-12 md:grid-cols-3">
+      <div className="grid min-h-screen grid-cols-1 pb-12 -mt-48 md:-mt-12 md:mb-12 gap-y-4 gap-x-12 md:px-24 md:gap-x-12 md:grid-cols-3">
         {data.map((item) => {
           // Here, I'm calculating the poll date from the current date so i could render items conditionally
           let due;

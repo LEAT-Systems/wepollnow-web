@@ -5,9 +5,9 @@ import { useEffect, useState } from "react";
 import errorIcon from "../../images/errorImg.png";
 
 const Message = (props) => {
-  const [emailErrorMessage, setEmailErrorMessage] = useState();
-  const [phoneErrorMessage, setPhoneErrorMessage] = useState();
-  const [httpErrorMessage, setHttpErrorMessage] = useState();
+  const [emailErrorMessage, setEmailErrorMessage] = useState("");
+  const [phoneErrorMessage, setPhoneErrorMessage] = useState("");
+  const [httpErrorMessage, setHttpErrorMessage] = useState("");
   const [errorState, setErrorState] = useState("");
 
   useEffect(() => {
@@ -17,6 +17,7 @@ const Message = (props) => {
     setHttpErrorMessage(props.httpError);
   }, [props.state, props.messageOne, props.messageTwo, props.httpError]);
 
+  console.log(httpErrorMessage, emailErrorMessage, phoneErrorMessage);
   //
   return (
     <div>
@@ -30,9 +31,9 @@ const Message = (props) => {
               </div>
               <h1 className="max-w-3xl text-xl font-semibold text-center text-red-500 md:text-lg ">
                 {httpErrorMessage}.<br />
-                {emailErrorMessage || ""}
+                {emailErrorMessage}
                 <br />
-                {phoneErrorMessage || ""}
+                {phoneErrorMessage}
               </h1>
               <div className="flex flex-row items-center justify-center space-x-4">
                 <Link to="/getting-started-six">

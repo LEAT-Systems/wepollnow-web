@@ -32,7 +32,7 @@ const GettingStartedContent = (props) => {
                 About Us
               </p>
               <h1 className="text-2xl md:text-[34px]">
-                Creating a better Society by making every vote count.
+                Creating a better Society by making every opinion count.
               </h1>
               <p className="text-md">
                 WePollNow is an independent research and analytics group

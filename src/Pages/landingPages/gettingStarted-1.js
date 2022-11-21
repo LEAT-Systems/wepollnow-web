@@ -75,7 +75,7 @@ const GettingStartedOne = () => {
             />
           </div>
           <p>Proceed to vote by clicking the button below</p>
-          <div className="md:pt-8">
+          <div className="md:mt-2">
             <button
               onClick={handleOpen}
               className="w-full p-4 px-8 text-white bg-[#08BC26] rounded-lg animate"
