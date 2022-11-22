@@ -8,8 +8,9 @@ import LinkIcon from "../../../assets/Filter@2x.png";
 import FilterIcon from "../../../assets/Filter@2x-1.png";
 import ManageCandidateTable from "./ManageCandidateTable";
 import Header from "../../../Header";
-import AddCandidateModal from "../../Modals/AddCandidate";
+import AddCandidateModal from "../../Modals/AddCandidateModal";
 import FilterModal from "../../Modals/FilterModal";
+import axios from "axios";
 
 const SubHeaderData = [
   {
@@ -70,12 +71,24 @@ const Candidate = () => {
     setRefineResult(!refineResult);
   };
 
+  /* Request Data from Endpoint */
 
   useEffect(() => {
-    /* For our demo json object */
-    setTableData(dataTable);
-    setSearchResult(dataTable);
+    axios
+      .get("https://wepollnow.azurewebsites.net/utilities/candidates/")
+      .then((res) => {
+        console.log(res);
+        setTableData(res.data);
+        setSearchResult(res.data);
+      })
+      .catch((err) => console.log(err));
   }, []);
+
+  // useEffect(() => {
+  //   /* For our demo json object */
+  //   setTableData(dataTable);
+  //   setSearchResult(dataTable);
+  // }, []);
 
   const handleFilterActive = (index) => {
     setFilterIsActive(index);
