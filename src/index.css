@@ -88,6 +88,10 @@ input[type="radio"]:checked {
   @apply font-medium text-base w-full relative after:content-[""] after:absolute after:top-[3.7rem] after:right-1 after:-translate-y-2/4 after:-translate-x-2/4 after:border-x-transparent after:border-solid after:border-[0.5em] after:border-t-[#333] after:border-b-transparent after:pointer-events-none;
 }
 
+/* TableStateResult Styling */
+.tableStateResult, .tableStateResult th, .tableStateResult td {
+  @apply border-2 border-solid border-collapse
+}
 /* Modals style */
 
 .modal__header__title {
