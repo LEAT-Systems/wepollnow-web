@@ -6,16 +6,20 @@ import { Modal } from "@mui/material";
 
 import { getState, getLGA, getDistrict, getZone, getPollType, postImage } from "../api";
 
-const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
-  const [state, setState] = useState("")
-  const [district, setDistrict] = useState("")
-  const [lga, setLga] = useState("")
-  const [zone, setZone] = useState("")
-  const [pollType, setPollType] = useState("")
-  const [candidateName, setCandidateName] = useState("")
-  const [candidateImage, setCandidateImage] = useState("")
-  const [percentage, setPercentage] = useState("")
-  const [errorMessage, setErrorMessage] = useState("")
+const AddCandidateModal = ({
+  addCandidate,
+  handleCloseAddCandidate,
+  modalData
+ }) => {
+  const [state, setState] = useState("");
+  const [district, setDistrict] = useState("");
+  const [lga, setLga] = useState("");
+  const [zone, setZone] = useState("");
+  const [pollType, setPollType] = useState("");
+  const [candidateName, setCandidateName] = useState("");
+  const [candidateImage, setCandidateImage] = useState("");
+  const [percentage, setPercentage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
 
   console.log("State: ", state);
@@ -28,7 +32,7 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-  }
+  };
 
   return (
     <div className='w-full'>

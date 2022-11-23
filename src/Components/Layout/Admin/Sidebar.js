@@ -27,9 +27,9 @@ const SideBar = () => {
       </NavLink>
 
       {/*  */}
-      <NavLink to="/admin/polls" className="py-3">
-        <div className="flex flex-col items-center justify-center transition duration-700 ease-in-out">
-          <div className="rounded-md">
+      <NavLink to='/admin/polls/' className='py-3'>
+        <div className='flex flex-col items-center justify-center transition duration-700 ease-in-out'>
+          <div className='rounded-md'>
             <img
               src={PollIcon}
               alt="Account"

@@ -95,7 +95,7 @@ const DashboardContent = () => {
                   <img
                     src={People}
                     alt='Account'
-                    className='w-[3.5rem] h-[3.5rem] bg-transparent'
+                    className='w-[3.5rem] h-[3.5rem] bg-[#e7f9ea]'
                   />
                 </span>
                 <div className='flex flex-col items-start'>

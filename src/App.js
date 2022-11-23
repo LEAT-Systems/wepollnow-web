@@ -8,6 +8,7 @@ import decode from "jwt-decode";
 import Loading from "./UI/Loading";
 import PublicRoutes from "./PublicRoutes";
 import PrivateRoutes from "./PrivateRoute";
+import TableStateResult from "./Components/Layout/Admin/Dashboard/Tables/TableStateResult/TableStateResult";
 
 // Lazy loads of components
 
@@ -237,7 +238,6 @@ function App() {
         </PrivateRoutes>
 
         {/* Polls Page */}
-
         <PrivateRoutes
           isAuthenticated={isAuthenticated}
           path="/admin/polls"

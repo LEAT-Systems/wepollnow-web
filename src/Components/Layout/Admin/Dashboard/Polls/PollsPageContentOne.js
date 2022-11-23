@@ -5,10 +5,10 @@ import Data from "../../Data.json";
 import PollsHeader from "./PollsHeader";
 import Grid from "./Grid";
 import FilterModal from "../Modals/FilterModal";
-import AddPollModal from "../Modals/AddPollModal";
+import CreatePollsContainer from "../Modals/CreatePollsContainer";
 // import { getTableData } from "../api";
 import SubHeader from "../../SubHeader";
-import CreatePollModal from "../Modals/CreatePollModal";
+import axios from "axios";
 
 const SubHeaderData = [
   {
@@ -28,6 +28,21 @@ const PollsPageContentOne = () => {
   const [refineResult, setRefineResult] = useState(false);
   const [tableData, setTableData] = useState([]);
   const [searchResult, setSearchResult] = useState([]);
+  const [modalData, setModalData] = useState([]);
+
+  /* 
+  const getdata = async () => {
+    axios.get("https://wepollnow.azurewebsites.net/utilities/candidates/").then((res) => {
+      console.log(res);
+      setModalData(res);
+    }).catch(err => console.log(err))
+  };
+
+  useEffect(() => {
+    getdata();
+  }, []);
+  
+*/
 
   /* View State */
   const [isGrid, setIsGrid] = useState(false);
@@ -112,8 +127,11 @@ const PollsPageContentOne = () => {
         </div>
 
         {/*************************** Create Poll Overlay *****************************/}
-        {/* <AddPollModal openModal={open} handleCloseAddPoll={handleClose} /> */}
-        <CreatePollModal open={open} handleClose={handleClose} />
+        <CreatePollsContainer
+          open={open}
+          handleClose={handleClose}
+          modalData={modalData}
+        />
 
         {/*************************** Filter Result Overlay *****************************/}
         <FilterModal

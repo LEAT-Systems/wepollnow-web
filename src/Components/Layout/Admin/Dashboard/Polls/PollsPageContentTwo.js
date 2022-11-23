@@ -13,39 +13,41 @@ import BarChart from "../Charts/BarChart";
 import PieChart from "../Charts/PieChart";
 import PieChart2 from "../Charts/PieChart2";
 import DropDown from "../DropDown/DropDown";
-import Tables from "../Tables/Tables";
 import Grid from "./Grid";
 import Data from "../../Data.json";
 import { NavLink } from "react-router-dom";
+import VOTES from '../../assets/directbox-default.png'
+import TableResult from "../Tables/TableResult/TableResult";
+import TableStateResult from "../Tables/TableStateResult/TableStateResult";
 
 const PollsPageContentTwo = () => {
   const [open, setOpen] = useState(false);
 
   /* View State */
-  const [isGrid, setIsGrid] = useState(false);
+  const [isTableState, setIsTableState] = useState(false);
   const [isBar, setIsBar] = useState(false);
   const [isPie, setIsPie] = useState(false);
 
   const handleGrid = () => {
-    setIsGrid(true);
+    setIsTableState(true);
     setIsBar(false);
     setIsPie(false);
   };
 
   const handleList = () => {
-    setIsGrid(false);
+    setIsTableState(false);
     setIsBar(false);
     setIsPie(false);
   };
 
   const handleBar = () => {
-    setIsGrid(false);
+    setIsTableState(false);
     setIsBar(true);
     setIsPie(false);
   };
 
   const handlePie = () => {
-    setIsGrid(false);
+    setIsTableState(false);
     setIsPie(true);
     setIsBar(false);
   };
@@ -100,7 +102,7 @@ const PollsPageContentTwo = () => {
                   </span>
                 </div>
 
-                <div className='flex justify-between my-auto w-full'>
+                <div className='flex justify-between w-full mt-auto'>
                   <h3 className='text-[.9rem]'>
                     <CalendarMonthOutlined
                       sx={{
@@ -110,14 +112,18 @@ const PollsPageContentTwo = () => {
                     />
                     22/22/2022
                   </h3>
-                  <h3 className='text-base'>{data.status[2]}</h3>
+                  <h3 className='text-base relative after:content-[""] after:absolute after:w-[.6rem] after:h-[.6rem] after:rounded-full after:bg-red-400 after:-left-3 after:top-1/2 after:-translate-y-1/2'>{data.status[1]}</h3>
                 </div>
               </div>
 
               {/* Second Card  */}
               <div className='flex flex-row items-center relative border-2 border-gray-400 bg-white rounded-lg p-5 w-full h-[9rem]'>
                 <span className='rounded-2xl bg-[#e7f9ea] p-4 mr-4 items-start'>
-                  <People sx={{ color: "green", fontSize: "3rem" }} />
+                  <img
+                    src={VOTES}
+                    alt='Votes'
+                    className='w-[3.5rem] h-[3.5rem] bg-[#e7f9ea]'
+                  />
                 </span>
                 <div className='flex flex-col items-start'>
                   <span className='text-2xl font-extrabold pb-1'>
@@ -178,14 +184,14 @@ const PollsPageContentTwo = () => {
             </div>
 
             <div className=''>
-              {isGrid ? (
-                <Grid data={Data} handleOpen={handleOpen} />
+              {isTableState ? (
+                <TableStateResult />
               ) : isBar ? (
                 <BarChart />
               ) : isPie ? (
                 <PieChart2 />
               ) : (
-                <Tables data={Data} />
+                <TableResult />
               )}
             </div>
           </div>
@@ -196,3 +202,9 @@ const PollsPageContentTwo = () => {
 };
 
 export default PollsPageContentTwo;
+
+
+// Add candidate
+// Remove LGA | Replace Party dropdown & Main candidate checkbox
+// Create poll
+// Remove LGA
