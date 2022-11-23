@@ -4,19 +4,19 @@ import React from "react";
 import SideBar from "../../Sidebar";
 import PageContent from "../../Content";
 import Wrapper from "../../BodyWrapper";
-import ManageBlogContent from "./ManageBlogContent";
+import CreateBlogContent from "./CreateBlogContent";
 
-const Blog = () => {
+const CreateBlog = () => {
   return (
     <>
       <Wrapper>
         <SideBar />
         <main className="ml-auto lg:ml-[82px] w-screen">
-          <PageContent children={<ManageBlogContent />} />
+          <PageContent children={<CreateBlogContent />} />
         </main>
       </Wrapper>
     </>
   );
 };
 
-export default Blog;
+export default CreateBlog;

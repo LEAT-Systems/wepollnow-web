@@ -23,14 +23,13 @@ const GettingStartedOne = () => {
 
   // open and close the modal
   const handleOpen = () => {
-    if (uniqueID !== "" || uniqueID !== undefined || uniqueID !== null) {
-      history.push("/vote", { replace: true });
-      // make API request with unique ID
-    }
     if (uniqueID === null) {
       localStorage.setItem("pollType", "presidential_poll");
       setOpen(true);
-    } 
+    } else {
+      // make API request with unique ID
+      history.push("/polls", { replace: true });
+    }
   };
   const handleClose = () => {
     setOpen(false);
