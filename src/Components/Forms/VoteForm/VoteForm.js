@@ -277,7 +277,9 @@ const FormFive = () => {
                                     {item.runningMate}
                                   </p>
                                   <Badge bg="EDFFF0" border="08C127">
-                                    <p className="text-[10px]">{item.vBadge}</p>
+                                    <p className="text-[7px] md:text-md">
+                                      {item.vBadge}
+                                    </p>
                                   </Badge>
                                 </div>
                               </section>

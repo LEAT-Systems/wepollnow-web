@@ -84,7 +84,7 @@ const BlogSingle = () => {
             </div>
           </div>
           {/* Side Bar */}
-          <div className="grid grid-cols-1 space-y-6 md:-mt-16 md:space-y-4 md:gap-y-0">
+          <div className="grid grid-cols-1 space-y-6 md:-mt-16 md:space-y-4 md:gap-y-0 pb-24 md:pb-0">
             {isEmpty && <p className="text-[14px] font-bold">Latest Posts</p>}
             {!isEmpty && (
               <div className="flex flex-row justify-center md:-pt-98 mb-8">
