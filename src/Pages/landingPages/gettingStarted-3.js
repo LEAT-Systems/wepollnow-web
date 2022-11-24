@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import Nav from "../../Components/Layout/Landing/mainNav";
 import { Link } from "react-router-dom";
@@ -16,7 +16,6 @@ import errorIcon from "../../images/errorImg.png";
 import Toast from "../../UI/SuccessToast";
 
 //
-const uniqueID = localStorage.getItem("uniqueID");
 
 const GettingStartedThree = () => {
   const [error, setHasError] = useState(false);
@@ -28,9 +27,15 @@ const GettingStartedThree = () => {
   const emailRef = useRef();
   const [open, setOpen] = useState(false);
 
+  //
+  let uniqueID;
+  useEffect(() => {
+    uniqueID = localStorage.getItem("uniqueID");
+  }, []);
+
   // open and close the modal
   const handleOpen = () => {
-    if (uniqueID === null) {
+    if (uniqueID === null || uniqueID === undefined) {
       setOpen(true);
     } else {
       // make API request with unique ID
@@ -154,7 +159,7 @@ const GettingStartedThree = () => {
                 </span>{" "}
                 the narrative.
               </h1>
-              <h1>Make your vote count.</h1>
+              <h1>Make your opinion count.</h1>
             </div>
           </div>
           <div>

@@ -63,7 +63,7 @@ const FormFive = () => {
 
   // This loads once page mounts
   useEffect(() => {
-    // sending selected poll to api
+    // sending selected poll to API to fetch poll data
     const sendData = async () => {
       try {
         const response = await fetch(
@@ -85,7 +85,7 @@ const FormFive = () => {
     };
     // Will get data from api and store in this state below to render on page
     setApiData(Parties);
-  });
+  }, []);
   //
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -277,7 +277,7 @@ const FormFive = () => {
                                     {item.runningMate}
                                   </p>
                                   <Badge bg="EDFFF0" border="08C127">
-                                    <p className="text-[7px] md:text-md">
+                                    <p className="text-[7px] md:text-[10px]">
                                       {item.vBadge}
                                     </p>
                                   </Badge>

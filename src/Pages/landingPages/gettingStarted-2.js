@@ -1,7 +1,6 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import Nav from "../../Components/Layout/Landing/mainNav";
-import Badge from "../../UI/Badge";
 import { Link } from "react-router-dom";
 import ModalComponent from "./GettingStartedModal";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
@@ -17,8 +16,6 @@ import doneIcon from "../../images/doneIcon.png";
 import errorIcon from "../../images/errorImg.png";
 
 //
-const uniqueID = localStorage.getItem("uniqueID");
-
 const GettingStartedTwo = () => {
   const [error, setHasError] = useState(false);
   const [hasHTTPError, setHasHTTPError] = useState("");
@@ -29,9 +26,15 @@ const GettingStartedTwo = () => {
   const emailRef = useRef();
   const [open, setOpen] = useState(false);
 
+  //
+  let uniqueID;
+  useEffect(() => {
+    uniqueID = localStorage.getItem("uniqueID");
+  }, []);
+
   // open and close the modal
   const handleOpen = () => {
-    if (uniqueID === null) {
+    if (uniqueID === null || uniqueID === undefined) {
       setOpen(true);
     } else {
       // make API request with unique ID

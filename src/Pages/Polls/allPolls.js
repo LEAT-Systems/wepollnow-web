@@ -8,21 +8,18 @@ import { useHistory } from "react-router-dom";
 import ModalComponent from "../landingPages/GettingStartedModal";
 
 // Unique ID from local storage
-const uniqueID = localStorage.getItem("uniqueID");
 
 const AllPolls = () => {
   const history = useHistory();
   const [data, setData] = useState([]);
   const [open, setOpen] = useState(false);
-  const id = localStorage.getItem("uniqueID");
+  const [idExist, setIdExist] = useState();
 
-  // TO check if poll contents are empty
-  const isEmpty = data.length === 0;
-
-  // Setting data from API here
   useEffect(() => {
+    const uniqueID = localStorage.getItem("uniqueID");
+    setIdExist(uniqueID);
     let formData = new FormData();
-    formData.append("user_id", `${id}`);
+    formData.append("user_id", `${uniqueID}`);
     const requestOptions = {
       method: "POST",
       body: null,
@@ -37,11 +34,14 @@ const AllPolls = () => {
       setData(JSONdata);
     };
     getData();
-  }, [id]);
+  }, []);
+
+  // TO check if api data is empty
+  const isEmpty = data.length === 0;
 
   // Open and close modal
   const handleOpen = () => {
-    if (uniqueID === null) {
+    if (idExist === null || idExist === undefined) {
       setOpen(true);
     } else {
       // make API request with unique ID
