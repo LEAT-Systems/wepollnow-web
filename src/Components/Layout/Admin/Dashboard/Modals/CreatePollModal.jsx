@@ -1,22 +1,120 @@
-import React from "react";
+import React, { useState, useEffect, useContext } from "react";
+import axios from "axios";
+import ModalFormContext from "../../../../../ModalFormContextAdmin/ModalFormContext";
 
 const CreatePollModal = ({ open, handleClose, nextPage }) => {
+  const {
+    pollType,
+    setPollType,
+    state,
+    setState,
+    selectedState,
+    setSelectedState,
+    district,
+    setDistrict,
+    party,
+    setParty,
+    zone,
+    setZone,
+    pollTypeData,
+    setPollTypeData,
+    districtData,
+    setDistrictData,
+    partyData,
+    setPartyData,
+    zoneData,
+    setZoneData,
+    startDate,
+    setStartDate,
+    endDate, 
+    setEndDate
+  } = useContext(ModalFormContext);
+
+
+  // const [email, setEmail] = useState([]);
+  // const [contactList, setContactList] = useState([]);
+  // const [candidates, setCandidates] = useState([]);
+  /* Get State */
+  useEffect(() => {
+    const getState = async () => {
+      await axios
+        .get("https://wepollnow.azurewebsites.net/utilities/states/")
+        .then((res) => setState(res.data))
+        .catch((err) => console.log(err));
+    };
+    getState();
+  }, [setState]);
+
+  const handleState = (e) => {
+    const stateID = e.target.value;
+
+    console.log("State ID: ", stateID);
+    setState(stateID)
+    setSelectedState(stateID);
+  };
+
+  /* Get Senetorial District */
+  useEffect(() => {
+    const getSenetorial = async () => {
+      await axios
+        .get(
+          `https://wepollnow.azurewebsites.net/utilities/senatorial/`
+        )
+        .then((res) => setDistrictData(res.data))
+        .catch((err) => console.log(err));
+    };
+    getSenetorial();
+  }, [setDistrictData]);
+
+  /* Get Poll Type */
+  useEffect(() => {
+    const getPollType = async () => {
+      await axios
+        .get(`https://wepollnow.azurewebsites.net/poll/poll_category/`)
+        .then((res) => { setPollTypeData(res.data); console.log(res.data) })
+        .catch((err) => console.log(err));
+    };
+    getPollType();
+  }, [setPollTypeData]);
+
+  /* Get Party */
+  useEffect(() => {
+    const getParty = async () => {
+      await axios
+        .get(`https://wepollnow.azurewebsites.net/utilities/party_list/`)
+        .then((res) => {
+          setPartyData(res.data);
+          console.log(res.data);
+        })
+        .catch((err) => console.log(err));
+    };
+    getParty();
+  }, [setPartyData]);
   return (
     <>
       <form className='flex flex-col justify-between items-center w-full my-2 hover:bg-transparent'>
         {/* First Form */}
         <div className='flex flex-col md:flex-row my-2 justify-center items-center w-full gap-3 md:gap-5'>
-          <label className='custom__select__container'>
+          <label className='custom_select_container'>
             Poll Type
             <select
-              name='poll__type'
-              id='poll__type'
-              className='custom__select'
+              name='poll_type'
+              id='poll_type'
+              className='custom_select'
+              value={pollType}
+              onChange={(e) => {
+                setPollType(e.target.value);
+                console.log(e.target.value);
+              }}
             >
               <option value='Select Poll Type'>Select Poll Type</option>
-              <option>President Poll</option>
-              <option>Gubernational Poll</option>
-              <option>Governorship Poll</option>
+              {pollTypeData.map((poll) => {
+                return (
+                  <option key={poll.id} id={poll.id} value={poll.id}>
+                    {poll.title}
+                  </option>
+                );
+              })}
             </select>
           </label>
         </div>
@@ -27,105 +125,104 @@ const CreatePollModal = ({ open, handleClose, nextPage }) => {
             Start Date
             <input
               type='date'
-              name='start__data'
-              id='start__data'
+              name='start_data'
+              id='start_data'
               className='font-medium text-base text-[#616b62] uppercase h-full w-full border-2 border-gray-300 rounded-md py-3 px-3'
               placeholder='DD/MM/YY'
+              value={startDate}
+              onChange={(e) => {
+                setStartDate(e.target.value);
+                console.log(e.target.value);
+              }}
             />
           </label>
           <label className='w-full relative'>
             End Date
             <input
               type='date'
-              name='end__date'
-              id='end__date'
+              name='end_date'
+              id='end_date'
               className='font-medium text-base text-[#616b62] uppercase h-full w-full border-2 border-gray-300 rounded-md py-3 px-3'
               placeholder='DD/MM/YY'
+              value={endDate}
+              onChange={(e) => {
+                setEndDate(e.target.value);
+                console.log(e.target.value);
+              }}
             />
           </label>
         </div>
 
         {/* Second Form */}
         <div className='flex flex-col md:flex-row my-2 justify-center items-center w-full gap-3 md:gap-5'>
-          <label className='custom__select__container'>
+          <label className='custom_select_container'>
             State
-            <select name='state' id='state' className='custom__select'>
-              <option value='Select state'>Select State</option>
-              <option>Abia</option>
-              <option>Adamawa</option>
-              <option>Akwa Ibom</option>
-              <option>Anambra</option>
-              <option>Bauchi</option>
-              <option>Bayelsa</option>
-              <option>Benue</option>
-              <option>Borno</option>
-              <option>Cross River</option>
-              <option>Delta</option>
-              <option>Ebonyi</option>
-              <option>Edo</option>
-              <option>Ekiti</option>
-              <option>Enugu</option>
-              <option>Fct</option>
-              <option>Gombe</option>
-              <option>Imo</option>
-              <option>Jigawa</option>
-              <option>Kaduna</option>
-              <option>Kano</option>
-              <option>Katsina</option>
-              <option>Kebbi</option>
-              <option>Kogi</option>
-              <option>Kwara</option>
-              <option>Lagos</option>
-              <option>Nasarawa</option>
-              <option>Niger</option>
-              <option>Ogun</option>
-              <option>Ondo</option>
-              <option>Osun</option>
-              <option>Oyo</option>
-              <option>Plateau</option>
-              <option>Rivers</option>
-              <option>Sokoto</option>
-              <option>Taraba</option>
-              <option>Yobe</option>
-              <option>Zamfara</option>
+            <select
+              name='state'
+              id='state'
+              className='custom_select'
+              value={selectedState}
+              onChange={(e) => {
+                setSelectedState(e.target.value);
+                console.log(e.target.value);
+              }}
+            >
+              <option>Select State</option>
+              {state.map((state) => {
+                return (
+                  <option key={state.id} id={state.id} value={state.id}>
+                    {state.name}
+                  </option>
+                );
+              })}
             </select>
           </label>
         </div>
 
         {/* Third Form */}
         <div className='flex flex-col md:flex-row my-2 justify-center items-center w-full gap-3 md:gap-5'>
-          <label className='custom__select__container'>
+          <label className='custom_select_container'>
             Senetorial District
             <select
-              name='poll__type'
-              id='poll__type'
-              className='custom__select'
+              name='senetorial_district'
+              id='senetorial_district'
+              className='custom_select'
+              value={district}
+              onChange={(e) => {
+                setDistrict(e.target.value);
+                console.log(e.target.value);
+              }}
             >
-              <option value='Select Poll Type'>
+              <option>
                 Select Senetorial District
               </option>
-              <option>This is a Senetorial District</option>
-              <option>This is a Senetorial District</option>
-              <option>This is a Senetorial District</option>
-            </select>
-          </label>
-
-          <label className='custom__select__container'>
-            LGA
-            <select name='lga' id='lga' className='custom__select'>
-              <option value='Select Poll Type'>Select LGA</option>
-              <option>This is an LGA</option>
-              <option>This is an LGA</option>
-              <option>This is an LGA</option>
+              {districtData.map((data) => {
+                return (
+                  <option key={data.id} value={data.id}>
+                    {data.name}
+                  </option>
+                );
+              })}
             </select>
           </label>
         </div>
+      
 
         {/* Final Form */}
         <div className='flex flex-col md:flex-row my-2 justify-center items-center w-full gap-3 md:gap-5'>
-          <label className='custom__select__container'>
+          <label className='custom_select_container'>
             Zone
-            <select name='zone' id='zone' className='custom__select'>
+            <select
+              name='zone'
+              id='zone'
+              className='custom_select disabled:bg-gray-200 disabled:cursor-not-allowed'
+              disabled={true}
+              value={zone}
+              onChange={(e) => {
+                setZone(e.target.value);
+                console.log(e.target.value);
+              }}
+            >
               <option value='Select Zone'>Select Zone</option>
               <option>1</option>
               <option>2</option>
