@@ -123,7 +123,7 @@ const FormFive = () => {
         history.push("/vote/vote-form-next", { replace: true });
       } else {
         console.log(response);
-        throw new Error("You have already voted for this poll.");
+        throw new Error("You have already participated in this poll.");
       }
 
       // catch error
@@ -156,7 +156,9 @@ const FormFive = () => {
 
           <div className="flex flex-col items-center justify-center px-4 space-y-4">
             {hasError && (
-              <p className="font-bold text-red-500">Error: {error}</p>
+              <p className="font-bold text-red-500 text-center">
+                Error: {error}
+              </p>
             )}
             <img src={cautionIcon} alt="caution" />
             <p className="p-1 px-4 text-xl font-extrabold text-center text-black md:text-2xl">
@@ -250,7 +252,6 @@ const FormFive = () => {
                                 value={item.partyName}
                                 onBlur={() => setVoteID(item.pollid)}
                                 onChange={checkHandler}
-                                // onBlur={set(item.pollid)}
                                 className="w-5 h-5 text-gray-600 border-gray-300 focus:ring-gray-500"
                               />
                             </div>
