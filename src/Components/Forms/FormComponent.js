@@ -52,7 +52,7 @@ const FormComponent = () => {
   // Checking a user is a diaspora voter from these two values
   useEffect(() => {
     let { stateOfVotingRes, LGAofVotingRes } = data;
-    if (stateOfVotingRes || LGAofVotingRes === "") {
+    if (stateOfVotingRes === "" || LGAofVotingRes === "") {
       setSendAsDiaspora(true);
     }
   }, []);
