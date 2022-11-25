@@ -14,7 +14,7 @@ const ManageCandidateTableRow = ({ tableData }) => {
         <span className='text-white text-sm font-bold capitalize bg-green-900 mr-4 rounded-xl p-[.45rem] md:p-[.6rem] cursor-pointer'>
           {tableData.symbol}
         </span>{" "}
-        {tableData.candidate}
+        {tableData.name}
       </th>
       <td className='px-6 py-4 cursor-pointer'>{tableData.poll}</td>
       <td className='flex flex-row px-6 py-4 space-x-2'>
