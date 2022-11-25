@@ -209,6 +209,7 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
 
           {/*  */}
           <form
+            encType="multipart/form-data"
             onSubmit={(e) => handleSubmit(e)}
             className='flex flex-col justify-between items-center w-full my-2 hover:bg-transparent'
           >
@@ -363,7 +364,6 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
               <div className='w-full'>
                 {/* Title */}
                 <FormControl
-                  onChange={(e) => console.log(e.target.value)}
                   sx={{ width: "100%" }}
                 >
                   <RadioGroup
