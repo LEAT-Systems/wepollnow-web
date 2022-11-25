@@ -85,7 +85,10 @@ const GettingStartedFive = () => {
           setErrorMessageEmail(emailHasError);
         }
 
-        if (emailHasError !== "Enter a valid email address.") {
+        if (
+          response.ok === true &&
+          emailHasError !== "Enter a valid email address."
+        ) {
           setShow(true);
           setHasError(false);
           setHasSubmitted(true);

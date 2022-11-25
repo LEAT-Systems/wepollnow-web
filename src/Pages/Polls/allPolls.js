@@ -36,10 +36,10 @@ const AllPolls = () => {
     getData();
   }, []);
 
-  // TO check if api data is empty
+  // ==================  To check if api data is empty
   const isEmpty = data.length === 0;
 
-  // Open and close modal
+  // ================== Open and close modal
   const handleOpen = () => {
     if (idExist === null || idExist === undefined) {
       setOpen(true);
@@ -52,7 +52,7 @@ const AllPolls = () => {
     setOpen(false);
   };
 
-  // ===================    JSX
+  // ===================    JSX    ==============================
   return (
     <div className="w-screen h-screen overflow-x-hidden">
       <ModalComponent open={open} handleClose={handleClose} />
@@ -80,7 +80,7 @@ const AllPolls = () => {
           </div>
         </div>
       )}
-      <div className="grid min-h-screen grid-cols-1 pb-12 -mt-48 md:-mt-12 md:mb-12 gap-y-4 gap-x-12 md:px-24 md:gap-x-12 md:grid-cols-3">
+      <div className="grid min-h-screen grid-cols-1 pb-12 -mt-12 md:mb-12 gap-y-4 gap-x-12 md:px-24 md:gap-x-12 md:grid-cols-3">
         {data.map((item) => {
           // Here, I'm calculating the poll date from the current date so i could render items conditionally
           let due;
@@ -89,9 +89,16 @@ const AllPolls = () => {
           due = distance < 0;
 
           // Storing Polltype clicked on button into local storage
-          const setDescription = item.poll_name;
+          const poll_name = item.poll_name;
+          const poll_id = item.id;
           const handler = () => {
-            localStorage.setItem("pollType", setDescription);
+            localStorage.setItem(
+              "poll_details",
+              JSON.stringify({
+                poll_id: poll_id,
+                poll_name: poll_name,
+              })
+            );
           };
 
           return (

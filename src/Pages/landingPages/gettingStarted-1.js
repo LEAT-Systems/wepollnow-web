@@ -28,7 +28,7 @@ const GettingStartedOne = () => {
   // open and close the modal
   const handleOpen = () => {
     if (uniqueID === null || uniqueID === undefined) {
-      localStorage.setItem("pollType", "presidential_poll");
+      localStorage.setItem("pollType", 1);
       setOpen(true);
     } else {
       // make API request with unique ID
