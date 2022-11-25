@@ -9,7 +9,7 @@ import {
   Radio,
   RadioGroup,
 } from "@mui/material";
-import axios from "axios";
+import Axios from "axios";
 
 const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
   const errRef = useRef();
@@ -40,7 +40,7 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
 
   useEffect(() => {
     const getState = async () => {
-      await axios
+      await Axios
         .get("https://wepollnow.azurewebsites.net/utilities/states/")
         .then((res) => setState(res.data))
         .catch((err) => console.log(err));
@@ -51,7 +51,7 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
   /* Get Senetorial District */
   useEffect(() => {
     const getSenetorial = async () => {
-      await axios
+      await Axios
         .get(`https://wepollnow.azurewebsites.net/utilities/senatorial/`)
         .then((res) => setDistrictData(res.data))
         .catch((err) => console.log(err));
@@ -62,7 +62,7 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
   /* Get Poll Type */
   useEffect(() => {
     const getPollType = async () => {
-      await axios
+      await Axios
         .get(`https://wepollnow.azurewebsites.net/poll/poll_category/`)
         .then((res) => {
           setPollTypeData(res.data);
@@ -76,7 +76,7 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
   /* Get Party */
   useEffect(() => {
     const getParty = async () => {
-      await axios
+      await Axios
         .get(`https://wepollnow.azurewebsites.net/utilities/party_list/`)
         .then((res) => {
           setPartyData(res.data);
@@ -94,7 +94,7 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
 
   const token = async () => {
     try {
-      const response = await axios.post(
+      const response = await Axios.post(
         "https://wepollnow.azurewebsites.net/utilities/candidates/",
         {
           name: name,
@@ -134,7 +134,31 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    token();
+    await Axios.post("https://wepollnow.azurewebsites.net/utilities/candidates/", {
+      name: name,
+      poll: null,
+      poll_category: pollType,
+      state_id: selectedState,
+      senatorial_id: district,
+      main_candidate: mainCandidate,
+      candidate_picture: candidateImage,
+    },
+    ).then(res => {
+      console.log(res.data.status)
+      setSuccessMessage(true)
+    }).catch(err => {
+      if (!err?.response) {
+        setErrorMessage("No Connection");
+      } else if (err.response?.status === 400) {
+        setErrorMessage("Email and Password are required");
+      } else if (err.response?.status === 401) {
+        setErrorMessage("Unauthorized");
+      } else {
+        setErrorMessage("Add Candidate Failed");
+      }
+      errRef.current.focus();
+    }
+    )
   };
 
   return (
@@ -162,6 +186,7 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
             <button
               className='flex items-center justify-center border border-1 rounded-md py-[2px] px-[2px] cursor-pointer text-sm md:text-base bg-[#fcf0f0] text-red-500'
               onClick={handleCloseAddCandidate}
+              type='button'
             >
               <Close />
             </button>
@@ -184,7 +209,7 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
 
           {/*  */}
           <form
-            onSubmit={handleSubmit}
+            onSubmit={(e) => handleSubmit(e)}
             className='flex flex-col justify-between items-center w-full my-2 hover:bg-transparent'
           >
             {/* First Form */}
@@ -427,12 +452,14 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
               <button
                 className='flex items-center justify-center border-2 border-gray-300 py-3 px-5 h-full cursor-pointer text-sm rounded-md capitalize mr-4 transition-all duration-400 ease-in-out hover:bg-[#f3dddd] hover:text-red-600 hover:rounded-full'
                 onClick={handleCloseAddCandidate}
+                type='button'
               >
                 cancel
               </button>
               <button
                 className='flex items-center justify-center rounded-md py-3 px-5 h-full cursor-pointer text-sm bg-green-500 text-white capitalize transition-all duration-400 ease-in-out hover:bg-green-500 hover:text-white hover:rounded-full'
                 type='submit'
+                onClick={handleCloseAddCandidate}
               >
                 continue
               </button>
