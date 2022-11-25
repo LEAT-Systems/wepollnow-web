@@ -51,6 +51,7 @@ const Candidate = () => {
   const [addCandidate, setAddCandidate] = useState(false);
   const [refineResult, setRefineResult] = useState(false);
   const [tableData, setTableData] = useState([]);
+  const [polls, setPolls] = useState([]);
   const [searchResult, setSearchResult] = useState([]);
   const [open, setOpen] = useState(false);
 
@@ -85,8 +86,7 @@ const Candidate = () => {
       })
       .catch((err) => console.log(err));
   }, []);
-
-  
+ 
 
   // useEffect(() => {
   //   /* For our demo json object */

@@ -12,154 +12,163 @@ import {
 import Axios from "axios";
 
 const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
-  const errRef = useRef();
   /* Handling the form input and data */
-  const [pollType, setPollType] = useState();
-  const [pollTypeData, setPollTypeData] = useState([]);
-  const [name, setName] = useState("");
-  const [state, setState] = useState([]);
-  const [selectedState, setSelectedState] = useState();
-  const [district, setDistrict] = useState();
-  const [districtData, setDistrictData] = useState([]);
-  const [candidateImage, setCandidateImage] = useState();
-  const [zone, setZone] = useState([]);
-  const [partyData, setPartyData] = useState([]);
-  const [party, setParty] = useState([]);
-  const [zoneData, setZoneData] = useState([]);
-  const [percentage, setPercentage] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
-  const [successMessage, setSuccessMessage] = useState("");
-  const [mainCandidate, setMainCandidate] = useState(false);
+    const [pollType, setPollType] = useState();
+    const [pollTypeData, setPollTypeData] = useState([]);
+    const [name, setName] = useState("");
+    const [state, setState] = useState([]);
+    const [selectedState, setSelectedState] = useState();
+    const [district, setDistrict] = useState();
+    const [districtData, setDistrictData] = useState([]);
+    const [candidateImage, setCandidateImage] = useState(null);
+    const [zone, setZone] = useState([]);
+    const [partyData, setPartyData] = useState([]);
+    const [party, setParty] = useState([]);
+    const [zoneData, setZoneData] = useState([]);
+    const [percentage, setPercentage] = useState("");
+    const [errorMessage, setErrorMessage] = useState("");
+    const [successMessage, setSuccessMessage] = useState("");
+    const [mainCandidate, setMainCandidate] = useState(false);
 
-  console.log("State: ", state);
-  console.log("District: ", district);
-  console.log("Zone: ", zone);
-  console.log("Poll Type: ", pollType);
-  console.log("Candidate Name: ", name);
-  console.log("Candidate Image: ", candidateImage);
+    useEffect(() => {
+      const getState = async () => {
+        await Axios.get("https://wepollnow.azurewebsites.net/utilities/states/")
+          .then((res) => setState(res.data))
+          .catch((err) => console.log(err));
+      };
+      getState();
+    }, [setState]);
 
-  useEffect(() => {
-    const getState = async () => {
-      await Axios
-        .get("https://wepollnow.azurewebsites.net/utilities/states/")
-        .then((res) => setState(res.data))
-        .catch((err) => console.log(err));
-    };
-    getState();
-  }, [setState]);
+    /* Get Senetorial District */
+    useEffect(() => {
+      const getSenetorial = async () => {
+        await Axios.get(
+          `https://wepollnow.azurewebsites.net/utilities/senatorial/`
+        )
+          .then((res) => setDistrictData(res.data))
+          .catch((err) => console.log(err));
+      };
+      getSenetorial();
+    }, [setDistrictData]);
 
-  /* Get Senetorial District */
-  useEffect(() => {
-    const getSenetorial = async () => {
-      await Axios
-        .get(`https://wepollnow.azurewebsites.net/utilities/senatorial/`)
-        .then((res) => setDistrictData(res.data))
-        .catch((err) => console.log(err));
-    };
-    getSenetorial();
-  }, [setDistrictData]);
+    /* Get Poll Type */
+    useEffect(() => {
+      const getPollType = async () => {
+        await Axios.get(
+          `https://wepollnow.azurewebsites.net/poll/poll_category/`
+        )
+          .then((res) => {
+            setPollTypeData(res.data);
+            console.log(res.data);
+          })
+          .catch((err) => console.log(err));
+      };
+      getPollType();
+    }, [setPollTypeData]);
 
-  /* Get Poll Type */
-  useEffect(() => {
-    const getPollType = async () => {
-      await Axios
-        .get(`https://wepollnow.azurewebsites.net/poll/poll_category/`)
-        .then((res) => {
-          setPollTypeData(res.data);
-          console.log(res.data);
-        })
-        .catch((err) => console.log(err));
-    };
-    getPollType();
-  }, [setPollTypeData]);
+    /* Get Party */
+    useEffect(() => {
+      const getParty = async () => {
+        await Axios.get(
+          `https://wepollnow.azurewebsites.net/utilities/party_list/`
+        )
+          .then((res) => {
+            setPartyData(res.data);
+            console.log(res.data);
+          })
+          .catch((err) => console.log(err));
+      };
+      getParty();
+    }, [setPartyData]);
 
-  /* Get Party */
-  useEffect(() => {
-    const getParty = async () => {
-      await Axios
-        .get(`https://wepollnow.azurewebsites.net/utilities/party_list/`)
-        .then((res) => {
-          setPartyData(res.data);
-          console.log(res.data);
-        })
-        .catch((err) => console.log(err));
-    };
-    getParty();
-  }, [setPartyData]);
+    /* Submit Form */
+    useEffect(() => {
+      setErrorMessage("");
+    }, [name, candidateImage, selectedState, district, pollType]);
 
-  /* Submit Form */
-  useEffect(() => {
-    setErrorMessage("");
-  }, [name, candidateImage, selectedState, district, pollType]);
+    const handleSubmit = async (e) => {
+      e.preventDefault();
 
-  const token = async () => {
-    try {
-      const response = await Axios.post(
+      const formData = new FormData();
+      formData.append("photo", candidateImage);
+
+      await Axios.post(
         "https://wepollnow.azurewebsites.net/utilities/candidates/",
         {
           name: name,
-          poll: null,
-          poll_category: pollType,
+          poll: 2,
+          poll_category_id: pollType,
           state_id: selectedState,
           senatorial_id: district,
+          party_id: party,
           main_candidate: mainCandidate,
-          candidate_picture: candidateImage,
+          candidate_picture: formData,
         },
         {
-          headers: { "Content-Type": "application/json" },
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
         }
-      );
-      // clear state and controlled inputs
-      setName("");
-      setPollType("");
-      setCandidateImage("");
-      setSelectedState("");
-      setDistrict("");
-      setSuccessMessage(true);
-      return response;
-    } catch (err) {
-      if (!err?.response) {
-        setErrorMessage("No Connection");
-      } else if (err.response?.status === 400) {
-        setErrorMessage("Email and Password are required");
-      } else if (err.response?.status === 401) {
-        setErrorMessage("Unauthorized");
-      } else {
-        setErrorMessage("Add Candidate Failed");
-      }
-      errRef.current.focus();
-    }
-  };
+      )
+        .then((res) => {
+          console.log(res);
+          setSuccessMessage(true);
+        })
+        .catch((err) => {
+          if (!err?.response) {
+            setErrorMessage("No Connection");
+          } else if (err.response?.status === 400) {
+            setErrorMessage("Email and Password are required");
+          } else if (err.response?.status === 401) {
+            setErrorMessage("Unauthorized");
+          } else {
+            setErrorMessage("Add Candidate Failed");
+          }
+        });
+    };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
 
-    await Axios.post("https://wepollnow.azurewebsites.net/utilities/candidates/", {
-      name: name,
-      poll: null,
-      poll_category: pollType,
-      state_id: selectedState,
-      senatorial_id: district,
-      main_candidate: mainCandidate,
-      candidate_picture: candidateImage,
-    },
-    ).then(res => {
-      console.log(res.data.status)
-      setSuccessMessage(true)
-    }).catch(err => {
-      if (!err?.response) {
-        setErrorMessage("No Connection");
-      } else if (err.response?.status === 400) {
-        setErrorMessage("Email and Password are required");
-      } else if (err.response?.status === 401) {
-        setErrorMessage("Unauthorized");
-      } else {
-        setErrorMessage("Add Candidate Failed");
-      }
-      errRef.current.focus();
-    }
-    )
-  };
+
+
+  // const token = async () => {
+  //   try {
+  //     const response = await Axios.post(
+  //       "https://wepollnow.azurewebsites.net/utilities/candidates/",
+  //       {
+  //         name: name,
+  //         poll: null,
+  //         poll_category: pollType,
+  //         state_id: selectedState,
+  //         senatorial_id: district,
+  //         main_candidate: mainCandidate,
+  //         candidate_picture: candidateImage,
+  //       },
+  //       {
+  //         headers: { "Content-Type": "application/json" },
+  //       }
+  //     );
+  //     // clear state and controlled inputs
+  //     setName("");
+  //     setPollType("");
+  //     setCandidateImage("");
+  //     setSelectedState("");
+  //     setDistrict("");
+  //     setSuccessMessage(true);
+  //     return response;
+  //   } catch (err) {
+  //     if (!err?.response) {
+  //       setErrorMessage("No Connection");
+  //     } else if (err.response?.status === 400) {
+  //       setErrorMessage("Email and Password are required");
+  //     } else if (err.response?.status === 401) {
+  //       setErrorMessage("Unauthorized");
+  //     } else {
+  //       setErrorMessage("Add Candidate Failed");
+  //     }
+  //     errRef.current.focus();
+  //   }
+  // };
+
 
   return (
     <div className='w-full'>
@@ -192,30 +201,12 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
             </button>
           </header>
 
-          {/*  */}
-          <section>
-            <p
-              ref={errRef}
-              className={
-                errorMessage
-                  ? " p-4 w-full font-bold text-red-500 block text-center"
-                  : "hidden"
-              }
-              aria-live='assertive'
-            >
-              {errorMessage}
-            </p>
-          </section>
+
 
           {/*  */}
-          <form
-            encType="multipart/form-data"
-            onSubmit={(e) => handleSubmit(e)}
-            className='flex flex-col justify-between items-center w-full my-2 hover:bg-transparent'
-          >
-            {/* First Form */}
-            <div className='flex flex-col md:flex-row my-2 justify-center items-center w-full gap-3 md:gap-5'>
-              <label className='w-full relative'>
+          <form onSubmit={handleSubmit}>
+            <div className='py-2'>
+              <label className='my-6 h-auto  w-full relative w-full'>
                 Name
                 <input
                   type='text'
@@ -231,9 +222,8 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
               </label>
             </div>
 
-            {/* Second Form */}
-            <div className='flex flex-col md:flex-row my-2 justify-center items-center w-full gap-3 md:gap-5'>
-              <label className='custom__select__container'>
+            <div className='py-2'>
+              <label className='my-6 h-auto  custom__select__container w-full'>
                 Poll Type
                 <select
                   name='poll__type'
@@ -259,9 +249,8 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
               </label>
             </div>
 
-            {/* Third Form */}
-            <div className='flex flex-col md:flex-row my-2 justify-center items-center w-full gap-3 md:gap-5'>
-              <label className='w-full relative'>
+            <div className='py-2'>
+              <label className='my-6 h-auto  w-full relative w-full'>
                 Candidate Image
                 <input
                   type='file'
@@ -277,9 +266,8 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
               </label>
             </div>
 
-            {/* Fourth Form */}
-            <div className='flex flex-col md:flex-row my-2 justify-center items-center w-full gap-3 md:gap-5'>
-              <label className='custom__select__container'>
+            <div className='py-2'>
+              <label className='my-6 h-auto  custom__select__container w-full'>
                 State
                 <select
                   name='state'
@@ -296,7 +284,7 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
                   <option>Select State</option>
                   {state.map((state) => {
                     return (
-                      <option key={state.id} id={state.id} value={state.id}>
+                      <option key={state.id} value={state.id}>
                         {state.name}
                       </option>
                     );
@@ -305,9 +293,8 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
               </label>
             </div>
 
-            {/* Fifth Form */}
-            <div className='flex flex-col md:flex-row my-2 justify-center items-center w-full gap-3 md:gap-5'>
-              <label className='custom__select__container'>
+            <div className='py-2'>
+              <label className='my-6 h-auto  custom__select__container w-full'>
                 Senetorial District
                 <select
                   name='district'
@@ -333,9 +320,8 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
               </label>
             </div>
 
-            {/* Fourth Form */}
-            <div className='flex flex-col md:flex-row my-2 justify-center items-center w-full gap-3 md:gap-5'>
-              <label className='custom_select_container'>
+            <div className='py-2'>
+              <label className='my-6 h-auto  custom_select_container w-full'>
                 Party
                 <select
                   name='party'
@@ -359,71 +345,62 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
               </label>
             </div>
 
-            {/* Fifth Form */}
-            <div className='flex flex-col my-2 justify-start items-start w-full gap-3'>
-              <div className='w-full'>
-                {/* Title */}
-                <FormControl
-                  sx={{ width: "100%" }}
-                >
-                  <RadioGroup
-                    value={mainCandidate}
-                    onChange={(e) => {
-                      setMainCandidate(e.target.value);
-                      console.log(e.target.value);
-                    }}
-                  >
-                    <div className='flex justify-between align-center'>
-                      <FormControlLabel
-                        value='true'
-                        className='text-[#616b62] font-medium'
-                        sx={{ width: "100%" }}
-                        control={
-                          <Radio
-                            sx={{
-                              color: "#616b62",
-                              "&.Mui-checked": {
-                                color: "#616b62",
-                              },
-                            }}
-                          />
-                        }
-                        label='Yes'
+            <FormControl sx={{ width: "100%" }}>
+              <RadioGroup
+                value={mainCandidate}
+                onChange={(e) => {
+                  setMainCandidate(e.target.value);
+                  console.log(e.target.value);
+                }}
+              >
+                <div className='flex justify-between align-center'>
+                  <FormControlLabel
+                    value='true'
+                    className='text-[#616b62] font-medium'
+                    sx={{ width: "100%" }}
+                    control={
+                      <Radio
+                        sx={{
+                          color: "#616b62",
+                          "&.Mui-checked": {
+                            color: "#616b62",
+                          },
+                        }}
                       />
-                      <h3 className='font-bold my-auto text-sm text-[#616b62] whitespace-nowrap'>
-                        Main Candidate
-                      </h3>
-                    </div>
-                    <div className='flex justify-between align-center'>
-                      <FormControlLabel
-                        value='false'
-                        className='text-[#616b62] font-medium'
-                        sx={{ width: "100%" }}
-                        control={
-                          <Radio
-                            sx={{
-                              color: "#616b62",
-                              "&.Mui-checked": {
-                                color: "#616b62",
-                              },
-                            }}
-                          />
-                        }
-                        label='No'
+                    }
+                    label='Yes'
+                  />
+                  <h3 className='font-bold my-auto text-sm text-[#616b62] whitespace-nowrap'>
+                    Main Candidate
+                  </h3>
+                </div>
+                <div className='flex justify-between align-center'>
+                  <FormControlLabel
+                    value='false'
+                    className='text-[#616b62] font-medium'
+                    sx={{ width: "100%" }}
+                    control={
+                      <Radio
+                        sx={{
+                          color: "#616b62",
+                          "&.Mui-checked": {
+                            color: "#616b62",
+                          },
+                        }}
                       />
+                    }
+                    label='No'
+                  />
 
-                      <h3 className='font-bold my-auto text-sm text-[#616b62] whitespace-nowrap'>
-                        Main Candidate
-                      </h3>
-                    </div>
-                  </RadioGroup>
-                </FormControl>
-              </div>
-            </div>
+                  <h3 className='font-bold my-auto text-sm text-[#616b62] whitespace-nowrap'>
+                    Main Candidate
+                  </h3>
+                </div>
+              </RadioGroup>
+            </FormControl>
 
-            {/* Final Form */}
-            <div className='flex flex-col md:flex-row my-2 justify-center items-center w-full gap-3 md:gap-5'>
-              <label className='custom__select__container'>
+            <div className='py-2'>
+              <label className='my-6 h-auto  custom__select__container w-full'>
                 Zone
                 <select
                   name='zone'
@@ -447,7 +424,6 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
               </label>
             </div>
 
-            {/* Buttons */}
             <div className='flex justify-end items-center w-full my-2'>
               <button
                 className='flex items-center justify-center border-2 border-gray-300 py-3 px-5 h-full cursor-pointer text-sm rounded-md capitalize mr-4 transition-all duration-400 ease-in-out hover:bg-[#f3dddd] hover:text-red-600 hover:rounded-full'
