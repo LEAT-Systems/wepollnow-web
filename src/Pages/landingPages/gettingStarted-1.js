@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Timer from "../../UI/Timer";
 import { countDownDate } from "../../UI/MagicVars";
 import { Link, useHistory } from "react-router-dom";
@@ -15,16 +15,20 @@ import ModalComponent from "./GettingStartedModal";
 import calendar from "../../images/calendar.png";
 
 //
-const uniqueID = localStorage.getItem("uniqueID");
 
 const GettingStartedOne = () => {
   const history = useHistory();
   const [open, setOpen] = useState(false);
 
+  let uniqueID;
+  useEffect(() => {
+    uniqueID = localStorage.getItem("uniqueID");
+  }, []);
+
   // open and close the modal
   const handleOpen = () => {
-    if (uniqueID === null) {
-      localStorage.setItem("pollType", "presidential_poll");
+    if (uniqueID === null || uniqueID === undefined) {
+      localStorage.setItem("pollType", 1);
       setOpen(true);
     } else {
       // make API request with unique ID

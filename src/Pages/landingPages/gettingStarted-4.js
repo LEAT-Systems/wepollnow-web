@@ -1,7 +1,6 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import Nav from "../../Components/Layout/Landing/mainNav";
-import Badge from "../../UI/Badge";
 import { Link } from "react-router-dom";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
@@ -17,7 +16,6 @@ import errorIcon from "../../images/errorImg.png";
 import Toast from "../../UI/SuccessToast";
 
 //
-const uniqueID = localStorage.getItem("uniqueID");
 
 const GettingStartedFour = () => {
   const [error, setHasError] = useState(false);
@@ -29,9 +27,15 @@ const GettingStartedFour = () => {
   const emailRef = useRef();
   const [open, setOpen] = useState(false);
 
+  //
+  let uniqueID;
+  useEffect(() => {
+    uniqueID = localStorage.getItem("uniqueID");
+  }, []);
+
   // open and close the modal
   const handleOpen = () => {
-    if (uniqueID === null) {
+    if (uniqueID === null || uniqueID === undefined) {
       setOpen(true);
     } else {
       // make API request with unique ID
@@ -66,7 +70,6 @@ const GettingStartedFour = () => {
         const result = await response.text();
         const JSONdata = await JSON.parse(result);
         const emailHasError = JSONdata?.email?.[0];
-        console.log(response);
         if (emailHasError === "Enter a valid email address.") {
           setHasError(true);
           setShow(true);
@@ -155,7 +158,7 @@ const GettingStartedFour = () => {
                 </span>{" "}
                 the narrative.
               </h1>
-              <h1>Make your vote count.</h1>
+              <h1>Make your opinion count.</h1>
             </div>
           </div>
           <div>

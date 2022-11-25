@@ -81,9 +81,11 @@ const Nav = (props) => {
     sendToAPI();
 
     // clear form
-    nameRef.current.value = "";
-    emailRef.current.value = "";
-    messageRef.current.value = "";
+    if (hasSubmitted === true) {
+      nameRef.current.value = "";
+      emailRef.current.value = "";
+      messageRef.current.value = "";
+    }
   };
 
   // Dismissing success message on form
@@ -220,10 +222,11 @@ const Nav = (props) => {
           </div>
         )}
         {errorMessageEmail !== "" && (
-          <div className="p-4 text-center text-white bg-red-500 rounded-lg">
+          <div className="flex flex-row justify-between p-4 text-center text-white bg-red-500 rounded-lg">
             <p>
               {hasHTTPError}: {errorMessageEmail}
             </p>
+            <EastIcon />
           </div>
         )}
         <button

@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import Nav from "../../Components/Layout/Landing/mainNav";
 import { Link, useHistory } from "react-router-dom";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
@@ -13,25 +13,27 @@ import ModalComponent from "./GettingStartedModal";
 import doneIcon from "../../images/doneIcon.png";
 import errorIcon from "../../images/errorImg.png";
 import Toast from "../../UI/SuccessToast";
-
-//local storage
-const uniqueID = localStorage.getItem("uniqueID");
+import CloseIcon from "@mui/icons-material/Close";
+import Close from "@mui/icons-material/Close";
 
 const GettingStartedFive = () => {
+  const history = useHistory();
+  const emailRef = useRef();
   const [error, setHasError] = useState(false);
   const [hasHTTPError, setHasHTTPError] = useState("");
   const [hasSubmitted, setHasSubmitted] = useState();
   const [errorMessageEmail, setErrorMessageEmail] = useState();
-  const history = useHistory();
   const [show, setShow] = useState(false);
-  const emailRef = useRef();
   const [open, setOpen] = useState(false);
 
-  console.log(uniqueID);
+  let uniqueID;
+  useEffect(() => {
+    uniqueID = localStorage.getItem("uniqueID");
+  }, []);
 
   // open and close the modal
   const handleOpen = () => {
-    if (uniqueID === null) {
+    if (uniqueID === null || uniqueID === undefined) {
       setOpen(true);
     } else {
       // make API request with unique ID
@@ -41,6 +43,7 @@ const GettingStartedFive = () => {
   const handleClose = () => {
     setOpen(false);
   };
+  //////////////////////////////////////
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -48,6 +51,7 @@ const GettingStartedFive = () => {
     // Collecting the email data with refs
     let email = emailRef.current.value.trim();
 
+    // Sending to API
     const sendToAPI = async () => {
       try {
         const requestOptions = {
@@ -63,23 +67,34 @@ const GettingStartedFive = () => {
           "https://wepollnow.azurewebsites.net/utilities/subscriber/",
           requestOptions
         );
+        //
         const result = await response.text();
         const JSONdata = await JSON.parse(result);
         const emailHasError = JSONdata?.email?.[0];
-        console.log(response);
+
+        //
+        if (!response) {
+          setShow(true);
+          setHasError(true);
+          throw new Error("An error occured");
+        }
+
         if (emailHasError === "Enter a valid email address.") {
           setHasError(true);
           setShow(true);
           setErrorMessageEmail(emailHasError);
         }
-        console.log("JSONDATA", JSONdata);
-        console.log("RESULT", result);
-        if (emailHasError !== "Enter a valid email address.") {
+
+        if (
+          response.ok === true &&
+          emailHasError !== "Enter a valid email address."
+        ) {
           setShow(true);
           setHasError(false);
           setHasSubmitted(true);
         }
       } catch (error) {
+        setHasError(true);
         setHasHTTPError(error.message);
       }
     };
@@ -87,7 +102,9 @@ const GettingStartedFive = () => {
     sendToAPI();
 
     // clear form
-    emailRef.current.value = "";
+    if (hasSubmitted === true) {
+      emailRef.current.value = "";
+    }
   };
 
   // clear message
@@ -101,7 +118,7 @@ const GettingStartedFive = () => {
     <Toast
       children={
         error === true ? (
-          <p>{errorMessageEmail}</p>
+          <p className="text-red-500">{errorMessageEmail}</p>
         ) : (
           <p>Successfully submitted</p>
         )
@@ -155,7 +172,7 @@ const GettingStartedFive = () => {
                 </span>{" "}
                 the narrative.
               </h1>
-              <h1>Make your vote count.</h1>
+              <h1>Make your opinion count.</h1>
             </div>
           </div>
           <div>
@@ -181,7 +198,6 @@ const GettingStartedFive = () => {
               </button>
             </form>
           </div>
-
           {/* Large screen controls */}
           <div className="absolute right-6 md:right-16 top-[430px] md:top-36">
             <div className="flex flex-col items-center justify-center space-y-4 ">

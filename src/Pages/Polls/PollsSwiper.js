@@ -13,14 +13,19 @@ import calendar from "../../images/calendar.png";
 
 const PollsSwiper = (props) => {
   const [data, setData] = useState([]);
-  const id = localStorage.getItem("uniqueID");
 
   // TO check if API data contents is empty
   const isEmpty = data.length === 0;
+
+  let uniqueID;
+  useEffect(() => {
+    uniqueID = localStorage.getItem("uniqueID");
+  }, []);
+
   // Setting data from API here
   useEffect(() => {
     let formData = new FormData();
-    formData.append("user_id", `${id}`);
+    formData.append("user_id", `${uniqueID}`);
     const requestOptions = {
       method: "POST",
       body: null,
@@ -35,7 +40,7 @@ const PollsSwiper = (props) => {
       setData(JSONdata);
     };
     getData();
-  }, [id]);
+  }, [uniqueID]);
 
   return (
     <div className="relative">

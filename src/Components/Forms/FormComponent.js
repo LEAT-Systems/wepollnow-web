@@ -11,8 +11,7 @@ import FormFour from "./FormFour";
 const FormComponent = () => {
   // From local Storage
   const localData = localStorage.getItem("phoneDetails");
-  const phoneDetails = JSON.parse(localData);
-  const { phoneNo, country } = phoneDetails;
+  const { phoneNo, country } = JSON.parse(localData);
 
   // hooks
   const history = useHistory();
