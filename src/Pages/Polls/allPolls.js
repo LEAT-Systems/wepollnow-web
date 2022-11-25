@@ -1,18 +1,24 @@
 import React, { useState, useEffect } from "react";
 import Nav from "../../Components/Layout/Landing/mainNav";
-import { Polls } from "./pollsObject";
 import Footer from "../../Components/Layout/Landing/Footer";
 import image from "../../images/pollsBanner.png";
 import Timer from "../../UI/Timer";
 import calendar from "../../images/calendar.png";
 import { useHistory } from "react-router-dom";
+import ModalComponent from "../landingPages/GettingStartedModal";
+
+// Unique ID from local storage
+const uniqueID = localStorage.getItem("uniqueID");
 
 const AllPolls = () => {
   const history = useHistory();
   const [data, setData] = useState([]);
+  const [open, setOpen] = useState(false);
   const id = localStorage.getItem("uniqueID");
+
   // TO check if poll contents are empty
   const isEmpty = data.length === 0;
+
   // Setting data from API here
   useEffect(() => {
     let formData = new FormData();
@@ -33,8 +39,23 @@ const AllPolls = () => {
     getData();
   }, [id]);
 
+  // Open and close modal
+  const handleOpen = () => {
+    if (uniqueID === null) {
+      setOpen(true);
+    } else {
+      // make API request with unique ID
+      history.push("/vote", { replace: true });
+    }
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  // ===================    JSX
   return (
     <div className="w-screen h-screen overflow-x-hidden">
+      <ModalComponent open={open} handleClose={handleClose} />
       <Nav bg="FCEBEE" bgImg="hero-container-pattern" hamburgerBg="FCEBEE" />
       <div className="flex flex-row items-center justify-between mx-auto bg-[#FCEBEE] bg-hero-container-pattern">
         <div className="flex flex-col px-4 space-y-2 md:px-24">
@@ -71,9 +92,6 @@ const AllPolls = () => {
           const setDescription = item.poll_name;
           const handler = () => {
             localStorage.setItem("pollType", setDescription);
-          };
-          const handleRedirect = () => {
-            history.push("/vote", { redirect: true });
           };
 
           return (
@@ -116,7 +134,7 @@ const AllPolls = () => {
                     />
                   ) : (
                     <button
-                      onClick={handleRedirect}
+                      onClick={handleOpen}
                       className="btn-stay animate"
                       onBlur={handler}
                     >

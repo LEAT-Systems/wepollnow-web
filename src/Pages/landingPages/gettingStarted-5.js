@@ -31,12 +31,11 @@ const GettingStartedFive = () => {
 
   // open and close the modal
   const handleOpen = () => {
-    if (uniqueID !== "" || uniqueID !== undefined || uniqueID !== null) {
-      history.push("/polls", { replace: true });
-      // make API request with unique ID and poll_type
-    }
     if (uniqueID === null) {
       setOpen(true);
+    } else {
+      // make API request with unique ID
+      history.push("/polls", { replace: true });
     }
   };
   const handleClose = () => {
