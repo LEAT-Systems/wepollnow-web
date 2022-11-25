@@ -1,9 +1,6 @@
 import { Suspense, useEffect, useState } from "react";
 import Nav from "../../Layout/Landing/mainNav";
 import Badge from "../../../UI/Badge";
-import vice from "../../../images/vice_candidate_apc.png";
-import partyLogo from "../../../images/apc.png";
-import candidate from "../../../images/candidate_apc.png";
 import Footer from "../../Layout/Landing/Footer";
 import { Modal, Slide } from "@mui/material";
 import cautionIcon from "../../../images/errorImg.png";
@@ -43,7 +40,6 @@ const FormFive = () => {
     setCastedVote(vote);
   };
 
-  const blurHandler = (e) => {};
   // This loads once page mounts
   useEffect(() => {
     const pollData = localStorage.getItem("poll_details");
