@@ -118,12 +118,12 @@ const FormFive = () => {
         requestOptions
       );
 
-      console.log(response);
       // redirect or throw error
       if (response.ok === true) {
         history.push("/vote/vote-form-next", { replace: true });
       } else {
-        throw new Error("A problem Occured");
+        console.log(response);
+        throw new Error("You have already voted for this poll.");
       }
 
       // catch error
@@ -156,7 +156,7 @@ const FormFive = () => {
 
           <div className="flex flex-col items-center justify-center px-4 space-y-4">
             {hasError && (
-              <p className="font-bold text-red-500">{error}. Try Again.</p>
+              <p className="font-bold text-red-500">Error: {error}</p>
             )}
             <img src={cautionIcon} alt="caution" />
             <p className="p-1 px-4 text-xl font-extrabold text-center text-black md:text-2xl">
