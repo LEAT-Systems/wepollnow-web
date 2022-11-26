@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Polls } from "./pollsObject";
 import Timer from "../../UI/Timer";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -88,9 +87,16 @@ const PollsSwiper = (props) => {
             due = distance < 0;
 
             // Storing Polltype clicked on button into local storage
-            const setDescription = item.poll_name;
+            const poll_name = item.poll_name;
+            const poll_id = item.id;
             const handler = () => {
-              localStorage.setItem("pollType", setDescription);
+              localStorage.setItem(
+                "poll_details",
+                JSON.stringify({
+                  poll_id: poll_id,
+                  poll_name: poll_name,
+                })
+              );
             };
 
             return (

@@ -24,6 +24,7 @@ const FormFive = () => {
   const [apiData, setApiData] = useState([]);
   const [pollID, setPollID] = useState("");
   const [voteID, setVoteID] = useState();
+  const [selectedPoll, setSelectedPoll] = useState();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -43,8 +44,9 @@ const FormFive = () => {
   // This loads once page mounts
   useEffect(() => {
     const pollData = localStorage.getItem("poll_details");
-    const { poll_id } = JSON.parse(pollData);
+    const { poll_id, poll_name } = JSON.parse(pollData);
     setPollID(poll_id);
+    setSelectedPoll(poll_name);
 
     let pollsData = [];
 
@@ -197,8 +199,7 @@ const FormFive = () => {
       <div className="flex flex-row items-center justify-center  bg-[#FFEDF1]">
         <div className="flex flex-col items-center justify-center p-16 space-y-4">
           <h1 className="text-xl md:text-4xl font-extrabold max-w-2xl md:leading-[48px] text-center">
-            Select the party you'd like to vote
-            {/* Select the party you'd like to vote in the {selectedPoll} */}
+            Select the party you'd like to vote in the {selectedPoll}
           </h1>
           <div className="flex flex-row items-center w-full">
             <img src={searchIcon} alt="search" className="pb-2" />
@@ -311,8 +312,8 @@ const FormFive = () => {
                   <div className="flex flex-row items-center justify-between p-8 -mt-48 border border-red-500 rounded">
                     <div className="flex flex-row space-x-2">
                       <p className="text-sm md:text-lg">
-                        No data found based on your search. You can search by
-                        party or candidate name.
+                        No data found. You can search by party or candidate
+                        name.
                       </p>
                     </div>
 
