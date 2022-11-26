@@ -1,13 +1,12 @@
 import React from "react";
 import TableBody from "./TableBody";
-import Data from "../../Data.json"
+import Data from "../../Data.json";
 
-JSON.stringify(Data)
+JSON.stringify(Data);
 const FilteredTable = ({ searchResult }) => {
   const results = searchResult.map((data) => {
     return <TableBody key={data.id} tableData={data} />;
   });
-
 
   const table = results?.length ? (
     results
