@@ -90,7 +90,7 @@ const TestForm = () => {
       e.preventDefault();
 
       const formData = new FormData();
-      formData.append('photo', candidateImage)
+      formData.append("candidateImage", candidateImage);
  
       await Axios.post(
         "https://wepollnow.azurewebsites.net/utilities/candidates/",
