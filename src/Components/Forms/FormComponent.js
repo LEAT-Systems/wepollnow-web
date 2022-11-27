@@ -49,13 +49,14 @@ const FormComponent = () => {
     accomodationStatus: "",
   });
 
-  // Checking a user is a diaspora voter from these two values
+  // Checking a user is a diaspora voter
+  let { diasporaVoter } = data;
+
   useEffect(() => {
-    let { stateOfVotingRes, LGAofVotingRes } = data;
-    if (stateOfVotingRes === "" || LGAofVotingRes === "") {
+    if (diasporaVoter === "true") {
       setSendAsDiaspora(true);
     }
-  }, []);
+  }, [diasporaVoter]);
 
   // storing state data in a variable
   const finalData = { ...data };
@@ -67,57 +68,57 @@ const FormComponent = () => {
     // Make API Request Handler
     let requestOptions;
     const makeRequest = async (formData) => {
-      {
-        sendAsDiaspora === true
-          ? (requestOptions = {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json; charset=UTF-8",
-              },
-              body: JSON.stringify({
-                phone: formData.phone,
-                country: formData.country,
-                email: formData.email,
-                first_time_voter: formData.firstTimeVoter,
-                diaspora_voter: formData.diasporaVoter,
-                state_of_origin_id: parseInt(formData.stateOfOrigin),
-                // NOT PASSING THESE VALUES BECAUSE A DIASPORA VOTER. THIS IS THE API SPECIFICATION
-                // resident_state_id: parseInt(formData.stateOfVotingRes),
-                // resident_lga_id: parseInt(formData.LGAofVotingRes),
-                age_range: parseInt(formData.ageRange),
-                valid_voters_card: formData.pvc,
-                marital_status: parseInt(formData.maritalStatus),
-                employment_status: parseInt(formData.employmentStatus),
-                gender: parseInt(formData.gender),
-                religion: parseInt(formData.religion),
-                property_status: parseInt(formData.selectOneOpt),
-                accomodation_status: parseInt(formData.accomodationStatus),
-              }),
-            })
-          : (requestOptions = {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json; charset=UTF-8",
-              },
-              body: JSON.stringify({
-                phone: formData.phone,
-                country: formData.country,
-                email: formData.email,
-                first_time_voter: formData.firstTimeVoter,
-                diaspora_voter: formData.diasporaVoter,
-                state_of_origin_id: parseInt(formData.stateOfOrigin),
-                resident_state_id: parseInt(formData.stateOfVotingRes),
-                resident_lga_id: parseInt(formData.LGAofVotingRes),
-                age_range: parseInt(formData.ageRange),
-                valid_voters_card: formData.pvc,
-                marital_status: parseInt(formData.maritalStatus),
-                employment_status: parseInt(formData.employmentStatus),
-                gender: parseInt(formData.gender),
-                religion: parseInt(formData.religion),
-                property_status: parseInt(formData.selectOneOpt),
-                accomodation_status: parseInt(formData.accomodationStatus),
-              }),
-            });
+      if (sendAsDiaspora === true) {
+        requestOptions = {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json; charset=UTF-8",
+          },
+          body: JSON.stringify({
+            phone: formData.phone,
+            country: formData.country,
+            email: formData.email,
+            first_time_voter: formData.firstTimeVoter,
+            diaspora_voter: formData.diasporaVoter,
+            state_of_origin_id: parseInt(formData.stateOfOrigin),
+            // NOT PASSING THESE VALUES BECAUSE A DIASPORA VOTER. THIS IS THE API SPECIFICATION
+            // resident_state_id: parseInt(formData.stateOfVotingRes),
+            // resident_lga_id: parseInt(formData.LGAofVotingRes),
+            age_range: parseInt(formData.ageRange),
+            valid_voters_card: formData.pvc,
+            marital_status: parseInt(formData.maritalStatus),
+            employment_status: parseInt(formData.employmentStatus),
+            gender: parseInt(formData.gender),
+            religion: parseInt(formData.religion),
+            property_status: parseInt(formData.selectOneOpt),
+            accomodation_status: parseInt(formData.accomodationStatus),
+          }),
+        };
+      } else {
+        requestOptions = {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json; charset=UTF-8",
+          },
+          body: JSON.stringify({
+            phone: formData.phone,
+            country: formData.country,
+            email: formData.email,
+            first_time_voter: formData.firstTimeVoter,
+            diaspora_voter: formData.diasporaVoter,
+            state_of_origin_id: parseInt(formData.stateOfOrigin),
+            resident_state_id: parseInt(formData.stateOfVotingRes),
+            resident_lga_id: parseInt(formData.LGAofVotingRes),
+            age_range: parseInt(formData.ageRange),
+            valid_voters_card: formData.pvc,
+            marital_status: parseInt(formData.maritalStatus),
+            employment_status: parseInt(formData.employmentStatus),
+            gender: parseInt(formData.gender),
+            religion: parseInt(formData.religion),
+            property_status: parseInt(formData.selectOneOpt),
+            accomodation_status: parseInt(formData.accomodationStatus),
+          }),
+        };
       }
 
       const response = await fetch(
