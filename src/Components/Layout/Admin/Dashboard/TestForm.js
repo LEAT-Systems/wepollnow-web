@@ -131,7 +131,7 @@ const TestForm = () => {
     <div>
       <form onSubmit={handleSubmit}>
         <div className='py-2'>
-          <label className='my-6 h-auto  w-full relative w-full'>
+          <label className='my-6 h-auto  w-full relative'>
             Name
             <input
               type='text'
@@ -185,6 +185,7 @@ const TestForm = () => {
               onChange={(e) => {
                 handleImageChange(e);
               }}
+              value={candidateImage}
               placeholder='Enter Candidate Name'
               required
               aria-required
