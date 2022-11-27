@@ -15,7 +15,7 @@ const TestForm = () => {
     const [selectedState, setSelectedState] = useState();
     const [district, setDistrict] = useState();
     const [districtData, setDistrictData] = useState([]);
-    const [candidateImage, setCandidateImage] = useState(null);
+    const [candidateImage, setCandidateImage] = useState('');
     const [zone, setZone] = useState([]);
     const [partyData, setPartyData] = useState([]);
     const [party, setParty] = useState([]);
@@ -186,8 +186,6 @@ const TestForm = () => {
                 handleImageChange(e);
               }}
               placeholder='Enter Candidate Name'
-              required
-              aria-required
               filename={candidateImage}
               className='font-medium text-base text-[#616b62] capitalize h-full w-full border-2 border-gray-300 rounded-md py-3 px-3 placeholder:text-[#616b62]'
             />
