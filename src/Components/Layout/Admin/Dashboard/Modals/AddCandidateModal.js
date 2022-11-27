@@ -171,7 +171,7 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
 
 
   return (
-    <div className='w-full'>
+      <form onSubmit={handleSubmit} className='w-full'>
       <Modal
         open={addCandidate}
         onClose={handleCloseAddCandidate}
@@ -204,9 +204,9 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
 
 
           {/*  */}
-          <form onSubmit={handleSubmit}>
+          
             <div className='py-2'>
-              <label className='my-6 h-auto  w-full relative w-full'>
+              <label className='my-6 h-auto  w-full relative'>
                 Name
                 <input
                   type='text'
@@ -250,7 +250,7 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
             </div>
 
             <div className='py-2'>
-              <label className='my-6 h-auto  w-full relative w-full'>
+              <label className='my-6 h-auto  w-full relative'>
                 Candidate Image
                 <input
                   type='file'
@@ -440,10 +440,9 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
                 continue
               </button>
             </div>
-          </form>
         </div>
       </Modal>
-    </div>
+    </form>
   );
 };
 
