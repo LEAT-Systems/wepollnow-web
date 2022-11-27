@@ -19,7 +19,6 @@ const ManageCandidateTableRow = ({ tableData }) => {
       >
         <span className='text-white text-sm font-bold capitalize bg-green-900 mr-4 rounded-xl p-[.45rem] md:p-[.6rem] cursor-pointer'>
           {getSymbol()}
-          <img src={tableData.poll_category.title} alt='Candidate' className='w-[1rem] h-[1rem]' />
         </span>{" "}
         {tableData.name}
       </th>
