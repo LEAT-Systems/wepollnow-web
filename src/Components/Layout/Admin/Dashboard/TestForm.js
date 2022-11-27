@@ -185,7 +185,6 @@ const TestForm = () => {
               onChange={(e) => {
                 handleImageChange(e);
               }}
-              value={candidateImage}
               placeholder='Enter Candidate Name'
               required
               aria-required
