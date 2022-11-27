@@ -82,6 +82,10 @@ const TestForm = () => {
      setErrorMessage("");
    }, [name, candidateImage, selectedState, district, pollType]);
   
+  const handleImageChange = (e) => {
+    const target = e.target.files[0]
+    setCandidateImage(target)
+  }
     const handleSubmit = async (e) => {
       e.preventDefault();
 
@@ -126,138 +130,147 @@ const TestForm = () => {
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        <div className='py-2'><label className='my-6 h-auto  w-full relative w-full'>
-          Name
-          <input
-            type='text'
-            name='name'
-            id='name'
-            placeholder='Enter Candidate Name'
-            required
-            aria-required
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            className='font-medium text-base text-[#616b62] capitalize h-full w-full border-2 border-gray-300 rounded-md py-3 px-3 placeholder:text-[#616b62]'
-          />
-        </label>
+        <div className='py-2'>
+          <label className='my-6 h-auto  w-full relative w-full'>
+            Name
+            <input
+              type='text'
+              name='name'
+              id='name'
+              placeholder='Enter Candidate Name'
+              required
+              aria-required
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              className='font-medium text-base text-[#616b62] capitalize h-full w-full border-2 border-gray-300 rounded-md py-3 px-3 placeholder:text-[#616b62]'
+            />
+          </label>
         </div>
 
-        <div className='py-2'><label className='my-6 h-auto  custom__select__container w-full'>
-          Poll Type
-          <select
-            name='poll__type'
-            id='poll__type'
-            required
-            aria-required
-            value={pollType}
-            onChange={(e) => {
-              setPollType(e.target.value);
-              console.log(e.target.value);
-            }}
-            className='custom__select'
-          >
-            <option>Select Poll Type</option>
-            {pollTypeData.map((poll) => {
-              return (
-                <option key={poll.id} id={poll.id} value={poll.id}>
-                  {poll.title}
-                </option>
-              );
-            })}
-          </select>
-        </label>
+        <div className='py-2'>
+          <label className='my-6 h-auto  custom__select__container w-full'>
+            Poll Type
+            <select
+              name='poll__type'
+              id='poll__type'
+              required
+              aria-required
+              value={pollType}
+              onChange={(e) => {
+                setPollType(e.target.value);
+                console.log(e.target.value);
+              }}
+              className='custom__select'
+            >
+              <option>Select Poll Type</option>
+              {pollTypeData.map((poll) => {
+                return (
+                  <option key={poll.id} id={poll.id} value={poll.id}>
+                    {poll.title}
+                  </option>
+                );
+              })}
+            </select>
+          </label>
         </div>
 
-        <div className='py-2'><label className='my-6 h-auto  w-full relative w-full'>
-          Candidate Image
-          <input
-            type='file'
-            name='image'
-            id='image'
-            placeholder='Enter Candidate Name'
-            required
-            aria-required
-            filename={candidateImage}
-            onChange={(e) => setCandidateImage(e.target.files[0])}
-            className='font-medium text-base text-[#616b62] capitalize h-full w-full border-2 border-gray-300 rounded-md py-3 px-3 placeholder:text-[#616b62]'
-          />
-        </label>
+        <div className='py-2'>
+          <label className='my-6 h-auto  w-full relative'>
+            Candidate Image
+            <input
+              name='image'
+              id='image'
+              type='file'
+              accept='image/jpeg,image/png,image/gif'
+              onChange={(e) => {
+                handleImageChange(e);
+              }}
+              placeholder='Enter Candidate Name'
+              required
+              aria-required
+              filename={candidateImage}
+              className='font-medium text-base text-[#616b62] capitalize h-full w-full border-2 border-gray-300 rounded-md py-3 px-3 placeholder:text-[#616b62]'
+            />
+          </label>
         </div>
 
-        <div className='py-2'><label className='my-6 h-auto  custom__select__container w-full'>
-          State
-          <select
-            name='state'
-            id='state'
-            className='custom__select'
-            required
-            aria-required
-            value={selectedState}
-            onChange={(e) => {
-              setSelectedState(e.target.value);
-              console.log(e.target.value);
-            }}
-          >
-            <option>Select State</option>
-            {state.map((state) => {
-              return (
-                <option key={state.id} value={state.id}>
-                  {state.name}
-                </option>
-              );
-            })}
-          </select>
-        </label>
+        <div className='py-2'>
+          <label className='my-6 h-auto  custom__select__container w-full'>
+            State
+            <select
+              name='state'
+              id='state'
+              className='custom__select'
+              required
+              aria-required
+              value={selectedState}
+              onChange={(e) => {
+                setSelectedState(e.target.value);
+                console.log(e.target.value);
+              }}
+            >
+              <option>Select State</option>
+              {state.map((state) => {
+                return (
+                  <option key={state.id} value={state.id}>
+                    {state.name}
+                  </option>
+                );
+              })}
+            </select>
+          </label>
         </div>
 
-        <div className='py-2'><label className='my-6 h-auto  custom__select__container w-full'>
-          Senetorial District
-          <select
-            name='district'
-            id='district'
-            className='custom__select'
-            required
-            aria-required
-            value={district}
-            onChange={(e) => {
-              setDistrict(e.target.value);
-              console.log(e.target.value);
-            }}
-          >
-            <option>Select Senetorial District</option>
-            {districtData.map((data) => {
-              return (
-                <option key={data.id} value={data.id}>
-                  {data.name}
-                </option>
-              );
-            })}
-          </select>
-        </label>
+        <div className='py-2'>
+          <label className='my-6 h-auto  custom__select__container w-full'>
+            Senetorial District
+            <select
+              name='district'
+              id='district'
+              className='custom__select'
+              required
+              aria-required
+              value={district}
+              onChange={(e) => {
+                setDistrict(e.target.value);
+                console.log(e.target.value);
+              }}
+            >
+              <option>Select Senetorial District</option>
+              {districtData.map((data) => {
+                return (
+                  <option key={data.id} value={data.id}>
+                    {data.name}
+                  </option>
+                );
+              })}
+            </select>
+          </label>
         </div>
 
-        <div className='py-2'><label className='my-6 h-auto  custom_select_container w-full'>
-          Party
-          <select
-            name='party'
-            id='party'
-            className='custom_select'
-            value={party}
-            onChange={(e) => {
-              setParty(e.target.value);
-              console.log(e.target.value);
-            }}
-          >
-            <option>Select Party</option>
-            {partyData.map((data) => {
-              return (
-                <option key={data.id} value={data.id}>
-                  {data.name}
-                </option>
-              );
-            })}
-          </select>
-        </label>
+        <div className='py-2'>
+          <label className='my-6 h-auto  custom_select_container w-full'>
+            Party
+            <select
+              name='party'
+              id='party'
+              className='custom_select'
+              value={party}
+              onChange={(e) => {
+                setParty(e.target.value);
+                console.log(e.target.value);
+              }}
+            >
+              <option>Select Party</option>
+              {partyData.map((data) => {
+                return (
+                  <option key={data.id} value={data.id}>
+                    {data.name}
+                  </option>
+                );
+              })}
+            </select>
+          </label>
         </div>
 
         <FormControl sx={{ width: "100%" }}>
@@ -314,28 +327,29 @@ const TestForm = () => {
           </RadioGroup>
         </FormControl>
 
-        <div className='py-2'><label className='my-6 h-auto  custom__select__container w-full'>
-          Zone
-          <select
-            name='zone'
-            id='zone'
-            className='custom_select disabled:bg-gray-200 disabled:cursor-not-allowed'
-            disabled={true}
-            value={zone}
-            onChange={(e) => {
-              setZone(e.target.value);
-              console.log(e.target.value);
-            }}
-          >
-            <option>Select Zone</option>
-            <option>1</option>
-            <option>2</option>
-            <option>2</option>
-            <option>4</option>
-            <option>5</option>
-            <option>6</option>
-          </select>
-        </label>
+        <div className='py-2'>
+          <label className='my-6 h-auto  custom__select__container w-full'>
+            Zone
+            <select
+              name='zone'
+              id='zone'
+              className='custom_select disabled:bg-gray-200 disabled:cursor-not-allowed'
+              disabled={true}
+              value={zone}
+              onChange={(e) => {
+                setZone(e.target.value);
+                console.log(e.target.value);
+              }}
+            >
+              <option>Select Zone</option>
+              <option>1</option>
+              <option>2</option>
+              <option>2</option>
+              <option>4</option>
+              <option>5</option>
+              <option>6</option>
+            </select>
+          </label>
         </div>
 
         <div className='flex justify-end items-center w-full my-2'>
