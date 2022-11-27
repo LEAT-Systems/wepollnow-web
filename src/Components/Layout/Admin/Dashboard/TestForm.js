@@ -84,6 +84,7 @@ const TestForm = () => {
   
   const handleImageChange = (e) => {
     const target = e.target.files[0]
+    console.log(e.target.files);
     setCandidateImage(target)
   }
     const handleSubmit = async (e) => {
