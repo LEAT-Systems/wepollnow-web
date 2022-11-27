@@ -435,7 +435,10 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
               <button
                 className='flex items-center justify-center rounded-md py-3 px-5 h-full cursor-pointer text-sm bg-green-500 text-white capitalize transition-all duration-400 ease-in-out hover:bg-green-500 hover:text-white hover:rounded-full'
                 type='submit'
-                onClick={handleCloseAddCandidate}
+              onClick={(e) => {
+                handleCloseAddCandidate()
+                handleSubmit(e)
+              }}
               >
                 continue
               </button>
