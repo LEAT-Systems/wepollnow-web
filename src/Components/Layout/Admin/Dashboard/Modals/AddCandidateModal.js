@@ -256,7 +256,7 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
                   type='file'
                   name='image'
                   id='image'
-                  placeholder='Enter Candidate Name'
+                  placeholder='Enter Candidate Image'
                   required
                   aria-required
                   filename={candidateImage}

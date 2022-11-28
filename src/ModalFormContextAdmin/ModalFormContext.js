@@ -3,7 +3,8 @@ const ModalFormContext = createContext();
 
 export const ModalFormProvider = ({children}) => {
   const  [pollType, setPollType] = useState([])
-  const  [pollTypeData, setPollTypeData] = useState([])
+  const [pollTypeData, setPollTypeData] = useState([])
+  const [pollName, setPollName] = useState('')
   const  [startDate, setStartDate] = useState([])
   const  [endDate, setEndDate] = useState([])
   const  [state, setState] = useState([])
@@ -16,7 +17,7 @@ export const ModalFormProvider = ({children}) => {
   const  [zoneData, setZoneData] = useState([])
   const [formTwoData, setFormTwoData] = useState([]);
   const  [selectedParty, setSelectedParty] = useState([])
-  const  [mainCandidate, setMainCandidate] = useState([])
+  const  [mainCandidate, setMainCandidate] = useState(false)
   const  [runningMate, setRunningMate] = useState([])
 
   return (
@@ -36,7 +37,6 @@ export const ModalFormProvider = ({children}) => {
         zoneData,
         selectedParty,
         mainCandidate,
-        runningMate,
         formTwoData,
         setPollType,
         setPollTypeData,
@@ -52,7 +52,6 @@ export const ModalFormProvider = ({children}) => {
         setZoneData,
         setSelectedParty,
         setMainCandidate,
-        setRunningMate,
         setFormTwoData,
       }}
     >
