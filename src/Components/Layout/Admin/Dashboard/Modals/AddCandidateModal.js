@@ -13,126 +13,119 @@ import Axios from "axios";
 
 const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
   /* Handling the form input and data */
-    const [pollType, setPollType] = useState();
-    const [pollTypeData, setPollTypeData] = useState([]);
-    const [name, setName] = useState("");
-    const [state, setState] = useState([]);
-    const [selectedState, setSelectedState] = useState();
-    const [district, setDistrict] = useState();
-    const [districtData, setDistrictData] = useState([]);
-    const [candidateImage, setCandidateImage] = useState(null);
-    const [zone, setZone] = useState([]);
-    const [partyData, setPartyData] = useState([]);
-    const [party, setParty] = useState([]);
-    const [zoneData, setZoneData] = useState([]);
-    const [percentage, setPercentage] = useState("");
-    const [errorMessage, setErrorMessage] = useState("");
-    const [successMessage, setSuccessMessage] = useState("");
-    const [mainCandidate, setMainCandidate] = useState(false);
+  const [pollType, setPollType] = useState();
+  const [pollTypeData, setPollTypeData] = useState([]);
+  const [name, setName] = useState("");
+  const [state, setState] = useState([]);
+  const [selectedState, setSelectedState] = useState();
+  const [district, setDistrict] = useState();
+  const [districtData, setDistrictData] = useState([]);
+  const [candidateImage, setCandidateImage] = useState(null);
+  const [zone, setZone] = useState([]);
+  const [partyData, setPartyData] = useState([]);
+  const [party, setParty] = useState([]);
+  const [zoneData, setZoneData] = useState([]);
+  const [percentage, setPercentage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
+  const [mainCandidate, setMainCandidate] = useState(false);
 
   if (selectedState === undefined) {
-      setSelectedState('')
+    setSelectedState("");
   }
 
-useEffect(() => {
-  const getState = async () => {
-    await Axios.get("https://wepollnow.azurewebsites.net/utilities/states/")
-      .then((res) => setState(res.data))
-      .catch((err) => console.log(err));
-  };
-  getState();
-}, [setState]);
-  
-/* Get Senetorial District */
-useEffect(() => {
-  const getSenetorial = async () => {
-    await Axios
-      .get(
+  useEffect(() => {
+    const getState = async () => {
+      await Axios.get("https://wepollnow.azurewebsites.net/utilities/states/")
+        .then((res) => setState(res.data))
+        .catch((err) => console.log(err));
+    };
+    getState();
+  }, [setState]);
+
+  /* Get Senetorial District */
+  useEffect(() => {
+    const getSenetorial = async () => {
+      await Axios.get(
         `https://wepollnow.azurewebsites.net/utilities/senatorial/${selectedState}`
       )
-      .then((res) => setDistrictData(res.data))
-      .catch((err) => console.log(err));
-  };
-  getSenetorial();
-}, [selectedState, setDistrictData]);
+        .then((res) => setDistrictData(res.data))
+        .catch((err) => console.log(err));
+    };
+    getSenetorial();
+  }, [selectedState, setDistrictData]);
 
+  /* Get Poll Type */
+  useEffect(() => {
+    const getPollType = async () => {
+      await Axios.get(`https://wepollnow.azurewebsites.net/poll/poll_category/`)
+        .then((res) => {
+          setPollTypeData(res.data);
+        })
+        .catch((err) => console.log(err));
+    };
+    getPollType();
+  }, [setPollTypeData]);
 
-    /* Get Poll Type */
-    useEffect(() => {
-      const getPollType = async () => {
-        await Axios.get(
-          `https://wepollnow.azurewebsites.net/poll/poll_category/`
-        )
-          .then((res) => {
-            setPollTypeData(res.data);
-          })
-          .catch((err) => console.log(err));
-      };
-      getPollType();
-    }, [setPollTypeData]);
-
-    /* Get Party */
-    useEffect(() => {
-      const getParty = async () => {
-        await Axios.get(
-          `https://wepollnow.azurewebsites.net/utilities/party_list/`
-        )
-          .then((res) => {
-            setPartyData(res.data);
-          })
-          .catch((err) => console.log(err));
-      };
-      getParty();
-    }, [setPartyData]);
-
-    /* Submit Form */
-    useEffect(() => {
-      setErrorMessage("");
-    }, [name, candidateImage, selectedState, district, pollType]);
-
-    const handleSubmit = async (e) => {
-      e.preventDefault();
-
-      const formData = new FormData();
-      formData.append("photo", candidateImage);
-
-      await Axios.post(
-        "https://wepollnow.azurewebsites.net/utilities/candidates/",
-        {
-          name: name,
-          poll: 2,
-          poll_category_id: pollType,
-          state_id: selectedState,
-          senatorial_id: district,
-          party_id: party,
-          main_candidate: mainCandidate,
-          candidate_picture: formData,
-        },
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
+  /* Get Party */
+  useEffect(() => {
+    const getParty = async () => {
+      await Axios.get(
+        `https://wepollnow.azurewebsites.net/utilities/party_list/`
       )
         .then((res) => {
-          console.log(res);
-          setSuccessMessage(true);
+          setPartyData(res.data);
         })
-        .catch((err) => {
-          if (!err?.response) {
-            setErrorMessage("No Connection");
-          } else if (err.response?.status === 400) {
-            setErrorMessage("Email and Password are required");
-          } else if (err.response?.status === 401) {
-            setErrorMessage("Unauthorized");
-          } else {
-            setErrorMessage("Add Candidate Failed");
-          }
-        });
+        .catch((err) => console.log(err));
     };
+    getParty();
+  }, [setPartyData]);
 
+  /* Submit Form */
+  useEffect(() => {
+    setErrorMessage("");
+  }, [name, candidateImage, selectedState, district, pollType]);
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
+    // const formData = new FormData();
+    // formData.append("photo", candidateImage);
+
+    await Axios.post(
+      "https://wepollnow.azurewebsites.net/utilities/candidates/",
+      {
+        name: name,
+        poll: 2,
+        poll_category_id: pollType,
+        state_id: selectedState,
+        senatorial_id: district,
+        party_id: party,
+        main_candidate: mainCandidate,
+        // candidate_picture: formData,
+      },
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    )
+      .then((res) => {
+        console.log(res);
+        setSuccessMessage(true);
+      })
+      .catch((err) => {
+        if (!err?.response) {
+          setErrorMessage("No Connection");
+        } else if (err.response?.status === 400) {
+          setErrorMessage("Email and Password are required");
+        } else if (err.response?.status === 401) {
+          setErrorMessage("Unauthorized");
+        } else {
+          setErrorMessage("Add Candidate Failed");
+        }
+      });
+  };
 
   // const token = async () => {
   //   try {
@@ -173,9 +166,8 @@ useEffect(() => {
   //   }
   // };
 
-
   return (
-    <form onSubmit={handleSubmit} className='w-full'>
+    <form onSubmit={handleSubmit} className="w-full">
       <Modal
         open={addCandidate}
         onClose={handleCloseAddCandidate}
@@ -191,52 +183,52 @@ useEffect(() => {
           },
         }}
       >
-        <div className='flex flex-col items-start justify-start px-6 py-4 my-auto mx-auto h-auto w-[95%] sm:w-5/6 md:w-3/6 bg-white rounded-lg overflow-y-auto focus:outline-none'>
-          <header className='flex justify-between items-center w-full border-b-2 border-solid border-gray-300 mb-3 py-2'>
-            <h2 className='font-extrabold text-lg md:text-xl text-[#082a0f] capitalize'>
+        <div className="flex flex-col items-start justify-start px-6 py-4 my-auto mx-auto h-auto w-[95%] sm:w-5/6 md:w-3/6 bg-white rounded-lg overflow-y-auto focus:outline-none">
+          <header className="flex items-center justify-between w-full py-2 mb-3 border-b-2 border-gray-300 border-solid">
+            <h2 className="font-extrabold text-lg md:text-xl text-[#082a0f] capitalize">
               Add Candidate
             </h2>
             <button
-              className='flex items-center justify-center border border-1 rounded-md py-[2px] px-[2px] cursor-pointer text-sm md:text-base bg-[#fcf0f0] text-red-500'
+              className="flex items-center justify-center border border-1 rounded-md py-[2px] px-[2px] cursor-pointer text-sm md:text-base bg-[#fcf0f0] text-red-500"
               onClick={handleCloseAddCandidate}
-              type='button'
+              type="button"
             >
               <Close />
             </button>
           </header>
 
           {/*  */}
-          <div className='w-full'>
-            <div className='py-2'>
-              <label className='my-6 h-auto  w-full relative'>
+          <div className="w-full">
+            <div className="py-2">
+              <label className="relative w-full h-auto my-6">
                 Name
                 <input
-                  type='text'
-                  name='name'
-                  id='name'
-                  placeholder='Enter Candidate Name'
+                  type="text"
+                  name="name"
+                  id="name"
+                  placeholder="Enter Candidate Name"
                   required
                   aria-required
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  className='font-medium text-base text-[#616b62] capitalize h-full w-full border-2 border-gray-300 rounded-md py-3 px-3 placeholder:text-[#616b62]'
+                  className="font-medium text-base text-[#616b62] capitalize h-full w-full border-2 border-gray-300 rounded-md py-3 px-3 placeholder:text-[#616b62]"
                 />
               </label>
             </div>
 
-            <div className='py-2'>
-              <label className='my-6 h-auto  custom__select__container w-full'>
+            <div className="py-2">
+              <label className="w-full h-auto my-6 custom__select__container">
                 Poll Type
                 <select
-                  name='poll__type'
-                  id='poll__type'
+                  name="poll__type"
+                  id="poll__type"
                   required
                   aria-required
                   value={pollType}
                   onChange={(e) => {
                     setPollType(e.target.value);
                   }}
-                  className='custom__select'
+                  className="custom__select"
                 >
                   <option>Select Poll Type</option>
                   {pollTypeData.map((poll) => {
@@ -250,30 +242,30 @@ useEffect(() => {
               </label>
             </div>
 
-            <div className='py-2'>
-              <label className='my-6 h-auto  w-full relative'>
+            <div className="py-2">
+              <label className="relative w-full h-auto my-6">
                 Candidate Image
                 <input
-                  type='file'
-                  name='image'
-                  id='image'
-                  placeholder='Enter Candidate Image'
+                  type="file"
+                  name="image"
+                  id="image"
+                  placeholder="Enter Candidate Image"
                   required
                   aria-required
                   filename={candidateImage}
                   onChange={(e) => setCandidateImage(e.target.files[0])}
-                  className='font-medium text-base text-[#616b62] capitalize h-full w-full border-2 border-gray-300 rounded-md py-3 px-3 placeholder:text-[#616b62]'
+                  className="font-medium text-base text-[#616b62] capitalize h-full w-full border-2 border-gray-300 rounded-md py-3 px-3 placeholder:text-[#616b62]"
                 />
               </label>
             </div>
 
-            <div className='py-2'>
-              <label className='my-6 h-auto  custom__select__container w-full'>
+            <div className="py-2">
+              <label className="w-full h-auto my-6 custom__select__container">
                 State
                 <select
-                  name='state'
-                  id='state'
-                  className='custom__select'
+                  name="state"
+                  id="state"
+                  className="custom__select"
                   required
                   aria-required
                   value={selectedState}
@@ -293,13 +285,13 @@ useEffect(() => {
               </label>
             </div>
 
-            <div className='py-2'>
-              <label className='my-6 h-auto  custom__select__container w-full'>
+            <div className="py-2">
+              <label className="w-full h-auto my-6 custom__select__container">
                 Senetorial District
                 <select
-                  name='district'
-                  id='district'
-                  className='custom__select'
+                  name="district"
+                  id="district"
+                  className="custom__select"
                   required
                   aria-required
                   value={district}
@@ -319,13 +311,13 @@ useEffect(() => {
               </label>
             </div>
 
-            <div className='py-2'>
-              <label className='my-6 h-auto  custom_select_container w-full'>
+            <div className="py-2">
+              <label className="w-full h-auto my-6 custom_select_container">
                 Party
                 <select
-                  name='party'
-                  id='party'
-                  className='custom_select'
+                  name="party"
+                  id="party"
+                  className="custom_select"
                   value={party}
                   onChange={(e) => {
                     setParty(e.target.value);
@@ -350,10 +342,10 @@ useEffect(() => {
                   setMainCandidate(e.target.value);
                 }}
               >
-                <div className='flex justify-between align-center'>
+                <div className="flex justify-between align-center">
                   <FormControlLabel
-                    value='true'
-                    className='text-[#616b62] font-medium'
+                    value="true"
+                    className="text-[#616b62] font-medium"
                     sx={{ width: "100%" }}
                     control={
                       <Radio
@@ -365,16 +357,16 @@ useEffect(() => {
                         }}
                       />
                     }
-                    label='Yes'
+                    label="Yes"
                   />
-                  <h3 className='font-bold my-auto text-sm text-[#616b62] whitespace-nowrap'>
+                  <h3 className="font-bold my-auto text-sm text-[#616b62] whitespace-nowrap">
                     Main Candidate
                   </h3>
                 </div>
-                <div className='flex justify-between align-center'>
+                <div className="flex justify-between align-center">
                   <FormControlLabel
-                    value='false'
-                    className='text-[#616b62] font-medium'
+                    value="false"
+                    className="text-[#616b62] font-medium"
                     sx={{ width: "100%" }}
                     control={
                       <Radio
@@ -386,28 +378,28 @@ useEffect(() => {
                         }}
                       />
                     }
-                    label='No'
+                    label="No"
                   />
 
-                  <h3 className='font-bold my-auto text-sm text-[#616b62] whitespace-nowrap'>
+                  <h3 className="font-bold my-auto text-sm text-[#616b62] whitespace-nowrap">
                     Main Candidate
                   </h3>
                 </div>
               </RadioGroup>
             </FormControl>
 
-            <div className='py-2'>
-              <label className='my-6 h-auto  custom__select__container w-full'>
+            <div className="py-2">
+              <label className="w-full h-auto my-6 custom__select__container">
                 Zone
                 <select
-                  name='zone'
-                  id='zone'
-                  className='custom_select disabled:bg-gray-200 disabled:cursor-not-allowed'
+                  name="zone"
+                  id="zone"
+                  className="custom_select disabled:bg-gray-200 disabled:cursor-not-allowed"
                   disabled={true}
                   value={zone}
                   onChange={(e) => {
                     setZone(e.target.value);
-                    }}
+                  }}
                 >
                   <option>Select Zone</option>
                   <option>1</option>
@@ -420,17 +412,17 @@ useEffect(() => {
               </label>
             </div>
           </div>
-          <div className='flex justify-end items-center w-full my-2'>
+          <div className="flex items-center justify-end w-full my-2">
             <button
-              className='flex items-center justify-center border-2 border-gray-300 py-3 px-5 h-full cursor-pointer text-sm rounded-md capitalize mr-4 transition-all duration-400 ease-in-out hover:bg-[#f3dddd] hover:text-red-600 hover:rounded-full'
+              className="flex items-center justify-center border-2 border-gray-300 py-3 px-5 h-full cursor-pointer text-sm rounded-md capitalize mr-4 transition-all duration-400 ease-in-out hover:bg-[#f3dddd] hover:text-red-600 hover:rounded-full"
               onClick={handleCloseAddCandidate}
-              type='button'
+              type="button"
             >
               cancel
             </button>
             <button
-              className='flex items-center justify-center rounded-md py-3 px-5 h-full cursor-pointer text-sm bg-green-500 text-white capitalize transition-all duration-400 ease-in-out hover:bg-green-500 hover:text-white hover:rounded-full'
-              type='submit'
+              className="flex items-center justify-center h-full px-5 py-3 text-sm text-white capitalize transition-all ease-in-out bg-green-500 rounded-md cursor-pointer duration-400 hover:bg-green-500 hover:text-white hover:rounded-full"
+              type="submit"
               onClick={(e) => {
                 handleCloseAddCandidate();
                 handleSubmit(e);
