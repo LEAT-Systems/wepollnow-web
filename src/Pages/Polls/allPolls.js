@@ -14,29 +14,34 @@ const AllPolls = () => {
   const history = useHistory();
   const [data, setData] = useState([]);
   const [open, setOpen] = useState(false);
-  const [idExist, setIdExist] = useState();
+  const [idExist, setIdExist] = useState("");
   const [tooltipStatus, setTooltipStatus] = useState(0);
 
+  let uniqueID;
   useEffect(() => {
-    const uniqueID = localStorage.getItem("uniqueID");
+    uniqueID = localStorage.getItem("uniqueID");
     setIdExist(uniqueID);
+
     let formData = new FormData();
-    formData.append("voter_id", `${uniqueID}`);
+    formData.append("voter_id", "542a2c42-e4a5-4e71-a441-40228ce2cd92");
     const requestOptions = {
       method: "POST",
-      body: formData,
     };
     const getData = async () => {
       const response = await fetch(
-        "https://wepollnow.azurewebsites.net/poll/user_polls/",
+        `https://wepollnow.azurewebsites.net/poll/user_polls/?voter_id=${uniqueID}`,
         requestOptions
       );
       const result = await response.text();
       const JSONdata = await JSON.parse(result);
-      setData(JSONdata);
+      if (!response.ok) {
+        alert("Error: Unable To Fetch Polls Data");
+      } else {
+        setData(JSONdata);
+      }
     };
     getData();
-  }, []);
+  }, [idExist]);
 
   // ==================  To check if api data is empty
   const isEmpty = data.length === 0;
@@ -74,7 +79,7 @@ const AllPolls = () => {
             {tooltipStatus === 1 && (
               <div
                 role="tooltip"
-                className="absolute text-white transition duration-150 ease-in-out bg-black rounded shadow-lg -mt-24"
+                className="absolute -mt-24 text-white transition duration-150 ease-in-out bg-black rounded shadow-lg"
               >
                 <p className="p-2 text-lg font-normal">
                   Polls in this section have been sorted according to your State
@@ -101,8 +106,8 @@ const AllPolls = () => {
           </div>
         </div>
       )}
-      <div className="grid min-h-screen grid-cols-1 md:grid-cols-1 lg:grid-cols-2 pb-12 -mt-48 md:-mt-24 gap-y-4 gap-x-12 md:px-24 md:gap-x-12 md:grid-cols-3">
-        {data.map((item) => {
+      <div className="grid min-h-screen grid-cols-1 pb-12 -mt-48 md:grid-cols-2 lg:grid-cols-3 md:-mt-24 gap-y-4 gap-x-12 md:px-24 md:gap-x-12 ">
+        {data?.map((item) => {
           // Here, I'm calculating the poll date from the current date so i could render items conditionally
           let due;
           const now = new Date().getTime();

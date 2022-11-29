@@ -1,6 +1,6 @@
 export const articleData = [
   {
-    postId: "",
+    postId: 1,
     postImgPath: "",
     authorImg: "Presidential",
     authorName: "King Daniels",
@@ -13,7 +13,7 @@ export const articleData = [
   },
 
   {
-    postId: "",
+    postId: 2,
     postImgPath: "",
     authorImg: "Presidential",
     authorName: "King Daniels",
@@ -25,7 +25,7 @@ export const articleData = [
       "Placerat mauris tortor vestibulum commodo orci vulputate. Tristique aliquam pulvinar velit molestie in vel ornare sed. Sit felis sit sed dui. Tempus lectus.",
   },
   {
-    postId: "",
+    postId: 3,
     postImgPath: "",
     authorImg: "Presidential",
     authorName: "King Daniels",

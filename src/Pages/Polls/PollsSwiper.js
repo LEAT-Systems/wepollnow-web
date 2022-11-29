@@ -19,7 +19,7 @@ const PollsSwiper = (props) => {
   let uniqueID;
   useEffect(() => {
     uniqueID = localStorage.getItem("uniqueID");
-  }, []);
+  });
 
   // Setting data from API here
   useEffect(() => {
@@ -102,9 +102,9 @@ const PollsSwiper = (props) => {
             return (
               <SwiperSlide key={item.id}>
                 <div className="flex flex-col items-center justify-center p-4 space-y-2 md:flex-row md:px-0">
-                  <div className="flex flex-col items-center justify-center w-full py-12 space-y-4 rounded-lg h-72 bg-polls-pattern">
+                  <div className="flex flex-col items-center justify-center w-full py-12 space-y-4 transition duration-200 rounded-lg h-72 bg-polls-pattern hover:-translate-y-1">
                     {!due && (
-                      <p className="text-xl font-bold text-white">
+                      <p className="text-xl font-bold text-center text-white">
                         {item.poll_name}
                       </p>
                     )}
@@ -118,12 +118,16 @@ const PollsSwiper = (props) => {
                       {!due && <img src={calendar} alt="calendarIcon" />}
                       <label className="text-[14px]">
                         <p className="font-normal">
-                          {due ? "Ongoing" : item.poll_date}
+                          {due
+                            ? "Ongoing"
+                            : new Date(`${item.poll_date}`)
+                                .toISOString()
+                                .substring(0, 10)}
                         </p>
                       </label>
                     </div>
                     {due && (
-                      <p className="text-xl font-bold text-white">
+                      <p className="text-xl font-bold text-center text-white">
                         {item.poll_name}
                       </p>
                     )}

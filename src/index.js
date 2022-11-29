@@ -1,4 +1,4 @@
-import React, { StrictMode } from "react";
+import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
@@ -8,13 +8,11 @@ import { AuthProvider } from "./AuthProvider";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <StrictMode>
-    <AuthProvider>
+  <AuthProvider>
     <BrowserRouter>
       <IdProvider>
         <App />
       </IdProvider>
-    </BrowserRouter>    
-    </AuthProvider>
-  </StrictMode>
+    </BrowserRouter>
+  </AuthProvider>
 );

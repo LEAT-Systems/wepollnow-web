@@ -43,16 +43,16 @@ const FormFive = () => {
 
   // This loads once page mounts
   useEffect(() => {
+    let pollsData = [];
     const pollData = localStorage.getItem("poll_details");
     const { poll_id, poll_name } = JSON.parse(pollData);
     setPollID(poll_id);
     setSelectedPoll(poll_name);
 
-    let pollsData = [];
-
     // sending selected poll to API to fetch poll data
     const getData = async () => {
       const formdata = new FormData();
+      console.log(poll_id);
       formdata.append("poll_id", poll_id);
       const requestOptions = {
         method: "POST",
@@ -64,29 +64,33 @@ const FormFive = () => {
           requestOptions
         );
         const result = await response.json();
-        result.forEach((item) => {
-          const pData = {
-            pollid: item.id,
-            party_logo: item.logo !== undefined ? item.logo : null,
-            partyName: item.name !== undefined ? item.name : null,
-            candidate: item.partyCandidate[0]?.name
-              ? item.partyCandidate[0]?.name
-              : null,
-            runningMate:
-              item.partyCandidate[1]?.name !== undefined
-                ? item.partyCandidate[1]?.name
-                : null,
-            candidateImg:
-              item.partyCandidate[0]?.candidate_picture !== undefined
+        if (!response.ok) {
+          alert("Something went wrong");
+        } else {
+          result.forEach((item) => {
+            const pData = {
+              pollid: item.id,
+              party_logo: item.logo !== undefined ? item.logo : null,
+              partyName: item.name !== undefined ? item.name : null,
+              candidate: item.partyCandidate[0]?.name
                 ? item.partyCandidate[0]?.name
                 : null,
-            viceCandidateImg:
-              item.partyCandidate[1]?.candidate_picture !== undefined
-                ? item.partyCandidate[1]?.candidate_picture
-                : null,
-          };
-          pollsData.push(pData);
-        });
+              runningMate:
+                item.partyCandidate[1]?.name !== undefined
+                  ? item.partyCandidate[1]?.name
+                  : null,
+              candidateImg:
+                item.partyCandidate[0]?.candidate_picture !== undefined
+                  ? item.partyCandidate[0]?.name
+                  : null,
+              viceCandidateImg:
+                item.partyCandidate[1]?.candidate_picture !== undefined
+                  ? item.partyCandidate[1]?.candidate_picture
+                  : null,
+            };
+            pollsData.push(pData);
+          });
+        }
 
         setApiData(pollsData);
       } catch (error) {
@@ -120,7 +124,6 @@ const FormFive = () => {
       if (response.ok === true) {
         history.push("/vote/vote-form-next", { replace: true });
       } else {
-        console.log(response);
         throw new Error("You have already participated in this poll.");
       }
 
@@ -154,7 +157,7 @@ const FormFive = () => {
 
           <div className="flex flex-col items-center justify-center px-4 space-y-4">
             {hasError && (
-              <p className="font-bold text-red-500 text-center">
+              <p className="font-bold text-center text-red-500">
                 Error: {error}
               </p>
             )}
@@ -175,7 +178,7 @@ const FormFive = () => {
                 <button
                   onClick={handleClose}
                   type="button"
-                  className="p-2 px-4 md:px-6 ml-6 text-black bg-transparent border border-black rounded-md animateBack"
+                  className="p-2 px-4 ml-6 text-black bg-transparent border border-black rounded-md md:px-6 animateBack"
                 >
                   Cancel
                 </button>
@@ -204,7 +207,7 @@ const FormFive = () => {
           <div className="flex flex-row items-center w-full">
             <img src={searchIcon} alt="search" className="pb-2" />
             <input
-              className="w-full h-12 px-4 mb-2 text-xs md:text-lg text-gray-700 placeholder-gray-600 bg-transparent border-b fontAwesome"
+              className="w-full h-12 px-4 mb-2 text-xs text-gray-700 placeholder-gray-600 bg-transparent border-b md:text-lg fontAwesome"
               type="text"
               placeholder="Search Party or Candidate Name"
               onChange={(e) => {
