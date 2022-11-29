@@ -98,7 +98,7 @@ const CreatePollModal = ({ open, handleClose, nextPage }) => {
     const getParties = async () => {
       await axios
         .post(`https://wepollnow.azurewebsites.net/poll/poll_category_party/`, {
-          poll_category_id: pollType,
+          pollcategory_id: pollType,
         })
         .then((res) => {
           setParties(res.data);
