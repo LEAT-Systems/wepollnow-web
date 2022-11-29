@@ -1,3 +1,5 @@
+/** @format */
+
 import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import ModalFormContext from "../../../../../ModalFormContextAdmin/ModalFormContext";
@@ -26,14 +28,14 @@ const CreatePollModal = ({ open, handleClose, nextPage }) => {
     setZoneData,
     startDate,
     setStartDate,
-    endDate, 
-    setEndDate
+    endDate,
+    setEndDate,
+    setPollName,
   } = useContext(ModalFormContext);
 
-
-  // const [email, setEmail] = useState([]);
-  // const [contactList, setContactList] = useState([]);
-  // const [candidates, setCandidates] = useState([]);
+  const [enableState, setEnabledState] = useState(false);
+  const [enableSenatorail, setEnabledSenetorial] = useState(false);
+  const [enabledZone, setEnabledZone] = useState(false);
   /* Get State */
   useEffect(() => {
     const getState = async () => {
@@ -45,33 +47,29 @@ const CreatePollModal = ({ open, handleClose, nextPage }) => {
     getState();
   }, [setState]);
 
-  const handleState = (e) => {
-    const stateID = e.target.value;
-
-    console.log("State ID: ", stateID);
-    setState(stateID)
-    setSelectedState(stateID);
-  };
-
+  console.log(selectedState);
   /* Get Senetorial District */
   useEffect(() => {
     const getSenetorial = async () => {
       await axios
         .get(
-          `https://wepollnow.azurewebsites.net/utilities/senatorial/`
+          `https://wepollnow.azurewebsites.net/utilities/senatorial/${selectedState}`
         )
         .then((res) => setDistrictData(res.data))
         .catch((err) => console.log(err));
     };
     getSenetorial();
-  }, [setDistrictData]);
+  }, [selectedState, setDistrictData]);
 
   /* Get Poll Type */
   useEffect(() => {
     const getPollType = async () => {
       await axios
         .get(`https://wepollnow.azurewebsites.net/poll/poll_category/`)
-        .then((res) => { setPollTypeData(res.data); console.log(res.data) })
+        .then((res) => {
+          setPollTypeData(res.data);
+          console.log(res.data);
+        })
         .catch((err) => console.log(err));
     };
     getPollType();
@@ -90,9 +88,35 @@ const CreatePollModal = ({ open, handleClose, nextPage }) => {
     };
     getParty();
   }, [setPartyData]);
+
+  //   if (pollType === 1) {
+  //     return setPollName(`${pollType} Polls`)
+  //   } else if (pollType === 2) {
+  //     return setPollName(`${state} ${pollType} Polls`)
+  //   } else if (pollType === 3) {
+  //     setPollName(`${state} ${pollType} Polls`)
+  // } else {
+  //     setPollName(`${state} ${pollType} Polls`)
+  //   }
+
+  var onDisabled = () => {
+    if (pollType === 1) {
+      setEnabledState(true);
+      setEnabledSenetorial(true);
+      setEnabledZone(true);
+    } else if (pollType === 2) {
+      setEnabledSenetorial(true);
+      setEnabledZone(true);
+    } else if (pollType === 3) {
+      setEnabledZone(true);
+    } else {
+      setEnabledSenetorial(true);
+    }
+  };
+
   return (
     <>
-      <form className='flex flex-col justify-between items-center w-full my-2 hover:bg-transparent'>
+      <div className='flex flex-col justify-between items-center w-full my-2 hover:bg-transparent'>
         {/* First Form */}
         <div className='flex flex-col md:flex-row my-2 justify-center items-center w-full gap-3 md:gap-5'>
           <label className='custom_select_container'>
@@ -166,6 +190,7 @@ const CreatePollModal = ({ open, handleClose, nextPage }) => {
                 setSelectedState(e.target.value);
                 console.log(e.target.value);
               }}
+              disabled={onDisabled}
             >
               <option>Select State</option>
               {state.map((state) => {
@@ -192,10 +217,9 @@ const CreatePollModal = ({ open, handleClose, nextPage }) => {
                 setDistrict(e.target.value);
                 console.log(e.target.value);
               }}
+              disabled={onDisabled}
             >
-              <option>
-                Select Senetorial District
-              </option>
+              <option>Select Senetorial District</option>
               {districtData.map((data) => {
                 return (
                   <option key={data.id} value={data.id}>
@@ -206,7 +230,6 @@ const CreatePollModal = ({ open, handleClose, nextPage }) => {
             </select>
           </label>
         </div>
-      
 
         {/* Final Form */}
         <div className='flex flex-col md:flex-row my-2 justify-center items-center w-full gap-3 md:gap-5'>
@@ -216,7 +239,7 @@ const CreatePollModal = ({ open, handleClose, nextPage }) => {
               name='zone'
               id='zone'
               className='custom_select disabled:bg-gray-200 disabled:cursor-not-allowed'
-              disabled={true}
+              disabled={onDisabled}
               value={zone}
               onChange={(e) => {
                 setZone(e.target.value);
@@ -248,10 +271,10 @@ const CreatePollModal = ({ open, handleClose, nextPage }) => {
               nextPage();
             }}
           >
-            confirm
+            Continue
           </button>
         </div>
-      </form>
+      </div>
     </>
   );
 };

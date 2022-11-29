@@ -1,14 +1,8 @@
-/** @format */
-
-import {
-  FormControl,
-  FormControlLabel,
-  Radio,
-  RadioGroup,
-} from "@mui/material";
-import React, { useState } from "react";
+import React, { useContext, useEffect } from "react";
 import APC from "../../../../../images/apc.png";
 import { ArrowBack } from "@mui/icons-material";
+import ModalFormContext from "../../../../../ModalFormContextAdmin/ModalFormContext";
+import axios from "axios";
 
 const data = [
   {
@@ -22,21 +16,50 @@ const data = [
 ];
 
 const AddPollModal = ({ open, handleClose, nextPage, prevPage, modalData }) => {
-  const [candidateName, setCandidateName] = useState("");
-  const [runningMate, setRunningMate] = useState("");
+  const {
+    mainCandidate,
+    setMainCandidate,
+    pollType,
+    selectedState,
+    district,
+    startDate,
+    endDate,
+    partyData,
+    runningMate,
+    pollName,
+  } = useContext(ModalFormContext);
 
-  console.log("Candidate Name: ", candidateName);
-  console.log("Running Mate: ", runningMate);
+  const config = () => {
+    if (pollType === 1) {
+      return {
+        poll_category_id: pollType,
+      };
+    } else if (pollType === 2) {
+       return {
+         poll_category_id: pollType,
+         poll_state: selectedState,
+       };
+    } else if (pollType === 3) {
+       return {
+         poll_category_id: pollType,
+         poll_senatorial_district: district,
+       };
+    }
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    axios
+      .post("https://wepollnow.azurewebsites.net/poll/poll_category_party/", config)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => console.log(err));
   };
   return (
     <>
-      <form
-        onSubmit={handleSubmit}
-        className='flex justify-start flex-col items-center w-full hover:bg-transparent'
-      >
+      <div className='flex justify-start flex-col items-center w-full hover:bg-transparent'>
         <div className='w-full'>
           <button
             className='flex items-center justify-start rounded-md py-3 h-full cursor-pointer text-sm font-bold capitalize'
@@ -45,7 +68,14 @@ const AddPollModal = ({ open, handleClose, nextPage, prevPage, modalData }) => {
             }}
           >
             <ArrowBack
-              sx={{ width: "1.5rem", height: "1.2rem", background: "#EDFFF0", padding: ".2rem", marginRight: '.5rem', borderRadius: "2rem" }}
+              sx={{
+                width: "1.5rem",
+                height: "1.2rem",
+                background: "#EDFFF0",
+                padding: ".2rem",
+                marginRight: ".5rem",
+                borderRadius: "2rem",
+              }}
             />{" "}
             Back
           </button>
@@ -58,6 +88,7 @@ const AddPollModal = ({ open, handleClose, nextPage, prevPage, modalData }) => {
             <div
               className='flex flex-col md:flex-col my-2 justify-center items-center w-full gap-3 md:gap-5 border rounded-md p-3'
               key={data.id}
+              value={data.id}
             >
               <div className='flex items-center w-full border-b my-auto pb-2'>
                 <img
@@ -71,59 +102,23 @@ const AddPollModal = ({ open, handleClose, nextPage, prevPage, modalData }) => {
               </div>
 
               {/* Second Form */}
-              <div className='flex flex-col my-2 justify-start items-start w-full gap-3'>
-                <div className='w-full'>
-                  {/* Title */}
-                  <FormControl
-                    onChange={(e) => console.log(e.target.value)}
-                    sx={{ width: "100%" }}
-                  >
-                    <RadioGroup>
-                      <div className='flex justify-between align-center'>
-                        <FormControlLabel
-                          value='first__time'
-                          className='text-[#616b62] font-medium'
-                          sx={{ width: "100%" }}
-                          control={
-                            <Radio
-                              sx={{
-                                color: "#616b62",
-                                "&.Mui-checked": {
-                                  color: "#616b62",
-                                },
-                              }}
-                            />
-                          }
-                          label='Jane Doe'
-                        />
-                        <h3 className='font-bold my-auto text-sm text-[#616b62] whitespace-nowrap'>
-                          Main
-                        </h3>
-                      </div>
-                      <div className='flex justify-between align-center'>
-                        <FormControlLabel
-                          value='returning__voter'
-                          className='text-[#616b62] font-medium'
-                          sx={{ width: "100%" }}
-                          control={
-                            <Radio
-                              sx={{
-                                color: "#616b62",
-                                "&.Mui-checked": {
-                                  color: "#616b62",
-                                },
-                              }}
-                            />
-                          }
-                          label='John Doe'
-                        />
 
-                        <h3 className='font-bold my-auto text-sm text-[#616b62] whitespace-nowrap'>
-                          Running Mate
-                        </h3>
-                      </div>
-                    </RadioGroup>
-                  </FormControl>
+              <div className='w-full'>
+                <div className='flex justify-between align-center'>
+                  <h3 className='font-bold my-auto text-base text-[#000] whitespace-nowrap'>
+                    {mainCandidate}
+                  </h3>
+                  <h3 className='font-bold my-auto text-sm text-[#616b62] whitespace-nowrap'>
+                    Main
+                  </h3>
+                </div>
+                <div className='flex justify-between align-center'>
+                  <h3 className='font-bold my-auto text-base text-[#000] whitespace-nowrap'>
+                    {runningMate}
+                  </h3>
+                  <h3 className='font-bold my-auto text-sm text-[#616b62] whitespace-nowrap'>
+                    Running Mate
+                  </h3>
                 </div>
               </div>
             </div>
@@ -140,14 +135,15 @@ const AddPollModal = ({ open, handleClose, nextPage, prevPage, modalData }) => {
           </button>
           <button
             className='flex items-center justify-center rounded-md py-3 px-5 h-full cursor-pointer text-sm bg-green-500 text-white capitalize transition-all duration-400 ease-in-out hover:bg-green-500 hover:text-white hover:rounded-full'
-            onClick={() => {
+            onClick={(e) => {
               handleClose();
+              handleSubmit(e);
             }}
           >
-            continue
+            Create
           </button>
         </div>
-      </form>
+      </div>
     </>
   );
 };

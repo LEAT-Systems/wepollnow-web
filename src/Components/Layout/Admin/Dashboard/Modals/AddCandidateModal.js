@@ -30,26 +30,32 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
     const [successMessage, setSuccessMessage] = useState("");
     const [mainCandidate, setMainCandidate] = useState(false);
 
-    useEffect(() => {
-      const getState = async () => {
-        await Axios.get("https://wepollnow.azurewebsites.net/utilities/states/")
-          .then((res) => setState(res.data))
-          .catch((err) => console.log(err));
-      };
-      getState();
-    }, [setState]);
+  if (selectedState === undefined) {
+      setSelectedState('')
+  }
 
-    /* Get Senetorial District */
-    useEffect(() => {
-      const getSenetorial = async () => {
-        await Axios.get(
-          `https://wepollnow.azurewebsites.net/utilities/senatorial/`
-        )
-          .then((res) => setDistrictData(res.data))
-          .catch((err) => console.log(err));
-      };
-      getSenetorial();
-    }, [setDistrictData]);
+useEffect(() => {
+  const getState = async () => {
+    await Axios.get("https://wepollnow.azurewebsites.net/utilities/states/")
+      .then((res) => setState(res.data))
+      .catch((err) => console.log(err));
+  };
+  getState();
+}, [setState]);
+  
+/* Get Senetorial District */
+useEffect(() => {
+  const getSenetorial = async () => {
+    await Axios
+      .get(
+        `https://wepollnow.azurewebsites.net/utilities/senatorial/${selectedState}`
+      )
+      .then((res) => setDistrictData(res.data))
+      .catch((err) => console.log(err));
+  };
+  getSenetorial();
+}, [selectedState, setDistrictData]);
+
 
     /* Get Poll Type */
     useEffect(() => {
@@ -59,7 +65,6 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
         )
           .then((res) => {
             setPollTypeData(res.data);
-            console.log(res.data);
           })
           .catch((err) => console.log(err));
       };
@@ -74,7 +79,6 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
         )
           .then((res) => {
             setPartyData(res.data);
-            console.log(res.data);
           })
           .catch((err) => console.log(err));
       };
@@ -171,7 +175,7 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
 
 
   return (
-      <form onSubmit={handleSubmit} className='w-full'>
+    <form onSubmit={handleSubmit} className='w-full'>
       <Modal
         open={addCandidate}
         onClose={handleCloseAddCandidate}
@@ -201,10 +205,8 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
             </button>
           </header>
 
-
-
           {/*  */}
-          
+          <div className='w-full'>
             <div className='py-2'>
               <label className='my-6 h-auto  w-full relative'>
                 Name
@@ -233,7 +235,6 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
                   value={pollType}
                   onChange={(e) => {
                     setPollType(e.target.value);
-                    console.log(e.target.value);
                   }}
                   className='custom__select'
                 >
@@ -278,7 +279,6 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
                   value={selectedState}
                   onChange={(e) => {
                     setSelectedState(e.target.value);
-                    console.log(e.target.value);
                   }}
                 >
                   <option>Select State</option>
@@ -305,7 +305,6 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
                   value={district}
                   onChange={(e) => {
                     setDistrict(e.target.value);
-                    console.log(e.target.value);
                   }}
                 >
                   <option>Select Senetorial District</option>
@@ -330,7 +329,6 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
                   value={party}
                   onChange={(e) => {
                     setParty(e.target.value);
-                    console.log(e.target.value);
                   }}
                 >
                   <option>Select Party</option>
@@ -350,7 +348,6 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
                 value={mainCandidate}
                 onChange={(e) => {
                   setMainCandidate(e.target.value);
-                  console.log(e.target.value);
                 }}
               >
                 <div className='flex justify-between align-center'>
@@ -410,8 +407,7 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
                   value={zone}
                   onChange={(e) => {
                     setZone(e.target.value);
-                    console.log(e.target.value);
-                  }}
+                    }}
                 >
                   <option>Select Zone</option>
                   <option>1</option>
@@ -423,26 +419,26 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
                 </select>
               </label>
             </div>
-
-            <div className='flex justify-end items-center w-full my-2'>
-              <button
-                className='flex items-center justify-center border-2 border-gray-300 py-3 px-5 h-full cursor-pointer text-sm rounded-md capitalize mr-4 transition-all duration-400 ease-in-out hover:bg-[#f3dddd] hover:text-red-600 hover:rounded-full'
-                onClick={handleCloseAddCandidate}
-                type='button'
-              >
-                cancel
-              </button>
-              <button
-                className='flex items-center justify-center rounded-md py-3 px-5 h-full cursor-pointer text-sm bg-green-500 text-white capitalize transition-all duration-400 ease-in-out hover:bg-green-500 hover:text-white hover:rounded-full'
-                type='submit'
+          </div>
+          <div className='flex justify-end items-center w-full my-2'>
+            <button
+              className='flex items-center justify-center border-2 border-gray-300 py-3 px-5 h-full cursor-pointer text-sm rounded-md capitalize mr-4 transition-all duration-400 ease-in-out hover:bg-[#f3dddd] hover:text-red-600 hover:rounded-full'
+              onClick={handleCloseAddCandidate}
+              type='button'
+            >
+              cancel
+            </button>
+            <button
+              className='flex items-center justify-center rounded-md py-3 px-5 h-full cursor-pointer text-sm bg-green-500 text-white capitalize transition-all duration-400 ease-in-out hover:bg-green-500 hover:text-white hover:rounded-full'
+              type='submit'
               onClick={(e) => {
-                handleCloseAddCandidate()
-                handleSubmit(e)
+                handleCloseAddCandidate();
+                handleSubmit(e);
               }}
-              >
-                continue
-              </button>
-            </div>
+            >
+              continue
+            </button>
+          </div>
         </div>
       </Modal>
     </form>
