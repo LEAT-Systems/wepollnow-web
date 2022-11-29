@@ -92,33 +92,33 @@ const CreatePollModal = ({ open, handleClose, nextPage }) => {
 
   /* Get Party */
   useEffect(() => {
+    var presidentID = {
+      pollcategory_id: pollType,
+    };
+    var governorshipID = {
+      pollcategory_id: pollType,
+      state_id: selectedState,
+    };
+    var senatorialID = {
+      pollcategory_id: pollType,
+      senatorial_id: district,
+    };
     const config = () => {
       if (pollType === "1") {
-        return {
-          pollcategory_id: parseInt(pollType)
-        };
+        return presidentID;
       } else if (pollType === "2") {
-        return {
-          pollcategory_id: parseInt(pollType),
-          state_id: parseInt(selectedState)
-        };
+        return governorshipID;
       } else if (pollType === "3") {
-        return {
-          pollcategory_id: parseInt(pollType),
-          senatorial_id: parseInt(district)
-        };
+        return senatorialID;
       } else {
-        return { pollcategory_id: parseInt(pollType) };
+        return presidentID;
       }
     };
 
     console.log(config());
     const getParties = async () => {
       await axios
-        .post(
-          `https://wepollnow.azurewebsites.net/poll/poll_category_party/`,
-          config
-        )
+        .post(`https://wepollnow.azurewebsites.net/poll/poll_category_party/`, config())
         .then((res) => {
           setParties(res.data);
           console.log(res.data);
@@ -127,7 +127,14 @@ const CreatePollModal = ({ open, handleClose, nextPage }) => {
     };
     getParties();
     config();
-  }, [setParties, pollType, district, selectedState]);
+  }, [
+    setParties,
+    pollType,
+    presidentID,
+    governorshipID,
+    senatorialID,
+    selectedState,
+  ]);
 
   useEffect(() => {
     var onDisabled = () => {
