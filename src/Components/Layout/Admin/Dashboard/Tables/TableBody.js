@@ -5,15 +5,14 @@ import Archive from "../../assets/archive@2x.png";
 import Delete from "../../assets/trash@2x.png";
 
 const TableBody = ({ tableData }) => {
-  const getSymbol = () => {
-    const string = tableData.poll_name;
-    const wordArray = string.split(" ", 2);
-    const symbol = wordArray[0].slice(0, 1) + wordArray[1].slice(0, 1);
-    return symbol;
-  };
+  // const getSymbol = () => {
+  //   const string = tableData.poll_name;
+  //   // const wordArray = string.split(" ", 2);
+  //   const symbol = string.slice(0, 2);
+  //   // + wordArray[1].slice(0, 1);
+  //   return symbol;
+  // };
 
-  
-  
   // console.log(tableData);
   // {
   //     "id": 1,
@@ -29,48 +28,54 @@ const TableBody = ({ tableData }) => {
   //     "poll_endDate": "2022-12-04T00:00:00Z",
   //     "status": 1
   // },
+
   return (
-    <tr className='table-row' onClick={(e) => console.log(e.currentTarget)}>
+    <tr className="table-row" onClick={(e) => console.log(e.currentTarget)}>
       <th
-        scope='row'
-        className='px-6 py-4 font-medium text-gray-900 whitespace-nowrap '
+        scope="row"
+        className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap "
       >
-        <span className='text-white font-bold capitalize bg-green-900 mr-4 rounded-xl p-[.6rem] cursor-pointer'>
-          {getSymbol()}
+        <span className="text-white font-bold capitalize bg-green-900 mr-4 rounded-xl p-[.6rem] cursor-pointer">
+          {/* {getSymbol()} */}
+          {tableData.symbol}
         </span>{" "}
-        <NavLink to='/admin/polls/poll_result' activeClassName={null}>
-          {tableData.poll_name}
+        <NavLink to="/admin/polls/poll_result" activeClassName={null}>
+          {/* {tableData.poll_name} */}
+          {tableData.poll}
         </NavLink>
       </th>
-      <td className='px-6 py-4 cursor-pointer'>
-        <NavLink to='/admin/polls/poll_result' activeClassName={null}>
-          {tableData.poll_state}
+      <td className="px-6 py-4 cursor-pointer">
+        <NavLink to="/admin/polls/poll_result" activeClassName={null}>
+          {/* {tableData.poll_state} */}
+          {tableData.location}
         </NavLink>
       </td>
-      <td className='px-6 py-4 cursor-pointer'>
-        <NavLink to='/admin/polls/poll_result' activeClassName={null}>
-          {tableData.poll_startDate}
+      <td className="px-6 py-4 cursor-pointer">
+        <NavLink to="/admin/polls/poll_result" activeClassName={null}>
+          {tableData.date__created}
         </NavLink>
       </td>
-      <td className='px-6 py-4 cursor-pointer'>
-        <NavLink to='/admin/polls/poll_result' activeClassName={null}>
-          {tableData.poll_endDate}
+      <td className="px-6 py-4 cursor-pointer">
+        <NavLink to="/admin/polls/poll_result" activeClassName={null}>
+          {tableData.poll__date}
         </NavLink>
       </td>
-      <td className='px-6 py-4 cursor-pointer'>
-        <NavLink to='/admin/polls/poll_result' activeClassName={null}>
-          {tableData.status === 1 ? "Active" : "Inactive"}
+      <td className="px-6 py-4 cursor-pointer">
+        <NavLink to="/admin/polls/poll_result" activeClassName={null}>
+          {/* {tableData.status === 1 ? "Active" : "Inactive"}
+           */}
+          {tableData.status}
         </NavLink>
       </td>
-      <td className='flex flex-row px-6 py-4 space-x-2'>
-        <div className='text-blue-500 cursor-pointer'>
-          <img src={Edit} alt='Edit' className='w-[1.1rem] h-[1.1rem]' />
+      <td className="flex flex-row px-6 py-4 space-x-2">
+        <div className="text-blue-500 cursor-pointer">
+          <img src={Edit} alt="Edit" className="w-[1.1rem] h-[1.1rem]" />
         </div>
-        <div className='text-black cursor-pointer'>
-          <img src={Archive} alt='Archive' className='w-[1.1rem] h-[1.1rem]' />
+        <div className="text-black cursor-pointer">
+          <img src={Archive} alt="Archive" className="w-[1.1rem] h-[1.1rem]" />
         </div>
-        <div className='text-red-500 cursor-pointer'>
-          <img src={Delete} alt='Trash' className='w-[1.1rem] h-[1.1rem]' />
+        <div className="text-red-500 cursor-pointer">
+          <img src={Delete} alt="Trash" className="w-[1.1rem] h-[1.1rem]" />
         </div>
       </td>
     </tr>
