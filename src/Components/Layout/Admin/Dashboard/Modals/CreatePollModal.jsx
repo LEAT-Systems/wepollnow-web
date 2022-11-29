@@ -130,9 +130,7 @@ const CreatePollModal = ({ open, handleClose, nextPage }) => {
   }, [
     setParties,
     pollType,
-    presidentID,
-    governorshipID,
-    senatorialID,
+    district,
     selectedState,
   ]);
 
