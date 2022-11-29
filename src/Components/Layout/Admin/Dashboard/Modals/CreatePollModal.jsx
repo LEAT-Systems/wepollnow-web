@@ -31,6 +31,7 @@ const CreatePollModal = ({ open, handleClose, nextPage }) => {
     endDate,
     setEndDate,
     setPollName,
+    pollTypeName,
     setParties,
   } = useContext(ModalFormContext);
 
@@ -118,7 +119,10 @@ const CreatePollModal = ({ open, handleClose, nextPage }) => {
     console.log(config());
     const getParties = async () => {
       await axios
-        .post(`https://wepollnow.azurewebsites.net/poll/poll_category_party/`, config())
+        .post(
+          `https://wepollnow.azurewebsites.net/poll/poll_category_party/`,
+          config()
+        )
         .then((res) => {
           setParties(res.data);
           console.log(res.data);
@@ -127,12 +131,7 @@ const CreatePollModal = ({ open, handleClose, nextPage }) => {
     };
     getParties();
     config();
-  }, [
-    setParties,
-    pollType,
-    district,
-    selectedState,
-  ]);
+  }, [setParties, pollType, district, selectedState]);
 
   useEffect(() => {
     var onDisabled = () => {
@@ -162,6 +161,18 @@ const CreatePollModal = ({ open, handleClose, nextPage }) => {
   console.log("Senatorial :", enabledSenetorial);
   console.log("State :", enableState);
 
+  if (pollType === "1") {
+    return setPollName(`${pollTypeName} Poll`);
+  } else if (pollType === "2") {
+    return setPollName(`${state} ${pollTypeName} Poll`);
+  } else if (pollType === "3") {
+    setPollName(`${state} ${pollTypeName} Polls`);
+  } else {
+    setPollName(`${state} ${pollTypeName} Polls`);
+  }
+
+  console.log(pollTypeName)
+  // polltype = 1 >>> pollTypeData.title[0]
   return (
     <>
       <div className='flex flex-col justify-between items-center w-full my-2 hover:bg-transparent'>
@@ -176,6 +187,7 @@ const CreatePollModal = ({ open, handleClose, nextPage }) => {
               value={pollType}
               onChange={(e) => {
                 setPollType(e.target.value);
+                pollTypeName(e.target.children);
                 console.log(e.target.value);
               }}
             >

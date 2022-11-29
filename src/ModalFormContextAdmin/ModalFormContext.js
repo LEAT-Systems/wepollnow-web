@@ -4,6 +4,7 @@ const ModalFormContext = createContext();
 export const ModalFormProvider = ({children}) => {
   const  [pollType, setPollType] = useState([])
   const [pollTypeData, setPollTypeData] = useState([])
+  const [pollTypeName, setPollTypeName] = useState('')
   const [pollName, setPollName] = useState('')
   const  [startDate, setStartDate] = useState([])
   const  [endDate, setEndDate] = useState([])
@@ -56,6 +57,10 @@ export const ModalFormProvider = ({children}) => {
         setFormTwoData,
         setParties,
         parties,
+        setPollName,
+        pollName,
+        pollTypeName,
+        setPollTypeName,
       }}
     >
       {children}

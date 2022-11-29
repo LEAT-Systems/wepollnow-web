@@ -44,15 +44,7 @@ const AddPollModal = ({ open, handleClose, nextPage, prevPage, modalData }) => {
     //     .catch((err) => console.log(err));
   };
 
-  //   if (pollType === 1) {
-  //     return setPollName(`${pollType} Polls`)
-  //   } else if (pollType === 2) {
-  //     return setPollName(`${state} ${pollType} Polls`)
-  //   } else if (pollType === 3) {
-  //     setPollName(`${state} ${pollType} Polls`)
-  // } else {
-  //     setPollName(`${state} ${pollType} Polls`)
-  //   }
+
   return (
     <>
       <div className='flex justify-start flex-col items-center w-full hover:bg-transparent'>
