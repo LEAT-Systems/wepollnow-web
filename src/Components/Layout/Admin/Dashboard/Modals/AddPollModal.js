@@ -27,36 +27,32 @@ const AddPollModal = ({ open, handleClose, nextPage, prevPage, modalData }) => {
     partyData,
     runningMate,
     pollName,
+    parties,
   } = useContext(ModalFormContext);
-
-  const config = () => {
-    if (pollType === 1) {
-      return {
-        poll_category_id: pollType,
-      };
-    } else if (pollType === 2) {
-       return {
-         poll_category_id: pollType,
-         poll_state: selectedState,
-       };
-    } else if (pollType === 3) {
-       return {
-         poll_category_id: pollType,
-         poll_senatorial_district: district,
-       };
-    }
-  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    axios
-      .post("https://wepollnow.azurewebsites.net/poll/poll_category_party/", config)
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => console.log(err));
+    //   axios
+    //     .post(
+    //       "https://wepollnow.azurewebsites.net/poll/poll_category_party/",
+    //       config
+    //     )
+    //     .then((res) => {
+    //       console.log(res);
+    //     })
+    //     .catch((err) => console.log(err));
   };
+
+  //   if (pollType === 1) {
+  //     return setPollName(`${pollType} Polls`)
+  //   } else if (pollType === 2) {
+  //     return setPollName(`${state} ${pollType} Polls`)
+  //   } else if (pollType === 3) {
+  //     setPollName(`${state} ${pollType} Polls`)
+  // } else {
+  //     setPollName(`${state} ${pollType} Polls`)
+  //   }
   return (
     <>
       <div className='flex justify-start flex-col items-center w-full hover:bg-transparent'>
@@ -83,7 +79,7 @@ const AddPollModal = ({ open, handleClose, nextPage, prevPage, modalData }) => {
 
         {/* First Form */}
 
-        {data?.map((data) => {
+        {parties?.map((data) => {
           return (
             <div
               className='flex flex-col md:flex-col my-2 justify-center items-center w-full gap-3 md:gap-5 border rounded-md p-3'
@@ -92,13 +88,11 @@ const AddPollModal = ({ open, handleClose, nextPage, prevPage, modalData }) => {
             >
               <div className='flex items-center w-full border-b my-auto pb-2'>
                 <img
-                  src={data.party__image}
+                  src={`https://wepollnow.azurewebsites.net${data.logo}`}
                   alt='Political Party'
                   className='w-[2.3rem] aspect-square rounded-sm'
                 />
-                <h2 className='text-base px-4 text-[#616b62]'>
-                  {data.party__name}
-                </h2>
+                <h2 className='text-base px-4 text-[#616b62]'>{data.name}</h2>
               </div>
 
               {/* Second Form */}
@@ -106,7 +100,7 @@ const AddPollModal = ({ open, handleClose, nextPage, prevPage, modalData }) => {
               <div className='w-full'>
                 <div className='flex justify-between align-center'>
                   <h3 className='font-bold my-auto text-base text-[#000] whitespace-nowrap'>
-                    {mainCandidate}
+                    {data.partyCandidate[0]}
                   </h3>
                   <h3 className='font-bold my-auto text-sm text-[#616b62] whitespace-nowrap'>
                     Main
@@ -114,7 +108,7 @@ const AddPollModal = ({ open, handleClose, nextPage, prevPage, modalData }) => {
                 </div>
                 <div className='flex justify-between align-center'>
                   <h3 className='font-bold my-auto text-base text-[#000] whitespace-nowrap'>
-                    {runningMate}
+                    {data.partyCandidate[1]}
                   </h3>
                   <h3 className='font-bold my-auto text-sm text-[#616b62] whitespace-nowrap'>
                     Running Mate

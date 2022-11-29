@@ -13,6 +13,7 @@ export const ModalFormProvider = ({children}) => {
   const  [districtData, setDistrictData] = useState([])
   const  [party, setParty] = useState([])
   const  [partyData, setPartyData] = useState([])
+  const [parties, setParties] = useState([]);
   const  [zone, setZone] = useState([])
   const  [zoneData, setZoneData] = useState([])
   const [formTwoData, setFormTwoData] = useState([]);
@@ -53,6 +54,8 @@ export const ModalFormProvider = ({children}) => {
         setSelectedParty,
         setMainCandidate,
         setFormTwoData,
+        setParties,
+        parties,
       }}
     >
       {children}

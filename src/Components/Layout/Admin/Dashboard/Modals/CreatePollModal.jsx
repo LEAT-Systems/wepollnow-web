@@ -31,6 +31,7 @@ const CreatePollModal = ({ open, handleClose, nextPage }) => {
     endDate,
     setEndDate,
     setPollName,
+    setParties,
   } = useContext(ModalFormContext);
 
   const [enableState, setEnabledState] = useState(false);
@@ -89,40 +90,67 @@ const CreatePollModal = ({ open, handleClose, nextPage }) => {
     getParty();
   }, [setPartyData]);
 
-  //   if (pollType === 1) {
-  //     return setPollName(`${pollType} Polls`)
-  //   } else if (pollType === 2) {
-  //     return setPollName(`${state} ${pollType} Polls`)
-  //   } else if (pollType === 3) {
-  //     setPollName(`${state} ${pollType} Polls`)
-  // } else {
-  //     setPollName(`${state} ${pollType} Polls`)
-  //   }
+
+
+  /* Get Party */
 
   useEffect(() => {
- var onDisabled = () => {
-   if (pollType === "1") {
-     setEnabledState(true);
-     setEnabledSenetorial(true);
-     setEnabledZone(true);
-   } else if (pollType === "2") {
-     setEnabledState(false);
-     setEnabledSenetorial(true);
-     setEnabledZone(true);
-   } else if (pollType === "3") {
-     setEnabledState(false);
-     setEnabledSenetorial(false);
-     setEnabledZone(true);
-   } else {
-     setEnabledSenetorial(true);
-     setEnabledZone(false);
-     setEnabledState(false);
-   }
- };
+    const getParties = async () => {
+      const config = () => {
+        if (pollType === 1) {
+          return {
+            poll_category_id: pollType,
+          };
+        } else if (pollType === 2) {
+          return {
+            pollcategory_id: pollType,
+            state_id: selectedState,
+          };
+        } else if (pollType === 3) {
+          return {
+            pollcategory_id: pollType,
+            senatorial_id: district,
+          };
+        }
+      };
 
- onDisabled();
-  }, [pollType])
- 
+      await axios
+        .post(
+          `https://wepollnow.azurewebsites.net/poll/poll_category_party/`,
+          config
+        )
+        .then((res) => {
+          setParties(res.data);
+          console.log(res.data);
+        })
+        .catch((err) => console.log(err));
+    };
+    getParties();
+  }, [setParties, district, selectedState, pollType]);
+
+  useEffect(() => {
+    var onDisabled = () => {
+      if (pollType === "1") {
+        setEnabledState(true);
+        setEnabledSenetorial(true);
+        setEnabledZone(true);
+      } else if (pollType === "2") {
+        setEnabledState(false);
+        setEnabledSenetorial(true);
+        setEnabledZone(true);
+      } else if (pollType === "3") {
+        setEnabledState(false);
+        setEnabledSenetorial(false);
+        setEnabledZone(true);
+      } else {
+        setEnabledSenetorial(true);
+        setEnabledZone(false);
+        setEnabledState(false);
+      }
+    };
+
+    onDisabled();
+  }, [pollType]);
 
   console.log("Zone :", enabledZone);
   console.log("Senatorial :", enabledSenetorial);
@@ -291,6 +319,6 @@ const CreatePollModal = ({ open, handleClose, nextPage }) => {
       </div>
     </>
   );
-};
+};;
 
 export default CreatePollModal;
