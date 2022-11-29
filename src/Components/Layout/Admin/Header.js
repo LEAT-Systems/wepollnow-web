@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import { Modal } from "@mui/material";
 import LogoutIcon from "@mui/icons-material/Logout";
 import CloseIcon from "@mui/icons-material/Close";
+import Close from "../../../images/CloseButton.png";
 
 const Header = () => {
   const [open, setOpen] = useState(false);
@@ -19,7 +20,7 @@ const Header = () => {
   };
   return (
     <>
-      <div className="flex flex-row items-center justify-between w-full py-4 px-3 md:px-4 border-b">
+      <div className="flex flex-row items-center justify-between w-full px-3 py-4 border-b md:px-4">
         <Link to="/admin/home">
           <img src={logo} alt="logo" className="pl-4" />
         </Link>
@@ -42,22 +43,25 @@ const Header = () => {
       {/* LOGOUT MODAL */}
       <Modal open={open}>
         <div className="flex flex-col items-center justify-center min-h-screen px-4 py-4 mx-auto md:px-0">
-          <div className="w-full px-4 py-4 bg-white border border-gray-500 rounded-lg md:w-1/4">
+          <div className="w-full px-4 py-12 bg-white border-gray-500 rounded-lg md:w-1/3">
             <div className="flex flex-row items-center justify-between p-3 border-b">
               <p className="text-lg font-bold">
                 Are you sure you want to leave?
               </p>
-              <button
-                onClick={handleClose}
-                type="button"
-                className="flex flex-row items-center justify-center w-5 h-5 text-white bg-red-500 rounded-full"
-              >
-                <CloseIcon fontSize="small" />
+              <button onClick={handleClose} type="button">
+                <img src={Close} alt="closeIcon" />
               </button>
             </div>
-            <div className="flex flex-row items-center justify-center p-4 space-x-4">
-              <button className="btn-stay">Stay</button>
-              <button className="btn-leave">Leave</button>
+            <div className="flex flex-row items-center justify-center pt-12 space-x-4 ">
+              <button
+                onClick={handleClose}
+                className="p-3 bg-[#08c127] rounded px-12 text-white animate"
+              >
+                Stay
+              </button>
+              <button className="p-3 px-10 text-black border rounded ">
+                Leave
+              </button>
             </div>
           </div>
         </div>

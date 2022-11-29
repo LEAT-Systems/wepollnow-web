@@ -28,7 +28,13 @@ const GettingStartedOne = () => {
   // open and close the modal
   const handleOpen = () => {
     if (uniqueID === null || uniqueID === undefined) {
-      localStorage.setItem("pollType", 1);
+      localStorage.setItem(
+        "poll_details",
+        JSON.stringify({
+          poll_id: 1,
+          poll_name: "Presidential Election",
+        })
+      );
       setOpen(true);
     } else {
       // make API request with unique ID
@@ -73,7 +79,8 @@ const GettingStartedOne = () => {
           <div className="md:p-6">
             <Timer
               date={countDownDate}
-              size="9xl"
+              size="4xl"
+              sizelg="9xl"
               color="black"
               pcolor="black"
             />

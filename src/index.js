@@ -1,20 +1,21 @@
-import React, { StrictMode } from "react";
+import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import { BrowserRouter } from "react-router-dom";
 import { IdProvider } from "./Components/Forms/FormContext/userIdContext";
 import { AuthProvider } from "./AuthProvider";
+import { ModalFormProvider } from "./ModalFormContextAdmin/ModalFormContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <StrictMode>
-    <AuthProvider>
+  <AuthProvider>
     <BrowserRouter>
       <IdProvider>
-        <App />
+        <ModalFormProvider>
+          <App />
+        </ModalFormProvider>
       </IdProvider>
-    </BrowserRouter>    
-    </AuthProvider>
-  </StrictMode>
+    </BrowserRouter>
+  </AuthProvider>
 );

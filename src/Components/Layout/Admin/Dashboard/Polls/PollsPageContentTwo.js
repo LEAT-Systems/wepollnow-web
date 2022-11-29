@@ -208,3 +208,4 @@ export default PollsPageContentTwo;
 // Remove LGA | Replace Party dropdown & Main candidate checkbox
 // Create poll
 // Remove LGA
+

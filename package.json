@@ -16,6 +16,8 @@
     "chart.js": "^3.9.1",
     "chart.js-plugin-labels-dv": "^3.3.0",
     "chartjs-plugin-datalabels": "^2.1.0",
+    "dompurify": "^2.4.1",
+    "draft-convert": "^2.1.13",
     "flowbite": "^1.5.3",
     "formik": "^2.2.9",
     "jwt-decode": "^3.1.2",

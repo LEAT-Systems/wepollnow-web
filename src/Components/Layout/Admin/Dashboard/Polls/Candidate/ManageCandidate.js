@@ -45,13 +45,16 @@ const dataTable = [
     symbol: "RM",
   },
 ];
+
 const Candidate = () => {
   const [filterIsActive, setFilterIsActive] = useState(0);
   const [addCandidate, setAddCandidate] = useState(false);
   const [refineResult, setRefineResult] = useState(false);
   const [tableData, setTableData] = useState([]);
+  const [polls, setPolls] = useState([]);
   const [searchResult, setSearchResult] = useState([]);
   const [open, setOpen] = useState(false);
+
 
   /* handle for create new Candidate */
   const handleOpenAddCandidate = () => {
@@ -83,6 +86,7 @@ const Candidate = () => {
       })
       .catch((err) => console.log(err));
   }, []);
+ 
 
   // useEffect(() => {
   //   /* For our demo json object */

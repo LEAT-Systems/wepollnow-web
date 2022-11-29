@@ -7,14 +7,52 @@ import time from "../../images/time.png";
 import Footer from "../../Components/Layout/Landing/Footer";
 import image from "../../images/blogImg.png";
 import anchor from "../../images/anchor.png";
-import { DUMMY_DATA } from "./DummyData";
+import avatar from "../../images/avartar.png";
 
 const BlogPage = () => {
   const [data, setData] = useState([]);
 
   // Setting data from API here
+  // ====================================    Get All blog data from API
   useEffect(() => {
-    setData(DUMMY_DATA);
+    const getData = async () => {
+      const requestOptions = {
+        method: "GET",
+      };
+      const response = await fetch(
+        "https://wepollnow.azurewebsites.net/blog/",
+        requestOptions
+      );
+      const apiData = await response.json();
+
+      let renderData = [];
+      apiData.forEach((item) => {
+        const aData = {
+          id: item.id,
+          image: item.image,
+          title: item.title.split(" ").splice(0, 7).join(" ") + "...",
+          content:
+            item.content !== undefined
+              ? item.content.split(" ").splice(0, 20).join(" ") + "..."
+              : null,
+          date_posted:
+            item.date_posted !== undefined
+              ? new Date(`${item.date_posted}`).toISOString().substring(0, 10)
+              : null,
+          time_posted:
+            item.date_posted !== undefined
+              ? new Date(`${item.date_posted}`).toLocaleTimeString("en", {
+                  hour: "numeric",
+                  minute: "numeric",
+                  hour12: true,
+                })
+              : null,
+        };
+        renderData.push(aData);
+        setData(renderData);
+      });
+    };
+    getData();
   }, []);
 
   // TO check if API data contents is empty
@@ -48,14 +86,17 @@ const BlogPage = () => {
       )}
       {/* ITEMS */}
       <div className="grid min-h-screen grid-cols-1 px-4 mt-12 mb-12 md:mb-24 md:space-y-0 gap-y-12 md:gap-y-12 gap-x-12 md:px-24 md:gap-x-12 md:grid-cols-3 md:mt-24">
-        {data.map((data) => {
+        {data?.map((data) => {
           return (
-            <div className="w-full" key={data.id}>
-              <Link to={"/blog-single"}>
+            <div className="w-full hover:brightness-50" key={data.id}>
+              <Link
+                to={"/blog-single"}
+                onClick={() => localStorage.setItem("blog_article_id", data.id)}
+              >
                 <div className="flex flex-col w-full space-y-2 md:h-full">
                   <div className="relative">
                     <img
-                      src={data.articleImg}
+                      src={data.image}
                       alt="Voter"
                       className="w-full h-full rounded md:object-cover"
                     />
@@ -68,29 +109,23 @@ const BlogPage = () => {
                     </div>
                   </div>
                   <div className="flex flex-row items-center space-x-2">
-                    <img
-                      className="w-6 h-6 rounded-full"
-                      src={data.authorImg}
-                      alt=""
-                    />
-                    <p className="font-normal">{data.author}</p>
+                    <img className="w-6 h-6 rounded-full" src={avatar} alt="" />
+                    <p className="font-normal">Wepollnow Admin</p>
                   </div>
 
-                  <p className="max-w-sm font-bold text-md">
-                    {data.postCaption}
-                  </p>
+                  <p className="max-w-sm font-bold text-md">{data.title}</p>
                   <div className="flex flex-row space-x-4">
                     <div className="flex flex-row items-center justify-start space-x-2">
                       <img src={eye} alt="calendarIcon" />
-                      <p className="text-xs">{data.views}</p>
+                      <p className="text-xs">0</p>
                     </div>
                     <div className="flex flex-row items-center justify-start space-x-2 text-xs">
                       <img src={time} alt="calendarIcon" />
-                      <p className="text-xs">{data.timePosted}</p>
+                      <p className="text-xs">{data.time_posted}</p>
                     </div>
                     <div className="flex flex-row items-center justify-start space-x-2 text-xs">
                       <img src={calendar} alt="calendarIcon" />
-                      <p className="text-xs">{data.datePosted}</p>
+                      <p className="text-xs">{data.date_posted}</p>
                     </div>
                   </div>
                 </div>

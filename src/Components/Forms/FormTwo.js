@@ -226,7 +226,10 @@ const FormTwo = (props) => {
                             <option value={null}>--Select an option--</option>
                             {data.map((item) => {
                               return (
-                                <option key={item.id} value={item.id}>
+                                <option
+                                  key={item.id}
+                                  value={disable === true ? null : item.id}
+                                >
                                   {item.name}
                                 </option>
                               );

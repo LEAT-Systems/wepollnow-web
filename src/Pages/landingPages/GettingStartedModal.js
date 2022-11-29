@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import {
-  formatPhoneNumberIntl,
+  formatPhoneNumber,
   parsePhoneNumber,
 } from "react-phone-number-input";
 import { useHistory } from "react-router-dom";
@@ -29,17 +29,23 @@ const ModalComponent = (props) => {
 
     // if not null, get the phone number and country
     if (value !== null) {
-      const intformatedPhoneNumber = formatPhoneNumberIntl(value);
+      const formatedPhoneNumber = formatPhoneNumber(value);
       const countryEntered = parsePhoneNumber(value).country;
+
+      // Validate on end point
+
+      // save in local storage if successfully validated by endpoint
       localStorage.setItem(
         "phoneDetails",
         JSON.stringify({
-          phoneNo: intformatedPhoneNumber,
+          phoneNo: formatedPhoneNumber,
           country: countryEntered,
         })
       );
       setHasError(false);
       history.push("/getting-started-six", { replace: true });
+    }else{
+      alert('This phonenumber is already registered ')
     }
   };
 
