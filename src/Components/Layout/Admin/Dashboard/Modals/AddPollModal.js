@@ -1,3 +1,5 @@
+/** @format */
+
 import React, { useContext, useEffect } from "react";
 import APC from "../../../../../images/apc.png";
 import { ArrowBack } from "@mui/icons-material";
@@ -28,22 +30,74 @@ const AddPollModal = ({ open, handleClose, nextPage, prevPage, modalData }) => {
     runningMate,
     pollName,
     parties,
+    setSuccessMessage,
   } = useContext(ModalFormContext);
+
+  /* Post Info */
+    const candidate = [];
+    const parti = [];
+
+    parties.forEach((item) => {
+      const i = item.candidates[0].id;
+      const j = item.candidates[1].id;
+      const p = item.id;
+
+      parti.push(p);
+      candidate.push(i, j);
+    });
+    var presidentID = {
+      poll_category_id: pollType,
+      poll_startDate: startDate,
+      poll_endDate: endDate,
+      status: 1,
+      party: parti,
+      candidate: candidate,
+    };
+    var governorshipID = {
+      poll_category_id: pollType,
+      poll_state: selectedState,
+      poll_startDate: startDate,
+      poll_endDate: endDate,
+      status: 1,
+      party: parti,
+      candidate: candidate,
+    };
+    var senatorialID = {
+      poll_category_id: pollType,
+      poll_senatorial_district: district,
+      poll_startDate: startDate,
+      poll_endDate: endDate,
+      status: 1,
+      party: parti,
+      candidate: candidate,
+    };
+
+    var config = () => {
+      if (pollType === "1") {
+        return presidentID;
+      } else if (pollType === "2") {
+        return governorshipID;
+      } else if (pollType === "3") {
+        return senatorialID;
+      } else {
+        return presidentID;
+      }
+    };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    //   axios
-    //     .post(
-    //       "https://wepollnow.azurewebsites.net/poll/poll_category_party/",
-    //       config
-    //     )
-    //     .then((res) => {
-    //       console.log(res);
-    //     })
-    //     .catch((err) => console.log(err));
+    const getParties = async () => {
+      await axios
+        .post(`https://wepollnow.azurewebsites.net/poll/create_poll/`, config())
+        .then((res) => {
+          setSuccessMessage(res.status);
+          console.log(res.data);
+        })
+        .catch((err) => console.log(err));
+    };
+    getParties();
   };
-
 
   return (
     <>
