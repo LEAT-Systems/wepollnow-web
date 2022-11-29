@@ -120,6 +120,10 @@ const CreatePollModal = ({ open, handleClose, nextPage }) => {
     onDisabled()
   }, [pollType])
 
+  console.log(enabledZone);
+  console.log(enableSenatorail);
+  console.log(enableState);
+
   return (
     <>
       <div className='flex flex-col justify-between items-center w-full my-2 hover:bg-transparent'>
