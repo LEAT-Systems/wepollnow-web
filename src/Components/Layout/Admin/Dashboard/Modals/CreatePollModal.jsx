@@ -94,21 +94,27 @@ const CreatePollModal = ({ open, handleClose, nextPage }) => {
   useEffect(() => {
     const config = () => {
       if (pollType === "1") {
-        return {
-          pollcategory_id: pollType,
-        };
+        return (
+          {
+          pollcategory_id: pollType
+          }
+        )
       } else if (pollType === "2") {
-        return {
+        return (
+          {
           pollcategory_id: pollType,
-          state_id: selectedState,
-        };
+          state_id: selectedState
+          }
+        )
       } else if (pollType === "3") {
-        return {
+        return (
+          {
           pollcategory_id: pollType,
-          senatorial_id: district,
-        };
+          senatorial_id: district
+          }
+        )
       } else {
-        return { pollcategory_id: pollType };
+        return ({ pollcategory_id: pollType })
       }
     };
 
