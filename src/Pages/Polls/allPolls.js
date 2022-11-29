@@ -23,7 +23,6 @@ const AllPolls = () => {
     setIdExist(uniqueID);
 
     let formData = new FormData();
-    formData.append("voter_id", "542a2c42-e4a5-4e71-a441-40228ce2cd92");
     const requestOptions = {
       method: "POST",
     };
