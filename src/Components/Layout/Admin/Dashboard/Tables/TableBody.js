@@ -7,8 +7,8 @@ import Delete from "../../assets/trash@2x.png";
 const TableBody = ({ tableData }) => {
   const getSymbol = () => {
     const string = tableData.poll_name;
-    const wordArray = string.split(" ", 2);
-    const symbol = wordArray[0].slice(0, 2);
+    // const wordArray = string.split(" ", 2);
+    const symbol = string.slice(0, 2);
     // + wordArray[1].slice(0, 1);
     return symbol;
   };
