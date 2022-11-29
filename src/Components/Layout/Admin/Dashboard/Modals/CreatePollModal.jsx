@@ -96,29 +96,10 @@ const CreatePollModal = ({ open, handleClose, nextPage }) => {
 
   useEffect(() => {
     const getParties = async () => {
-      const config = () => {
-        if (pollType === '1') {
-          return {
-            poll_category_id: pollType,
-          };
-        } else if (pollType === '2') {
-          return {
-            pollcategory_id: pollType,
-            state_id: selectedState,
-          };
-        } else if (pollType === '3') {
-          return {
-            pollcategory_id: pollType,
-            senatorial_id: district,
-          };
-        }
-      };
-
       await axios
-        .post(
-          `https://wepollnow.azurewebsites.net/poll/poll_category_party/`,
-          config
-        )
+        .post(`https://wepollnow.azurewebsites.net/poll/poll_category_party/`, {
+          poll_category_id: pollType,
+        })
         .then((res) => {
           setParties(res.data);
           console.log(res.data);
@@ -126,7 +107,26 @@ const CreatePollModal = ({ open, handleClose, nextPage }) => {
         .catch((err) => console.log(err));
     };
     getParties();
-  }, [setParties, district, selectedState, pollType]);
+  }, [setParties, pollType]);
+
+  // if (pollType === '1') {
+  //         return {
+  //           poll_category_id: pollType,
+  //         };
+  //       } else if (pollType === '2') {
+  //         return {
+  //           pollcategory_id: pollType,
+  //           state_id: selectedState,
+  //         };
+  //       } else if (pollType === '3') {
+  //         return {
+  //           pollcategory_id: pollType,
+  //           senatorial_id: district,
+  //         };
+  //       } else {
+  //         pollcategory_id: pollType,
+  //       }
+
 
   useEffect(() => {
     var onDisabled = () => {
