@@ -99,30 +99,34 @@ const CreatePollModal = ({ open, handleClose, nextPage }) => {
   //     setPollName(`${state} ${pollType} Polls`)
   //   }
 
-
-
   useEffect(() => {
-    var onDisabled = () => {
-    if (pollType === '1') {
-      setEnabledState(true);
-      setEnabledSenetorial(true);
-      setEnabledZone(true);
-    } else if (pollType === '2') {
-      setEnabledSenetorial(true);
-      setEnabledZone(true);
-    } else if (pollType === '3') {
-      setEnabledZone(true);
-    } else {
-      setEnabledSenetorial(true);
-    }
-    }
-    
-    onDisabled()
-  }, [pollType])
+ var onDisabled = () => {
+   if (pollType === "1") {
+     setEnabledState(true);
+     setEnabledSenetorial(true);
+     setEnabledZone(true);
+   } else if (pollType === "2") {
+     setEnabledState(false);
+     setEnabledSenetorial(true);
+     setEnabledZone(true);
+   } else if (pollType === "3") {
+     setEnabledState(false);
+     setEnabledSenetorial(false);
+     setEnabledZone(true);
+   } else {
+     setEnabledSenetorial(true);
+     setEnabledZone(false);
+     setEnabledState(false);
+   }
+ };
 
-  console.log('Zone :', enabledZone);
+ onDisabled();
+  }, [pollType])
+ 
+
+  console.log("Zone :", enabledZone);
   console.log("Senatorial :", enabledSenetorial);
-  console.log('State :', enableState);
+  console.log("State :", enableState);
 
   return (
     <>
