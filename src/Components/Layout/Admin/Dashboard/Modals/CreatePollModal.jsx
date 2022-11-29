@@ -34,7 +34,7 @@ const CreatePollModal = ({ open, handleClose, nextPage }) => {
   } = useContext(ModalFormContext);
 
   const [enableState, setEnabledState] = useState(false);
-  const [enableSenatorail, setEnabledSenetorial] = useState(false);
+  const [enabledSenetorial, setEnabledSenetorial] = useState(false);
   const [enabledZone, setEnabledZone] = useState(false);
   /* Get State */
   useEffect(() => {
@@ -103,14 +103,14 @@ const CreatePollModal = ({ open, handleClose, nextPage }) => {
 
   useEffect(() => {
     var onDisabled = () => {
-    if (pollType === 1) {
+    if (pollType === '1') {
       setEnabledState(true);
       setEnabledSenetorial(true);
       setEnabledZone(true);
-    } else if (pollType === 2) {
+    } else if (pollType === '2') {
       setEnabledSenetorial(true);
       setEnabledZone(true);
-    } else if (pollType === 3) {
+    } else if (pollType === '3') {
       setEnabledZone(true);
     } else {
       setEnabledSenetorial(true);
@@ -120,9 +120,9 @@ const CreatePollModal = ({ open, handleClose, nextPage }) => {
     onDisabled()
   }, [pollType])
 
-  console.log(enabledZone);
-  console.log(enableSenatorail);
-  console.log(enableState);
+  console.log('Zone :', enabledZone);
+  console.log("Senatorial :", enabledSenetorial);
+  console.log('State :', enableState);
 
   return (
     <>
@@ -194,7 +194,7 @@ const CreatePollModal = ({ open, handleClose, nextPage }) => {
             <select
               name='state'
               id='state'
-              className='custom_select'
+              className='custom_select disabled:bg-gray-200 disabled:cursor-not-allowed'
               value={selectedState}
               onChange={(e) => {
                 setSelectedState(e.target.value);
@@ -221,13 +221,13 @@ const CreatePollModal = ({ open, handleClose, nextPage }) => {
             <select
               name='senetorial_district'
               id='senetorial_district'
-              className='custom_select'
+              className='custom_select disabled:bg-gray-200 disabled:cursor-not-allowed'
               value={district}
               onChange={(e) => {
                 setDistrict(e.target.value);
                 console.log(e.target.value);
               }}
-              disabled={enableSenatorail}
+              disabled={enabledSenetorial}
             >
               <option>Select Senetorial District</option>
               {districtData.map((data) => {
