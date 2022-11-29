@@ -7,6 +7,7 @@ import time from "../../../../../images/time.png";
 import image from "../../../../../images/blankImg.png";
 import Delete from "../../assets/trash@2x.png";
 import { Link } from "react-router-dom";
+import DOMPurify from "dompurify";
 
 /* Not used by Vincent */
 
@@ -22,7 +23,18 @@ const ManageBlogContent = () => {
     image: image,
   });
 
-  // Get post content
+  const createMarkup = (html) => {
+    return {
+      __html: DOMPurify.sanitize(html),
+    };
+  };
+
+  //
+  //
+  //
+  //
+  //
+  // =================================== Get post content based on the selected ID
 
   const getContent = async () => {
     const requestOptions = {
@@ -54,20 +66,23 @@ const ManageBlogContent = () => {
     };
     setRightContent(data);
 
-    // }
     if (!response.ok) {
       alert("Could not fetch data");
     }
   };
 
-  // Call this function to get the article ID
   useEffect(() => {
     if (articleId !== undefined) {
       getContent();
     }
   }, [articleId]);
 
-  // Delete post
+  //
+  //
+  //
+  //
+  //
+  // ========================================    Delete article post
   const deleteHandler = async (e) => {
     e.preventDefault();
     // Send API request
@@ -85,7 +100,7 @@ const ManageBlogContent = () => {
     }
   };
 
-  // Get data from API
+  // ====================================    Get All blog data from API
   useEffect(() => {
     const getData = async () => {
       const requestOptions = {
@@ -101,8 +116,11 @@ const ManageBlogContent = () => {
       apiData.forEach((item) => {
         const aData = {
           id: item.id,
-          title: item.title,
-          content: item.content !== undefined ? item.content : null,
+          title: item.title.split(" ").splice(0, 7).join(" ") + "...",
+          content:
+            item.content !== undefined
+              ? item.content.split(" ").splice(0, 20).join(" ") + "..."
+              : null,
           date_posted:
             item.date_posted !== undefined
               ? new Date(`${item.date_posted}`).toISOString().substring(0, 10)
@@ -135,9 +153,7 @@ const ManageBlogContent = () => {
           </div>
 
           <nav className="flex h-full pl-3 my-auto text-gray-500">
-            <span className="mr-1 w-[2.6rem]">
-              {/* <img src={LinkIcon} alt="Account" className="w-full" /> */}
-            </span>
+            <span className="mr-1 w-[2.6rem]"></span>
             <Link
               to={"/admin/blog/manageBlog"}
               className="p-3 rounded-md bg-[#08c127] text-white px-5 animate"
@@ -165,7 +181,7 @@ const ManageBlogContent = () => {
                       key={data.id}
                     >
                       <div
-                        className="p-6 hover:bg-gray-100"
+                        className="p-6 hover:bg-green-100"
                         onClick={() => setArticleId(data.id)}
                       >
                         <div className="flex flex-row items-center justify-between">
@@ -181,9 +197,9 @@ const ManageBlogContent = () => {
                             <img src={Delete} alt="trash" className="w-5 h-5" />
                           </button>
                         </div>
-                        <div>
-                          <p>{data.content}</p>
-                        </div>
+                        <p
+                          dangerouslySetInnerHTML={createMarkup(data.content)}
+                        ></p>
                       </div>
                     </form>
                   );
@@ -220,7 +236,7 @@ const ManageBlogContent = () => {
                     </div>
                     <div className="flex flex-row items-center justify-center space-x-2">
                       <img src={time} alt="timeIcon" className="w-4 h-4" />
-                      <p className="text-sm">{rightContent.time}</p>
+                      <p className="text-sm">{rightContent.time_posted}</p>
                     </div>
                     <div className="flex flex-row items-center justify-center space-x-2">
                       <img
@@ -228,8 +244,15 @@ const ManageBlogContent = () => {
                         alt="calendarIcon"
                         // className="w-3 h-3"
                       />
-                      <p className="text-sm">{rightContent.date}</p>
+                      <p className="text-sm">{rightContent.date_posted}</p>
                     </div>
+                  </div>
+                  <div>
+                    <p
+                      dangerouslySetInnerHTML={createMarkup(
+                        rightContent.content
+                      )}
+                    ></p>
                   </div>
                 </div>
               </div>

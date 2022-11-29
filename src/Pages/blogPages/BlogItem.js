@@ -64,7 +64,7 @@ const BlogItem = () => {
         {data.slice(0, 3).map((data) => {
           return (
             <div
-              className="w-full transition duration-150 hover:-translate-y-1"
+              className="w-full transition duration-150 hover:brightness-50"
               key={data.id}
             >
               <Link

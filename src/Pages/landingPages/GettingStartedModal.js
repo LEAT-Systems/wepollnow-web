@@ -31,6 +31,10 @@ const ModalComponent = (props) => {
     if (value !== null) {
       const intformatedPhoneNumber = formatPhoneNumberIntl(value);
       const countryEntered = parsePhoneNumber(value).country;
+
+      // Validate on end point
+
+      // save in local storage if successfully validated by endpoint
       localStorage.setItem(
         "phoneDetails",
         JSON.stringify({
@@ -40,6 +44,8 @@ const ModalComponent = (props) => {
       );
       setHasError(false);
       history.push("/getting-started-six", { replace: true });
+    }else{
+      alert('This phonenumber is already registered ')
     }
   };
 

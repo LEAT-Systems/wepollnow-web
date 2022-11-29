@@ -9,6 +9,7 @@ import image from "../../images/blankImg.png";
 import backarrow from "../../images/backArrow.png";
 import Footer from "../../Components/Layout/Landing/Footer";
 import { useHistory, Link } from "react-router-dom";
+import DOMPurify from "dompurify";
 
 const BlogSingle = () => {
   const history = useHistory();
@@ -108,30 +109,40 @@ const BlogSingle = () => {
     }
   };
 
+  // Purify the Text
+  const createMarkup = (html) => {
+    return {
+      __html: DOMPurify.sanitize(html),
+    };
+  };
+
   // Call this function to load the article data
+
   useEffect(() => {
     if (blogId !== undefined) {
       getContent(blogId);
     }
-  }, [blogId]);
+  });
 
   return (
     <>
       <Nav />
-      <div className="flex flex-col items-center justify-center md:px-24 md:flex-row ">
-        <div className="min-h-[1000px] pt-6">
+      <div className="flex flex-col items-center justify-center md:px-16 md:flex-row ">
+        <div className="h-[1500px] px-16 pt-6">
           {/* Main Reading Bar */}
-          <div className="flex flex-col md:flex-row max-w-[1410px] items-center justify-center">
+          <div className="flex flex-col md:flex-row max-w-[1410px] items-center justify-center space-x-24">
             <div className="flex md:max-w-[80%] md:min-w-[50%] h-screen flex-col items-start justify-start w-full pb-12 space-y-2">
               <button onClick={backHandler} className="flex flex-row space-x-2">
                 <img src={backarrow} alt="back_button" />
                 <p>Back</p>
               </button>
-              <img
-                src={fullContent?.image}
-                className="w-[700px] md:h-[400px]"
-                alt="post_image"
-              />
+              <div className="w-full h-[400px]">
+                <img
+                  src={fullContent?.image}
+                  className="w-full h-full"
+                  alt="post_image"
+                />
+              </div>
               <div className="flex flex-row space-x-2">
                 <img src={avatar} alt="avatar" className="w-6 h-6" />
                 <p>Wepollnow Admin</p>
@@ -153,11 +164,17 @@ const BlogSingle = () => {
                   <p>{fullContent?.date_posted}</p>
                 </div>
               </div>
-              <div>{fullContent?.content}</div>
+
+              {/* Blog text contents displayed as HTML */}
+              <div>
+                <p
+                  dangerouslySetInnerHTML={createMarkup(fullContent.content)}
+                ></p>
+              </div>
             </div>
 
             {/* Side Bar */}
-            <div className="grid w-full md:w-[35%] h-screen grid-cols-1 pb-24 space-y-6 md:space-y-4 md:gap-y-0 md:pb-0">
+            <div className="grid w-full md:w-[45%] h-screen grid-cols-1 pb-24 space-y-6 md:space-y-4 md:gap-y-0 md:pb-0">
               {isEmpty && <p className="text-[14px] font-bold">Latest Posts</p>}
               {!isEmpty && (
                 <div className="flex flex-row justify-center mb-8 md:-pt-98">
@@ -170,14 +187,21 @@ const BlogSingle = () => {
               )}
               {data.slice(0, 3).map((data) => {
                 return (
-                  <div className="w-full" key={data.id}>
+                  <div
+                    className="w-full"
+                    key={data.id}
+                    onClick={() => {
+                      localStorage.setItem("blog_article_id", data.id);
+                      window.location.reload();
+                    }}
+                  >
                     <Link to={"/blog-single"}>
                       <div className="flex flex-col w-full space-y-1 md:h-full">
                         <div className="relative">
                           <img
                             src={data.image}
                             alt="Voter"
-                            className="w-full h-[200px] rounded md:object-cover"
+                            className="w-full h-[200px] hover:brightness-50 rounded md:object-cover"
                           />
                           <div className="absolute bottom-0 right-0 z-30">
                             <img
@@ -218,6 +242,11 @@ const BlogSingle = () => {
                   </div>
                 );
               })}
+              <Link to="/blog" className="w-full pt-8">
+                <button className="w-full p-3 px-4 rounded bg-[#08c127] text-white animate">
+                  View More
+                </button>
+              </Link>
             </div>
           </div>
         </div>

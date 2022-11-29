@@ -7,7 +7,6 @@ import { FileUploader } from "react-drag-drop-files";
 import { EditorState } from "draft-js";
 import { Editor } from "react-draft-wysiwyg";
 import { convertToHTML } from "draft-convert";
-import DOMPurify from "dompurify";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 
 // Allowable file types
@@ -50,22 +49,20 @@ const CreateBlogContent = () => {
     let currentContentAsHTML = convertToHTML(editorState.getCurrentContent());
     setConvertedContent(currentContentAsHTML);
   };
-  const createMarkup = (html) => {
-    return {
-      __html: DOMPurify.sanitize(html),
-    };
-  };
+
   ///////////////////////////////////
 
   const updateState = () => {
     setIsSubmitting(true);
     setFormState({
       title: titleRef.current.value,
-      content: createMarkup(convertedContent),
+      content: convertedContent,
       image: file,
       date_posted: currentDate,
     });
   };
+
+  console.log(formState);
 
   // Handle submit
   const handleSubmit = (e) => {
@@ -195,6 +192,22 @@ const CreateBlogContent = () => {
                   editorState={editorState}
                   editorClassName="border"
                   onEditorStateChange={handleEditorChange}
+                  toolbar={{
+                    options: [
+                      "inline",
+                      "fontSize",
+                      "fontFamily",
+                      "textAlign",
+                      "colorPicker",
+                      "link",
+                      "remove",
+                      "history",
+                    ],
+                    inline: {
+                      inDropdown: false,
+                      options: ["bold", "italic", "underline"],
+                    },
+                  }}
                 />
               </div>
             </div>
