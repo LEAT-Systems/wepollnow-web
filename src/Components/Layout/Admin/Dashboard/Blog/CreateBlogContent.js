@@ -98,10 +98,10 @@ const CreateBlogContent = () => {
     <>
       <Header />
       <form className="px-4 my-4 md:px-6 lg:px-12" onSubmit={handleSubmit}>
-        {!isSubmitting && (
+        {isSubmitting && (
           <div className="flex flex-row items-center justify-center space-x-2">
             <img src={spinner} alt="loading_spinner" className="w-5 h-5" />
-            <p>Uploading...</p>
+            <p>Getting ready to upload...</p>
           </div>
         )}
         <header className="flex flex-row justify-between w-full py-4">

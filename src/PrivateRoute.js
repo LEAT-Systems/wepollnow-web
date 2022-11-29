@@ -1,5 +1,3 @@
-/** @format */
-
 import { useEffect } from "react";
 import { Route, Redirect } from "react-router-dom";
 import { useLocation } from "react-router-dom/cjs/react-router-dom.min";

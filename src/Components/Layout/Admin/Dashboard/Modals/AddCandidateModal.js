@@ -1,41 +1,181 @@
 /** @format */
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Close } from "@mui/icons-material";
 import { Modal } from "@mui/material";
+import {
+  FormControl,
+  FormControlLabel,
+  Radio,
+  RadioGroup,
+} from "@mui/material";
+import Axios from "axios";
 
-import { getState, getLGA, getDistrict, getZone, getPollType, postImage } from "../api";
+const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
+  /* Handling the form input and data */
+    const [pollType, setPollType] = useState();
+    const [pollTypeData, setPollTypeData] = useState([]);
+    const [name, setName] = useState("");
+    const [state, setState] = useState([]);
+    const [selectedState, setSelectedState] = useState();
+    const [district, setDistrict] = useState();
+    const [districtData, setDistrictData] = useState([]);
+    const [candidateImage, setCandidateImage] = useState(null);
+    const [zone, setZone] = useState([]);
+    const [partyData, setPartyData] = useState([]);
+    const [party, setParty] = useState([]);
+    const [zoneData, setZoneData] = useState([]);
+    const [percentage, setPercentage] = useState("");
+    const [errorMessage, setErrorMessage] = useState("");
+    const [successMessage, setSuccessMessage] = useState("");
+    const [mainCandidate, setMainCandidate] = useState(false);
 
-const AddCandidateModal = ({
-  addCandidate,
-  handleCloseAddCandidate,
-  modalData
- }) => {
-  const [state, setState] = useState("");
-  const [district, setDistrict] = useState("");
-  const [lga, setLga] = useState("");
-  const [zone, setZone] = useState("");
-  const [pollType, setPollType] = useState("");
-  const [candidateName, setCandidateName] = useState("");
-  const [candidateImage, setCandidateImage] = useState("");
-  const [percentage, setPercentage] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
-  const [successMessage, setSuccessMessage] = useState("");
+  if (selectedState === undefined) {
+      setSelectedState('')
+  }
 
-  console.log("State: ", state);
-  console.log("District: ", district);
-  console.log("LGA: ", lga);
-  console.log("Zone: ", zone);
-  console.log("Poll Type: ", pollType);
-  console.log("Candidate Name: ", candidateName);
-  console.log("Candidate Image: ", candidateImage);
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
+useEffect(() => {
+  const getState = async () => {
+    await Axios.get("https://wepollnow.azurewebsites.net/utilities/states/")
+      .then((res) => setState(res.data))
+      .catch((err) => console.log(err));
   };
+  getState();
+}, [setState]);
+  
+/* Get Senetorial District */
+useEffect(() => {
+  const getSenetorial = async () => {
+    await Axios
+      .get(
+        `https://wepollnow.azurewebsites.net/utilities/senatorial/${selectedState}`
+      )
+      .then((res) => setDistrictData(res.data))
+      .catch((err) => console.log(err));
+  };
+  getSenetorial();
+}, [selectedState, setDistrictData]);
+
+
+    /* Get Poll Type */
+    useEffect(() => {
+      const getPollType = async () => {
+        await Axios.get(
+          `https://wepollnow.azurewebsites.net/poll/poll_category/`
+        )
+          .then((res) => {
+            setPollTypeData(res.data);
+          })
+          .catch((err) => console.log(err));
+      };
+      getPollType();
+    }, [setPollTypeData]);
+
+    /* Get Party */
+    useEffect(() => {
+      const getParty = async () => {
+        await Axios.get(
+          `https://wepollnow.azurewebsites.net/utilities/party_list/`
+        )
+          .then((res) => {
+            setPartyData(res.data);
+          })
+          .catch((err) => console.log(err));
+      };
+      getParty();
+    }, [setPartyData]);
+
+    /* Submit Form */
+    useEffect(() => {
+      setErrorMessage("");
+    }, [name, candidateImage, selectedState, district, pollType]);
+
+    const handleSubmit = async (e) => {
+      e.preventDefault();
+
+      const formData = new FormData();
+      formData.append("photo", candidateImage);
+
+      await Axios.post(
+        "https://wepollnow.azurewebsites.net/utilities/candidates/",
+        {
+          name: name,
+          poll: 2,
+          poll_category_id: pollType,
+          state_id: selectedState,
+          senatorial_id: district,
+          party_id: party,
+          main_candidate: mainCandidate,
+          candidate_picture: formData,
+        },
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      )
+        .then((res) => {
+          console.log(res);
+          setSuccessMessage(true);
+        })
+        .catch((err) => {
+          if (!err?.response) {
+            setErrorMessage("No Connection");
+          } else if (err.response?.status === 400) {
+            setErrorMessage("Email and Password are required");
+          } else if (err.response?.status === 401) {
+            setErrorMessage("Unauthorized");
+          } else {
+            setErrorMessage("Add Candidate Failed");
+          }
+        });
+    };
+
+
+
+
+  // const token = async () => {
+  //   try {
+  //     const response = await Axios.post(
+  //       "https://wepollnow.azurewebsites.net/utilities/candidates/",
+  //       {
+  //         name: name,
+  //         poll: null,
+  //         poll_category: pollType,
+  //         state_id: selectedState,
+  //         senatorial_id: district,
+  //         main_candidate: mainCandidate,
+  //         candidate_picture: candidateImage,
+  //       },
+  //       {
+  //         headers: { "Content-Type": "application/json" },
+  //       }
+  //     );
+  //     // clear state and controlled inputs
+  //     setName("");
+  //     setPollType("");
+  //     setCandidateImage("");
+  //     setSelectedState("");
+  //     setDistrict("");
+  //     setSuccessMessage(true);
+  //     return response;
+  //   } catch (err) {
+  //     if (!err?.response) {
+  //       setErrorMessage("No Connection");
+  //     } else if (err.response?.status === 400) {
+  //       setErrorMessage("Email and Password are required");
+  //     } else if (err.response?.status === 401) {
+  //       setErrorMessage("Unauthorized");
+  //     } else {
+  //       setErrorMessage("Add Candidate Failed");
+  //     }
+  //     errRef.current.focus();
+  //   }
+  // };
+
 
   return (
-    <div className='w-full'>
+    <form onSubmit={handleSubmit} className='w-full'>
       <Modal
         open={addCandidate}
         onClose={handleCloseAddCandidate}
@@ -59,168 +199,217 @@ const AddCandidateModal = ({
             <button
               className='flex items-center justify-center border border-1 rounded-md py-[2px] px-[2px] cursor-pointer text-sm md:text-base bg-[#fcf0f0] text-red-500'
               onClick={handleCloseAddCandidate}
+              type='button'
             >
               <Close />
             </button>
           </header>
 
-          <form
-            onSubmit={handleSubmit}
-            className='flex flex-col justify-between items-center w-full my-2 hover:bg-transparent'
-          >
-            {/* First Form */}
-            <div className='flex flex-col md:flex-row my-2 justify-center items-center w-full gap-3 md:gap-5'>
-              <label className='w-full relative'>
+          {/*  */}
+          <div className='w-full'>
+            <div className='py-2'>
+              <label className='my-6 h-auto  w-full relative'>
                 Name
                 <input
                   type='text'
                   name='name'
                   id='name'
                   placeholder='Enter Candidate Name'
-                  value={candidateName}
-                  onChange={(e) => setCandidateName(e.target.value)}
+                  required
+                  aria-required
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
                   className='font-medium text-base text-[#616b62] capitalize h-full w-full border-2 border-gray-300 rounded-md py-3 px-3 placeholder:text-[#616b62]'
                 />
               </label>
             </div>
 
-            {/* Second Form */}
-            <div className='flex flex-col md:flex-row my-2 justify-center items-center w-full gap-3 md:gap-5'>
-              <label className='custom__select__container'>
+            <div className='py-2'>
+              <label className='my-6 h-auto  custom__select__container w-full'>
                 Poll Type
                 <select
                   name='poll__type'
                   id='poll__type'
+                  required
+                  aria-required
                   value={pollType}
-                  onChange={(e) => setPollType(e.target.value)}
+                  onChange={(e) => {
+                    setPollType(e.target.value);
+                  }}
                   className='custom__select'
                 >
-                  <option value='Select Poll Type'>Select Poll Type</option>
-                  <option>This is a Poll Type</option>
-                  <option>This is a Poll Type</option>
-                  <option>This is a Poll Type</option>
+                  <option>Select Poll Type</option>
+                  {pollTypeData.map((poll) => {
+                    return (
+                      <option key={poll.id} id={poll.id} value={poll.id}>
+                        {poll.title}
+                      </option>
+                    );
+                  })}
                 </select>
               </label>
             </div>
 
-            {/* Third Form */}
-            <div className='flex flex-col md:flex-row my-2 justify-center items-center w-full gap-3 md:gap-5'>
-              <label className='w-full relative'>
+            <div className='py-2'>
+              <label className='my-6 h-auto  w-full relative'>
                 Candidate Image
                 <input
                   type='file'
                   name='image'
                   id='image'
-                  placeholder='Enter Candidate Name'
+                  placeholder='Enter Candidate Image'
+                  required
+                  aria-required
                   filename={candidateImage}
-                  onChange={(e) => setCandidateImage(e.target.files)}
+                  onChange={(e) => setCandidateImage(e.target.files[0])}
                   className='font-medium text-base text-[#616b62] capitalize h-full w-full border-2 border-gray-300 rounded-md py-3 px-3 placeholder:text-[#616b62]'
                 />
               </label>
             </div>
 
-            {/* Fourth Form */}
-            <div className='flex flex-col md:flex-row my-2 justify-center items-center w-full gap-3 md:gap-5'>
-              <label className='custom__select__container'>
+            <div className='py-2'>
+              <label className='my-6 h-auto  custom__select__container w-full'>
                 State
                 <select
                   name='state'
                   id='state'
                   className='custom__select'
-                  value={state}
-                  onChange={(e) => setState(e.target.value)}
+                  required
+                  aria-required
+                  value={selectedState}
+                  onChange={(e) => {
+                    setSelectedState(e.target.value);
+                  }}
                 >
-                  <option value='Select state'>Select State</option>
-                  <option>Abia</option>
-                  <option>Adamawa</option>
-                  <option>Akwa Ibom</option>
-                  <option>Anambra</option>
-                  <option>Bauchi</option>
-                  <option>Bayelsa</option>
-                  <option>Benue</option>
-                  <option>Borno</option>
-                  <option>Cross River</option>
-                  <option>Delta</option>
-                  <option>Ebonyi</option>
-                  <option>Edo</option>
-                  <option>Ekiti</option>
-                  <option>Enugu</option>
-                  <option>Fct</option>
-                  <option>Gombe</option>
-                  <option>Imo</option>
-                  <option>Jigawa</option>
-                  <option>Kaduna</option>
-                  <option>Kano</option>
-                  <option>Katsina</option>
-                  <option>Kebbi</option>
-                  <option>Kogi</option>
-                  <option>Kwara</option>
-                  <option>Lagos</option>
-                  <option>Nasarawa</option>
-                  <option>Niger</option>
-                  <option>Ogun</option>
-                  <option>Ondo</option>
-                  <option>Osun</option>
-                  <option>Oyo</option>
-                  <option>Plateau</option>
-                  <option>Rivers</option>
-                  <option>Sokoto</option>
-                  <option>Taraba</option>
-                  <option>Yobe</option>
-                  <option>Zamfara</option>
+                  <option>Select State</option>
+                  {state.map((state) => {
+                    return (
+                      <option key={state.id} value={state.id}>
+                        {state.name}
+                      </option>
+                    );
+                  })}
                 </select>
               </label>
             </div>
 
-            {/* Fifth Form */}
-            <div className='flex flex-col md:flex-row my-2 justify-center items-center w-full gap-3 md:gap-5'>
-              <label className='custom__select__container'>
+            <div className='py-2'>
+              <label className='my-6 h-auto  custom__select__container w-full'>
                 Senetorial District
                 <select
                   name='district'
                   id='district'
                   className='custom__select'
+                  required
+                  aria-required
                   value={district}
-                  onChange={(e) => setDistrict(e.target.value)}
+                  onChange={(e) => {
+                    setDistrict(e.target.value);
+                  }}
                 >
-                  <option value='Select Poll Type'>
-                    Select Senetorial District
-                  </option>
-                  <option>This is a Senetorial District</option>
-                  <option>This is a Senetorial District</option>
-                  <option>This is a Senetorial District</option>
-                </select>
-              </label>
-
-              <label className='custom__select__container'>
-                LGA
-                <select
-                  name='lga'
-                  id='lga'
-                  className='custom__select'
-                  value={lga}
-                  onChange={(e) => setLga(e.target.value)}
-                >
-                  <option value='Select Poll Type'>Select LGA</option>
-                  <option>This is an LGA</option>
-                  <option>This is an LGA</option>
-                  <option>This is an LGA</option>
+                  <option>Select Senetorial District</option>
+                  {districtData.map((data) => {
+                    return (
+                      <option key={data.id} value={data.id}>
+                        {data.name}
+                      </option>
+                    );
+                  })}
                 </select>
               </label>
             </div>
 
-            {/* Final Form */}
-            <div className='flex flex-col md:flex-row my-2 justify-center items-center w-full gap-3 md:gap-5'>
-              <label className='custom__select__container'>
+            <div className='py-2'>
+              <label className='my-6 h-auto  custom_select_container w-full'>
+                Party
+                <select
+                  name='party'
+                  id='party'
+                  className='custom_select'
+                  value={party}
+                  onChange={(e) => {
+                    setParty(e.target.value);
+                  }}
+                >
+                  <option>Select Party</option>
+                  {partyData.map((data) => {
+                    return (
+                      <option key={data.id} value={data.id}>
+                        {data.name}
+                      </option>
+                    );
+                  })}
+                </select>
+              </label>
+            </div>
+
+            <FormControl sx={{ width: "100%" }}>
+              <RadioGroup
+                value={mainCandidate}
+                onChange={(e) => {
+                  setMainCandidate(e.target.value);
+                }}
+              >
+                <div className='flex justify-between align-center'>
+                  <FormControlLabel
+                    value='true'
+                    className='text-[#616b62] font-medium'
+                    sx={{ width: "100%" }}
+                    control={
+                      <Radio
+                        sx={{
+                          color: "#616b62",
+                          "&.Mui-checked": {
+                            color: "#616b62",
+                          },
+                        }}
+                      />
+                    }
+                    label='Yes'
+                  />
+                  <h3 className='font-bold my-auto text-sm text-[#616b62] whitespace-nowrap'>
+                    Main Candidate
+                  </h3>
+                </div>
+                <div className='flex justify-between align-center'>
+                  <FormControlLabel
+                    value='false'
+                    className='text-[#616b62] font-medium'
+                    sx={{ width: "100%" }}
+                    control={
+                      <Radio
+                        sx={{
+                          color: "#616b62",
+                          "&.Mui-checked": {
+                            color: "#616b62",
+                          },
+                        }}
+                      />
+                    }
+                    label='No'
+                  />
+
+                  <h3 className='font-bold my-auto text-sm text-[#616b62] whitespace-nowrap'>
+                    Main Candidate
+                  </h3>
+                </div>
+              </RadioGroup>
+            </FormControl>
+
+            <div className='py-2'>
+              <label className='my-6 h-auto  custom__select__container w-full'>
                 Zone
                 <select
                   name='zone'
                   id='zone'
-                  className='custom__select'
+                  className='custom_select disabled:bg-gray-200 disabled:cursor-not-allowed'
+                  disabled={true}
                   value={zone}
-                  onChange={(e) => setZone(e.target.value)}
+                  onChange={(e) => {
+                    setZone(e.target.value);
+                    }}
                 >
-                  <option value='Select Zone'>Select Zone</option>
+                  <option>Select Zone</option>
                   <option>1</option>
                   <option>2</option>
                   <option>2</option>
@@ -230,23 +419,29 @@ const AddCandidateModal = ({
                 </select>
               </label>
             </div>
-          </form>
-
-          {/* Buttons */}
+          </div>
           <div className='flex justify-end items-center w-full my-2'>
             <button
               className='flex items-center justify-center border-2 border-gray-300 py-3 px-5 h-full cursor-pointer text-sm rounded-md capitalize mr-4 transition-all duration-400 ease-in-out hover:bg-[#f3dddd] hover:text-red-600 hover:rounded-full'
               onClick={handleCloseAddCandidate}
+              type='button'
             >
               cancel
             </button>
-            <button className='flex items-center justify-center rounded-md py-3 px-5 h-full cursor-pointer text-sm bg-green-500 text-white capitalize transition-all duration-400 ease-in-out hover:bg-green-500 hover:text-white hover:rounded-full'>
+            <button
+              className='flex items-center justify-center rounded-md py-3 px-5 h-full cursor-pointer text-sm bg-green-500 text-white capitalize transition-all duration-400 ease-in-out hover:bg-green-500 hover:text-white hover:rounded-full'
+              type='submit'
+              onClick={(e) => {
+                handleCloseAddCandidate();
+                handleSubmit(e);
+              }}
+            >
               continue
             </button>
           </div>
         </div>
       </Modal>
-    </div>
+    </form>
   );
 };
 

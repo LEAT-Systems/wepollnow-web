@@ -8,7 +8,7 @@ import FilterModal from "../Modals/FilterModal";
 import CreatePollsContainer from "../Modals/CreatePollsContainer";
 // import { getTableData } from "../api";
 import SubHeader from "../../SubHeader";
-import axios from "axios";
+import Axios from "axios";
 
 const SubHeaderData = [
   {
@@ -30,19 +30,21 @@ const PollsPageContentOne = () => {
   const [searchResult, setSearchResult] = useState([]);
   const [modalData, setModalData] = useState([]);
 
-  /* 
-  const getdata = async () => {
-    axios.get("https://wepollnow.azurewebsites.net/utilities/candidates/").then((res) => {
+  const getData = async () => {
+    Axios.get("https://wepollnow.azurewebsites.net/poll/get_polls/")
+      .then((res) => {
       console.log(res);
-      setModalData(res);
-    }).catch(err => console.log(err))
+      setModalData(res.data);
+      })
+      .catch(err => console.log(err))
   };
 
   useEffect(() => {
-    getdata();
+    getData();
   }, []);
+
+
   
-*/
 
   /* View State */
   const [isGrid, setIsGrid] = useState(false);
@@ -85,12 +87,10 @@ const PollsPageContentOne = () => {
     // }).then(json => {
     //   setSearchResult(json)
     // })
-
     /* For our demo json object */
-    setTableData(Data);
-    setSearchResult(Data);
-  }, []);
-
+    setTableData(modalData);
+    setSearchResult(modalData);
+  }, [modalData]);
   return (
     <main className='flex flex-col justify-center w-[98%]'>
       <Header />
@@ -122,7 +122,8 @@ const PollsPageContentOne = () => {
           {isGrid ? (
             <Grid data={searchResult} handleOpen={handleOpen} />
           ) : (
-            <Tables data={searchResult} />
+              <Tables data={searchResult} />
+              
           )}
         </div>
 

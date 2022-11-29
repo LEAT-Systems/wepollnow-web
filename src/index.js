@@ -5,13 +5,16 @@ import App from "./App";
 import { BrowserRouter } from "react-router-dom";
 import { IdProvider } from "./Components/Forms/FormContext/userIdContext";
 import { AuthProvider } from "./AuthProvider";
+import { ModalFormProvider } from "./ModalFormContextAdmin/ModalFormContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <AuthProvider>
     <BrowserRouter>
       <IdProvider>
-        <App />
+        <ModalFormProvider>
+          <App />
+        </ModalFormProvider>
       </IdProvider>
     </BrowserRouter>
   </AuthProvider>
