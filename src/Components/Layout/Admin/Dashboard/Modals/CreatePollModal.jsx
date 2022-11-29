@@ -96,25 +96,25 @@ const CreatePollModal = ({ open, handleClose, nextPage }) => {
       if (pollType === "1") {
         return (
           {
-          pollcategory_id: pollType
+          "pollcategory_id": pollType
           }
         )
       } else if (pollType === "2") {
         return (
           {
-          pollcategory_id: pollType,
-          state_id: selectedState
+          "pollcategory_id": pollType,
+          "state_id": selectedState
           }
         )
       } else if (pollType === "3") {
         return (
           {
-          pollcategory_id: pollType,
-          senatorial_id: district
+          "pollcategory_id": pollType,
+          "senatorial_id": district
           }
         )
       } else {
-        return ({ pollcategory_id: pollType })
+        return ({ "pollcategory_id": pollType })
       }
     };
 
