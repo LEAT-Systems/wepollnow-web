@@ -90,16 +90,34 @@ const CreatePollModal = ({ open, handleClose, nextPage }) => {
     getParty();
   }, [setPartyData]);
 
-
-
   /* Get Party */
-
   useEffect(() => {
+    const config = () => {
+      if (pollType === "1") {
+        return {
+          pollcategory_id: pollType,
+        };
+      } else if (pollType === "2") {
+        return {
+          pollcategory_id: pollType,
+          state_id: selectedState,
+        };
+      } else if (pollType === "3") {
+        return {
+          pollcategory_id: pollType,
+          senatorial_id: district,
+        };
+      } else {
+        return { pollcategory_id: pollType };
+      }
+    };
+
     const getParties = async () => {
       await axios
-        .post(`https://wepollnow.azurewebsites.net/poll/poll_category_party/`, {
-          pollcategory_id: pollType,
-        })
+        .post(
+          `https://wepollnow.azurewebsites.net/poll/poll_category_party/`,
+          config
+        )
         .then((res) => {
           setParties(res.data);
           console.log(res.data);
@@ -107,26 +125,8 @@ const CreatePollModal = ({ open, handleClose, nextPage }) => {
         .catch((err) => console.log(err));
     };
     getParties();
-  }, [setParties, pollType]);
-
-  // if (pollType === '1') {
-  //         return {
-  //           poll_category_id: pollType,
-  //         };
-  //       } else if (pollType === '2') {
-  //         return {
-  //           pollcategory_id: pollType,
-  //           state_id: selectedState,
-  //         };
-  //       } else if (pollType === '3') {
-  //         return {
-  //           pollcategory_id: pollType,
-  //           senatorial_id: district,
-  //         };
-  //       } else {
-  //         pollcategory_id: pollType,
-  //       }
-
+    config();
+  }, [setParties, pollType, district, selectedState]);
 
   useEffect(() => {
     var onDisabled = () => {
@@ -319,6 +319,6 @@ const CreatePollModal = ({ open, handleClose, nextPage }) => {
       </div>
     </>
   );
-};;
+};
 
 export default CreatePollModal;
