@@ -99,7 +99,10 @@ const CreatePollModal = ({ open, handleClose, nextPage }) => {
   //     setPollName(`${state} ${pollType} Polls`)
   //   }
 
-  var onDisabled = () => {
+
+
+  useEffect(() => {
+    var onDisabled = () => {
     if (pollType === 1) {
       setEnabledState(true);
       setEnabledSenetorial(true);
@@ -112,7 +115,10 @@ const CreatePollModal = ({ open, handleClose, nextPage }) => {
     } else {
       setEnabledSenetorial(true);
     }
-  };
+    }
+    
+    onDisabled()
+  }, [pollType])
 
   return (
     <>
@@ -190,7 +196,7 @@ const CreatePollModal = ({ open, handleClose, nextPage }) => {
                 setSelectedState(e.target.value);
                 console.log(e.target.value);
               }}
-              disabled={onDisabled}
+              disabled={enableState}
             >
               <option>Select State</option>
               {state.map((state) => {
@@ -217,7 +223,7 @@ const CreatePollModal = ({ open, handleClose, nextPage }) => {
                 setDistrict(e.target.value);
                 console.log(e.target.value);
               }}
-              disabled={onDisabled}
+              disabled={enableSenatorail}
             >
               <option>Select Senetorial District</option>
               {districtData.map((data) => {
@@ -239,7 +245,7 @@ const CreatePollModal = ({ open, handleClose, nextPage }) => {
               name='zone'
               id='zone'
               className='custom_select disabled:bg-gray-200 disabled:cursor-not-allowed'
-              disabled={onDisabled}
+              disabled={enabledZone}
               value={zone}
               onChange={(e) => {
                 setZone(e.target.value);
