@@ -118,6 +118,7 @@ const CreatePollModal = ({ open, handleClose, nextPage }) => {
       }
     };
 
+    console.log(config());
     const getParties = async () => {
       await axios
         .post(
