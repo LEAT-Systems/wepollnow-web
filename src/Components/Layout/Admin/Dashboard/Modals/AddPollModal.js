@@ -42,8 +42,12 @@ const AddPollModal = ({ open, handleClose, nextPage, prevPage, modalData }) => {
       const j = item.candidates[1].id;
       const p = item.id;
 
-      parti.push(p);
-      candidate.push(i, j);
+      console.log("i: ", i)
+      console.log("i: ", j)
+      console.log("i: ", p)
+
+      // parti.push(p);
+      // candidate.push(i, j);
     });
     var presidentID = {
       poll_category_id: pollType,
