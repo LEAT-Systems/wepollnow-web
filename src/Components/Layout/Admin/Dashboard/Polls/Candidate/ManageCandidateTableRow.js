@@ -17,7 +17,7 @@ const ManageCandidateTableRow = ({ tableData }) => {
         scope="row"
         className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap"
       >
-        <span className="text-white text-sm font-bold capitalize bg-green-900 mr-4 rounded-xl p-[.45rem] min-w-[3rem] md:p-[.6rem] cursor-pointer">
+        <span className="text-white text-sm font-bold uppercase bg-green-900 mr-4 rounded-xl p-[.45rem] min-w-[3rem] md:p-[.6rem] cursor-pointer">
           {getSymbol()}
         </span>{" "}
         {tableData.name}
