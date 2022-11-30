@@ -1,6 +1,6 @@
 /** @format */
 
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import APC from "../../../../../images/apc.png";
 import { ArrowBack } from "@mui/icons-material";
 import ModalFormContext from "../../../../../ModalFormContextAdmin/ModalFormContext";
@@ -32,6 +32,23 @@ const AddPollModal = ({ open, handleClose, nextPage, prevPage, modalData }) => {
     parties,
     setSuccessMessage,
   } = useContext(ModalFormContext);
+
+  const [parti, setParti] = useState([])
+  const [candi, setCandi] = useState([])
+
+
+  console.log('Parties: ', parti)
+  console.log('Candidates: ', candi)
+
+parties?.forEach(element => {
+  const name1 = element.partyCandidate[0].id;
+  const name2 = element.partyCandidate[0].id;
+  const par = element.name;
+  const names = [...name1, ...name2]
+
+  setCandi(names)
+  setParti(par)
+});
 
   /* Post Info */
     // const candidate = [];
