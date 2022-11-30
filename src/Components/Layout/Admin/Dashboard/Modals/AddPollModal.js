@@ -39,8 +39,9 @@ const AddPollModal = ({ open, handleClose, nextPage, prevPage, modalData }) => {
 
   console.log('Parties: ', parti)
   console.log('Candidates: ', candi)
-
-parties?.forEach(element => {
+  
+  useEffect(() => {
+    parties?.forEach(element => {
   const name1 = element.partyCandidate[0].id;
   const name2 = element.partyCandidate[0].id;
   Object.keys(name1);
@@ -61,6 +62,7 @@ parties?.forEach(element => {
   setCandi(names)
   setParti(par)
 });
+  }, [parties])
 
   /* Post Info */
     // const candidate = [];
