@@ -1,14 +1,8 @@
-/** @format */
-
 import React, { useEffect } from "react";
 import { useState } from "react";
 import Tables from "../Tables/Tables";
 import Header from "../../Header";
-import Data from "../../Data.json";
-import {
-  ArrowForwardIos,
-  ArrowUpward
-} from "@mui/icons-material";
+import { ArrowForwardIos, ArrowUpward } from "@mui/icons-material";
 import Chart from "../../assets/Chart.jpg"
 import People from "../../assets/People.jpg"
 import Axios from 'axios'
@@ -41,6 +35,8 @@ const DashboardContent = () => {
   useEffect(() => {
     getData();
   }, []);
+
+  console.log(modalData)
 
   const date = new Date();
   const hrs = date.getHours();
