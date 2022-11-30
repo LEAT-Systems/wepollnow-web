@@ -37,18 +37,21 @@ const AddPollModal = ({ open, handleClose, nextPage, prevPage, modalData }) => {
     const candidate = [];
     const parti = [];
 
-    parties.forEach((item) => {
+    parties.map((item) => {
       const i = item.candidates[0].id;
       const j = item.candidates[1].id;
-      const p = item.id;
-
       console.log("i: ", i)
       console.log("i: ", j)
+
+      return candidate.push(i, j);
+    });
+    parties.map((item) => {
+      const p = item.id
       console.log("i: ", p)
 
-      // parti.push(p);
-      // candidate.push(i, j);
+      return parti.push(p)
     });
+
     var presidentID = {
       poll_category_id: pollType,
       poll_startDate: startDate,
