@@ -37,32 +37,21 @@ const AddPollModal = ({ open, handleClose, nextPage, prevPage, modalData }) => {
     const candidate = [];
     const parti = [];
 
-  const can = () => {
-    parties.map(item => {
-      return item.candidates[0].id;
-    })
-  const can2 = () => {
-    parties.map(item => {
-      return item.candidates[0].id;
-    })
-  }
-    const joined = [...can(), ...can2()]
-    const canID = () => {
-    parties.map(item => {
-      return item.id;
-    })
-    const ID = [...canID()]
-  }
+    parties.forEach((item) => {
+      const i = item.candidates[0].id;
+      const j = item.candidates[1].id;
+      const p = item.id;
 
-
-    
+      parti.push(p);
+      candidate.push(i, j);
+    });
     var presidentID = {
       poll_category_id: pollType,
       poll_startDate: startDate,
       poll_endDate: endDate,
       status: 1,
-      party: ID,
-      candidate: joined,
+      party: parti,
+      candidate: candidate,
     };
     var governorshipID = {
       poll_category_id: pollType,
@@ -70,8 +59,8 @@ const AddPollModal = ({ open, handleClose, nextPage, prevPage, modalData }) => {
       poll_startDate: startDate,
       poll_endDate: endDate,
       status: 1,
-      party: ID,
-      candidate: joined,
+      party: parti,
+      candidate: candidate,
     };
     var senatorialID = {
       poll_category_id: pollType,
@@ -80,7 +69,7 @@ const AddPollModal = ({ open, handleClose, nextPage, prevPage, modalData }) => {
       poll_endDate: endDate,
       status: 1,
       party: parti,
-      candidate: joined,
+      candidate: candidate,
     };
 
     var config = () => {
