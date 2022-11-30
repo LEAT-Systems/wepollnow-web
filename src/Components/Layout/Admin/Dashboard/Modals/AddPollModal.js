@@ -1,7 +1,4 @@
-/** @format */
-
 import React, { useContext, useEffect, useState } from "react";
-import APC from "../../../../../images/apc.png";
 import { ArrowBack } from "@mui/icons-material";
 import ModalFormContext from "../../../../../ModalFormContextAdmin/ModalFormContext";
 import axios from "axios";
@@ -33,95 +30,98 @@ const AddPollModal = ({ open, handleClose, nextPage, prevPage, modalData }) => {
     setSuccessMessage,
   } = useContext(ModalFormContext);
 
-  const [parti, setParti] = useState([])
-  const [candi, setCandi] = useState([])
+  const [parti, setParti] = useState([]);
+  const [candi, setCandi] = useState([]);
 
-
-  
   useEffect(() => {
-    parties?.forEach(element => {
-  const name1 = element.partyCandidate[0].id;
-  const name2 = element.partyCandidate[0].id;
-  Object.keys(name1);
-  Object.keys(name2);
-  const par = element.name;
+    parties?.forEach((element) => {
+      const name1 = element.partyCandidate[0].id;
+      const name2 = element.partyCandidate[0].id;
+      const par = element.name;
+      let newNameArray = [];
+      let newPartyArray = [];
 
-  if (name1.length === 0 && name2.length >= 1) {
-    var names = [name1, ...name2];
-  } else if (name1.length >= 1 && name2.length === 0) {
-    names = [...name1, name2];
-  } else if (name1.length >= 1 && name2.length >= 1) {
-    names = [...name1, ...name2];
-  } else {
-    names = [name1, name2];
-  }
-   
+      Object.keys(name1);
+      Object.keys(name2);
 
-  setCandi(names)
-  setParti(par)
-});
-  }, [parties])
+      newNameArray.push(name1, name2);
+      newPartyArray.push(par);
 
-    console.log("Parties: ", parti);
-    console.log("Candidates: ", candi);
+      // if (name1.length === 0 && name2.length >= 1) {
+      //   var names = [name1, ...name2];
+      // } else if (name1.length >= 1 && name2.length === 0) {
+      //   names = [...name1, name2];
+      // } else if (name1.length >= 1 && name2.length >= 1) {
+      //   names = [...name1, ...name2];
+      // } else {
+      //   names = [name1, name2];
+      // }
+
+      setCandi(newNameArray);
+      setParti(newPartyArray);
+    });
+  }, [parties]);
+
+  console.log("Parties: ", parti);
+  console.log("Candidates: ", candi);
 
   /* Post Info */
-    // const candidate = [];
-    // const parti = [];
+  // const candidate = [];
+  // const parti = [];
 
-    // parties.map((item) => {
-    //   const i = item.candidates[0].id;
-    //   const j = item.candidates[1].id;
-    //   console.log("i: ", i)
-    //   console.log("i: ", j)
+  // parties.map((item) => {
+  //   const i = item.candidates[0].id;
+  //   const j = item.candidates[1].id;
+  //   console.log("i: ", i)
+  //   console.log("i: ", j)
 
-    //   return candidate.push(i, j);
-    // });
-    // parties.map((item) => {
-    //   const p = item.id
-    //   console.log("i: ", p)
+  //   return candidate.push(i, j);
+  // });
+  // parties.map((item) => {
+  //   const p = item.id
+  //   console.log("i: ", p)
 
-    //   return parti.push(p)
-    // });
+  //   return parti.push(p)
+  // });
 
-    var presidentID = {
-      poll_category_id: pollType,
-      poll_startDate: startDate,
-      poll_endDate: endDate,
-      status: 1,
-      // party: parti,
-      // candidate: candidate,
-    };
-    var governorshipID = {
-      poll_category_id: pollType,
-      poll_state: selectedState,
-      poll_startDate: startDate,
-      poll_endDate: endDate,
-      status: 1,
-      // party: parti,
-      // candidate: candidate,
-    };
-    var senatorialID = {
-      poll_category_id: pollType,
-      poll_senatorial_district: district,
-      poll_startDate: startDate,
-      poll_endDate: endDate,
-      status: 1,
-      // party: parti,
-      // candidate: candidate,
-    };
+  var presidentID = {
+    poll_category_id: pollType,
+    poll_startDate: startDate,
+    poll_endDate: endDate,
+    status: 1,
+    // party: parti,
+    // candidate: candidate,
+  };
+  var governorshipID = {
+    poll_category_id: pollType,
+    poll_state: selectedState,
+    poll_startDate: startDate,
+    poll_endDate: endDate,
+    status: 1,
+    // party: parti,
+    // candidate: candidate,
+  };
+  var senatorialID = {
+    poll_category_id: pollType,
+    poll_senatorial_district: district,
+    poll_startDate: startDate,
+    poll_endDate: endDate,
+    status: 1,
+    // party: parti,
+    // candidate: candidate,
+  };
 
-    var config = () => {
-      if (pollType === "1") {
-        return presidentID;
-      } else if (pollType === "2") {
-        return governorshipID;
-      } else if (pollType === "3") {
-        return senatorialID;
-      } else {
-        return presidentID;
-      }
-    };
+  var config = () => {
+    if (pollType === "1") {
+      return presidentID;
+    } else if (pollType === "2") {
+      return governorshipID;
+    } else if (pollType === "3") {
+      return senatorialID;
+    } else {
+      return presidentID;
+    }
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
