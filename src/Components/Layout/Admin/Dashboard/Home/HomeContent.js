@@ -3,9 +3,9 @@ import { useState } from "react";
 import Tables from "../Tables/Tables";
 import Header from "../../Header";
 import { ArrowForwardIos, ArrowUpward } from "@mui/icons-material";
-import Chart from "../../assets/Chart.jpg"
-import People from "../../assets/People.jpg"
-import Axios from 'axios'
+import Chart from "../../assets/Chart.jpg";
+import People from "../../assets/People.jpg";
+import Axios from "axios";
 
 const DashboardContent = () => {
   const data = [
@@ -22,20 +22,20 @@ const DashboardContent = () => {
   const [greeting, setGreeting] = useState("");
   const [modalData, setModalData] = useState([]);
 
-  const getData = async () => {
-    Axios.get("https://wepollnow.azurewebsites.net/poll/get_polls/")
-      .then((res) => {
-        console.log(res);
-        setModalData(res.data);
-      })
-      .catch((err) => console.log(err));
-  };
-
   useEffect(() => {
+    const getData = async () => {
+      Axios.get("https://wepollnow.azurewebsites.net/poll/get_polls/")
+        .then((res) => {
+          console.log(res);
+          setModalData(res.data);
+        })
+        .catch((err) => console.log(err));
+    };
+
     getData();
   }, []);
 
-  console.log(modalData)
+  console.log(modalData);
 
   const date = new Date();
   const hrs = date.getHours();
