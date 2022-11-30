@@ -37,8 +37,6 @@ const AddPollModal = ({ open, handleClose, nextPage, prevPage, modalData }) => {
   const [candi, setCandi] = useState([])
 
 
-  console.log('Parties: ', parti)
-  console.log('Candidates: ', candi)
   
   useEffect(() => {
     parties?.forEach(element => {
@@ -63,6 +61,9 @@ const AddPollModal = ({ open, handleClose, nextPage, prevPage, modalData }) => {
   setParti(par)
 });
   }, [parties])
+
+    console.log("Parties: ", parti);
+    console.log("Candidates: ", candi);
 
   /* Post Info */
     // const candidate = [];
