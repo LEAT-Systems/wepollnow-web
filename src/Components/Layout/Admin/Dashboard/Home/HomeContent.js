@@ -50,7 +50,7 @@ const DashboardContent = () => {
     if (hrs >= 17 && hrs <= 24) {
       setGreeting("Evening");
     }
-  }, [hrs, date]);
+  }, [hrs]);
 
   return (
     <>
@@ -180,7 +180,7 @@ const DashboardContent = () => {
               />
             </button>
           </div>
-          <Tables data={Data} />
+          <Tables data={modalData} />
         </div>
       </main>
     </>
