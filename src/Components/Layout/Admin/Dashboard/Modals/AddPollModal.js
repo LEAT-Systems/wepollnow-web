@@ -46,7 +46,17 @@ parties?.forEach(element => {
   Object.keys(name1);
   Object.keys(name2);
   const par = element.name;
-  const names = [...name1, ...name2]
+
+  if (name1.length === 0 && name2.length >= 1) {
+    var names = [name1, ...name2];
+  } else if (name1.length >= 1 && name2.length === 0) {
+    names = [...name1, name2];
+  } else if (name1.length >= 1 && name2.length >= 1) {
+    names = [...name1, ...name2];
+  } else {
+    names = [name1, name2];
+  }
+   
 
   setCandi(names)
   setParti(par)
