@@ -6,16 +6,16 @@ import { ArrowBack } from "@mui/icons-material";
 import ModalFormContext from "../../../../../ModalFormContextAdmin/ModalFormContext";
 import axios from "axios";
 
-const data = [
-  {
-    id: 1,
-    Symbol: "AP",
-    party__name: "All Progressive Congress (APC)",
-    party__image: APC,
-    candidate: ["Jane Doe", "John Doe"],
-    running__mate: ["Jane Doe", "John Doe"],
-  },
-];
+// const data = [
+//   {
+//     id: 1,
+//     Symbol: "AP",
+//     party__name: "All Progressive Congress (APC)",
+//     party__image: APC,
+//     candidate: ["Jane Doe", "John Doe"],
+//     running__mate: ["Jane Doe", "John Doe"],
+//   },
+// ];
 
 const AddPollModal = ({ open, handleClose, nextPage, prevPage, modalData }) => {
   const {
@@ -34,31 +34,31 @@ const AddPollModal = ({ open, handleClose, nextPage, prevPage, modalData }) => {
   } = useContext(ModalFormContext);
 
   /* Post Info */
-    const candidate = [];
-    const parti = [];
+    // const candidate = [];
+    // const parti = [];
 
-    parties.map((item) => {
-      const i = item.candidates[0].id;
-      const j = item.candidates[1].id;
-      console.log("i: ", i)
-      console.log("i: ", j)
+    // parties.map((item) => {
+    //   const i = item.candidates[0].id;
+    //   const j = item.candidates[1].id;
+    //   console.log("i: ", i)
+    //   console.log("i: ", j)
 
-      return candidate.push(i, j);
-    });
-    parties.map((item) => {
-      const p = item.id
-      console.log("i: ", p)
+    //   return candidate.push(i, j);
+    // });
+    // parties.map((item) => {
+    //   const p = item.id
+    //   console.log("i: ", p)
 
-      return parti.push(p)
-    });
+    //   return parti.push(p)
+    // });
 
     var presidentID = {
       poll_category_id: pollType,
       poll_startDate: startDate,
       poll_endDate: endDate,
       status: 1,
-      party: parti,
-      candidate: candidate,
+      // party: parti,
+      // candidate: candidate,
     };
     var governorshipID = {
       poll_category_id: pollType,
@@ -66,8 +66,8 @@ const AddPollModal = ({ open, handleClose, nextPage, prevPage, modalData }) => {
       poll_startDate: startDate,
       poll_endDate: endDate,
       status: 1,
-      party: parti,
-      candidate: candidate,
+      // party: parti,
+      // candidate: candidate,
     };
     var senatorialID = {
       poll_category_id: pollType,
@@ -75,8 +75,8 @@ const AddPollModal = ({ open, handleClose, nextPage, prevPage, modalData }) => {
       poll_startDate: startDate,
       poll_endDate: endDate,
       status: 1,
-      party: parti,
-      candidate: candidate,
+      // party: parti,
+      // candidate: candidate,
     };
 
     var config = () => {
