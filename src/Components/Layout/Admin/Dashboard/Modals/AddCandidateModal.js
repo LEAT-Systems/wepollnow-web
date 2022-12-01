@@ -123,6 +123,7 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
           text: res.data.message,
           icon: "success",
           button: "Ok",
+          className: "swalButton",
         });
         setName("");
         setPollType("");
@@ -140,6 +141,7 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
             text: "No Internet Connection",
             icon: "error",
             button: "Ok",
+            className: "swalButton",
           });
         } else if (err.response?.status === 400) {
           setErrorMessage("Email and Password are required");
@@ -148,6 +150,7 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
             text: "All fields are required!",
             icon: "error",
             button: "Ok",
+            className: "swalButton",
           });
         } else if (err.response?.status === 401) {
           setErrorMessage("Unauthorized");
@@ -156,6 +159,7 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
             text: "Unauthorized",
             icon: "error",
             button: "Ok",
+            className: "swalButton",
           });
         } else {
           setErrorMessage("Add Candidate Failed");
@@ -164,6 +168,7 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
             text: "Adding Candidate Failed",
             icon: "error",
             button: "Ok",
+            className: "swalButton",
           });
         }
       });
