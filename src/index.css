@@ -298,3 +298,9 @@ input:focus {
 .PhoneInputInput:focus {
   @apply p-2 w-full outline-none rounded-md !important;
 }
+
+
+/* Swal Library Button Custom Style */
+.swalButton {
+  @apply bg-green-500 text-white
+}
