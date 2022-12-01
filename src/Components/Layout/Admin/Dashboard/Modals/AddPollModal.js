@@ -42,13 +42,14 @@ const AddPollModal = ({ open, handleClose, nextPage, prevPage, modalData }) => {
   const [candi, setCandi] = useState([]);
 
   useEffect(() => {
+    let newNameArray = [];
+    let newPartyArray = [];
+
     parties?.forEach((element) => {
       const name1 = element.partyCandidate[0].id;
       const name2 = element.partyCandidate[0].id;
       const par = element.name;
-      let newNameArray = [];
-      let newPartyArray = [];
-
+      
       Object.keys(name1);
       Object.keys(name2);
 
@@ -64,10 +65,10 @@ const AddPollModal = ({ open, handleClose, nextPage, prevPage, modalData }) => {
       // } else {
       //   names = [name1, name2];
       // }
-
-      setCandi(newNameArray);
-      setParti(newPartyArray);
+      
     });
+    setCandi(newNameArray);
+    setParti(newPartyArray);
   }, [parties]);
 
   console.log("Parties: ", parti);
