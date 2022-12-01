@@ -1,16 +1,11 @@
-/** @format */
-
 import React, { useEffect } from "react";
 import { useState } from "react";
 import Tables from "../Tables/Tables";
 import Header from "../../Header";
-import Data from "../../Data.json";
-import {
-  ArrowForwardIos,
-  ArrowUpward
-} from "@mui/icons-material";
-import Chart from "../../assets/Chart.jpg"
-import People from "../../assets/People.jpg"
+import { ArrowForwardIos, ArrowUpward } from "@mui/icons-material";
+import Chart from "../../assets/Chart.jpg";
+import People from "../../assets/People.jpg";
+import Axios from "axios";
 
 const DashboardContent = () => {
   const data = [
@@ -25,6 +20,23 @@ const DashboardContent = () => {
   ];
 
   const [greeting, setGreeting] = useState("");
+  const [modalData, setModalData] = useState([]);
+
+  useEffect(() => {
+    const getData = async () => {
+      Axios.get("https://wepollnow.azurewebsites.net/poll/get_polls/")
+        .then((res) => {
+          console.log(res);
+          setModalData(res.data);
+        })
+        .catch((err) => console.log(err));
+    };
+
+    getData();
+  }, []);
+
+  console.log(modalData);
+
   const date = new Date();
   const hrs = date.getHours();
 
@@ -38,7 +50,7 @@ const DashboardContent = () => {
     if (hrs >= 17 && hrs <= 24) {
       setGreeting("Evening");
     }
-  }, [hrs, date]);
+  }, [hrs]);
 
   return (
     <>
@@ -168,7 +180,7 @@ const DashboardContent = () => {
               />
             </button>
           </div>
-          <Tables data={Data} />
+          <Tables data={modalData} />
         </div>
       </main>
     </>
