@@ -10,6 +10,8 @@ import {
   RadioGroup,
 } from "@mui/material";
 import Axios from "axios";
+import swal from "sweetalert";
+
 
 const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
   /* Handling the form input and data */
@@ -30,9 +32,9 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
   const [successMessage, setSuccessMessage] = useState("");
   const [mainCandidate, setMainCandidate] = useState(false);
 
-    const [enableState, setEnabledState] = useState(false);
-    const [enabledSenetorial, setEnabledSenetorial] = useState(false);
-    const [enabledZone, setEnabledZone] = useState(false);
+  const [enableState, setEnabledState] = useState(false);
+  const [enabledSenetorial, setEnabledSenetorial] = useState(false);
+  const [enabledZone, setEnabledZone] = useState(false);
 
   if (selectedState === undefined) {
     setSelectedState("");
@@ -116,44 +118,80 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
     )
       .then((res) => {
         console.log(res);
+        swal({
+          title: "Success",
+          text: res.data.message,
+          icon: "success",
+          button: "Ok",
+        });
+        setName("");
+        setPollType("");
+        setSelectedState("");
+        setDistrict("");
+        setParty("");
+        setMainCandidate(false);
         setSuccessMessage(true);
       })
       .catch((err) => {
         if (!err?.response) {
           setErrorMessage("No Connection");
+          swal({
+            title: "Success",
+            text: "No Internet Connection",
+            icon: "error",
+            button: "Ok",
+          });
         } else if (err.response?.status === 400) {
           setErrorMessage("Email and Password are required");
+          swal({
+            title: "Failure",
+            text: "All fields are required!",
+            icon: "error",
+            button: "Ok",
+          });
         } else if (err.response?.status === 401) {
           setErrorMessage("Unauthorized");
+          swal({
+            title: "Failure",
+            text: "Unauthorized",
+            icon: "error",
+            button: "Ok",
+          });
         } else {
           setErrorMessage("Add Candidate Failed");
+          swal({
+            title: "Failure",
+            text: "Adding Candidate Failed",
+            icon: "error",
+            button: "Ok",
+          });
         }
       });
   };
 
-    useEffect(() => {
-      var onDisabled = () => {
-        if (pollType === "1") {
-          setEnabledState(true);
-          setEnabledSenetorial(true);
-          setEnabledZone(true);
-        } else if (pollType === "2") {
-          setEnabledState(false);
-          setEnabledSenetorial(true);
-          setEnabledZone(true);
-        } else if (pollType === "3") {
-          setEnabledState(false);
-          setEnabledSenetorial(false);
-          setEnabledZone(true);
-        } else {
-          setEnabledSenetorial(true);
-          setEnabledZone(false);
-          setEnabledState(false);
-        }
-      };
+  useEffect(() => {
+    var onDisabled = () => {
+      if (pollType === "1") {
+        setEnabledState(true);
+        setEnabledSenetorial(true);
+        setEnabledZone(true);
+      } else if (pollType === "2") {
+        setEnabledState(false);
+        setEnabledSenetorial(true);
+        setEnabledZone(true);
+      } else if (pollType === "3") {
+        setEnabledState(false);
+        setEnabledSenetorial(false);
+        setEnabledZone(true);
+      } else {
+        setEnabledSenetorial(true);
+        setEnabledZone(false);
+        setEnabledState(false);
+      }
+    };
 
-      onDisabled();
-    }, [pollType]);
+    onDisabled();
+  }, [pollType]);
 
   // const token = async () => {
   //   try {
