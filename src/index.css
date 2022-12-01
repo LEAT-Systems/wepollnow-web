@@ -301,6 +301,10 @@ input:focus {
 
 
 /* Swal Library Button Custom Style */
-.swalButton {
+/* .swalButton {
   @apply bg-green-500 text-white
+} */
+
+.swal-button {
+ @apply px-5 py-3 text-sm text-white bg-green-500 rounded-md cursor-pointer capitalize;
 }
