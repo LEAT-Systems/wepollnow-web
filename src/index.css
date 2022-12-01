@@ -306,5 +306,5 @@ input:focus {
 } */
 
 .swal-button {
- @apply px-5 py-3 text-sm text-white bg-green-500 rounded-md cursor-pointer capitalize;
+ @apply px-5 py-3 text-sm text-white bg-green-500 hover:bg-green-500 hover:text-white rounded-md cursor-pointer capitalize;
 }
