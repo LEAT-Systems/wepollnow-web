@@ -93,11 +93,7 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
     setErrorMessage("");
   }, [name, candidateImage, selectedState, district, pollType]);
 
-  if (name !== "" && pollType !== "") {
-    setConfirmBtn(true)
-  } else {
-    setConfirmBtn(false)
-  }
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -198,7 +194,13 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
     };
 
     onDisabled();
-  }, [pollType]);
+
+      if (name !== "" && pollType !== "") {
+        setConfirmBtn(true);
+      } else {
+        setConfirmBtn(false);
+      }
+  }, [name, pollType]);
 
   // const token = async () => {
   //   try {
