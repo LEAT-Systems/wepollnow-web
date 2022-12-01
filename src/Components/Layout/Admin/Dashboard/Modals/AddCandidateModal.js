@@ -195,7 +195,7 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
 
     onDisabled();
 
-      if (name !== "" && pollType !== "") {
+      if (name !== "" || pollType !== "") {
         setConfirmBtn(false);
       } else {
         setConfirmBtn(true);
