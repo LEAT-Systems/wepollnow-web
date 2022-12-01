@@ -1,7 +1,10 @@
+/** @format */
+
 import React, { useContext, useEffect, useState } from "react";
 import { ArrowBack } from "@mui/icons-material";
 import ModalFormContext from "../../../../../ModalFormContextAdmin/ModalFormContext";
 import axios from "axios";
+import swal from "sweetalert";
 
 // const data = [
 //   {
@@ -28,6 +31,11 @@ const AddPollModal = ({ open, handleClose, nextPage, prevPage, modalData }) => {
     pollName,
     parties,
     setSuccessMessage,
+    setPollType,
+    setSelectedState,
+    setDistrict,
+    setStartDate,
+    setEndDate,
   } = useContext(ModalFormContext);
 
   const [parti, setParti] = useState([]);
@@ -129,11 +137,62 @@ const AddPollModal = ({ open, handleClose, nextPage, prevPage, modalData }) => {
     const getParties = async () => {
       await axios
         .post(`https://wepollnow.azurewebsites.net/poll/create_poll/`, config())
+        // .then((res) => {
+        //   setSuccessMessage(res.status);
+        //   console.log(res.data);
+        // })
+        // .catch((err) => console.log(err));
+
         .then((res) => {
-          setSuccessMessage(res.status);
-          console.log(res.data);
+          console.log(res);
+          swal({
+            title: "Success",
+            text: "New Poll Added Successfully!",
+            icon: "success",
+            button: "Ok",
+          });
+          setPollType("");
+          setSelectedState("");
+          setDistrict("");
+          setStartDate("");
+          setEndDate("");
+          setSuccessMessage(true);
         })
-        .catch((err) => console.log(err));
+        .catch((err) => {
+          if (!err?.response) {
+            setSuccessMessage("No Connection");
+            swal({
+              title: "Success",
+              text: "No Internet Connection",
+              icon: "error",
+              button: "Ok",
+            });
+          } else if (err.response?.status === 400) {
+            setSuccessMessage("Email and Password are required");
+            swal({
+              title: "Failure",
+              text: "All fields are required!",
+              icon: "error",
+              button: "Ok",
+            });
+          } else if (err.response?.status === 401) {
+            setSuccessMessage("Unauthorized");
+            swal({
+              title: "Failure",
+              text: "Unauthorized",
+              icon: "error",
+              button: "Ok",
+            });
+          } else {
+            setSuccessMessage("Add Candidate Failed");
+            swal({
+              title: "Failure",
+              text: "Adding New Poll Failed",
+              icon: "error",
+              button: "Ok",
+            });
+          }
+        });
     };
     getParties();
   };
