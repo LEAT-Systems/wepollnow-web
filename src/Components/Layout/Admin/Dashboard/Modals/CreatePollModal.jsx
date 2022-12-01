@@ -38,6 +38,8 @@ const CreatePollModal = ({ open, handleClose, nextPage }) => {
   const [enableState, setEnabledState] = useState(false);
   const [enabledSenetorial, setEnabledSenetorial] = useState(false);
   const [enabledZone, setEnabledZone] = useState(false);
+  const [confirmBtn, setConfirmBtn] = useState(true);
+
   /* Get State */
   useEffect(() => {
     const getState = async () => {
@@ -155,7 +157,13 @@ const CreatePollModal = ({ open, handleClose, nextPage }) => {
     };
 
     onDisabled();
-  }, [pollType]);
+
+    if (startDate !== "" || pollType !== "" || endDate !== "") {
+      setConfirmBtn(false);
+    } else {
+      setConfirmBtn(true);
+    }
+  }, [startDate, endDate, pollType]);
 
   // if (pollType === "1") {
   //   return setPollName(`${pollTypeName} Poll`);
@@ -181,6 +189,8 @@ const CreatePollModal = ({ open, handleClose, nextPage }) => {
               id='poll_type'
               className='custom_select'
               value={pollType}
+              required
+              aria-required
               onChange={(e) => {
                 setPollType(e.target.value);
                 console.log(e.target.value);
@@ -209,6 +219,8 @@ const CreatePollModal = ({ open, handleClose, nextPage }) => {
               className='font-medium text-base text-[#616b62] uppercase h-full w-full border-2 border-gray-300 rounded-md py-3 px-3'
               placeholder='DD/MM/YY'
               value={startDate}
+              required
+              aria-required
               onChange={(e) => {
                 setStartDate(e.target.value);
                 console.log(e.target.value);
@@ -224,6 +236,8 @@ const CreatePollModal = ({ open, handleClose, nextPage }) => {
               className='font-medium text-base text-[#616b62] uppercase h-full w-full border-2 border-gray-300 rounded-md py-3 px-3'
               placeholder='DD/MM/YY'
               value={endDate}
+              required
+              aria-required
               onChange={(e) => {
                 setEndDate(e.target.value);
                 console.log(e.target.value);
@@ -321,7 +335,8 @@ const CreatePollModal = ({ open, handleClose, nextPage }) => {
             cancel
           </button>
           <button
-            className='flex items-center justify-center rounded-md py-3 px-5 h-full cursor-pointer text-sm bg-green-500 text-white capitalize transition-all duration-400 ease-in-out hover:bg-green-500 hover:text-white hover:rounded-full'
+            className='flex items-center justify-center rounded-md py-3 px-5 h-full cursor-pointer text-sm bg-green-500 text-white capitalize transition-all duration-400 ease-in-out hover:bg-green-500 hover:text-white hover:rounded-full disabled:bg-gray-200 disabled:cursor-not-allowed'
+            disabled={confirmBtn}
             onClick={() => {
               nextPage();
             }}

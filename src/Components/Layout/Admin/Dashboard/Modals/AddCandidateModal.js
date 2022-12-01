@@ -35,6 +35,7 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
   const [enableState, setEnabledState] = useState(false);
   const [enabledSenetorial, setEnabledSenetorial] = useState(false);
   const [enabledZone, setEnabledZone] = useState(false);
+  const [confirmBtn, setConfirmBtn] = useState(true);
 
   if (selectedState === undefined) {
     setSelectedState("");
@@ -92,6 +93,8 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
     setErrorMessage("");
   }, [name, candidateImage, selectedState, district, pollType]);
 
+
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -120,10 +123,9 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
         console.log(res);
         swal({
           title: "Success",
-          text: res.data.message,
+          text: "New Candidate Added!",
           icon: "success",
           button: "Ok",
-          className: "swalButton",
         });
         setName("");
         setPollType("");
@@ -141,7 +143,6 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
             text: "No Internet Connection",
             icon: "error",
             button: "Ok",
-            className: "swalButton",
           });
         } else if (err.response?.status === 400) {
           setErrorMessage("Email and Password are required");
@@ -150,7 +151,6 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
             text: "All fields are required!",
             icon: "error",
             button: "Ok",
-            className: "swalButton",
           });
         } else if (err.response?.status === 401) {
           setErrorMessage("Unauthorized");
@@ -159,7 +159,6 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
             text: "Unauthorized",
             icon: "error",
             button: "Ok",
-            className: "swalButton",
           });
         } else {
           setErrorMessage("Add Candidate Failed");
@@ -168,7 +167,6 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
             text: "Adding Candidate Failed",
             icon: "error",
             button: "Ok",
-            className: "swalButton",
           });
         }
       });
@@ -196,7 +194,13 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
     };
 
     onDisabled();
-  }, [pollType]);
+
+      if (name !== "" || pollType !== "") {
+        setConfirmBtn(false);
+      } else {
+        setConfirmBtn(true);
+      }
+  }, [name, pollType]);
 
   // const token = async () => {
   //   try {
@@ -336,7 +340,7 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
                 <select
                   name='state'
                   id='state'
-                  className='custom__select'
+                  className='custom__select disabled:bg-gray-200 disabled:cursor-not-allowed'
                   required
                   aria-required
                   value={selectedState}
@@ -363,7 +367,7 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
                 <select
                   name='district'
                   id='district'
-                  className='custom__select'
+                  className='custom__select disabled:bg-gray-200 disabled:cursor-not-allowed'
                   required
                   aria-required
                   value={district}
@@ -487,15 +491,16 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
           </div>
           <div className='flex items-center justify-end w-full my-2'>
             <button
-              className='flex items-center justify-center border-2 border-gray-300 py-3 px-5 h-full cursor-pointer text-sm rounded-md capitalize mr-4 transition-all duration-400 ease-in-out hover:bg-[#f3dddd] hover:text-red-600 hover:rounded-full'
+              className='flex items-center justify-center border-2 border-gray-300 py-3 px-5 h-full cursor-pointer text-sm rounded-md capitalize mr-4 transition-all duration-400 ease-in-out hover:bg-[#f3dddd] hover:text-red-600 hover:rounded-full '
               onClick={handleCloseAddCandidate}
               type='button'
             >
               cancel
             </button>
             <button
-              className='flex items-center justify-center h-full px-5 py-3 text-sm text-white capitalize transition-all ease-in-out bg-green-500 rounded-md cursor-pointer duration-400 hover:bg-green-500 hover:text-white hover:rounded-full'
+              className='flex items-center justify-center h-full px-5 py-3 text-sm text-white capitalize transition-all ease-in-out bg-green-500 rounded-md cursor-pointer duration-400 hover:bg-green-500 hover:text-white hover:rounded-full disabled:bg-gray-200 disabled:cursor-not-allowed'
               type='submit'
+              disabled={confirmBtn}
               onClick={(e) => {
                 handleCloseAddCandidate();
                 handleSubmit(e);
