@@ -96,8 +96,8 @@ const AddPollModal = ({ open, handleClose, nextPage, prevPage, modalData, setPag
     poll_startDate: startDate,
     poll_endDate: endDate,
     status: 1,
-    // party: parti,
-    // candidate: candidate,
+    party: parti,
+    candidate: candi,
   };
   var governorshipID = {
     poll_category_id: pollType,
@@ -105,8 +105,8 @@ const AddPollModal = ({ open, handleClose, nextPage, prevPage, modalData, setPag
     poll_startDate: startDate,
     poll_endDate: endDate,
     status: 1,
-    // party: parti,
-    // candidate: candidate,
+    party: parti,
+    candidate: candi,
   };
   var senatorialID = {
     poll_category_id: pollType,
@@ -114,8 +114,8 @@ const AddPollModal = ({ open, handleClose, nextPage, prevPage, modalData, setPag
     poll_startDate: startDate,
     poll_endDate: endDate,
     status: 1,
-    // party: parti,
-    // candidate: candidate,
+    party: parti,
+    candidate: candi,
   };
 
   var config = () => {
