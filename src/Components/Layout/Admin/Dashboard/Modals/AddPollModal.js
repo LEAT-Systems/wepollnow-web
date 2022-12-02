@@ -17,16 +17,11 @@ import swal from "sweetalert";
 
 const AddPollModal = ({ open, handleClose, nextPage, prevPage, modalData, setPage }) => {
   const {
-    mainCandidate,
-    setMainCandidate,
     pollType,
     selectedState,
     district,
     startDate,
     endDate,
-    partyData,
-    runningMate,
-    pollName,
     parties,
     setSuccessMessage,
     setPollType,
@@ -130,10 +125,10 @@ const AddPollModal = ({ open, handleClose, nextPage, prevPage, modalData, setPag
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const getParties = async () => {
+
       await axios
         .post(`https://wepollnow.azurewebsites.net/poll/create_poll/`, config())
         // .then((res) => {
@@ -141,7 +136,6 @@ const AddPollModal = ({ open, handleClose, nextPage, prevPage, modalData, setPag
         //   console.log(res.data);
         // })
         // .catch((err) => console.log(err));
-
         .then((res) => {
           console.log(res);
           swal({
@@ -192,8 +186,8 @@ const AddPollModal = ({ open, handleClose, nextPage, prevPage, modalData, setPag
             });
           }
         });
-    };
-    getParties();
+
+
   };
 
   return (
