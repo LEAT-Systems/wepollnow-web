@@ -156,7 +156,12 @@ const GettingStartedFive = () => {
           <h1 className="text-xl font-extrabold md:text-3xl">
             Gubernatorial Polls
           </h1>
-
+          <div
+            className={`inline-flex items-center justify-center space-x-1 px-4 py-1 text-xs bg-[#EDFFF0] border-[#08c127] border md:text-lg font-semibold leading-none text-black rounded-md`}
+          >
+            <img src={calendar} alt="calendarMonth" />
+            <p className="text-sm">Oncoming</p>
+          </div>
           <div className="flex flex-row items-center justify-center ">
             <div className="max-w-4xl p-8 text-4xl text-[#082B0E] md:space-y-4 text-center md:text-[54px]">
               <h1>

@@ -62,6 +62,8 @@ const CreateBlogContent = () => {
     });
   };
 
+  console.log(formState);
+
   // Handle submit
   const handleSubmit = (e) => {
     e.preventDefault();

@@ -3,7 +3,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Close } from "@mui/icons-material";
 import { Modal } from "@mui/material";
-import { FileUploader } from "react-drag-drop-files";
 import {
   FormControl,
   FormControlLabel,
@@ -31,18 +30,6 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
   const [mainCandidate, setMainCandidate] = useState(false);
-  // newly added states
-  const [file, setFile] = useState(null);
-  const [fileName, setFileName] = useState("");
-  const [fileError, setFileError] = useState();
-
-  // Newly added: Handler to listen to file change
-  const handleFileChange = (file) => {
-    setFile(file);
-  };
-
-  // Newly added: Allowable file types
-  const fileTypes = ["JPG", "PNG", "JPEG"];
 
   const [enableState, setEnabledState] = useState(false);
   const [enabledSenetorial, setEnabledSenetorial] = useState(false);
@@ -111,8 +98,6 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
     // const formData = new FormData();
     // formData.append("photo", candidateImage);
 
-    console.log(file);
-
     await Axios.post(
       "https://wepollnow.azurewebsites.net/utilities/candidates/",
       {
@@ -123,7 +108,12 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
         senatorial_id: district,
         party_id: party,
         main_candidate: mainCandidate,
-        candidate_picture: file,
+        // candidate_picture: formData,
+      },
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
       }
     )
       .then((res) => {
@@ -342,26 +332,18 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
 
             {/* <div className="py-2">
               <label className="relative w-full h-auto my-6">
-                Candidate Image (Max size 2MB (png, jpg, jpeg))
-                <FileUploader
-                  onTypeError={(err) => setFileError(err)}
-                  onDrop={(file) => setFileName(file.name)}
-                  onSelect={(file) => setFileName(file.name)}
-                  handleChange={handleFileChange}
-                  name="file"
-                  types={fileTypes}
-                  maxSize={2}
-                >
-                  <div className="font-medium text-base text-[#616b62] capitalize h-full w-full border-2 border-gray-300 rounded-md py-3 px-3 placeholder:text-[#616b62]">
-                    <div className="flex flex-row space-x-2">
-                      <button className="px-2 border">Select a file</button>{" "}
-                      <p>{fileName === "" ? "No File Selected" : fileName}</p>
-                      <p className="p-1 text-red-500 rounded">
-                        {fileName === "" && fileError !== "" && fileError}
-                      </p>
-                    </div>
-                  </div>
-                </FileUploader>
+                Candidate Image
+                <input
+                  type="file"
+                  name="image"
+                  id="image"
+                  placeholder="Enter Candidate Image"
+                  required
+                  aria-required
+                  filename={candidateImage}
+                  onChange={(e) => setCandidateImage(e.target.files[0])}
+                  className="font-medium text-base text-[#616b62] capitalize h-full w-full border-2 border-gray-300 rounded-md py-3 px-3 placeholder:text-[#616b62]"
+                />
               </label>
             </div> */}
 

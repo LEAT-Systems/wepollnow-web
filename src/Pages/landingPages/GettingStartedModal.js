@@ -1,5 +1,8 @@
 import React, { useState } from "react";
-import { formatPhoneNumber, parsePhoneNumber } from "react-phone-number-input";
+import {
+  formatPhoneNumber,
+  parsePhoneNumber,
+} from "react-phone-number-input";
 import { useHistory } from "react-router-dom";
 import "react-phone-number-input/style.css";
 import PhoneInput from "react-phone-number-input";
@@ -13,9 +16,6 @@ const ModalComponent = (props) => {
   const [hasError, setHasError] = useState(false);
   const [value, setValue] = useState(null);
   const [tooltipStatus, setTooltipStatus] = useState(0);
-  const [message, setMessage] = useState("");
-
-  // Validate on end point
 
   // Submit form values
   const handleSubmit = (e) => {
@@ -29,48 +29,23 @@ const ModalComponent = (props) => {
 
     // if not null, get the phone number and country
     if (value !== null) {
-      const formatedPhoneNumber = formatPhoneNumber(value).replace(/\s/g, "");
+      const formatedPhoneNumber = formatPhoneNumber(value);
       const countryEntered = parsePhoneNumber(value).country;
 
-      // pass phone number to function
-      const validatePhone = async () => {
-        let formData = new FormData();
-        formData.append("phoneNumber", formatedPhoneNumber);
-        let requestOptions = {
-          method: "POST",
-          body: formData,
-        };
-        const response = await fetch(
-          "https://wepollnow.azurewebsites.net/voters/verify_phone/",
-          requestOptions
-        );
-        const result = await response.json();
+      // Validate on end point
 
-        if (!response.ok) {
-          alert("An error occured");
-        } else {
-          const { message, voter_id } = result;
-          if (message === "A registered Voter") {
-            alert(
-              "You are already registered on our system. You will be redirected to the polls page"
-            );
-            localStorage.setItem("uniqueID", voter_id);
-            history.push("/polls", { replace: true });
-          } else {
-            localStorage.setItem(
-              "phoneDetails",
-              JSON.stringify({
-                phoneNo: formatedPhoneNumber,
-                country: countryEntered,
-              })
-            );
-            setHasError(false);
-            history.push("/getting-started-six", { replace: true });
-          }
-        }
-      };
-
-      validatePhone();
+      // save in local storage if successfully validated by endpoint
+      localStorage.setItem(
+        "phoneDetails",
+        JSON.stringify({
+          phoneNo: formatedPhoneNumber,
+          country: countryEntered,
+        })
+      );
+      setHasError(false);
+      history.push("/getting-started-six", { replace: true });
+    }else{
+      alert('This phonenumber is already registered ')
     }
   };
 
@@ -89,7 +64,6 @@ const ModalComponent = (props) => {
                 </div>
                 <div className="relative flex flex-row items-center justify-start space-x-2">
                   <p className="text-[16px] font-normal text-center">
-                    {message !== "" ? message : ""}
                     Input your phone number to proceed
                   </p>
                   <img
