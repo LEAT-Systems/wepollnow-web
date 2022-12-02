@@ -2,24 +2,25 @@
 @tailwind components;
 @tailwind utilities;
 
+
 /* This colors doesn't affect anything, so please don't touch */
 customColors {
-  color: #fceaea; /* concluded color */
-  color: #fff9eb; /* scheduled color */
-  color: #ebf5ed; /* ongoing color */
-  color: #082a0f; /* primary color */
-  color: #08c127; /* progress color */
-  color: #e7f9ea; /* progress background color */
+color: #fceaea; /* concluded color */
+color: #fff9eb; /* scheduled color */
+color: #ebf5ed; /* ongoing color */
+color: #082a0f; /* primary color */
+color: #08c127; /* progress color */
+color: #e7f9ea; /* progress background color */
 }
+
 
 /* .active {
   @apply after:content-[''] relative after:absolute
   after:w-1 after:h-1 bg-green-400  after:top-0 right-0;
 } */
 
-*,
-body,
-html {
+
+*, body, html {
   font-family: "Montserrat", sans-serif;
 }
 
@@ -80,7 +81,7 @@ input[type="radio"]:checked {
 }
 
 .custom__select > option {
-  @apply text-[#616b62];
+  @apply text-[#616b62]
 }
 
 .custom__select__container {
@@ -92,7 +93,7 @@ input[type="radio"]:checked {
 }
 
 .custom_select > option {
-  @apply text-[#616b62];
+  @apply text-[#616b62]
 }
 
 .custom_select_container {
@@ -100,10 +101,8 @@ input[type="radio"]:checked {
 }
 
 /* TableStateResult Styling */
-.tableStateResult,
-.tableStateResult th,
-.tableStateResult td {
-  @apply border-2 border-solid border-collapse;
+.tableStateResult, .tableStateResult th, .tableStateResult td {
+  @apply border-2 border-solid border-collapse
 }
 
 /* Modals style */
@@ -267,28 +266,30 @@ input:focus {
 }
 
 .table-row {
-  @apply border-b even:bg-[#f2f7f3] odd:bg-white;
+  @apply border-b even:bg-[#f2f7f3] odd:bg-white
 }
+
 
 .searchInp {
-  @apply flex w-full;
+  @apply flex w-full
 }
 
-.searchInp input {
-  @apply border-x-0 border-t-0 border-b rounded-md rounded-tl-none rounded-bl-none text-[1rem] pr-4 py-5 md:py-5 h-8 md:h-12 w-full lg:w-[22rem] md:w-[16rem] focus:outline-none pl-1 md:pl-0;
+.searchInp input{
+ @apply border-x-0 border-t-0 border-b rounded-md rounded-tl-none rounded-bl-none text-[1rem] pr-4 py-5 md:py-5 h-8 md:h-12 w-full lg:w-[22rem] md:w-[16rem] focus:outline-none pl-1 md:pl-0
 }
 
 .searchIcons {
-  @apply pt-3 pb-1 md:pb-1 h-full md:h-12 w-6 md:w-12 grid place-items-center cursor-pointer border-b;
+ @apply  pt-3 pb-1 md:pb-1 h-full md:h-12 w-6 md:w-12 grid place-items-center cursor-pointer border-b 
 }
 
 .searchResult {
-  @apply bg-white w-[22rem] h-[22rem] shadow-md overflow-hidden overflow-y-auto;
+  @apply bg-white w-[22rem] h-[22rem] shadow-md overflow-hidden overflow-y-auto
 }
 
 .searchResult::-webkit-scrollbar {
   display: none;
 }
+
 
 .PhoneInputInput {
   @apply p-2 w-full rounded !important;

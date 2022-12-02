@@ -105,7 +105,7 @@ const AllPolls = () => {
           </div>
         </div>
       )}
-      <div className="grid min-h-[100vh] grid-cols-1 pb-12 mt-12 md:grid-cols-2 lg:grid-cols-3 gap-y-4 gap-x-12 md:px-24 md:gap-x-12 ">
+      <div className="grid min-h-screen grid-cols-1 pb-12 -mt-48 md:grid-cols-2 lg:grid-cols-3 md:-mt-24 gap-y-4 gap-x-12 md:px-24 md:gap-x-12 ">
         {data?.map((item) => {
           // Here, I'm calculating the poll date from the current date so i could render items conditionally
           let due;
@@ -128,12 +128,12 @@ const AllPolls = () => {
 
           return (
             <div
-              className="flex flex-col items-center justify-center p-4 space-y-2 md:flex-row md:px-0 hover:-translate-y-1"
+              className="flex flex-col items-center justify-center p-4 space-y-2 md:flex-row md:px-0"
               key={item.id}
             >
               <div className="flex flex-col items-center justify-center w-full py-12 space-y-4 rounded-lg h-72 bg-polls-pattern">
                 {!due && (
-                  <p className="text-xl font-bold text-white text-center">
+                  <p className="text-xl font-bold text-white">
                     {item.poll_name}
                   </p>
                 )}
@@ -152,7 +152,7 @@ const AllPolls = () => {
                   </label>
                 </div>
                 {due && (
-                  <p className="text-xl font-bold text-white text-center">
+                  <p className="text-xl font-bold text-white">
                     {item.poll_name}
                   </p>
                 )}
@@ -166,11 +166,9 @@ const AllPolls = () => {
                     />
                   ) : (
                     <button
-                      onClick={() => {
-                        handleOpen();
-                        handler();
-                      }}
+                      onClick={handleOpen}
                       className="btn-stay animate"
+                      onBlur={handler}
                     >
                       Vote Now
                     </button>

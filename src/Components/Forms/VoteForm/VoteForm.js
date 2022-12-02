@@ -138,7 +138,7 @@ const FormFive = () => {
   const keys = ["partyName", "candidate", "runningMate"];
   const search = (data) =>
     data.filter((data) =>
-      keys.some((key) => data[key]?.toLowerCase().includes(query))
+      keys.some((key) => data[key].toLowerCase().includes(query))
     );
 
   const hasContent = search(apiData).length;
@@ -218,7 +218,7 @@ const FormFive = () => {
         </div>
       </div>
 
-      <div className="flex flex-row items-center justify-center min-h-[50vh] md:min-h-[100vh] py-4 mx-auto md:px-4">
+      <div className="flex flex-row items-center justify-center min-h-[100vh] py-4 mx-auto md:px-4">
         <div className="w-full text-lg text-gray-700 md:w-3/4 ">
           <form onSubmit={handleSubmit}>
             <div className="flex flex-col space-y-4 md:p-8">
