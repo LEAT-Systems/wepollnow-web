@@ -158,10 +158,8 @@ const CreatePollModal = ({ open, handleClose, nextPage, setPage }) => {
 
     onDisabled();
 
-    if (startDate !== "" || pollType !== "" || endDate !== "") {
+    if (startDate !== "" && pollType !== "" && endDate !== "") {
       setConfirmBtn(false);
-    } else {
-      setConfirmBtn(true);
     }
   }, [startDate, endDate, pollType]);
 
