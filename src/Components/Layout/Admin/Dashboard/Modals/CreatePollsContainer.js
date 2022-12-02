@@ -1,14 +1,22 @@
 /** @format */
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import { Modal } from "@mui/material";
 import { Close } from "@mui/icons-material";
 import AddPollModal from "./AddPollModal";
 import CreatePollModal from "./CreatePollModal";
-import axios from "axios";
+import ModalFormContext from "../../../../../ModalFormContextAdmin/ModalFormContext";
+
 
 const CreatePollsContainer = ({ open, handleClose, modalData }) => {
   const [page, setPage] = useState(1);
+  const {
+    setPollType,
+    setSelectedState,
+    setDistrict,
+    setStartDate,
+    setEndDate,
+  } = useContext(ModalFormContext);
 
   const nextPage = () => {
     setPage(page + 1);
@@ -26,6 +34,7 @@ const CreatePollsContainer = ({ open, handleClose, modalData }) => {
           modalData={modalData}
           handleClose={handleClose}
           nextPage={nextPage}
+          setPage={setPage}
         />
       );
 
@@ -37,6 +46,7 @@ const CreatePollsContainer = ({ open, handleClose, modalData }) => {
           handleClose={handleClose}
           nextPage={nextPage}
           prevPage={prevPage}
+          setPage={setPage}
         />
       );
   };
@@ -45,7 +55,15 @@ const CreatePollsContainer = ({ open, handleClose, modalData }) => {
       <form>
         <Modal
           open={open}
-          onClose={handleClose}
+          onClose={() => {
+            handleClose();
+            setPollType("");
+            setSelectedState("");
+            setDistrict("");
+            setStartDate("");
+            setEndDate("");
+            setPage(1);
+          }}
           sx={{
             display: "flex",
             justifyContent: "center",
@@ -60,7 +78,15 @@ const CreatePollsContainer = ({ open, handleClose, modalData }) => {
               </h2>
               <button
                 className='flex items-center justify-center border border-1 rounded-md py-[2px] px-[2px] cursor-pointer text-sm md:text-base bg-[#fcf0f0] text-red-500'
-                onClick={handleClose}
+                onClick={() => {
+                  handleClose();
+                  setPollType("");
+                  setSelectedState("");
+                  setDistrict("");
+                  setStartDate("");
+                  setEndDate("");
+                  setPage(1);
+                }}
               >
                 <Close />
               </button>

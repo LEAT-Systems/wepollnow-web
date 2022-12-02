@@ -12,7 +12,6 @@ import {
 import Axios from "axios";
 import swal from "sweetalert";
 
-
 const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
   /* Handling the form input and data */
   const [pollType, setPollType] = useState();
@@ -92,8 +91,6 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
   useEffect(() => {
     setErrorMessage("");
   }, [name, candidateImage, selectedState, district, pollType]);
-
-
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -195,11 +192,11 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
 
     onDisabled();
 
-      if (name !== "" || pollType !== "") {
-        setConfirmBtn(false);
-      } else {
-        setConfirmBtn(true);
-      }
+    if (name !== "" || pollType !== "") {
+      setConfirmBtn(false);
+    } else {
+      setConfirmBtn(true);
+    }
   }, [name, pollType]);
 
   // const token = async () => {
@@ -245,7 +242,15 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
     <form onSubmit={handleSubmit} className='w-full'>
       <Modal
         open={addCandidate}
-        onClose={handleCloseAddCandidate}
+        onClose={() => {
+          handleCloseAddCandidate();
+          setName("");
+          setPollType("");
+          setSelectedState("");
+          setDistrict("");
+          setParty("");
+          setMainCandidate(false);
+        }}
         sx={{
           display: "flex",
           justifyContent: "center",
@@ -265,7 +270,15 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
             </h2>
             <button
               className='flex items-center justify-center border border-1 rounded-md py-[2px] px-[2px] cursor-pointer text-sm md:text-base bg-[#fcf0f0] text-red-500'
-              onClick={handleCloseAddCandidate}
+              onClick={() => {
+                handleCloseAddCandidate();
+                setName("");
+                setPollType("");
+                setSelectedState("");
+                setDistrict("");
+                setParty("");
+                setMainCandidate(false);
+              }}
               type='button'
             >
               <Close />
@@ -492,7 +505,15 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
           <div className='flex items-center justify-end w-full my-2'>
             <button
               className='flex items-center justify-center border-2 border-gray-300 py-3 px-5 h-full cursor-pointer text-sm rounded-md capitalize mr-4 transition-all duration-400 ease-in-out hover:bg-[#f3dddd] hover:text-red-600 hover:rounded-full '
-              onClick={handleCloseAddCandidate}
+              onClick={() => {
+                handleCloseAddCandidate();
+                setName("");
+                setPollType("");
+                setSelectedState("");
+                setDistrict("");
+                setParty("");
+                setMainCandidate(false);
+              }}
               type='button'
             >
               cancel

@@ -35,50 +35,50 @@ const TableBody = ({ tableData }) => {
   // },
 
   return (
-  <tr className='table-row' onClick={(e) => console.log(e.currentTarget)}>
-    <th
-      scope='row'
-      className='px-6 py-4 font-medium text-gray-900 whitespace-nowrap '
-    >
-      <span className='text-white font-bold capitalize bg-green-900 mr-4 rounded-xl p-[.6rem] cursor-pointer'>
-        {getSymbol()}
-      </span>{" "}
-      <NavLink to='/admin/polls/poll_result' activeClassName={null}>
-        {tableData.poll_name}
-      </NavLink>
-    </th>
-    <td className='px-6 py-4 cursor-pointer'>
-      <NavLink to='/admin/polls/poll_result' activeClassName={null}>
-        {tableData.poll_state}
-      </NavLink>
-    </td>
-    <td className='px-6 py-4 cursor-pointer'>
-      <NavLink to='/admin/polls/poll_result' activeClassName={null}>
-        {tableData.poll_startDate}
-      </NavLink>
-    </td>
-    <td className='px-6 py-4 cursor-pointer'>
-      <NavLink to='/admin/polls/poll_result' activeClassName={null}>
-        {tableData.poll_endDate}
-      </NavLink>
-    </td>
-    <td className='px-6 py-4 cursor-pointer'>
-      <NavLink to='/admin/polls/poll_result' activeClassName={null}>
-        {tableData.status === 1 ? "Active" : "Inactive"}
-      </NavLink>
-    </td>
-    <td className='flex flex-row px-6 py-4 space-x-2'>
-      <div className='text-blue-500 cursor-pointer'>
-        <img src={Edit} alt='Edit' className='w-[1.1rem] h-[1.1rem]' />
-      </div>
-      <div className='text-black cursor-pointer'>
-        <img src={Archive} alt='Archive' className='w-[1.1rem] h-[1.1rem]' />
-      </div>
-      <div className='text-red-500 cursor-pointer'>
-        <img src={Delete} alt='Trash' className='w-[1.1rem] h-[1.1rem]' />
-      </div>
-    </td>
-  </tr>
+    <tr className='table-row' onClick={(e) => console.log(e.currentTarget)}>
+      <th
+        scope='row'
+        className='px-6 py-4 font-medium text-gray-900 whitespace-nowrap '
+      >
+        <span className='text-white font-bold capitalize bg-green-900 mr-4 rounded-xl p-[.6rem] cursor-pointer'>
+          {getSymbol()}
+        </span>{" "}
+        <NavLink to='/admin/polls/poll_result' activeClassName={null}>
+          {tableData.poll_name}
+        </NavLink>
+      </th>
+      <td className='px-6 py-4 cursor-pointer'>
+        <NavLink to='/admin/polls/poll_result' activeClassName={null}>
+          {tableData.poll_state_name}
+        </NavLink>
+      </td>
+      <td className='px-6 py-4 cursor-pointer'>
+        <NavLink to='/admin/polls/poll_result' activeClassName={null}>
+          {tableData.poll_startDate}
+        </NavLink>
+      </td>
+      <td className='px-6 py-4 cursor-pointer'>
+        <NavLink to='/admin/polls/poll_result' activeClassName={null}>
+          {tableData.poll_endDate}
+        </NavLink>
+      </td>
+      <td className='px-6 py-4 cursor-pointer'>
+        <NavLink to='/admin/polls/poll_result' activeClassName={null}>
+          {tableData.status === 1 ? "Active" : "Inactive"}
+        </NavLink>
+      </td>
+      <td className='flex flex-row px-6 py-4 space-x-2'>
+        <div className='text-blue-500 cursor-pointer'>
+          <img src={Edit} alt='Edit' className='w-[1.1rem] h-[1.1rem]' />
+        </div>
+        <div className='text-black cursor-pointer'>
+          <img src={Archive} alt='Archive' className='w-[1.1rem] h-[1.1rem]' />
+        </div>
+        <div className='text-red-500 cursor-pointer'>
+          <img src={Delete} alt='Trash' className='w-[1.1rem] h-[1.1rem]' />
+        </div>
+      </td>
+    </tr>
   );
 };
 

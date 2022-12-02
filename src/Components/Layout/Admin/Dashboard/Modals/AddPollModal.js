@@ -1,5 +1,3 @@
-/** @format */
-
 import React, { useContext, useEffect, useState } from "react";
 import { ArrowBack } from "@mui/icons-material";
 import ModalFormContext from "../../../../../ModalFormContextAdmin/ModalFormContext";
@@ -17,18 +15,13 @@ import swal from "sweetalert";
 //   },
 // ];
 
-const AddPollModal = ({ open, handleClose, nextPage, prevPage, modalData }) => {
+const AddPollModal = ({ open, handleClose, nextPage, prevPage, modalData, setPage }) => {
   const {
-    mainCandidate,
-    setMainCandidate,
     pollType,
     selectedState,
     district,
     startDate,
     endDate,
-    partyData,
-    runningMate,
-    pollName,
     parties,
     setSuccessMessage,
     setPollType,
@@ -98,8 +91,8 @@ const AddPollModal = ({ open, handleClose, nextPage, prevPage, modalData }) => {
     poll_startDate: startDate,
     poll_endDate: endDate,
     status: 1,
-    // party: parti,
-    // candidate: candidate,
+    party: parti,
+    candidate: candi,
   };
   var governorshipID = {
     poll_category_id: pollType,
@@ -107,8 +100,8 @@ const AddPollModal = ({ open, handleClose, nextPage, prevPage, modalData }) => {
     poll_startDate: startDate,
     poll_endDate: endDate,
     status: 1,
-    // party: parti,
-    // candidate: candidate,
+    party: parti,
+    candidate: candi,
   };
   var senatorialID = {
     poll_category_id: pollType,
@@ -116,8 +109,8 @@ const AddPollModal = ({ open, handleClose, nextPage, prevPage, modalData }) => {
     poll_startDate: startDate,
     poll_endDate: endDate,
     status: 1,
-    // party: parti,
-    // candidate: candidate,
+    party: parti,
+    candidate: candi,
   };
 
   var config = () => {
@@ -132,10 +125,10 @@ const AddPollModal = ({ open, handleClose, nextPage, prevPage, modalData }) => {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const getParties = async () => {
+
       await axios
         .post(`https://wepollnow.azurewebsites.net/poll/create_poll/`, config())
         // .then((res) => {
@@ -143,7 +136,6 @@ const AddPollModal = ({ open, handleClose, nextPage, prevPage, modalData }) => {
         //   console.log(res.data);
         // })
         // .catch((err) => console.log(err));
-
         .then((res) => {
           console.log(res);
           swal({
@@ -194,8 +186,8 @@ const AddPollModal = ({ open, handleClose, nextPage, prevPage, modalData }) => {
             });
           }
         });
-    };
-    getParties();
+
+
   };
 
   return (
@@ -268,7 +260,15 @@ const AddPollModal = ({ open, handleClose, nextPage, prevPage, modalData }) => {
         <div className='flex justify-end items-center w-full my-2'>
           <button
             className='flex items-center justify-center border-2 border-gray-300 py-3 px-5 h-full cursor-pointer text-sm rounded-md capitalize mr-4 transition-all duration-400 ease-in-out hover:bg-[#f3dddd] hover:text-red-600 hover:rounded-full'
-            onClick={handleClose}
+            onClick={() => {
+              handleClose()
+              setPollType("");
+              setSelectedState("");
+              setDistrict("");
+              setStartDate("");
+              setEndDate("");
+              setPage(1);
+            }}
           >
             cancel
           </button>
@@ -277,6 +277,7 @@ const AddPollModal = ({ open, handleClose, nextPage, prevPage, modalData }) => {
             onClick={(e) => {
               handleClose();
               handleSubmit(e);
+              setPage(1);
             }}
           >
             Create
