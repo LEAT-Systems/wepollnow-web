@@ -4,7 +4,7 @@ import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import ModalFormContext from "../../../../../ModalFormContextAdmin/ModalFormContext";
 
-const CreatePollModal = ({ open, handleClose, nextPage }) => {
+const CreatePollModal = ({ open, handleClose, nextPage, setPage }) => {
   const {
     pollType,
     setPollType,
@@ -330,7 +330,15 @@ const CreatePollModal = ({ open, handleClose, nextPage }) => {
         <div className='flex justify-end items-center w-full my-2'>
           <button
             className='flex items-center justify-center border-2 border-gray-300 py-3 px-5 h-full cursor-pointer text-sm rounded-md capitalize mr-4 transition-all duration-400 ease-in-out hover:bg-[#f3dddd] hover:text-red-600 hover:rounded-full'
-            onClick={handleClose}
+            onClick={() => {
+              handleClose();
+              setPollType("");
+              setSelectedState("");
+              setDistrict("");
+              setStartDate("");
+              setEndDate("");
+              setPage(1)
+            }}
           >
             cancel
           </button>
