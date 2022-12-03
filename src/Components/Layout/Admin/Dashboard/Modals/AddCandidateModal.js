@@ -60,6 +60,7 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
     };
     getSenetorial();
   }, [selectedState, setDistrictData]);
+  console.log('Selected State: ',selectedState)
 
   /* Get Poll Type */
   useEffect(() => {
