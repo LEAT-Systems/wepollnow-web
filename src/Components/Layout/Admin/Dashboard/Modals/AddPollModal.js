@@ -237,7 +237,7 @@ const AddPollModal = ({ open, handleClose, nextPage, prevPage, modalData, setPag
               <div className='w-full'>
                 <div className='flex justify-between align-center'>
                   <h3 className='font-bold my-auto text-base text-[#000] whitespace-nowrap'>
-                    {data.partyCandidate[0].name}
+                    {data?.partyCandidate[0].name}
                   </h3>
                   <h3 className='font-bold my-auto text-sm text-[#616b62] whitespace-nowrap'>
                     Main
@@ -245,7 +245,7 @@ const AddPollModal = ({ open, handleClose, nextPage, prevPage, modalData, setPag
                 </div>
                 <div className='flex justify-between align-center'>
                   <h3 className='font-bold my-auto text-base text-[#000] whitespace-nowrap'>
-                    {data.partyCandidate[1].name}
+                    {data?.partyCandidate[1].name}
                   </h3>
                   <h3 className='font-bold my-auto text-sm text-[#616b62] whitespace-nowrap'>
                     Running Mate
