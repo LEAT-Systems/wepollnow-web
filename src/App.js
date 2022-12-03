@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import React, { useState, useEffect, useMemo, Suspense } from "react";
 import { Switch } from "react-router-dom";
 import VoteFormTwo from "./Components/Forms/VoteForm/VoteFormTwo";
 import VoteSuccess from "./Components/Forms/VoteForm/VoteSuccess";
@@ -84,33 +84,33 @@ const Candidate = React.lazy(() =>
 );
 
 function App() {
-  const getToken = () => {
-    const token = localStorage.getItem("token");
-    const refreshToken = localStorage.getItem("refreshToken");
-    try {
-      decode(token);
-      decode(refreshToken);
-      console.log([decode(token), decode(refreshToken)]);
-      return true;
-    } catch (error) {
-      return false;
-    }
-  };
+const [isfalse, setIsFalse] = useState(false)
 
-  const isAuthenticated = getToken();
+  // useMemo(() => {
+  //   const token = localStorage.getItem("access");
+  //   console.log("From App.js: ", token);
+  //   // const refreshToken = localStorage.getItem("refreshToken");
+
+  //   if (token !== "" && token !== undefined) {
+  //     return setIsFalse(true);
+  //   } else {
+  //     return setIsFalse(false);
+  //   }
+  // }, []);
+
 
   return (
     <Suspense fallback={<Loading />}>
       <Switch>
         {/* //////////////////////////   LANDING PAGE ROUTES    //////////////////////////////////// */}
         {/* FALLBACK URL ROUTE */}
-        <PublicRoutes isAuthenticated={isAuthenticated} path='/' exact>
+        <PublicRoutes isAuthenticated={isfalse} path='/' exact>
           <GettingStartedOne />
         </PublicRoutes>
 
         {/* GETTING STARTED ONE Routes */}
         <PublicRoutes
-          isAuthenticated={isAuthenticated}
+          isAuthenticated={isfalse}
           path='/getting-started-one'
           exact
         >
@@ -119,7 +119,7 @@ function App() {
 
         {/* GETTING STARTED TWO Routes */}
         <PublicRoutes
-          isAuthenticated={isAuthenticated}
+          isAuthenticated={isfalse}
           path='/getting-started-two'
           exact
         >
@@ -128,7 +128,7 @@ function App() {
 
         {/* GETTING STARTED THREE Routes */}
         <PublicRoutes
-          isAuthenticated={isAuthenticated}
+          isAuthenticated={isfalse}
           path='/getting-started-three'
           exact
         >
@@ -137,7 +137,7 @@ function App() {
 
         {/* GETTING STARTED FOUR Routes */}
         <PublicRoutes
-          isAuthenticated={isAuthenticated}
+          isAuthenticated={isfalse}
           path='/getting-started-four'
           exact
         >
@@ -146,7 +146,7 @@ function App() {
 
         {/* GETTING STARTED FIVE Routes */}
         <PublicRoutes
-          isAuthenticated={isAuthenticated}
+          isAuthenticated={isfalse}
           path='/getting-started-five'
           exact
         >
@@ -155,7 +155,7 @@ function App() {
 
         {/* GETTING STARTED THREE Routes */}
         <PublicRoutes
-          isAuthenticated={isAuthenticated}
+          isAuthenticated={isfalse}
           path='/getting-started-six'
           exact
         >
@@ -163,26 +163,22 @@ function App() {
         </PublicRoutes>
 
         {/* ABOUT PAGE Routes */}
-        <PublicRoutes isAuthenticated={isAuthenticated} path='/about' exact>
+        <PublicRoutes isAuthenticated={isfalse} path='/about' exact>
           <AboutPage />
         </PublicRoutes>
 
         {/* BLOG PAGE Routes */}
-        <PublicRoutes isAuthenticated={isAuthenticated} path='/blog' exact>
+        <PublicRoutes isAuthenticated={isfalse} path='/blog' exact>
           <BlogPage />
         </PublicRoutes>
 
-        <PublicRoutes
-          isAuthenticated={isAuthenticated}
-          path='/blog-single'
-          exact
-        >
+        <PublicRoutes isAuthenticated={isfalse} path='/blog-single' exact>
           <BlogSingle />
         </PublicRoutes>
 
         {/* CONTACT PAGE Routes */}
         <PublicRoutes
-          isAuthenticated={isAuthenticated}
+          isAuthenticated={isfalse}
           path='/vote/vote-form-next'
           exact
         >
@@ -190,65 +186,49 @@ function App() {
         </PublicRoutes>
 
         {/* CONTACT PAGE Routes */}
-        <PublicRoutes
-          isAuthenticated={isAuthenticated}
-          path='/vote/voteSuccess'
-          exact
-        >
+        <PublicRoutes isAuthenticated={isfalse} path='/vote/voteSuccess' exact>
           <VoteSuccess />
         </PublicRoutes>
 
         {/* TEST PAGE Routes */}
-        <PublicRoutes isAuthenticated={isAuthenticated} path='/test' exact>
+        <PublicRoutes isAuthenticated={isfalse} path='/test' exact>
           <Test />
         </PublicRoutes>
 
         {/* ALL POLLS PAGE Routes */}
-        <PublicRoutes isAuthenticated={isAuthenticated} path='/polls' exact>
+        <PublicRoutes isAuthenticated={isfalse} path='/polls' exact>
           <AllPolls />
         </PublicRoutes>
 
         {/* REGISTRATION Routes */}
-        <PublicRoutes isAuthenticated={isAuthenticated} path='/register' exact>
+        <PublicRoutes isAuthenticated={isfalse} path='/register' exact>
           <FormComponent />
         </PublicRoutes>
 
         {/* Some Other Page */}
-        <PublicRoutes isAuthenticated={isAuthenticated} path='/vote' exact>
+        <PublicRoutes isAuthenticated={isfalse} path='/vote' exact>
           <FormFive />
         </PublicRoutes>
 
         {/* =========================  ADMIN ROUTES  ========================== */}
 
         {/* Login Page */}
-        <PublicRoutes
-          isAuthenticated={isAuthenticated}
-          path='/admin/login'
-          exact
-        >
+        <PublicRoutes isAuthenticated={isfalse} path='/admin/login' exact>
           <Login />
         </PublicRoutes>
 
         {/* Dashboard Landing */}
-        <PrivateRoutes
-          isAuthenticated={isAuthenticated}
-          path='/admin/home'
-          exact
-        >
+        <PrivateRoutes isAuthenticated={isfalse} path='/admin/home' exact>
           <Dashboard />
         </PrivateRoutes>
 
         {/* Polls Page */}
-        <PrivateRoutes
-          isAuthenticated={isAuthenticated}
-          path='/admin/polls'
-          exact
-        >
+        <PrivateRoutes isAuthenticated={isfalse} path='/admin/polls' exact>
           <ManagePolls />
         </PrivateRoutes>
 
         <PrivateRoutes
-          isAuthenticated={isAuthenticated}
+          isAuthenticated={isfalse}
           path='/admin/polls/polls'
           exact
         >
@@ -256,7 +236,7 @@ function App() {
         </PrivateRoutes>
 
         <PrivateRoutes
-          isAuthenticated={isAuthenticated}
+          isAuthenticated={isfalse}
           path='/admin/polls/candidates'
           exact
         >
@@ -265,7 +245,7 @@ function App() {
 
         {/* Polls result*/}
         <PrivateRoutes
-          isAuthenticated={isAuthenticated}
+          isAuthenticated={isfalse}
           path='/admin/polls/poll_result'
           exact
         >
@@ -274,16 +254,12 @@ function App() {
 
         {/* surveys */}
 
-        <PrivateRoutes
-          isAuthenticated={isAuthenticated}
-          path='/admin/surveys'
-          exact
-        >
+        <PrivateRoutes isAuthenticated={isfalse} path='/admin/surveys' exact>
           <Survey />
         </PrivateRoutes>
 
         <PrivateRoutes
-          isAuthenticated={isAuthenticated}
+          isAuthenticated={isfalse}
           path='/admin/surveys/manageSurvey'
           exact
         >
@@ -292,16 +268,12 @@ function App() {
 
         {/* blog */}
 
-        <PrivateRoutes
-          isAuthenticated={isAuthenticated}
-          path='/admin/blog'
-          exact
-        >
+        <PrivateRoutes isAuthenticated={isfalse} path='/admin/blog' exact>
           <Blog />
         </PrivateRoutes>
 
         <PrivateRoutes
-          isAuthenticated={isAuthenticated}
+          isAuthenticated={isfalse}
           path='/admin/blog/manageBlog'
           exact
         >
@@ -309,16 +281,12 @@ function App() {
         </PrivateRoutes>
 
         {/* account */}
-        <PrivateRoutes
-          isAuthenticated={isAuthenticated}
-          path='/admin/account'
-          exact
-        >
+        <PrivateRoutes isAuthenticated={isfalse} path='/admin/account' exact>
           <Account />
         </PrivateRoutes>
 
         <PrivateRoutes
-          isAuthenticated={isAuthenticated}
+          isAuthenticated={isfalse}
           path='/admin/account/settings'
           exact
         >
@@ -326,19 +294,19 @@ function App() {
         </PrivateRoutes>
 
         <PrivateRoutes
-          isAuthenticated={isAuthenticated}
+          isAuthenticated={isfalse}
           path='/admin/account/Managepassword'
           exact
         >
           <Password />
         </PrivateRoutes>
 
-        <PublicRoutes path='/testForm' isAuthenticated={isAuthenticated}>
+        <PublicRoutes path='/testForm' isAuthenticated={isfalse}>
           <TestForm />
         </PublicRoutes>
 
         {/*=========================  NOT FOUND ROUTES ========================*/}
-        <PublicRoutes isAuthenticated={isAuthenticated} path='*'>
+        <PublicRoutes isAuthenticated={isfalse} path='*'>
           <NotFound />
         </PublicRoutes>
       </Switch>

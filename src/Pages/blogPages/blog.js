@@ -98,7 +98,7 @@ const BlogPage = () => {
                     <img
                       src={data.image}
                       alt="Voter"
-                      className="w-full h-full rounded md:object-cover"
+                      className="w-full h-[250px] rounded md:object-cover"
                     />
                     <div className="absolute bottom-0 right-0 z-30">
                       <img

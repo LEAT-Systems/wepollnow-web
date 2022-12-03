@@ -1,3 +1,5 @@
+/** @format */
+
 import React, { useContext, useEffect, useState } from "react";
 import { ArrowBack } from "@mui/icons-material";
 import ModalFormContext from "../../../../../ModalFormContextAdmin/ModalFormContext";
@@ -15,7 +17,14 @@ import swal from "sweetalert";
 //   },
 // ];
 
-const AddPollModal = ({ open, handleClose, nextPage, prevPage, modalData, setPage }) => {
+const AddPollModal = ({
+  open,
+  handleClose,
+  nextPage,
+  prevPage,
+  modalData,
+  setPage,
+}) => {
   const {
     pollType,
     selectedState,
@@ -39,14 +48,20 @@ const AddPollModal = ({ open, handleClose, nextPage, prevPage, modalData, setPag
     let newPartyArray = [];
 
     parties?.forEach((element) => {
-      var name1 = element.partyCandidate[0].id;
-      var name2 = element.partyCandidate[0].id;
-      var par = element.id;
-      
-      Object.keys(name1);
-      Object.keys(name2);
+      for (var i = 0; i < element.partyCandidate.length; i++) {
+        let name = element.partyCandidate[i].id;
+        // Object.keys(name);
+        newNameArray.push(name);
+      }
 
-      newNameArray.push(name1, name2);
+      // var name1 = element.partyCandidate[0].id;
+      // var name2 = element.partyCandidate[1].id;
+      var par = element.id;
+
+      // Object.keys(name1);
+      // Object.keys(name2);
+
+      // newNameArray.push(name1, name2);
       newPartyArray.push(par);
 
       // if (name1.length === 0 && name2.length >= 1) {
@@ -58,7 +73,6 @@ const AddPollModal = ({ open, handleClose, nextPage, prevPage, modalData, setPag
       // } else {
       //   names = [name1, name2];
       // }
-      
     });
     setCandi(newNameArray);
     setParti(newPartyArray);
@@ -93,6 +107,7 @@ const AddPollModal = ({ open, handleClose, nextPage, prevPage, modalData, setPag
     status: 1,
     party: parti,
     candidate: candi,
+    poll_name: `Presidential Poll`,
   };
   var governorshipID = {
     poll_category_id: pollType,
@@ -102,6 +117,7 @@ const AddPollModal = ({ open, handleClose, nextPage, prevPage, modalData, setPag
     status: 1,
     party: parti,
     candidate: candi,
+    poll_name: `Governorship Poll`,
   };
   var senatorialID = {
     poll_category_id: pollType,
@@ -111,6 +127,7 @@ const AddPollModal = ({ open, handleClose, nextPage, prevPage, modalData, setPag
     status: 1,
     party: parti,
     candidate: candi,
+    poll_name: `Senatorial Poll`
   };
 
   var config = () => {
@@ -128,66 +145,67 @@ const AddPollModal = ({ open, handleClose, nextPage, prevPage, modalData, setPag
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-
-      await axios
-        .post(`https://wepollnow.azurewebsites.net/poll/create_poll/`, config())
-        // .then((res) => {
-        //   setSuccessMessage(res.status);
-        //   console.log(res.data);
-        // })
-        // .catch((err) => console.log(err));
-        .then((res) => {
-          console.log(res);
+    await axios
+      .post(`https://wepollnow.azurewebsites.net/poll/create_poll/`, config())
+      // .then((res) => {
+      //   setSuccessMessage(res.status);
+      //   console.log(res.data);
+      // })
+      // .catch((err) => console.log(err));
+      .then((res) => {
+        console.log(res);
+        swal({
+          title: "Success",
+          text: "New Poll Added Successfully!",
+          icon: "success",
+          button: "Ok",
+        });
+        setPollType("");
+        setSelectedState("");
+        setDistrict("");
+        setStartDate("");
+        setEndDate("");
+        setSuccessMessage(true);
+      })
+      .catch((err) => {
+        if (!err?.response) {
+          setSuccessMessage("No Connection");
+          console.log(err);
           swal({
             title: "Success",
-            text: "New Poll Added Successfully!",
-            icon: "success",
+            text: "No Internet Connection",
+            icon: "error",
             button: "Ok",
           });
-          setPollType("");
-          setSelectedState("");
-          setDistrict("");
-          setStartDate("");
-          setEndDate("");
-          setSuccessMessage(true);
-        })
-        .catch((err) => {
-          if (!err?.response) {
-            setSuccessMessage("No Connection");
-            swal({
-              title: "Success",
-              text: "No Internet Connection",
-              icon: "error",
-              button: "Ok",
-            });
-          } else if (err.response?.status === 400) {
-            setSuccessMessage("Email and Password are required");
-            swal({
-              title: "Failure",
-              text: "All fields are required!",
-              icon: "error",
-              button: "Ok",
-            });
-          } else if (err.response?.status === 401) {
-            setSuccessMessage("Unauthorized");
-            swal({
-              title: "Failure",
-              text: "Unauthorized",
-              icon: "error",
-              button: "Ok",
-            });
-          } else {
-            setSuccessMessage("Add Candidate Failed");
-            swal({
-              title: "Failure",
-              text: "Adding New Poll Failed",
-              icon: "error",
-              button: "Ok",
-            });
-          }
-        });
-
-
+        } else if (err.response?.status === 400) {
+          setSuccessMessage("Email and Password are required");
+          console.log(err);
+          swal({
+            title: "Failure",
+            text: "All fields are required!",
+            icon: "error",
+            button: "Ok",
+          });
+        } else if (err.response?.status === 401) {
+          setSuccessMessage("Unauthorized");
+          console.log(err);
+          swal({
+            title: "Failure",
+            text: "Unauthorized",
+            icon: "error",
+            button: "Ok",
+          });
+        } else {
+          setSuccessMessage("Add Candidate Failed");
+          console.log(err);
+          swal({
+            title: "Failure",
+            text: "Adding New Poll Failed",
+            icon: "error",
+            button: "Ok",
+          });
+        }
+      });
   };
 
   return (
@@ -215,53 +233,66 @@ const AddPollModal = ({ open, handleClose, nextPage, prevPage, modalData, setPag
         </div>
 
         {/* First Form */}
+        {parties.length < 1 ? (
+          <h3 className='w-full font-base text-red-400 text-center'>
+            No candidate exist for intended poll!
+          </h3>
+        ) : (
+          <>
+            {parties?.map((data) => {
+              return (
+                <div
+                  className='flex flex-col md:flex-col my-2 justify-center items-center w-full gap-3 md:gap-5 border rounded-md p-3'
+                  key={data.id}
+                  value={data.id}
+                >
+                  <div className='flex items-center w-full border-b my-auto pb-2'>
+                    {/* Party Logo */}
+                    <img
+                      src={`https://wepollnow.azurewebsites.net${data.logo}`}
+                      alt='Political Party'
+                      className='w-[2.3rem] aspect-square rounded-sm'
+                    />
+                    {/* Party Name */}
+                    <h2 className='text-base px-4 text-[#616b62]'>
+                      {data.name}
+                    </h2>
+                  </div>
 
-        {parties?.map((data) => {
-          return (
-            <div
-              className='flex flex-col md:flex-col my-2 justify-center items-center w-full gap-3 md:gap-5 border rounded-md p-3'
-              key={data.id}
-              value={data.id}
-            >
-              <div className='flex items-center w-full border-b my-auto pb-2'>
-                <img
-                  src={`https://wepollnow.azurewebsites.net${data.logo}`}
-                  alt='Political Party'
-                  className='w-[2.3rem] aspect-square rounded-sm'
-                />
-                <h2 className='text-base px-4 text-[#616b62]'>{data.name}</h2>
-              </div>
+                  {/* Second Form */}
 
-              {/* Second Form */}
-
-              <div className='w-full'>
-                <div className='flex justify-between align-center'>
-                  <h3 className='font-bold my-auto text-base text-[#000] whitespace-nowrap'>
-                    {data.partyCandidate[0].name}
-                  </h3>
-                  <h3 className='font-bold my-auto text-sm text-[#616b62] whitespace-nowrap'>
-                    Main
-                  </h3>
+                  <div className='w-full'>
+                    <div className='flex justify-between align-center'>
+                      <h3 className='font-bold my-auto text-base text-[#000] whitespace-nowrap'>
+                        {data?.partyCandidate[0].name}
+                      </h3>
+                      <h3 className='font-bold my-auto text-sm text-[#616b62] whitespace-nowrap'>
+                        Main
+                      </h3>
+                    </div>
+                    {data.partyCandidate.length > 1 && (
+                      <div className='flex justify-between align-center'>
+                        <h3 className='font-bold my-auto text-base text-[#000] whitespace-nowrap'>
+                          {data?.partyCandidate[1]?.name}
+                        </h3>
+                        <h3 className='font-bold my-auto text-sm text-[#616b62] whitespace-nowrap'>
+                          Running Mate
+                        </h3>
+                      </div>
+                    )}
+                  </div>
                 </div>
-                <div className='flex justify-between align-center'>
-                  <h3 className='font-bold my-auto text-base text-[#000] whitespace-nowrap'>
-                    {data.partyCandidate[1].name}
-                  </h3>
-                  <h3 className='font-bold my-auto text-sm text-[#616b62] whitespace-nowrap'>
-                    Running Mate
-                  </h3>
-                </div>
-              </div>
-            </div>
-          );
-        })}
+              );
+            })}
+          </>
+        )}
 
         {/* Buttons */}
         <div className='flex justify-end items-center w-full my-2'>
           <button
             className='flex items-center justify-center border-2 border-gray-300 py-3 px-5 h-full cursor-pointer text-sm rounded-md capitalize mr-4 transition-all duration-400 ease-in-out hover:bg-[#f3dddd] hover:text-red-600 hover:rounded-full'
             onClick={() => {
-              handleClose()
+              handleClose();
               setPollType("");
               setSelectedState("");
               setDistrict("");

@@ -35,12 +35,13 @@ const Login = () => {
        );
 
        // NOTE SAVE THE TOKENS IN LOCALSTORAGE
-       localStorage.setItem("access", response.data.access);
-       localStorage.setItem("refresh", response.data.refresh);
+       console.log(response.data)
+       localStorage.setItem("access", response.data.token.access);
+       localStorage.setItem("refresh", response.data.token.refresh);
 
        // AccessToken
-       const access = response?.data?.access;
-       const refresh = response?.data?.refresh;
+       const access = response?.data?.token.access;
+       const refresh = response?.data?.token.refresh;
        setAuth({ email, password, refresh, access });
        // clear state and controlled inputs
        setEmail("");
