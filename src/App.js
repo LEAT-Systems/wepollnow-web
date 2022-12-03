@@ -97,9 +97,8 @@ const [isfalse, setIsFalse] = useState(false)
       return setIsFalse(false);
     }
   }, []);
-  useEffect(() => {
-    Memo();
-  }, [Memo]);
+  Memo()
+
 
   return (
     <Suspense fallback={<Loading />}>
