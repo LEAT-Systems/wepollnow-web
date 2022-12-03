@@ -39,14 +39,22 @@ const AddPollModal = ({ open, handleClose, nextPage, prevPage, modalData, setPag
     let newPartyArray = [];
 
     parties?.forEach((element) => {
-      var name1 = element.partyCandidate[0].id;
-      var name2 = element.partyCandidate[0].id;
+
+      for (var i = 0; i <= element.partyCandidate; i++) {
+        let name = i.id;
+        // Object.keys(name);
+        newNameArray.push(name);
+      }
+        
+      // var name1 = element.partyCandidate[0].id;
+      // var name2 = element.partyCandidate[1].id;
       var par = element.id;
       
-      Object.keys(name1);
-      Object.keys(name2);
 
-      newNameArray.push(name1, name2);
+      // Object.keys(name1);
+      // Object.keys(name2);
+
+      // newNameArray.push(name1, name2);
       newPartyArray.push(par);
 
       // if (name1.length === 0 && name2.length >= 1) {
