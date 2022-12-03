@@ -226,52 +226,59 @@ const AddPollModal = ({
         </div>
 
         {/* First Form */}
-
-        {parties?.map((data) => {
-          return (
-            <div
-              className='flex flex-col md:flex-col my-2 justify-center items-center w-full gap-3 md:gap-5 border rounded-md p-3'
-              key={data.id}
-              value={data.id}
-            >
-              <div className='flex items-center w-full border-b my-auto pb-2'>
-                <img
-                  src={`https://wepollnow.azurewebsites.net${data.logo}`}
-                  alt='Political Party'
-                  className='w-[2.3rem] aspect-square rounded-sm'
-                />
-                <h2 className='text-base px-4 text-[#616b62]'>{data.name}</h2>
-              </div>
-
-              {/* Second Form */}
-              {data.partyCandidate.length >= 1 ? (
-                <div className='w-full'>
-                  <div className='flex justify-between align-center'>
-                    <h3 className='font-bold my-auto text-base text-[#000] whitespace-nowrap'>
-                      {data?.partyCandidate[0].name}
-                    </h3>
-                    <h3 className='font-bold my-auto text-sm text-[#616b62] whitespace-nowrap'>
-                      Main
-                    </h3>
+        {parties.length < 1 ? (
+          <h3 className='w-full font-base text-red-400 text-center'>
+            No candidate exist for intended poll!
+          </h3>
+        ) : (
+          <>
+            {parties?.map((data) => {
+              return (
+                <div
+                  className='flex flex-col md:flex-col my-2 justify-center items-center w-full gap-3 md:gap-5 border rounded-md p-3'
+                  key={data.id}
+                  value={data.id}
+                >
+                  <div className='flex items-center w-full border-b my-auto pb-2'>
+                    {/* Party Logo */}
+                    <img
+                      src={`https://wepollnow.azurewebsites.net${data.logo}`}
+                      alt='Political Party'
+                      className='w-[2.3rem] aspect-square rounded-sm'
+                    />
+                    {/* Party Name */}
+                    <h2 className='text-base px-4 text-[#616b62]'>
+                      {data.name}
+                    </h2>
                   </div>
 
-                  <div className='flex justify-between align-center'>
-                    <h3 className='font-bold my-auto text-base text-[#000] whitespace-nowrap'>
-                      {data?.partyCandidate[1].name}
-                    </h3>
-                    <h3 className='font-bold my-auto text-sm text-[#616b62] whitespace-nowrap'>
-                      Running Mate
-                    </h3>
+                  {/* Second Form */}
+
+                  <div className='w-full'>
+                    <div className='flex justify-between align-center'>
+                      <h3 className='font-bold my-auto text-base text-[#000] whitespace-nowrap'>
+                        {data?.partyCandidate[0].name}
+                      </h3>
+                      <h3 className='font-bold my-auto text-sm text-[#616b62] whitespace-nowrap'>
+                        Main
+                      </h3>
+                    </div>
+                    {data.partyCandidate.length > 1 && (
+                      <div className='flex justify-between align-center'>
+                        <h3 className='font-bold my-auto text-base text-[#000] whitespace-nowrap'>
+                          {data?.partyCandidate[1]?.name}
+                        </h3>
+                        <h3 className='font-bold my-auto text-sm text-[#616b62] whitespace-nowrap'>
+                          Running Mate
+                        </h3>
+                      </div>
+                    )}
                   </div>
                 </div>
-              ) : (
-                  <h3 className='w-full font-base text-red-400 text-center'>
-                    No candidate exist for intended poll!
-                </h3>
-              )}
-            </div>
-          );
-        })}
+              );
+            })}
+          </>
+        )}
 
         {/* Buttons */}
         <div className='flex justify-end items-center w-full my-2'>
