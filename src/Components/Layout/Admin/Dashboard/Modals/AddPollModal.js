@@ -48,7 +48,7 @@ const AddPollModal = ({
     let newPartyArray = [];
 
     parties?.forEach((element) => {
-      for (var i = 0; i <= element.partyCandidate; i++) {
+      for (var i = 0; i <= element.partyCandidate.length; i++) {
         let name = element.partyCandidate[i].id;
         // Object.keys(name);
         newNameArray.push(name);
