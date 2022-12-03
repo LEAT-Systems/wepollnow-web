@@ -86,17 +86,17 @@ const Candidate = React.lazy(() =>
 function App() {
 const [isfalse, setIsFalse] = useState(false)
 
-  useMemo(() => {
-    const token = localStorage.getItem("access");
-    console.log("From App.js: ", token);
-    // const refreshToken = localStorage.getItem("refreshToken");
+  // useMemo(() => {
+  //   const token = localStorage.getItem("access");
+  //   console.log("From App.js: ", token);
+  //   // const refreshToken = localStorage.getItem("refreshToken");
 
-    if (token !== "" && token !== undefined) {
-      return setIsFalse(true);
-    } else {
-      return setIsFalse(false);
-    }
-  }, []);
+  //   if (token !== "" && token !== undefined) {
+  //     return setIsFalse(true);
+  //   } else {
+  //     return setIsFalse(false);
+  //   }
+  // }, []);
 
 
   return (
