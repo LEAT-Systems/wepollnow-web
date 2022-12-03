@@ -21,6 +21,7 @@ export const ModalFormProvider = ({children}) => {
   const  [selectedParty, setSelectedParty] = useState([])
   const  [mainCandidate, setMainCandidate] = useState(false)
   const  [runningMate, setRunningMate] = useState([])
+  const [successMessage, setSuccessMessage] = useState('');
 
   return (
     <ModalFormContext.Provider
@@ -61,6 +62,8 @@ export const ModalFormProvider = ({children}) => {
         pollName,
         pollTypeName,
         setPollTypeName,
+        successMessage,
+        setSuccessMessage,
       }}
     >
       {children}
