@@ -9,7 +9,7 @@ function PrivateRoutes({ children, isAuthenticated, ...rest }) {
     <Route
       {...rest}
       render={() =>
-        !isAuthenticated ? (
+        isAuthenticated ? (
           children
         ) : (
           <Redirect to="/admin/login" />
