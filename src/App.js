@@ -86,11 +86,12 @@ const Candidate = React.lazy(() =>
 function App() {
 
   const getToken = () => {
+    // const [isfalse, set]
     const token = localStorage.getItem("access");
     console.log("From App.js: ", token)
     // const refreshToken = localStorage.getItem("refreshToken");
 
-    if (token !== "" && token === undefined) {
+    if (token !== "" && token !== undefined) {
       return true
     } else {
       return false
