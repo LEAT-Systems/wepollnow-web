@@ -124,7 +124,7 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
         senatorial_id_id: district,
         party_id: party,
         main_candidate: mainCandidate,
-        candidate_picture: file,
+        // candidate_picture: file,
       }
     )
       .then((res) => {
@@ -341,7 +341,7 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
               </label>
             </div>
 
-           <div className="py-2">
+           {/* <div className="py-2">
               <label className="relative w-full h-auto my-6">
                 Candidate Image (Max size 2MB (png, jpg, jpeg))
                 <FileUploader
@@ -364,7 +364,7 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
                   </div>
                 </FileUploader>
               </label>
-            </div>
+            </div> */}
 
             <div className='py-2'>
               <label className='w-full h-auto my-6 custom__select__container'>
