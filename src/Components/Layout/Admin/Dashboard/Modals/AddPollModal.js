@@ -244,7 +244,7 @@ const AddPollModal = ({
               </div>
 
               {/* Second Form */}
-              {data.partyCandidate.length > 1 ? (
+              {data.partyCandidate.length >= 1 ? (
                 <div className='w-full'>
                   <div className='flex justify-between align-center'>
                     <h3 className='font-bold my-auto text-base text-[#000] whitespace-nowrap'>
