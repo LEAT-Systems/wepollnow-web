@@ -170,6 +170,7 @@ const AddPollModal = ({
       .catch((err) => {
         if (!err?.response) {
           setSuccessMessage("No Connection");
+          console.log(err);
           swal({
             title: "Success",
             text: "No Internet Connection",
@@ -178,6 +179,7 @@ const AddPollModal = ({
           });
         } else if (err.response?.status === 400) {
           setSuccessMessage("Email and Password are required");
+          console.log(err);
           swal({
             title: "Failure",
             text: "All fields are required!",
@@ -186,6 +188,7 @@ const AddPollModal = ({
           });
         } else if (err.response?.status === 401) {
           setSuccessMessage("Unauthorized");
+          console.log(err);
           swal({
             title: "Failure",
             text: "Unauthorized",
@@ -194,6 +197,7 @@ const AddPollModal = ({
           });
         } else {
           setSuccessMessage("Add Candidate Failed");
+          console.log(err);
           swal({
             title: "Failure",
             text: "Adding New Poll Failed",
