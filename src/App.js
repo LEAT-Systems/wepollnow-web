@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import React, { useState, useEffect, Suspense } from "react";
 import { Switch } from "react-router-dom";
 import VoteFormTwo from "./Components/Forms/VoteForm/VoteFormTwo";
 import VoteSuccess from "./Components/Forms/VoteForm/VoteSuccess";
@@ -84,30 +84,33 @@ const Candidate = React.lazy(() =>
 );
 
 function App() {
+const [isfalse, setIsFalse] = useState(false)
+  useEffect(() => {
+    const getToken = () => {
+      //
+      const token = localStorage.getItem("access");
+      console.log("From App.js: ", token);
+      // const refreshToken = localStorage.getItem("refreshToken");
 
-  const getToken = () => {
-    // const [isfalse, set]
-    const token = localStorage.getItem("access");
-    console.log("From App.js: ", token)
-    // const refreshToken = localStorage.getItem("refreshToken");
+      if (token !== "" && token !== undefined) {
+        return setIsFalse(true);
+      } else {
+        return setIsFalse(false);
+      }
 
-    if (token !== "" && token !== undefined) {
-      return true
-    } else {
-      return false
-    }
+      // try {
+      //   decode(token);
+      //   decode(refreshToken);
+      //   console.log([decode(token), decode(refreshToken)]);
+      //   return true;
+      // } catch (error) {
+      //   return false;
+      // }
+    };
+    getToken();
+  }, [setIsFalse]);
 
-    // try {
-    //   decode(token);
-    //   decode(refreshToken);
-    //   console.log([decode(token), decode(refreshToken)]);
-    //   return true;
-    // } catch (error) {
-    //   return false;
-    // }
-  };
-
-  const isAuthenticated = getToken();
+  const isAuthenticated = isfalse;
 
   return (
     <Suspense fallback={<Loading />}>
