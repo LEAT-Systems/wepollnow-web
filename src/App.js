@@ -85,16 +85,23 @@ const Candidate = React.lazy(() =>
 
 function App() {
   const getToken = () => {
-    const token = localStorage.getItem("token");
-    const refreshToken = localStorage.getItem("refreshToken");
-    try {
-      decode(token);
-      decode(refreshToken);
-      console.log([decode(token), decode(refreshToken)]);
-      return true;
-    } catch (error) {
-      return false;
+    const token = localStorage.getItem("access");
+    // const refreshToken = localStorage.getItem("refreshToken");
+
+    if (token !== "" && token === undefined) {
+      return true
+    } else {
+      return false
     }
+
+    // try {
+    //   decode(token);
+    //   decode(refreshToken);
+    //   console.log([decode(token), decode(refreshToken)]);
+    //   return true;
+    // } catch (error) {
+    //   return false;
+    // }
   };
 
   const isAuthenticated = getToken();
