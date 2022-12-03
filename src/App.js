@@ -108,7 +108,7 @@ const [isfalse, setIsFalse] = useState(false)
       // }
     };
     getToken();
-  }, [setIsFalse]);
+  }, []);
 
   const isAuthenticated = isfalse;
 
