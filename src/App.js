@@ -86,7 +86,7 @@ const Candidate = React.lazy(() =>
 function App() {
 const [isfalse, setIsFalse] = useState(false)
   useEffect(() => {
-    const getToken = () => {
+
       //
       const token = localStorage.getItem("access");
       console.log("From App.js: ", token);
@@ -106,24 +106,21 @@ const [isfalse, setIsFalse] = useState(false)
       // } catch (error) {
       //   return false;
       // }
-    };
-    getToken();
-  }, []);
 
-  const isAuthenticated = isfalse;
+  }, []);
 
   return (
     <Suspense fallback={<Loading />}>
       <Switch>
         {/* //////////////////////////   LANDING PAGE ROUTES    //////////////////////////////////// */}
         {/* FALLBACK URL ROUTE */}
-        <PublicRoutes isAuthenticated={isAuthenticated} path='/' exact>
+        <PublicRoutes isAuthenticated={isfalse} path='/' exact>
           <GettingStartedOne />
         </PublicRoutes>
 
         {/* GETTING STARTED ONE Routes */}
         <PublicRoutes
-          isAuthenticated={isAuthenticated}
+          isAuthenticated={isfalse}
           path='/getting-started-one'
           exact
         >
@@ -132,7 +129,7 @@ const [isfalse, setIsFalse] = useState(false)
 
         {/* GETTING STARTED TWO Routes */}
         <PublicRoutes
-          isAuthenticated={isAuthenticated}
+          isAuthenticated={isfalse}
           path='/getting-started-two'
           exact
         >
@@ -141,7 +138,7 @@ const [isfalse, setIsFalse] = useState(false)
 
         {/* GETTING STARTED THREE Routes */}
         <PublicRoutes
-          isAuthenticated={isAuthenticated}
+          isAuthenticated={isfalse}
           path='/getting-started-three'
           exact
         >
@@ -150,7 +147,7 @@ const [isfalse, setIsFalse] = useState(false)
 
         {/* GETTING STARTED FOUR Routes */}
         <PublicRoutes
-          isAuthenticated={isAuthenticated}
+          isAuthenticated={isfalse}
           path='/getting-started-four'
           exact
         >
@@ -159,7 +156,7 @@ const [isfalse, setIsFalse] = useState(false)
 
         {/* GETTING STARTED FIVE Routes */}
         <PublicRoutes
-          isAuthenticated={isAuthenticated}
+          isAuthenticated={isfalse}
           path='/getting-started-five'
           exact
         >
@@ -168,7 +165,7 @@ const [isfalse, setIsFalse] = useState(false)
 
         {/* GETTING STARTED THREE Routes */}
         <PublicRoutes
-          isAuthenticated={isAuthenticated}
+          isAuthenticated={isfalse}
           path='/getting-started-six'
           exact
         >
@@ -176,26 +173,22 @@ const [isfalse, setIsFalse] = useState(false)
         </PublicRoutes>
 
         {/* ABOUT PAGE Routes */}
-        <PublicRoutes isAuthenticated={isAuthenticated} path='/about' exact>
+        <PublicRoutes isAuthenticated={isfalse} path='/about' exact>
           <AboutPage />
         </PublicRoutes>
 
         {/* BLOG PAGE Routes */}
-        <PublicRoutes isAuthenticated={isAuthenticated} path='/blog' exact>
+        <PublicRoutes isAuthenticated={isfalse} path='/blog' exact>
           <BlogPage />
         </PublicRoutes>
 
-        <PublicRoutes
-          isAuthenticated={isAuthenticated}
-          path='/blog-single'
-          exact
-        >
+        <PublicRoutes isAuthenticated={isfalse} path='/blog-single' exact>
           <BlogSingle />
         </PublicRoutes>
 
         {/* CONTACT PAGE Routes */}
         <PublicRoutes
-          isAuthenticated={isAuthenticated}
+          isAuthenticated={isfalse}
           path='/vote/vote-form-next'
           exact
         >
@@ -203,65 +196,49 @@ const [isfalse, setIsFalse] = useState(false)
         </PublicRoutes>
 
         {/* CONTACT PAGE Routes */}
-        <PublicRoutes
-          isAuthenticated={isAuthenticated}
-          path='/vote/voteSuccess'
-          exact
-        >
+        <PublicRoutes isAuthenticated={isfalse} path='/vote/voteSuccess' exact>
           <VoteSuccess />
         </PublicRoutes>
 
         {/* TEST PAGE Routes */}
-        <PublicRoutes isAuthenticated={isAuthenticated} path='/test' exact>
+        <PublicRoutes isAuthenticated={isfalse} path='/test' exact>
           <Test />
         </PublicRoutes>
 
         {/* ALL POLLS PAGE Routes */}
-        <PublicRoutes isAuthenticated={isAuthenticated} path='/polls' exact>
+        <PublicRoutes isAuthenticated={isfalse} path='/polls' exact>
           <AllPolls />
         </PublicRoutes>
 
         {/* REGISTRATION Routes */}
-        <PublicRoutes isAuthenticated={isAuthenticated} path='/register' exact>
+        <PublicRoutes isAuthenticated={isfalse} path='/register' exact>
           <FormComponent />
         </PublicRoutes>
 
         {/* Some Other Page */}
-        <PublicRoutes isAuthenticated={isAuthenticated} path='/vote' exact>
+        <PublicRoutes isAuthenticated={isfalse} path='/vote' exact>
           <FormFive />
         </PublicRoutes>
 
         {/* =========================  ADMIN ROUTES  ========================== */}
 
         {/* Login Page */}
-        <PublicRoutes
-          isAuthenticated={isAuthenticated}
-          path='/admin/login'
-          exact
-        >
+        <PublicRoutes isAuthenticated={isfalse} path='/admin/login' exact>
           <Login />
         </PublicRoutes>
 
         {/* Dashboard Landing */}
-        <PrivateRoutes
-          isAuthenticated={isAuthenticated}
-          path='/admin/home'
-          exact
-        >
+        <PrivateRoutes isAuthenticated={isfalse} path='/admin/home' exact>
           <Dashboard />
         </PrivateRoutes>
 
         {/* Polls Page */}
-        <PrivateRoutes
-          isAuthenticated={isAuthenticated}
-          path='/admin/polls'
-          exact
-        >
+        <PrivateRoutes isAuthenticated={isfalse} path='/admin/polls' exact>
           <ManagePolls />
         </PrivateRoutes>
 
         <PrivateRoutes
-          isAuthenticated={isAuthenticated}
+          isAuthenticated={isfalse}
           path='/admin/polls/polls'
           exact
         >
@@ -269,7 +246,7 @@ const [isfalse, setIsFalse] = useState(false)
         </PrivateRoutes>
 
         <PrivateRoutes
-          isAuthenticated={isAuthenticated}
+          isAuthenticated={isfalse}
           path='/admin/polls/candidates'
           exact
         >
@@ -278,7 +255,7 @@ const [isfalse, setIsFalse] = useState(false)
 
         {/* Polls result*/}
         <PrivateRoutes
-          isAuthenticated={isAuthenticated}
+          isAuthenticated={isfalse}
           path='/admin/polls/poll_result'
           exact
         >
@@ -287,16 +264,12 @@ const [isfalse, setIsFalse] = useState(false)
 
         {/* surveys */}
 
-        <PrivateRoutes
-          isAuthenticated={isAuthenticated}
-          path='/admin/surveys'
-          exact
-        >
+        <PrivateRoutes isAuthenticated={isfalse} path='/admin/surveys' exact>
           <Survey />
         </PrivateRoutes>
 
         <PrivateRoutes
-          isAuthenticated={isAuthenticated}
+          isAuthenticated={isfalse}
           path='/admin/surveys/manageSurvey'
           exact
         >
@@ -305,16 +278,12 @@ const [isfalse, setIsFalse] = useState(false)
 
         {/* blog */}
 
-        <PrivateRoutes
-          isAuthenticated={isAuthenticated}
-          path='/admin/blog'
-          exact
-        >
+        <PrivateRoutes isAuthenticated={isfalse} path='/admin/blog' exact>
           <Blog />
         </PrivateRoutes>
 
         <PrivateRoutes
-          isAuthenticated={isAuthenticated}
+          isAuthenticated={isfalse}
           path='/admin/blog/manageBlog'
           exact
         >
@@ -322,16 +291,12 @@ const [isfalse, setIsFalse] = useState(false)
         </PrivateRoutes>
 
         {/* account */}
-        <PrivateRoutes
-          isAuthenticated={isAuthenticated}
-          path='/admin/account'
-          exact
-        >
+        <PrivateRoutes isAuthenticated={isfalse} path='/admin/account' exact>
           <Account />
         </PrivateRoutes>
 
         <PrivateRoutes
-          isAuthenticated={isAuthenticated}
+          isAuthenticated={isfalse}
           path='/admin/account/settings'
           exact
         >
@@ -339,19 +304,19 @@ const [isfalse, setIsFalse] = useState(false)
         </PrivateRoutes>
 
         <PrivateRoutes
-          isAuthenticated={isAuthenticated}
+          isAuthenticated={isfalse}
           path='/admin/account/Managepassword'
           exact
         >
           <Password />
         </PrivateRoutes>
 
-        <PublicRoutes path='/testForm' isAuthenticated={isAuthenticated}>
+        <PublicRoutes path='/testForm' isAuthenticated={isfalse}>
           <TestForm />
         </PublicRoutes>
 
         {/*=========================  NOT FOUND ROUTES ========================*/}
-        <PublicRoutes isAuthenticated={isAuthenticated} path='*'>
+        <PublicRoutes isAuthenticated={isfalse} path='*'>
           <NotFound />
         </PublicRoutes>
       </Switch>
