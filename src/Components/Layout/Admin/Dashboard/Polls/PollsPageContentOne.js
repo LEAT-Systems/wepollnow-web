@@ -1,3 +1,5 @@
+/** @format */
+
 import React, { useEffect, useState } from "react";
 import Tables from "../Tables/Tables";
 import Header from "../../Header";
@@ -30,21 +32,14 @@ const PollsPageContentOne = () => {
   const [searchResult, setSearchResult] = useState([]);
   const [modalData, setModalData] = useState([]);
 
-  const getData = async () => {
+  useEffect(() => {
     Axios.get("https://wepollnow.azurewebsites.net/poll/get_polls/")
       .then((res) => {
-      console.log(res);
-      setModalData(res.data);
+        console.log(res);
+        setModalData(res.data);
       })
-      .catch(err => console.log(err))
-  };
-
-  useEffect(() => {
-    getData();
-  }, []);
-
-
-  
+      .catch((err) => console.log(err));
+  }, [modalData, setModalData]);
 
   /* View State */
   const [isGrid, setIsGrid] = useState(false);
@@ -122,8 +117,7 @@ const PollsPageContentOne = () => {
           {isGrid ? (
             <Grid data={searchResult} handleOpen={handleOpen} />
           ) : (
-              <Tables data={searchResult} />
-              
+            <Tables data={searchResult} />
           )}
         </div>
 
