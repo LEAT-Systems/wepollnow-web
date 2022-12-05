@@ -144,16 +144,15 @@ const GettingStartedFour = () => {
           </h1>
 
           <div className="flex flex-row items-center justify-center ">
-            <div className="max-w-4xl p-8 text-4xl text-[#082B0E] md:space-y-4 text-center md:text-[54px]">
-              <h1>
+            <div className="max-w-4xl p-8 text-4xl text-[#082B0E]  md:space-y-4 text-center md:text-[54px]">
+              <h1 className="leading-none">
                 {" "}
-                Let's{" "}
+                Participate and let your <br />
                 <span className="underline underline-offset-4 decoration-yellow-500 decoration-[6px]">
-                  change
+                  voice
                 </span>{" "}
-                the narrative.
+                be heard.
               </h1>
-              <h1>Make your opinion count.</h1>
             </div>
           </div>
           <div>

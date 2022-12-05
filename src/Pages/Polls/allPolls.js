@@ -81,8 +81,8 @@ const AllPolls = () => {
                 className="absolute -mt-24 text-white transition duration-150 ease-in-out bg-black rounded shadow-lg"
               >
                 <p className="p-2 text-lg font-normal">
-                  Polls in this section have been sorted according to your State
-                  Of Origin.
+                  Polls in this section have been sorted according to your
+                  voting location.
                 </p>
               </div>
             )}
@@ -105,7 +105,7 @@ const AllPolls = () => {
           </div>
         </div>
       )}
-      <div className="grid min-h-[100vh] grid-cols-1 pb-12 mt-12 md:grid-cols-2 lg:grid-cols-3 gap-y-4 gap-x-12 md:px-24 md:gap-x-12 ">
+      <div className="grid min-h-[50vh] grid-cols-1 pb-12 mt-12 md:grid-cols-2 lg:grid-cols-3 gap-y-4 gap-x-12 md:px-24 md:gap-x-12 ">
         {data?.map((item) => {
           // Here, I'm calculating the poll date from the current date so i could render items conditionally
           let due;

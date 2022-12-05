@@ -7,6 +7,7 @@ import Nav from "../Layout/Landing/mainNav";
 import FormLabel from "../../UI/FormLabel";
 import { states } from "./states";
 import spinner from "../../images/spinner.gif";
+import tooltipIcon from "../../images/tooltip.png";
 
 const FormTwo = (props) => {
   const [formisCompleted, setFormIsCompleted] = useState(false);
@@ -121,14 +122,19 @@ const FormTwo = (props) => {
                     <div className="h-full space-y-4 md:px-4">
                       {/*  */}
                       {/* Select State of voting residence */}
-                      <div className="relative flex flex-col mt-8 space-y-1 md:pb-0 md:mt-0">
-                        <p
-                          onMouseEnter={() => setTooltipStatus(1)}
-                          onMouseLeave={() => setTooltipStatus(0)}
-                          className="hover:cursor-pointer text-md font-bold underline underline-2 underline-offset-2 decoration-yellow-500 decoration-[3px]"
-                        >
-                          Which state will you be voting in?
-                        </p>
+                      <div className="relative flex flex-col mt-8 md:pb-0 md:mt-0">
+                        <div className="flex flex-row items-center space-x-2">
+                          <p className=" text-md font-bold underline underline-2 underline-offset-2 decoration-yellow-500 decoration-[3px]">
+                            Which state will you be voting in?
+                          </p>
+                          <img
+                            src={tooltipIcon}
+                            alt="tooltip"
+                            className="w-4 h-4 hover:cursor-pointer"
+                            onMouseEnter={() => setTooltipStatus(1)}
+                            onMouseLeave={() => setTooltipStatus(0)}
+                          />
+                        </div>
 
                         {/* ========== TOOLTIP =================*/}
                         {tooltipStatus === 1 && (
@@ -166,7 +172,7 @@ const FormTwo = (props) => {
                           }
                           disabled={disable ? true : false}
                           name="stateOfVotingRes"
-                          className={`block w-full px-3 py-3 mt-1 bg-white border border-gray-300 rounded ${
+                          className={`block w-full px-3 py-4 bg-white border border-gray-300 rounded ${
                             disable === true ? "cursor-not-allowed" : ""
                           }`}
                         >
@@ -186,7 +192,7 @@ const FormTwo = (props) => {
 
                       {/* LGA of voting residence */}
 
-                      <div className="flex flex-col space-y-1 md:pb-0">
+                      <div className="flex flex-col md:pt-4 md:pb-0">
                         <FormLabel
                           no="i"
                           title=" Select L.G.A of voting location (Not applicable for
@@ -210,16 +216,17 @@ const FormTwo = (props) => {
                             <img
                               src={spinner}
                               alt="spinner"
-                              className="w-8 h-8"
+                              className="w-6 h-6"
                             />
                           </div>
                         )}
+
                         <div className="flex flex-row items-start justify-between">
                           <Field
                             disabled={disable === true ? true : false}
                             as="select"
                             name="LGAofVotingRes"
-                            className={`block w-full px-3 py-3 mt-1 bg-white border border-gray-300 rounded ${
+                            className={`block w-full px-3 py-4 bg-white border border-gray-300 rounded ${
                               disable === true ? "cursor-not-allowed" : ""
                             }`}
                           >
@@ -240,82 +247,84 @@ const FormTwo = (props) => {
 
                       {/* Age Range */}
 
-                      <div className="flex flex-col pb-8 space-y-2 md:pb-0 ">
+                      <div className="flex flex-col pb-8 md:pt-4 md:pb-0 ">
                         <FormLabel no="i" title="Select Your Age Range" />
                         <p className="text-red-600">
                           <ErrorMessage name="ageRange" />
                         </p>
-                        <div className="flex flex-row items-center justify-between space-x-4">
-                          <label
-                            htmlFor="ageRange1"
-                            className="flex flex-row items-center w-full p-3 px-4 space-x-2 border rounded md:p-4"
-                          >
-                            <Field
-                              id="ageRange1"
-                              type="radio"
-                              name="ageRange"
-                              value="1"
-                              placeholder="18-25"
-                              className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
-                            />
-                            <p>18-25</p>
-                          </label>
-                          <label
-                            htmlFor="ageRange2"
-                            className="flex flex-row items-center w-full p-3 space-x-2 border rounded md:p-4"
-                          >
-                            <Field
-                              id="ageRange2"
-                              type="radio"
-                              name="ageRange"
-                              value="2"
-                              className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
-                            />
-                            <p>25-35</p>
-                          </label>
-                        </div>
-                        <div className="flex flex-row items-center justify-between mt-2 space-x-4 md:mt-0">
-                          <label
-                            htmlFor="ageRange3"
-                            className="flex flex-row items-center w-full p-3 px-4 space-x-2 border rounded md:p-4"
-                          >
-                            <Field
-                              id="ageRange3"
-                              type="radio"
-                              name="ageRange"
-                              value="3"
-                              className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
-                            />
-                            <p>35-45</p>
-                          </label>
-                          <label
-                            htmlFor="ageRange4"
-                            className="flex flex-row items-center w-full p-3 space-x-2 border rounded md:p-4"
-                          >
-                            <Field
-                              id="ageRange4"
-                              type="radio"
-                              name="ageRange"
-                              value="4"
-                              className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
-                            />
-                            <p>45-50</p>
-                          </label>
-                        </div>
-                        <div className="flex flex-row items-center justify-between mt-2 space-x-4 md:space-y-4 md:pb-0 md:mt-0">
-                          <label
-                            htmlFor="ageRange5"
-                            className="flex flex-row items-center w-full p-3 space-x-2 border rounded md:p-4"
-                          >
-                            <Field
-                              id="ageRange5"
-                              type="radio"
-                              name="ageRange"
-                              value="5"
-                              className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
-                            />
-                            <p>50 and above</p>
-                          </label>
+                        <div className="space-y-3">
+                          <div className="flex flex-row items-center justify-between space-x-4">
+                            <label
+                              htmlFor="ageRange1"
+                              className="flex flex-row items-center w-full p-3 px-4 space-x-2 border rounded md:p-4"
+                            >
+                              <Field
+                                id="ageRange1"
+                                type="radio"
+                                name="ageRange"
+                                value="1"
+                                placeholder="18-25"
+                                className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
+                              />
+                              <p>18-25</p>
+                            </label>
+                            <label
+                              htmlFor="ageRange2"
+                              className="flex flex-row items-center w-full p-3 space-x-2 border rounded md:p-4"
+                            >
+                              <Field
+                                id="ageRange2"
+                                type="radio"
+                                name="ageRange"
+                                value="2"
+                                className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
+                              />
+                              <p>25-35</p>
+                            </label>
+                          </div>
+                          <div className="flex flex-row items-center justify-between mt-2 space-x-4 md:mt-0">
+                            <label
+                              htmlFor="ageRange3"
+                              className="flex flex-row items-center w-full p-3 px-4 space-x-2 border rounded md:p-4"
+                            >
+                              <Field
+                                id="ageRange3"
+                                type="radio"
+                                name="ageRange"
+                                value="3"
+                                className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
+                              />
+                              <p>35-45</p>
+                            </label>
+                            <label
+                              htmlFor="ageRange4"
+                              className="flex flex-row items-center w-full p-3 space-x-2 border rounded md:p-4"
+                            >
+                              <Field
+                                id="ageRange4"
+                                type="radio"
+                                name="ageRange"
+                                value="4"
+                                className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
+                              />
+                              <p>45-50</p>
+                            </label>
+                          </div>
+                          <div className="flex flex-row items-center justify-between mt-2 space-x-4 md:space-y-4 md:pb-0 md:mt-0">
+                            <label
+                              htmlFor="ageRange5"
+                              className="flex flex-row items-center w-full p-3 space-x-2 border rounded md:p-4"
+                            >
+                              <Field
+                                id="ageRange5"
+                                type="radio"
+                                name="ageRange"
+                                value="5"
+                                className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
+                              />
+                              <p>50 and above</p>
+                            </label>
+                          </div>
                         </div>
                       </div>
                     </div>

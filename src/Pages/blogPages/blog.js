@@ -86,7 +86,7 @@ const BlogPage = () => {
       )}
       {/* ITEMS */}
       <div className="grid min-h-screen grid-cols-1 px-4 mt-12 mb-12 md:mb-24 md:space-y-0 gap-y-12 md:gap-y-12 gap-x-12 md:px-24 md:gap-x-12 md:grid-cols-3 md:mt-24">
-        {data?.map((data) => {
+        {data?.reverse().map((data) => {
           return (
             <div className="w-full hover:brightness-50" key={data.id}>
               <Link

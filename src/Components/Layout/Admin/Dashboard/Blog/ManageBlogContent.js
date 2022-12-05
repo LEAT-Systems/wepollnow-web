@@ -116,10 +116,10 @@ const ManageBlogContent = () => {
       apiData.forEach((item) => {
         const aData = {
           id: item.id,
-          title: item.title.split(" ").splice(0, 7).join(" ") + "...",
+          title: item.title.split(" ").splice(0, 5).join(" ") + "...",
           content:
             item.content !== undefined
-              ? item.content.split(" ").splice(0, 20).join(" ") + "..."
+              ? item.content.split(" ").splice(0, 15).join(" ") + "..."
               : null,
           date_posted:
             item.date_posted !== undefined
@@ -173,37 +173,48 @@ const ManageBlogContent = () => {
                   <p className="font-bold text-[18px]">All Posts</p>
                 </header>
                 {data.length === 0 && <p className="p-12">No post available</p>}
-                {data?.slice(0, 5).map((data) => {
-                  return (
-                    <form
-                      onSubmit={deleteHandler}
-                      className="flex flex-col space-y-2 border-b hover:cursor-pointer"
-                      key={data.id}
-                    >
-                      <div
-                        className="p-6 hover:bg-green-100"
-                        onClick={() => setArticleId(data.id)}
+                {data
+                  ?.slice(0, 5)
+                  .reverse()
+                  .map((data) => {
+                    return (
+                      <form
+                        onSubmit={deleteHandler}
+                        className="flex flex-col space-y-2 border-b hover:cursor-pointer"
+                        key={data.id}
                       >
-                        <div className="flex flex-row items-center justify-between">
-                          <div className="flex flex-col space-y-2">
-                            <p className="font-bold text-md">{data.title}</p>
-                            <div className="flex flex-row items-center justify-start space-x-1">
-                              <p>{data.date_posted}</p>
-                              <span className="w-2 h-2 bg-black rounded-full "></span>
-                              <p>{data.time_posted}</p>
+                        <div
+                          className="p-6 hover:bg-green-100"
+                          onClick={() => setArticleId(data.id)}
+                        >
+                          <div className="flex flex-row items-center justify-between">
+                            <div className="flex flex-col space-y-2">
+                              <p className="font-bold text-md">{data.title}</p>
+                              <div className="flex flex-row items-center justify-start space-x-1">
+                                <p>{data.date_posted}</p>
+                                <span className="w-2 h-2 bg-black rounded-full "></span>
+                                <p>{data.time_posted}</p>
+                              </div>
                             </div>
+                            <button
+                              className="hover:bg-[#eee]"
+                              type="submit"
+                              onClick={() => setID(data.id)}
+                            >
+                              <img
+                                src={Delete}
+                                alt="trash"
+                                className="w-5 h-5"
+                              />
+                            </button>
                           </div>
-                          <button type="submit" onClick={() => setID(data.id)}>
-                            <img src={Delete} alt="trash" className="w-5 h-5" />
-                          </button>
+                          <p
+                            dangerouslySetInnerHTML={createMarkup(data.content)}
+                          ></p>
                         </div>
-                        <p
-                          dangerouslySetInnerHTML={createMarkup(data.content)}
-                        ></p>
-                      </div>
-                    </form>
-                  );
-                })}
+                      </form>
+                    );
+                  })}
               </div>
             </div>
 

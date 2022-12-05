@@ -13,7 +13,7 @@ const ModalComponent = (props) => {
   const [hasError, setHasError] = useState(false);
   const [value, setValue] = useState(null);
   const [tooltipStatus, setTooltipStatus] = useState(0);
-  const [message, setMessage] = useState("");
+  const [userExists, setUserExists] = useState(false);
 
   // Validate on end point
 
@@ -46,17 +46,28 @@ const ModalComponent = (props) => {
         );
         const result = await response.json();
 
+        let data;
         if (!response.ok) {
-          alert("An error occured");
+          alert("Something went wrong");
         } else {
-          const { message, voter_id } = result;
-          if (message === "A registered Voter") {
+          data = {
+            message: result.message !== undefined ? result.message : "",
+            voter_id: result.voter_id !== undefined ? result.voter_id : "",
+          };
+        }
+
+        const { message, voter_id } = data;
+
+        if (response.ok === true) {
+          if (message === "A registered Voter" && voter_id !== null) {
             alert(
               "You are already registered on our system. You will be redirected to the polls page"
             );
             localStorage.setItem("uniqueID", voter_id);
+            setUserExists(true);
             history.push("/polls", { replace: true });
-          } else {
+          }
+          if (message === "New User") {
             localStorage.setItem(
               "phoneDetails",
               JSON.stringify({
@@ -89,7 +100,6 @@ const ModalComponent = (props) => {
                 </div>
                 <div className="relative flex flex-row items-center justify-start space-x-2">
                   <p className="text-[16px] font-normal text-center">
-                    {message !== "" ? message : ""}
                     Input your phone number to proceed
                   </p>
                   <img

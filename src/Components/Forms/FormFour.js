@@ -69,12 +69,12 @@ const FormFour = (props) => {
                       {/*  */}
                       {/* ================= 1.  Gender    ================*/}
                       {/*  */}
-                      <div className="pt-8 space-y-1 md:pt-0">
+                      <div className="pt-8 md:pt-0">
                         <FormLabel no="i" title=" Select your Gender" />
                         <p className="text-red-600">
                           <ErrorMessage name="gender" />
                         </p>
-                        <div className="flex flex-row items-center justify-between space-x-4 md:p-2">
+                        <div className="flex flex-row items-center justify-between space-x-4">
                           <label
                             htmlFor="gender"
                             className="flex flex-row items-center w-full p-3 space-x-2 border rounded md:p-4"
@@ -111,61 +111,63 @@ const FormFour = (props) => {
                         <p className="text-red-600">
                           <ErrorMessage name="religion" />
                         </p>
-                        <div className="flex flex-row items-center justify-between space-x-4 md:p-2">
-                          <label
-                            htmlFor="religion"
-                            className="flex flex-row items-center w-full p-3 space-x-2 border rounded md:p-4"
-                          >
-                            <Field
-                              id="religion"
-                              type="radio"
-                              name="religion"
-                              value="1"
-                              className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
-                            />
-                            <p>Christianity</p>
-                          </label>
-                          <label
-                            htmlFor="religion2"
-                            className="flex flex-row items-center w-full p-3 space-x-2 border rounded md:p-4"
-                          >
-                            <Field
-                              id="religion2"
-                              type="radio"
-                              name="religion"
-                              value="2"
-                              className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
-                            />
-                            <p>Islam</p>
-                          </label>
-                        </div>
-                        <div className="flex flex-row items-center justify-between mt-2 space-x-4 md:p-2 md:mt-0">
-                          <label
-                            htmlFor="religion3"
-                            className="flex flex-row items-center w-full p-3 space-x-2 border rounded md:p-4"
-                          >
-                            <Field
-                              id="religion3"
-                              type="radio"
-                              name="religion"
-                              value="3"
-                              className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
-                            />
-                            <p>Traditional</p>
-                          </label>
-                          <label
-                            htmlFor="religion4"
-                            className="flex flex-row items-center w-full p-3 space-x-2 border rounded md:p-4"
-                          >
-                            <Field
-                              id="religion4"
-                              type="radio"
-                              name="religion"
-                              value="4"
-                              className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
-                            />
-                            <p>Other</p>
-                          </label>
+                        <div className="space-y-4">
+                          <div className="flex flex-row items-center justify-between space-x-4">
+                            <label
+                              htmlFor="religion"
+                              className="flex flex-row items-center w-full p-3 space-x-2 border rounded md:p-4"
+                            >
+                              <Field
+                                id="religion"
+                                type="radio"
+                                name="religion"
+                                value="1"
+                                className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
+                              />
+                              <p>Christianity</p>
+                            </label>
+                            <label
+                              htmlFor="religion2"
+                              className="flex flex-row items-center w-full p-3 space-x-2 border rounded md:p-4"
+                            >
+                              <Field
+                                id="religion2"
+                                type="radio"
+                                name="religion"
+                                value="2"
+                                className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
+                              />
+                              <p>Islam</p>
+                            </label>
+                          </div>
+                          <div className="flex flex-row items-center justify-between mt-2 space-x-4 md:mt-0">
+                            <label
+                              htmlFor="religion3"
+                              className="flex flex-row items-center w-full p-3 space-x-2 border rounded md:p-4"
+                            >
+                              <Field
+                                id="religion3"
+                                type="radio"
+                                name="religion"
+                                value="3"
+                                className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
+                              />
+                              <p>Traditional</p>
+                            </label>
+                            <label
+                              htmlFor="religion4"
+                              className="flex flex-row items-center w-full p-3 space-x-2 border rounded md:p-4"
+                            >
+                              <Field
+                                id="religion4"
+                                type="radio"
+                                name="religion"
+                                value="4"
+                                className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
+                              />
+                              <p>Other</p>
+                            </label>
+                          </div>
                         </div>
                       </div>
 
@@ -176,7 +178,7 @@ const FormFour = (props) => {
                         <p className="text-red-600">
                           <ErrorMessage name="selectOneOpt" />
                         </p>
-                        <div className="flex flex-col items-center justify-between space-y-2 md:flex-row md:space-x-4 md:p-2 md:space-y-0">
+                        <div className="flex flex-col items-center justify-between space-y-2 md:flex-row md:space-x-4  md:space-y-0">
                           <label
                             htmlFor="selectOneOpt"
                             className="flex flex-row items-center w-full p-3 space-x-2 border rounded md:p-4"
@@ -226,7 +228,7 @@ const FormFour = (props) => {
                         <p className="text-red-600">
                           <ErrorMessage name="accomodationStatus" />
                         </p>
-                        <div className="flex flex-col items-center justify-between space-y-2 md:flex-row md:space-x-4 md:p-2 md:space-y-0">
+                        <div className="flex flex-col items-center justify-between space-y-2 md:flex-row md:space-x-4  md:space-y-0">
                           <label
                             htmlFor="accomodationStatus"
                             className="flex flex-row items-center w-full p-4 space-x-2 border rounded"

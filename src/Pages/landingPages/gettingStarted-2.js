@@ -140,7 +140,7 @@ const GettingStartedTwo = () => {
 
         <div className="relative flex flex-col items-center bg-no-repeat bg-top bg-opacity-5 justify-center space-y-4 md:space-y-4 bg-contain bg-hero-pattern lg:pb-[10rem]">
           <h1 className="text-xl font-extrabold md:text-3xl">
-            Senatorial Polls
+            Gubernatorial Polls
           </h1>
 
           <div className="flex flex-row items-center justify-center ">
@@ -153,7 +153,7 @@ const GettingStartedTwo = () => {
                 </span>{" "}
                 the narrative.
               </h1>
-              <h1>Credible elections for all.</h1>
+              <h1>Credible polls for all.</h1>
             </div>
           </div>
           <div>

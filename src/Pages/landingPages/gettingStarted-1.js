@@ -80,7 +80,7 @@ const GettingStartedOne = () => {
             <Timer
               date={countDownDate}
               size="4xl"
-              sizelg="9xl"
+              sizelg="5xl"
               color="black"
               pcolor="black"
             />
