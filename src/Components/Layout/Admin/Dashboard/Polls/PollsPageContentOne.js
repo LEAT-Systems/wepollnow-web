@@ -39,7 +39,7 @@ const PollsPageContentOne = () => {
         setModalData(res.data);
       })
       .catch((err) => console.log(err));
-  }, [modalData, setModalData]);
+  }, [setModalData]);
 
   /* View State */
   const [isGrid, setIsGrid] = useState(false);

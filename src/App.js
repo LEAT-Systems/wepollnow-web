@@ -237,7 +237,7 @@ const [isfalse, setIsFalse] = useState(false)
         </PrivateRoutes>
 
         {/* Redirect users to the /admin/polls/polls to activate active class */}
-        <Redirect from='/admin/polls' to='/admin/polls/polls' />
+        <Redirect exact strict from='/admin/polls' to='/admin/polls/polls' />
 
         <PrivateRoutes
           isAuthenticated={isfalse}
@@ -298,7 +298,12 @@ const [isfalse, setIsFalse] = useState(false)
         </PrivateRoutes>
 
         {/* Redirect users to the /admin/account/settings to activate active class */}
-        <Redirect from='/admin/account' to='/admin/account/settings' />
+        <Redirect
+          exact
+          strict
+          from='/admin/account'
+          to='/admin/account/settings'
+        />
 
         <PrivateRoutes
           isAuthenticated={isfalse}
