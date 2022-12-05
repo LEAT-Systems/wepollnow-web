@@ -33,13 +33,17 @@ const PollsPageContentOne = () => {
   const [modalData, setModalData] = useState([]);
 
   useEffect(() => {
-    Axios.get("https://wepollnow.azurewebsites.net/poll/get_polls/")
-      .then((res) => {
-        console.log(res);
-        setModalData(res.data);
-      })
-      .catch((err) => console.log(err));
-  }, [setModalData]);
+    const getData = async () => {
+     await Axios.get("https://wepollnow.azurewebsites.net/poll/get_polls/")
+        .then((res) => {
+          console.log(res);
+          setModalData(res.data);
+        })
+        .catch((err) => console.log(err));
+    };
+
+    getData();
+  }, []);
 
   /* View State */
   const [isGrid, setIsGrid] = useState(false);
