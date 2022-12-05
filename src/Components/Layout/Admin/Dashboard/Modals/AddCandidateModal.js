@@ -497,11 +497,12 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
                     onChange={(e) => {
                       setMainCandidate(e.target.checked);
                     }}
-                    label='Main Candidate'
+                    
                   />
                 }
+                label='Main Candidate'
               />
-              <RadioGroup
+              {/* <RadioGroup
                 value={mainCandidate}
                 onChange={(e) => {
                   setMainCandidate(e.target.value);
@@ -550,7 +551,7 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
                     Main Candidate
                   </h3>
                 </div>
-              </RadioGroup>
+              </RadioGroup> */}
             </FormControl>
           </div>
           <div className='flex items-center justify-end w-full my-2'>
