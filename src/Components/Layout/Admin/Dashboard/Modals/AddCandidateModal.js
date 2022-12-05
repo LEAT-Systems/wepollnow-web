@@ -66,7 +66,9 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
   useEffect(() => {
     const getSenetorial = async () => {
       await Axios.get(
-        `https://wepollnow.azurewebsites.net/utilities/senatorial/${selectedState}`
+        `https://wepollnow.azurewebsites.net/utilities/senatorial/${selectedState}`, {
+          state_id: selectedState
+        }
       )
         .then((res) => setDistrictData(res.data))
         .catch((err) => console.log(err));
@@ -126,7 +128,6 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
     // formData.append("photo", candidateImage);
 
     console.log(file);
-    console.log("Main Candidate: ", mainCandidate);
 
     await Axios.post(
       "https://wepollnow.azurewebsites.net/utilities/candidates/",
@@ -192,8 +193,11 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
           });
         }
       });
+    
+    window.location.reload()
   };
 
+      console.log("Main Candidate: ", mainCandidate);
   useEffect(() => {
     var onDisabled = () => {
       if (pollType === "1") {
