@@ -206,6 +206,8 @@ const AddPollModal = ({
           });
         }
       });
+    
+    window.location.reload();
   };
 
   return (
