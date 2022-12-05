@@ -1,3 +1,5 @@
+/** @format */
+
 import React, { useState, useEffect, useRef } from "react";
 import { Close } from "@mui/icons-material";
 import { Checkbox, Modal } from "@mui/material";
@@ -490,11 +492,12 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
               <FormControlLabel
                 control={
                   <Checkbox
-                    checked={true}
-                    name={mainCandidate}
+                    checked={mainCandidate}
+                    value={mainCandidate}
                     onChange={(e) => {
                       setMainCandidate(e.target.checked);
                     }}
+                    label='Main Candidate'
                   />
                 }
               />
