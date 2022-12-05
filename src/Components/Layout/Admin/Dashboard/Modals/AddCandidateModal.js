@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Close } from "@mui/icons-material";
-import { Modal } from "@mui/material";
+import { Checkbox, Modal } from "@mui/material";
 import { FileUploader } from "react-drag-drop-files";
 import {
   FormControl,
@@ -487,6 +487,17 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
             </div>
 
             <FormControl sx={{ width: "100%" }}>
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={true}
+                    name={mainCandidate}
+                    onChange={(e) => {
+                      setMainCandidate(e.target.checked);
+                    }}
+                  />
+                }
+              />
               <RadioGroup
                 value={mainCandidate}
                 onChange={(e) => {
