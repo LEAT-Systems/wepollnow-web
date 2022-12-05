@@ -61,62 +61,69 @@ const BlogItem = () => {
       {/* ITEMS */}
       <div className="grid grid-cols-1 px-4 mt-4 md:space-y-0 gap-y-12 md:gap-y-0 gap-x-12 md:px-24 md:gap-x-12 md:grid-cols-3">
         {isEmpty && <p className="text-sm md:text-lg">No posts to show</p>}
-        {data.slice(0, 3).map((data) => {
-          return (
-            <div
-              className="w-full transition duration-150 hover:brightness-50"
-              key={data.id}
-            >
-              <Link
-                to={"/blog-single"}
-                onClick={() =>
-                  localStorage.setItem("blog_article_id", `${data.id}`)
-                }
+        {data
+          .slice(-3)
+          .reverse()
+          .map((data) => {
+            return (
+              <div
+                className="w-full transition duration-150 hover:brightness-50"
+                key={data.id}
               >
-                <div className="flex flex-col w-full space-y-2 md:h-full">
-                  <div className="relative">
-                    <img
-                      src={data.image}
-                      alt="Voter"
-                      className="w-full h-[250px] rounded md:object-cover "
-                    />
-                    <div className="absolute bottom-0 right-0 z-30">
+                <Link
+                  to={"/blog-single"}
+                  onClick={() =>
+                    localStorage.setItem("blog_article_id", `${data.id}`)
+                  }
+                >
+                  <div className="flex flex-col w-full space-y-2 md:h-full">
+                    <div className="relative">
                       <img
-                        src={anchor}
-                        alt="anchorIcon"
-                        className="rounded-br"
+                        src={data.image}
+                        alt="Voter"
+                        className="w-full h-[250px] rounded md:object-cover "
                       />
+                      <div className="absolute bottom-0 right-0 z-30">
+                        <img
+                          src={anchor}
+                          alt="anchorIcon"
+                          className="rounded-br"
+                        />
+                      </div>
                     </div>
-                  </div>
-                  <div className="flex flex-row items-center space-x-2">
-                    <img className="w-6 h-6 rounded-full" src={avatar} alt="" />
-                    <p className="font-normal">Administrator</p>
-                  </div>
+                    <div className="flex flex-row items-center space-x-2">
+                      <img
+                        className="w-6 h-6 rounded-full"
+                        src={avatar}
+                        alt=""
+                      />
+                      <p className="font-normal">Administrator</p>
+                    </div>
 
-                  <p className="max-w-sm font-bold text-md">{data.title}</p>
-                  <div className="flex flex-row space-x-4">
-                    <div className="flex flex-row items-center justify-start space-x-2">
-                      <img src={eye} alt="eyeIcon" />
-                      <p className="text-xs">0</p>
-                    </div>
-                    <div className="flex flex-row items-center justify-start space-x-2 text-xs">
-                      <img src={time} alt="timeIcon" />
-                      <p className="text-xs">{data.time_posted}</p>
-                    </div>
-                    <div className="flex flex-row items-center justify-start space-x-2 text-xs">
-                      <img
-                        src={calendar}
-                        alt="calendarIcon"
-                        className="w-3 h-3"
-                      />
-                      <p className="text-xs">{data.date_posted}</p>
+                    <p className="max-w-sm font-bold text-md">{data.title}</p>
+                    <div className="flex flex-row space-x-4">
+                      <div className="flex flex-row items-center justify-start space-x-2">
+                        <img src={eye} alt="eyeIcon" />
+                        <p className="text-xs">0</p>
+                      </div>
+                      <div className="flex flex-row items-center justify-start space-x-2 text-xs">
+                        <img src={time} alt="timeIcon" />
+                        <p className="text-xs">{data.time_posted}</p>
+                      </div>
+                      <div className="flex flex-row items-center justify-start space-x-2 text-xs">
+                        <img
+                          src={calendar}
+                          alt="calendarIcon"
+                          className="w-3 h-3"
+                        />
+                        <p className="text-xs">{data.date_posted}</p>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </Link>
-            </div>
-          );
-        })}
+                </Link>
+              </div>
+            );
+          })}
       </div>
     </div>
   );

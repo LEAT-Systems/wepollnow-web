@@ -131,8 +131,8 @@ const BlogSingle = () => {
       </div>
       <div className="flex flex-col items-center md:flex-row">
         <section className="flex flex-col items-center justify-center w-full px-8 mx-auto">
-          <div className="flex flex-col items-start justify-start md:min-h-[1500px] space-y-4 md:space-x-24 md:px-24 md:mt-4 md:flex-row">
-            <div className="flex flex-col items-start w-full md:w-[65%] md:h-screen space-y-4 ">
+          <div className="flex flex-col items-start justify-start  space-y-4 md:space-x-24 md:px-24 md:mt-4 md:flex-row">
+            <div className="flex flex-col items-start w-full md:w-[65%] md:h-fit space-y-4 pb-12">
               <div className="p-2">
                 <button
                   onClick={backHandler}
@@ -197,65 +197,68 @@ const BlogSingle = () => {
                   )}
                 </header>
               </div>
-              {data?.slice(0, 3).map((data) => {
-                return (
-                  <div
-                    className="w-full pb-6"
-                    key={data.id}
-                    onClick={() => {
-                      localStorage.setItem("blog_article_id", data.id);
-                      window.location.reload();
-                    }}
-                  >
-                    <Link to={"/blog-single"}>
-                      <div className="flex flex-col w-full space-y-1 md:h-full">
-                        <div className="relative">
-                          <div className="w-full">
-                            <img
-                              src={data.image}
-                              alt="Voter"
-                              className="w-full h-[200px] hover:brightness-50 rounded md:object-cover"
-                            />
+              {data
+                .slice(-3)
+                .reverse()
+                .map((data) => {
+                  return (
+                    <div
+                      className="w-full pb-6"
+                      key={data.id}
+                      onClick={() => {
+                        localStorage.setItem("blog_article_id", data.id);
+                        window.location.reload();
+                      }}
+                    >
+                      <Link to={"/blog-single"}>
+                        <div className="flex flex-col w-full space-y-1 md:h-full">
+                          <div className="relative">
+                            <div className="w-full">
+                              <img
+                                src={data.image}
+                                alt="Voter"
+                                className="w-full h-[200px] hover:brightness-50 rounded md:object-cover"
+                              />
+                            </div>
+                            <div className="absolute bottom-0 right-0 z-30">
+                              <img
+                                src={anchor}
+                                alt="anchorIcon"
+                                className="rounded-br"
+                              />
+                            </div>
                           </div>
-                          <div className="absolute bottom-0 right-0 z-30">
+                          <div className="flex flex-row items-center space-x-2">
                             <img
-                              src={anchor}
-                              alt="anchorIcon"
-                              className="rounded-br"
+                              className="w-6 h-6 rounded-full"
+                              src={avatar}
+                              alt="authorImg"
                             />
+                            <p className="font-normal">Wepollnow Admin</p>
                           </div>
-                        </div>
-                        <div className="flex flex-row items-center space-x-2">
-                          <img
-                            className="w-6 h-6 rounded-full"
-                            src={avatar}
-                            alt="authorImg"
-                          />
-                          <p className="font-normal">Wepollnow Admin</p>
-                        </div>
 
-                        <p className="max-w-sm font-bold text-md">
-                          {data.title}
-                        </p>
-                        <div className="flex flex-row space-x-4">
-                          <div className="flex flex-row items-center justify-start space-x-2">
-                            <img src={eye} alt="calendarIcon" />
-                            <p className="text-xs">0</p>
-                          </div>
-                          <div className="flex flex-row items-center justify-start space-x-2 text-xs">
-                            <img src={time} alt="calendarIcon" />
-                            <p className="text-xs">{data.time_posted}</p>
-                          </div>
-                          <div className="flex flex-row items-center justify-start space-x-2 text-xs">
-                            <img src={calendar} alt="calendarIcon" />
-                            <p className="text-xs">{data.date_posted}</p>
+                          <p className="max-w-sm font-bold text-md">
+                            {data.title}
+                          </p>
+                          <div className="flex flex-row space-x-4">
+                            <div className="flex flex-row items-center justify-start space-x-2">
+                              <img src={eye} alt="calendarIcon" />
+                              <p className="text-xs">0</p>
+                            </div>
+                            <div className="flex flex-row items-center justify-start space-x-2 text-xs">
+                              <img src={time} alt="calendarIcon" />
+                              <p className="text-xs">{data.time_posted}</p>
+                            </div>
+                            <div className="flex flex-row items-center justify-start space-x-2 text-xs">
+                              <img src={calendar} alt="calendarIcon" />
+                              <p className="text-xs">{data.date_posted}</p>
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    </Link>
-                  </div>
-                );
-              })}
+                      </Link>
+                    </div>
+                  );
+                })}
               <Link to="/blog" className="w-full mt-12">
                 <button className="w-full p-3 px-4 rounded bg-[#08c127] text-white animate">
                   View More

@@ -154,7 +154,7 @@ const GettingStartedFive = () => {
 
         <div className="relative flex flex-col items-center bg-no-repeat bg-top bg-opacity-5 justify-center space-y-4 md:space-y-4 bg-contain bg-hero-pattern lg:pb-[10rem]">
           <h1 className="text-xl font-extrabold md:text-3xl">
-            Gubernatorial Polls
+            Senatorial Polls
           </h1>
 
           <div className="flex flex-row items-center justify-center ">
@@ -167,7 +167,7 @@ const GettingStartedFive = () => {
                 </span>{" "}
                 the narrative.
               </h1>
-              <h1>Make your opinion count.</h1>
+              <h1>Your opinion counts.</h1>
             </div>
           </div>
           <div>

@@ -7,7 +7,6 @@ import Nav from "../Layout/Landing/mainNav";
 import FormLabel from "../../UI/FormLabel";
 import { states } from "./states";
 
-
 const FormOne = (props) => {
   // destructuring to configure the form arrow indicators
   let { email, firstTimeVoter, diasporaVoter, stateOfOrigin } = props.data;
@@ -81,8 +80,8 @@ const FormOne = (props) => {
                     <div className="h-full px-4 space-y-4 ">
                       {/* Email Address */}
 
-                      <div className="flex flex-col pt-8 space-y-1 md:p-2 md:pt-0">
-                        <FormLabel no="i" title="Enter Email " />
+                      <div className="flex flex-col pt-8 md:pt-0">
+                        <FormLabel no="i" title="Email Address " />
                         <p className="text-red-600">
                           <ErrorMessage name="email" />
                         </p>
@@ -97,7 +96,7 @@ const FormOne = (props) => {
 
                       <div className="space-y-1">
                         <FormLabel no="i" title="Are you a First Time Voter?" />
-                        <div className="flex flex-row items-center justify-between space-x-4 md:p-2">
+                        <div className="flex flex-row items-center justify-between space-x-4">
                           <label
                             htmlFor="firstTimeVoter"
                             className={`flex radio flex-row items-center w-full p-3 space-x-2 border rounded md:p-4`}
@@ -133,7 +132,7 @@ const FormOne = (props) => {
                           no="i"
                           title="Are you a Diaspora Resident? "
                         />
-                        <div className="flex flex-row items-center justify-between space-x-4 md:p-2">
+                        <div className="flex flex-row items-center justify-between space-x-4">
                           {/*  */}
                           {/* DIASPORA VOTER OPTION : 'YES'  */}
                           <label
@@ -168,7 +167,7 @@ const FormOne = (props) => {
                       </div>
                       {/* State of Origin  */}
 
-                      <div className="space-y-2 md:p-2">
+                      <div className="space-y-1">
                         <FormLabel no="i" title=" Select State of Origin" />
                         <p className="text-red-600">
                           <ErrorMessage name="stateOfOrigin" />
@@ -177,7 +176,7 @@ const FormOne = (props) => {
                           <Field
                             as="select"
                             name="stateOfOrigin"
-                            className="block w-full p-4 px-3 py-3 mt-1 bg-white border border-gray-300 rounded"
+                            className="block w-full p-4 px-3 py-4  bg-white border border-gray-300 rounded"
                           >
                             <option value={null}>-- Select an option--</option>
                             {states.map((item) => {
