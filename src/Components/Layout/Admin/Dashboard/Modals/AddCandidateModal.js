@@ -126,6 +126,7 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
     // formData.append("photo", candidateImage);
 
     console.log(file);
+    console.log("Main Candidate: ", mainCandidate);
 
     await Axios.post(
       "https://wepollnow.azurewebsites.net/utilities/candidates/",
@@ -492,12 +493,17 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
               <FormControlLabel
                 control={
                   <Checkbox
+                    sx={{
+                      color: "#616b62",
+                      "&.Mui-checked": {
+                        color: "#616b62",
+                      },
+                    }}
                     checked={mainCandidate}
                     value={mainCandidate}
                     onChange={(e) => {
                       setMainCandidate(e.target.checked);
                     }}
-                    
                   />
                 }
                 label='Main Candidate'
