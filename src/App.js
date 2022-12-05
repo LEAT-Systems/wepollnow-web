@@ -10,6 +10,7 @@ import PublicRoutes from "./PublicRoutes";
 import PrivateRoutes from "./PrivateRoute";
 import TableStateResult from "./Components/Layout/Admin/Dashboard/Tables/TableStateResult/TableStateResult";
 import TestForm from './Components/Layout/Admin/Dashboard/TestForm'
+import { Redirect } from "react-router-dom/cjs/react-router-dom.min";
 
 // Lazy loads of components
 
@@ -235,6 +236,9 @@ const [isfalse, setIsFalse] = useState(false)
           <ManagePolls />
         </PrivateRoutes>
 
+        {/* Redirect users to the /admin/polls/polls to activate active class */}
+        <Redirect exact strict from='/admin/polls' to='/admin/polls/polls' />
+
         <PrivateRoutes
           isAuthenticated={isfalse}
           path='/admin/polls/candidates'
@@ -292,6 +296,14 @@ const [isfalse, setIsFalse] = useState(false)
         >
           <Account />
         </PrivateRoutes>
+
+        {/* Redirect users to the /admin/account/settings to activate active class */}
+        <Redirect
+          exact
+          strict
+          from='/admin/account'
+          to='/admin/account/settings'
+        />
 
         <PrivateRoutes
           isAuthenticated={isfalse}
