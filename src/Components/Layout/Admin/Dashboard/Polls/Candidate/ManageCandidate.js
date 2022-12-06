@@ -85,7 +85,7 @@ const Candidate = () => {
         setSearchResult(res.data);
       })
       .catch((err) => console.log(err));
-  }, []);
+  }, [setTableData, setSearchResult]);
  
 
   // useEffect(() => {
