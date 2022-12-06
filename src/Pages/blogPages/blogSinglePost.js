@@ -131,7 +131,7 @@ const BlogSingle = () => {
       </div>
       <div className="flex flex-col items-center md:flex-row">
         <section className="flex flex-col items-center justify-center w-full px-8 mx-auto">
-          <div className="flex flex-col items-start justify-start  space-y-4 md:space-x-24 md:px-24 md:mt-4 md:flex-row">
+          <div className="flex flex-col items-start justify-start space-y-4 md:space-x-24 md:px-24 md:mt-4 md:flex-row">
             <div className="flex flex-col items-start w-full md:w-[65%] md:h-fit space-y-4 pb-12">
               <div className="p-2">
                 <button
@@ -143,10 +143,10 @@ const BlogSingle = () => {
                 </button>
               </div>
 
-              <div className="w-full h-[400px]">
+              <div className="w-full h-[246px] md:h-[400px] ">
                 <img
                   src={fullContent?.image}
-                  className="w-full h-full"
+                  className="w-full h-full rounded-md"
                   alt="post_image"
                 />
               </div>
@@ -175,6 +175,7 @@ const BlogSingle = () => {
               {/* Blog text contents displayed as HTML */}
               <div className="md:pt-8">
                 <p
+                  className="text-justify"
                   dangerouslySetInnerHTML={createMarkup(fullContent.content)}
                 ></p>
               </div>

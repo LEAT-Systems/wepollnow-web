@@ -63,7 +63,7 @@ const AllPolls = () => {
     <div className="w-screen h-screen overflow-x-hidden">
       <ModalComponent open={open} handleClose={handleClose} />
       <Nav bg="FCEBEE" bgImg="hero-container-pattern" hamburgerBg="FCEBEE" />
-      <div className="flex flex-row items-center justify-between mx-auto bg-[#FCEBEE] bg-hero-container-pattern">
+      <div className="flex flex-row items-center justify-between mx-auto bg-[#EDFFF0] md:bg-[#FCEBEE] bg-hero-container-pattern">
         <div className="flex flex-col px-4 space-y-2 md:px-24">
           <div className="relative flex flex-row items-center justify-start space-x-2">
             <p className="text-xs md:text-lg font-bold underline underline-2 underline-offset-2 decoration-yellow-500 decoration-[6px]">
@@ -80,7 +80,7 @@ const AllPolls = () => {
                 role="tooltip"
                 className="absolute -mt-24 text-white transition duration-150 ease-in-out bg-black rounded shadow-lg"
               >
-                <p className="p-2 text-lg font-normal">
+                <p className="p-2 text-xs font-normal md:text-lg">
                   Polls in this section have been sorted according to your
                   voting location.
                 </p>
@@ -133,7 +133,7 @@ const AllPolls = () => {
             >
               <div className="flex flex-col items-center justify-center w-full py-12 space-y-4 rounded-lg h-72 bg-polls-pattern">
                 {!due && (
-                  <p className="text-xl font-bold text-white text-center">
+                  <p className="text-xl font-bold text-center text-white">
                     {item.poll_name}
                   </p>
                 )}
@@ -152,7 +152,7 @@ const AllPolls = () => {
                   </label>
                 </div>
                 {due && (
-                  <p className="text-xl font-bold text-white text-center">
+                  <p className="text-xl font-bold text-center text-white">
                     {item.poll_name}
                   </p>
                 )}

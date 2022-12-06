@@ -181,7 +181,7 @@ const GettingStartedTwo = () => {
           </div>
 
           {/* Large screen controls */}
-          <div className="absolute right-6 md:right-16 top-[430px] md:top-36">
+          <div className="absolute right-6 md:right-16 top-[400px] md:top-36">
             <div className="flex flex-col items-center justify-center space-y-4 ">
               <Link
                 to="/getting-started-one"
@@ -209,7 +209,7 @@ const GettingStartedTwo = () => {
           <img
             src={text_logo}
             alt="vote"
-            className="w-full md:w-[55%] md:-mt-[140px] h-full md:max-w-[30%] md:min-w-[55%] md:h-[200px]"
+            className="w-full md:w-[55%] mt-8 md:-mt-[140px] h-full md:max-w-[30%] md:min-w-[55%] md:h-[200px]"
           />
         </div>
 
