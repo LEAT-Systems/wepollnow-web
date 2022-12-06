@@ -31,7 +31,7 @@ const data = [
 
 const ChartLegend = () => {
   return (
-    <main className='w-[10rem] border rounded-md py-4 px-2 h-full'>
+    <main className='w-[25rem] border rounded-md py-4 px-2 h-full'>
       <h2 className='font-bold text-black text-base capitalize'>Legend</h2>
       <div className='flex flex-col gap-4'>
         {data.map((data) => {
