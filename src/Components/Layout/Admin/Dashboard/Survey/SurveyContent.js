@@ -175,7 +175,7 @@ const SurveyContent = () => {
         <div className="flex flex-col items-center justify-center px-6 py-4 mx-auto h-auto w-[95%] sm:w-5/6 md:w-3/5 bg-white rounded-lg">
           <header className="flex items-center justify-between w-full pb-3 mb-3 border-b-2 border-gray-300 border-solid">
             <h2 className="font-extrabold text-lg md:text-xl text-[#082a0f] capitalize">
-              edit survey
+              Edit survey
             </h2>
             <button
               className="flex items-center justify-center border border-1 rounded-md py-[2px] px-[2px] cursor-pointer text-sm md:text-base bg-[#fcf0f0] text-red-500"
@@ -202,8 +202,12 @@ const SurveyContent = () => {
             </div>
           ))}
 
-          <form className="flex items-center justify-between w-full my-2 ">
+          <form
+            onSubmit={addHandler}
+            className="flex items-center justify-between w-full my-2 "
+          >
             <input
+              required
               ref={inputRef}
               className="font-[600] text-base text-gray-400 capitalize h-full w-full border-y-2 border-l-2 border-r-0 border-solid border-gray-300 rounded-tl-lg rounded-bl-lg rounded-tr-none rounded-br-none py-4 px-3"
               placeholder="Add New Survey"
@@ -211,7 +215,7 @@ const SurveyContent = () => {
 
             <button
               className="flex items-center justify-center h-full px-3 py-4 text-sm text-white bg-green-500 border rounded-tl-none rounded-tr-lg rounded-bl-none rounded-br-lg cursor-pointer border-1 md:text-base"
-              onClick={addHandler}
+              type="submit"
             >
               <AddOutlined sx={{ marginRight: ".3rem" }} />
               Add

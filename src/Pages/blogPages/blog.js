@@ -11,7 +11,29 @@ import avatar from "../../images/avartar.png";
 
 const BlogPage = () => {
   const [data, setData] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postPerPage] = useState(6);
 
+  /////////////////////////////////  =====     PAGINATION    ===========   ////////////////////////////////
+  // get current posts
+  const indexOfLastPost = currentPage * postPerPage;
+  const indexOfFirstPost = indexOfLastPost - postPerPage;
+  const currentPosts = data.slice(indexOfFirstPost, indexOfLastPost);
+  const pageNumbers = [];
+  for (let i = 1; i <= Math.ceil(data.length / postPerPage); i++) {
+    pageNumbers.push(i);
+  }
+  const paginate = (i) => setCurrentPage(i);
+  const pagination = pageNumbers.map((i) => (
+    <button
+      key={i}
+      onClick={() => paginate(i)}
+      className="px-4 py-2 text-sm font-medium text-black border border-[#000]  focus:bg-green-200"
+    >
+      {i}
+    </button>
+  ));
+  //////////////////////////////////////////////////////////////////////////////////////////
   // Setting data from API here
   // ====================================    Get All blog data from API
   useEffect(() => {
@@ -56,7 +78,7 @@ const BlogPage = () => {
   }, []);
 
   // TO check if API data contents is empty
-  const isEmpty = data.length === 0;
+  const isEmpty = currentPosts.length === 0;
 
   return (
     <div className="w-screen h-screen overflow-x-hidden">
@@ -85,8 +107,8 @@ const BlogPage = () => {
         </div>
       )}
       {/* ITEMS */}
-      <div className="grid min-h-screen grid-cols-1 px-4 mt-12 mb-12 md:mb-24 md:space-y-0 gap-y-12 md:gap-y-12 gap-x-12 md:px-24 md:gap-x-12 md:grid-cols-3 md:mt-24">
-        {data?.reverse().map((data) => {
+      <div className="grid grid-cols-1 px-4 mt-12 mb-12 h-fit md:mb-24 md:space-y-0 gap-y-12 md:gap-y-12 gap-x-12 md:px-24 md:gap-x-12 md:grid-cols-3 md:mt-24">
+        {currentPosts?.reverse()?.map((data) => {
           return (
             <div className="w-full hover:brightness-50" key={data.id}>
               <Link
@@ -133,6 +155,11 @@ const BlogPage = () => {
             </div>
           );
         })}
+      </div>
+      <div className="flex flex-row items-center justify-center w-full">
+        <div className="flex flex-row items-center justify-center p-4 space-x-4 border-[#F5C946] mb-4 border-4">
+          {pagination}
+        </div>
       </div>
       <Footer />
     </div>

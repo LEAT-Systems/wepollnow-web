@@ -7,6 +7,7 @@ import Slide from "@mui/material/Slide";
 import { Modal } from "@mui/material";
 import Close from "../../images/CloseButton.png";
 import tooltipIcon from "../../images/tooltip.png";
+import swal from "sweetalert";
 
 const ModalComponent = (props) => {
   const history = useHistory();
@@ -60,9 +61,17 @@ const ModalComponent = (props) => {
 
         if (response.ok === true) {
           if (message === "A registered Voter" && voter_id !== null) {
-            alert(
-              "You are already registered on our system. You will be redirected to the polls page"
-            );
+            swal({
+              title: "You are already registered on our system.",
+              text: "We have provisioned polls eligible for you based on your State of Origin",
+              icon: "warning",
+              buttons: {
+                confirm: {
+                  text: "Okay, I understand",
+                  className: "swalButton",
+                },
+              },
+            });
             localStorage.setItem("uniqueID", voter_id);
             setUserExists(true);
             history.push("/polls", { replace: true });
