@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import { Close } from "@mui/icons-material";
-import { Modal } from "@mui/material";
+import { Checkbox, Modal } from "@mui/material";
 import { FileUploader } from "react-drag-drop-files";
 import {
   FormControl,
@@ -66,14 +66,29 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
   useEffect(() => {
     const getSenetorial = async () => {
       await Axios.get(
-        `https://wepollnow.azurewebsites.net/utilities/senatorial/${selectedState}`
+        `https://wepollnow.azurewebsites.net/utilities/senatorial/${selectedState}`, {
+          state_id: selectedState
+        }
       )
         .then((res) => setDistrictData(res.data))
         .catch((err) => console.log(err));
     };
     getSenetorial();
   }, [selectedState, setDistrictData]);
-  console.log('Selected State: ',selectedState)
+  console.log("Selected State: ", selectedState);
+
+  // /* Get Zone */
+  // useEffect(() => {
+  //   const getSenetorial = async () => {
+  //     await Axios.get(
+  //       `https://wepollnow.azurewebsites.net/utilities/zone/${selectedState}`
+  //     )
+  //       .then((res) => setZoneData(res.data))
+  //       .catch((err) => console.log(err));
+  //   };
+  //   getSenetorial();
+  // }, [selectedState, setZoneData]);
+  // console.log("Selected Zone: ", zone);
 
   /* Get Poll Type */
   useEffect(() => {
@@ -178,8 +193,11 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
           });
         }
       });
+    
+    window.location.reload()
   };
 
+      console.log("Main Candidate: ", mainCandidate);
   useEffect(() => {
     var onDisabled = () => {
       if (pollType === "1") {
@@ -341,7 +359,7 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
               </label>
             </div>
 
-           {/* <div className="py-2">
+            {/* <div className="py-2">
               <label className="relative w-full h-auto my-6">
                 Candidate Image (Max size 2MB (png, jpg, jpeg))
                 <FileUploader
@@ -421,6 +439,37 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
             </div>
 
             <div className='py-2'>
+              <label className='w-full h-auto my-6 custom__select__container'>
+                Zone
+                <select
+                  name='zone'
+                  id='zone'
+                  className='custom_select disabled:bg-gray-200 disabled:cursor-not-allowed'
+                  value={zone}
+                  onChange={(e) => {
+                    setZone(e.target.value);
+                  }}
+                  disabled={enabledZone}
+                >
+                  <option>Select Zone</option>
+                  <option>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                  <option>5</option>
+                  <option>6</option>
+                  {/* {zoneData.map((data) => {
+                    return (
+                      <option key={data.id} value={data.id}>
+                        {data.name}
+                      </option>
+                    );
+                  })} */}
+                </select>
+              </label>
+            </div>
+
+            <div className='py-2'>
               <label className='w-full h-auto my-6 custom_select_container'>
                 Party
                 <select
@@ -445,7 +494,25 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
             </div>
 
             <FormControl sx={{ width: "100%" }}>
-              <RadioGroup
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    sx={{
+                      color: "#616b62",
+                      "&.Mui-checked": {
+                        color: "#616b62",
+                      },
+                    }}
+                    checked={mainCandidate}
+                    value={mainCandidate}
+                    onChange={(e) => {
+                      setMainCandidate(e.target.checked);
+                    }}
+                  />
+                }
+                label='Main Candidate'
+              />
+              {/* <RadioGroup
                 value={mainCandidate}
                 onChange={(e) => {
                   setMainCandidate(e.target.value);
@@ -494,32 +561,8 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
                     Main Candidate
                   </h3>
                 </div>
-              </RadioGroup>
+              </RadioGroup> */}
             </FormControl>
-
-            <div className='py-2'>
-              <label className='w-full h-auto my-6 custom__select__container'>
-                Zone
-                <select
-                  name='zone'
-                  id='zone'
-                  className='custom_select disabled:bg-gray-200 disabled:cursor-not-allowed'
-                  value={zone}
-                  onChange={(e) => {
-                    setZone(e.target.value);
-                  }}
-                  disabled={enabledZone}
-                >
-                  <option>Select Zone</option>
-                  <option>1</option>
-                  <option>2</option>
-                  <option>2</option>
-                  <option>4</option>
-                  <option>5</option>
-                  <option>6</option>
-                </select>
-              </label>
-            </div>
           </div>
           <div className='flex items-center justify-end w-full my-2'>
             <button
