@@ -18,7 +18,9 @@ const BlogPage = () => {
   // get current posts
   const indexOfLastPost = currentPage * postPerPage;
   const indexOfFirstPost = indexOfLastPost - postPerPage;
-  const currentPosts = data.slice(indexOfFirstPost, indexOfLastPost);
+  const currentPosts = [...data]
+    ?.reverse()
+    ?.slice(indexOfFirstPost, indexOfLastPost);
   const pageNumbers = [];
   for (let i = 1; i <= Math.ceil(data.length / postPerPage); i++) {
     pageNumbers.push(i);
@@ -108,7 +110,7 @@ const BlogPage = () => {
       )}
       {/* ITEMS */}
       <div className="grid grid-cols-1 px-4 mt-12 mb-12 h-fit md:mb-24 md:space-y-0 gap-y-12 md:gap-y-12 gap-x-12 md:px-24 md:gap-x-12 md:grid-cols-3 md:mt-24">
-        {currentPosts?.reverse()?.map((data) => {
+        {currentPosts?.map((data) => {
           return (
             <div className="w-full hover:brightness-50" key={data.id}>
               <Link

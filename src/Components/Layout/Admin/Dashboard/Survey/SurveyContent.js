@@ -10,8 +10,7 @@ import LinkIcon from "../../assets/Filter@2x.png";
 import Header from "../../Header";
 import Progress from "./Progress";
 import { Modal } from "@mui/material";
-import { useEffect, useRef } from "react";
-import swal from "sweetalert";
+import { useRef } from "react";
 
 const SurveyContent = () => {
   const inputRef = useRef();

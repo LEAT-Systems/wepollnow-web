@@ -29,7 +29,9 @@ const ManageBlogContent = () => {
   // get current posts
   const indexOfLastPost = currentPage * postPerPage;
   const indexOfFirstPost = indexOfLastPost - postPerPage;
-  const currentPosts = data.slice(indexOfFirstPost, indexOfLastPost);
+  const currentPosts = [...data]
+    ?.reverse()
+    ?.slice(indexOfFirstPost, indexOfLastPost);
   const pageNumbers = [];
   for (let i = 1; i <= Math.ceil(data.length / postPerPage); i++) {
     pageNumbers.push(i);
@@ -195,7 +197,7 @@ const ManageBlogContent = () => {
                 {currentPosts.length === 0 && (
                   <p className="p-12">No post available</p>
                 )}
-                {currentPosts.reverse().map((data) => {
+                {currentPosts.map((data) => {
                   return (
                     <form
                       onSubmit={deleteHandler}
