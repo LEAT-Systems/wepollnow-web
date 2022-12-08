@@ -1,5 +1,3 @@
-/** @format */
-
 import React, { useState } from "react";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import {
@@ -69,7 +67,7 @@ const PollsPageContentTwo = () => {
   return (
     <>
       <Header />
-      <main className='max-h-screen px-4 md:px-6 lg:px-12 text-[#082a0f]'>
+      <main className='max-h-screen w-full px-4 md:px-6 lg:px-12 text-[#082a0f]'>
         <div className='flex flex-row items-center justify-between pt-2'>
           <div className='flex flex-col mt-3 my-auto place-items-start items-start w-full'>
             <h2 className='font-extrabold text-xl lg:text-2xl md:text-[1.4rem] capitalize pt-4 pb-2 pl-0 w-full'>
@@ -155,7 +153,7 @@ const PollsPageContentTwo = () => {
 
         {/* ===============   Chart Table ========================*/}
 
-        <div className='px-2 md:px-4'>
+        <div className='px-2 md:px-4 w-full'>
           <div className='flex flex-col p-4 border rounded-lg'>
             <div className='flex flex-row items-center justify-between mb-10'>
               <p className='font-[800] text-[#082b0e]'>
@@ -183,7 +181,7 @@ const PollsPageContentTwo = () => {
               </div>
             </div>
 
-            <div className=''>
+            <div className='max-w-full'>
               {isTableState ? (
                 <TableStateResult />
               ) : isBar ? (

@@ -86,8 +86,8 @@ const legendMarginRight = {
 
 const BarChart = () => {
   return (
-    <div className='flex flex-row justify-center align-center h-full w-full'>
-      <div className='w-full h-full border rounded '>
+    <div className='grid grid-cols-12 gap-7 place-items-center h-full w-full'>
+      <div className='w-full h-full border rounded col-span-9'>
         <Bar
           height={75}
           width={150}
@@ -168,7 +168,10 @@ const BarChart = () => {
           }}
         />
       </div>
-      <ChartLegend />
+      <div className="col-span-3 w-full h-full">
+        <ChartLegend />
+      </div>
+      
     </div>
   );
 }

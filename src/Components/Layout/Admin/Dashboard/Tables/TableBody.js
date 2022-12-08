@@ -18,6 +18,16 @@ const TableBody = ({ tableData }) => {
     return symbol;
   };
 
+  // useEffect(() => {
+
+  // })
+  const statusColors =
+    tableData.status === 1
+      ? "after:bg-blue-500"
+      : tableData.status === 2
+      ? "after:bg-green-500"
+      : "after:bg-red-400";
+
   // console.log(tableData);
   // {
   //     "id": 1,
@@ -35,12 +45,12 @@ const TableBody = ({ tableData }) => {
   // },
 
   return (
-    <tr className='table-row' onClick={(e) => console.log(e.currentTarget)}>
+    <tr className='table-row' value={tableData.id}>
       <th
         scope='row'
         className='px-6 py-4 font-medium text-gray-900 whitespace-nowrap '
       >
-        <span className='text-white font-bold capitalize bg-green-900 mr-4 rounded-xl p-[.6rem] cursor-pointer'>
+        <span className='text-white font-bold capitalize bg-green-900 mr-4 rounded-xl p-[.6rem]'>
           {getSymbol()}
         </span>{" "}
         <NavLink to='/admin/polls/poll_result' activeClassName={null}>
@@ -64,17 +74,25 @@ const TableBody = ({ tableData }) => {
       </td>
       <td className='px-6 py-4 cursor-pointer'>
         <NavLink to='/admin/polls/poll_result' activeClassName={null}>
-          {tableData.status === 1 ? "Active" : "Inactive"}
+          <h3
+            className={`relative after:content-[''] after:absolute after:w-[.6rem] after:h-[.6rem] after:rounded-full ${statusColors} after:-left-3 after:top-1/2 after:-translate-y-1/2`}
+          >
+            {tableData.status === 1
+              ? "Upcoming"
+              : tableData.status === 2
+              ? "Scheduled"
+              : "Concluded"}
+          </h3>
         </NavLink>
       </td>
       <td className='flex flex-row px-6 py-4 space-x-2'>
-        <div className='text-blue-500 cursor-pointer'>
+        <div className='text-blue-500 cursor-pointer' onClick={(e) => console.log(e.currentTarget)}>
           <img src={Edit} alt='Edit' className='w-[1.1rem] h-[1.1rem]' />
         </div>
-        <div className='text-black cursor-pointer'>
+        {/* <div className='text-black cursor-pointer'>
           <img src={Archive} alt='Archive' className='w-[1.1rem] h-[1.1rem]' />
-        </div>
-        <div className='text-red-500 cursor-pointer'>
+        </div> */}
+        <div className='text-red-500 cursor-pointer' onClick={(e) => console.log(e.currentTarget)}>
           <img src={Delete} alt='Trash' className='w-[1.1rem] h-[1.1rem]' />
         </div>
       </td>
