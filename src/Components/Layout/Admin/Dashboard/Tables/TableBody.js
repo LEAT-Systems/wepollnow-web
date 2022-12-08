@@ -86,13 +86,13 @@ const TableBody = ({ tableData }) => {
         </NavLink>
       </td>
       <td className='flex flex-row px-6 py-4 space-x-2'>
-        <div className='text-blue-500 cursor-pointer' onClick={(e) => console.log(e.currentTarget.value)}>
+        <div className='text-blue-500 cursor-pointer' onClick={(e) => console.log(e.currentTarget)}>
           <img src={Edit} alt='Edit' className='w-[1.1rem] h-[1.1rem]' />
         </div>
         {/* <div className='text-black cursor-pointer'>
           <img src={Archive} alt='Archive' className='w-[1.1rem] h-[1.1rem]' />
         </div> */}
-        <div className='text-red-500 cursor-pointer' onClick={(e) => console.log(e.currentTarget.value)}>
+        <div className='text-red-500 cursor-pointer' onClick={(e) => console.log(e.currentTarget)}>
           <img src={Delete} alt='Trash' className='w-[1.1rem] h-[1.1rem]' />
         </div>
       </td>
