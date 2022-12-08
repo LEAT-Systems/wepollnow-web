@@ -38,7 +38,7 @@ const ChartLegend = () => {
           return (
             <h3
               key={data.id}
-              className={`font-bold text-sm text-[#020] capitalize leading-5 relative after:content-[""] after:absolute after:w-[.6rem] after:h-[.6rem] after:rounded-full ${`after:bg-[${data.labelColor}]`} after:-left-3 after:top-1/2 after:-translate-y-1/2`}
+              className={`font-bold text-xs text-[#020] capitalize leading-5 relative after:content-[""] after:absolute after:w-[.6rem] after:h-[.6rem] after:rounded-full ${`after:bg-[${data.labelColor}]`} after:-left-3 after:top-1/2 after:-translate-y-1/2`}
             >
               {data.label}
             </h3>
