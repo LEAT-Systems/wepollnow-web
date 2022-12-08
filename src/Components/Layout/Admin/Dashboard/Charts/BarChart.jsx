@@ -1,7 +1,7 @@
-import React, {useState, useEffect} from 'react'
-import {Refresh} from "@mui/icons-material"
+import React from 'react'
 import { Bar } from "react-chartjs-2";
 import { Chart, registerables, defaults, Legend } from 'chart.js';
+import ChartLegend from './ChartLegend';
 
 Chart.register(...registerables)
 /* Target the legend positioning */
@@ -86,7 +86,7 @@ const legendMarginRight = {
 
 const BarChart = () => {
   return (
-    <div className='flex flex-col justify-center align-center h-full w-full'>
+    <div className='flex flex-row justify-center align-center h-full w-full'>
       <div className='w-full h-full border rounded '>
         <Bar
           height={75}
@@ -168,6 +168,7 @@ const BarChart = () => {
           }}
         />
       </div>
+      <ChartLegend />
     </div>
   );
 }
