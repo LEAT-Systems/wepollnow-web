@@ -45,12 +45,12 @@ const TableBody = ({ tableData }) => {
   // },
 
   return (
-    <tr className='table-row' onClick={(e) => console.log(e.currentTarget.value)} value={tableData.id}>
+    <tr className='table-row' value={tableData.id}>
       <th
         scope='row'
         className='px-6 py-4 font-medium text-gray-900 whitespace-nowrap '
       >
-        <span className='text-white font-bold capitalize bg-green-900 mr-4 rounded-xl p-[.6rem] cursor-pointer'>
+        <span className='text-white font-bold capitalize bg-green-900 mr-4 rounded-xl p-[.6rem]'>
           {getSymbol()}
         </span>{" "}
         <NavLink to='/admin/polls/poll_result' activeClassName={null}>
@@ -86,13 +86,13 @@ const TableBody = ({ tableData }) => {
         </NavLink>
       </td>
       <td className='flex flex-row px-6 py-4 space-x-2'>
-        <div className='text-blue-500 cursor-pointer'>
+        <div className='text-blue-500 cursor-pointer' onClick={(e) => console.log(e.currentTarget.value)}>
           <img src={Edit} alt='Edit' className='w-[1.1rem] h-[1.1rem]' />
         </div>
-        <div className='text-black cursor-pointer'>
+        {/* <div className='text-black cursor-pointer'>
           <img src={Archive} alt='Archive' className='w-[1.1rem] h-[1.1rem]' />
-        </div>
-        <div className='text-red-500 cursor-pointer'>
+        </div> */}
+        <div className='text-red-500 cursor-pointer' onClick={(e) => console.log(e.currentTarget.value)}>
           <img src={Delete} alt='Trash' className='w-[1.1rem] h-[1.1rem]' />
         </div>
       </td>
