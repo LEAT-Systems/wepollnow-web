@@ -261,6 +261,13 @@ input:focus {
   background-image: url("images/ng_1.png");
 }
 
+/* Swal button */
+.swalButton {
+  @apply p-4 rounded hover:rounded-full;
+}
+.swalButton:hover {
+  background-color: green !important;
+}
 /* Table header */
 .table-head {
   @apply px-6 py-3 font-bold lg:font-[700] text-base normal-case min-w-fit whitespace-nowrap;
@@ -298,15 +305,14 @@ input:focus {
   @apply p-2 w-full outline-none rounded-md !important;
 }
 
-
 /* Swal Library Button Custom Style */
 /* .swalButton {
   @apply bg-green-500 text-white
 } */
 
 .swal-button {
- @apply px-5 py-3 text-sm text-white bg-green-500 hover:!bg-green-500 hover:!text-white rounded-md cursor-pointer capitalize;
+  @apply px-5 py-3 text-sm text-white bg-green-500 hover:!bg-green-500 hover:!text-white rounded-md cursor-pointer capitalize;
 }
 .swal-button:hover {
- @apply text-white bg-green-500
+  @apply text-white bg-green-500;
 }

@@ -28,7 +28,7 @@ const Footer = () => {
           <div className="flex flex-col items-start justify-start space-y-2 bg-[#ffedf1] p-4 rounded-lg">
             <div>
               <a
-                className="flex flex-row space-x-2 items-center"
+                className="flex flex-row items-center space-x-2"
                 target="_blank"
                 href="https://www.freepik.com/free-photo/cropped-shot-pleased-female-copywriter-reads-positive-information-smart-phone-sits-front-opened-laptop-computer-drinks-aromatic-coffee_9591287.htm#query=african%20person%20reading&position=12&from_view=search&track=sph"
               >
@@ -40,7 +40,7 @@ const Footer = () => {
             </div>
             <div>
               <a
-                className="flex flex-row space-x-2 items-center"
+                className="flex flex-row items-center justify-center justify"
                 target="_blank"
                 href="https://www.freepik.com/free-photo/team-business-people-collaborating-plan-financial-strategy-doing-teamwork-create-sales-report-laptop-office-employees-working-project-strategy-analyze-career-growth_24732590.htm#query=black%20people%20having%20meeting&position=24&from_view=search&track=ais"
               >
@@ -104,7 +104,7 @@ const Footer = () => {
           </a>
         </div>
       </div>
-      <div className="flex flex-row items-center justify-between bg-[#08C127] py-8 px-12 md:px-[100px] text-white">
+      <div className="flex flex-col md:flex-row items-center justify-between bg-[#08C127] py-8 px-12 md:px-[100px] text-white">
         <p className="text-center">
           WepollNow {copy} 2022. All rights reserved.
         </p>

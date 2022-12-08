@@ -17,6 +17,10 @@ const BlogSingle = () => {
   const [isEmpty, setIsEmpty] = useState(false);
   const [blogId, setBlogId] = useState();
   const [fullContent, setFullContent] = useState({});
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postPerPage] = useState(3);
+
+  // Go back to previous page
   const backHandler = () => {
     history.goBack();
   };
@@ -29,6 +33,7 @@ const BlogSingle = () => {
   }, []);
   ///////////////////////////////////////////////////////////////
 
+  // Get post
   useEffect(() => {
     const getData = async () => {
       const requestOptions = {
@@ -67,13 +72,14 @@ const BlogSingle = () => {
     getData();
   }, []);
 
+  // Check if data from API is empty
   useEffect(() => {
     if (data.length === 0) {
       setIsEmpty(true);
     }
   }, [data.length]);
 
-  // Get article contents
+  // Get article contents for latest post
   const getContent = async (id) => {
     const requestOptions = {
       method: "GET",
@@ -123,7 +129,28 @@ const BlogSingle = () => {
       getContent(blogId);
     }
   });
+  /////////////////////////////////  =====     PAGINATION    ===========   ////////////////////////////////
+  // get current posts
+  const indexOfLastPost = currentPage * postPerPage;
+  const indexOfFirstPost = indexOfLastPost - postPerPage;
+  const currentPosts = data.slice(indexOfFirstPost, indexOfLastPost);
+  const pageNumbers = [];
+  for (let i = 1; i <= Math.ceil(data.length / postPerPage); i++) {
+    pageNumbers.push(i);
+  }
+  const paginate = (i) => setCurrentPage(i);
+  const pagination = pageNumbers.map((i) => (
+    <button
+      key={i}
+      onClick={() => paginate(i)}
+      className="px-4 py-2 text-sm font-medium text-black border border-[#000]  focus:bg-green-200"
+    >
+      {i}
+    </button>
+  ));
+  //////////////////////////////////////////////////////////////////////////////////////////
 
+  //
   return (
     <div className="space-y-3 overflow-x-hidden">
       <div>
@@ -131,7 +158,7 @@ const BlogSingle = () => {
       </div>
       <div className="flex flex-col items-center md:flex-row">
         <section className="flex flex-col items-center justify-center w-full px-8 mx-auto">
-          <div className="flex flex-col items-start justify-start  space-y-4 md:space-x-24 md:px-24 md:mt-4 md:flex-row">
+          <div className="flex flex-col items-start justify-start space-y-4 md:space-x-24 md:px-24 md:mt-4 md:flex-row">
             <div className="flex flex-col items-start w-full md:w-[65%] md:h-fit space-y-4 pb-12">
               <div className="p-2">
                 <button
@@ -143,10 +170,10 @@ const BlogSingle = () => {
                 </button>
               </div>
 
-              <div className="w-full h-[400px]">
+              <div className="w-full h-[246px] md:h-[400px] ">
                 <img
                   src={fullContent?.image}
-                  className="w-full h-full"
+                  className="w-full h-full rounded-md"
                   alt="post_image"
                 />
               </div>
@@ -175,12 +202,13 @@ const BlogSingle = () => {
               {/* Blog text contents displayed as HTML */}
               <div className="md:pt-8">
                 <p
+                  className="text-justify"
                   dangerouslySetInnerHTML={createMarkup(fullContent.content)}
                 ></p>
               </div>
             </div>
 
-            <div className="w-full md:w-[35%] md:h-screen pb-12 md:pb-0 space-y-4">
+            <div className="w-full md:w-[35%] md:h-fit pb-12 md:pb-0 space-y-4">
               <div>
                 <header className="pt-4">
                   {isEmpty && (
@@ -197,73 +225,71 @@ const BlogSingle = () => {
                   )}
                 </header>
               </div>
-              {data
-                .slice(-3)
-                .reverse()
-                .map((data) => {
-                  return (
-                    <div
-                      className="w-full pb-6"
-                      key={data.id}
-                      onClick={() => {
-                        localStorage.setItem("blog_article_id", data.id);
-                        window.location.reload();
-                      }}
-                    >
-                      <Link to={"/blog-single"}>
-                        <div className="flex flex-col w-full space-y-1 md:h-full">
-                          <div className="relative">
-                            <div className="w-full">
-                              <img
-                                src={data.image}
-                                alt="Voter"
-                                className="w-full h-[200px] hover:brightness-50 rounded md:object-cover"
-                              />
-                            </div>
-                            <div className="absolute bottom-0 right-0 z-30">
-                              <img
-                                src={anchor}
-                                alt="anchorIcon"
-                                className="rounded-br"
-                              />
-                            </div>
-                          </div>
-                          <div className="flex flex-row items-center space-x-2">
+              {currentPosts.reverse().map((data) => {
+                return (
+                  <div
+                    className="w-full pb-6"
+                    key={data.id}
+                    onClick={() => {
+                      localStorage.setItem("blog_article_id", data.id);
+                      window.location.reload();
+                    }}
+                  >
+                    <Link to={"/blog-single"}>
+                      <div className="flex flex-col w-full space-y-1 md:h-full">
+                        <div className="relative">
+                          <div className="w-full">
                             <img
-                              className="w-6 h-6 rounded-full"
-                              src={avatar}
-                              alt="authorImg"
+                              src={data.image}
+                              alt="Voter"
+                              className="w-full h-[200px] hover:brightness-50 rounded md:object-cover"
                             />
-                            <p className="font-normal">Wepollnow Admin</p>
                           </div>
-
-                          <p className="max-w-sm font-bold text-md">
-                            {data.title}
-                          </p>
-                          <div className="flex flex-row space-x-4">
-                            <div className="flex flex-row items-center justify-start space-x-2">
-                              <img src={eye} alt="calendarIcon" />
-                              <p className="text-xs">0</p>
-                            </div>
-                            <div className="flex flex-row items-center justify-start space-x-2 text-xs">
-                              <img src={time} alt="calendarIcon" />
-                              <p className="text-xs">{data.time_posted}</p>
-                            </div>
-                            <div className="flex flex-row items-center justify-start space-x-2 text-xs">
-                              <img src={calendar} alt="calendarIcon" />
-                              <p className="text-xs">{data.date_posted}</p>
-                            </div>
+                          <div className="absolute bottom-0 right-0 z-30">
+                            <img
+                              src={anchor}
+                              alt="anchorIcon"
+                              className="rounded-br"
+                            />
                           </div>
                         </div>
-                      </Link>
-                    </div>
-                  );
-                })}
-              <Link to="/blog" className="w-full mt-12">
-                <button className="w-full p-3 px-4 rounded bg-[#08c127] text-white animate">
-                  View More
-                </button>
-              </Link>
+                        <div className="flex flex-row items-center space-x-2">
+                          <img
+                            className="w-6 h-6 rounded-full"
+                            src={avatar}
+                            alt="authorImg"
+                          />
+                          <p className="font-normal">Wepollnow Admin</p>
+                        </div>
+
+                        <p className="max-w-sm font-bold text-md">
+                          {data.title}
+                        </p>
+                        <div className="flex flex-row space-x-4">
+                          <div className="flex flex-row items-center justify-start space-x-2">
+                            <img src={eye} alt="calendarIcon" />
+                            <p className="text-xs">0</p>
+                          </div>
+                          <div className="flex flex-row items-center justify-start space-x-2 text-xs">
+                            <img src={time} alt="calendarIcon" />
+                            <p className="text-xs">{data.time_posted}</p>
+                          </div>
+                          <div className="flex flex-row items-center justify-start space-x-2 text-xs">
+                            <img src={calendar} alt="calendarIcon" />
+                            <p className="text-xs">{data.date_posted}</p>
+                          </div>
+                        </div>
+                      </div>
+                    </Link>
+                  </div>
+                );
+              })}
+
+              {/* PAgination */}
+
+              <div className="flex flex-row p-4 space-x-4 border-[#EAB308] border-4 rounded">
+                {pagination}
+              </div>
             </div>
             {/* Side Bar */}
           </div>
