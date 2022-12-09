@@ -92,7 +92,12 @@ const AllPolls = () => {
           </h1>
         </div>
         <div className="z-10 flex md:-mt-36">
-          <img src={image} className="w-full md:h-[500px]" alt={"Voter"} />
+          <img
+            src={image}
+            className="w-full md:h-[500px]"
+            loading="lazy"
+            alt={"Voter"}
+          />
         </div>
       </div>
       {/* ==============   GRID FOR ARRANGING ITEMS  ===================*/}

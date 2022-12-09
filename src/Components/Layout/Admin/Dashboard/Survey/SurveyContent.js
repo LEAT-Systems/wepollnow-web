@@ -1,5 +1,5 @@
 /** @format */
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   AddOutlined,
   BorderColorOutlined,
@@ -11,6 +11,7 @@ import Header from "../../Header";
 import Progress from "./Progress";
 import { Modal } from "@mui/material";
 import { useRef } from "react";
+import swal from "sweetalert";
 
 const SurveyContent = () => {
   const inputRef = useRef();
@@ -31,12 +32,26 @@ const SurveyContent = () => {
       ];
       return updatedItem;
     });
+
     inputRef.current.value = "";
   };
 
   // Submit Hanlder
   const submitHandler = async () => {
-    console.log(list);
+    const items = list.map((item) => item.title);
+    const finalData = { survey: items };
+    localStorage.setItem("survey", JSON.stringify(finalData));
+    swal({
+      title: "Action was successful.",
+      icon: "success",
+      buttons: {
+        confirm: {
+          text: "Close",
+          className: "swalButton",
+        },
+      },
+    });
+    console.log(finalData);
     // const requestOptions = {
     //   body: list,
     //   method: "POST",

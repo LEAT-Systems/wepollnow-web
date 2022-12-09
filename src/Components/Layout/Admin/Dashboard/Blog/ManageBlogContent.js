@@ -243,6 +243,7 @@ const ManageBlogContent = () => {
               <div className="border border-gray-200 rounded">
                 <div className="flex flex-col p-4 space-y-2 md:p-8">
                   <img
+                    loading="lazy"
                     src={rightContent.image}
                     alt="headerImage"
                     className="w-full md:w-[1000px] md:h-[600px] md:object-cover"
@@ -250,6 +251,7 @@ const ManageBlogContent = () => {
                   <div className="flex flex-row space-x-2">
                     <img
                       src={bannerImage}
+                      loading="lazy"
                       alt="avatar"
                       className="w-6 h-6 rounded-full"
                     />
