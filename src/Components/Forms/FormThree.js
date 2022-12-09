@@ -68,12 +68,12 @@ const FormThree = (props) => {
                     <div className="h-full px-4 space-y-2">
                       {/*  */}
                       {/* Do you have a PVC */}
-                      <div className="py-4 pt-8 space-y-1 md:pt-0">
+                      <div className="py-4 pt-8 md:pt-0">
                         <FormLabel no="i" title="Do you have a PVC?" />
                         <p className="text-red-600">
                           <ErrorMessage name="pvc" />
                         </p>
-                        <div className="flex flex-row items-center justify-between space-x-4 md:p-2">
+                        <div className="flex flex-row items-center justify-between space-x-4">
                           <label
                             htmlFor="pvc"
                             className="flex flex-row items-center w-full p-3 space-x-2 border rounded md:p-4"
@@ -110,67 +110,71 @@ const FormThree = (props) => {
                         <p className="text-red-600">
                           <ErrorMessage name="employmentStatus" />
                         </p>
-                        <div className="flex flex-row items-center justify-between space-x-4 md:p-2">
-                          <label
-                            htmlFor="maritalStatus"
-                            className="flex flex-row items-center w-full p-3 space-x-2 border rounded md:p-4"
-                          >
-                            <Field
-                              id="maritalStatus"
-                              type="radio"
-                              name="maritalStatus"
-                              value="1"
-                              className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
-                            />
-                            <p className="text-[14px] md:text-[18px]">Single</p>
-                          </label>
-                          <label
-                            htmlFor="maritalStatus2"
-                            className="flex flex-row items-center w-full p-3 space-x-2 border rounded md:p-4"
-                          >
-                            <Field
-                              id="maritalStatus2"
-                              type="radio"
-                              name="maritalStatus"
-                              value="2"
-                              className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
-                            />
-                            <p className="text-[14px] md:text-[18px]">
-                              Married
-                            </p>
-                          </label>
-                        </div>
-                        <div className="flex flex-row items-center justify-between mt-2 space-x-4 md:p-2 md:mt-0">
-                          <label
-                            htmlFor="maritalStatus3"
-                            className="flex flex-row items-center w-full p-3 space-x-2 border rounded md:p-4"
-                          >
-                            <Field
-                              id="maritalStatus3"
-                              type="radio"
-                              name="maritalStatus"
-                              value="3"
-                              className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
-                            />
-                            <p className="text-[14px] md:text-[18px]">
-                              Divorced
-                            </p>
-                          </label>
-                          <label
-                            htmlFor="maritalStatus4"
-                            className="flex flex-row items-center w-full p-3 space-x-2 border rounded md:p-4"
-                          >
-                            <Field
-                              id="maritalStatus4"
-                              type="radio"
-                              name="maritalStatus"
-                              value="4"
-                              className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
-                            />
-                            <p className="text-[14px] md:text-[18px] ">
-                              Widowed
-                            </p>
-                          </label>
+                        <div className="space-y-4">
+                          <div className="flex flex-row items-center justify-between space-x-4">
+                            <label
+                              htmlFor="maritalStatus"
+                              className="flex flex-row items-center w-full p-3 space-x-2 border rounded md:p-4"
+                            >
+                              <Field
+                                id="maritalStatus"
+                                type="radio"
+                                name="maritalStatus"
+                                value="1"
+                                className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
+                              />
+                              <p className="text-[14px] md:text-[18px]">
+                                Single
+                              </p>
+                            </label>
+                            <label
+                              htmlFor="maritalStatus2"
+                              className="flex flex-row items-center w-full p-3 space-x-2 border rounded md:p-4"
+                            >
+                              <Field
+                                id="maritalStatus2"
+                                type="radio"
+                                name="maritalStatus"
+                                value="2"
+                                className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
+                              />
+                              <p className="text-[14px] md:text-[18px]">
+                                Married
+                              </p>
+                            </label>
+                          </div>
+                          <div className="flex flex-row items-center justify-between mt-2 space-x-4 md:mt-0">
+                            <label
+                              htmlFor="maritalStatus3"
+                              className="flex flex-row items-center w-full p-3 space-x-2 border rounded md:p-4"
+                            >
+                              <Field
+                                id="maritalStatus3"
+                                type="radio"
+                                name="maritalStatus"
+                                value="3"
+                                className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
+                              />
+                              <p className="text-[14px] md:text-[18px]">
+                                Divorced
+                              </p>
+                            </label>
+                            <label
+                              htmlFor="maritalStatus4"
+                              className="flex flex-row items-center w-full p-3 space-x-2 border rounded md:p-4"
+                            >
+                              <Field
+                                id="maritalStatus4"
+                                type="radio"
+                                name="maritalStatus"
+                                value="4"
+                                className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
+                              />
+                              <p className="text-[14px] md:text-[18px] ">
+                                Widowed
+                              </p>
+                            </label>
+                          </div>
                         </div>
                       </div>
 
@@ -181,69 +185,71 @@ const FormThree = (props) => {
                         <p className="text-red-600">
                           <ErrorMessage name="employmentStatus" />
                         </p>
-                        <div className="flex flex-row items-center justify-between space-x-4 md:p-2">
-                          <label
-                            htmlFor="employmentStatus"
-                            className="flex flex-row items-center w-full p-3 space-x-2 border rounded md:p-4"
-                          >
-                            <Field
-                              id="employmentStatus"
-                              type="radio"
-                              name="employmentStatus"
-                              value="1"
-                              className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
-                            />
-                            <p className="text-[14px] md:text-[18px]">
-                              Student
-                            </p>
-                          </label>
-                          <label
-                            htmlFor="employmentStatus2"
-                            className="flex flex-row items-center w-full p-3 space-x-2 border rounded md:p-4"
-                          >
-                            <Field
-                              id="employmentStatus2"
-                              type="radio"
-                              name="employmentStatus"
-                              value="2"
-                              className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
-                            />
-                            <p className="text-[14px] md:text-[18px]">
-                              Employed
-                            </p>
-                          </label>
-                        </div>
-                        <div className="flex flex-row items-center justify-between mt-2 space-x-4 md:p-2 md:mt-0">
-                          <label
-                            htmlFor="employmentStatus3"
-                            className="flex flex-row items-center w-full p-3 space-x-2 border rounded md:p-4"
-                          >
-                            <Field
-                              id="employmentStatus3"
-                              type="radio"
-                              name="employmentStatus"
-                              value="3"
-                              className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
-                            />
-                            <p className="text-[14px] md:text-[18px]">
-                              Unemployed
-                            </p>
-                          </label>
-                          <label
-                            htmlFor="employmentStatus4"
-                            className="flex flex-row items-center w-full p-4 space-x-2 border rounded md:p-4"
-                          >
-                            <Field
-                              id="employmentStatus4"
-                              type="radio"
-                              name="employmentStatus"
-                              value="4"
-                              className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
-                            />
-                            <p className="text-[14px] md:text-[18px]">
-                              Self-employed
-                            </p>
-                          </label>
+                        <div className="space-y-4">
+                          <div className="flex flex-row items-center justify-between space-x-4">
+                            <label
+                              htmlFor="employmentStatus"
+                              className="flex flex-row items-center w-full p-3 space-x-2 border rounded md:p-4"
+                            >
+                              <Field
+                                id="employmentStatus"
+                                type="radio"
+                                name="employmentStatus"
+                                value="1"
+                                className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
+                              />
+                              <p className="text-[14px] md:text-[18px]">
+                                Student
+                              </p>
+                            </label>
+                            <label
+                              htmlFor="employmentStatus2"
+                              className="flex flex-row items-center w-full p-3 space-x-2 border rounded md:p-4"
+                            >
+                              <Field
+                                id="employmentStatus2"
+                                type="radio"
+                                name="employmentStatus"
+                                value="2"
+                                className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
+                              />
+                              <p className="text-[14px] md:text-[18px]">
+                                Employed
+                              </p>
+                            </label>
+                          </div>
+                          <div className="flex flex-row items-center justify-between mt-2 space-x-4  md:mt-0">
+                            <label
+                              htmlFor="employmentStatus3"
+                              className="flex flex-row items-center w-full p-3 space-x-2 border rounded md:p-4"
+                            >
+                              <Field
+                                id="employmentStatus3"
+                                type="radio"
+                                name="employmentStatus"
+                                value="3"
+                                className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
+                              />
+                              <p className="text-[14px] md:text-[18px]">
+                                Unemployed
+                              </p>
+                            </label>
+                            <label
+                              htmlFor="employmentStatus4"
+                              className="flex flex-row items-center w-full p-4 space-x-2 border rounded md:p-4"
+                            >
+                              <Field
+                                id="employmentStatus4"
+                                type="radio"
+                                name="employmentStatus"
+                                value="4"
+                                className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
+                              />
+                              <p className="text-[14px] md:text-[18px]">
+                                Self-employed
+                              </p>
+                            </label>
+                          </div>
                         </div>
                       </div>
                     </div>

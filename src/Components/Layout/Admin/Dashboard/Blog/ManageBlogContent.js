@@ -15,6 +15,8 @@ const ManageBlogContent = () => {
   const [data, setData] = useState([]);
   const [id, setID] = useState();
   const [articleId, setArticleId] = useState();
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postPerPage] = useState(4);
   const [rightContent, setRightContent] = useState({
     id: "Sample001",
     title: "Article title preview",
@@ -22,6 +24,29 @@ const ManageBlogContent = () => {
     time: "00:00:00",
     image: image,
   });
+
+  /////////////////////////////////  =====     PAGINATION    ===========   ////////////////////////////////
+  // get current posts
+  const indexOfLastPost = currentPage * postPerPage;
+  const indexOfFirstPost = indexOfLastPost - postPerPage;
+  const currentPosts = [...data]
+    ?.reverse()
+    ?.slice(indexOfFirstPost, indexOfLastPost);
+  const pageNumbers = [];
+  for (let i = 1; i <= Math.ceil(data.length / postPerPage); i++) {
+    pageNumbers.push(i);
+  }
+  const paginate = (i) => setCurrentPage(i);
+  const pagination = pageNumbers.map((i) => (
+    <button
+      key={i}
+      onClick={() => paginate(i)}
+      className="px-4 py-2 text-sm font-medium text-black border border-[#000]  focus:bg-green-200"
+    >
+      {i}
+    </button>
+  ));
+  //////////////////////////////////////////////////////////////////////////////////////////
 
   const createMarkup = (html) => {
     return {
@@ -79,9 +104,6 @@ const ManageBlogContent = () => {
 
   //
   //
-  //
-  //
-  //
   // ========================================    Delete article post
   const deleteHandler = async (e) => {
     e.preventDefault();
@@ -116,10 +138,10 @@ const ManageBlogContent = () => {
       apiData.forEach((item) => {
         const aData = {
           id: item.id,
-          title: item.title.split(" ").splice(0, 7).join(" ") + "...",
+          title: item.title.split(" ").splice(0, 5).join(" ") + "...",
           content:
             item.content !== undefined
-              ? item.content.split(" ").splice(0, 20).join(" ") + "..."
+              ? item.content.split(" ").splice(0, 15).join(" ") + "..."
               : null,
           date_posted:
             item.date_posted !== undefined
@@ -172,8 +194,10 @@ const ManageBlogContent = () => {
                 <header className="p-4 border-b">
                   <p className="font-bold text-[18px]">All Posts</p>
                 </header>
-                {data.length === 0 && <p className="p-12">No post available</p>}
-                {data?.slice(0, 5).map((data) => {
+                {currentPosts.length === 0 && (
+                  <p className="p-12">No post available</p>
+                )}
+                {currentPosts.map((data) => {
                   return (
                     <form
                       onSubmit={deleteHandler}
@@ -193,7 +217,11 @@ const ManageBlogContent = () => {
                               <p>{data.time_posted}</p>
                             </div>
                           </div>
-                          <button type="submit" onClick={() => setID(data.id)}>
+                          <button
+                            className="hover:bg-[#eee]"
+                            type="submit"
+                            onClick={() => setID(data.id)}
+                          >
                             <img src={Delete} alt="trash" className="w-5 h-5" />
                           </button>
                         </div>
@@ -204,6 +232,9 @@ const ManageBlogContent = () => {
                     </form>
                   );
                 })}
+              </div>
+              <div className="flex flex-row p-4 space-x-4 border-b border-l border-r">
+                {pagination}
               </div>
             </div>
 

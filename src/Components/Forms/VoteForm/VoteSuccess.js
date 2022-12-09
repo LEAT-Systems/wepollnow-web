@@ -32,7 +32,7 @@ const VoteSuccess = () => {
   const message = (
     <div className="flex flex-row items-center justify-center px-4 mx-auto mt-24 md:px-0">
       <div
-        className={`flex flex-row items-center justify-between p-3 px-4 w-full md:w-1/3 border rounded-md`}
+        className={`flex flex-row items-center justify-between p-3 px-4 w-full md:w-2/3 border rounded-md`}
       >
         <div className="flex flex-row items-center space-x-3">
           <img src={copyIcon} className="w-4 h-4" alt="copiedIcon" />
@@ -48,11 +48,11 @@ const VoteSuccess = () => {
   return (
     <div>
       <Nav />
-      <Slide direction="down" in={copied} mountOnEnter unmountOnExit>
-        {message}
-      </Slide>
       <div className="flex flex-row items-center justify-center min-h-screen px-4 py-4 mx-auto md:px-0">
         <div className="w-full px-4 py-4 text-lg text-gray-700 border rounded-lg md:w-2/4">
+          <Slide direction="down" in={copied} mountOnEnter unmountOnExit>
+            {message}
+          </Slide>
           <header className="w-full py-4 md:p-8">
             <div className="flex flex-col items-center justify-center space-y-4">
               <img src={doneIcon} alt="success" />

@@ -1,17 +1,12 @@
-/** @format */
-
 import React, { useState, useEffect, useRef } from "react";
 import { Close } from "@mui/icons-material";
 import { Checkbox, Modal } from "@mui/material";
 import { FileUploader } from "react-drag-drop-files";
-import {
-  FormControl,
-  FormControlLabel,
-} from "@mui/material";
+import { FormControl, FormControlLabel } from "@mui/material";
 import Axios from "axios";
 import swal from "sweetalert";
 
-const EditCandidate = ({ addCandidate, handleCloseAddCandidate }) => {
+const EditCandidate = ({ open, close }) => {
   /* Handling the form input and data */
   const [pollType, setPollType] = useState();
   const [pollTypeData, setPollTypeData] = useState([]);
@@ -225,13 +220,12 @@ const EditCandidate = ({ addCandidate, handleCloseAddCandidate }) => {
     }
   }, [name, pollType]);
 
-
   return (
     <form onSubmit={handleSubmit} className='w-full'>
       <Modal
-        open={addCandidate}
+        open={open}
         onClose={() => {
-          handleCloseAddCandidate();
+          close();
           setName("");
           setPollType("");
           setSelectedState("");
@@ -259,7 +253,7 @@ const EditCandidate = ({ addCandidate, handleCloseAddCandidate }) => {
             <button
               className='flex items-center justify-center border border-1 rounded-md py-[2px] px-[2px] cursor-pointer text-sm md:text-base bg-[#fcf0f0] text-red-500'
               onClick={() => {
-                handleCloseAddCandidate();
+                close();
                 setName("");
                 setPollType("");
                 setSelectedState("");
@@ -446,14 +440,13 @@ const EditCandidate = ({ addCandidate, handleCloseAddCandidate }) => {
                 }
                 label='Main Candidate'
               />
-     
             </FormControl>
           </div>
           <div className='flex items-center justify-end w-full my-2'>
             <button
               className='flex items-center justify-center border-2 border-gray-300 py-3 px-5 h-full cursor-pointer text-sm rounded-md capitalize mr-4 transition-all duration-400 ease-in-out hover:bg-[#f3dddd] hover:text-red-600 hover:rounded-full '
               onClick={() => {
-                handleCloseAddCandidate();
+                close();
                 setName("");
                 setPollType("");
                 setSelectedState("");
@@ -470,11 +463,11 @@ const EditCandidate = ({ addCandidate, handleCloseAddCandidate }) => {
               type='submit'
               disabled={confirmBtn}
               onClick={(e) => {
-                handleCloseAddCandidate();
+                close();
                 handleSubmit(e);
               }}
             >
-              continue
+              Edit Candidate
             </button>
           </div>
         </div>

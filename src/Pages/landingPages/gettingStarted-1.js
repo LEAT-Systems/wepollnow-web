@@ -52,7 +52,7 @@ const GettingStartedOne = () => {
       <ModalComponent open={open} handleClose={handleClose} />
       <div className="relative flex flex-col">
         <div
-          className={`absolute z-10 flex flex-col items-center top-[550px] md:top-56 justify-center space-y-4 left-8 md:left-16`}
+          className={`absolute z-10 flex flex-col items-center top-[450px] md:top-56 justify-center space-y-4 left-8 md:left-16`}
         >
           <div className={`flex flex-col space-y-4 text-[#707070]`}>
             <a href="https://instagram.com/wepollnow">
@@ -80,7 +80,7 @@ const GettingStartedOne = () => {
             <Timer
               date={countDownDate}
               size="4xl"
-              sizelg="9xl"
+              sizelg="5xl"
               color="black"
               pcolor="black"
             />
@@ -95,9 +95,9 @@ const GettingStartedOne = () => {
             </button>
           </div>
           {/* Large screen controls */}
-          <div className="absolute right-6 md:right-16 top-[450px] md:top-36">
-            <div className="flex flex-col items-center justify-center space-y-4 ">
-              <div className="bg-[#EDFFF0] rounded-full p-1 ">
+          <div className="absolute right-6 md:right-16 top-[350px] md:top-36">
+            <div className="flex flex-col items-center justify-center space-y-4">
+              <div className="bg-[#EDFFF0] rounded-full p-1">
                 <KeyboardArrowUpIcon />
               </div>
               <div className="flex flex-col items-center justify-center px-2 space-y-2">
@@ -120,7 +120,7 @@ const GettingStartedOne = () => {
           <img
             src={text_logo}
             alt="vote"
-            className="w-full md:w-[55%] md:-mt-[140px] h-full md:max-w-[30%] md:min-w-[55%] md:h-[200px]"
+            className="w-full md:w-[55%] -mt-16 md:-mt-[140px] h-full md:max-w-[30%] md:min-w-[55%] md:h-[200px]"
           />
         </div>
       </div>

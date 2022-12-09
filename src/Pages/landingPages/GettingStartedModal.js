@@ -7,13 +7,14 @@ import Slide from "@mui/material/Slide";
 import { Modal } from "@mui/material";
 import Close from "../../images/CloseButton.png";
 import tooltipIcon from "../../images/tooltip.png";
+import swal from "sweetalert";
 
 const ModalComponent = (props) => {
   const history = useHistory();
   const [hasError, setHasError] = useState(false);
   const [value, setValue] = useState(null);
   const [tooltipStatus, setTooltipStatus] = useState(0);
-  const [message, setMessage] = useState("");
+  const [userExists, setUserExists] = useState(false);
 
   // Validate on end point
 
@@ -46,17 +47,36 @@ const ModalComponent = (props) => {
         );
         const result = await response.json();
 
+        let data;
         if (!response.ok) {
-          alert("An error occured");
+          alert("Something went wrong");
         } else {
-          const { message, voter_id } = result;
-          if (message === "A registered Voter") {
-            alert(
-              "You are already registered on our system. You will be redirected to the polls page"
-            );
+          data = {
+            message: result.message !== undefined ? result.message : "",
+            voter_id: result.voter_id !== undefined ? result.voter_id : "",
+          };
+        }
+
+        const { message, voter_id } = data;
+
+        if (response.ok === true) {
+          if (message === "A registered Voter" && voter_id !== null) {
+            swal({
+              title: "You are already registered on our system.",
+              text: "We have provisioned polls eligible for you based on your State of Origin",
+              icon: "warning",
+              buttons: {
+                confirm: {
+                  text: "Okay, I understand",
+                  className: "swalButton",
+                },
+              },
+            });
             localStorage.setItem("uniqueID", voter_id);
+            setUserExists(true);
             history.push("/polls", { replace: true });
-          } else {
+          }
+          if (message === "New User") {
             localStorage.setItem(
               "phoneDetails",
               JSON.stringify({
@@ -89,7 +109,6 @@ const ModalComponent = (props) => {
                 </div>
                 <div className="relative flex flex-row items-center justify-start space-x-2">
                   <p className="text-[16px] font-normal text-center">
-                    {message !== "" ? message : ""}
                     Input your phone number to proceed
                   </p>
                   <img
