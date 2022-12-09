@@ -395,14 +395,14 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
                   aria-required
                   value={selectedState}
                   onChange={(e) => {
-                    setSelectedState(e.target.value);
+                    setSelectedState(e.target.getAttribute('data-id'));
                   }}
                   disabled={enableState}
                 >
                   <option>Select State</option>
                   {state.map((state) => {
                     return (
-                      <option key={state.id} value={state.id}>
+                      <option key={state.id} data-id={state.id}>
                         {state.name}
                       </option>
                     );
