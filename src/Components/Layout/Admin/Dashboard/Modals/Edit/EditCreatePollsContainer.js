@@ -3,9 +3,9 @@
 import React, { useState, useContext } from "react";
 import { Modal } from "@mui/material";
 import { Close } from "@mui/icons-material";
-import AddPollModal from "./AddPollModal";
-import CreatePollModal from "./CreatePollModal";
-import ModalFormContext from "../../../../../ModalFormContextAdmin/ModalFormContext";
+import AddPollModal from "../AddPollModal";
+import CreatePollModal from "../CreatePollModal";
+import ModalFormContext from "../../../../../../ModalFormContextAdmin/ModalFormContext";
 
 const EditCreatePollsContainer = ({ open, handleClose, modalData }) => {
   const [page, setPage] = useState(1);
