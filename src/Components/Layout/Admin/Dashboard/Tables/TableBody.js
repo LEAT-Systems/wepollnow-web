@@ -1,7 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom/cjs/react-router-dom.min";
 import Edit from "../../assets/edit@2x.png";
-import Archive from "../../assets/archive@2x.png";
+// import Archive from "../../assets/archive@2x.png";
 import Delete from "../../assets/trash@2x.png";
 
 const TableBody = ({ tableData }) => {
