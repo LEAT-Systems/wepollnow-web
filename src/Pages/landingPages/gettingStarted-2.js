@@ -140,7 +140,7 @@ const GettingStartedTwo = () => {
 
         <div className="relative flex flex-col items-center bg-no-repeat bg-top bg-opacity-5 justify-center space-y-4 md:space-y-4 bg-contain bg-hero-pattern lg:pb-[10rem]">
           <h1 className="text-xl font-extrabold md:text-3xl">
-            Senatorial Polls
+            Gubernatorial Polls
           </h1>
 
           <div className="flex flex-row items-center justify-center ">
@@ -153,7 +153,7 @@ const GettingStartedTwo = () => {
                 </span>{" "}
                 the narrative.
               </h1>
-              <h1>Credible elections for all.</h1>
+              <h1>Credible polls for all.</h1>
             </div>
           </div>
           <div>
@@ -181,7 +181,7 @@ const GettingStartedTwo = () => {
           </div>
 
           {/* Large screen controls */}
-          <div className="absolute right-6 md:right-16 top-[430px] md:top-36">
+          <div className="absolute right-6 md:right-16 top-[400px] md:top-36">
             <div className="flex flex-col items-center justify-center space-y-4 ">
               <Link
                 to="/getting-started-one"
@@ -209,7 +209,7 @@ const GettingStartedTwo = () => {
           <img
             src={text_logo}
             alt="vote"
-            className="w-full md:w-[55%] md:-mt-[140px] h-full md:max-w-[30%] md:min-w-[55%] md:h-[200px]"
+            className="w-full md:w-[55%] mt-8 md:-mt-[140px] h-full md:max-w-[30%] md:min-w-[55%] md:h-[200px]"
           />
         </div>
 

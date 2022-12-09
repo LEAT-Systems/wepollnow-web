@@ -199,7 +199,7 @@ const FormFive = () => {
     <div>
       <Nav bg="FFEDF1" />
       <Modal open={open} children={ModalContent} />
-      <div className="flex flex-row items-center justify-center  bg-[#FFEDF1]">
+      <div className="flex flex-row items-center justify-center  md:bg-[#FFEDF1] bg-[#EDFFF0]">
         <div className="flex flex-col items-center justify-center p-16 space-y-4">
           <h1 className="text-xl md:text-4xl font-extrabold max-w-2xl md:leading-[48px] text-center">
             Select the party you'd like to vote in the {selectedPoll}

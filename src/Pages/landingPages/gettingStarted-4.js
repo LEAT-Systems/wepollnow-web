@@ -123,7 +123,7 @@ const GettingStartedFour = () => {
       <ModalComponent open={open} handleClose={handleClose} />
       <div className="relative flex flex-col mt-12 ">
         <div
-          className={`absolute z-10 flex flex-col items-center left-4 md:left-16 top-[450px] md:top-48 justify-center`}
+          className={`absolute z-10 flex flex-col items-center left-4 md:left-16 top-[400px] md:top-48 justify-center`}
         >
           <div className={`flex flex-col space-y-4`}>
             <a href="https://instagram.com/wepollnow">
@@ -144,16 +144,15 @@ const GettingStartedFour = () => {
           </h1>
 
           <div className="flex flex-row items-center justify-center ">
-            <div className="max-w-4xl p-8 text-4xl text-[#082B0E] md:space-y-4 text-center md:text-[54px]">
-              <h1>
+            <div className="max-w-4xl p-8 text-4xl text-[#082B0E]  md:space-y-4 text-center md:text-[54px]">
+              <h1 className="leading-none">
                 {" "}
-                Let's{" "}
+                Participate and let your <br />
                 <span className="underline underline-offset-4 decoration-yellow-500 decoration-[6px]">
-                  change
+                  voice
                 </span>{" "}
-                the narrative.
+                be heard.
               </h1>
-              <h1>Make your opinion count.</h1>
             </div>
           </div>
           <div>
@@ -180,7 +179,7 @@ const GettingStartedFour = () => {
           </div>
 
           {/* Large screen controls */}
-          <div className="absolute right-6 md:right-16 top-[430px] md:top-36">
+          <div className="absolute right-6 md:right-16 top-[350px] md:top-36">
             <div className="flex flex-col items-center justify-center space-y-4 ">
               <Link
                 to="/getting-started-three"
@@ -208,7 +207,7 @@ const GettingStartedFour = () => {
           <img
             src={text_logo}
             alt="vote"
-            className="w-full md:w-[55%] md:-mt-[140px] h-full md:max-w-[30%] md:min-w-[55%] md:h-[200px]"
+            className="w-full md:w-[55%] mt-8 md:-mt-[140px] h-full md:max-w-[30%] md:min-w-[55%] md:h-[200px]"
           />
         </div>
         <GettingStartedContent prompt={handleOpen} />

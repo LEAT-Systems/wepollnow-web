@@ -2,14 +2,15 @@
 
 import React from "react";
 import logo from "../../../images/logo.png";
+import { useHistory } from "react-router-dom";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Modal } from "@mui/material";
 import LogoutIcon from "@mui/icons-material/Logout";
-import CloseIcon from "@mui/icons-material/Close";
 import Close from "../../../images/CloseButton.png";
 
 const Header = () => {
+  const history = useHistory();
   const [open, setOpen] = useState(false);
 
   const handleOpen = () => {
@@ -17,6 +18,12 @@ const Header = () => {
   };
   const handleClose = () => {
     setOpen(false);
+  };
+
+  const leaveHandler = () => {
+    history.push("/admin/login", { replace: true });
+    // destroy session here
+    // ...
   };
   return (
     <>
@@ -59,7 +66,10 @@ const Header = () => {
               >
                 Stay
               </button>
-              <button className="p-3 px-10 text-black border rounded ">
+              <button
+                onClick={leaveHandler}
+                className="p-3 px-10 text-black border rounded "
+              >
                 Leave
               </button>
             </div>
