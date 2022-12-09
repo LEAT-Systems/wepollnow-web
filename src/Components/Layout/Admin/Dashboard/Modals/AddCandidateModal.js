@@ -75,7 +75,7 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
     };
     getSenetorial();
   }, [selectedState, setDistrictData]);
-  console.log("Selected State: ", selectedState);
+  // console.log("Selected State: ", selectedState);
 
   // /* Get Zone */
   // useEffect(() => {
@@ -197,7 +197,7 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
     window.location.reload()
   };
 
-      console.log("Main Candidate: ", mainCandidate);
+      // console.log("Main Candidate: ", mainCandidate);
   useEffect(() => {
     var onDisabled = () => {
       if (pollType === "1") {
@@ -422,14 +422,14 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
                   aria-required
                   value={district}
                   onChange={(e) => {
-                    setDistrict(e.target.value);
+                    setDistrict(e.target.getAttribute("data-id"));
                   }}
                   disabled={enabledSenetorial}
                 >
                   <option>Select Senetorial District</option>
                   {districtData.map((data) => {
                     return (
-                      <option key={data.id} value={data.id}>
+                      <option key={data.id} data-id={state.id}>
                         {data.name}
                       </option>
                     );
@@ -447,7 +447,7 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
                   className='custom_select disabled:bg-gray-200 disabled:cursor-not-allowed'
                   value={zone}
                   onChange={(e) => {
-                    setZone(e.target.value);
+                    setZone(e.target.getAttribute("data-id"));
                   }}
                   disabled={enabledZone}
                 >
@@ -460,7 +460,7 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
                   <option>6</option>
                   {/* {zoneData.map((data) => {
                     return (
-                      <option key={data.id} value={data.id}>
+                      <option key={data.id} data-id={state.id}>
                         {data.name}
                       </option>
                     );
@@ -478,13 +478,13 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
                   className='custom_select'
                   value={party}
                   onChange={(e) => {
-                    setParty(e.target.value);
+                    setParty(e.target.getAttribute("data-id"));
                   }}
                 >
                   <option>Select Party</option>
                   {partyData.map((data) => {
                     return (
-                      <option key={data.id} value={data.id}>
+                      <option key={data.id} data-id={state.id}>
                         {data.name}
                       </option>
                     );
