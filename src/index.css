@@ -1,0 +1,318 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* This colors doesn't affect anything, so please don't touch */
+customColors {
+  color: #fceaea; /* concluded color */
+  color: #fff9eb; /* scheduled color */
+  color: #ebf5ed; /* ongoing color */
+  color: #082a0f; /* primary color */
+  color: #08c127; /* progress color */
+  color: #e7f9ea; /* progress background color */
+}
+
+/* .active {
+  @apply after:content-[''] relative after:absolute
+  after:w-1 after:h-1 bg-green-400  after:top-0 right-0;
+} */
+
+*,
+body,
+html {
+  font-family: "Montserrat", sans-serif;
+}
+
+.active {
+  @apply relative bg-transparentWhite px-2 before:absolute before:-translate-y-1/2 before:top-1/2 before:right-0 before:content-[""] before:bg-green-500 before:h-[2.7rem] before:w-[.3rem] before:rounded-[1rem];
+}
+
+.sidebar-icons {
+  @apply text-gray-200;
+}
+
+.sidebar-icons.active {
+  @apply text-white;
+}
+
+select,
+input::placeholder {
+  font-family: "Montserrat", sans-serif;
+}
+
+select,
+input,
+button {
+  @apply focus:outline-gray-300 outline-gray-300 focus:outline-1 outline-1;
+}
+
+h1 {
+  @apply font-extrabold;
+  font-family: "Montserrat", sans-serif;
+}
+
+h2,
+p {
+  font-family: "Montserrat", sans-serif;
+}
+
+input:focus {
+  outline: none;
+}
+
+input[type="radio"]:checked {
+  accent-color: green;
+  color: rgb(156 163 175);
+}
+
+.radio:checked ~ label {
+  @apply bg-green-400;
+}
+/* label:hover {
+  @apply bg-[#EDFFF0];
+} */
+input[type="radio"]:checked {
+  @apply bg-green-50;
+}
+
+.custom__select {
+  @apply text-[#616b62] font-medium text-base capitalize h-full w-full border-2 rounded-md py-4 px-3 appearance-none;
+}
+
+.custom__select > option {
+  @apply text-[#616b62];
+}
+
+.custom__select__container {
+  @apply font-medium text-base w-full relative after:content-[""] after:absolute after:top-[3.7rem] after:right-1 after:-translate-y-2/4 after:-translate-x-2/4 after:border-x-transparent after:border-solid after:border-[0.5em] after:border-t-[#333] after:border-b-transparent after:pointer-events-none;
+}
+
+.custom_select {
+  @apply text-[#616b62] font-medium text-base capitalize h-full w-full border-2 rounded-md py-4 px-3 appearance-none;
+}
+
+.custom_select > option {
+  @apply text-[#616b62];
+}
+
+.custom_select_container {
+  @apply font-medium text-base w-full relative after:content-[""] after:absolute after:top-[3.7rem] after:right-1 after:-translate-y-2/4 after:-translate-x-2/4 after:border-x-transparent after:border-solid after:border-[0.5em] after:border-t-[#333] after:border-b-transparent after:pointer-events-none;
+}
+
+/* TableStateResult Styling */
+.tableStateResult,
+.tableStateResult th,
+.tableStateResult td {
+  @apply border-2 border-solid border-collapse;
+}
+
+/* Modals style */
+.modal__header__title {
+  @apply flex mb-2;
+}
+
+.modal__header__title > h4 {
+  @apply font-bold text-sm mr-2 whitespace-nowrap;
+}
+
+.modal__header__title > p {
+  @apply w-full h-[1px] text-[1px] font-[100] bg-gray-400 my-auto;
+}
+
+.modal__header__title > span {
+  @apply w-[.99rem] h-[.8rem] ml-2 my-auto rounded-full bg-gray-400;
+}
+
+.animate {
+  @apply transition duration-700 ease-in-out hover:bg-[#06931e] hover:rounded-full;
+}
+
+.animateBack {
+  @apply transition duration-700 ease-in-out hover:rounded-full;
+}
+
+.btn-stay {
+  @apply bg-[#08C127] p-3 text-white rounded-md px-8;
+}
+
+.btn-leave {
+  @apply bg-red-500 p-3 text-white  rounded-md px-4;
+}
+
+/* Hamburger Menu */
+.hamburger {
+  cursor: pointer;
+  width: 24px;
+  height: 20px;
+  transition: all 0.25s;
+  position: relative;
+  color: #082a0f;
+}
+
+.hamburger-top,
+.hamburger-middle,
+.hamburger-bottom {
+  position: absolute;
+  width: 24px;
+  height: 1px;
+  top: 0px;
+  left: 0px;
+  background: #000;
+  transform: rotate (0);
+  transition: all 0.5s;
+}
+
+.hamburger-middle {
+  transform: translateY(7px);
+}
+
+.hamburger-bottom {
+  transform: translateY(14px);
+}
+
+.open {
+  transform: rotate(90deg);
+}
+
+.open .hamburger-top {
+  transform: rotate(45deg);
+  @apply bg-white;
+}
+
+.open .hamburger-middle {
+  display: none;
+}
+
+.open .hamburger-bottom {
+  transform: rotate(135deg);
+  @apply bg-white;
+}
+
+.stroke {
+  color: black;
+  text-shadow: 1px 1px 0 #fff, -1px -1px 0 #fff, 1px -1px 0 #fff,
+    -1px 1px 0 #fff, 1px 1px 0 #fff;
+}
+
+.input::placeholder {
+  font-family: "Montserrat", sans-serif;
+  opacity: 1; /* Firefox */
+}
+
+input[type="select"] option {
+  background: "#08c127" !important;
+}
+
+.scrollable::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  width: 0.4rem;
+  height: 0.4rem;
+}
+
+.scrollable::-webkit-scrollbar-track,
+body::-webkit-scrollbar-track {
+  background: #eee;
+}
+
+.scrollable::-webkit-scrollbar-thumb,
+body::-webkit-scrollbar-thumb {
+  background-color: #082a0f;
+  border-radius: 10px;
+  /* border: 3px solid #000; */
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  /* Chrome, Safari, Opera */
+  display: none;
+  /* IE, Edge, Firefox */
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.bg-hero {
+  width: 200px;
+  height: 300px;
+  left: 30%;
+}
+
+.fontAwesome {
+  font-family: "Arial", FontAwesome !important;
+}
+
+/* Swiper JS styles */
+.swiper-button-prev {
+  color: #fff !important;
+}
+
+.swiper-button-next {
+  color: #fff !important;
+}
+
+.swiper {
+  width: 100%;
+  height: 100%;
+}
+
+input:focus {
+  outline: 1px solid #eee;
+}
+
+.iti__flag {
+  background-image: url("images/ng_1.png");
+}
+
+/* Swal button */
+.swalButton {
+  @apply p-4 rounded hover:rounded-full;
+}
+.swalButton:hover {
+  background-color: green !important;
+}
+/* Table header */
+.table-head {
+  @apply px-6 py-3 font-bold lg:font-[700] text-base normal-case min-w-fit whitespace-nowrap;
+}
+
+.table-row {
+  @apply border-b even:bg-[#f2f7f3] odd:bg-white;
+}
+
+.searchInp {
+  @apply flex w-full;
+}
+
+.searchInp input {
+  @apply border-x-0 border-t-0 border-b rounded-md rounded-tl-none rounded-bl-none text-[1rem] pr-4 py-5 md:py-5 h-8 md:h-12 w-full lg:w-[22rem] md:w-[16rem] focus:outline-none pl-1 md:pl-0;
+}
+
+.searchIcons {
+  @apply pt-3 pb-1 md:pb-1 h-full md:h-12 w-6 md:w-12 grid place-items-center cursor-pointer border-b;
+}
+
+.searchResult {
+  @apply bg-white w-[22rem] h-[22rem] shadow-md overflow-hidden overflow-y-auto;
+}
+
+.searchResult::-webkit-scrollbar {
+  display: none;
+}
+
+.PhoneInputInput {
+  @apply p-2 w-full rounded !important;
+}
+
+.PhoneInputInput:focus {
+  @apply p-2 w-full outline-none rounded-md !important;
+}
+
+/* Swal Library Button Custom Style */
+/* .swalButton {
+  @apply bg-green-500 text-white
+} */
+
+.swal-button {
+  @apply px-5 py-3 text-sm text-white bg-green-500 hover:!bg-green-500 hover:!text-white rounded-md cursor-pointer capitalize;
+}
+.swal-button:hover {
+  @apply text-white bg-green-500;
+}
