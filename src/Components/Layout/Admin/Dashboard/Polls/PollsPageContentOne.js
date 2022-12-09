@@ -8,6 +8,7 @@ import PollsHeader from "./PollsHeader";
 import Grid from "./Grid";
 import FilterModal from "../Modals/FilterModal";
 import CreatePollsContainer from "../Modals/CreatePollsContainer";
+import EditCreatePollsContainer from "../Modals/Edit/EditCreatePollsContainer";
 // import { getTableData } from "../api";
 import SubHeader from "../../SubHeader";
 import Axios from "axios";
@@ -27,6 +28,7 @@ const SubHeaderData = [
 
 const PollsPageContentOne = () => {
   const [open, setOpen] = useState(false);
+  const [openEdit, setOpenEdit] = useState(false);
   const [refineResult, setRefineResult] = useState(false);
   const [tableData, setTableData] = useState([]);
   const [searchResult, setSearchResult] = useState([]);
@@ -34,7 +36,7 @@ const PollsPageContentOne = () => {
 
   useEffect(() => {
     const getData = async () => {
-     await Axios.get("https://wepollnow.azurewebsites.net/poll/get_polls/")
+      await Axios.get("https://wepollnow.azurewebsites.net/poll/get_polls/")
         .then((res) => {
           console.log(res);
           setModalData(res.data);
@@ -70,6 +72,14 @@ const PollsPageContentOne = () => {
   };
   const handleClose = () => {
     setOpen(!open);
+  };
+
+  /* handle for create new poll */
+  const handleOpenEdit = () => {
+    setOpenEdit(!openEdit);
+  };
+  const handleCloseEdit = () => {
+    setOpenEdit(!openEdit);
   };
 
   const isActiveClass =
@@ -129,6 +139,11 @@ const PollsPageContentOne = () => {
         <CreatePollsContainer
           open={open}
           handleClose={handleClose}
+          modalData={modalData}
+        />
+        <EditCreatePollsContainer
+          open={openEdit}
+          handleClose={handleCloseEdit}
           modalData={modalData}
         />
 
