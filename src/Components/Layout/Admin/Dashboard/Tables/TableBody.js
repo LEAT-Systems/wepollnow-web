@@ -1,16 +1,18 @@
+/** @format */
+
 import React from "react";
 import { NavLink } from "react-router-dom/cjs/react-router-dom.min";
 import Edit from "../../assets/edit@2x.png";
 import Archive from "../../assets/archive@2x.png";
 import Delete from "../../assets/trash@2x.png";
 
-const TableBody = ({ tableData }) => {
+const TableBody = ({ tableData, open }) => {
   const getSymbol = () => {
     const string = tableData.poll_name;
     const wordArray = string.split(" ", 2);
     let symbol;
     if (wordArray.length === 1) {
-       symbol = string.slice(0, 2);
+      symbol = string.slice(0, 2);
     }
     if (wordArray.length === 2) {
       symbol = string.slice(0, 1) + wordArray[1].slice(0, 1);
@@ -28,7 +30,8 @@ const TableBody = ({ tableData }) => {
       ? "after:bg-green-500"
       : "after:bg-red-400";
 
-  const parentTarget = (e) => e.currentTarget.parentNode.parentNode.getAttribute("data-id");
+  const parentTarget = (e) =>
+    e.currentTarget.parentNode.parentNode.getAttribute("data-id");
   return (
     <tr className='table-row' data-id={tableData.id}>
       <th
@@ -82,7 +85,10 @@ const TableBody = ({ tableData }) => {
         </div> */}
         <div
           className='text-red-500 cursor-pointer'
-          onClick={(e) => console.log(parentTarget(e))}
+          onClick={(e) => {
+            console.log(parentTarget(e));
+            open();
+          }}
         >
           <img src={Delete} alt='Trash' className='w-[1.1rem] h-[1.1rem]' />
         </div>
