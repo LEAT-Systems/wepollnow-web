@@ -72,7 +72,7 @@ const data = {
 const legendMarginRight = {
   id: "legendMarginRight",
   beforeInit(chart, argument, options) {
-    // console.log(chart);
+    console.log(chart);
     const fitValue = chart.legend.fit;
 
     chart.legend.fit = function fit() {
@@ -86,7 +86,7 @@ const legendMarginRight = {
 
 const BarChart = () => {
   return (
-    <div className='grid grid-cols-12 gap-4 place-items-center h-full w-full'>
+    <div className='grid grid-cols-12 gap-7 place-items-center h-full w-full'>
       <div className='w-full h-full border rounded col-span-9'>
         <Bar
           height={75}

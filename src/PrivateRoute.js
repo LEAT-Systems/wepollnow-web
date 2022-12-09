@@ -5,7 +5,6 @@ import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
 function PrivateRoutes({ children, isAuthenticated, ...rest }) {
   console.log("Private isAuthenticated: ", isAuthenticated);
   let location = useLocation();
- 
   return (
     <Route
       {...rest}
