@@ -1,19 +1,12 @@
-/** @format */
-
 import React, { useState, useEffect, useRef } from "react";
 import { Close } from "@mui/icons-material";
 import { Checkbox, Modal } from "@mui/material";
 import { FileUploader } from "react-drag-drop-files";
-import {
-  FormControl,
-  FormControlLabel,
-  Radio,
-  RadioGroup,
-} from "@mui/material";
+import { FormControl, FormControlLabel } from "@mui/material";
 import Axios from "axios";
 import swal from "sweetalert";
 
-const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
+const EditCandidate = ({ open, close }) => {
   /* Handling the form input and data */
   const [pollType, setPollType] = useState();
   const [pollTypeData, setPollTypeData] = useState([]);
@@ -26,8 +19,6 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
   const [zone, setZone] = useState([]);
   const [partyData, setPartyData] = useState([]);
   const [party, setParty] = useState([]);
-  const [zoneData, setZoneData] = useState([]);
-  const [percentage, setPercentage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
   const [mainCandidate, setMainCandidate] = useState(false);
@@ -66,8 +57,9 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
   useEffect(() => {
     const getSenetorial = async () => {
       await Axios.get(
-        `https://wepollnow.azurewebsites.net/utilities/senatorial/${selectedState}`, {
-          state_id: selectedState
+        `https://wepollnow.azurewebsites.net/utilities/senatorial/${selectedState}`,
+        {
+          state_id: selectedState,
         }
       )
         .then((res) => setDistrictData(res.data))
@@ -75,7 +67,7 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
     };
     getSenetorial();
   }, [selectedState, setDistrictData]);
-  // console.log("Selected State: ", selectedState);
+  console.log("Selected State: ", selectedState);
 
   // /* Get Zone */
   // useEffect(() => {
@@ -146,7 +138,7 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
         console.log(res);
         swal({
           title: "Success",
-          text: "New Candidate Added!",
+          text: "Candidate Modified!",
           icon: "success",
           button: "Ok",
         });
@@ -162,7 +154,7 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
         if (!err?.response) {
           setErrorMessage("No Connection");
           swal({
-            title: "Success",
+            title: "Failure",
             text: "No Internet Connection",
             icon: "error",
             button: "Ok",
@@ -187,17 +179,17 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
           setErrorMessage("Add Candidate Failed");
           swal({
             title: "Failure",
-            text: "Adding Candidate Failed",
+            text: "Editing Candidate Failed",
             icon: "error",
             button: "Ok",
           });
         }
       });
-    
-    window.location.reload()
+
+    window.location.reload();
   };
 
-      // console.log("Main Candidate: ", mainCandidate);
+  console.log("Main Candidate: ", mainCandidate);
   useEffect(() => {
     var onDisabled = () => {
       if (pollType === "1") {
@@ -228,51 +220,12 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
     }
   }, [name, pollType]);
 
-  // const token = async () => {
-  //   try {
-  //     const response = await Axios.post(
-  //       "https://wepollnow.azurewebsites.net/utilities/candidates/",
-  //       {
-  //         name: name,
-  //         poll: null,
-  //         poll_category: pollType,
-  //         state_id: selectedState,
-  //         senatorial_id: district,
-  //         main_candidate: mainCandidate,
-  //         candidate_picture: candidateImage,
-  //       },
-  //       {
-  //         headers: { "Content-Type": "application/json" },
-  //       }
-  //     );
-  //     // clear state and controlled inputs
-  //     setName("");
-  //     setPollType("");
-  //     setCandidateImage("");
-  //     setSelectedState("");
-  //     setDistrict("");
-  //     setSuccessMessage(true);
-  //     return response;
-  //   } catch (err) {
-  //     if (!err?.response) {
-  //       setErrorMessage("No Connection");
-  //     } else if (err.response?.status === 400) {
-  //       setErrorMessage("Email and Password are required");
-  //     } else if (err.response?.status === 401) {
-  //       setErrorMessage("Unauthorized");
-  //     } else {
-  //       setErrorMessage("Add Candidate Failed");
-  //     }
-  //     errRef.current.focus();
-  //   }
-  // };
-
   return (
     <form onSubmit={handleSubmit} className='w-full'>
       <Modal
-        open={addCandidate}
+        open={open}
         onClose={() => {
-          handleCloseAddCandidate();
+          close();
           setName("");
           setPollType("");
           setSelectedState("");
@@ -300,7 +253,7 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
             <button
               className='flex items-center justify-center border border-1 rounded-md py-[2px] px-[2px] cursor-pointer text-sm md:text-base bg-[#fcf0f0] text-red-500'
               onClick={() => {
-                handleCloseAddCandidate();
+                close();
                 setName("");
                 setPollType("");
                 setSelectedState("");
@@ -359,31 +312,6 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
               </label>
             </div>
 
-            {/* <div className="py-2">
-              <label className="relative w-full h-auto my-6">
-                Candidate Image (Max size 2MB (png, jpg, jpeg))
-                <FileUploader
-                  onTypeError={(err) => setFileError(err)}
-                  onDrop={(file) => setFileName(file.name)}
-                  onSelect={(file) => setFileName(file.name)}
-                  handleChange={handleFileChange}
-                  name="file"
-                  types={fileTypes}
-                  maxSize={2}
-                >
-                  <div className="font-medium text-base text-[#616b62] capitalize h-full w-full border-2 border-gray-300 rounded-md py-3 px-3 placeholder:text-[#616b62]">
-                    <div className="flex flex-row space-x-2">
-                      <button className="px-2 border">Select a file</button>{" "}
-                      <p>{fileName === "" ? "No File Selected" : fileName}</p>
-                      <p className="p-1 text-red-500 rounded">
-                        {fileName === "" && fileError !== "" && fileError}
-                      </p>
-                    </div>
-                  </div>
-                </FileUploader>
-              </label>
-            </div> */}
-
             <div className='py-2'>
               <label className='w-full h-auto my-6 custom__select__container'>
                 State
@@ -395,14 +323,14 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
                   aria-required
                   value={selectedState}
                   onChange={(e) => {
-                    setSelectedState(e.target.getAttribute('data-id'));
+                    setSelectedState(e.target.value);
                   }}
                   disabled={enableState}
                 >
                   <option>Select State</option>
                   {state.map((state) => {
                     return (
-                      <option key={state.id} data-id={state.id}>
+                      <option key={state.id} value={state.id}>
                         {state.name}
                       </option>
                     );
@@ -422,14 +350,14 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
                   aria-required
                   value={district}
                   onChange={(e) => {
-                    setDistrict(e.target.getAttribute("data-id"));
+                    setDistrict(e.target.value);
                   }}
                   disabled={enabledSenetorial}
                 >
                   <option>Select Senetorial District</option>
                   {districtData.map((data) => {
                     return (
-                      <option key={data.id} data-id={state.id}>
+                      <option key={data.id} value={data.id}>
                         {data.name}
                       </option>
                     );
@@ -447,7 +375,7 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
                   className='custom_select disabled:bg-gray-200 disabled:cursor-not-allowed'
                   value={zone}
                   onChange={(e) => {
-                    setZone(e.target.getAttribute("data-id"));
+                    setZone(e.target.value);
                   }}
                   disabled={enabledZone}
                 >
@@ -460,7 +388,7 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
                   <option>6</option>
                   {/* {zoneData.map((data) => {
                     return (
-                      <option key={data.id} data-id={state.id}>
+                      <option key={data.id} value={data.id}>
                         {data.name}
                       </option>
                     );
@@ -478,13 +406,13 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
                   className='custom_select'
                   value={party}
                   onChange={(e) => {
-                    setParty(e.target.getAttribute("data-id"));
+                    setParty(e.target.value);
                   }}
                 >
                   <option>Select Party</option>
                   {partyData.map((data) => {
                     return (
-                      <option key={data.id} data-id={state.id}>
+                      <option key={data.id} value={data.id}>
                         {data.name}
                       </option>
                     );
@@ -512,63 +440,13 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
                 }
                 label='Main Candidate'
               />
-              {/* <RadioGroup
-                value={mainCandidate}
-                onChange={(e) => {
-                  setMainCandidate(e.target.value);
-                }}
-              >
-                <div className='flex justify-between align-center'>
-                  <FormControlLabel
-                    value='true'
-                    className='text-[#616b62] font-medium'
-                    sx={{ width: "100%" }}
-                    control={
-                      <Radio
-                        sx={{
-                          color: "#616b62",
-                          "&.Mui-checked": {
-                            color: "#616b62",
-                          },
-                        }}
-                      />
-                    }
-                    label='Yes'
-                  />
-                  <h3 className='font-bold my-auto text-sm text-[#616b62] whitespace-nowrap'>
-                    Main Candidate
-                  </h3>
-                </div>
-                <div className='flex justify-between align-center'>
-                  <FormControlLabel
-                    value='false'
-                    className='text-[#616b62] font-medium'
-                    sx={{ width: "100%" }}
-                    control={
-                      <Radio
-                        sx={{
-                          color: "#616b62",
-                          "&.Mui-checked": {
-                            color: "#616b62",
-                          },
-                        }}
-                      />
-                    }
-                    label='No'
-                  />
-
-                  <h3 className='font-bold my-auto text-sm text-[#616b62] whitespace-nowrap'>
-                    Main Candidate
-                  </h3>
-                </div>
-              </RadioGroup> */}
             </FormControl>
           </div>
           <div className='flex items-center justify-end w-full my-2'>
             <button
               className='flex items-center justify-center border-2 border-gray-300 py-3 px-5 h-full cursor-pointer text-sm rounded-md capitalize mr-4 transition-all duration-400 ease-in-out hover:bg-[#f3dddd] hover:text-red-600 hover:rounded-full '
               onClick={() => {
-                handleCloseAddCandidate();
+                close();
                 setName("");
                 setPollType("");
                 setSelectedState("");
@@ -585,11 +463,11 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
               type='submit'
               disabled={confirmBtn}
               onClick={(e) => {
-                handleCloseAddCandidate();
+                close();
                 handleSubmit(e);
               }}
             >
-              continue
+              Edit Candidate
             </button>
           </div>
         </div>
@@ -598,4 +476,4 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
   );
 };
 
-export default AddCandidateModal;
+export default EditCandidate;
