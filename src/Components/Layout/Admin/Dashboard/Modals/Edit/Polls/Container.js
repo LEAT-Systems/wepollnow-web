@@ -39,7 +39,7 @@ const Container = ({ open, handleClose, modalData }) => {
 
     if (page === 2)
       return (
-        <PollFormOne
+        <PollFormTwo
           open={open}
           modalData={modalData}
           handleClose={handleClose}
