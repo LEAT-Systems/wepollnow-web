@@ -1,12 +1,12 @@
-/** @format */
-
-import React from "react";
+import React, {useContext} from "react";
 import { NavLink } from "react-router-dom/cjs/react-router-dom.min";
 import Edit from "../../assets/edit@2x.png";
 import Archive from "../../assets/archive@2x.png";
 import Delete from "../../assets/trash@2x.png";
+import ModalFormContext from "../../../../../ModalFormContextAdmin/ModalFormContext";
 
 const TableBody = ({ tableData, open }) => {
+  const {tableRowID,  setTableRowID} = useContext(ModalFormContext)
   const getSymbol = () => {
     const string = tableData.poll_name;
     const wordArray = string.split(" ", 2);
@@ -75,7 +75,12 @@ const TableBody = ({ tableData, open }) => {
       <td className='flex flex-row px-6 py-4 space-x-2'>
         <div
           className='text-blue-500 cursor-pointer'
-          onClick={(e) => console.log(parentTarget(e))}
+          onClick={(e) => {
+            setTableRowID(parentTarget(e));
+            console.log(parentTarget(e));
+            open();
+          }
+          }
         >
           <img src={Edit} alt='Edit' className='w-[1.1rem] h-[1.1rem]' />
         </div>
@@ -85,8 +90,8 @@ const TableBody = ({ tableData, open }) => {
         <div
           className='text-red-500 cursor-pointer'
           onClick={(e) => {
-            console.log(parentTarget(e));
-            open();
+            setTableRowID(parentTarget(e))
+            console.log(parentTarget(e))
           }}
         >
           <img src={Delete} alt='Trash' className='w-[1.1rem] h-[1.1rem]' />
