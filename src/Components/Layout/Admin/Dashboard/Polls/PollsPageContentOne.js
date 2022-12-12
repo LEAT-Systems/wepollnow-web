@@ -7,8 +7,7 @@ import PollsHeader from "./PollsHeader";
 import Grid from "./Grid";
 import FilterModal from "../Modals/FilterModal";
 import CreatePollsContainer from "../Modals/CreatePollsContainer";
-import EditCreatePollsContainer from "../Modals/Edit/EditCreatePollsContainer";
-// import { getTableData } from "../api";
+import Container from "../Modals/Edit/Polls/Container";
 import SubHeader from "../../SubHeader";
 import Axios from "axios";
 
@@ -100,12 +99,12 @@ const PollsPageContentOne = () => {
     setSearchResult(modalData);
   }, [modalData]);
   return (
-    <main className="flex flex-col justify-center w-[98%]">
+    <main className='flex flex-col justify-center w-[98%]'>
       <Header />
 
-      <div className="px-4 md:px-6 lg:px-12">
+      <div className='px-4 md:px-6 lg:px-12'>
         <SubHeader data={SubHeaderData} />
-        <div className="w-full">
+        <div className='w-full'>
           <PollsHeader
             setSearchResult={setSearchResult}
             tableData={tableData}
@@ -116,9 +115,9 @@ const PollsPageContentOne = () => {
         </div>
 
         {/* Data Table */}
-        <div className="flex flex-col text-[#082a0f] my-1">
-          <div className="flex flex-row justify-between px-2 pt-4 mb-3">
-            <h2 className="font-extrabold text-[#082a0f] text-lg">Polls</h2>
+        <div className='flex flex-col text-[#082a0f] my-1'>
+          <div className='flex flex-row justify-between px-2 pt-4 mb-3'>
+            <h2 className='font-extrabold text-[#082a0f] text-lg'>Polls</h2>
             <button
               className={open ? isActiveClass : isNotActiveClass}
               onClick={handleOpen}
@@ -130,7 +129,7 @@ const PollsPageContentOne = () => {
           {isGrid ? (
             <Grid data={searchResult} handleOpen={handleOpen} />
           ) : (
-            <Tables data={searchResult} />
+            <Tables data={searchResult} open={handleOpenEdit} />
           )}
         </div>
 
@@ -140,7 +139,7 @@ const PollsPageContentOne = () => {
           handleClose={handleClose}
           modalData={modalData}
         />
-        <EditCreatePollsContainer
+        <Container
           open={openEdit}
           handleClose={handleCloseEdit}
           modalData={modalData}

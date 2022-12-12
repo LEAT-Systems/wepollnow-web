@@ -3,11 +3,11 @@
 import React, { useState, useContext } from "react";
 import { Modal } from "@mui/material";
 import { Close } from "@mui/icons-material";
-import AddPollModal from "../AddPollModal";
-import CreatePollModal from "../CreatePollModal";
-import ModalFormContext from "../../../../../../ModalFormContextAdmin/ModalFormContext";
+import PollFormOne from "./PollFormOne";
+import PollFormTwo from "./PollFormTwo";
+import ModalFormContext from "../../../../../../../ModalFormContextAdmin/ModalFormContext";
 
-const EditCreatePollsContainer = ({ open, handleClose, modalData }) => {
+const Container = ({ open, handleClose, modalData }) => {
   const [page, setPage] = useState(1);
   const {
     setPollType,
@@ -28,7 +28,7 @@ const EditCreatePollsContainer = ({ open, handleClose, modalData }) => {
   const Forms = () => {
     if (page === 1)
       return (
-        <CreatePollModal
+        <PollFormOne
           open={open}
           modalData={modalData}
           handleClose={handleClose}
@@ -39,7 +39,7 @@ const EditCreatePollsContainer = ({ open, handleClose, modalData }) => {
 
     if (page === 2)
       return (
-        <AddPollModal
+        <PollFormTwo
           open={open}
           modalData={modalData}
           handleClose={handleClose}
@@ -99,4 +99,4 @@ const EditCreatePollsContainer = ({ open, handleClose, modalData }) => {
   );
 };
 
-export default EditCreatePollsContainer;
+export default Container;
