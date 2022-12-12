@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import TableBody from "./TableBody";
 import Axios from "axios";
 
-const Tables = ({ data }) => {
+const Tables = ({ data, open }) => {
   // const [state, setState] = useState([]);
   // const [stateID, setStateID] = useState([])
 
@@ -26,7 +26,7 @@ const Tables = ({ data }) => {
   // }, [stateID]);
   const results = data.map((data) => {
     return (
-      <TableBody key={data.id} id={data.id} tableData={data} />
+      <TableBody key={data.id} id={data.id} tableData={data} open={open} />
     );
   });
 
