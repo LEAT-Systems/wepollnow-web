@@ -7,8 +7,7 @@ import PollsHeader from "./PollsHeader";
 import Grid from "./Grid";
 import FilterModal from "../Modals/FilterModal";
 import CreatePollsContainer from "../Modals/CreatePollsContainer";
-import EditCreatePollsContainer from "../Modals/Edit/EditCreatePollsContainer";
-// import { getTableData } from "../api";
+import Container from "../Modals/Edit/Polls/Container";
 import SubHeader from "../../SubHeader";
 import Axios from "axios";
 
@@ -130,7 +129,7 @@ const PollsPageContentOne = () => {
           {isGrid ? (
             <Grid data={searchResult} handleOpen={handleOpen} />
           ) : (
-            <Tables data={searchResult} />
+            <Tables data={searchResult} open={openEdit} />
           )}
         </div>
 
@@ -140,7 +139,7 @@ const PollsPageContentOne = () => {
           handleClose={handleClose}
           modalData={modalData}
         />
-        <EditCreatePollsContainer
+        <Container
           open={openEdit}
           handleClose={handleCloseEdit}
           modalData={modalData}
