@@ -1,5 +1,3 @@
-/** @format */
-
 import React, { useEffect, useState } from "react";
 import Tables from "../Tables/Tables";
 import Header from "../../Header";
@@ -74,10 +72,10 @@ const PollsPageContentOne = () => {
 
   /* handle for create new poll */
   const handleOpenEdit = () => {
-    setOpenEdit(!openEdit);
+    setOpenEdit(true);
   };
   const handleCloseEdit = () => {
-    setOpenEdit(!openEdit);
+    setOpenEdit(false);
   };
 
   const isActiveClass =

@@ -29,7 +29,7 @@ const Container = ({ open, handleClose, modalData }) => {
     if (page === 1)
       return (
         <PollFormOne
-          open={open}
+          open={() => open()}
           modalData={modalData}
           handleClose={handleClose}
           nextPage={nextPage}
