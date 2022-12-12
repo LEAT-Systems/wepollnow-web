@@ -1,5 +1,3 @@
-/** @format */
-
 import React, { useState, useEffect, useRef } from "react";
 import { Close } from "@mui/icons-material";
 import { Checkbox, Modal } from "@mui/material";

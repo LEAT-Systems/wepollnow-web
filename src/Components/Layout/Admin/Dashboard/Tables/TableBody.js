@@ -30,8 +30,7 @@ const TableBody = ({ tableData, open }) => {
       ? "after:bg-green-500"
       : "after:bg-red-400";
 
-  const parentTarget = (e) =>
-    e.currentTarget.parentNode.parentNode.getAttribute("data-id");
+  const parentTarget = (e) => e.currentTarget.parentNode.parentNode.getAttribute("data-id");
   return (
     <tr className='table-row' data-id={tableData.id}>
       <th
