@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import TableBody from "./TableBody";
 import Axios from "axios";
-import EditCandidate from "../Modals/Edit/Candidate/EditCandidate";
+// import EditCandidate from "../Modals/Edit/Candidate/EditCandidate";
 
 const Tables = ({ data, close, open }) => {
   // const [state, setState] = useState([]);
@@ -75,7 +75,7 @@ const Tables = ({ data, close, open }) => {
         )}
       </div>
 
-      <EditCandidate open={open} close={close}  />
+      
     </div>
   );
 };
