@@ -8,8 +8,11 @@ import { Link } from "react-router-dom";
 import { Modal } from "@mui/material";
 import LogoutIcon from "@mui/icons-material/Logout";
 import Close from "../../../images/CloseButton.png";
+import { useContext } from "react";
+import AuthContext from "../../../store/auth-context";
 
 const Header = () => {
+  const authCtx = useContext(AuthContext);
   const history = useHistory();
   const [open, setOpen] = useState(false);
 
@@ -23,7 +26,7 @@ const Header = () => {
   const leaveHandler = () => {
     history.push("/admin/login", { replace: true });
     // destroy session here
-    // ...
+    authCtx.logout();
   };
   return (
     <>
@@ -68,7 +71,7 @@ const Header = () => {
               </button>
               <button
                 onClick={leaveHandler}
-                className="p-3 px-10 text-black border rounded "
+                className="p-3 px-10 text-black border rounded bg-red-200"
               >
                 Leave
               </button>
