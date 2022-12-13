@@ -189,7 +189,7 @@ const PollFormOne = ({ open, handleClose, nextPage, setPage }) => {
               name='poll_type'
               id='poll_type'
               className='custom_select'
-              value={"Governorship Poll"}  
+              value={pollType}  
               required
               aria-required
               onChange={(e) => {
@@ -197,9 +197,10 @@ const PollFormOne = ({ open, handleClose, nextPage, setPage }) => {
                 console.log(e.target.value);
               }}
             >
+              <option value='Select Poll Type' >Select Poll Type</option>
               {pollTypeData.map((poll) => {
                 return (
-                  <option key={poll.id} id={poll.id} value={poll.id} defaultValue={'Presidential Poll'} >
+                  <option key={poll.id} id={poll.id} value={poll.id} defaultValue={'Presidential Polls'} >
                     {poll.title}
                   </option>
                 );
