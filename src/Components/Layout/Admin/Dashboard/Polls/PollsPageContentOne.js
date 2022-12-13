@@ -72,10 +72,10 @@ const PollsPageContentOne = () => {
 
   /* handle for create new poll */
   const handleOpenEdit = () => {
-    setOpenEdit(true);
+    setOpenEdit(!openEdit);
   };
   const handleCloseEdit = () => {
-    setOpenEdit(false);
+    setOpenEdit(!openEdit);
   };
 
   const isActiveClass =
