@@ -1,12 +1,12 @@
 import React, {useContext} from "react";
 import { NavLink } from "react-router-dom/cjs/react-router-dom.min";
 import Edit from "../../assets/edit@2x.png";
-import Archive from "../../assets/archive@2x.png";
+// import Archive from "../../assets/archive@2x.png";
 import Delete from "../../assets/trash@2x.png";
-import ModalFormContext from "../../../../../ModalFormContextAdmin/ModalFormContext";
+import EditContext from "../Modals/Edit/Polls/EditContext";
 
 const TableBody = ({ tableData, open }) => {
-  const {tableRowID,  setTableRowID} = useContext(ModalFormContext)
+  const { setTableRowID } = useContext(EditContext);
   const getSymbol = () => {
     const string = tableData.poll_name;
     const wordArray = string.split(" ", 2);
@@ -20,9 +20,6 @@ const TableBody = ({ tableData, open }) => {
     return symbol;
   };
 
-  // useEffect(() => {
-
-  // })
   const statusColors =
     tableData.status === 1
       ? "after:bg-blue-500"
