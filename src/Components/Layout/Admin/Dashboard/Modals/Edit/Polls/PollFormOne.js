@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
-import ModalFormContext from "../../../../../../../ModalFormContextAdmin/ModalFormContext";
+import EditContext from "./EditContext";
 
 const PollFormOne = ({ open, handleClose, nextPage, setPage }) => {
   const {
@@ -29,7 +29,7 @@ const PollFormOne = ({ open, handleClose, nextPage, setPage }) => {
     tableRowID,
     editPollData,
     setEditPollData,
-  } = useContext(ModalFormContext);
+  } = useContext(EditContext);
 
   const [enableState, setEnabledState] = useState(false);
   const [enabledSenetorial, setEnabledSenetorial] = useState(false);
