@@ -189,7 +189,7 @@ const PollFormOne = ({ open, handleClose, nextPage, setPage }) => {
               name='poll_type'
               id='poll_type'
               className='custom_select'
-              value={pollType}  
+              value={"Governorship Poll"}  
               required
               aria-required
               onChange={(e) => {
