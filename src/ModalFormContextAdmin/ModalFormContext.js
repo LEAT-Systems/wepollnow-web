@@ -1,7 +1,9 @@
+/** @format */
+
 import { useState, createContext } from "react";
 const ModalFormContext = createContext();
 
-export const EditContext = ({ children }) => {
+export const ModalFormProvider = ({ children }) => {
   /* Value ID's */
   const [pollType, setPollType] = useState([]);
   const [pollTypeName, setPollTypeName] = useState("");
@@ -86,4 +88,4 @@ export const EditContext = ({ children }) => {
   );
 };
 
-export default EditContext;
+export default ModalFormContext;

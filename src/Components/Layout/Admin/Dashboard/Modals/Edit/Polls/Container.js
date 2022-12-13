@@ -1,5 +1,3 @@
-/** @format */
-
 import React, { useState, useContext } from "react";
 import { Modal } from "@mui/material";
 import { Close } from "@mui/icons-material";

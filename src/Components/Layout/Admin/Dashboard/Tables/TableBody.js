@@ -1,4 +1,7 @@
-import React, {useContext} from "react";
+/** @format */
+
+import axios from "axios";
+import React, { useContext } from "react";
 import { NavLink } from "react-router-dom/cjs/react-router-dom.min";
 import Edit from "../../assets/edit@2x.png";
 // import Archive from "../../assets/archive@2x.png";
@@ -27,7 +30,17 @@ const TableBody = ({ tableData, open }) => {
       ? "after:bg-green-500"
       : "after:bg-red-400";
 
-  const parentTarget = (e) => e.currentTarget.parentNode.parentNode.getAttribute("data-id");
+  const parentTarget = (e) =>
+    e.currentTarget.parentNode.parentNode.getAttribute("data-id");
+
+  const handleDelete = () => {
+    axios
+      .delete("", {})
+      .then((res) => res.data)
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   return (
     <tr className='table-row' data-id={tableData.id}>
       <th
@@ -76,8 +89,7 @@ const TableBody = ({ tableData, open }) => {
             setTableRowID(parentTarget(e));
             console.log(parentTarget(e));
             open();
-          }
-          }
+          }}
         >
           <img src={Edit} alt='Edit' className='w-[1.1rem] h-[1.1rem]' />
         </div>
@@ -87,8 +99,8 @@ const TableBody = ({ tableData, open }) => {
         <div
           className='text-red-500 cursor-pointer'
           onClick={(e) => {
-            setTableRowID(parentTarget(e))
-            console.log(parentTarget(e))
+            setTableRowID(parentTarget(e));
+            console.log(parentTarget(e));
           }}
         >
           <img src={Delete} alt='Trash' className='w-[1.1rem] h-[1.1rem]' />
