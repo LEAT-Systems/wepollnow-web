@@ -1,5 +1,3 @@
-/** @format */
-
 import React, { useEffect, useState } from "react";
 import Tables from "../Tables/Tables";
 import Header from "../../Header";

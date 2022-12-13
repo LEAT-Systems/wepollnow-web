@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
-import { ArrowUpward, CalendarMonthOutlined, People, Save } from "@mui/icons-material";
+import { ArrowUpward, CalendarMonthOutlined, Save } from "@mui/icons-material";
 import Header from "../../Header";
 import BarChart from "../Charts/BarChart";
 import PieChart from "../Charts/PieChart";
