@@ -97,7 +97,7 @@ const TableBody = ({ tableData, open }) => {
       </th>
       <td className='px-6 py-4 cursor-pointer'>
         <NavLink to='/admin/polls/poll_result' activeClassName={null}>
-          {tableData.poll_state.name}
+          {tableData.poll_state_name}
         </NavLink>
       </td>
       <td className='px-6 py-4 cursor-pointer'>
