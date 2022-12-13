@@ -1,30 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import TableBody from "./TableBody";
-import Axios from "axios";
-// import EditCandidate from "../Modals/Edit/Candidate/EditCandidate";
 
 const Tables = ({ data, close, open }) => {
-  // const [state, setState] = useState([]);
-  // const [stateID, setStateID] = useState([])
-
-  // if(data.poll_state === undefined) {
-  //   setStateID(1)
-  // } else {
-  //   data.poll_state.map(state => setState(state))
-  // }
-
-  // useEffect(() => {
-  //   const getState = async () => {
-  //     Axios.get(`https://wepollnow.azurewebsites.net/poll/get_polls/${stateID}`)
-  //       .then((res) => {
-  //         console.log(res);
-  //         setState(res);
-  //       })
-  //       .catch((err) => console.log(err));
-  //   };
-
-  //   getState();
-  // }, [stateID]);
   const results = data.map((data) => {
     return (
       <TableBody key={data.id} id={data.id} tableData={data} open={open} />

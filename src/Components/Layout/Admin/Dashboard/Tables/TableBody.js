@@ -1,12 +1,16 @@
-import React, {useContext} from "react";
+/** @format */
+
+import axios from "axios";
+import React, { useContext } from "react";
 import { NavLink } from "react-router-dom/cjs/react-router-dom.min";
 import Edit from "../../assets/edit@2x.png";
-import Archive from "../../assets/archive@2x.png";
+// import Archive from "../../assets/archive@2x.png";
 import Delete from "../../assets/trash@2x.png";
 import ModalFormContext from "../../../../../ModalFormContextAdmin/ModalFormContext";
+import swal from "sweetalert";
 
 const TableBody = ({ tableData, open }) => {
-  const {tableRowID,  setTableRowID} = useContext(ModalFormContext)
+  const { tableRowID, setTableRowID } = useContext(ModalFormContext);
   const getSymbol = () => {
     const string = tableData.poll_name;
     const wordArray = string.split(" ", 2);
@@ -20,9 +24,6 @@ const TableBody = ({ tableData, open }) => {
     return symbol;
   };
 
-  // useEffect(() => {
-
-  // })
   const statusColors =
     tableData.status === 1
       ? "after:bg-blue-500"
@@ -30,7 +31,57 @@ const TableBody = ({ tableData, open }) => {
       ? "after:bg-green-500"
       : "after:bg-red-400";
 
-  const parentTarget = (e) => e.currentTarget.parentNode.parentNode.getAttribute("data-id");
+  const parentTarget = (e) =>
+    e.currentTarget.parentNode.parentNode.getAttribute("data-id");
+
+  const handleDelete = async () => {
+    await axios
+      .delete(
+        `https://wepollnow.azurewebsites.net/poll/rud_poll/${tableRowID}`)
+      .then((res) => {
+        console.log(res.data)
+        swal({
+          title: "Success",
+          text: "Poll Deleted!",
+          icon: "success",
+          button: "Ok",
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+        if (!err?.response) {
+          swal({
+            title: "Success",
+            text: "No Internet Connection",
+            icon: "error",
+            button: "Ok",
+          });
+        } else if (err.response?.status === 400) {
+          swal({
+            title: "Failure",
+            text: "Something went wrong!",
+            icon: "error",
+            button: "Ok",
+          });
+        } else if (err.response?.status === 401) {
+          swal({
+            title: "Failure",
+            text: "Unauthorized",
+            icon: "error",
+            button: "Ok",
+          });
+        } else {
+          swal({
+            title: "Failure",
+            text: "Poll Deletion Failed",
+            icon: "error",
+            button: "Ok",
+          });
+        }
+      });
+    
+    window.location.reload();
+  };
   return (
     <tr className='table-row' data-id={tableData.id}>
       <th
@@ -79,8 +130,7 @@ const TableBody = ({ tableData, open }) => {
             setTableRowID(parentTarget(e));
             console.log(parentTarget(e));
             open();
-          }
-          }
+          }}
         >
           <img src={Edit} alt='Edit' className='w-[1.1rem] h-[1.1rem]' />
         </div>
@@ -90,8 +140,9 @@ const TableBody = ({ tableData, open }) => {
         <div
           className='text-red-500 cursor-pointer'
           onClick={(e) => {
-            setTableRowID(parentTarget(e))
-            console.log(parentTarget(e))
+            setTableRowID(parentTarget(e));
+            handleDelete()
+            console.log(parentTarget(e));
           }}
         >
           <img src={Delete} alt='Trash' className='w-[1.1rem] h-[1.1rem]' />

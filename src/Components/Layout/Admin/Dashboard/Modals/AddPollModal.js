@@ -1,5 +1,3 @@
-/** @format */
-
 import React, { useContext, useEffect, useState } from "react";
 import { ArrowBack } from "@mui/icons-material";
 import ModalFormContext from "../../../../../ModalFormContextAdmin/ModalFormContext";

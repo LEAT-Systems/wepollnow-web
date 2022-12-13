@@ -1,5 +1,3 @@
-/** @format */
-
 import React, { useContext, useEffect, useState } from "react";
 import { ArrowBack } from "@mui/icons-material";
 import ModalFormContext from "../../../../../../../ModalFormContextAdmin/ModalFormContext";
@@ -38,6 +36,7 @@ const PollFormTwo = ({
     setDistrict,
     setStartDate,
     setEndDate,
+    tableRowID,
   } = useContext(ModalFormContext);
 
   const [parti, setParti] = useState([]);
@@ -128,12 +127,12 @@ const PollFormTwo = ({
     e.preventDefault();
 
     await axios
-      .post(`https://wepollnow.azurewebsites.net/poll/create_poll/`, config())
+      .put(`https://wepollnow.azurewebsites.net/poll/rud_poll/${tableRowID}`, config())
       .then((res) => {
         console.log(res);
         swal({
           title: "Success",
-          text: "New Poll Added Successfully!",
+          text: "Poll Edited!",
           icon: "success",
           button: "Ok",
         });
@@ -173,11 +172,11 @@ const PollFormTwo = ({
             button: "Ok",
           });
         } else {
-          setSuccessMessage("Add Candidate Failed");
+          setSuccessMessage("Poll Edition Failed");
           console.log(err);
           swal({
             title: "Failure",
-            text: "Adding New Poll Failed",
+            text: "Poll Failed To Edit",
             icon: "error",
             button: "Ok",
           });
