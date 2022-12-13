@@ -1,35 +1,34 @@
-/** @format */
-
 import { useState, createContext } from "react";
 const ModalFormContext = createContext();
 
-export const ModalFormProvider = ({ children }) => {
+export const EditContext = ({ children }) => {
+  /* Value ID's */
   const [pollType, setPollType] = useState([]);
-  const [pollTypeData, setPollTypeData] = useState([]);
   const [pollTypeName, setPollTypeName] = useState("");
   const [pollName, setPollName] = useState("");
   const [startDate, setStartDate] = useState([]);
   const [endDate, setEndDate] = useState([]);
-  const [state, setState] = useState([]);
   const [selectedState, setSelectedState] = useState("");
   const [district, setDistrict] = useState([]);
-  const [districtData, setDistrictData] = useState([]);
   const [party, setParty] = useState([]);
-  const [partyData, setPartyData] = useState([]);
-  const [parties, setParties] = useState([]);
   const [zone, setZone] = useState([]);
-  const [zoneData, setZoneData] = useState([]);
-  const [formTwoData, setFormTwoData] = useState([]);
   const [selectedParty, setSelectedParty] = useState([]);
   const [mainCandidate, setMainCandidate] = useState(false);
-  const [runningMate, setRunningMate] = useState([]);
   const [successMessage, setSuccessMessage] = useState("");
+
+  /* Data's  */
+  const [pollTypeData, setPollTypeData] = useState([]);
+  const [state, setState] = useState([]);
+  const [districtData, setDistrictData] = useState([]);
+  const [partyData, setPartyData] = useState([]);
+  const [parties, setParties] = useState([]);
+  const [zoneData, setZoneData] = useState([]);
+  const [formTwoData, setFormTwoData] = useState([]);
 
   /* Table State */
   const [tableRowID, setTableRowID] = useState("");
-
   /* Edit Poll Data  */
-  const [editPollData, setEditPollData] = useState([])
+  const [editPollData, setEditPollData] = useState([]);
 
   return (
     <ModalFormContext.Provider
@@ -79,7 +78,7 @@ export const ModalFormProvider = ({ children }) => {
 
         /* Edit Poll Data */
         editPollData,
-        setEditPollData
+        setEditPollData,
       }}
     >
       {children}
@@ -87,4 +86,4 @@ export const ModalFormProvider = ({ children }) => {
   );
 };
 
-export default ModalFormContext;
+export default EditContext;

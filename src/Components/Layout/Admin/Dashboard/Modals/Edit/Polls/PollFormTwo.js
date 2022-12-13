@@ -1,8 +1,6 @@
-/** @format */
-
 import React, { useContext, useEffect, useState } from "react";
 import { ArrowBack } from "@mui/icons-material";
-import EditContext from "./EditContext";
+import ModalFormContext from "../../../../../../../ModalFormContextAdmin/ModalFormContext";
 import axios from "axios";
 import swal from "sweetalert";
 
@@ -38,7 +36,7 @@ const PollFormTwo = ({
     setDistrict,
     setStartDate,
     setEndDate,
-  } = useContext(EditContext);
+  } = useContext(ModalFormContext);
 
   const [parti, setParti] = useState([]);
   const [candi, setCandi] = useState([]);

@@ -5,7 +5,7 @@ import { Modal } from "@mui/material";
 import { Close } from "@mui/icons-material";
 import PollFormOne from "./PollFormOne";
 import PollFormTwo from "./PollFormTwo";
-import EditContext from "./EditContext";
+import ModalFormContext from "../../../../../../../ModalFormContextAdmin/ModalFormContext";
 
 const Container = ({ open, handleClose, modalData }) => {
   const [page, setPage] = useState(1);
@@ -15,7 +15,7 @@ const Container = ({ open, handleClose, modalData }) => {
     setDistrict,
     setStartDate,
     setEndDate,
-  } = useContext(EditContext);
+  } = useContext(ModalFormContext);
 
   const nextPage = () => {
     setPage(page + 1);
