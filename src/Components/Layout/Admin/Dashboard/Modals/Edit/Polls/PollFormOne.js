@@ -197,7 +197,6 @@ const PollFormOne = ({ open, handleClose, nextPage, setPage }) => {
                 console.log(e.target.value);
               }}
             >
-              <option value='Select Poll Type' >Select Poll Type</option>
               {pollTypeData.map((poll) => {
                 return (
                   <option key={poll.id} id={poll.id} value={poll.id} defaultValue={'Presidential Poll'} >
