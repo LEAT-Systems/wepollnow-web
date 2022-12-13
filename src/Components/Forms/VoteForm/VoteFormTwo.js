@@ -1,37 +1,56 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import Nav from "../../Layout/Landing/mainNav";
+import swal from "sweetalert";
 
-const RadioItems = [
-  {
-    id: "q1",
-    type: "radio",
-    option: "Transportation",
-  },
-  {
-    id: "q2",
-    type: "radio",
-    option: "Education",
-  },
-  {
-    id: "q3",
-    type: "radio",
-    option: "Security",
-  },
-  {
-    id: "q4",
-    type: "radio",
-    option: "Finance and Economy",
-  },
-];
-const phone = localStorage.getItem("phoneNumber");
 const VoteFormTwo = () => {
   const history = useHistory();
   const [radioValue, setRadioValue] = useState("");
   const [textValue, setTextValue] = useState("");
   const [hasError, setHasError] = useState(false);
   const [error, setErrorMessage] = useState(false);
+  const [data, setData] = useState([]);
 
+  // Get data for radio buttons
+  useEffect(() => {
+    try {
+      const getData = async () => {
+        const response = await fetch(
+          "https://wepollnow.azurewebsites.net/poll/poll_survey_category/",
+          { method: "GET" }
+        );
+        const result = await response.json();
+        if (!response.ok) {
+          swal({
+            title: "An error Occured",
+            icon: "error",
+            buttons: {
+              confirm: {
+                text: "Close",
+                className: "swalButton",
+              },
+            },
+          });
+        } else {
+          setData(result);
+        }
+      };
+      getData();
+    } catch (error) {
+      swal({
+        title: error,
+        icon: "error",
+        buttons: {
+          confirm: {
+            text: "Close",
+            className: "swalButton",
+          },
+        },
+      });
+    }
+  });
+
+  // Handle form change
   const radioChangeHandler = (e) => {
     const questionOne = e.target.value;
     setRadioValue(questionOne);
@@ -41,7 +60,7 @@ const VoteFormTwo = () => {
     setTextValue(questionTwo);
   };
 
-  // SEND DATA TO API
+  // SEND SELECTED RADIO DATA TO API
   const sendToAPI = async (e) => {
     e.preventDefault();
     try {
@@ -50,7 +69,6 @@ const VoteFormTwo = () => {
         {
           method: "POST",
           body: JSON.stringify({
-            phone: phone,
             importantIssue: radioValue,
             other: textValue,
           }),
@@ -86,7 +104,7 @@ const VoteFormTwo = () => {
                 Great...!!! To finish up, would you mind telling us which of
                 these issues is most important to you?
               </p>
-              {RadioItems.map((item) => {
+              {data.map((item) => {
                 return (
                   <label
                     key={item.id}
@@ -96,13 +114,13 @@ const VoteFormTwo = () => {
                     <div className="flex flex-row items-center justify-center space-x-3">
                       <input
                         id={item.id}
-                        type={item.type}
-                        name={item.type}
-                        value={item.option}
+                        type="radio"
+                        name="radio"
+                        value={item.id}
                         onChange={radioChangeHandler}
                         className="w-4 h-4 text-gray-600 border-gray-300"
                       />
-                      <p>{item.option}</p>
+                      <p>{item.surveyName}</p>
                     </div>
                   </label>
                 );

@@ -20,6 +20,7 @@ const GettingStartedContent = (props) => {
           <div className="right-0 text-black  min-w-[50%] max-w-96 md:space-y-8 md:right-0 md:py-20 md:p-0 md:absolute">
             <div className="flex md:px-0">
               <img
+                loading="lazy"
                 src={image}
                 alt=""
                 className="md:w-[911px] md:h-[608px] mt-12 md:mt-0"

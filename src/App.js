@@ -1,19 +1,12 @@
 import React, { useState, useEffect, useMemo, Suspense } from "react";
-import { Switch } from "react-router-dom";
+import { Switch, Route, Redirect } from "react-router-dom";
 import VoteFormTwo from "./Components/Forms/VoteForm/VoteFormTwo";
 import VoteSuccess from "./Components/Forms/VoteForm/VoteSuccess";
 import BlogSingle from "./Pages/blogPages/blogSinglePost";
-import decode from "jwt-decode";
-
 import Loading from "./UI/Loading";
-import PublicRoutes from "./PublicRoutes";
-import PrivateRoutes from "./PrivateRoute";
-import TableStateResult from "./Components/Layout/Admin/Dashboard/Tables/TableStateResult/TableStateResult";
-
-
-import TestForm from './Components/Layout/Admin/Dashboard/TestForm'
-import { Redirect } from "react-router-dom/cjs/react-router-dom.min";
-
+import TestForm from "./Components/Layout/Admin/Dashboard/TestForm";
+import { useContext } from "react";
+import AuthContext from "./store/auth-context";
 
 // Lazy loads of components
 
@@ -86,233 +79,180 @@ const Candidate = React.lazy(() =>
 );
 
 function App() {
-  const [isfalse, setIsFalse] = useState(false);
-
-  // useMemo(() => {
-  //   const token = localStorage.getItem("access");
-  //   console.log("From App.js: ", token);
-  //   // const refreshToken = localStorage.getItem("refreshToken");
-
-  //   if (token !== "" && token !== undefined) {
-  //     return setIsFalse(true);
-  //   } else {
-  //     return setIsFalse(false);
-  //   }
-  // }, []);
-
+  const authCtx = useContext(AuthContext);
   return (
     <Suspense fallback={<Loading />}>
       <Switch>
         {/* //////////////////////////   LANDING PAGE ROUTES    //////////////////////////////////// */}
         {/* FALLBACK URL ROUTE */}
-        <PublicRoutes isAuthenticated={isfalse} path="/" exact>
+        <Route path="/" exact>
           <GettingStartedOne />
-        </PublicRoutes>
+        </Route>
 
         {/* GETTING STARTED ONE Routes */}
-        <PublicRoutes
-          isAuthenticated={isfalse}
-          path="/getting-started-one"
-          exact
-        >
+        <Route path="/getting-started-one" exact>
           <GettingStartedOne />
-        </PublicRoutes>
+        </Route>
 
         {/* GETTING STARTED TWO Routes */}
-        <PublicRoutes
-          isAuthenticated={isfalse}
-          path="/getting-started-two"
-          exact
-        >
+        <Route path="/getting-started-two" exact>
           <GettingStartedTwo />
-        </PublicRoutes>
+        </Route>
 
         {/* GETTING STARTED THREE Routes */}
-        <PublicRoutes
-          isAuthenticated={isfalse}
-          path="/getting-started-three"
-          exact
-        >
+        <Route path="/getting-started-three" exact>
           <GettingStartedThree />
-        </PublicRoutes>
+        </Route>
 
         {/* GETTING STARTED FOUR Routes */}
-        <PublicRoutes
-          isAuthenticated={isfalse}
-          path="/getting-started-four"
-          exact
-        >
+        <Route path="/getting-started-four" exact>
           <GettingStartedFour />
-        </PublicRoutes>
+        </Route>
 
         {/* GETTING STARTED FIVE Routes */}
-        <PublicRoutes
-          isAuthenticated={isfalse}
-          path="/getting-started-five"
-          exact
-        >
+        <Route path="/getting-started-five" exact>
           <GettingStartedFive />
-        </PublicRoutes>
+        </Route>
 
         {/* GETTING STARTED THREE Routes */}
-        <PublicRoutes
-          isAuthenticated={isfalse}
-          path="/getting-started-six"
-          exact
-        >
+        <Route path="/getting-started-six" exact>
           <GettingStartedSix />
-        </PublicRoutes>
+        </Route>
 
         {/* ABOUT PAGE Routes */}
-        <PublicRoutes isAuthenticated={isfalse} path="/about" exact>
+        <Route path="/about" exact>
           <AboutPage />
-        </PublicRoutes>
+        </Route>
 
         {/* BLOG PAGE Routes */}
-        <PublicRoutes isAuthenticated={isfalse} path="/blog" exact>
+        <Route path="/blog" exact>
           <BlogPage />
-        </PublicRoutes>
+        </Route>
 
-        <PublicRoutes isAuthenticated={isfalse} path="/blog-single" exact>
+        <Route path="/blog-single" exact>
           <BlogSingle />
-        </PublicRoutes>
+        </Route>
 
         {/* CONTACT PAGE Routes */}
-        <PublicRoutes
-          isAuthenticated={isfalse}
-          path="/vote/vote-form-next"
-          exact
-        >
+        <Route path="/vote/vote-form-next" exact>
           <VoteFormTwo />
-        </PublicRoutes>
+        </Route>
 
         {/* CONTACT PAGE Routes */}
-        <PublicRoutes isAuthenticated={isfalse} path="/vote/voteSuccess" exact>
+        <Route path="/vote/voteSuccess" exact>
           <VoteSuccess />
-        </PublicRoutes>
+        </Route>
 
         {/* TEST PAGE Routes */}
-        <PublicRoutes isAuthenticated={isfalse} path="/test" exact>
+        <Route path="/test" exact>
           <Test />
-        </PublicRoutes>
+        </Route>
 
         {/* ALL POLLS PAGE Routes */}
-        <PublicRoutes isAuthenticated={isfalse} path="/polls" exact>
+        <Route path="/polls" exact>
           <AllPolls />
-        </PublicRoutes>
+        </Route>
 
         {/* REGISTRATION Routes */}
-        <PublicRoutes isAuthenticated={isfalse} path="/register" exact>
+        <Route path="/register" exact>
           <FormComponent />
-        </PublicRoutes>
+        </Route>
 
         {/* Some Other Page */}
-        <PublicRoutes isAuthenticated={isfalse} path="/vote" exact>
+        <Route path="/vote" exact>
           <FormFive />
-        </PublicRoutes>
+        </Route>
 
         {/* =========================  ADMIN ROUTES  ========================== */}
 
         {/* Login Page */}
-        <PublicRoutes isAuthenticated={isfalse} path="/admin/login" exact>
+        <Route path="/admin/login" exact>
           <Login />
-        </PublicRoutes>
+        </Route>
 
         {/* Dashboard Landing */}
-        <PrivateRoutes isAuthenticated={isfalse} path="/admin/home" exact>
-          <Dashboard />
-        </PrivateRoutes>
+        <Route path="/admin/home" exact>
+          {authCtx.isLoggedIn && <Dashboard />}
+          {!authCtx.isLoggedIn && <Login />}
+        </Route>
 
         {/* Polls Page */}
-        <PrivateRoutes isAuthenticated={isfalse} path="/admin/polls" exact>
-          <ManagePolls />
-        </PrivateRoutes>
+        <Route path="/admin/polls" exact>
+          {authCtx.isLoggedIn && <ManagePolls />}
+          {!authCtx.isLoggedIn && <Login />}
+        </Route>
 
-        <PrivateRoutes
-          isAuthenticated={isfalse}
-          path="/admin/polls/polls"
-          exact
-        >
-          <ManagePolls />
-        </PrivateRoutes>
+        <Route path="/admin/polls/polls" exact>
+          {authCtx.isLoggedIn && <ManagePolls />}
+          {!authCtx.isLoggedIn && <Login />}
+        </Route>
 
         {/* Redirect users to the /admin/polls/polls to activate active class */}
-        <Redirect exact strict from='/admin/polls' to='/admin/polls/polls' />
+        <Redirect exact strict from="/admin/polls" to="/admin/polls/polls" />
 
-        <PrivateRoutes
-          isAuthenticated={isfalse}
-          path="/admin/polls/candidates"
-          exact
-        >
-          <Candidate />
-        </PrivateRoutes>
+        <Route path="/admin/polls/candidates" exact>
+          {authCtx.isLoggedIn && <Candidate />}
+          {!authCtx.isLoggedIn && <Login />}
+        </Route>
 
         {/* Polls result*/}
-        <PrivateRoutes
-          isAuthenticated={isfalse}
-          path="/admin/polls/poll_result"
-          exact
-        >
-          <PollsResult />
-        </PrivateRoutes>
+        <Route path="/admin/polls/poll_result" exact>
+          {authCtx.isLoggedIn && <PollsResult />}
+          {!authCtx.isLoggedIn && <Login />}
+        </Route>
 
         {/* surveys */}
 
-        <PrivateRoutes isAuthenticated={isfalse} path="/admin/surveys" exact>
-          <Survey />
-        </PrivateRoutes>
+        <Route path="/admin/surveys" exact>
+          {authCtx.isLoggedIn && <Survey />}
+          {!authCtx.isLoggedIn && <Login />}
+        </Route>
 
         {/* blog */}
 
-        <PrivateRoutes isAuthenticated={isfalse} path="/admin/blog" exact>
-          <Blog />
-        </PrivateRoutes>
+        <Route path="/admin/blog" exact>
+          {authCtx.isLoggedIn && <Blog />}
+          {!authCtx.isLoggedIn && <Login />}
+        </Route>
 
-        <PrivateRoutes
-          isAuthenticated={isfalse}
-          path="/admin/blog/manageBlog"
-          exact
-        >
-          <CreateBlog />
-        </PrivateRoutes>
+        <Route path="/admin/blog/manageBlog" exact>
+          {authCtx.isLoggedIn && <CreateBlog />}
+          {!authCtx.isLoggedIn && <Login />}
+        </Route>
 
         {/* account */}
-        <PrivateRoutes isAuthenticated={isfalse} path="/admin/account" exact>
-          <Account />
-        </PrivateRoutes>
+        <Route path="/admin/account" exact>
+          {authCtx.isLoggedIn && <Account />}
+          {!authCtx.isLoggedIn && <Login />}
+        </Route>
 
-        <PrivateRoutes
-          isAuthenticated={isfalse}
-          path="/admin/account/settings"
-          exact
-        >
-          <Account />
-        </PrivateRoutes>
+        <Route path="/admin/account/settings" exact>
+          {authCtx.isLoggedIn && <Account />}
+          {!authCtx.isLoggedIn && <Login />}
+        </Route>
 
         {/* Redirect users to the /admin/account/settings to activate active class */}
         <Redirect
           exact
           strict
-          from='/admin/account'
-          to='/admin/account/settings'
+          from="/admin/account"
+          to="/admin/account/settings"
         />
 
-        <PrivateRoutes
-          isAuthenticated={isfalse}
-          path="/admin/account/Managepassword"
-          exact
-        >
-          <Password />
-        </PrivateRoutes>
+        <Route path="/admin/account/Managepassword" exact>
+          {authCtx.isLoggedIn && <Password />}
+          {!authCtx.isLoggedIn && <Login />}
+        </Route>
 
-        <PublicRoutes path="/testForm" isAuthenticated={isfalse}>
-          <TestForm />
-        </PublicRoutes>
+        <Route path="/testForm">
+          {authCtx.isLoggedIn && <TestForm />}
+          {!authCtx.isLoggedIn && <Login />}
+        </Route>
 
         {/*=========================  NOT FOUND ROUTES ========================*/}
-        <PublicRoutes isAuthenticated={isfalse} path="*">
+        <Route path="*">
           <NotFound />
-        </PublicRoutes>
+        </Route>
       </Switch>
     </Suspense>
   );

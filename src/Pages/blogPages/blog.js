@@ -14,7 +14,7 @@ const BlogPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [postPerPage] = useState(6);
 
-  /////////////////////////////////  =====     PAGINATION    ===========   ////////////////////////////////
+  /////////////////////////////////  =========     PAGINATION    ===========   ////////////////////////////////
   // get current posts
   const indexOfLastPost = currentPage * postPerPage;
   const indexOfFirstPost = indexOfLastPost - postPerPage;
@@ -87,7 +87,7 @@ const BlogPage = () => {
       <Nav bg="FCEBEE" bgImg="hero-container-pattern" hamburgerBg="FCEBEE" />
       <div className="flex flex-row items-center justify-between mx-auto bg-[#EDFFF0] md:bg-[#FCEBEE] bg-hero-container-pattern">
         <div className="flex flex-col px-4 space-y-2 md:px-24">
-          <p className="text-xs md:text-lg font-bold underline underline-2 underline-offset-2 decoration-yellow-500 decoration-[5px]">
+          <p className="text-xs md:text-lg font-bold underline underline-2 underline-offset-4 decoration-yellow-500 decoration-[5px]">
             Our Blog
           </p>
           <h1 className="max-w-full md:max-w-xl leading-none md:leading-tight text-[16px] md:text-5xl font-extrabold">
@@ -95,7 +95,12 @@ const BlogPage = () => {
           </h1>
         </div>
         <div className="z-10 flex md:-mt-36">
-          <img src={image} className="w-[100%] h-[80%]" alt={"Voter"} />
+          <img
+            src={image}
+            className="w-[100%] h-[80%]"
+            alt={"Voter"}
+            loading="lazy"
+          />
         </div>
       </div>
       {/* Rendering the empty container */}
@@ -120,12 +125,14 @@ const BlogPage = () => {
                 <div className="flex flex-col w-full space-y-2 md:h-full">
                   <div className="relative">
                     <img
+                      loading="lazy"
                       src={data.image}
                       alt="Voter"
                       className="w-full h-[246px] rounded md:object-cover"
                     />
                     <div className="absolute bottom-0 right-0 z-30">
                       <img
+                        loading="lazy"
                         src={anchor}
                         alt="anchorIcon"
                         className="rounded-br"
@@ -133,22 +140,27 @@ const BlogPage = () => {
                     </div>
                   </div>
                   <div className="flex flex-row items-center space-x-2">
-                    <img className="w-6 h-6 rounded-full" src={avatar} alt="" />
+                    <img
+                      className="w-6 h-6 rounded-full"
+                      src={avatar}
+                      alt=""
+                      loading="lazy"
+                    />
                     <p className="font-normal">Wepollnow Admin</p>
                   </div>
 
                   <p className="max-w-sm font-bold text-md">{data.title}</p>
                   <div className="flex flex-row space-x-4">
                     <div className="flex flex-row items-center justify-start space-x-2">
-                      <img src={eye} alt="calendarIcon" />
+                      <img src={eye} alt="calendarIcon" loading="lazy" />
                       <p className="text-xs">0</p>
                     </div>
                     <div className="flex flex-row items-center justify-start space-x-2 text-xs">
-                      <img src={time} alt="calendarIcon" />
+                      <img src={time} alt="calendarIcon" loading="lazy" />
                       <p className="text-xs">{data.time_posted}</p>
                     </div>
                     <div className="flex flex-row items-center justify-start space-x-2 text-xs">
-                      <img src={calendar} alt="calendarIcon" />
+                      <img src={calendar} alt="calendarIcon" loading="lazy" />
                       <p className="text-xs">{data.date_posted}</p>
                     </div>
                   </div>
