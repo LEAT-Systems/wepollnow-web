@@ -25,7 +25,7 @@ const TableBody = ({ tableData, open }) => {
   };
 
   const formatDate = (string) => {
-    string.split("T", 10).join()
+    return string.split("T", 10).join()
   }
 
   const statusColors =
