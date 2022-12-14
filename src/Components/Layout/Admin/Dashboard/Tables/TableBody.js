@@ -24,6 +24,10 @@ const TableBody = ({ tableData, open }) => {
     return symbol;
   };
 
+  const formatDate = (string) => {
+    string.split("T", 10).join()
+  }
+
   const statusColors =
     tableData.status === 1
       ? "after:bg-blue-500"
@@ -86,7 +90,7 @@ const TableBody = ({ tableData, open }) => {
     <tr className='table-row' data-id={tableData.id}>
       <th
         scope='row'
-        className='px-6 py-4 font-medium text-gray-900 whitespace-nowrap '
+        className='px-6 py-4 font-medium text-gray-900 whitespace-nowrap text-sm'
       >
         <span className='text-white font-bold capitalize bg-green-900 mr-4 rounded-xl p-[.6rem]'>
           {getSymbol()}
@@ -102,12 +106,12 @@ const TableBody = ({ tableData, open }) => {
       </td>
       <td className='px-6 py-4 cursor-pointer'>
         <NavLink to='/admin/polls/poll_result' activeClassName={null}>
-          {tableData.poll_startDate}
+          {formatDate(tableData.poll_startDate)}
         </NavLink>
       </td>
       <td className='px-6 py-4 cursor-pointer'>
         <NavLink to='/admin/polls/poll_result' activeClassName={null}>
-          {tableData.poll_endDate}
+          {formatDate(tableData.poll_endDate)}
         </NavLink>
       </td>
       <td className='px-6 py-4 cursor-pointer'>
@@ -141,7 +145,7 @@ const TableBody = ({ tableData, open }) => {
           className='text-red-500 cursor-pointer'
           onClick={(e) => {
             setTableRowID(parentTarget(e));
-            handleDelete()
+            handleDelete();
             console.log(parentTarget(e));
           }}
         >

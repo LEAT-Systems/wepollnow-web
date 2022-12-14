@@ -22,10 +22,10 @@ const Tables = ({ data, close, open }) => {
                   State
                 </th>
                 <th scope='col' className='table-head'>
-                  Poll Start Date
+                  Poll Begins
                 </th>
                 <th scope='col' className='table-head'>
-                  Poll End Date
+                  Poll Ends
                 </th>
                 <th scope='col' className='table-head'>
                   Status
