@@ -19,7 +19,6 @@ const ManageCandidateTableRow = ({ tableData, open }) => {
    const parentTarget = (e) =>
      e.currentTarget.parentNode.parentNode.getAttribute("data-id");
 
-  console.log(parentTarget);
    const handleDelete = async () => {
      await axios
        .delete(
@@ -86,8 +85,8 @@ const ManageCandidateTableRow = ({ tableData, open }) => {
         <div
           className='text-blue-500 cursor-pointer'
           onClick={(e) => {
-            setCandidateRowID(parentTarget(e));
             console.log(parentTarget(e));
+            setCandidateRowID(parentTarget(e));
             open();
           }}
         >
@@ -96,9 +95,10 @@ const ManageCandidateTableRow = ({ tableData, open }) => {
         <div
           className='text-red-500 cursor-pointer'
           onClick={(e) => {
+            console.log(parentTarget(e));
             setCandidateRowID(parentTarget(e));
             handleDelete();
-            console.log(parentTarget(e));
+            
           }}
         >
           <img src={Delete} alt='Trash' className='w-[1.1rem] h-[1.1rem]' />
