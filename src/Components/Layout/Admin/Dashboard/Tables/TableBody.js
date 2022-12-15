@@ -1,6 +1,3 @@
-/** @format */
-
-import axios from "axios";
 import React, { useContext } from "react";
 import { NavLink } from "react-router-dom/cjs/react-router-dom.min";
 import Edit from "../../assets/edit@2x.png";
@@ -8,6 +5,7 @@ import Edit from "../../assets/edit@2x.png";
 import Delete from "../../assets/trash@2x.png";
 import ModalFormContext from "../../../../../ModalFormContextAdmin/ModalFormContext";
 import swal from "sweetalert";
+import axios from "axios";
 
 const TableBody = ({ tableData, open }) => {
   const { tableRowID, setTableRowID } = useContext(ModalFormContext);
