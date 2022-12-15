@@ -176,7 +176,7 @@ const Candidate = () => {
           handleCloseAddCandidate={handleCloseAddCandidate}
         />
 
-        <EditCandidate open={openEdit} close={handleCloseEdit} />
+        <EditCandidate open={handleOpenEdit} close={handleCloseEdit} />
         <FilterModal
           refineResult={refineResult}
           handleCloseRefineResult={handleCloseRefineResult}
