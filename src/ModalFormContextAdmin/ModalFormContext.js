@@ -27,8 +27,10 @@ export const ModalFormProvider = ({ children }) => {
   const [zoneData, setZoneData] = useState([]);
   const [formTwoData, setFormTwoData] = useState([]);
 
-  /* Table State */
+  /* Poll Table State */
   const [tableRowID, setTableRowID] = useState("");
+  /* Poll Table State */
+  const [candidateRowID, setCandidateRowID] = useState("");
   /* Edit Poll Data  */
   const [editPollData, setEditPollData] = useState([]);
 
