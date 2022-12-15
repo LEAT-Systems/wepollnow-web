@@ -1,5 +1,3 @@
-/** @format */
-
 import axios from "axios";
 import React, { useContext } from "react";
 import { NavLink } from "react-router-dom/cjs/react-router-dom.min";
@@ -99,17 +97,17 @@ const TableBody = ({ tableData, open }) => {
           {tableData.poll_name}
         </NavLink>
       </th>
-      <td className='px-6 py-4 cursor-pointer'>
+      <td className='px-6 py-4 cursor-pointer text-sm'>
         <NavLink to='/admin/polls/poll_result' activeClassName={null}>
           {tableData.poll_state.name}
         </NavLink>
       </td>
-      <td className='px-6 py-4 cursor-pointer'>
+      <td className='px-6 py-4 cursor-pointer text-sm'>
         <NavLink to='/admin/polls/poll_result' activeClassName={null}>
           {formatDate(tableData.poll_startDate)}
         </NavLink>
       </td>
-      <td className='px-6 py-4 cursor-pointer'>
+      <td className='px-6 py-4 cursor-pointer text-sm'>
         <NavLink to='/admin/polls/poll_result' activeClassName={null}>
           {formatDate(tableData.poll_endDate)}
         </NavLink>
