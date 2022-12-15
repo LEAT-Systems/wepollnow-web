@@ -7,7 +7,7 @@ import ModalFormContext from "../../../../../../ModalFormContextAdmin/ModalFormC
 
 const ManageCandidateTableRow = ({ tableData, open }) => {
 
-  const { candidateRowID, setCandidateRowID } = useContext(ModalFormContext);
+  const { candidateID, setCandidateID } = useContext(ModalFormContext);
   const getSymbol = () => {
     const string = tableData.name;
     const wordArray = string.split(" ", 2);
@@ -22,7 +22,7 @@ const ManageCandidateTableRow = ({ tableData, open }) => {
    const handleDelete = async () => {
      await axios
        .delete(
-         `https://wepollnow.azurewebsites.net/poll/rud_poll/${candidateRowID}`
+         `https://wepollnow.azurewebsites.net/poll/rud_poll/${candidateID}`
        )
        .then((res) => {
          console.log(res.data);
@@ -85,8 +85,8 @@ const ManageCandidateTableRow = ({ tableData, open }) => {
         <div
           className='text-blue-500 cursor-pointer'
           onClick={(e) => {
-            console.log(parentTarget(e));
-            setCandidateRowID(parentTarget(e));
+            console.log(parentTarget(e))
+            setCandidateID(parentTarget(e))
             open();
           }}
         >
@@ -96,7 +96,7 @@ const ManageCandidateTableRow = ({ tableData, open }) => {
           className='text-red-500 cursor-pointer'
           onClick={(e) => {
             console.log(parentTarget(e));
-            setCandidateRowID(parentTarget(e));
+            setCandidateID(parentTarget(e));
             handleDelete();
             
           }}

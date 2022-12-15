@@ -30,7 +30,7 @@ export const ModalFormProvider = ({ children }) => {
   /* Poll Table State */
   const [tableRowID, setTableRowID] = useState("");
   /* Poll Table State */
-  const [candidateRowID, setCandidateRowID] = useState("");
+  const [candidateID, setCandidateID] = useState("");
   /* Edit Poll Data  */
   const [editPollData, setEditPollData] = useState([]);
 
@@ -76,9 +76,13 @@ export const ModalFormProvider = ({ children }) => {
         successMessage,
         setSuccessMessage,
 
-        /* Table State */
+        /* Poll Table State */
         tableRowID,
         setTableRowID,
+
+        /* Candidate Table State */
+        candidateID,
+        setCandidateID,
 
         /* Edit Poll Data */
         editPollData,
