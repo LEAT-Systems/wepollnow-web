@@ -19,6 +19,7 @@ const ManageCandidateTableRow = ({ tableData, open }) => {
    const parentTarget = (e) =>
      e.currentTarget.parentNode.parentNode.getAttribute("data-id");
 
+  console.log(parentTarget);
    const handleDelete = async () => {
      await axios
        .delete(
