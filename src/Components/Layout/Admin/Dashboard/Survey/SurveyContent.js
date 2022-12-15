@@ -1,27 +1,150 @@
 /** @format */
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   AddOutlined,
   BorderColorOutlined,
   Close,
   Delete,
 } from "@mui/icons-material";
+import { Axios } from "axios";
 import LinkIcon from "../../assets/Filter@2x.png";
 import Header from "../../Header";
 import Progress from "./Progress";
 import { Modal } from "@mui/material";
 import { useRef } from "react";
+import swal from "sweetalert";
+import { Link } from "react-router-dom";
 
 const SurveyContent = () => {
   const inputRef = useRef();
   const [open, setOpen] = useState(false);
+  const [openAdd, setOpenAdd] = useState(false);
   const [list, setList] = useState([]);
+  const [data, setData] = useState([]);
+  const [polls, setPolls] = useState([]);
+  const [show, setShow] = useState(false);
+  const [surveyType, setSurveyType] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postPerPage] = useState(5);
 
-  // Add Item Handler
+  // This handles pagination on the poll items
+  const indexOfLastPost = currentPage * postPerPage;
+  const indexOfFirstPost = indexOfLastPost - postPerPage;
+  const currentPosts = [...polls]
+    ?.reverse()
+    ?.slice(indexOfFirstPost, indexOfLastPost);
+  const pageNumbers = [];
+  for (let i = 1; i <= Math.ceil(polls.length / postPerPage); i++) {
+    pageNumbers.push(i);
+  }
+  const paginate = (i) => setCurrentPage(i);
+  const pagination = pageNumbers.map((i) => (
+    <button
+      key={i}
+      onClick={() => paginate(i)}
+      className="px-4 py-2 text-sm font-medium text-black border border-[#000]  focus:bg-green-200"
+    >
+      {i}
+    </button>
+  ));
+
+  // This handles the deletion of added SURVEYS
+  const handleDelete = (id) => {
+    try {
+      const getData = async () => {
+        const response = await fetch(
+          `https://wepollnow.azurewebsites.net/poll/survey_category/${id}`,
+          { method: "DELETE" }
+        );
+        if (response.ok === true) {
+          swal({
+            title: "Action Successful",
+            icon: "success",
+            buttons: {
+              confirm: {
+                text: "Close",
+                className: "swalButton",
+              },
+            },
+          }).then(() => handleClose());
+        }
+      };
+      getData();
+    } catch (error) {
+      swal({
+        title: error,
+        icon: "error",
+        buttons: {
+          confirm: {
+            text: "Close",
+            className: "swalButton",
+          },
+        },
+      });
+    }
+  };
+
+  // This gets all the polls to render on page so we can get the surveys on each of them
+  useEffect(() => {
+    try {
+      const getPollData = async () => {
+        const response = await fetch(
+          "https://wepollnow.azurewebsites.net/poll/get_polls/",
+          {
+            method: "GET",
+          }
+        );
+        const result = await response.json();
+        setPolls(result);
+      };
+      getPollData();
+    } catch (error) {
+      swal({
+        title: error,
+        icon: "error",
+        buttons: {
+          confirm: {
+            text: "Close",
+            className: "swalButton",
+          },
+        },
+      });
+    }
+  }, []);
+
+  // This gets all the surveys items from the API endpoint. Im rendering this data on the edit modal
+  useEffect(() => {
+    try {
+      const getData = async () => {
+        const response = await fetch(
+          "https://wepollnow.azurewebsites.net/poll/survey_category/",
+          { method: "GET" }
+        );
+        const result = await response.json();
+        if (response.ok) {
+          setData(result);
+        }
+      };
+      getData();
+    } catch (error) {
+      swal({
+        title: error,
+        icon: "error",
+        buttons: {
+          confirm: {
+            text: "Close",
+            className: "swalButton",
+          },
+        },
+      });
+    }
+  });
+
+  // Add Item Handler in to-do list
   const addHandler = (e) => {
     e.preventDefault();
     setList((prevUserList) => {
-      //new state snapshot. The spread operator copies all elemrnts from prev snapshot
+      //new state snapshot. The spread operator copies all elements from prev snapshot
       const updatedItem = [
         ...prevUserList,
         {
@@ -31,34 +154,54 @@ const SurveyContent = () => {
       ];
       return updatedItem;
     });
-    inputRef.current.value = "";
   };
 
-  // Submit Hanlder
+  // Submit Hanlder to send to-do list items to API endpoint
   const submitHandler = async () => {
-    console.log(list);
-    // const requestOptions = {
-    //   body: list,
-    //   method: "POST",
-    // };
+    try {
+      const items = list.map((item) => item.title);
+      const finalData = { survey_name: items };
+      const requestOptions = {
+        body: JSON.stringify(finalData),
+        headers: {
+          "Content-Type": "application/json",
+        },
+        method: "POST",
+      };
 
-    // const response = await fetch(
-    //   "https://www.azurewebsites.net/opinions/",
-    //   requestOptions
-    // );
-    // const result = await response.json();
-
-    // if (!response.ok) {
-    //   swal("An Error Occured");
-    // } else {
-    //   swal("Action was Successful");
-    // }
-    setOpen(false);
+      const response = await fetch(
+        "https://wepollnow.azurewebsites.net/poll/poll_survey_category/",
+        requestOptions
+      );
+      console.log(response);
+      if (response.ok === true) {
+        swal({
+          title: "Action Successful",
+          icon: "success",
+          buttons: {
+            confirm: {
+              text: "Close",
+              className: "swalButton",
+            },
+          },
+        }).then(() => handleClose());
+      }
+    } catch (error) {
+      swal({
+        title: error,
+        icon: "error",
+        buttons: {
+          confirm: {
+            text: "Close",
+            className: "swalButton",
+          },
+        },
+      });
+    }
   };
 
   // Delete Item Handler
   const deleteHandler = (id) => {
-    console.log(id);
     const filtered = list.filter((el) => el.id !== id);
     setList(filtered);
   };
@@ -70,8 +213,10 @@ const SurveyContent = () => {
 
   const handleClose = () => {
     setOpen(false);
+    setOpenAdd(false);
   };
 
+  const isEmpty = polls.length === 0;
   const EditActiveStyle =
     "bg-green-500 text-white flex items-center justify-center py-2 px-5 border border-gray-200 rounded-full cursor-pointer  text-sm md:text-base my-auto transition-all duration-700 ease hover:bg-green-500 hover:text-white hover:rounded-full";
 
@@ -89,13 +234,20 @@ const SurveyContent = () => {
             </h2>
           </div>
 
-          <nav className="flex h-full pl-3 my-auto text-gray-500">
+          <nav className="flex h-full pl-3 my-auto space-x-2 text-gray-500">
             <span className="mr-1 w-[2.6rem]">
               <img src={LinkIcon} alt="Account" className="w-full" />
             </span>
             <button
               className={open ? EditActiveStyle : EditNotActiveStyle}
               onClick={handleOpen}
+            >
+              Add New
+              <AddOutlined sx={{ marginRight: ".3rem" }} />
+            </button>
+            <button
+              className={EditNotActiveStyle}
+              onClick={() => setOpenAdd(true)}
             >
               Edit
               <BorderColorOutlined
@@ -113,59 +265,48 @@ const SurveyContent = () => {
             How users responded to issues that are most important to them.
           </h4>
 
-          <div className="px-6 py-6 border border-gray-200 rounded-md">
-            <div className="flex flex-col items-start justify-between w-full px-2 py-3 md:flex-row md:items-center">
-              <div className="w-[20rem]">
-                <h3 className="py-2 font-bold leading-10 capitalize">
-                  Transportation
-                </h3>
-              </div>
-
-              <Progress percentage="67" />
-            </div>
-
-            <div className="flex flex-col items-start justify-between w-full px-2 py-0 md:flex-row md:items-center md:py-3">
-              <div className="w-[20rem]">
-                <h3 className="py-2 font-bold leading-10 capitalize">
-                  Education
-                </h3>
-              </div>
-
-              <Progress percentage="73" />
-            </div>
-
-            <div className="flex flex-col items-start justify-between w-full px-2 py-0 md:flex-row md:items-center md:py-3">
-              <div className="w-[20rem]">
-                <h3 className="py-2 font-bold leading-10 capitalize">
-                  Security
-                </h3>
-              </div>
-
-              <Progress percentage="65" />
-            </div>
-
-            <div className="flex flex-col items-start justify-between w-full px-2 py-0 md:flex-row md:items-center md:py-3">
-              <div className="w-[20rem]">
-                <h3 className="py-2 font-bold leading-10 capitalize">
-                  Finance & Economy
-                </h3>
-              </div>
-
-              <Progress percentage="90" />
-            </div>
-
-            <div className="flex flex-col items-start justify-between w-full px-2 py-0 md:flex-row md:items-center md:py-3">
-              <div className="w-[20rem]">
-                <h3 className="py-2 font-bold leading-10 capitalize">Others</h3>
-              </div>
-
-              <Progress percentage="55" />
+          {/*General COntainer with Polls information  */}
+          <div className="px-6 py-6 space-y-4 border border-gray-200 rounded-md">
+            {isEmpty && <p>No data to show</p>}
+            {currentPosts.map((item) => {
+              return (
+                <div
+                  key={item.id}
+                  className="flex flex-col items-start justify-between w-full p-2 px-4 border rounded hover:bg-green-50 md:flex-row md:items-center"
+                >
+                  <Link to="/admin/polls/polls" className="w-[20rem]">
+                    <h3 className="py-2 font-bold leading-10 capitalize">
+                      {item.poll_name}
+                    </h3>
+                  </Link>
+                  <div className="w-[20rem]">
+                    <h3 className="py-2 leading-10 capitalize">
+                      <span className="font-bold">Date Created: </span>
+                      {new Date(`${item.poll_date}`).toLocaleDateString(
+                        "en-EN",
+                        { year: "numeric", month: "long", day: "numeric" }
+                      )}
+                    </h3>
+                  </div>
+                  <button
+                    className="flex items-center justify-center border border-1 rounded-md px-3 py-2 cursor-pointer text-sm md:text-base bg-[#08c127] text-white animate"
+                    onClick={() => (
+                      setShow(true), setSurveyType(item.poll_name)
+                    )}
+                  >
+                    View Results
+                  </button>
+                </div>
+              );
+            })}
+            <div className="flex flex-row p-4 space-x-4 border border-l border-r">
+              {pagination}
             </div>
           </div>
         </div>
       </main>
 
-      {/* Overlay */}
+      {/* ADD SURVEY MODAL */}
       <Modal
         open={open}
         onClose={handleClose}
@@ -174,7 +315,7 @@ const SurveyContent = () => {
         <div className="flex flex-col items-center justify-center px-6 py-4 mx-auto h-auto w-[95%] sm:w-5/6 md:w-3/5 bg-white rounded-lg">
           <header className="flex items-center justify-between w-full pb-3 mb-3 border-b-2 border-gray-300 border-solid">
             <h2 className="font-extrabold text-lg md:text-xl text-[#082a0f] capitalize">
-              Edit survey
+              Add New survey
             </h2>
             <button
               className="flex items-center justify-center border border-1 rounded-md py-[2px] px-[2px] cursor-pointer text-sm md:text-base bg-[#fcf0f0] text-red-500"
@@ -238,27 +379,102 @@ const SurveyContent = () => {
           </div>
         </div>
       </Modal>
+
+      {/* EDIT SURVEY MODAL */}
+      <Modal
+        open={openAdd}
+        onClose={() => setOpenAdd(false)}
+        sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
+      >
+        <div className="flex flex-col items-center justify-center px-6 py-4 mx-auto h-auto w-[95%] sm:w-5/6 md:w-3/5 bg-white rounded-lg">
+          <header className="flex items-center justify-between w-full pb-3 mb-3 border-b-2 border-gray-300 border-solid">
+            <h2 className="font-extrabold text-lg md:text-xl text-[#082a0f] capitalize">
+              Edit survey
+            </h2>
+            <button
+              className="flex items-center justify-center border border-1 rounded-md py-[2px] px-[2px] cursor-pointer text-sm md:text-base bg-[#fcf0f0] text-red-500"
+              onClick={() => setOpenAdd(false)}
+            >
+              <Close />
+            </button>
+          </header>
+          {data.length === 0 && <p>No data available</p>}
+          {data?.map((item) => (
+            <div
+              key={item.id}
+              className="flex items-center justify-between w-full px-3 py-3 my-2 border-2 border-gray-300 border-solid rounded-lg"
+            >
+              <h2 className="font-[600] text-base text-gray-400 capitalize">
+                {item.surveyName}
+              </h2>
+              <button
+                className="flex items-center justify-center border border-1 rounded-md py-[2px] px-[2px] cursor-pointer text-sm md:text-base text-red-400"
+                onClick={() => handleDelete(item.id)}
+              >
+                <Delete />
+              </button>
+            </div>
+          ))}
+
+          {/* Buttons */}
+          <div className="flex items-center justify-end w-full my-2">
+            <button
+              className="flex items-center justify-center border-2 border-gray-300 py-3 px-5 h-full cursor-pointer text-sm rounded-md capitalize mr-4 transition-all duration-400 ease-in-out hover:bg-[#f3dddd] hover:text-red-600 hover:rounded-full"
+              onClick={handleClose}
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+      </Modal>
+
+      {/* How users reacted modal */}
+      <Modal
+        open={show}
+        onClose={() => setShow(false)}
+        sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
+      >
+        <div className="flex flex-col items-center justify-center px-6 py-4 mx-auto h-auto w-[95%] sm:w-5/6 md:w-4/5 bg-white rounded-lg">
+          <header className="flex items-center justify-between w-full pb-3 mb-3 border-b-2 border-gray-300 border-solid">
+            <h2 className="font-extrabold text-lg md:text-xl text-[#082a0f] capitalize">
+              How users responded to issues in the {surveyType}
+            </h2>
+            <button
+              className="flex items-center justify-center border border-1 rounded-md py-[2px] px-[2px] cursor-pointer text-sm md:text-base bg-[#fcf0f0] text-red-500"
+              onClick={() => setShow(false)}
+            >
+              <Close />
+            </button>
+          </header>
+
+          {/* {data?.map((item) => ( */}
+          <div
+            // key={item.id}
+            className="flex flex-col items-start justify-between w-full px-2 py-3 md:flex-row md:items-center"
+          >
+            <div className="w-[20rem]">
+              <h3 className="py-2 font-bold leading-10 capitalize">
+                {/* {item.surveyName} */}Health
+              </h3>
+            </div>
+
+            <Progress percentage="67" />
+          </div>
+          {/* ))} */}
+
+          {/* Buttons */}
+          <div className="flex items-center justify-end w-full my-2">
+            <button
+              className="flex items-center justify-center border-2 border-gray-300 py-3 px-5 h-full cursor-pointer text-sm rounded-md capitalize mr-4 transition-all duration-400 ease-in-out hover:bg-[#f3dddd] hover:text-red-600 hover:rounded-full"
+              onClick={() => setShow(false)}
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+      </Modal>
     </>
   );
 };
 
 export default SurveyContent;
-
-/* 
-      <div className='flex flex-row'>
-        <div className='flex flex-col p-8 space-y-2'>
-          <h2 className='text-2xl font-bold'>Survey</h2>
-          <div className='relative flex flex-row items-center justify-start px-2 space-x-2 border border-yellow-500 rounded'>
-            <Link to='/wepollnow/surveys'>
-              <p className='font-bold'>Survey</p>
-            </Link>
-            <NavigateNext />
-            <Link to='/wepollnow/surveys/manageSurvey'>
-              <p className='font-bold text-gray-300'>Manage Survey</p>
-            </Link>
-          </div>
-        </div>
-      </div>
-      <div className='flex flex-row items-center justify-between w-full p-8 mx-auto -mt-6 space-x-12'></div>
-      <div className='w-full px-8'></div>
-       */

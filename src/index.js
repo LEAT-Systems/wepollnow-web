@@ -3,19 +3,16 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import { BrowserRouter } from "react-router-dom";
-import { IdProvider } from "./Components/Forms/FormContext/userIdContext";
-import { AuthProvider } from "./AuthProvider";
+import { AuthContextProvider } from "./store/auth-context";
 import { ModalFormProvider } from "./ModalFormContextAdmin/ModalFormContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <AuthProvider>
+  <AuthContextProvider>
     <BrowserRouter>
-      <IdProvider>
-        <ModalFormProvider>
-          <App />
-        </ModalFormProvider>
-      </IdProvider>
+      <ModalFormProvider>
+        <App />
+      </ModalFormProvider>
     </BrowserRouter>
-  </AuthProvider>
+  </AuthContextProvider>
 );

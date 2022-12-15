@@ -17,7 +17,12 @@ const AboutPage = () => {
           </h1>
         </div>
         <div className="z-10 flex md:-mt-36">
-          <img src={image} className="w-[100%] h-[85%]" alt={"Voter"} />
+          <img
+            src={image}
+            className="w-[100%] h-[85%]"
+            loading="lazy"
+            alt={"Voter"}
+          />
         </div>
       </div>
 
