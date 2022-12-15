@@ -1,3 +1,5 @@
+/** @format */
+
 import axios from "axios";
 import React, { useContext } from "react";
 import { NavLink } from "react-router-dom/cjs/react-router-dom.min";
@@ -23,8 +25,8 @@ const TableBody = ({ tableData, open }) => {
   };
 
   const formatDate = (string) => {
-    return string.slice(0, 10) /* string.split("T", 10).join() */
-  }
+    return string.slice(0, 10); /* string.split("T", 10).join() */
+  };
 
   const statusColors =
     tableData.status === 1
@@ -38,10 +40,9 @@ const TableBody = ({ tableData, open }) => {
 
   const handleDelete = async () => {
     await axios
-      .delete(
-        `https://wepollnow.azurewebsites.net/poll/rud_poll/${tableRowID}`)
+      .delete(`https://wepollnow.azurewebsites.net/poll/rud_poll/${tableRowID}`)
       .then((res) => {
-        console.log(res.data)
+        console.log(res.data);
         swal({
           title: "Success",
           text: "Poll Deleted!",
@@ -81,7 +82,7 @@ const TableBody = ({ tableData, open }) => {
           });
         }
       });
-    
+
     window.location.reload();
   };
   return (
@@ -93,27 +94,47 @@ const TableBody = ({ tableData, open }) => {
         <span className='text-white font-bold capitalize bg-green-900 mr-4 rounded-xl p-[.6rem]'>
           {getSymbol()}
         </span>{" "}
-        <NavLink to='/admin/polls/poll_result' activeClassName={null}>
-          {tableData.poll_name}
+        <NavLink
+          to='/admin/polls/poll_result'
+          className='text-sm'
+          activeClassName={null}
+        >
+          {tableData?.poll_name}
         </NavLink>
       </th>
       <td className='px-6 py-4 cursor-pointer text-sm'>
-        <NavLink to='/admin/polls/poll_result' activeClassName={null}>
-          {tableData.poll_state.name}
+        <NavLink
+          to='/admin/polls/poll_result'
+          className='text-sm'
+          activeClassName={null}
+        >
+          {tableData?.poll_state?.name}
         </NavLink>
       </td>
       <td className='px-6 py-4 cursor-pointer text-sm'>
-        <NavLink to='/admin/polls/poll_result' activeClassName={null}>
-          {formatDate(tableData.poll_startDate)}
+        <NavLink
+          to='/admin/polls/poll_result'
+          className='text-sm'
+          activeClassName={null}
+        >
+          {formatDate(tableData?.poll_startDate)}
         </NavLink>
       </td>
       <td className='px-6 py-4 cursor-pointer text-sm'>
-        <NavLink to='/admin/polls/poll_result' activeClassName={null}>
-          {formatDate(tableData.poll_endDate)}
+        <NavLink
+          to='/admin/polls/poll_result'
+          className='text-sm'
+          activeClassName={null}
+        >
+          {formatDate(tableData?.poll_endDate)}
         </NavLink>
       </td>
       <td className='px-6 py-4 cursor-pointer'>
-        <NavLink to='/admin/polls/poll_result' activeClassName={null}>
+        <NavLink
+          to='/admin/polls/poll_result'
+          className='text-sm'
+          activeClassName={null}
+        >
           <h3
             className={`relative after:content-[''] after:absolute after:w-[.6rem] after:h-[.6rem] after:rounded-full ${statusColors} after:-left-3 after:top-1/2 after:-translate-y-1/2`}
           >
