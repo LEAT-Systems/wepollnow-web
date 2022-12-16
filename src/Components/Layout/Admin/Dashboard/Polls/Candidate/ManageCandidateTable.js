@@ -1,10 +1,8 @@
-/** @format */
-
 import ManageCandidateTableRow from "./ManageCandidateTableRow.js";
 
-const ManageCandidateTable = ({ data }) => {
+const ManageCandidateTable = ({ data, open }) => {
   const results = data.map((data) => {
-    return <ManageCandidateTableRow key={data.id} id={data.id} tableData={data} />;
+    return <ManageCandidateTableRow key={data.id} id={data.id} tableData={data} open={open} />;
   });
   return (
     <div className='relative overflow-auto scrollable w-full'>
@@ -14,13 +12,13 @@ const ManageCandidateTable = ({ data }) => {
             <thead className='text-xs text-gray-700 uppercase'>
               <tr>
                 <th scope='col' className='table-head'>
-                  Candidate
+                  Candidates
                 </th>
                 <th scope='col' className='table-head'>
-                  Poll
+                  Polls
                 </th>
                 <th scope='col' className='table-head'>
-                  Action
+                  Actions
                 </th>
               </tr>
             </thead>

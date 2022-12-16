@@ -70,7 +70,7 @@ const PollsPageContentOne = () => {
     setOpen(!open);
   };
 
-  /* handle for create new poll */
+  /* handle for editing poll */
   const handleOpenEdit = () => {
     setOpenEdit(!openEdit);
   };

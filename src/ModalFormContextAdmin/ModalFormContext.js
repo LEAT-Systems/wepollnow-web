@@ -27,8 +27,10 @@ export const ModalFormProvider = ({ children }) => {
   const [zoneData, setZoneData] = useState([]);
   const [formTwoData, setFormTwoData] = useState([]);
 
-  /* Table State */
+  /* Poll Table State */
   const [tableRowID, setTableRowID] = useState("");
+  /* Poll Table State */
+  const [candidateID, setCandidateID] = useState("");
   /* Edit Poll Data  */
   const [editPollData, setEditPollData] = useState([]);
 
@@ -74,9 +76,13 @@ export const ModalFormProvider = ({ children }) => {
         successMessage,
         setSuccessMessage,
 
-        /* Table State */
+        /* Poll Table State */
         tableRowID,
         setTableRowID,
+
+        /* Candidate Table State */
+        candidateID,
+        setCandidateID,
 
         /* Edit Poll Data */
         editPollData,

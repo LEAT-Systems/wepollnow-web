@@ -13,6 +13,29 @@ import VOTES from '../../assets/directbox-default.png'
 import TableResult from "../Tables/TableResult/TableResult";
 import TableStateResult from "../Tables/TableStateResult/TableStateResult";
 
+
+/* POll RESULT DATA TEMPLATE 
+
+[
+    {
+        "id": 1,
+        "voteCount": 0,
+        "partyCandidate": [],
+        "votePercent": 0,
+        "name": "People's Democratic Party",
+        "logo": "/media/party_pictures/pdp-logo-1_w0ej5nj.png"
+    },
+    {
+        "id": 4,
+        "voteCount": 0,
+        "partyCandidate": [],
+        "votePercent": 0,
+        "name": "All Progressives Grand Alliance",
+        "logo": "/media/party_pictures/APGA_Nigeria_Logo_aeZzed2.png"
+    }
+]
+
+*/
 const PollsPageContentTwo = () => {
   const [open, setOpen] = useState(false);
 
@@ -105,7 +128,7 @@ const PollsPageContentTwo = () => {
                     />
                     22/22/2022
                   </h3>
-                  <h3 className='text-base relative after:content-[""] after:absolute after:w-[.6rem] after:h-[.6rem] after:rounded-full after:bg-red-400 after:-left-3 after:top-1/2 after:-translate-y-1/2'>{data.status[1]}</h3>
+                  <h3 className='text-base relative after:content-[""] after:absolute after:w-[.6rem] after:h-[.6rem] after:rounded-full after:bg-red-500 after:-left-3 after:top-1/2 after:-translate-y-1/2'>{data.status[1]}</h3>
                 </div>
               </div>
 

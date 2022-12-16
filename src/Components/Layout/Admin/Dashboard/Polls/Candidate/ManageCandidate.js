@@ -11,6 +11,7 @@ import Header from "../../../Header";
 import AddCandidateModal from "../../Modals/AddCandidateModal";
 import FilterModal from "../../Modals/FilterModal";
 import axios from "axios";
+import EditCandidate from "../../Modals/Edit/Candidate/EditCandidate";
 
 const SubHeaderData = [
   {
@@ -48,7 +49,8 @@ const dataTable = [
 
 const Candidate = () => {
   const [filterIsActive, setFilterIsActive] = useState(0);
-  const [addCandidate, setAddCandidate] = useState(false);
+  const [openCandidateModal, setOpenCandidateModal] = useState(false);
+    const [openEdit, setOpenEdit] = useState(false);
   const [refineResult, setRefineResult] = useState(false);
   const [tableData, setTableData] = useState([]);
   const [polls, setPolls] = useState([]);
@@ -58,12 +60,21 @@ const Candidate = () => {
 
   /* handle for create new Candidate */
   const handleOpenAddCandidate = () => {
-    setAddCandidate(!addCandidate);
+    setOpenCandidateModal(!openCandidateModal);
   };
 
   const handleCloseAddCandidate = () => {
-    setAddCandidate(!addCandidate);
+    setOpenCandidateModal(!openCandidateModal);
   };
+
+    /* handle for editing poll */
+  const handleOpenEdit = () => {
+    setOpenEdit(!openEdit);
+  };
+  const handleCloseEdit = () => {
+    setOpenEdit(!openEdit);
+  };
+
 
   /* handle for refine results */
   const handleOpenRefineResult = () => {
@@ -157,13 +168,15 @@ const Candidate = () => {
               Add candidate
             </button>
           </div>
-          <ManageCandidateTable data={searchResult} />
+          <ManageCandidateTable data={searchResult} open={handleOpenEdit} />
         </div>
 
         <AddCandidateModal
-          addCandidate={addCandidate}
+          addCandidate={openCandidateModal}
           handleCloseAddCandidate={handleCloseAddCandidate}
         />
+
+        <EditCandidate open={openEdit} close={handleCloseEdit} />
         <FilterModal
           refineResult={refineResult}
           handleCloseRefineResult={handleCloseRefineResult}
