@@ -124,7 +124,7 @@ const Login = () => {
                 />
 
                 <div
-                  className='absolute icon_button right-4 top-9'
+                  className='absolute icon_button right-4 top-4'
                   onClick={() => {
                     setHide(!hide);
                   }}
