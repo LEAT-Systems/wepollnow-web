@@ -30,6 +30,18 @@ const data = [
 
 
 const ChartLegend = () => {
+
+    const statusColors =
+      data.labelColor === "#f9c033"
+        ? "after:bg-blue-['#f9c033']"
+        : data.status === "#e2345a"
+        ? "after:bg-['#e2345a']"
+        : data.status === "#2e5aac"
+        ? "after:bg-['#2e5aac']"
+        : data.status === "purple"
+        ? "after:bg-['purple']"
+        : "after:bg-['#08c127']"
+
   return (
     <main className='w-full border rounded-md py-4 pl-5 pr-2 h-full'>
       <h2 className='font-bold text-black text-base capitalize pb-4'>Legend</h2>
@@ -38,7 +50,7 @@ const ChartLegend = () => {
           return (
             <h3
               key={data.id}
-              className={`font-bold text-xs text-[#020] capitalize leading-5 relative after:content-[""] after:absolute after:w-[.6rem] after:h-[.6rem] after:rounded-full ${`after:bg-[${data.labelColor}]`} after:-left-3 after:top-1/2 after:-translate-y-1/2`}
+              className={`font-bold text-xs text-[#020] capitalize leading-5 relative after:content-[""] after:absolute after:w-[.6rem] after:h-[.6rem] after:rounded-full ${statusColors} after:-left-3 after:top-1/2 after:-translate-y-1/2`}
             >
               {data.label}
             </h3>
