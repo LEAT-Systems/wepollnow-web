@@ -25,13 +25,7 @@ const Grid = ({ handleOpen, data }) => {
     return string.slice(0, 10); /* string.split("T", 10).join() */
   };
 
-  const statusColors = data?.map((data) => {
-    return data.status === 1
-      ? "bg-blue-500"
-      : data.status === 2
-      ? "bg-green-500"
-      : "bg-red-400";
-  });
+
 
   return (
     <main className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xxl:grid-cols-4 mb-4 gap-6'>
@@ -110,7 +104,13 @@ const Grid = ({ handleOpen, data }) => {
               </div>
               <div className='flex justify-center-items-center'>
                 <div
-                  className={`${statusColors} rounded-full h-2 w-2 m-auto`}
+                  className={`${
+                    data.status === 1
+                      ? "bg-blue-500"
+                      : data.status === 2
+                      ? "bg-green-500"
+                      : "bg-red-400"
+                  } rounded-full h-2 w-2 m-auto`}
                 >
                   {" "}
                 </div>
