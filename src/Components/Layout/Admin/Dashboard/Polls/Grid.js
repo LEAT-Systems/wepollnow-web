@@ -7,7 +7,7 @@ import Delete from "../../assets/trash@2x.png";
 
 const Grid = ({ handleOpen, data }) => {
   const getSymbol = () => {
-    data?.forEach((data) => {
+    data?.map((data) => {
       const string = data?.poll_name;
       const wordArray = string.split(" ", 2);
       let symbol;
@@ -27,10 +27,10 @@ const Grid = ({ handleOpen, data }) => {
 
   const statusColors = data?.map((data) => {
     return data.status === 1
-      ? "after:bg-blue-500"
+      ? "bg-blue-500"
       : data.status === 2
-      ? "after:bg-green-500"
-      : "after:bg-red-400";
+      ? "bg-green-500"
+      : "bg-red-400";
   });
 
   return (
@@ -109,7 +109,9 @@ const Grid = ({ handleOpen, data }) => {
                 </h2>
               </div>
               <div className='flex justify-center-items-center'>
-                <div className={`${statusColors} rounded-full h-2 w-2 m-auto`}>
+                <div
+                  className={`${statusColors} rounded-full h-2 w-2 m-auto`}
+                >
                   {" "}
                 </div>
 
