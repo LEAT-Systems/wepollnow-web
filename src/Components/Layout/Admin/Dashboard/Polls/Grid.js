@@ -6,8 +6,7 @@ import Archive from "../../assets/archive@2x.png";
 import Delete from "../../assets/trash@2x.png";
 
 const Grid = ({ handleOpen, data }) => {
-  const getSymbol = () => {
-    data?.map((data) => {
+  const getSymbol = (data) => {
       const string = data?.poll_name;
       const wordArray = string.split(" ", 2);
       let symbol;
@@ -18,7 +17,6 @@ const Grid = ({ handleOpen, data }) => {
         symbol = string.slice(0, 1) + wordArray[1].slice(0, 1);
       }
       return symbol;
-    });
   };
 
   const formatDate = (string) => {
@@ -76,7 +74,7 @@ const Grid = ({ handleOpen, data }) => {
 
           {/* Second Section of Card */}
           <div className='flex h-36 w-full bg-[#b3bab4] tracking-wider font-serif text-[#082a0f] items-center justify-center text-4xl font-bold sm:font-[900] capitalize'>
-            {getSymbol()}
+            {getSymbol(data)}
           </div>
 
           {/* Third Section of Card */}
