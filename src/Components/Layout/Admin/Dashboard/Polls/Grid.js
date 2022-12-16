@@ -73,7 +73,7 @@ const Grid = ({ handleOpen, data }) => {
           </div>
 
           {/* Second Section of Card */}
-          <div className='flex h-36 w-full bg-[#b3bab4] tracking-wider font-serif text-[#082a0f] items-center justify-center text-4xl font-bold sm:font-[900] capitalize'>
+          <div className='flex h-36 w-full bg-[#b3bab4] tracking-wider font-serif text-[#082a0f] items-center justify-center text-4xl font-bold sm:font-[900] uppercase'>
             {getSymbol(data)}
           </div>
 
