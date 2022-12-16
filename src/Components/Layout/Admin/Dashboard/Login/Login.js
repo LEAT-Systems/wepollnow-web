@@ -111,7 +111,7 @@ const Login = () => {
               <label htmlFor='password' className='font-semibold'>
                 Password
               </label>
-              <div className='eye_div'>
+              <div className='eye_div relative'>
                 <input
                   type={hide === true ? "password" : "text"}
                   className='w-full py-3 px-4 bg-transparent border border-black rounded mb-6 mt-1 font-semibold'
