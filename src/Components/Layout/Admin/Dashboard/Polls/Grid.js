@@ -1,35 +1,38 @@
 /** @format */
 import React from "react";
-import {
-  AddOutlined,
-  CalendarMonthOutlined,
-} from "@mui/icons-material";
-import Edit from '../../assets/edit@2x.png'
+import { AddOutlined, CalendarMonthOutlined } from "@mui/icons-material";
+import Edit from "../../assets/edit@2x.png";
 import Archive from "../../assets/archive@2x.png";
-import Delete from '../../assets/trash@2x.png'
+import Delete from "../../assets/trash@2x.png";
 
 const Grid = ({ handleOpen, data }) => {
-
   const getSymbol = () => {
-    const string = data.poll_name;
-    const wordArray = string.split(" ", 2);
-    let symbol;
-    if (wordArray.length === 1) {
-      symbol = string.slice(0, 2);
-    }
-    if (wordArray.length === 2) {
-      symbol = string.slice(0, 1) + wordArray[1].slice(0, 1);
-    }
-    return symbol;
+    data?.forEach((data) => {
+      const string = data?.poll_name;
+      const wordArray = string.split(" ", 2);
+      let symbol;
+      if (wordArray.length === 1) {
+        symbol = string.slice(0, 2);
+      }
+      if (wordArray.length === 2) {
+        symbol = string.slice(0, 1) + wordArray[1].slice(0, 1);
+      }
+      return symbol;
+    });
   };
 
+  const formatDate = (string) => {
+    return string.slice(0, 10); /* string.split("T", 10).join() */
+  };
 
-    const statusColors =
-      data.status === 1
-        ? "after:bg-blue-500"
-        : data.status === 2
-        ? "after:bg-green-500"
-        : "after:bg-red-400";
+  const statusColors = data?.map((data) => {
+    return data.status === 1
+      ? "after:bg-blue-500"
+      : data.status === 2
+      ? "after:bg-green-500"
+      : "after:bg-red-400";
+  });
+
   return (
     <main className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xxl:grid-cols-4 mb-4 gap-6'>
       {/* Button to create new poll */}
@@ -54,7 +57,7 @@ const Grid = ({ handleOpen, data }) => {
           {/* First Section of Card */}
           <div className='justify-between items-center flex p-2'>
             <button className='border border-gray-100 text-[.8rem] px-2 py-1 fit-content rounded-sm'>
-              {data?.poll_startDate}
+              {formatDate(data?.poll_startDate)}
             </button>
             <div className='flex my-auto'>
               <span className='text-[1rem] mr-2 hover:cursor-pointer'>
@@ -102,7 +105,7 @@ const Grid = ({ handleOpen, data }) => {
                   />
                 </span>
                 <h2 className='font-[400] text-[.8rem] md:text-[.8rem] my-auto pt-1'>
-                  {data?.poll_endDate}
+                  {formatDate(data?.poll_endDate)}
                 </h2>
               </div>
               <div className='flex justify-center-items-center'>
