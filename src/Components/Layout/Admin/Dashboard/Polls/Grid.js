@@ -53,7 +53,12 @@ const Grid = ({ handleOpen, data }) => {
               {formatDate(data?.poll_startDate)}
             </button>
             <div className='flex my-auto'>
-              <span className='text-[1rem] mr-2 hover:cursor-pointer'>
+              <span
+                className='text-[1rem] mr-2 hover:cursor-pointer'
+                onClick={(e) => {
+                  console.log(parentTarget(e));
+                }}
+              >
                 <img src={Edit} alt='Edit' className='w-[1.1rem] h-[1.1rem]' />
               </span>
               {/* <span className='text-[1rem] mx-2 hover:cursor-pointer'>
@@ -63,9 +68,12 @@ const Grid = ({ handleOpen, data }) => {
                   className='w-[1.1rem] h-[1.1rem]'
                 />
               </span> */}
-              <span className='text-[1.1rem] ml-2 hover:cursor-pointer' onClick={(e) => {
-                parentTarget(e)
-              }}>
+              <span
+                className='text-[1.1rem] ml-2 hover:cursor-pointer'
+                onClick={(e) => {
+                  console.log(parentTarget(e));
+                }}
+              >
                 <img
                   src={Delete}
                   alt='Trash'
