@@ -23,7 +23,8 @@ const Grid = ({ handleOpen, data }) => {
     return string.slice(0, 10); /* string.split("T", 10).join() */
   };
 
-
+  const parentTarget = (e) =>
+    e.currentTarget.parentNode.parentNode.parentNode.getAttribute("data-id");
 
   return (
     <main className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xxl:grid-cols-4 mb-4 gap-6'>
@@ -55,14 +56,16 @@ const Grid = ({ handleOpen, data }) => {
               <span className='text-[1rem] mr-2 hover:cursor-pointer'>
                 <img src={Edit} alt='Edit' className='w-[1.1rem] h-[1.1rem]' />
               </span>
-              <span className='text-[1rem] mx-2 hover:cursor-pointer'>
+              {/* <span className='text-[1rem] mx-2 hover:cursor-pointer'>
                 <img
                   src={Archive}
                   alt='Archive'
                   className='w-[1.1rem] h-[1.1rem]'
                 />
-              </span>
-              <span className='text-[1.1rem] ml-2 hover:cursor-pointer'>
+              </span> */}
+              <span className='text-[1.1rem] ml-2 hover:cursor-pointer' onClick={(e) => {
+                parentTarget(e)
+              }}>
                 <img
                   src={Delete}
                   alt='Trash'

@@ -252,7 +252,7 @@ const EditCandidate = ({ open, close }) => {
         <div className='flex flex-col items-start justify-start px-6 py-4 my-auto mx-auto h-auto w-[95%] sm:w-5/6 md:w-3/6 bg-white rounded-lg overflow-y-auto focus:outline-none'>
           <header className='flex items-center justify-between w-full py-2 mb-3 border-b-2 border-gray-300 border-solid'>
             <h2 className='font-extrabold text-lg md:text-xl text-[#082a0f] capitalize'>
-              Add Candidate
+              Edit Candidate Details
             </h2>
             <button
               className='flex items-center justify-center border border-1 rounded-md py-[2px] px-[2px] cursor-pointer text-sm md:text-base bg-[#fcf0f0] text-red-500'
