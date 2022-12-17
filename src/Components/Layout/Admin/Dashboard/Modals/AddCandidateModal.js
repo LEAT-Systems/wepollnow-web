@@ -51,7 +51,7 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
   const adminRef = useRef();
 
   useEffect(() => {
-    adminRef.current.focus();
+    adminRef?.current?.focus();
   }, []);
   if (selectedState === undefined) {
     setSelectedState("");

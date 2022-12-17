@@ -43,10 +43,10 @@ const EditCandidate = ({ open, close }) => {
   const [enabledSenetorial, setEnabledSenetorial] = useState(false);
   const [enabledZone, setEnabledZone] = useState(false);
   const [confirmBtn, setConfirmBtn] = useState(true);
-  const adminRef = useRef();
+  const inputRef = useRef(null);
 
   useEffect(() => {
-    adminRef.current.focus();
+    inputRef?.current?.focus();
   }, []);
   if (selectedState === undefined) {
     setSelectedState("");
@@ -288,7 +288,7 @@ const EditCandidate = ({ open, close }) => {
                   required
                   aria-required
                   value={name}
-                  ref={adminRef}
+                  ref={inputRef}
                   onChange={(e) => setName(e.target.value)}
                   className='font-medium text-base text-[#616b62] capitalize h-full w-full border-2 border-gray-300 rounded-md py-3 px-3 placeholder:text-[#616b62]'
                 />
