@@ -130,7 +130,7 @@ const EditCandidate = ({ open, close }) => {
     console.log(file);
 
     await Axios.put(
-      `https://wepollnow.azurewebsites.net/poll/rud_candidate/${candidateID}`,
+      `https://wepollnow.azurewebsites.net/utilities/rud_candidate/${candidateID}`,
       {
         name: name,
         poll: 2,
