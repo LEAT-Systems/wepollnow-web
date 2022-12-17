@@ -24,7 +24,7 @@ const Grid = ({ handleOpen, data }) => {
   };
 
   const parentTarget = (e) =>
-    e.currentTarget.parentNode.parentNode.getAttribute("data-id");
+    e.currentTarget.parentNode.parentNode/* .getAttribute("data-id") */;
 
   return (
     <main className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xxl:grid-cols-4 mb-4 gap-6'>
@@ -46,6 +46,7 @@ const Grid = ({ handleOpen, data }) => {
         <div
           className='border-2 border-gray-300 py-2 block gap-4 rounded-lg'
           key={data?.id}
+          data-id={data.id}
         >
           {/* First Section of Card */}
           <div className='justify-between items-center flex p-2'>
