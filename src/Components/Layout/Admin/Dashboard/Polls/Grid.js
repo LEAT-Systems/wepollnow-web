@@ -24,7 +24,7 @@ const Grid = ({ handleOpen, data }) => {
   };
 
   const parentTarget = (e) =>
-    e.currentTarget.parentNode.parentNode/* .getAttribute("data-id") */;
+    e.currentTarget.parentNode.parentNode.parentNode.getAttribute("data-id");
 
   return (
     <main className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xxl:grid-cols-4 mb-4 gap-6'>
