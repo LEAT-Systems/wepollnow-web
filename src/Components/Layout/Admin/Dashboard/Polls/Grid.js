@@ -1,8 +1,6 @@
-/** @format */
 import React, { useContext } from "react";
 import { AddOutlined, CalendarMonthOutlined } from "@mui/icons-material";
 import Edit from "../../assets/edit@2x.png";
-import Archive from "../../assets/archive@2x.png";
 import Delete from "../../assets/trash@2x.png";
 import swal from "sweetalert";
 import axios from "axios";

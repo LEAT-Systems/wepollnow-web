@@ -1,10 +1,13 @@
-import React, { useState, useEffect, useRef } from "react";
+/** @format */
+
+import React, { useState, useEffect, useRef, useContext } from "react";
 import { Close } from "@mui/icons-material";
 import { Checkbox, Modal } from "@mui/material";
 import { FileUploader } from "react-drag-drop-files";
 import { FormControl, FormControlLabel } from "@mui/material";
 import Axios from "axios";
 import swal from "sweetalert";
+import ModalFormContext from "../../../../../../../ModalFormContextAdmin/ModalFormContext";
 
 const EditCandidate = ({ open, close }) => {
   /* Handling the form input and data */
@@ -22,6 +25,7 @@ const EditCandidate = ({ open, close }) => {
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
   const [mainCandidate, setMainCandidate] = useState(false);
+  const { candidateID, setCandidateID } = useContext(ModalFormContext);
   // newly added states
   const [file, setFile] = useState(null);
   const [fileName, setFileName] = useState("");
@@ -125,8 +129,8 @@ const EditCandidate = ({ open, close }) => {
 
     console.log(file);
 
-    await Axios.post(
-      "https://wepollnow.azurewebsites.net/utilities/candidates/",
+    await Axios.put(
+      `https://wepollnow.azurewebsites.net/poll/rud_candidate/${candidateID}`,
       {
         name: name,
         poll: 2,
