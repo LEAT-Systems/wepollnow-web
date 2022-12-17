@@ -194,7 +194,7 @@ const EditCandidate = ({ open, close }) => {
         }
       });
 
-    window.location.reload();
+    // window.location.reload();
   };
 
   console.log("Main Candidate: ", mainCandidate);
