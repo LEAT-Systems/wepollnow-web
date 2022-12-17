@@ -1,11 +1,15 @@
 /** @format */
-import React from "react";
+import React, { useContext } from "react";
 import { AddOutlined, CalendarMonthOutlined } from "@mui/icons-material";
 import Edit from "../../assets/edit@2x.png";
 import Archive from "../../assets/archive@2x.png";
 import Delete from "../../assets/trash@2x.png";
+import swal from "sweetalert";
+import axios from "axios";
+import ModalFormContext from "../../../../../ModalFormContextAdmin/ModalFormContext";
 
-const Grid = ({ handleOpen, data }) => {
+const Grid = ({ handleOpen, data, open }) => {
+    const { tableRowID, setTableRowID } = useContext(ModalFormContext);
   const getSymbol = (data) => {
       const string = data?.poll_name;
       const wordArray = string.split(" ", 2);
@@ -26,6 +30,55 @@ const Grid = ({ handleOpen, data }) => {
   const parentTarget = (e) =>
     e.currentTarget.parentNode.parentNode.parentNode.getAttribute("data-id");
 
+    const handleDelete = async () => {
+      await axios
+        .delete(
+          `https://wepollnow.azurewebsites.net/poll/rud_poll/${tableRowID}`
+        )
+        .then((res) => {
+          console.log(res.data);
+          swal({
+            title: "Success",
+            text: "Poll Deleted!",
+            icon: "success",
+            button: "Ok",
+          });
+        })
+        .catch((err) => {
+          console.log(err);
+          if (!err?.response) {
+            swal({
+              title: "Success",
+              text: "No Internet Connection",
+              icon: "error",
+              button: "Ok",
+            });
+          } else if (err.response?.status === 400) {
+            swal({
+              title: "Failure",
+              text: "Something went wrong!",
+              icon: "error",
+              button: "Ok",
+            });
+          } else if (err.response?.status === 401) {
+            swal({
+              title: "Failure",
+              text: "Unauthorized",
+              icon: "error",
+              button: "Ok",
+            });
+          } else {
+            swal({
+              title: "Failure",
+              text: "Poll Deletion Failed",
+              icon: "error",
+              button: "Ok",
+            });
+          }
+        });
+
+      window.location.reload();
+    };
   return (
     <main className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xxl:grid-cols-4 mb-4 gap-6'>
       {/* Button to create new poll */}
@@ -57,6 +110,8 @@ const Grid = ({ handleOpen, data }) => {
               <span
                 className='text-[1rem] mr-2 hover:cursor-pointer'
                 onClick={(e) => {
+                  setTableRowID(parentTarget(e));
+                  open();
                   console.log(parentTarget(e));
                 }}
               >
@@ -72,7 +127,9 @@ const Grid = ({ handleOpen, data }) => {
               <span
                 className='text-[1.1rem] ml-2 hover:cursor-pointer'
                 onClick={(e) => {
-                  console.log(parentTarget(e));
+                  setTableRowID(parentTarget(e));
+                  handleDelete();
+                  // console.log(parentTarget(e));
                 }}
               >
                 <img

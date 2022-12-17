@@ -125,7 +125,7 @@ const PollsPageContentOne = () => {
           </div>
 
           {isGrid ? (
-            <Grid data={searchResult} handleOpen={handleOpen} />
+            <Grid data={searchResult} handleOpen={handleOpen} open={handleOpenEdit} />
           ) : (
             <Tables data={searchResult} open={handleOpenEdit} />
           )}

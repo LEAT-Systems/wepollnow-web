@@ -149,7 +149,7 @@ const TableBody = ({ tableData, open }) => {
           className='text-blue-500 cursor-pointer'
           onClick={(e) => {
             setTableRowID(parentTarget(e));
-            console.log(parentTarget(e));
+            // console.log(parentTarget(e));
             open();
           }}
         >
@@ -163,7 +163,7 @@ const TableBody = ({ tableData, open }) => {
           onClick={(e) => {
             setTableRowID(parentTarget(e));
             handleDelete();
-            console.log(parentTarget(e));
+            // console.log(parentTarget(e));
           }}
         >
           <img src={Delete} alt='Trash' className='w-[1.1rem] h-[1.1rem]' />
