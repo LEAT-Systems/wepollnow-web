@@ -40,7 +40,7 @@ const TableResult = ({ data }) => {
           <TableResultBody key={data?.id} id={data?.id} tableData={data} />
         );
       }) : (
-                <div className='w-full h-full flex justify-center items-center text-center font-bold text-sm'>
+                <div className='w-full h-full flex flex-row justify-center items-center text-center font-bold text-sm'>
                   <h2 className="text-center">No Poll, hence result doesn't exits</h2>
                   <button
                     className='bg-green-500 text-white p-6 rounded-md shadow-sm'
@@ -49,7 +49,7 @@ const TableResult = ({ data }) => {
                     Select Poll First
                   </button>
                 </div>
-              );
+              ));
 
   return (
     <div className='relative overflow-auto scrollable sm:rounded-lg w-full'>
