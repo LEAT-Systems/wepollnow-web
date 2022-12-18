@@ -31,7 +31,7 @@ import TableResultBody from "./TableResultBody";
 //   }
 // ]
 const TableResult = ({data}) => {
-  const results = data?.map((data) => {
+  const results = typeof data === "function" && data?.map((data) => {
     return <TableResultBody key={data?.id} id={data?.id} tableData={data} />;
   });
 
