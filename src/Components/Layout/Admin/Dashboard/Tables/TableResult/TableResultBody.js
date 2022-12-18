@@ -22,7 +22,7 @@ const TableResultBody = ({ tableData }) => {
       return symbol;
     };
   return (
-    <tr className='table-row' onClick={(e) => console.log(e.currentTarget.id)}>
+    <tr className='table-row' onClick={(e) => console.log(e?.currentTarget?.id)}>
       <th
         scope='row'
         className='px-6 py-4 font-medium text-gray-900 whitespace-nowrap '
@@ -32,8 +32,8 @@ const TableResultBody = ({ tableData }) => {
         </span>{" "}
         {tableData?.name}
       </th>
-      <td className='px-6 py-4'>{tableData?.partyCandidate[0]}</td>
-      <td className='px-6 py-4'>{tableData?.partyCandidate[1]}</td>
+      <td className='px-6 py-4'>{tableData?.partyCandidate[0]?.name}</td>
+      <td className='px-6 py-4'>{tableData?.partyCandidate[1]?.name}</td>
       <td className='px-6 py-4'>{tableData?.voteCount}</td>
       <td className='px-6 py-4'>{tableData?.votePercent}</td>
     </tr>

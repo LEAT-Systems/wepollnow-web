@@ -31,8 +31,8 @@ import TableResultBody from "./TableResultBody";
 //   }
 // ]
 const TableResult = ({data}) => {
-  const results = data.map((data) => {
-    return <TableResultBody key={data.id} id={data.id} tableData={data} />;
+  const results = data?.map((data) => {
+    return <TableResultBody key={data?.id} id={data?.id} tableData={data} />;
   });
 
   return (
