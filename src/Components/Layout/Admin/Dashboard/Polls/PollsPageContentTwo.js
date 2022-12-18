@@ -16,6 +16,7 @@ import TableResult from "../Tables/TableResult/TableResult";
 import TableStateResult from "../Tables/TableStateResult/TableStateResult";
 import axios from "axios";
 import ModalFormContext from "../../../../../ModalFormContextAdmin/ModalFormContext";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 /* POll RESULT DATA TEMPLATE 
 
@@ -49,6 +50,7 @@ const PollsPageContentTwo = () => {
   const [isData, setIsData] = useState([]);
   const { tableRowID } = useContext(ModalFormContext);
 
+  const history = useHistory()
   const handleGrid = () => {
     setIsTableState(true);
     setIsBar(false);
@@ -125,7 +127,7 @@ const PollsPageContentTwo = () => {
         {/* CARDS */}
         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 place-items-center w-full mx-auto my-9'>
           {/* First Card */}
-          {data.map((data) => (
+          {data?.map((data) => (
             <>
               <div className='flex flex-col flex-1 relative border-2 border-gray-400 bg-white rounded-lg px-5 py-2 w-full h-[9rem]'>
                 <div className='w-full whitespace'>
@@ -227,8 +229,18 @@ const PollsPageContentTwo = () => {
                 <BarChart />
               ) : isPie ? (
                 <PieChart2 />
-              ) : (
+              ) : isData ? (
                 <TableResult data={isData} />
+              ) : (
+                <div className='w-full h-full flex justify-center items-center text-center font-bold text-2xl'>
+                  <h2 className="text-center">No Poll, hence result doesn't exits</h2>
+                  <button
+                    className='bg-green-500 text-white p-8 rounded-md shadow-sm'
+                    onClick={() => history.push("./admin/polls/polls")}
+                  >
+                    Select Poll First
+                  </button>
+                </div>
               )}
             </div>
           </div>
