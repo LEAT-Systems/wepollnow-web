@@ -34,17 +34,16 @@ import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 const TableResult = ({ data }) => {
   const history = useHistory()
   const results =
-    (typeof data !== "object" ||
-    data.length === 0) ?
+    (typeof data !== "object" ?
       data?.map((data) => {
         return (
           <TableResultBody key={data?.id} id={data?.id} tableData={data} />
         );
       }) : (
-                <div className='w-full h-full flex justify-center items-center text-center font-bold text-2xl'>
+                <div className='w-full h-full flex justify-center items-center text-center font-bold text-sm'>
                   <h2 className="text-center">No Poll, hence result doesn't exits</h2>
                   <button
-                    className='bg-green-500 text-white p-8 rounded-md shadow-sm'
+                    className='bg-green-500 text-white p-6 rounded-md shadow-sm'
                     onClick={() => history.push("./admin/polls/polls")}
                   >
                     Select Poll First
