@@ -86,3 +86,108 @@ const SideBar = () => {
 };
 
 export default SideBar;
+
+
+/* 
+
+
+import React from 'react';
+
+const Nav = () => {
+  return (
+    <nav>
+      <ul>
+        <li>Home</li>
+        <li>About</li>
+        <li>Contact</li>
+      </ul>
+    </nav>
+  );
+}
+
+export default Nav;
+
+
+
+
+
+
+
+// Nav styles 
+nav {
+  // Display the nav as a side nav on larger screens
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+
+  // Hide the nav on smaller screens 
+  @media (max-width: 600px) {
+    display: none;
+  }
+}
+
+nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+nav li {
+  // Style the nav items 
+  color: white;
+  background-color: black;
+  padding: 10px;
+}
+
+// Menu bar styles
+.menu-bar {
+  // Display the menu bar as a top nav on smaller screens 
+  display: none;
+  @media (max-width: 600px) {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background-color: black;
+    color: white;
+    padding: 10px;
+  }
+}
+
+.menu-bar .menu-bar-items {
+  display: flex;
+  flex-direction: row;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.menu-bar .menu-bar-items li {
+  // Style the menu bar items
+  color: white;
+  padding: 10px;
+}
+
+.menu-bar .menu-button {
+  // Style the menu button 
+  background-color: white;
+  color: black;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+*/

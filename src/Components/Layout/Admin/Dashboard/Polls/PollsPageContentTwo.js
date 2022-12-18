@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+/** @format */
+
+import React, { useContext, useEffect, useState } from "react";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import { ArrowUpward, CalendarMonthOutlined, Save } from "@mui/icons-material";
 import Header from "../../Header";
@@ -9,10 +11,11 @@ import DropDown from "../DropDown/DropDown";
 import Grid from "./Grid";
 import Data from "../../Data.json";
 import { NavLink } from "react-router-dom";
-import VOTES from '../../assets/directbox-default.png'
+import VOTES from "../../assets/directbox-default.png";
 import TableResult from "../Tables/TableResult/TableResult";
 import TableStateResult from "../Tables/TableStateResult/TableStateResult";
-
+import axios from "axios";
+import ModalFormContext from "../../../../../ModalFormContextAdmin/ModalFormContext";
 
 /* POll RESULT DATA TEMPLATE 
 
@@ -43,6 +46,8 @@ const PollsPageContentTwo = () => {
   const [isTableState, setIsTableState] = useState(false);
   const [isBar, setIsBar] = useState(false);
   const [isPie, setIsPie] = useState(false);
+  const [isData, setIsData] = useState([]);
+  const { tableRowID } = useContext(ModalFormContext);
 
   const handleGrid = () => {
     setIsTableState(true);
@@ -71,6 +76,17 @@ const PollsPageContentTwo = () => {
   const handleOpen = () => {
     setOpen(!open);
   };
+
+  useEffect(() => {
+    axios.post("https://wepollnow.azurewebsites.net/poll/poll_result/", {
+      poll_id: tableRowID,
+    }).then(res => {
+      console.log(res.data);
+      setIsData(res.data)
+    }).catch(err => {
+      console.log(err);
+    });
+  });
 
   const data = [
     {
@@ -128,7 +144,9 @@ const PollsPageContentTwo = () => {
                     />
                     22/22/2022
                   </h3>
-                  <h3 className='text-base relative after:content-[""] after:absolute after:w-[.6rem] after:h-[.6rem] after:rounded-full after:bg-red-500 after:-left-3 after:top-1/2 after:-translate-y-1/2'>{data.status[1]}</h3>
+                  <h3 className='text-base relative after:content-[""] after:absolute after:w-[.6rem] after:h-[.6rem] after:rounded-full after:bg-red-500 after:-left-3 after:top-1/2 after:-translate-y-1/2'>
+                    {data.status[1]}
+                  </h3>
                 </div>
               </div>
 
@@ -219,9 +237,7 @@ const PollsPageContentTwo = () => {
 
 export default PollsPageContentTwo;
 
-
 // Add candidate
 // Remove LGA | Replace Party dropdown & Main candidate checkbox
 // Create poll
 // Remove LGA
-
