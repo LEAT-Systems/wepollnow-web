@@ -31,9 +31,14 @@ import TableResultBody from "./TableResultBody";
 //   }
 // ]
 const TableResult = ({data}) => {
-  const results = typeof data === "function" && data?.map((data) => {
-    return <TableResultBody key={data?.id} id={data?.id} tableData={data} />;
-  });
+  const results =
+    (typeof data !== "object" ||
+    data.length === 0) &&
+      data?.map((data) => {
+        return (
+          <TableResultBody key={data?.id} id={data?.id} tableData={data} />
+        );
+      });
 
   return (
     <div className='relative overflow-auto scrollable sm:rounded-lg w-full'>
