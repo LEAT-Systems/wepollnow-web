@@ -1,36 +1,36 @@
 import React from "react";
 import TableResultBody from "./TableResultBody";
 
-const data = [
-  {
-    id: 0,
-    symbol: "AB",
-    party: 'All progressive Congress (APC)',
-    candidate: 'Bola Ahmed Tinubu',
-    running_mate: 'Kashim Shettima',
-    votes: 43536765,
-    percentage: "50%"
-  },
-  {
-    id: 1,
-    symbol: "GP",
-    party: 'All progressive Congress (APC)',
-    candidate: 'Bola Ahmed Tinubu',
-    running_mate: 'Kashim Shettima',
-    votes: 43536765,
-    percentage: "50%"
-  },
-  {
-    id: 2,
-    symbol: "AC",
-    party: 'All progressive Congress (APC)',
-    candidate: 'Bola Ahmed Tinubu',
-    running_mate: 'Kashim Shettima',
-    votes: 43536765,
-    percentage: "50%"
-  }
-]
-const TableResult = () => {
+// const data = [
+//   {
+//     id: 0,
+//     symbol: "AB",
+//     party: 'All progressive Congress (APC)',
+//     candidate: 'Bola Ahmed Tinubu',
+//     running_mate: 'Kashim Shettima',
+//     votes: 43536765,
+//     percentage: "50%"
+//   },
+//   {
+//     id: 1,
+//     symbol: "GP",
+//     party: 'All progressive Congress (APC)',
+//     candidate: 'Bola Ahmed Tinubu',
+//     running_mate: 'Kashim Shettima',
+//     votes: 43536765,
+//     percentage: "50%"
+//   },
+//   {
+//     id: 2,
+//     symbol: "AC",
+//     party: 'All progressive Congress (APC)',
+//     candidate: 'Bola Ahmed Tinubu',
+//     running_mate: 'Kashim Shettima',
+//     votes: 43536765,
+//     percentage: "50%"
+//   }
+// ]
+const TableResult = ({data}) => {
   const results = data.map((data) => {
     return <TableResultBody key={data.id} id={data.id} tableData={data} />;
   });

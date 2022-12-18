@@ -78,15 +78,18 @@ const PollsPageContentTwo = () => {
   };
 
   useEffect(() => {
-    axios.post("https://wepollnow.azurewebsites.net/poll/poll_result/", {
-      poll_id: tableRowID,
-    }).then(res => {
-      console.log(res.data);
-      setIsData(res.data)
-    }).catch(err => {
-      console.log(err);
-    });
-  });
+    axios
+      .post("https://wepollnow.azurewebsites.net/poll/poll_result/", {
+        poll_id: tableRowID,
+      })
+      .then((res) => {
+        console.log(res.data);
+        setIsData(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [tableRowID]);
 
   const data = [
     {
@@ -225,7 +228,7 @@ const PollsPageContentTwo = () => {
               ) : isPie ? (
                 <PieChart2 />
               ) : (
-                <TableResult />
+                <TableResult data={isData} />
               )}
             </div>
           </div>
