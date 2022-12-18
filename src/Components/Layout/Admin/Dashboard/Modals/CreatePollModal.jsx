@@ -1,6 +1,6 @@
 /** @format */
 
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useRef } from "react";
 import axios from "axios";
 import ModalFormContext from "../../../../../ModalFormContextAdmin/ModalFormContext";
 
@@ -39,7 +39,11 @@ const CreatePollModal = ({ open, handleClose, nextPage, setPage }) => {
   const [enabledSenetorial, setEnabledSenetorial] = useState(false);
   const [enabledZone, setEnabledZone] = useState(false);
   const [confirmBtn, setConfirmBtn] = useState(true);
+  const adminRef = useRef();
 
+  useEffect(() => {
+    adminRef.current.focus();
+  }, []);
   /* Get State */
   useEffect(() => {
     const getState = async () => {
@@ -191,6 +195,7 @@ const CreatePollModal = ({ open, handleClose, nextPage, setPage }) => {
               value={pollType}
               required
               aria-required
+              ref={adminRef}
               onChange={(e) => {
                 setPollType(e.target.value);
                 console.log(e.target.value);
@@ -337,7 +342,7 @@ const CreatePollModal = ({ open, handleClose, nextPage, setPage }) => {
               setDistrict("");
               setStartDate("");
               setEndDate("");
-              setPage(1)
+              setPage(1);
             }}
           >
             cancel

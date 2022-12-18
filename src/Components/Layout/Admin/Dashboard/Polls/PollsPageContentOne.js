@@ -85,14 +85,6 @@ const PollsPageContentOne = () => {
     "flex items-center justify-center rounded-md py-3 px-5 h-full cursor-pointer text-sm bg-green-500 text-white capitalize transition-all duration-400 ease-in-out hover:bg-green-500 hover:text-white hover:rounded-full";
 
   useEffect(() => {
-    /* For the api */
-    // getTableData().then(json => {
-    //   setTableData(json)
-    //   return json
-    // }).then(json => {
-    //   setSearchResult(json)
-    // })
-    /* For our demo json object */
     setTableData(modalData);
     setSearchResult(modalData);
   }, [modalData]);
@@ -125,7 +117,7 @@ const PollsPageContentOne = () => {
           </div>
 
           {isGrid ? (
-            <Grid data={searchResult} handleOpen={handleOpen} />
+            <Grid data={searchResult} handleOpen={handleOpen} open={handleOpenEdit} />
           ) : (
             <Tables data={searchResult} open={handleOpenEdit} />
           )}

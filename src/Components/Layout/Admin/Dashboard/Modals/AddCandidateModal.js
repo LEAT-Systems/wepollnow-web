@@ -48,7 +48,11 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
   const [enabledSenetorial, setEnabledSenetorial] = useState(false);
   const [enabledZone, setEnabledZone] = useState(false);
   const [confirmBtn, setConfirmBtn] = useState(true);
+  const adminRef = useRef();
 
+  useEffect(() => {
+    adminRef?.current?.focus();
+  }, []);
   if (selectedState === undefined) {
     setSelectedState("");
   }
@@ -327,6 +331,7 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
                   required
                   aria-required
                   value={name}
+                  ref={adminRef}
                   onChange={(e) => setName(e.target.value)}
                   className='font-medium text-base text-[#616b62] capitalize h-full w-full border-2 border-gray-300 rounded-md py-3 px-3 placeholder:text-[#616b62]'
                 />
@@ -395,7 +400,7 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
                   aria-required
                   value={selectedState}
                   onChange={(e) => {
-                    setSelectedState(e.target.getAttribute('data-id'));
+                    setSelectedState(e.target.getAttribute("data-id"));
                   }}
                   disabled={enableState}
                 >

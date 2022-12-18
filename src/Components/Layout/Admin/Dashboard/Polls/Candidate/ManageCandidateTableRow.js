@@ -22,7 +22,7 @@ const ManageCandidateTableRow = ({ tableData, open }) => {
    const handleDelete = async () => {
      await axios
        .delete(
-         `https://wepollnow.azurewebsites.net/poll/rud_poll/${candidateID}`
+         `https://wepollnow.azurewebsites.net/utilities/rud_candidate/${candidateID}`
        )
        .then((res) => {
          console.log(res.data);
