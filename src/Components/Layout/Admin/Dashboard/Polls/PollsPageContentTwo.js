@@ -229,18 +229,8 @@ const PollsPageContentTwo = () => {
                 <BarChart />
               ) : isPie ? (
                 <PieChart2 />
-              ) : isData ? (
-                <TableResult data={isData} />
               ) : (
-                <div className='w-full h-full flex justify-center items-center text-center font-bold text-2xl'>
-                  <h2 className="text-center">No Poll, hence result doesn't exits</h2>
-                  <button
-                    className='bg-green-500 text-white p-8 rounded-md shadow-sm'
-                    onClick={() => history.push("./admin/polls/polls")}
-                  >
-                    Select Poll First
-                  </button>
-                </div>
+                <TableResult data={isData} />
               )}
             </div>
           </div>
