@@ -123,7 +123,7 @@ const TableBody = ({ tableData, open }) => {
               : "Concluded"}
           </h3>
       </td>
-      <td className='flex flex-row px-6 py-4 space-x-2'>
+      <td className='flex flex-row px-6 py-4 space-x-2' onClick={(e) => e.stopPropagation()}>
         <div
           className='text-blue-500 cursor-pointer'
           onClick={(e) => {
