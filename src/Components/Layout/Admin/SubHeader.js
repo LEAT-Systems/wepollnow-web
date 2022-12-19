@@ -1,9 +1,15 @@
-/** @format */
-
-import React from "react";
+import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 
 const SubHeader = ({ data }) => {
+  const [isActive, setIsActive] = useState(data[0].linkText);
+
+  const handleClick = (linkText) => {
+    setIsActive(linkText);
+  };
+
+  const activeClass =
+    'bg-transparent before:absolute pb-[2px] before:bottom-0 before:left-[50%] before:-translate-x-1/2 before:content-[""] before:bg-green-500 before:h-[0.3rem] before:w-[5rem] before:rounded-t-[1rem]';
   return (
     <header className='flex items-center border-b w-full'>
       <ul>
@@ -15,7 +21,8 @@ const SubHeader = ({ data }) => {
             >
               <NavLink
                 to={route}
-                activeClassName='bg-transparent before:absolute pb-[2px] before:bottom-0 before:left-[50%] before:-translate-x-1/2 before:content-[""] before:bg-green-500 before:h-[0.3rem] before:w-[5rem] before:rounded-t-[1rem]'
+                activeClassName={isActive === linkText ? activeClass : "null"}
+                onClick={handleClick(linkText)}
               >
                 {linkText}
               </NavLink>
@@ -28,23 +35,3 @@ const SubHeader = ({ data }) => {
 };
 
 export default SubHeader;
-
-{
-  /* 
-<li className='font-bold text-[#082b0e] inline-block p-5 mr-1 relative'>
-  <NavLink
-    to='/admin/manageAdmin'
-    activeClassName='bg-transparent before:absolute pb-[2px] before:bottom-0 before:left-[50%] before:-translate-x-1/2 before:content-[""] before:bg-green-500 before:h-[0.3rem] before:w-[5rem] before:rounded-t-[1rem]'
-  >
-    Admins
-  </NavLink>
-</li>
-<li className='font-bold text-[#082b0e] inline-block p-5 ml-1 relative'>
-  <NavLink
-    to='/admin/password'
-    activeClassName='bg-transparent before:absolute pb-[2px] before:bottom-0 before:left-[50%] before:-translate-x-1/2 before:content-[""] before:bg-green-500 before:h-[0.3rem] before:w-[5rem] before:rounded-t-[1rem]'
-  >
-    Password
-    </NavLink>
-  </li> */
-}
