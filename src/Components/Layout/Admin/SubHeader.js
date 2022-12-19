@@ -1,12 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 
 const SubHeader = ({ data }) => {
-  const [isActive, setIsActive] = useState(data[0].linkText);
+  const [isDefault, setIsDefault] = useState('')
+  const [isActive, setIsActive] = useState(isDefault);
 
   const handleClick = (linkText) => {
     setIsActive(linkText);
   };
+
+  useEffect(() => {
+    setIsDefault(data[0].linkText)
+  }, [data])
 
   const activeClass =
     'bg-transparent before:absolute pb-[2px] before:bottom-0 before:left-[50%] before:-translate-x-1/2 before:content-[""] before:bg-green-500 before:h-[0.3rem] before:w-[5rem] before:rounded-t-[1rem]';
