@@ -38,7 +38,7 @@ const TableResult = ({ data }) => {
   console.log(data);
   const history = useHistory();
   const results =
-    typeof data === 'object' ? (
+    typeof data === 'object' && data.length > 0 ? (
       data?.map((data) => {
         return (
           <TableResultBody key={data?.id} id={data?.id} tableData={data} />

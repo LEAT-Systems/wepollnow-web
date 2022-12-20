@@ -15,7 +15,7 @@ const TableBody = ({ tableData, open }) => {
 
   const getLocalstorageItem = () => {
     const items = localStorage.getItem("pollID");
-    return items;
+    setTableRowID(items)
   };
 
   const saveToLocalstorage = () => {
@@ -108,8 +108,9 @@ const TableBody = ({ tableData, open }) => {
       data-id={tableData.id}
       onClick={(e) => {
         setValue(e.target.getAttribute("data-id"));
+        console.log("Value for redirection :", value);
         saveToLocalstorage();
-        setTableRowID(getLocalstorageItem());
+        getLocalstorageItem();
         redirect();
       }}
     >
@@ -151,7 +152,7 @@ const TableBody = ({ tableData, open }) => {
           onClick={(e) => {
             setValue(setTableRowID(parentTarget(e)));
             saveToLocalstorage();
-            setTableRowID(getLocalstorageItem());
+            getLocalstorageItem();
             // console.log(parentTarget(e));
             open();
           }}
@@ -166,7 +167,7 @@ const TableBody = ({ tableData, open }) => {
           onClick={(e) => {
             setValue(setTableRowID(parentTarget(e)));
             saveToLocalstorage();
-            setTableRowID(getLocalstorageItem());
+            getLocalstorageItem();
             handleDelete();
             // console.log(parentTarget(e));
           }}
