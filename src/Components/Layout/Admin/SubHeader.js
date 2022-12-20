@@ -1,10 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { NavLink } from "react-router-dom";
-import { useLocation } from "react-router-dom/cjs/react-router-dom";
+import { useHistory, useLocation } from "react-router-dom/cjs/react-router-dom";
 
 const AccountHeader = ({ data }) => {
   const location = useLocation();
+  const history = useHistory();
 
+    useEffect(() => {
+      if (location.pathname === "/admin/account/") {
+        history.push("/admin/account/settings");
+      }
+    }, [history, location.pathname]);
+  
   const activeClass =
     'bg-transparent before:absolute pb-[2px] before:bottom-0 before:left-[50%] before:-translate-x-1/2 before:content-[""] before:bg-green-500 before:h-[0.3rem] before:w-[5rem] before:rounded-t-[1rem]';
   return (
@@ -43,6 +50,13 @@ const AccountHeader = ({ data }) => {
 
 const PollHeader = () => {
   const location = useLocation();
+  const history = useHistory()
+
+  useEffect(() => {
+    if (location.pathname === "/admin/polls/") {
+      history.push("/admin/polls/polls");
+    }
+  }, [history, location.pathname]);
 
   const activeClass =
     'bg-transparent before:absolute pb-[2px] before:bottom-0 before:left-[50%] before:-translate-x-1/2 before:content-[""] before:bg-green-500 before:h-[0.3rem] before:w-[5rem] before:rounded-t-[1rem]';
