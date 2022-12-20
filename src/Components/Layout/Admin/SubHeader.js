@@ -6,12 +6,13 @@ const AccountHeader = ({ data }) => {
   const location = useLocation();
   const history = useHistory();
 
-    useEffect(() => {
-      if (location.pathname === "/admin/account/") {
-        history.push("/admin/account/settings");
-      }
-    }, [history, location.pathname]);
+  useEffect(() => {
+    if (location.pathname === "/admin/account") {
+      history.push("/admin/account/settings");
+    }
+  }, [history, location.pathname]);
   
+  console.log(location.pathname);
   const activeClass =
     'bg-transparent before:absolute pb-[2px] before:bottom-0 before:left-[50%] before:-translate-x-1/2 before:content-[""] before:bg-green-500 before:h-[0.3rem] before:w-[5rem] before:rounded-t-[1rem]';
   return (
@@ -23,7 +24,7 @@ const AccountHeader = ({ data }) => {
             activeClassName={
               location.pathname === "/admin/account/settings"
                 ? activeClass
-                : location.pathname === "/admin/account/"
+                : location.pathname === "/admin/account"
                 ? activeClass
                 : "null"
             }
