@@ -1,5 +1,3 @@
-/** @format */
-
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 
@@ -9,32 +7,36 @@ const AccountHeader = ({ data }) => {
   return (
     <header className='flex items-center border-b w-full'>
       <ul>
-        <li className='font-bold text-[#082b0e] inline-block p-4 mr-1 relative'>
+        <li
+          className='font-bold text-[#082b0e] inline-block p-4 mr-1 relative'
+          onClick={() => {
+            setIsActive("Admins");
+          }}
+        >
           <NavLink
             to={"/admin/account/settings"}
-            className={
+            activeClassName={
               isActive === "Admins"
                 ? 'bg-transparent before:absolute pb-[2px] before:bottom-0 before:left-[50%] before:-translate-x-1/2 before:content-[""] before:bg-green-500 before:h-[0.3rem] before:w-[5rem] before:rounded-t-[1rem]'
                 : "null"
             }
-            onClick={() => {
-              setIsActive("Admins");
-            }}
           >
             Admins
           </NavLink>
         </li>
-        <li className='font-bold text-[#082b0e] inline-block p-4 mr-1 relative'>
+        <li
+          className='font-bold text-[#082b0e] inline-block p-4 mr-1 relative'
+          onClick={() => {
+            setIsActive("Password");
+          }}
+        >
           <NavLink
             to={"/admin/account/managePassword"}
-            className={
+            activeClassName={
               isActive === "Password"
                 ? 'bg-transparent before:absolute pb-[2px] before:bottom-0 before:left-[50%] before:-translate-x-1/2 before:content-[""] before:bg-green-500 before:h-[0.3rem] before:w-[5rem] before:rounded-t-[1rem]'
                 : "null"
             }
-            onClick={() => {
-              setIsActive("Password");
-            }}
           >
             Password
           </NavLink>
@@ -50,32 +52,36 @@ const PollHeader = () => {
   return (
     <header className='flex items-center border-b w-full'>
       <ul>
-        <li className='font-bold text-[#082b0e] inline-block p-4 mr-1 relative' onClick={() => {
-              setPollSubNav("Polls");
-            }}>
+        <li
+          className='font-bold text-[#082b0e] inline-block p-4 mr-1 relative'
+          onClick={() => {
+            setPollSubNav("Polls");
+          }}
+        >
           <NavLink
             to='/admin/polls/polls'
-            className={
+            activeClassName={
               pollSubNav === "Polls"
                 ? 'bg-transparent before:absolute pb-[2px] before:bottom-0 before:left-[50%] before:-translate-x-1/2 before:content-[""] before:bg-green-500 before:h-[0.3rem] before:w-[5rem] before:rounded-t-[1rem]'
                 : "null"
             }
-            
           >
             Polls
           </NavLink>
         </li>
-        <li className='font-bold text-[#082b0e] inline-block p-4 mr-1 relative' onClick={() => {
-              setPollSubNav("Candidates");
-            }}>
+        <li
+          className='font-bold text-[#082b0e] inline-block p-4 mr-1 relative'
+          onClick={() => {
+            setPollSubNav("Candidates");
+          }}
+        >
           <NavLink
             to='/admin/polls/candidates'
-            className={
+            activeClassName={
               pollSubNav === "Candidates"
                 ? 'bg-transparent before:absolute pb-[2px] before:bottom-0 before:left-[50%] before:-translate-x-1/2 before:content-[""] before:bg-green-500 before:h-[0.3rem] before:w-[5rem] before:rounded-t-[1rem]'
                 : "null"
             }
-            
           >
             Candidates
           </NavLink>
