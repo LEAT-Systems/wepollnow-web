@@ -35,6 +35,7 @@ import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 // ]
 const TableResult = ({ data }) => {
   console.log(typeof data);
+  console.log(data);
   const history = useHistory();
   const results =
     typeof data === 'object' ? (
