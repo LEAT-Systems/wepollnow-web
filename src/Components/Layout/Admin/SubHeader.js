@@ -16,7 +16,7 @@ const AccountHeader = ({ data }) => {
             activeClassName={
               location.pathname === "/admin/account/settings"
                 ? activeClass
-                : location.pathname === "/admin/account"
+                : location.pathname === "/admin/account/"
                 ? activeClass
                 : "null"
             }
@@ -56,7 +56,7 @@ const PollHeader = () => {
             activeClassName={
               location.pathname === "/admin/polls/polls"
                 ? activeClass
-                : location.pathname === "/admin/polls"
+                : location.pathname === "/admin/polls/"
                 ? activeClass
                 : "null"
             }
