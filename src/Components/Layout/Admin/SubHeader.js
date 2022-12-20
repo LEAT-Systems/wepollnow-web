@@ -1,40 +1,35 @@
-import React, { useState } from "react";
+import React from "react";
 import { NavLink } from "react-router-dom";
+import { useLocation } from "react-router-dom/cjs/react-router-dom";
 
 const AccountHeader = ({ data }) => {
-  const [isActive, setIsActive] = useState("Admins");
+  const location = useLocation();
 
+  const activeClass =
+    'bg-transparent before:absolute pb-[2px] before:bottom-0 before:left-[50%] before:-translate-x-1/2 before:content-[""] before:bg-green-500 before:h-[0.3rem] before:w-[5rem] before:rounded-t-[1rem]';
   return (
     <header className='flex items-center border-b w-full'>
       <ul>
-        <li
-          className='font-bold text-[#082b0e] inline-block p-4 mr-1 relative'
-          onClick={() => {
-            setIsActive("Admins");
-          }}
-        >
+        <li className='font-bold text-[#082b0e] inline-block p-4 mr-1 relative'>
           <NavLink
-            to={"/admin/account/settings"}
+            to='/admin/account/settings'
             activeClassName={
-              isActive === "Admins"
-                ? 'bg-transparent before:absolute pb-[2px] before:bottom-0 before:left-[50%] before:-translate-x-1/2 before:content-[""] before:bg-green-500 before:h-[0.3rem] before:w-[5rem] before:rounded-t-[1rem]'
+              location.pathname === "/admin/account/settings"
+                ? activeClass
+                : location.pathname === "/admin/account"
+                ? activeClass
                 : "null"
             }
           >
             Admins
           </NavLink>
         </li>
-        <li
-          className='font-bold text-[#082b0e] inline-block p-4 mr-1 relative'
-          onClick={() => {
-            setIsActive("Password");
-          }}
-        >
+        <li className='font-bold text-[#082b0e] inline-block p-4 mr-1 relative'>
           <NavLink
             to={"/admin/account/managePassword"}
             activeClassName={
-              isActive === "Password"
-                ? 'bg-transparent before:absolute pb-[2px] before:bottom-0 before:left-[50%] before:-translate-x-1/2 before:content-[""] before:bg-green-500 before:h-[0.3rem] before:w-[5rem] before:rounded-t-[1rem]'
+              location.pathname === "/admin/account/managePassword"
+                ? activeClass
                 : "null"
             }
           >
@@ -47,38 +42,33 @@ const AccountHeader = ({ data }) => {
 };
 
 const PollHeader = () => {
-  const [pollSubNav, setPollSubNav] = useState("Polls");
+  const location = useLocation();
 
+  const activeClass =
+    'bg-transparent before:absolute pb-[2px] before:bottom-0 before:left-[50%] before:-translate-x-1/2 before:content-[""] before:bg-green-500 before:h-[0.3rem] before:w-[5rem] before:rounded-t-[1rem]';
+  console.log(location.pathname);
   return (
     <header className='flex items-center border-b w-full'>
       <ul>
-        <li
-          className='font-bold text-[#082b0e] inline-block p-4 mr-1 relative'
-          onClick={() => {
-            setPollSubNav("Polls");
-          }}
-        >
+        <li className='font-bold text-[#082b0e] inline-block p-4 mr-1 relative'>
           <NavLink
             to='/admin/polls/polls'
             activeClassName={
-              pollSubNav === "Polls"
-                ? 'bg-transparent before:absolute pb-[2px] before:bottom-0 before:left-[50%] before:-translate-x-1/2 before:content-[""] before:bg-green-500 before:h-[0.3rem] before:w-[5rem] before:rounded-t-[1rem]'
+              location.pathname === "/admin/polls/polls"
+                ? activeClass
+                : location.pathname === "/admin/polls"
+                ? activeClass
                 : "null"
             }
           >
             Polls
           </NavLink>
         </li>
-        <li
-          className='font-bold text-[#082b0e] inline-block p-4 mr-1 relative'
-          onClick={() => {
-            setPollSubNav("Candidates");
-          }}
-        >
+        <li className='font-bold text-[#082b0e] inline-block p-4 mr-1 relative'>
           <NavLink
             to='/admin/polls/candidates'
             activeClassName={
-              pollSubNav === "Candidates"
+              location.pathname === "/admin/polls/candidates"
                 ? 'bg-transparent before:absolute pb-[2px] before:bottom-0 before:left-[50%] before:-translate-x-1/2 before:content-[""] before:bg-green-500 before:h-[0.3rem] before:w-[5rem] before:rounded-t-[1rem]'
                 : "null"
             }
