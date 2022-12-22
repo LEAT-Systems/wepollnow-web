@@ -1,6 +1,6 @@
 /** @format */
 
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import Edit from "../../assets/edit@2x.png";
 // import Archive from "../../assets/archive@2x.png";
@@ -12,15 +12,19 @@ import axios from "axios";
 const TableBody = ({ tableData, open }) => {
   const { tableRowID, setTableRowID } = useContext(ModalFormContext);
   const [value, setValue] = useState("");
-  console.log(value)
-  const saveToLocalstorage = (target) => {
-    localStorage.setItem("pollID", target);
+  console.log("TableRowID: ", tableRowID);
+  console.log("Value: ", value)
+
+  useEffect(() => {
+    setValue(tableRowID);
+  }, [tableRowID]);
+  const saveToLocalstorage = () => {
+    localStorage.setItem("pollID", tableRowID);
   };
 
   const getLocalstorageItem = () => {
     const items = localStorage.getItem("pollID");
-
-    return items;
+    console.log(items);
   };
   console.log("set items func: ", saveToLocalstorage());
   console.log("get items func: ", getLocalstorageItem());
@@ -110,9 +114,8 @@ const TableBody = ({ tableData, open }) => {
       className='table-row cursor-pointer'
       data-id={tableData.id}
       onClick={(e) => {
-        setValue(e.target.getAttribute("data-id"));
         setTableRowID(e.target.getAttribute("data-id"));
-        saveToLocalstorage(tableRowID);
+        saveToLocalstorage();
 
         getLocalstorageItem();
         console.log("Value for redirection :", getLocalstorageItem());
@@ -155,9 +158,8 @@ const TableBody = ({ tableData, open }) => {
         <div
           className='text-blue-500 cursor-pointer'
           onClick={(e) => {
-            setValue(parentTarget(e));
             setTableRowID(parentTarget(e));
-            saveToLocalstorage(tableRowID);
+            saveToLocalstorage();
             getLocalstorageItem();
             console.log("Value for redirection :", getLocalstorageItem());
             console.log(parentTarget(e));
@@ -172,9 +174,8 @@ const TableBody = ({ tableData, open }) => {
         <div
           className='text-red-500 cursor-pointer'
           onClick={(e) => {
-            setValue(parentTarget(e));
             setTableRowID(parentTarget(e));
-            saveToLocalstorage(tableRowID);
+            saveToLocalstorage();
             getLocalstorageItem();
             console.log("Value for redirection :", getLocalstorageItem());
             handleDelete();
