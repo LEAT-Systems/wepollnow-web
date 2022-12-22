@@ -12,14 +12,13 @@ import axios from "axios";
 const TableBody = ({ tableData, open }) => {
   const { tableRowID, setTableRowID } = useContext(ModalFormContext);
   const [value, setValue] = useState("");
-
+  console.log(value)
   const saveToLocalstorage = (target) => {
     localStorage.setItem("pollID", target);
   };
 
   const getLocalstorageItem = () => {
     const items = localStorage.getItem("pollID");
-    setTableRowID(items);
 
     return items;
   };
@@ -112,8 +111,8 @@ const TableBody = ({ tableData, open }) => {
       data-id={tableData.id}
       onClick={(e) => {
         setValue(e.target.getAttribute("data-id"));
-        console.log("Value State :", value);
-        saveToLocalstorage(e.target.getAttribute("data-id"));
+        setTableRowID(e.target.getAttribute("data-id"));
+        saveToLocalstorage(tableRowID);
 
         getLocalstorageItem();
         console.log("Value for redirection :", getLocalstorageItem());
@@ -157,8 +156,8 @@ const TableBody = ({ tableData, open }) => {
           className='text-blue-500 cursor-pointer'
           onClick={(e) => {
             setValue(parentTarget(e));
-            console.log("Value State :", value);
-            saveToLocalstorage(parentTarget(e));
+            setTableRowID(parentTarget(e));
+            saveToLocalstorage(tableRowID);
             getLocalstorageItem();
             console.log("Value for redirection :", getLocalstorageItem());
             console.log(parentTarget(e));
@@ -174,8 +173,8 @@ const TableBody = ({ tableData, open }) => {
           className='text-red-500 cursor-pointer'
           onClick={(e) => {
             setValue(parentTarget(e));
-            console.log("Value State :", value);
-            saveToLocalstorage(parentTarget(e));
+            setTableRowID(parentTarget(e));
+            saveToLocalstorage(tableRowID);
             getLocalstorageItem();
             console.log("Value for redirection :", getLocalstorageItem());
             handleDelete();
