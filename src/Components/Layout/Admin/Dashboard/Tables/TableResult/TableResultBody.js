@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useContext } from "react";
+import ModalFormContext from "../../../../../../ModalFormContextAdmin/ModalFormContext";
     // {
     //     "id": 4,
     //     "voteCount": 0,
@@ -8,6 +9,8 @@ import React from "react";
     //     "logo": "/media/party_pictures/APGA_Nigeria_Logo_aeZzed2.png"
     // }
 const TableResultBody = ({ tableData }) => {
+    const { tableRowID } = useContext(ModalFormContext);
+    console.log(tableRowID);
 
     const getSymbol = () => {
       const string = tableData?.name;

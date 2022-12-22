@@ -13,14 +13,19 @@ const TableBody = ({ tableData, open }) => {
   const { tableRowID, setTableRowID } = useContext(ModalFormContext);
   const [value, setValue] = useState("");
 
+
+  const saveToLocalstorage = () => {
+   return localStorage.setItem("pollID", value);
+  };
+
   const getLocalstorageItem = () => {
     const items = localStorage.getItem("pollID");
     setTableRowID(items)
   };
+  console.log("set items func: ", saveToLocalstorage());
+  console.log("get items func: ", getLocalstorageItem());
 
-  const saveToLocalstorage = () => {
-    localStorage.setItem("pollID", value);
-  };
+
 
   const history = useHistory();
 
