@@ -60,6 +60,7 @@ const TableBody = ({ tableData, open }) => {
 
   const parentTarget = (e) =>
     e.currentTarget.parentNode.parentNode.getAttribute("data-id");
+  const target = (e) => e.target.getAttribute("data-id");
 
   const handleDelete = async () => {
     await axios
@@ -114,9 +115,8 @@ const TableBody = ({ tableData, open }) => {
       className='table-row cursor-pointer'
       data-id={tableData.id}
       onClick={(e) => {
-        setTableRowID(e.target.getAttribute("data-id"));
+        setTableRowID(target(e));
         saveToLocalstorage();
-
         getLocalstorageItem();
         console.log("Value for redirection :", getLocalstorageItem());
         redirect();
