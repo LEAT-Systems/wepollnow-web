@@ -13,19 +13,18 @@ const TableBody = ({ tableData, open }) => {
   const { tableRowID, setTableRowID } = useContext(ModalFormContext);
   const [value, setValue] = useState("");
 
-
-  const saveToLocalstorage = () => {
-   return localStorage.setItem("pollID", value);
+  const saveToLocalstorage = (target) => {
+    localStorage.setItem("pollID", target);
   };
 
   const getLocalstorageItem = () => {
     const items = localStorage.getItem("pollID");
-    setTableRowID(items)
+    setTableRowID(items);
+
+    return items;
   };
   console.log("set items func: ", saveToLocalstorage());
   console.log("get items func: ", getLocalstorageItem());
-
-
 
   const history = useHistory();
 
@@ -113,9 +112,11 @@ const TableBody = ({ tableData, open }) => {
       data-id={tableData.id}
       onClick={(e) => {
         setValue(e.target.getAttribute("data-id"));
-        console.log("Value for redirection :", value);
-        saveToLocalstorage();
+        console.log("Value State :", value);
+        saveToLocalstorage(e.target.getAttribute("data-id"));
+
         getLocalstorageItem();
+        console.log("Value for redirection :", getLocalstorageItem());
         redirect();
       }}
     >
@@ -155,10 +156,12 @@ const TableBody = ({ tableData, open }) => {
         <div
           className='text-blue-500 cursor-pointer'
           onClick={(e) => {
-            setValue(setTableRowID(parentTarget(e)));
-            saveToLocalstorage();
+            setValue(parentTarget(e));
+            console.log("Value State :", value);
+            saveToLocalstorage(parentTarget(e));
             getLocalstorageItem();
-            // console.log(parentTarget(e));
+            console.log("Value for redirection :", getLocalstorageItem());
+            console.log(parentTarget(e));
             open();
           }}
         >
@@ -170,9 +173,11 @@ const TableBody = ({ tableData, open }) => {
         <div
           className='text-red-500 cursor-pointer'
           onClick={(e) => {
-            setValue(setTableRowID(parentTarget(e)));
-            saveToLocalstorage();
+            setValue(parentTarget(e));
+            console.log("Value State :", value);
+            saveToLocalstorage(parentTarget(e));
             getLocalstorageItem();
+            console.log("Value for redirection :", getLocalstorageItem());
             handleDelete();
             // console.log(parentTarget(e));
           }}
