@@ -1,7 +1,7 @@
 /** @format */
 
 import React from "react";
-import SubHeader from "../../../SubHeader";
+import SubHeader, { PollHeader } from "../../../SubHeader";
 import { useState, useEffect } from "react";
 import SearchBar from "../../Search/SearchBar";
 import LinkIcon from "../../../assets/Filter@2x.png";
@@ -119,7 +119,7 @@ const Candidate = () => {
     <main className='flex flex-col justify-center w-[98%]'>
       <Header />
       <div className='max-h-screen px-4 md:px-6 lg:px-12 text-[#082a0f]'>
-        <SubHeader data={SubHeaderData} />
+        <PollHeader data={SubHeaderData} />
         <header className='flex flex-col md:flex-row justify-start md:justify-between my-4 place-items-start md:place-items-center items-start w-full md:items-center'>
           <h3 className='font-bold text-xl lg:text-2xl md:text-[1.4rem] capitalize py-4 pl-0 w-full'>
             Manage Candidates

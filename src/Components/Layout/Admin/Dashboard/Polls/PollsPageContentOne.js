@@ -6,7 +6,7 @@ import Grid from "./Grid";
 import FilterModal from "../Modals/FilterModal";
 import CreatePollsContainer from "../Modals/CreatePollsContainer";
 import Container from "../Modals/Edit/Polls/Container";
-import SubHeader from "../../SubHeader";
+import SubHeader, { PollHeader } from "../../SubHeader";
 import Axios from "axios";
 
 const SubHeaderData = [
@@ -93,7 +93,7 @@ const PollsPageContentOne = () => {
       <Header />
 
       <div className='px-4 md:px-6 lg:px-12'>
-        <SubHeader data={SubHeaderData} />
+        <PollHeader data={SubHeaderData} />
         <div className='w-full'>
           <PollsHeader
             setSearchResult={setSearchResult}
@@ -117,7 +117,11 @@ const PollsPageContentOne = () => {
           </div>
 
           {isGrid ? (
-            <Grid data={searchResult} handleOpen={handleOpen} open={handleOpenEdit} />
+            <Grid
+              data={searchResult}
+              handleOpen={handleOpen}
+              open={handleOpenEdit}
+            />
           ) : (
             <Tables data={searchResult} open={handleOpenEdit} />
           )}
