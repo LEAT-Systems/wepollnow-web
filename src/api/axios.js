@@ -1,7 +1,7 @@
-import axios from 'axios';
+import Axios from 'axios';
 
-export default axios.create({
-  baseURL: "https://wepollnow.azurewebsites.net/user/login/",
+const axios = Axios.create({
+  baseURL: "https://wepollnow.azurewebsites.net/",
 });
 
-
+export default axios;
