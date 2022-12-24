@@ -8,6 +8,7 @@ import EyeIcon from "@mui/icons-material/Visibility";
 import EyeOffIcon from "@mui/icons-material/VisibilityOff";
 import { useState } from "react";
 import { useEffect } from "react";
+import swal from "sweetalert";
 
 const data = [
   {
@@ -27,6 +28,7 @@ const Password = () => {
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [passwordMisMatch, setPasswordMismatch] = useState(false);
+  const [sendingRequest, setSendingRequest] = useState(false);
 
   useEffect(() => {
     if (newPassword !== confirmPassword) {
@@ -36,7 +38,47 @@ const Password = () => {
     }
   }, [newPassword, confirmPassword]);
 
-  console.log(passwordMisMatch);
+  const sendToAPI = async (e) => {
+    e.preventDefault();
+    setSendingRequest(true);
+    const response = await fetch(
+      "https://wepollnow.azurewebsites.net/user/signup/",
+      {
+        method: "POST",
+        body: JSON.stringify({
+          old_password: oldpassword,
+          new_Password: confirmPassword,
+        }),
+      }
+    );
+    const result = await response.json();
+    if (!response.ok) {
+      setSendingRequest(false);
+      swal({
+        title: `${result.detail}`,
+        icon: "error",
+        buttons: {
+          confirm: {
+            text: "Close",
+            className: "swalButton",
+          },
+        },
+      });
+    } else {
+      swal({
+        title: "Action was successful",
+        icon: "success",
+        buttons: {
+          confirm: {
+            text: "Close",
+            className: "swalButton",
+          },
+        },
+      });
+    }
+    setSendingRequest(false);
+  };
+
   return (
     <main className="flex flex-col justify-center w-[98%]">
       <Header />
@@ -53,7 +95,7 @@ const Password = () => {
             <div className="flex flex-row p-4">
               {/*  */}
               {/*========================  CHANGE PASSWORD FORM ================================*/}
-              <form className="w-full space-y-4">
+              <form className="w-full space-y-4" onSubmit={sendToAPI}>
                 {/* State : TYPE => Select */}
                 <div className="flex flex-col py-2">
                   <div className="relative block password_2">
@@ -132,7 +174,7 @@ const Password = () => {
                   </div>
                   {passwordMisMatch && (
                     <p className="pt-2 font-bold text-red-500">
-                      Error: Password Mis-match
+                      Error: New & Confirm Password Mis-match
                     </p>
                   )}
                 </div>
@@ -140,12 +182,13 @@ const Password = () => {
                 {/* Cancel and Submit button */}
                 <div className="flex flex-row">
                   <button
+                    type="submit"
                     disabled={passwordMisMatch}
                     className={` ${
                       passwordMisMatch && "hover:cursor-not-allowed"
                     } w-full p-3 text-white transition-all duration-200 ease-linear delay-100 bg-green-500 rounded-md cursor-pointer hover:rounded-full focus:outline-none`}
                   >
-                    Change Password
+                    {sendingRequest ? "Please wait..." : "Change Password"}
                   </button>
                 </div>
               </form>

@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import Header from "../../Header";
-import bannerImage from "../../../../../images/image_3.png";
+import bannerImage from "../../../../../images/avartar.png";
 import eye from "../../../../../images/eye.png";
 import calendar from "../../../../../images/calendar.png";
 import time from "../../../../../images/time.png";
-import image from "../../../../../images/blankImg.png";
+import image from "../../../../../images/blog_cover_final.png";
 import Delete from "../../assets/trash@2x.png";
 import { Link } from "react-router-dom";
 import DOMPurify from "dompurify";
@@ -138,6 +138,7 @@ const ManageBlogContent = () => {
       apiData.forEach((item) => {
         const aData = {
           id: item.id,
+          image: data.image !== undefined ? data.image : { image },
           title: item.title.split(" ").splice(0, 5).join(" ") + "...",
           content:
             item.content !== undefined
@@ -246,7 +247,7 @@ const ManageBlogContent = () => {
                     loading="lazy"
                     src={rightContent.image}
                     alt="headerImage"
-                    className="w-full md:w-[1000px] md:h-[600px] md:object-cover"
+                    className="w-full md:w-[1000px] md:h-[460px] md:object-cover"
                   />
                   <div className="flex flex-row space-x-2">
                     <img

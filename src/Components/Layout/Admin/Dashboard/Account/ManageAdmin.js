@@ -12,6 +12,7 @@ import Header from "../../Header";
 import { Modal } from "@mui/material";
 import { Close } from "@mui/icons-material";
 import { useRef } from "react";
+import swal from "sweetalert";
 
 const data = [
   {
@@ -35,22 +36,6 @@ const dataTable = [
     status: "active",
     symbol: "RM",
   },
-  {
-    id: 2,
-    name: "Jane Doe",
-    email: "Johndoe@gmail.com",
-    role: "Super Admin",
-    status: "active",
-    symbol: "RM",
-  },
-  {
-    id: 3,
-    name: "John Doe",
-    email: "Johndoe@gmail.com",
-    role: "Super Admin",
-    status: "active",
-    symbol: "RM",
-  },
 ];
 
 const ManageAdmin = () => {
@@ -59,7 +44,7 @@ const ManageAdmin = () => {
   const [tableData, setTableData] = useState([]);
   const [searchResult, setSearchResult] = useState([]);
   const [open, setOpen] = useState(false);
-  const [zone, setZone] = useState("");
+  const [role, setRone] = useState("");
   const [status, setStatus] = useState("");
   const [disable, setDisable] = useState(true);
   const nameRef = useRef();
@@ -74,12 +59,11 @@ const ManageAdmin = () => {
   };
 
   useEffect(() => {
-    if (zone !== "" && status !== "") {
+    if (role !== "" && status !== "") {
       setDisable(false);
     }
-  }, [zone, status]);
+  }, [role, status]);
 
-  console.log("isDisabled:", disable);
   /* handle for refine results */
   const handleOpenRefineResult = () => {
     setRefineResult(!refineResult);
@@ -90,19 +74,59 @@ const ManageAdmin = () => {
 
   useEffect(() => {
     /* For our demo json object */
+    // API DATA WILL BE SET HERE
     setTableData(dataTable);
     setSearchResult(dataTable);
   }, []);
 
   const handleFilterActive = (index) => {
     setFilterIsActive(index);
-    console.log(index);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("clicked");
-    console.log(nameRef.current.value, emailRef.current.value, status, zone);
+    try {
+      const response = await fetch(
+        "https://wepollnow.azurewebsites.net/user/signup/",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name: nameRef.current.value,
+            email: emailRef.current.value,
+            status: status,
+            role: role.toUpperCase(),
+          }),
+        }
+      );
+      if (response.ok === true) {
+        swal({
+          title: "Action was successful",
+          icon: "success",
+          buttons: {
+            confirm: {
+              text: "Close",
+              className: "swalButton",
+            },
+          },
+        });
+      } else {
+        throw new Error("A problem occured");
+      }
+    } catch (error) {
+      swal({
+        title: error,
+        icon: "error",
+        buttons: {
+          confirm: {
+            text: "Close",
+            className: "swalButton",
+          },
+        },
+      });
+    }
   };
   const filterActive =
     "hover:bg-blue-100 bg-blue-100 cursor-pointer  mr-1 w-[2.2rem]";
@@ -228,7 +252,7 @@ const ManageAdmin = () => {
               <label className="font-semibold custom_select_container">
                 <span className="font-semibold">Role</span>
                 <select
-                  onChange={(e) => setZone(e.target.value)}
+                  onChange={(e) => setRone(e.target.value)}
                   defaultValue={"DEFAULT"}
                   name="zone"
                   id="zone"

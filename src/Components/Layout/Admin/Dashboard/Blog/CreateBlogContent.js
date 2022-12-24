@@ -132,7 +132,7 @@ const CreateBlogContent = () => {
           <div className="flex flex-row items-center justify-center space-x-12">
             <div className="w-full space-y-12">
               <div className="flex flex-col space-y-1">
-                <p>Blog Title</p>
+                <p className="font-semibold">Blog Title</p>
                 <input
                   required
                   type="text"
@@ -143,7 +143,7 @@ const CreateBlogContent = () => {
                 />
               </div>
               <div className="flex flex-col space-y-1">
-                <p>Upload Featured Image</p>
+                <p className="font-semibold">Upload Featured Image</p>
                 <FileUploader
                   onTypeError={(err) => setFileError(err)}
                   onDrop={(file) => setFileName(file.name)}
@@ -184,7 +184,10 @@ const CreateBlogContent = () => {
                 </FileUploader>
               </div>
               <div className="flex flex-col space-y-1">
-                <p>Blog Content</p>
+                <p className="font-semibold">
+                  Blog Content
+                  <i> (Don't paste an image in this editor)</i>
+                </p>
                 <Editor
                   editorStyle={{ height: "300px" }}
                   editorState={editorState}

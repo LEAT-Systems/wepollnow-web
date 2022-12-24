@@ -37,7 +37,6 @@ const Login = () => {
 
       access = response?.data?.token.access;
       refresh = response?.data?.token.refresh;
-      setIsLoading(false);
       // setting the AccessToken to the AUTHCONTEXT
       authCtx.login(access);
       history.push("/admin/home", { replace: true });
@@ -58,6 +57,7 @@ const Login = () => {
       }
       errRef.current.focus();
     }
+    setIsLoading(false);
   };
 
   const handleSubmit = async (e) => {
@@ -71,10 +71,10 @@ const Login = () => {
         <img src={LOGO} alt="LOGO" className="w-44 pb-9" />
         <div className="w-full px-4 py-4 text-lg text-gray-700 border border-gray-500 rounded-lg shadow-2xl md:w-98 shadow-gray-200">
           <div className="p-6 space-y-4">
-            <h1 className="text-xl md:text-2xl text-center font-extrabold text-black">
+            <h1 className="text-xl font-extrabold text-center text-black md:text-2xl">
               Welcome Back
             </h1>
-            <p className="text-base text-center md:text-lg text-gray-600 font-semibold">
+            <p className="text-base font-semibold text-center text-gray-600 md:text-lg">
               Enter your credentials below to Login
             </p>
             <section>
@@ -96,7 +96,7 @@ const Login = () => {
               </label>
               <input
                 type="email"
-                className="w-full py-3 px-4 bg-transparent border border-black rounded mb-4 mt-1 font-semibold"
+                className="w-full px-4 py-3 mt-1 mb-4 font-semibold bg-transparent border border-black rounded"
                 placeholder="Enter Email"
                 required
                 aria-required
@@ -110,7 +110,7 @@ const Login = () => {
               </label>
               <input
                 type="password"
-                className="w-full py-3 px-4 bg-transparent border border-black rounded mb-6 mt-1 font-semibold"
+                className="w-full px-4 py-3 mt-1 mb-6 font-semibold bg-transparent border border-black rounded"
                 placeholder="Enter Password"
                 id="password"
                 autoComplete="on"
@@ -118,7 +118,7 @@ const Login = () => {
                 onChange={(e) => setPassword(e.target.value)}
                 value={password}
               />
-              <button className="w-full p-3 text-white bg-green-500 rounded-xl cursor-pointer transition-all duration-200 ease-linear delay-100 hover:rounded-full focus:outline-none">
+              <button className="w-full p-3 text-white transition-all duration-200 ease-linear delay-100 bg-green-500 cursor-pointer rounded-xl hover:rounded-full focus:outline-none">
                 {loading ? "Logging in..." : "Login"}
               </button>
             </form>
