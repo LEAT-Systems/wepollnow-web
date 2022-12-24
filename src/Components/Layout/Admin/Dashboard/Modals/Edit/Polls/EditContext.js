@@ -3,7 +3,7 @@
 import { useState, createContext } from "react";
 const ModalFormContext = createContext();
 
-export const ModalFormProvider = ({ children }) => {
+export const EditContext = ({ children }) => {
   /* Value ID's */
   const [pollType, setPollType] = useState([]);
   const [pollTypeName, setPollTypeName] = useState("");
@@ -27,10 +27,8 @@ export const ModalFormProvider = ({ children }) => {
   const [zoneData, setZoneData] = useState([]);
   const [formTwoData, setFormTwoData] = useState([]);
 
-  /* Poll Table State */
+  /* Table State */
   const [tableRowID, setTableRowID] = useState("");
-  /* Poll Table State */
-  const [candidateID, setCandidateID] = useState("");
   /* Edit Poll Data  */
   const [editPollData, setEditPollData] = useState([]);
 
@@ -76,13 +74,9 @@ export const ModalFormProvider = ({ children }) => {
         successMessage,
         setSuccessMessage,
 
-        /* Poll Table State */
+        /* Table State */
         tableRowID,
         setTableRowID,
-
-        /* Candidate Table State */
-        candidateID,
-        setCandidateID,
 
         /* Edit Poll Data */
         editPollData,
@@ -94,4 +88,4 @@ export const ModalFormProvider = ({ children }) => {
   );
 };
 
-export default ModalFormContext;
+export default EditContext;

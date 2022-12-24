@@ -1,6 +1,4 @@
-/** @format */
-
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useRef } from "react";
 import axios from "axios";
 import ModalFormContext from "../../../../../../../ModalFormContextAdmin/ModalFormContext";
 
@@ -35,6 +33,12 @@ const PollFormOne = ({ open, handleClose, nextPage, setPage }) => {
   const [enabledSenetorial, setEnabledSenetorial] = useState(false);
   const [enabledZone, setEnabledZone] = useState(false);
   const [confirmBtn, setConfirmBtn] = useState(true);
+  const adminRef = useRef();
+
+    useEffect(() => {
+    adminRef.current.focus();
+  }, []);
+
 
   /* Get State */
   useEffect(() => {
@@ -191,6 +195,7 @@ const PollFormOne = ({ open, handleClose, nextPage, setPage }) => {
               className='custom_select'
               value={pollType}
               required
+              ref={adminRef}
               aria-required
               onChange={(e) => {
                 setPollType(e.target.value);
@@ -200,7 +205,12 @@ const PollFormOne = ({ open, handleClose, nextPage, setPage }) => {
               <option value='Select Poll Type'>Select Poll Type</option>
               {pollTypeData.map((poll) => {
                 return (
-                  <option key={poll.id} id={poll.id} value={poll.id}>
+                  <option
+                    key={poll.id}
+                    id={poll.id}
+                    value={poll.id}
+                    defaultValue={"Presidential Polls"}
+                  >
                     {poll.title}
                   </option>
                 );

@@ -1,7 +1,7 @@
 /** @format */
 
 import React from "react";
-import SubHeader from "../../../SubHeader";
+import SubHeader, { PollHeader } from "../../../SubHeader";
 import { useState, useEffect } from "react";
 import SearchBar from "../../Search/SearchBar";
 import LinkIcon from "../../../assets/Filter@2x.png";
@@ -11,6 +11,7 @@ import Header from "../../../Header";
 import AddCandidateModal from "../../Modals/AddCandidateModal";
 import FilterModal from "../../Modals/FilterModal";
 import axios from "axios";
+import EditCandidate from "../../Modals/Edit/Candidate/EditCandidate";
 
 const SubHeaderData = [
   {
@@ -48,7 +49,8 @@ const dataTable = [
 
 const Candidate = () => {
   const [filterIsActive, setFilterIsActive] = useState(0);
-  const [addCandidate, setAddCandidate] = useState(false);
+  const [openCandidateModal, setOpenCandidateModal] = useState(false);
+    const [openEdit, setOpenEdit] = useState(false);
   const [refineResult, setRefineResult] = useState(false);
   const [tableData, setTableData] = useState([]);
   const [polls, setPolls] = useState([]);
@@ -58,12 +60,21 @@ const Candidate = () => {
 
   /* handle for create new Candidate */
   const handleOpenAddCandidate = () => {
-    setAddCandidate(!addCandidate);
+    setOpenCandidateModal(!openCandidateModal);
   };
 
   const handleCloseAddCandidate = () => {
-    setAddCandidate(!addCandidate);
+    setOpenCandidateModal(!openCandidateModal);
   };
+
+    /* handle for editing poll */
+  const handleOpenEdit = () => {
+    setOpenEdit(!openEdit);
+  };
+  const handleCloseEdit = () => {
+    setOpenEdit(!openEdit);
+  };
+
 
   /* handle for refine results */
   const handleOpenRefineResult = () => {
@@ -108,7 +119,7 @@ const Candidate = () => {
     <main className='flex flex-col justify-center w-[98%]'>
       <Header />
       <div className='max-h-screen px-4 md:px-6 lg:px-12 text-[#082a0f]'>
-        <SubHeader data={SubHeaderData} />
+        <PollHeader data={SubHeaderData} />
         <header className='flex flex-col md:flex-row justify-start md:justify-between my-4 place-items-start md:place-items-center items-start w-full md:items-center'>
           <h3 className='font-bold text-xl lg:text-2xl md:text-[1.4rem] capitalize py-4 pl-0 w-full'>
             Manage Candidates
@@ -157,13 +168,15 @@ const Candidate = () => {
               Add candidate
             </button>
           </div>
-          <ManageCandidateTable data={searchResult} />
+          <ManageCandidateTable data={searchResult} open={handleOpenEdit} />
         </div>
 
         <AddCandidateModal
-          addCandidate={addCandidate}
+          addCandidate={openCandidateModal}
           handleCloseAddCandidate={handleCloseAddCandidate}
         />
+
+        <EditCandidate open={openEdit} close={handleCloseEdit} />
         <FilterModal
           refineResult={refineResult}
           handleCloseRefineResult={handleCloseRefineResult}

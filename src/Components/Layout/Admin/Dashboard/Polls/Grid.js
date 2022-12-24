@@ -1,17 +1,82 @@
-/** @format */
-import React from "react";
-import {
-  AddOutlined,
-  CalendarMonthOutlined,
-  DeleteOutline,
-  Inventory2Outlined,
-  NoteAltOutlined,
-} from "@mui/icons-material";
-import Edit from '../../assets/edit@2x.png'
-import Archive from "../../assets/archive@2x.png";
-import Delete from '../../assets/trash@2x.png'
+import React, { useContext } from "react";
+import { AddOutlined, CalendarMonthOutlined } from "@mui/icons-material";
+import Edit from "../../assets/edit@2x.png";
+import Delete from "../../assets/trash@2x.png";
+import swal from "sweetalert";
+import axios from "axios";
+import ModalFormContext from "../../../../../ModalFormContextAdmin/ModalFormContext";
 
-const Grid = ({ handleOpen, data }) => {
+const Grid = ({ handleOpen, data, open }) => {
+    const { tableRowID, setTableRowID } = useContext(ModalFormContext);
+  const getSymbol = (data) => {
+      const string = data?.poll_name;
+      const wordArray = string.split(" ", 2);
+      let symbol;
+      if (wordArray.length === 1) {
+        symbol = string.slice(0, 2);
+      }
+      if (wordArray.length === 2) {
+        symbol = string.slice(0, 1) + wordArray[1].slice(0, 1);
+      }
+      return symbol;
+  };
+
+  const formatDate = (string) => {
+    return string.slice(0, 10); /* string.split("T", 10).join() */
+  };
+
+  const parentTarget = (e) =>
+    e.currentTarget.parentNode.parentNode.parentNode.getAttribute("data-id");
+
+    const handleDelete = async () => {
+      await axios
+        .delete(
+          `https://wepollnow.azurewebsites.net/poll/rud_poll/${tableRowID}`
+        )
+        .then((res) => {
+          console.log(res.data);
+          swal({
+            title: "Success",
+            text: "Poll Deleted!",
+            icon: "success",
+            button: "Ok",
+          });
+        })
+        .catch((err) => {
+          console.log(err);
+          if (!err?.response) {
+            swal({
+              title: "Success",
+              text: "No Internet Connection",
+              icon: "error",
+              button: "Ok",
+            });
+          } else if (err.response?.status === 400) {
+            swal({
+              title: "Failure",
+              text: "Something went wrong!",
+              icon: "error",
+              button: "Ok",
+            });
+          } else if (err.response?.status === 401) {
+            swal({
+              title: "Failure",
+              text: "Unauthorized",
+              icon: "error",
+              button: "Ok",
+            });
+          } else {
+            swal({
+              title: "Failure",
+              text: "Poll Deletion Failed",
+              icon: "error",
+              button: "Ok",
+            });
+          }
+        });
+
+      window.location.reload();
+    };
   return (
     <main className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xxl:grid-cols-4 mb-4 gap-6'>
       {/* Button to create new poll */}
@@ -28,87 +93,105 @@ const Grid = ({ handleOpen, data }) => {
       </div>
 
       {/* existing polls from API */}
-      {data.map(
-        ({ date__created, poll, poll__date, location, symbol, id, status }) => (
-          <div
-            className='border-2 border-gray-300 py-2 block gap-4 rounded-lg'
-            key={id}
-          >
-            {/* First Section of Card */}
-            <div className='justify-between items-center flex p-2'>
-              <button className='border border-gray-100 text-[.8rem] px-2 py-1 fit-content rounded-sm'>
-                {date__created}
-              </button>
-              <div className='flex my-auto'>
-                <span className='text-[1rem] mr-2 hover:cursor-pointer'>
-                  <img
-                    src={Edit}
-                    alt='Edit'
-                    className='w-[1.1rem] h-[1.1rem]'
-                  />
-                </span>
-                <span className='text-[1rem] mx-2 hover:cursor-pointer'>
-                  <img
-                    src={Archive}
-                    alt='Archive'
-                    className='w-[1.1rem] h-[1.1rem]'
-                  />
-                </span>
-                <span className='text-[1.1rem] ml-2 hover:cursor-pointer'>
-                  <img
-                    src={Delete}
-                    alt='Trash'
-                    className='w-[1.1rem] h-[1.1rem]'
-                  />
-                </span>
-              </div>
+      {data.map((data) => (
+        <div
+          className='border-2 border-gray-300 py-2 block gap-4 rounded-lg'
+          key={data?.id}
+          data-id={data.id}
+        >
+          {/* First Section of Card */}
+          <div className='justify-between items-center flex p-2'>
+            <button className='border border-gray-100 text-[.8rem] px-2 py-1 fit-content rounded-sm'>
+              {formatDate(data?.poll_startDate)}
+            </button>
+            <div className='flex my-auto'>
+              <span
+                className='text-[1rem] mr-2 hover:cursor-pointer'
+                onClick={(e) => {
+                  setTableRowID(parentTarget(e));
+                  open();
+                  console.log(parentTarget(e));
+                }}
+              >
+                <img src={Edit} alt='Edit' className='w-[1.1rem] h-[1.1rem]' />
+              </span>
+              {/* <span className='text-[1rem] mx-2 hover:cursor-pointer'>
+                <img
+                  src={Archive}
+                  alt='Archive'
+                  className='w-[1.1rem] h-[1.1rem]'
+                />
+              </span> */}
+              <span
+                className='text-[1.1rem] ml-2 hover:cursor-pointer'
+                onClick={(e) => {
+                  setTableRowID(parentTarget(e));
+                  handleDelete();
+                  // console.log(parentTarget(e));
+                }}
+              >
+                <img
+                  src={Delete}
+                  alt='Trash'
+                  className='w-[1.1rem] h-[1.1rem]'
+                />
+              </span>
+            </div>
+          </div>
+
+          {/* Second Section of Card */}
+          <div className='flex h-36 w-full bg-[#b3bab4] tracking-wider font-serif text-[#082a0f] items-center justify-center text-4xl font-bold sm:font-[900] uppercase'>
+            {getSymbol(data)}
+          </div>
+
+          {/* Third Section of Card */}
+          <div className='justify-between items-center flex px-2'>
+            <div className='block p-2'>
+              <h2 className='font-[700] text-[.9rem] md:text-[.8rem] text-[#082a0f] capitalize'>
+                {data?.poll_name}
+              </h2>
+              <h4 className='font-[500] text-[.9rem] md:text-[.9rem] text-[#082a0f] capitalize'>
+                {data?.poll_state?.name}
+              </h4>
             </div>
 
-            {/* Second Section of Card */}
-            <div className='flex h-36 w-full bg-[#b3bab4] tracking-wider font-serif text-[#082a0f] items-center justify-center text-4xl font-bold sm:font-[900] capitalize'>
-              {symbol}
-            </div>
-
-            {/* Third Section of Card */}
-            <div className='justify-between items-center flex px-2'>
-              <div className='block p-2'>
-                <h2 className='font-[700] text-[.9rem] md:text-[.8rem] text-[#082a0f] capitalize'>
-                  {poll}
+            <div className='block text-[#082a0f] py-3'>
+              <div className='flex items-center m-auto px-2'>
+                <span className='text-[.9rem] mr-2 hover:cursor-pointer my-auto'>
+                  <CalendarMonthOutlined
+                    className='text-[#082a0f] font-[500]'
+                    fontSize='inherit'
+                  />
+                </span>
+                <h2 className='font-[400] text-[.8rem] md:text-[.8rem] my-auto pt-1'>
+                  {formatDate(data?.poll_endDate)}
                 </h2>
-                <h4 className='font-[500] text-[.9rem] md:text-[.9rem] text-[#082a0f] capitalize'>
-                  {location}
-                </h4>
               </div>
+              <div className='flex justify-center-items-center'>
+                <div
+                  className={`${
+                    data.status === 1
+                      ? "bg-blue-500"
+                      : data.status === 2
+                      ? "bg-green-500"
+                      : "bg-red-400"
+                  } rounded-full h-2 w-2 m-auto`}
+                >
+                  {" "}
+                </div>
 
-              <div className='block text-[#082a0f] py-3'>
-                <div className='flex items-center m-auto px-2'>
-                  <span className='text-[.9rem] mr-2 hover:cursor-pointer my-auto'>
-                    <CalendarMonthOutlined
-                      className='text-[#082a0f] font-[500]'
-                      fontSize='inherit'
-                    />
-                  </span>
-                  <h2 className='font-[400] text-[.8rem] md:text-[.8rem] my-auto pt-1'>
-                    {poll__date}
-                  </h2>
-                </div>
-                <div className='flex justify-center-items-center'>
-                  {status === "Upcoming" ? (
-                    <div className='bg-yellow-600 rounded-full h-2 w-2 m-auto'></div>
-                  ) : status === "Concluded" ? (
-                    <div className='bg-[#082a0f] rounded-full h-2 w-2 m-auto'></div>
-                  ) : (
-                    <div className='bg-red-100 rounded-full h-2 w-2 m-auto'></div>
-                  )}
-                  <h2 className='font-[400] text-base md:text-base my-auto capitalize'>
-                    {status}
-                  </h2>
-                </div>
+                <h2 className='font-[400] text-base md:text-base my-auto capitalize'>
+                  {data.status === 1
+                    ? "Upcoming"
+                    : data.status === 2
+                    ? "Scheduled"
+                    : "Concluded"}
+                </h2>
               </div>
             </div>
           </div>
-        )
-      )}
+        </div>
+      ))}
     </main>
   );
 };

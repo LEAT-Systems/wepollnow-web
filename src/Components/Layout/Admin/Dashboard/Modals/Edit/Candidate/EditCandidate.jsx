@@ -1,10 +1,13 @@
-import React, { useState, useEffect, useRef } from "react";
+/** @format */
+
+import React, { useState, useEffect, useRef, useContext } from "react";
 import { Close } from "@mui/icons-material";
 import { Checkbox, Modal } from "@mui/material";
 import { FileUploader } from "react-drag-drop-files";
 import { FormControl, FormControlLabel } from "@mui/material";
 import Axios from "axios";
 import swal from "sweetalert";
+import ModalFormContext from "../../../../../../../ModalFormContextAdmin/ModalFormContext";
 
 const EditCandidate = ({ open, close }) => {
   /* Handling the form input and data */
@@ -22,6 +25,7 @@ const EditCandidate = ({ open, close }) => {
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
   const [mainCandidate, setMainCandidate] = useState(false);
+  const { candidateID, setCandidateID } = useContext(ModalFormContext);
   // newly added states
   const [file, setFile] = useState(null);
   const [fileName, setFileName] = useState("");
@@ -39,7 +43,11 @@ const EditCandidate = ({ open, close }) => {
   const [enabledSenetorial, setEnabledSenetorial] = useState(false);
   const [enabledZone, setEnabledZone] = useState(false);
   const [confirmBtn, setConfirmBtn] = useState(true);
+  const inputRef = useRef(null);
 
+  useEffect(() => {
+    inputRef?.current?.focus();
+  }, []);
   if (selectedState === undefined) {
     setSelectedState("");
   }
@@ -121,8 +129,8 @@ const EditCandidate = ({ open, close }) => {
 
     console.log(file);
 
-    await Axios.post(
-      "https://wepollnow.azurewebsites.net/utilities/candidates/",
+    await Axios.put(
+      `https://wepollnow.azurewebsites.net/utilities/rud_candidate/${candidateID}`,
       {
         name: name,
         poll: 2,
@@ -186,7 +194,7 @@ const EditCandidate = ({ open, close }) => {
         }
       });
 
-    window.location.reload();
+    // window.location.reload();
   };
 
   console.log("Main Candidate: ", mainCandidate);
@@ -248,7 +256,7 @@ const EditCandidate = ({ open, close }) => {
         <div className='flex flex-col items-start justify-start px-6 py-4 my-auto mx-auto h-auto w-[95%] sm:w-5/6 md:w-3/6 bg-white rounded-lg overflow-y-auto focus:outline-none'>
           <header className='flex items-center justify-between w-full py-2 mb-3 border-b-2 border-gray-300 border-solid'>
             <h2 className='font-extrabold text-lg md:text-xl text-[#082a0f] capitalize'>
-              Add Candidate
+              Edit Candidate Details
             </h2>
             <button
               className='flex items-center justify-center border border-1 rounded-md py-[2px] px-[2px] cursor-pointer text-sm md:text-base bg-[#fcf0f0] text-red-500'
@@ -280,6 +288,7 @@ const EditCandidate = ({ open, close }) => {
                   required
                   aria-required
                   value={name}
+                  ref={inputRef}
                   onChange={(e) => setName(e.target.value)}
                   className='font-medium text-base text-[#616b62] capitalize h-full w-full border-2 border-gray-300 rounded-md py-3 px-3 placeholder:text-[#616b62]'
                 />

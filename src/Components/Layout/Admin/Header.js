@@ -27,6 +27,7 @@ const Header = () => {
     history.push("/admin/login", { replace: true });
     // destroy session here
     authCtx.logout();
+    window.location.reload()
   };
   return (
     <>
