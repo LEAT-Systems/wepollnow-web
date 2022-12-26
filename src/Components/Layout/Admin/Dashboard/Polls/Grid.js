@@ -3,7 +3,7 @@ import { AddOutlined, CalendarMonthOutlined } from "@mui/icons-material";
 import Edit from "../../assets/edit@2x.png";
 import Delete from "../../assets/trash@2x.png";
 import swal from "sweetalert";
-import axios from "axios";
+import axios from "../../../../../api/axios";
 import ModalFormContext from "../../../../../ModalFormContextAdmin/ModalFormContext";
 
 const Grid = ({ handleOpen, data, open }) => {
@@ -31,7 +31,7 @@ const Grid = ({ handleOpen, data, open }) => {
     const handleDelete = async () => {
       await axios
         .delete(
-          `https://wepollnow.azurewebsites.net/poll/rud_poll/${tableRowID}`
+          `/poll/rud_poll/${tableRowID}`
         )
         .then((res) => {
           console.log(res.data);
