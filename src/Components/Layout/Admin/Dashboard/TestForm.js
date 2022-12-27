@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import Axios from 'axios'
+import axios from "../../../../api/axios.js"
 import {
   FormControl,
   FormControlLabel,
@@ -28,7 +28,7 @@ const TestForm = () => {
 
    useEffect(() => {
      const getState = async () => {
-       await Axios.get("https://wepollnow.azurewebsites.net/utilities/states/")
+       await axios.get("/utilities/states/")
          .then((res) => setState(res.data))
          .catch((err) => console.log(err));
      };
@@ -38,8 +38,8 @@ const TestForm = () => {
    /* Get Senetorial District */
    useEffect(() => {
      const getSenetorial = async () => {
-       await Axios.get(
-         `https://wepollnow.azurewebsites.net/utilities/senatorial/`
+       await axios.get(
+         `/utilities/senatorial/`
        )
          .then((res) => setDistrictData(res.data))
          .catch((err) => console.log(err));
@@ -50,8 +50,8 @@ const TestForm = () => {
    /* Get Poll Type */
    useEffect(() => {
      const getPollType = async () => {
-       await Axios.get(
-         `https://wepollnow.azurewebsites.net/poll/poll_category/`
+       await axios.get(
+         `/poll/poll_category/`
        )
          .then((res) => {
            setPollTypeData(res.data);
@@ -65,8 +65,8 @@ const TestForm = () => {
    /* Get Party */
    useEffect(() => {
      const getParty = async () => {
-       await Axios.get(
-         `https://wepollnow.azurewebsites.net/utilities/party_list/`
+       await axios.get(
+         `/utilities/party_list/`
        )
          .then((res) => {
            setPartyData(res.data);
@@ -93,8 +93,8 @@ const TestForm = () => {
       const formData = new FormData();
       formData.append("candidateImage", candidateImage);
  
-      await Axios.post(
-        "https://wepollnow.azurewebsites.net/utilities/candidates/",
+      await axios.post(
+        "/utilities/candidates/",
         {
           name: name,
           poll: 2,
