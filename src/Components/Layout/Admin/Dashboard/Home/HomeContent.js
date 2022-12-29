@@ -5,7 +5,7 @@ import Header from "../../Header";
 import { ArrowForwardIos, ArrowUpward } from "@mui/icons-material";
 import Chart from "../../assets/Chart.jpg";
 import People from "../../assets/People.jpg";
-import Axios from "axios";
+import axios from "../../../../../api/axios";
 
 const DashboardContent = () => {
   const data = [
@@ -24,7 +24,7 @@ const DashboardContent = () => {
 
   useEffect(() => {
     const getData = async () => {
-      Axios.get("https://wepollnow.azurewebsites.net/poll/get_polls/")
+      axios.get("/poll/get_polls/")
         .then((res) => {
           console.log(res);
           setModalData(res.data);
