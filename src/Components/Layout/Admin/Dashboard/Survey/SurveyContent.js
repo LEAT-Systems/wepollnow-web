@@ -6,7 +6,6 @@ import {
   Close,
   Delete,
 } from "@mui/icons-material";
-import { Axios } from "axios";
 import LinkIcon from "../../assets/Filter@2x.png";
 import Header from "../../Header";
 import Progress from "./Progress";
