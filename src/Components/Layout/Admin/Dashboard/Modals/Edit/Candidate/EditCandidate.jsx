@@ -5,7 +5,7 @@ import { Close } from "@mui/icons-material";
 import { Checkbox, Modal } from "@mui/material";
 import { FileUploader } from "react-drag-drop-files";
 import { FormControl, FormControlLabel } from "@mui/material";
-import Axios from "axios";
+import axios from "../../../../../../../api/axios";
 import swal from "sweetalert";
 import ModalFormContext from "../../../../../../../ModalFormContextAdmin/ModalFormContext";
 
@@ -54,7 +54,7 @@ const EditCandidate = ({ open, close }) => {
 
   useEffect(() => {
     const getState = async () => {
-      await Axios.get("https://wepollnow.azurewebsites.net/utilities/states/")
+      await axios.get("/utilities/states/")
         .then((res) => setState(res.data))
         .catch((err) => console.log(err));
     };
@@ -64,8 +64,8 @@ const EditCandidate = ({ open, close }) => {
   /* Get Senetorial District */
   useEffect(() => {
     const getSenetorial = async () => {
-      await Axios.get(
-        `https://wepollnow.azurewebsites.net/utilities/senatorial/${selectedState}`,
+      await axios.get(
+        `/utilities/senatorial/${selectedState}`,
         {
           state_id: selectedState,
         }
@@ -80,8 +80,8 @@ const EditCandidate = ({ open, close }) => {
   // /* Get Zone */
   // useEffect(() => {
   //   const getSenetorial = async () => {
-  //     await Axios.get(
-  //       `https://wepollnow.azurewebsites.net/utilities/zone/${selectedState}`
+  //     await axios.get(
+  //       `/utilities/zone/${selectedState}`
   //     )
   //       .then((res) => setZoneData(res.data))
   //       .catch((err) => console.log(err));
@@ -93,7 +93,7 @@ const EditCandidate = ({ open, close }) => {
   /* Get Poll Type */
   useEffect(() => {
     const getPollType = async () => {
-      await Axios.get(`https://wepollnow.azurewebsites.net/poll/poll_category/`)
+      await axios.get(`/poll/poll_category/`)
         .then((res) => {
           setPollTypeData(res.data);
         })
@@ -105,8 +105,8 @@ const EditCandidate = ({ open, close }) => {
   /* Get Party */
   useEffect(() => {
     const getParty = async () => {
-      await Axios.get(
-        `https://wepollnow.azurewebsites.net/utilities/party_list/`
+      await axios.get(
+        `/utilities/party_list/`
       )
         .then((res) => {
           setPartyData(res.data);
@@ -129,8 +129,8 @@ const EditCandidate = ({ open, close }) => {
 
     console.log(file);
 
-    await Axios.put(
-      `https://wepollnow.azurewebsites.net/utilities/rud_candidate/${candidateID}`,
+    await axios.put(
+      `/utilities/rud_candidate/${candidateID}`,
       {
         name: name,
         poll: 2,

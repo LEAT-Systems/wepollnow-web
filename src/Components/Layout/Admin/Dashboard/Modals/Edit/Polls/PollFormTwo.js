@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { ArrowBack } from "@mui/icons-material";
 import ModalFormContext from "../../../../../../../ModalFormContextAdmin/ModalFormContext";
-import axios from "axios";
+import axios from "../../../../../../../api/axios";
 import swal from "sweetalert";
 
 // const data = [
@@ -127,7 +127,7 @@ const PollFormTwo = ({
     e.preventDefault();
 
     await axios
-      .put(`https://wepollnow.azurewebsites.net/poll/rud_poll/${tableRowID}`, config())
+      .put(`/poll/rud_poll/${tableRowID}`, config())
       .then((res) => {
         console.log(res);
         swal({

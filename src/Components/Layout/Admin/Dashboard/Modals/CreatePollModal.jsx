@@ -1,7 +1,7 @@
 /** @format */
 
 import React, { useState, useEffect, useContext, useRef } from "react";
-import axios from "axios";
+import axios from "../../../../../api/axios";
 import ModalFormContext from "../../../../../ModalFormContextAdmin/ModalFormContext";
 
 const CreatePollModal = ({ open, handleClose, nextPage, setPage }) => {
@@ -48,7 +48,7 @@ const CreatePollModal = ({ open, handleClose, nextPage, setPage }) => {
   useEffect(() => {
     const getState = async () => {
       await axios
-        .get("https://wepollnow.azurewebsites.net/utilities/states/")
+        .get("/utilities/states/")
         .then((res) => setState(res.data))
         .catch((err) => console.log(err));
     };
@@ -61,7 +61,7 @@ const CreatePollModal = ({ open, handleClose, nextPage, setPage }) => {
     const getSenetorial = async () => {
       await axios
         .get(
-          `https://wepollnow.azurewebsites.net/utilities/senatorial/${selectedState}`
+          `/utilities/senatorial/${selectedState}`
         )
         .then((res) => setDistrictData(res.data))
         .catch((err) => console.log(err));
@@ -73,7 +73,7 @@ const CreatePollModal = ({ open, handleClose, nextPage, setPage }) => {
   useEffect(() => {
     const getPollType = async () => {
       await axios
-        .get(`https://wepollnow.azurewebsites.net/poll/poll_category/`)
+        .get(`/poll/poll_category/`)
         .then((res) => {
           setPollTypeData(res.data);
           console.log(res.data);
@@ -87,7 +87,7 @@ const CreatePollModal = ({ open, handleClose, nextPage, setPage }) => {
   useEffect(() => {
     const getParty = async () => {
       await axios
-        .get(`https://wepollnow.azurewebsites.net/utilities/party_list/`)
+        .get(`/utilities/party_list/`)
         .then((res) => {
           setPartyData(res.data);
           console.log(res.data);
@@ -126,7 +126,7 @@ const CreatePollModal = ({ open, handleClose, nextPage, setPage }) => {
     const getParties = async () => {
       await axios
         .post(
-          `https://wepollnow.azurewebsites.net/poll/poll_category_party/`,
+          `/poll/poll_category_party/`,
           config()
         )
         .then((res) => {
