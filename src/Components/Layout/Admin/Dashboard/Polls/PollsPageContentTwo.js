@@ -8,13 +8,12 @@ import BarChart from "../Charts/BarChart";
 import PieChart from "../Charts/PieChart";
 import PieChart2 from "../Charts/PieChart2";
 import DropDown from "../DropDown/DropDown";
-import Grid from "./Grid";
 import Data from "../../Data.json";
 import { NavLink } from "react-router-dom";
 import VOTES from "../../assets/directbox-default.png";
 import TableResult from "../Tables/TableResult/TableResult";
 import TableStateResult from "../Tables/TableStateResult/TableStateResult";
-import axios from "axios";
+import axios from "../../../../../api/axios";
 import ModalFormContext from "../../../../../ModalFormContextAdmin/ModalFormContext";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
@@ -81,7 +80,7 @@ const PollsPageContentTwo = () => {
 
   useEffect(() => {
     axios
-      .post("https://wepollnow.azurewebsites.net/poll/poll_result/", {
+      .post("/poll/poll_result/", {
         poll_id: tableRowID,
       })
       .then((res) => {
