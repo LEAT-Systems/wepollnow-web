@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Header from "../../Header";
 import { Link, useHistory } from "react-router-dom";
 import gallery from "../../../../../images/gallery.png";
@@ -8,6 +8,7 @@ import { EditorState } from "draft-js";
 import { Editor } from "react-draft-wysiwyg";
 import { convertToHTML } from "draft-convert";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
+import { baseUrl } from "../../../../../store/baseUrl";
 
 // Allowable file types
 const fileTypes = ["JPG", "PNG", "JPEG"];
@@ -19,12 +20,18 @@ const CreateBlogContent = () => {
   const [fileName, setFileName] = useState("");
   const [fileError, setFileError] = useState();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [token, setToken] = useState();
   const [formState, setFormState] = useState({
     title: "",
     image: {},
     content: "",
     date_posted: "",
   });
+
+  // Getting user authorized token from local storage
+  useEffect(() => {
+    setToken(localStorage.getItem("token"));
+  }, []);
 
   // Get current date
   const currentDate = new Date().toJSON().slice(0, 10);
@@ -65,9 +72,10 @@ const CreateBlogContent = () => {
   // Handle submit
   const handleSubmit = (e) => {
     e.preventDefault();
-
     // Send to API
     let formData = new FormData();
+    let myHeaders = new Headers();
+    myHeaders.append("Authorization", `Bearer ${token}`);
     formData.append("title", formState.title);
     formData.append("content", formState.content);
     formData.append("image", formState.image);
@@ -75,18 +83,18 @@ const CreateBlogContent = () => {
 
     const requestOptions = {
       method: "POST",
+      headers: myHeaders,
       body: formData,
     };
+
     const sendData = async () => {
-      const response = await fetch(
-        "https://wepollnow.azurewebsites.net/blog/",
-        requestOptions
-      );
+      const response = await fetch(baseUrl + `blog/`, requestOptions);
+
       if (!response.ok) {
         alert("Failed to upload...Try again...");
+        setIsSubmitting(false);
       } else {
         history.push("/admin/blog", { replace: true });
-        setIsSubmitting(false);
       }
     };
     sendData();

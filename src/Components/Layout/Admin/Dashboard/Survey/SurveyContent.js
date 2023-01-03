@@ -9,9 +9,10 @@ import {
 import Header from "../../Header";
 import Progress from "./Progress";
 import { Modal } from "@mui/material";
-import { useRef } from "react";
+import tooltipIcon from "../../../../../images/tooltip.png";
 import swal from "sweetalert";
 import { Link } from "react-router-dom";
+import { baseUrl } from "../../../../../store/baseUrl";
 
 const SurveyContent = () => {
   const [open, setOpen] = useState(false);
@@ -25,6 +26,8 @@ const SurveyContent = () => {
   const [postPerPage] = useState(5);
   const [title, setTitle] = useState("");
   const [surveyData, setSurveyData] = useState([]);
+  const [tooltipStatus, setTooltipStatus] = useState(0);
+
   // This handles pagination on the poll items
   const indexOfLastPost = currentPage * postPerPage;
   const indexOfFirstPost = indexOfLastPost - postPerPage;
@@ -51,7 +54,7 @@ const SurveyContent = () => {
     try {
       const getData = async () => {
         const response = await fetch(
-          `https://wepollnow.azurewebsites.net/poll/rud_survey_category/${id}`,
+          baseUrl + `poll/rud_survey_category/${id}`,
           { method: "DELETE" }
         );
         if (response.ok === true) {
@@ -86,12 +89,9 @@ const SurveyContent = () => {
   useEffect(() => {
     try {
       const getPollData = async () => {
-        const response = await fetch(
-          "https://wepollnow.azurewebsites.net/poll/get_polls/",
-          {
-            method: "GET",
-          }
-        );
+        const response = await fetch(baseUrl + `poll/get_polls/`, {
+          method: "GET",
+        });
         const result = await response.json();
         setPolls(result);
       };
@@ -113,13 +113,15 @@ const SurveyContent = () => {
   // This gets all the survey category so i could display percentages on the survey modal
 
   const getPollSurvey = (id) => {
+    console.log(id);
     try {
       const getData = async () => {
         const response = await fetch(
-          `https://wepollnow.azurewebsites.net/poll/survey_category/${id}`,
+          baseUrl + `poll/poll_survey_category/${id}`,
           { method: "GET" }
         );
         const result = await response.json();
+        console.log(result);
         if (response.ok) {
           setSurveyData(result);
         }
@@ -139,14 +141,13 @@ const SurveyContent = () => {
     }
   };
 
-  // This gets all the surveys items from the API endpoint. Im rendering this data on the edit modal
+  // This gets all the surveys items from the API endpoint.
   useEffect(() => {
     try {
       const getData = async () => {
-        const response = await fetch(
-          "https://wepollnow.azurewebsites.net/poll/survey_category/",
-          { method: "GET" }
-        );
+        const response = await fetch(baseUrl + `poll/survey_category/`, {
+          method: "GET",
+        });
         const result = await response.json();
         if (response.ok) {
           setData(result);
@@ -199,10 +200,9 @@ const SurveyContent = () => {
       };
 
       const response = await fetch(
-        "https://wepollnow.azurewebsites.net/poll/poll_survey_category/",
+        baseUrl + `poll/poll_survey_category/`,
         requestOptions
       );
-      console.log(response);
       if (response.ok === true) {
         swal({
           title: "Action Successful",
@@ -228,6 +228,8 @@ const SurveyContent = () => {
       });
     }
   };
+
+  //Get opinions
 
   // Delete Item Handler of todo list
   const deleteHandler = (id) => {
@@ -290,9 +292,28 @@ const SurveyContent = () => {
         </header>
 
         <div className="block text-[#082a0f]">
-          <h4 className="mb-3 text-lg font-medium leading-10">
-            How users responded to issues that are most important to them.
-          </h4>
+          <div className="flex flex-row items-center space-x-2">
+            <h4 className="mb-3 text-lg font-medium leading-10">
+              How users responded to issues that are most important to them
+            </h4>
+            <img
+              src={tooltipIcon}
+              className="w-4 h-4 mb-3"
+              alt="tooltipIcon"
+              onMouseEnter={() => setTooltipStatus(1)}
+              onMouseLeave={() => setTooltipStatus(0)}
+            />
+            {tooltipStatus === 1 && (
+              <div
+                role="tooltip"
+                className="absolute -mt-24 text-white transition duration-150 ease-in-out bg-black rounded shadow-lg"
+              >
+                <p className="p-2 text-xs font-normal md:text-lg">
+                  Click on a poll title to view more details about a poll.
+                </p>
+              </div>
+            )}
+          </div>
 
           {/*General COntainer with Polls information  */}
           <div className="px-6 py-6 space-y-4 border border-gray-200 rounded-md">
@@ -490,7 +511,7 @@ const SurveyContent = () => {
                 </h3>
               </div>
 
-              <Progress percentage={item.percentage_count} />
+              <Progress percentage={item.percentage} />
             </div>
           ))}
 

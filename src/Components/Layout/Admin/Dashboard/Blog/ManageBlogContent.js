@@ -8,6 +8,7 @@ import image from "../../../../../images/blog_cover_final.png";
 import Delete from "../../assets/trash@2x.png";
 import { Link } from "react-router-dom";
 import DOMPurify from "dompurify";
+import { baseUrl } from "../../../../../store/baseUrl";
 
 /* Not used by Vincent */
 
@@ -65,15 +66,13 @@ const ManageBlogContent = () => {
     const requestOptions = {
       method: "GET",
     };
-    const response = await fetch(
-      `https://wepollnow.azurewebsites.net/blog/${articleId}`,
-      requestOptions
-    );
+    const response = await fetch(baseUrl + `blog/${articleId}`, requestOptions);
     let data = await response.json();
 
     data = {
       id: data.id,
       title: data.title,
+      author: data.author,
       image: data.image !== undefined ? data.image : { image },
       content: data.content !== undefined ? data.content : null,
       date_posted:
@@ -111,10 +110,7 @@ const ManageBlogContent = () => {
     const requestOptions = {
       method: "DELETE",
     };
-    const response = await fetch(
-      `https://wepollnow.azurewebsites.net/blog/${id}`,
-      requestOptions
-    );
+    const response = await fetch(baseUrl + `blog/${id}`, requestOptions);
     if (!response.ok) {
       alert("Could not perform operation");
     } else {
@@ -128,16 +124,14 @@ const ManageBlogContent = () => {
       const requestOptions = {
         method: "GET",
       };
-      const response = await fetch(
-        "https://wepollnow.azurewebsites.net/blog/",
-        requestOptions
-      );
+      const response = await fetch(baseUrl + `blog/`, requestOptions);
       const apiData = await response.json();
 
       let renderData = [];
       apiData.forEach((item) => {
         const aData = {
           id: item.id,
+          author: data.author,
           image: data.image !== undefined ? data.image : { image },
           title: item.title.split(" ").splice(0, 5).join(" ") + "...",
           content:
@@ -256,7 +250,7 @@ const ManageBlogContent = () => {
                       alt="avatar"
                       className="w-6 h-6 rounded-full"
                     />
-                    <p>Administrator</p>
+                    <p>{rightContent.author}</p>
                   </div>
                   <div>
                     <p className="text-3xl font-extrabold">

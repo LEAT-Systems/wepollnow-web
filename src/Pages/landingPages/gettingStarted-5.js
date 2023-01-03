@@ -6,21 +6,18 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import instagram from "../../images/landingIcons/IG.png";
 import youtube from "../../images/landingIcons/YU.png";
 import facebook from "../../images/landingIcons/FB.png";
-import calendar from "../../images/calendar.png";
 import text_logo from "../../images/voteWatermark.png";
 import GettingStartedContent from "./GettingStartedContent";
 import ModalComponent from "./GettingStartedModal";
 import doneIcon from "../../images/doneIcon.png";
 import errorIcon from "../../images/errorImg.png";
 import Toast from "../../UI/SuccessToast";
-import CloseIcon from "@mui/icons-material/Close";
-import Close from "@mui/icons-material/Close";
+import { baseUrl } from "../../store/baseUrl";
 
 const GettingStartedFive = () => {
   const history = useHistory();
   const emailRef = useRef();
   const [error, setHasError] = useState(false);
-  const [hasHTTPError, setHasHTTPError] = useState("");
   const [hasSubmitted, setHasSubmitted] = useState();
   const [errorMessageEmail, setErrorMessageEmail] = useState();
   const [show, setShow] = useState(false);
@@ -64,7 +61,7 @@ const GettingStartedFive = () => {
           },
         };
         const response = await fetch(
-          "https://wepollnow.azurewebsites.net/utilities/subscriber/",
+          baseUrl + `utilities/subscriber/`,
           requestOptions
         );
         //
@@ -95,7 +92,7 @@ const GettingStartedFive = () => {
         }
       } catch (error) {
         setHasError(true);
-        setHasHTTPError(error.message);
+        alert(error.message);
       }
     };
 

@@ -27,7 +27,7 @@ const Header = () => {
     history.push("/admin/login", { replace: true });
     // destroy session here
     authCtx.logout();
-    window.location.reload()
+    window.location.reload();
   };
   return (
     <>
@@ -66,13 +66,13 @@ const Header = () => {
             <div className="flex flex-row items-center justify-center pt-12 space-x-4 ">
               <button
                 onClick={leaveHandler}
-                className="p-3 px-10 text-white border rounded bg-[#08c127]"
+                className="p-3 px-10 text-white border rounded bg-[#08c127] animate"
               >
                 Yes
               </button>
               <button
                 onClick={handleClose}
-                className="p-3 bg-[#fff] rounded px-10 text-black border animate"
+                className="p-3 bg-[#fff] rounded px-10 text-black border hover:rounded-full"
               >
                 No
               </button>

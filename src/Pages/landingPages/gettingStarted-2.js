@@ -8,18 +8,16 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import instagram from "../../images/landingIcons/IG.png";
 import youtube from "../../images/landingIcons/YU.png";
 import facebook from "../../images/landingIcons/FB.png";
-import calendar from "../../images/calendar.png";
 import text_logo from "../../images/voteWatermark.png";
 import GettingStartedContent from "./GettingStartedContent";
 import Toast from "../../UI/SuccessToast";
 import doneIcon from "../../images/doneIcon.png";
 import errorIcon from "../../images/errorImg.png";
+import { baseUrl } from "../../store/baseUrl";
 
 //
 const GettingStartedTwo = () => {
   const [error, setHasError] = useState(false);
-  const [hasHTTPError, setHasHTTPError] = useState("");
-  const [hasSubmitted, setHasSubmitted] = useState();
   const [errorMessageEmail, setErrorMessageEmail] = useState();
   const history = useHistory();
   const [show, setShow] = useState(false);
@@ -63,27 +61,23 @@ const GettingStartedTwo = () => {
           },
         };
         const response = await fetch(
-          "https://wepollnow.azurewebsites.net/utilities/subscriber/",
+          baseUrl + `utilities/subscriber/`,
           requestOptions
         );
         const result = await response.text();
         const JSONdata = await JSON.parse(result);
         const emailHasError = JSONdata?.email?.[0];
-        console.log(response);
         if (emailHasError === "Enter a valid email address.") {
           setHasError(true);
           setShow(true);
           setErrorMessageEmail(emailHasError);
         }
-        console.log("JSONDATA", JSONdata);
-        console.log("RESULT", result);
         if (emailHasError !== "Enter a valid email address.") {
           setShow(true);
           setHasError(false);
-          setHasSubmitted(true);
         }
       } catch (error) {
-        setHasHTTPError(error.message);
+        alert(error);
       }
     };
 
