@@ -7,7 +7,7 @@ import FilterModal from "../Modals/FilterModal";
 import CreatePollsContainer from "../Modals/CreatePollsContainer";
 import Container from "../Modals/Edit/Polls/Container";
 import SubHeader, { PollHeader } from "../../SubHeader";
-import Axios from "axios";
+import axios from "../../../../../api/axios";
 
 const SubHeaderData = [
   {
@@ -32,7 +32,7 @@ const PollsPageContentOne = () => {
 
   useEffect(() => {
     const getData = async () => {
-      await Axios.get("https://wepollnow.azurewebsites.net/poll/get_polls/")
+      await axios.get("/poll/get_polls/")
         .then((res) => {
           console.log(res);
           setModalData(res.data);

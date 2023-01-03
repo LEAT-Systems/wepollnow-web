@@ -10,7 +10,7 @@ import {
   Radio,
   RadioGroup,
 } from "@mui/material";
-import Axios from "axios";
+import axios from "../../../../../api/axios";
 import swal from "sweetalert";
 
 const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
@@ -59,7 +59,7 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
 
   useEffect(() => {
     const getState = async () => {
-      await Axios.get("https://wepollnow.azurewebsites.net/utilities/states/")
+      await axios.get("/utilities/states/")
         .then((res) => setState(res.data))
         .catch((err) => console.log(err));
     };
@@ -69,8 +69,8 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
   /* Get Senetorial District */
   useEffect(() => {
     const getSenetorial = async () => {
-      await Axios.get(
-        `https://wepollnow.azurewebsites.net/utilities/senatorial/${selectedState}`, {
+      await axios.get(
+        `/utilities/senatorial/${selectedState}`, {
           state_id: selectedState
         }
       )
@@ -84,8 +84,8 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
   // /* Get Zone */
   // useEffect(() => {
   //   const getSenetorial = async () => {
-  //     await Axios.get(
-  //       `https://wepollnow.azurewebsites.net/utilities/zone/${selectedState}`
+  //     await axios.get(
+  //       `/utilities/zone/${selectedState}`
   //     )
   //       .then((res) => setZoneData(res.data))
   //       .catch((err) => console.log(err));
@@ -97,7 +97,7 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
   /* Get Poll Type */
   useEffect(() => {
     const getPollType = async () => {
-      await Axios.get(`https://wepollnow.azurewebsites.net/poll/poll_category/`)
+      await axios.get(`/poll/poll_category/`)
         .then((res) => {
           setPollTypeData(res.data);
         })
@@ -109,8 +109,8 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
   /* Get Party */
   useEffect(() => {
     const getParty = async () => {
-      await Axios.get(
-        `https://wepollnow.azurewebsites.net/utilities/party_list/`
+      await axios.get(
+        `/utilities/party_list/`
       )
         .then((res) => {
           setPartyData(res.data);
@@ -133,8 +133,8 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
 
     console.log(file);
 
-    await Axios.post(
-      "https://wepollnow.azurewebsites.net/utilities/candidates/",
+    await axios.post(
+      "/utilities/candidates/",
       {
         name: name,
         poll: 2,
@@ -234,8 +234,8 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
 
   // const token = async () => {
   //   try {
-  //     const response = await Axios.post(
-  //       "https://wepollnow.azurewebsites.net/utilities/candidates/",
+  //     const response = await axios.post(
+  //       "/utilities/candidates/",
   //       {
   //         name: name,
   //         poll: null,
