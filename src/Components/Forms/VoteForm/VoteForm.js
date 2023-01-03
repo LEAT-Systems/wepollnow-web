@@ -8,6 +8,8 @@ import close from "../../../images/CloseButton.png";
 import { useHistory } from "react-router-dom";
 import searchIcon from "../../../images/search.png";
 import Loading from "../../../UI/Loading";
+import img_avatar from "../../../images/avat.png";
+import swal from "sweetalert";
 
 // Getting phone number and selected poll from local storage
 const selectedPoll = localStorage.getItem("pollType");
@@ -52,7 +54,6 @@ const FormFive = () => {
     // sending selected poll to API to fetch poll data
     const getData = async () => {
       const formdata = new FormData();
-      console.log(poll_id);
       formdata.append("poll_id", poll_id);
       const requestOptions = {
         method: "POST",
@@ -65,7 +66,16 @@ const FormFive = () => {
         );
         const result = await response.json();
         if (!response.ok) {
-          alert("Something went wrong");
+          swal({
+            title: "Something went wrong. Could not fetch candidates",
+            icon: "error",
+            buttons: {
+              confirm: {
+                text: "Close",
+                className: "swalButton",
+              },
+            },
+          });
         } else {
           result.forEach((item) => {
             const pData = {
@@ -120,11 +130,13 @@ const FormFive = () => {
         requestOptions
       );
 
+      const result = await response.json();
       // redirect or throw error
       if (response.ok === true) {
         history.push("/vote/vote-form-next", { replace: true });
-      } else {
-        throw new Error("You have already participated in this poll.");
+      }
+      if (result?.errors[0] !== "") {
+        throw new Error("You have voted already for this poll");
       }
 
       // catch error
@@ -228,7 +240,7 @@ const FormFive = () => {
                     return (
                       <Suspense fallback={Loading} key={item.pollid}>
                         <div
-                          className={`p-1 border border-gray-200 rounded-md md:p-6 ${
+                          className={`p-1 border border-gray-200 rounded-lg md:p-6 ${
                             castedVote === item.partyName ? "bg-[#EDFFF0]" : ""
                           }
                       `}
@@ -262,7 +274,11 @@ const FormFive = () => {
                               >
                                 <div className="flex flex-row items-center justify-center space-x-2 md:space-x-4">
                                   <img
-                                    src={`https://wepollnow.azurewebsites.net/${item.viceCandidateImg}`}
+                                    src={
+                                      item.viceCandidateImg !== null
+                                        ? `https://wepollnow.azurewebsites.net/${item.viceCandidateImg}`
+                                        : img_avatar
+                                    }
                                     className="w-8 h-8 rounded"
                                     alt=""
                                   />
@@ -277,7 +293,11 @@ const FormFive = () => {
                                 </div>
                                 <div className="flex flex-row items-center justify-center space-x-2 md:space-x-4">
                                   <img
-                                    src={`https://wepollnow.azurewebsites.net/${item.viceCandidateImg}`}
+                                    src={
+                                      item.viceCandidateImg !== null
+                                        ? `https://wepollnow.azurewebsites.net/${item.viceCandidateImg}`
+                                        : img_avatar
+                                    }
                                     className="w-8 h-8 rounded"
                                     alt=""
                                   />

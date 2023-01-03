@@ -8,6 +8,7 @@ import Footer from "../../Components/Layout/Landing/Footer";
 import image from "../../images/blogImg.png";
 import anchor from "../../images/anchor.png";
 import avatar from "../../images/avartar.png";
+import { baseUrl } from "../../store/baseUrl";
 
 const BlogPage = () => {
   const [data, setData] = useState([]);
@@ -43,16 +44,14 @@ const BlogPage = () => {
       const requestOptions = {
         method: "GET",
       };
-      const response = await fetch(
-        "https://wepollnow.azurewebsites.net/blog/",
-        requestOptions
-      );
+      const response = await fetch(baseUrl + `blog/`, requestOptions);
       const apiData = await response.json();
 
       let renderData = [];
       apiData.forEach((item) => {
         const aData = {
           id: item.id,
+          author: item.author,
           image: item.image,
           title: item.title.split(" ").splice(0, 7).join(" ") + "...",
           content:
@@ -146,7 +145,7 @@ const BlogPage = () => {
                       alt=""
                       loading="lazy"
                     />
-                    <p className="font-normal">Wepollnow Admin</p>
+                    <p className="font-normal">{data.author}</p>
                   </div>
 
                   <p className="max-w-sm font-bold text-md">{data.title}</p>
