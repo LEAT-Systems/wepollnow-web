@@ -125,7 +125,7 @@ const AddPollModal = ({
     status: 1,
     party: parti,
     candidate: candi,
-    poll_name: `Senatorial Poll`
+    poll_name: `Senatorial Poll `
   };
 
   var config = () => {
