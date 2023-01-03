@@ -7,7 +7,7 @@ import Edit from "../../assets/edit@2x.png";
 import Delete from "../../assets/trash@2x.png";
 import ModalFormContext from "../../../../../ModalFormContextAdmin/ModalFormContext";
 import swal from "sweetalert";
-import axios from "axios";
+import axios from "../../../../../api/axios";
 
 const TableBody = ({ tableData, open }) => {
   const { tableRowID, setTableRowID } = useContext(ModalFormContext);
@@ -64,7 +64,7 @@ const TableBody = ({ tableData, open }) => {
 
   const handleDelete = async () => {
     await axios
-      .delete(`https://wepollnow.azurewebsites.net/poll/rud_poll/${tableRowID}`)
+      .delete(`/poll/rud_poll/${tableRowID}`)
       .then((res) => {
         console.log(res.data);
         swal({

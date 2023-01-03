@@ -1,7 +1,7 @@
 /** @format */
 
 import React, { useState, useEffect, useContext, useRef } from "react";
-import axios from "axios";
+import axios from "../../../../../api/axios";
 import ModalFormContext from "../../../../../ModalFormContextAdmin/ModalFormContext";
 
 const CreatePollModal = ({ open, handleClose, nextPage, setPage }) => {
@@ -32,6 +32,15 @@ const CreatePollModal = ({ open, handleClose, nextPage, setPage }) => {
     setEndDate,
     setPollName,
     pollTypeName,
+
+    presidentialName,
+    setPresidentialName,
+    senatorialName,
+    setSenatorialName,
+    gubernationalName,
+    setGubernationalName,
+    zonelName,
+    setZonelName,
     setParties,
   } = useContext(ModalFormContext);
 
@@ -48,7 +57,7 @@ const CreatePollModal = ({ open, handleClose, nextPage, setPage }) => {
   useEffect(() => {
     const getState = async () => {
       await axios
-        .get("https://wepollnow.azurewebsites.net/utilities/states/")
+        .get("/utilities/states/")
         .then((res) => setState(res.data))
         .catch((err) => console.log(err));
     };
@@ -60,9 +69,7 @@ const CreatePollModal = ({ open, handleClose, nextPage, setPage }) => {
   useEffect(() => {
     const getSenetorial = async () => {
       await axios
-        .get(
-          `https://wepollnow.azurewebsites.net/utilities/senatorial/${selectedState}`
-        )
+        .get(`/utilities/senatorial/${selectedState}`)
         .then((res) => setDistrictData(res.data))
         .catch((err) => console.log(err));
     };
@@ -73,7 +80,7 @@ const CreatePollModal = ({ open, handleClose, nextPage, setPage }) => {
   useEffect(() => {
     const getPollType = async () => {
       await axios
-        .get(`https://wepollnow.azurewebsites.net/poll/poll_category/`)
+        .get(`/poll/poll_category/`)
         .then((res) => {
           setPollTypeData(res.data);
           console.log(res.data);
@@ -87,7 +94,7 @@ const CreatePollModal = ({ open, handleClose, nextPage, setPage }) => {
   useEffect(() => {
     const getParty = async () => {
       await axios
-        .get(`https://wepollnow.azurewebsites.net/utilities/party_list/`)
+        .get(`/utilities/party_list/`)
         .then((res) => {
           setPartyData(res.data);
           console.log(res.data);
@@ -125,10 +132,7 @@ const CreatePollModal = ({ open, handleClose, nextPage, setPage }) => {
     console.log(config());
     const getParties = async () => {
       await axios
-        .post(
-          `https://wepollnow.azurewebsites.net/poll/poll_category_party/`,
-          config()
-        )
+        .post(`/poll/poll_category_party/`, config())
         .then((res) => {
           setParties(res.data);
           console.log(res.data);
@@ -169,18 +173,34 @@ const CreatePollModal = ({ open, handleClose, nextPage, setPage }) => {
     }
   }, [startDate, endDate, pollType]);
 
-  // if (pollType === "1") {
-  //   return setPollName(`${pollTypeName} Poll`);
-  // } else if (pollType === "2") {
-  //   return setPollName(`${state} ${pollTypeName} Poll`);
-  // } else if (pollType === "3") {
-  //   setPollName(`${state} ${pollTypeName} Polls`);
-  // } else {
-  //   setPollName(`${state} ${pollTypeName} Polls`);
-  // }
+  useEffect(() => {
+    if (pollType === "1") {
+      setPollName(presidentialName);
+    } else if (pollType === "2") {
+      setPollName(`${gubernationalName} State Gubernational Poll`);
+    } else if (pollType === "3") {
+      setPollName(`${senatorialName} Senatorial Poll`);
+    } else {
+      setPollName(`${zonelName} Zonal Poll`);
+    }
+  }, [
+    presidentialName,
+    gubernationalName,
+    senatorialName,
+    zonelName,
+    setPollName,
+    pollType,
+  ]);
 
   // console.log('poll name: ' pollTypeName)
   // // polltype = 1 >>> pollTypeData.title[0]
+
+  // presidentialName,
+  // setPresidentialName,
+  // senatorialName,
+  // setSenatorialName,
+  // gubernationalName,
+  // setGubernationalName,
   return (
     <>
       <div className='flex flex-col justify-between items-center w-full my-2 hover:bg-transparent'>
@@ -198,13 +218,20 @@ const CreatePollModal = ({ open, handleClose, nextPage, setPage }) => {
               ref={adminRef}
               onChange={(e) => {
                 setPollType(e.target.value);
+                setPresidentialName(e.target.getAttribute("data-valueName"));
+                console.log(presidentialName)
                 console.log(e.target.value);
               }}
             >
               <option value='Select Poll Type'>Select Poll Type</option>
               {pollTypeData.map((poll) => {
                 return (
-                  <option key={poll.id} id={poll.id} value={poll.id}>
+                  <option
+                    key={poll.id}
+                    id={poll.id}
+                    value={poll.id}
+                    data-valueName={poll.title}
+                  >
                     {poll.title}
                   </option>
                 );
@@ -262,6 +289,8 @@ const CreatePollModal = ({ open, handleClose, nextPage, setPage }) => {
               value={selectedState}
               onChange={(e) => {
                 setSelectedState(e.target.value);
+                setGubernationalName(e.target.getAttribute("data-valueName"));
+                console.log(gubernationalName);
                 console.log(e.target.value);
               }}
               disabled={enableState}
@@ -269,7 +298,12 @@ const CreatePollModal = ({ open, handleClose, nextPage, setPage }) => {
               <option>Select State</option>
               {state.map((state) => {
                 return (
-                  <option key={state.id} id={state.id} value={state.id}>
+                  <option
+                    key={state.id}
+                    id={state.id}
+                    value={state.id}
+                    data-valueName={state.name}
+                  >
                     {state.name}
                   </option>
                 );
@@ -289,6 +323,8 @@ const CreatePollModal = ({ open, handleClose, nextPage, setPage }) => {
               value={district}
               onChange={(e) => {
                 setDistrict(e.target.value);
+                setSenatorialName(e.target.getAttribute("data-valueName"));
+                console.log(senatorialName);
                 console.log(e.target.value);
               }}
               disabled={enabledSenetorial}
@@ -296,7 +332,11 @@ const CreatePollModal = ({ open, handleClose, nextPage, setPage }) => {
               <option>Select Senetorial District</option>
               {districtData.map((data) => {
                 return (
-                  <option key={data.id} value={data.id}>
+                  <option
+                    key={data.id}
+                    value={data.id}
+                    data-valueName={data.name}
+                  >
                     {data.name}
                   </option>
                 );
@@ -317,10 +357,14 @@ const CreatePollModal = ({ open, handleClose, nextPage, setPage }) => {
               value={zone}
               onChange={(e) => {
                 setZone(e.target.value);
+                setZonelName(e.target.getAttribute("data-valueName"));
+                console.log(zonelName);
                 console.log(e.target.value);
               }}
             >
-              <option value='Select Zone'>Select Zone</option>
+              <option value='Select Zone' data-valueName={"Zone 2"}>
+                Select Zone
+              </option>
               <option>1</option>
               <option>2</option>
               <option>2</option>

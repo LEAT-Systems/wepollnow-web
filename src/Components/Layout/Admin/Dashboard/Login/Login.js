@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState, useContext } from "react";
 import LOGO from "../../../../../images/LogoHighRes.jpg";
 import axios from "../../../../../api/axios";
 import AuthContext from "../../../../../store/auth-context";
-import { Redirect } from "react-router-dom/cjs/react-router-dom.min";
 import { useHistory } from "react-router-dom";
 import EyeIcon from "@mui/icons-material/Visibility";
 import EyeOffIcon from "@mui/icons-material/VisibilityOff";
@@ -30,7 +29,7 @@ const Login = () => {
     setIsLoading(true);
     try {
       const response = await axios.post(
-        "https://wepollnow.azurewebsites.net/user/login/",
+        "/user/login/",
         { email: email, password: password },
         {
           headers: { "Content-Type": "application/json" },
