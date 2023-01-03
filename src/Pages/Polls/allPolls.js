@@ -7,6 +7,7 @@ import calendar from "../../images/calendar.png";
 import { useHistory } from "react-router-dom";
 import ModalComponent from "../landingPages/GettingStartedModal";
 import tooltipIcon from "../../images/tooltip.png";
+import { baseUrl } from "../../store/baseUrl";
 
 // Unique ID from local storage
 
@@ -28,7 +29,7 @@ const AllPolls = () => {
     };
     const getData = async () => {
       const response = await fetch(
-        `https://wepollnow.azurewebsites.net/poll/user_polls/?voter_id=${uniqueID}`,
+        baseUrl + `poll/user_polls/?voter_id=${uniqueID}`,
         requestOptions
       );
       const result = await response.text();

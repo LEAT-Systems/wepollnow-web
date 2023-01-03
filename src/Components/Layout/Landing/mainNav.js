@@ -10,6 +10,7 @@ import back from "../../../images/backArrow.png";
 import hamburger from "../../../images/hamburger.png";
 import { Modal, Slide } from "@mui/material";
 import hamburgerSmall from "../../../images/hamburgSmall.png";
+import { baseUrl } from "../../../store/baseUrl";
 
 const Nav = (props) => {
   const [show, setShow] = useState(false);
@@ -54,7 +55,7 @@ const Nav = (props) => {
           },
         };
         const response = await fetch(
-          "https://wepollnow.azurewebsites.net/utilities/contact/",
+          baseUrl + `utilities/contact/`,
           requestOptions
         );
         const result = await response.text();
@@ -64,8 +65,7 @@ const Nav = (props) => {
           setHasError(true);
           setErrorMessageEmail(emailHasError);
         }
-        console.log("JSONDATA", JSONdata);
-        console.log("RESULT", result);
+
         if (!response.ok) {
           setHasError(true);
           throw new Error("Something Isn't right");

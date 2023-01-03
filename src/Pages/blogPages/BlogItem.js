@@ -6,6 +6,7 @@ import time from "../../images/time.png";
 import image from "../../images/blankImg.png";
 import avatar from "../../images/avartar.png";
 import { Link } from "react-router-dom";
+import { baseUrl } from "../../store/baseUrl";
 
 const BlogItem = () => {
   const [data, setData] = useState([]);
@@ -16,16 +17,14 @@ const BlogItem = () => {
       const requestOptions = {
         method: "GET",
       };
-      const response = await fetch(
-        "https://wepollnow.azurewebsites.net/blog/",
-        requestOptions
-      );
+      const response = await fetch(baseUrl + `blog/`, requestOptions);
       const apiData = await response.json();
 
       let renderData = [];
       apiData.forEach((item) => {
         const aData = {
           id: item.id,
+          author: item.author,
           title: item.title,
           image: item.image !== undefined ? item.image : { image },
           content: item.content !== undefined ? item.content : null,
@@ -97,7 +96,7 @@ const BlogItem = () => {
                         src={avatar}
                         alt=""
                       />
-                      <p className="font-normal">Administrator</p>
+                      <p className="font-normal">{data.author}</p>
                     </div>
 
                     <p className="max-w-sm font-bold text-md">{data.title}</p>
