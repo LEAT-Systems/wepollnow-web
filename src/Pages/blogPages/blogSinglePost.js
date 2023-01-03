@@ -10,6 +10,7 @@ import backarrow from "../../images/backArrow.png";
 import Footer from "../../Components/Layout/Landing/Footer";
 import { useHistory, Link } from "react-router-dom";
 import DOMPurify from "dompurify";
+import { baseUrl } from "../../store/baseUrl";
 
 const BlogSingle = () => {
   const history = useHistory();
@@ -39,10 +40,7 @@ const BlogSingle = () => {
       const requestOptions = {
         method: "GET",
       };
-      const response = await fetch(
-        "https://wepollnow.azurewebsites.net/blog/",
-        requestOptions
-      );
+      const response = await fetch(baseUrl + `blog/`, requestOptions);
       const apiData = await response.json();
 
       let renderData = [];
@@ -50,6 +48,7 @@ const BlogSingle = () => {
         const aData = {
           id: item.id,
           title: item.title,
+          author: item.author,
           image: item.image !== undefined ? item.image : { image },
           content: item.content !== undefined ? item.content : null,
           date_posted:
@@ -84,10 +83,7 @@ const BlogSingle = () => {
     const requestOptions = {
       method: "GET",
     };
-    const response = await fetch(
-      `https://wepollnow.azurewebsites.net/blog/${id}`,
-      requestOptions
-    );
+    const response = await fetch(baseUrl + `blog/${id}`, requestOptions);
     const data = await response.json();
     let fetchedData;
     if (!response.ok) {
@@ -95,6 +91,7 @@ const BlogSingle = () => {
     } else {
       fetchedData = {
         id: data.id,
+        author: data.author,
         title: data.title,
         image: data.image !== undefined ? data.image : { image },
         content: data.content !== undefined ? data.content : null,
@@ -179,7 +176,7 @@ const BlogSingle = () => {
               </div>
               <div className="flex flex-row space-x-2">
                 <img src={avatar} alt="avatar" className="w-6 h-6" />
-                <p>Wepollnow Admin</p>
+                <p>{fullContent.author}</p>
               </div>
               <h3 className="max-w-2xl text-xl font-bold md:text-3xl ">
                 {fullContent?.title}
@@ -259,7 +256,7 @@ const BlogSingle = () => {
                             src={avatar}
                             alt="authorImg"
                           />
-                          <p className="font-normal">Wepollnow Admin</p>
+                          <p className="font-normal">{fullContent.author}</p>
                         </div>
 
                         <p className="max-w-sm font-bold text-md">
@@ -291,7 +288,6 @@ const BlogSingle = () => {
                 {pagination}
               </div>
             </div>
-            {/* Side Bar */}
           </div>
         </section>
       </div>

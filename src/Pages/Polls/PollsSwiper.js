@@ -6,6 +6,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import { Navigation } from "swiper";
 import calendar from "../../images/calendar.png";
+import { baseUrl } from "../../store/baseUrl";
 
 //
 //
@@ -21,7 +22,7 @@ const PollsSwiper = (props) => {
     uniqueID = localStorage.getItem("uniqueID");
   });
 
-  // Setting data from API here
+  // Setting data for polls from API here
   useEffect(() => {
     let formData = new FormData();
     formData.append("user_id", `${uniqueID}`);
@@ -31,7 +32,7 @@ const PollsSwiper = (props) => {
     };
     const getData = async () => {
       const response = await fetch(
-        "https://wepollnow.azurewebsites.net/poll/user_polls/",
+        baseUrl + `poll/user_polls/`,
         requestOptions
       );
       const result = await response.text();

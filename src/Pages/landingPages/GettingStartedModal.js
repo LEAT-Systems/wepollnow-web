@@ -8,13 +8,13 @@ import { Modal } from "@mui/material";
 import Close from "../../images/CloseButton.png";
 import tooltipIcon from "../../images/tooltip.png";
 import swal from "sweetalert";
+import { baseUrl } from "../../store/baseUrl";
 
 const ModalComponent = (props) => {
   const history = useHistory();
   const [hasError, setHasError] = useState(false);
   const [value, setValue] = useState(null);
   const [tooltipStatus, setTooltipStatus] = useState(0);
-  const [userExists, setUserExists] = useState(false);
 
   // Validate on end point
 
@@ -30,7 +30,7 @@ const ModalComponent = (props) => {
 
     // if not null, get the phone number and country
     if (value !== null) {
-      const formatedPhoneNumber = formatPhoneNumber(value).replace(/\s/g, "");
+      const formatedPhoneNumber = formatPhoneNumber(value).replace(/\s/g, ""); // removing white spaces from phone
       const countryEntered = parsePhoneNumber(value).country;
 
       // pass phone number to function
@@ -42,7 +42,7 @@ const ModalComponent = (props) => {
           body: formData,
         };
         const response = await fetch(
-          "https://wepollnow.azurewebsites.net/voters/verify_phone/",
+          baseUrl + `voters/verify_phone/`,
           requestOptions
         );
         const result = await response.json();
@@ -73,7 +73,6 @@ const ModalComponent = (props) => {
               },
             });
             localStorage.setItem("uniqueID", voter_id);
-            setUserExists(true);
             history.push("/polls", { replace: true });
           }
           if (message === "New User") {
