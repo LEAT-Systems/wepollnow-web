@@ -59,7 +59,8 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
 
   useEffect(() => {
     const getState = async () => {
-      await axios.get("/utilities/states/")
+      await axios
+        .get("/utilities/states/")
         .then((res) => setState(res.data))
         .catch((err) => console.log(err));
     };
@@ -69,16 +70,26 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
   /* Get Senetorial District */
   useEffect(() => {
     const getSenetorial = async () => {
-      await axios.get(
-        `/utilities/senatorial/${selectedState}`, {
-          state_id: selectedState
-        }
-      )
+      await axios
+        .get(`/utilities/senatorial/${selectedState}`, {
+          state_id: selectedState,
+        })
         .then((res) => setDistrictData(res.data))
         .catch((err) => console.log(err));
     };
     getSenetorial();
   }, [selectedState, setDistrictData]);
+
+  /* Get Zones */
+  useEffect(() => {
+    const getZones = async () => {
+      await axios
+        .get(`/utilities/constituency/${selectedState}`)
+        .then((res) => setZoneData(res.data))
+        .catch((err) => console.log(err));
+    };
+    getZones();
+  }, [selectedState, setZoneData]);
   // console.log("Selected State: ", selectedState);
 
   // /* Get Zone */
@@ -97,7 +108,8 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
   /* Get Poll Type */
   useEffect(() => {
     const getPollType = async () => {
-      await axios.get(`/poll/poll_category/`)
+      await axios
+        .get(`/poll/poll_category/`)
         .then((res) => {
           setPollTypeData(res.data);
         })
@@ -109,9 +121,8 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
   /* Get Party */
   useEffect(() => {
     const getParty = async () => {
-      await axios.get(
-        `/utilities/party_list/`
-      )
+      await axios
+        .get(`/utilities/party_list/`)
         .then((res) => {
           setPartyData(res.data);
         })
@@ -132,20 +143,71 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
     // formData.append("photo", candidateImage);
 
     console.log(file);
+    
+        var presidentID = {
+          name: name,
+          poll: "",
+          poll_category_id: pollType,
+          party_id: party,
+          main_candidate: mainCandidate,
+        };
+        var governorshipID = {
+          name: name,
+          poll: "",
+          poll_category_id: pollType,
+          state_id_id: selectedState,
+          party_id: party,
+          main_candidate: mainCandidate,
+        };
+        var senatorialID = {
+          name: name,
+          poll: "",
+          poll_category_id: pollType,
+          state_id_id: selectedState,
+          senatorial_id_id: district,
+          party_id: party,
+          main_candidate: mainCandidate,
+        };
+        var zoneID = {
+          name: name,
+          poll: "",
+          poll_category_id: pollType,
+          state_id_id: selectedState,
+          zone_id_id: district,
+          party_id: party,
+          main_candidate: mainCandidate,
+        };
 
-    await axios.post(
-      "/utilities/candidates/",
-      {
+    
+    
+        const config = () => {
+          if (pollType === "1") {
+            return presidentID;
+          } else if (pollType === "2") {
+            return governorshipID;
+          } else if (pollType === "3") {
+            return senatorialID;
+          } else if (pollType === "4") { 
+            return zoneID;
+          } else {
+            return presidentID;
+          }
+    };
+    
+    await axios
+      .post(
+        "/utilities/candidates/",
+        /* {
         name: name,
         poll: 2,
-        poll_category_id: pollType,
+        poll_category_id: pollType ,
         state_id_id: selectedState,
         senatorial_id_id: district,
         party_id: party,
         main_candidate: mainCandidate,
         // candidate_picture: file,
-      }
-    )
+      } */ config()
+      )
       .then((res) => {
         console.log(res);
         swal({
@@ -197,11 +259,11 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
           });
         }
       });
-    
+
     window.location.reload()
   };
 
-      // console.log("Main Candidate: ", mainCandidate);
+  // console.log("Main Candidate: ", mainCandidate);
   useEffect(() => {
     var onDisabled = () => {
       if (pollType === "1") {
@@ -400,14 +462,19 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
                   aria-required
                   value={selectedState}
                   onChange={(e) => {
-                    setSelectedState(e.target.getAttribute("data-id"));
+                    setSelectedState(e.target.value);
+                    console.log("Seclected State ID is: ", selectedState);
                   }}
                   disabled={enableState}
                 >
                   <option>Select State</option>
                   {state.map((state) => {
                     return (
-                      <option key={state.id} data-id={state.id}>
+                      <option
+                        key={state.id}
+                        data-id={state.id}
+                        value={state.id}
+                      >
                         {state.name}
                       </option>
                     );
@@ -427,14 +494,14 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
                   aria-required
                   value={district}
                   onChange={(e) => {
-                    setDistrict(e.target.getAttribute("data-id"));
+                    setDistrict(e.target.value);
                   }}
                   disabled={enabledSenetorial}
                 >
                   <option>Select Senetorial District</option>
                   {districtData.map((data) => {
                     return (
-                      <option key={data.id} data-id={state.id}>
+                      <option key={data.id} data-id={data.id} value={data.id}>
                         {data.name}
                       </option>
                     );
@@ -452,24 +519,22 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
                   className='custom_select disabled:bg-gray-200 disabled:cursor-not-allowed'
                   value={zone}
                   onChange={(e) => {
-                    setZone(e.target.getAttribute("data-id"));
+                    setZone(e.target.value);
                   }}
                   disabled={enabledZone}
                 >
                   <option>Select Zone</option>
-                  <option>1</option>
-                  <option>2</option>
-                  <option>3</option>
-                  <option>4</option>
-                  <option>5</option>
-                  <option>6</option>
-                  {/* {zoneData.map((data) => {
+                  {zoneData?.map((data) => {
                     return (
-                      <option key={data.id} data-id={state.id}>
+                      <option
+                        key={data.id}
+                        value={data.id}
+                        data-valueName={data.name}
+                      >
                         {data.name}
                       </option>
                     );
-                  })} */}
+                  })}
                 </select>
               </label>
             </div>
@@ -483,13 +548,17 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
                   className='custom_select'
                   value={party}
                   onChange={(e) => {
-                    setParty(e.target.getAttribute("data-id"));
+                    setParty(e.target.value);
                   }}
                 >
                   <option>Select Party</option>
                   {partyData.map((data) => {
                     return (
-                      <option key={data.id} data-id={state.id}>
+                      <option
+                        key={data.id}
+                        data-id={data.id}
+                        value={data.id}
+                      >
                         {data.name}
                       </option>
                     );

@@ -6,7 +6,7 @@ import Grid from "./Grid";
 import FilterModal from "../Modals/FilterModal";
 import CreatePollsContainer from "../Modals/CreatePollsContainer";
 import Container from "../Modals/Edit/Polls/Container";
-import SubHeader, { PollHeader } from "../../SubHeader";
+import { PollHeader } from "../../SubHeader";
 import axios from "../../../../../api/axios";
 
 const SubHeaderData = [
