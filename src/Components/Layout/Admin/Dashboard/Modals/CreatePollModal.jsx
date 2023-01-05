@@ -76,6 +76,17 @@ const CreatePollModal = ({ open, handleClose, nextPage, setPage }) => {
     getSenetorial();
   }, [selectedState, setDistrictData]);
 
+  /* Get Zones */
+  useEffect(() => {
+    const getZones = async () => {
+      await axios
+        .get(`/utilities/constituency/${selectedState}`)
+        .then((res) => setZoneData(res.data))
+        .catch((err) => console.log(err));
+    };
+    getZones();
+  }, [selectedState, setZoneData]);
+
   /* Get Poll Type */
   useEffect(() => {
     const getPollType = async () => {
@@ -157,21 +168,43 @@ const CreatePollModal = ({ open, handleClose, nextPage, setPage }) => {
         setEnabledState(false);
         setEnabledSenetorial(false);
         setEnabledZone(true);
-      } else {
+      } else if (pollType === "3") {
         setEnabledSenetorial(true);
         setEnabledZone(false);
         setEnabledState(false);
+      } else {
+        setEnabledSenetorial(true);
+        setEnabledZone(true);
+        setEnabledState(true);
       }
     };
 
     onDisabled();
 
-    if (startDate !== "" && pollType !== "" && endDate !== "") {
+    if (startDate !== "" || pollType === "1" || endDate !== "") {
+      setConfirmBtn(false);
+    } else if (startDate !== "" || pollType === "2" || selectedState !== "" || endDate !== "") { 
+      setConfirmBtn(false);
+    } else if (
+      startDate !== "" ||
+      pollType === "3" ||
+      selectedState !== "" ||
+      district !== "" ||
+      endDate !== ""
+    ) {
+      setConfirmBtn(false);
+    } else if (
+      startDate !== "" ||
+      pollType === "3" ||
+      selectedState !== "" ||
+      zone !== "" ||
+      endDate !== ""
+    ) {
       setConfirmBtn(false);
     } else {
       setConfirmBtn(true);
     }
-  }, [startDate, endDate, pollType]);
+  }, [startDate, endDate, pollType, district, selectedState, zone]);
 
   useEffect(() => {
     if (pollType === "1") {
@@ -219,7 +252,7 @@ const CreatePollModal = ({ open, handleClose, nextPage, setPage }) => {
               onChange={(e) => {
                 setPollType(e.target.value);
                 setPresidentialName(e.target.getAttribute("data-valueName"));
-                console.log(presidentialName)
+                console.log(presidentialName);
                 console.log(e.target.value);
               }}
             >
@@ -365,12 +398,17 @@ const CreatePollModal = ({ open, handleClose, nextPage, setPage }) => {
               <option value='Select Zone' data-valueName={"Zone 2"}>
                 Select Zone
               </option>
-              <option>1</option>
-              <option>2</option>
-              <option>2</option>
-              <option>4</option>
-              <option>5</option>
-              <option>6</option>
+              {zoneData?.map((data) => {
+                return (
+                  <option
+                    key={data.id}
+                    value={data.id}
+                    data-valueName={data.name}
+                  >
+                    {data.name}
+                  </option>
+                );
+              })}
             </select>
           </label>
         </div>
