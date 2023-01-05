@@ -168,7 +168,7 @@ const CreatePollModal = ({ open, handleClose, nextPage, setPage }) => {
         setEnabledState(false);
         setEnabledSenetorial(false);
         setEnabledZone(true);
-      } else if (pollType === "3") {
+      } else if (pollType === "4") {
         setEnabledSenetorial(true);
         setEnabledZone(false);
         setEnabledState(false);
@@ -181,23 +181,23 @@ const CreatePollModal = ({ open, handleClose, nextPage, setPage }) => {
 
     onDisabled();
 
-    if (startDate !== "" || pollType === "1" || endDate !== "") {
+    if (startDate !== "" && pollType === "1" && endDate !== "") {
       setConfirmBtn(false);
-    } else if (startDate !== "" || pollType === "2" || selectedState !== "" || endDate !== "") { 
+    } else if (startDate !== "" && pollType === "2" && selectedState !== "" && endDate !== "") { 
       setConfirmBtn(false);
     } else if (
-      startDate !== "" ||
-      pollType === "3" ||
-      selectedState !== "" ||
-      district !== "" ||
+      startDate !== "" &&
+      pollType === "3" &&
+      selectedState !== "" &&
+      district !== "" &&
       endDate !== ""
     ) {
       setConfirmBtn(false);
     } else if (
-      startDate !== "" ||
-      pollType === "3" ||
-      selectedState !== "" ||
-      zone !== "" ||
+      startDate !== "" &&
+      pollType === "3" &&
+      selectedState !== "" &&
+      zone !== "" &&
       endDate !== ""
     ) {
       setConfirmBtn(false);

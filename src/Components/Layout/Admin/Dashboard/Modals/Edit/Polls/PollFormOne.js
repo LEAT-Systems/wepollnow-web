@@ -149,10 +149,14 @@ const PollFormOne = ({ open, handleClose, nextPage, setPage }) => {
         setEnabledState(false);
         setEnabledSenetorial(false);
         setEnabledZone(true);
-      } else {
+      } else if (pollType === "4") {
         setEnabledSenetorial(true);
         setEnabledZone(false);
         setEnabledState(false);
+      } else {
+        setEnabledSenetorial(true);
+        setEnabledZone(true);
+        setEnabledState(true);
       }
     };
 
