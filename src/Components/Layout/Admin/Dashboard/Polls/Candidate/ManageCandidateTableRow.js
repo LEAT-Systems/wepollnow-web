@@ -1,4 +1,4 @@
-import React, {useContext} from "react";
+import React, {useContext, useEffect} from "react";
 import Edit from "../../../assets/edit@2x.png";
 import Delete from "../../../assets/trash@2x.png";
 import swal from "sweetalert";
@@ -97,7 +97,9 @@ const ManageCandidateTableRow = ({ tableData, open }) => {
           className='text-red-500 cursor-pointer'
           onClick={(e) => {
             console.log(parentTarget(e));
-            setCandidateID(parentTarget(e));
+            setCandidateID(
+              e.currentTarget.parentNode.parentNode.getAttribute("data-id")
+            );
             console.log(candidateID);
             handleDelete();
             

@@ -155,7 +155,9 @@ const TableBody = ({ tableData, open }) => {
         <div
           className='text-red-500 cursor-pointer'
           onClick={(e) => {
-            setTableRowID(parentTarget(e));
+            setTableRowID(
+              e.currentTarget.parentNode.parentNode.getAttribute("data-id")
+            );
             console.log(tableRowID);
             handleDelete();
             console.log(parentTarget(e));
