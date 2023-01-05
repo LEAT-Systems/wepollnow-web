@@ -495,13 +495,17 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
                   className='custom_select'
                   value={party}
                   onChange={(e) => {
-                    setParty(e.target.getAttribute("data-id"));
+                    setParty(e.target.value);
                   }}
                 >
                   <option>Select Party</option>
                   {partyData.map((data) => {
                     return (
-                      <option key={data.id} data-id={state.id}>
+                      <option
+                        key={data.id}
+                        data-id={data.id}
+                        value={data.id}
+                      >
                         {data.name}
                       </option>
                     );
