@@ -11,23 +11,8 @@ import axios from "../../../../../api/axios";
 
 const TableBody = ({ tableData, open }) => {
   const { tableRowID, setTableRowID } = useContext(ModalFormContext);
-  const [value, setValue] = useState("");
   console.log("TableRowID: ", tableRowID);
-  console.log("Value: ", value)
 
-  useEffect(() => {
-    setValue(tableRowID);
-  }, [tableRowID]);
-  const saveToLocalstorage = () => {
-    localStorage.setItem("pollID", tableRowID);
-  };
-
-  const getLocalstorageItem = () => {
-    const items = localStorage.getItem("pollID");
-    console.log(items);
-  };
-  console.log("set items func: ", saveToLocalstorage());
-  console.log("get items func: ", getLocalstorageItem());
 
   const history = useHistory();
 
@@ -108,7 +93,7 @@ const TableBody = ({ tableData, open }) => {
         }
       });
 
-    window.location.reload();
+    // window.location.reload();
   };
 
   return (
@@ -157,6 +142,7 @@ const TableBody = ({ tableData, open }) => {
           className='text-blue-500 cursor-pointer'
           onClick={(e) => {
             setTableRowID(parentTarget(e));
+            console.log(tableRowID)
             console.log(parentTarget(e));
             open();
           }}
@@ -170,6 +156,7 @@ const TableBody = ({ tableData, open }) => {
           className='text-red-500 cursor-pointer'
           onClick={(e) => {
             setTableRowID(parentTarget(e));
+            console.log(tableRowID);
             handleDelete();
             console.log(parentTarget(e));
           }}

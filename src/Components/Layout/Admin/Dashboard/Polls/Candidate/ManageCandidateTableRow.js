@@ -66,7 +66,7 @@ const ManageCandidateTableRow = ({ tableData, open }) => {
          }
        });
 
-     window.location.reload();
+    //  window.location.reload();
    };
 
   return (
@@ -87,6 +87,7 @@ const ManageCandidateTableRow = ({ tableData, open }) => {
           onClick={(e) => {
             console.log(parentTarget(e))
             setCandidateID(parentTarget(e))
+            console.log(candidateID);
             open();
           }}
         >
@@ -97,6 +98,7 @@ const ManageCandidateTableRow = ({ tableData, open }) => {
           onClick={(e) => {
             console.log(parentTarget(e));
             setCandidateID(parentTarget(e));
+            console.log(candidateID);
             handleDelete();
             
           }}
