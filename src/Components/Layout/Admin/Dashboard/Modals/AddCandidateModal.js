@@ -1,5 +1,3 @@
-/** @format */
-
 import React, { useState, useEffect, useRef } from "react";
 import { Close } from "@mui/icons-material";
 import { Checkbox, Modal } from "@mui/material";
@@ -7,8 +5,7 @@ import { FileUploader } from "react-drag-drop-files";
 import {
   FormControl,
   FormControlLabel,
-  Radio,
-  RadioGroup,
+
 } from "@mui/material";
 import axios from "../../../../../api/axios";
 import swal from "sweetalert";
@@ -143,7 +140,7 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
     // formData.append("photo", candidateImage);
 
     console.log(file);
-    
+
         var presidentID = {
           name: name,
           poll: "",

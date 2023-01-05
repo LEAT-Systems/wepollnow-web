@@ -60,6 +60,7 @@ const TableBody = ({ tableData, open }) => {
 
   const parentTarget = (e) =>
     e.currentTarget.parentNode.parentNode.getAttribute("data-id");
+  
   const target = (e) => e.target.getAttribute("data-id");
 
   const handleDelete = async () => {
@@ -116,9 +117,6 @@ const TableBody = ({ tableData, open }) => {
       data-id={tableData.id}
       onClick={(e) => {
         setTableRowID(target(e));
-        saveToLocalstorage();
-        getLocalstorageItem();
-        console.log("Value for redirection :", getLocalstorageItem());
         redirect();
       }}
     >
@@ -159,9 +157,6 @@ const TableBody = ({ tableData, open }) => {
           className='text-blue-500 cursor-pointer'
           onClick={(e) => {
             setTableRowID(parentTarget(e));
-            saveToLocalstorage();
-            getLocalstorageItem();
-            console.log("Value for redirection :", getLocalstorageItem());
             console.log(parentTarget(e));
             open();
           }}
@@ -175,11 +170,8 @@ const TableBody = ({ tableData, open }) => {
           className='text-red-500 cursor-pointer'
           onClick={(e) => {
             setTableRowID(parentTarget(e));
-            saveToLocalstorage();
-            getLocalstorageItem();
-            console.log("Value for redirection :", getLocalstorageItem());
             handleDelete();
-            // console.log(parentTarget(e));
+            console.log(parentTarget(e));
           }}
         >
           <img src={Delete} alt='Trash' className='w-[1.1rem] h-[1.1rem]' />
