@@ -143,18 +143,71 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
     // formData.append("photo", candidateImage);
 
     console.log(file);
+    
+        var presidentID = {
+          name: name,
+          poll: "",
+          poll_category_id: pollType,
+          party_id: party,
+          main_candidate: mainCandidate,
+        };
+        var governorshipID = {
+          name: name,
+          poll: "",
+          poll_category_id: pollType,
+          state_id_id: selectedState,
+          party_id: party,
+          main_candidate: mainCandidate,
+        };
+        var senatorialID = {
+          name: name,
+          poll: "",
+          poll_category_id: pollType,
+          state_id_id: selectedState,
+          senatorial_id_id: district,
+          party_id: party,
+          main_candidate: mainCandidate,
+        };
+        var zoneID = {
+          name: name,
+          poll: "",
+          poll_category_id: pollType,
+          state_id_id: selectedState,
+          zone_id_id: district,
+          party_id: party,
+          main_candidate: mainCandidate,
+        };
 
+    
+    
+        const config = () => {
+          if (pollType === "1") {
+            return presidentID;
+          } else if (pollType === "2") {
+            return governorshipID;
+          } else if (pollType === "3") {
+            return senatorialID;
+          } else if (pollType === "4") { 
+            return zoneID;
+          } else {
+            return presidentID;
+          }
+    };
+    
     await axios
-      .post("/utilities/candidates/", {
+      .post(
+        "/utilities/candidates/",
+        /* {
         name: name,
         poll: 2,
-        poll_category_id: pollType,
+        poll_category_id: pollType ,
         state_id_id: selectedState,
         senatorial_id_id: district,
         party_id: party,
         main_candidate: mainCandidate,
         // candidate_picture: file,
-      })
+      } */ config()
+      )
       .then((res) => {
         console.log(res);
         swal({
