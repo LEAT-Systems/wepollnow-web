@@ -551,12 +551,8 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
                   <option>Select Party</option>
                   {partyData.map((data) => {
                     return (
-                      <option
-                        key={data.id}
-                        data-id={data.id}
-                        value={data.id}
-                      >
-                        {data.name}
+                      <option key={data.id} data-id={data.id} value={data.id}>
+                        {`${data.name}  (${data.abbr})`}
                       </option>
                     );
                   })}

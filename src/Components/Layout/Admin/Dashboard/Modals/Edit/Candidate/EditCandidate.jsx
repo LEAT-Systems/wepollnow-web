@@ -422,7 +422,7 @@ const EditCandidate = ({ open, close }) => {
                   {partyData.map((data) => {
                     return (
                       <option key={data.id} value={data.id}>
-                        {data.name}
+                        {`${data.name}  (${data.abbr})`}
                       </option>
                     );
                   })}
