@@ -149,10 +149,14 @@ const PollFormOne = ({ open, handleClose, nextPage, setPage }) => {
         setEnabledState(false);
         setEnabledSenetorial(false);
         setEnabledZone(true);
-      } else {
+      } else if (pollType === "4") {
         setEnabledSenetorial(true);
         setEnabledZone(false);
         setEnabledState(false);
+      } else {
+        setEnabledSenetorial(true);
+        setEnabledZone(true);
+        setEnabledState(true);
       }
     };
 
@@ -275,7 +279,7 @@ const PollFormOne = ({ open, handleClose, nextPage, setPage }) => {
               <option>Select State</option>
               {state.map((state) => {
                 return (
-                  <option key={state.id} id={state.id} value={state.id}>
+                  <option key={state.id} data-id={state.id} value={state.id}>
                     {state.name}
                   </option>
                 );

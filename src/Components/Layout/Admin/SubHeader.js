@@ -10,6 +10,10 @@ const AccountHeader = ({ data }) => {
     if (location.pathname === "/admin/account") {
       history.push("/admin/account/settings");
     }
+
+    if (location.pathname === "/admin/account/") {
+      history.push("/admin/account/settings");
+    }
   }, [history, location.pathname]);
 
   const activeClass =
@@ -56,6 +60,11 @@ const PollHeader = () => {
     if (location.pathname === "/admin/polls/") {
       history.push("/admin/polls/polls");
     }
+
+    if (location.pathname === "/admin/polls") {
+      history.push("/admin/polls/polls");
+    }
+    
   }, [history, location.pathname]);
 
   const activeClass =
