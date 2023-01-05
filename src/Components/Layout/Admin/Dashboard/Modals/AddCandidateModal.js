@@ -207,7 +207,7 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
         }
       });
 
-    // window.location.reload()
+    window.location.reload()
   };
 
   // console.log("Main Candidate: ", mainCandidate);
