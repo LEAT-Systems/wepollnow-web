@@ -28,7 +28,7 @@ const PollsSwiper = (props) => {
     formData.append("user_id", `${uniqueID}`);
     const requestOptions = {
       method: "POST",
-      body: null,
+      body: formData,
     };
     const getData = async () => {
       const response = await fetch(
