@@ -44,9 +44,9 @@ const CreatePollModal = ({ open, handleClose, nextPage, setPage }) => {
     setParties,
   } = useContext(ModalFormContext);
 
-  const stateRef = useRef()
-  const presidentialRef = useRef()
-  const senatorialRef = useRef()
+  const stateRef = useRef();
+  const presidentialRef = useRef();
+  const senatorialRef = useRef();
 
   const [enableState, setEnabledState] = useState(false);
   const [enabledSenetorial, setEnabledSenetorial] = useState(false);
@@ -187,7 +187,12 @@ const CreatePollModal = ({ open, handleClose, nextPage, setPage }) => {
 
     if (startDate !== "" && pollType === "1" && endDate !== "") {
       setConfirmBtn(false);
-    } else if (startDate !== "" && pollType === "2" && selectedState !== "" && endDate !== "") { 
+    } else if (
+      startDate !== "" &&
+      pollType === "2" &&
+      selectedState !== "" &&
+      endDate !== ""
+    ) {
       setConfirmBtn(false);
     } else if (
       startDate !== "" &&
@@ -255,8 +260,11 @@ const CreatePollModal = ({ open, handleClose, nextPage, setPage }) => {
               ref={adminRef}
               onChange={(e) => {
                 setPollType(e.target.value);
-                setPresidentialName( e.target.options[e.target.selectedIndex].getAttribute(
-                    "data-valueName");
+                setPresidentialName(
+                  e.target.options[e.target.selectedIndex].getAttribute(
+                    "data-valueName"
+                  )
+                );
                 console.log(presidentialName);
                 console.log(e.target.value);
               }}
@@ -367,8 +375,11 @@ const CreatePollModal = ({ open, handleClose, nextPage, setPage }) => {
               value={district}
               onChange={(e) => {
                 setDistrict(e.target.value);
-                setSenatorialName(e.target.options[e.target.selectedIndex].getAttribute(
-                    "data-valueName"))
+                setSenatorialName(
+                  e.target.options[e.target.selectedIndex].getAttribute(
+                    "data-valueName"
+                  )
+                );
                 console.log(senatorialName);
                 console.log(e.target.value);
               }}
@@ -402,8 +413,11 @@ const CreatePollModal = ({ open, handleClose, nextPage, setPage }) => {
               value={zone}
               onChange={(e) => {
                 setZone(e.target.value);
-                setZonelName( e.target.options[e.target.selectedIndex].getAttribute(
-                    "data-valueName");
+                setZonelName(
+                  e.target.options[e.target.selectedIndex].getAttribute(
+                    "data-valueName"
+                  )
+                );
                 console.log(zonelName);
                 console.log(e.target.value);
               }}
