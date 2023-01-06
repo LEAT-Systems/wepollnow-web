@@ -24,7 +24,7 @@ const AllPolls = () => {
     setIdExist(uniqueID);
 
     let formData = new FormData();
-    formData.append("user_id", `${uniqueID}`);
+    formData.append("voter_id", `${uniqueID}`);
     const requestOptions = {
       method: "POST",
       body: formData
