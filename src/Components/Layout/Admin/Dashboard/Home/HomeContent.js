@@ -24,7 +24,7 @@ const DashboardContent = () => {
   const [loggedInUser, setLoggedInUser] = useState({ name: "", status: "" });
 
   useEffect(() => {
-    const { name, status } = JSON.parse(localStorage.getItem("loggedInUser"));
+    const { name, status } = JSON.parse(localStorage?.getItem("loggedInUser"));
     const refinedName = name[0]?.toUpperCase() + name?.slice(1);
     setLoggedInUser({
       name: refinedName,
