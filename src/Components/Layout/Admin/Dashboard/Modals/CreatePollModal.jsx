@@ -328,9 +328,10 @@ const CreatePollModal = ({ open, handleClose, nextPage, setPage }) => {
               onChange={(e) => {
                 setSelectedState(e.target.value);
                 setGubernationalName(stateRef.current.attribute);
+                console.log(stateRef.current.attribute);
                 console.log("ref: ", gubernationalName);
                 console.log(e.target.value);
-                console.log("ref 2: ", e.target.dataset().valueName);
+                console.log("ref 2: ", e.target.dataset.valueName);
               }}
               disabled={enableState}
             >
