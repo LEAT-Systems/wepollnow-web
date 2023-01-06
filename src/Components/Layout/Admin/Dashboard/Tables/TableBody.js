@@ -11,6 +11,7 @@ import axios from "../../../../../api/axios";
 
 const TableBody = ({ tableData, open }) => {
   const { tableRowID, setTableRowID } = useContext(ModalFormContext);
+  const [id, setId] = useState("")
   console.log("TableRowID: ", tableRowID);
 
 
@@ -50,7 +51,7 @@ const TableBody = ({ tableData, open }) => {
 
   const handleDelete = async () => {
     await axios
-      .delete(`/poll/rud_poll/${tableRowID}`)
+      .delete(`/poll/rud_poll/${id}`)
       .then((res) => {
         console.log(res.data);
         swal({
@@ -102,6 +103,7 @@ const TableBody = ({ tableData, open }) => {
       data-id={tableData.id}
       onClick={(e) => {
         setTableRowID(target(e));
+        setId(target(e));
         redirect();
       }}
     >
@@ -142,6 +144,7 @@ const TableBody = ({ tableData, open }) => {
           className='text-blue-500 cursor-pointer'
           onClick={(e) => {
             setTableRowID(parentTarget(e));
+            setId(parentTarget(e));
             console.log(tableRowID)
             console.log(parentTarget(e));
             open();
@@ -156,6 +159,9 @@ const TableBody = ({ tableData, open }) => {
           className='text-red-500 cursor-pointer'
           onClick={(e) => {
             setTableRowID(
+              e.currentTarget.parentNode.parentNode.getAttribute("data-id")
+            );
+            setId(
               e.currentTarget.parentNode.parentNode.getAttribute("data-id")
             );
             console.log(tableRowID);
