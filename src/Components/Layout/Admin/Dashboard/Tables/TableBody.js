@@ -55,8 +55,7 @@ const TableBody = ({ tableData, open }) => {
   }, [setId, tableData.id, tableRowID]);
 
   const handleDelete = async () => {
-     try {
-      swal.showLoading();
+    try {
       await axios
         .delete(`/poll/rud_poll/${id}`, {
           headers: {
@@ -64,7 +63,6 @@ const TableBody = ({ tableData, open }) => {
           },
         })
         .then((res) => {
-          swal.hideLoading();
           console.log(res.data);
           swal({
             title: "Success",
@@ -79,7 +77,6 @@ const TableBody = ({ tableData, open }) => {
           });
         });
     } catch (err) {
-      swal.hideLoading();
       console.log(err);
       if (err.status === 400) {
         swal({
@@ -262,7 +259,7 @@ const TableBody = ({ tableData, open }) => {
           onClick={(e) => {
             setTableRowID(parentTarget(e));
             // setId(
-              // e.currentTarget.parentNode.parentNode.getAttribute("data-id")
+            // e.currentTarget.parentNode.parentNode.getAttribute("data-id")
             // );
             console.log(tableRowID);
             handleDelete();
