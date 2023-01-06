@@ -8,8 +8,6 @@ import { Navigation } from "swiper";
 import calendar from "../../images/calendar.png";
 import { baseUrl } from "../../store/baseUrl";
 
-//
-//
 
 const PollsSwiper = (props) => {
   const [data, setData] = useState([]);

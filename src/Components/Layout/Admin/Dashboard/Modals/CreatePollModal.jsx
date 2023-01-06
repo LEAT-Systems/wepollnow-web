@@ -52,8 +52,37 @@ const CreatePollModal = ({ open, handleClose, nextPage, setPage }) => {
   const [enabledSenetorial, setEnabledSenetorial] = useState(false);
   const [enabledZone, setEnabledZone] = useState(false);
   const [confirmBtn, setConfirmBtn] = useState(true);
+  const [minDate, setMinDate] = useState("");
+  const [error, setError] = useState(false);
   const adminRef = useRef();
 
+  const handleStartDateChange = (event) => {
+    const selectedDate = event.target.value;
+    if (selectedDate > endDate) {
+      setEndDate(selectedDate);
+      setError(false);
+    } else if (selectedDate <= endDate) {
+      setError(true);
+    }
+    setStartDate(selectedDate);
+  };
+
+  const handleEndDateChange = (event) => {
+    const selectedDate = event.target.value;
+    if (selectedDate < startDate) {
+      setEndDate(selectedDate);
+      setError(false);
+    } else if (selectedDate >= startDate) {
+      setError(true);
+    }
+    setEndDate(selectedDate);
+  };
+
+  useEffect(() => {
+    const yesterday = new Date();
+    yesterday.setDate(yesterday.getDate() - 1);
+    setMinDate(yesterday.toISOString().substring(0, 10));
+  }, [new Date().toISOString().substring(0, 10)]);
   useEffect(() => {
     adminRef.current.focus();
   }, []);
@@ -288,40 +317,56 @@ const CreatePollModal = ({ open, handleClose, nextPage, setPage }) => {
 
         {/*  */}
         <div className='flex flex-col md:flex-row my-2 justify-center items-center w-full gap-3 md:gap-5'>
-          <label className='w-full relative'>
-            Start Date
-            <input
-              type='date'
-              name='start_data'
-              id='start_data'
-              className='font-medium text-base text-[#616b62] uppercase h-full w-full border-2 border-gray-300 rounded-md py-3 px-3'
-              placeholder='DD/MM/YY'
-              value={startDate}
-              required
-              aria-required
-              onChange={(e) => {
-                setStartDate(e.target.value);
-                console.log(e.target.value);
-              }}
-            />
-          </label>
-          <label className='w-full relative'>
-            End Date
-            <input
-              type='date'
-              name='end_date'
-              id='end_date'
-              className='font-medium text-base text-[#616b62] uppercase h-full w-full border-2 border-gray-300 rounded-md py-3 px-3'
-              placeholder='DD/MM/YY'
-              value={endDate}
-              required
-              aria-required
-              onChange={(e) => {
-                setEndDate(e.target.value);
-                console.log(e.target.value);
-              }}
-            />
-          </label>
+          <div className='flex flex-row'>
+            {error && (
+              <div className='text-red-500 text-center '>
+                Start date must be earlier than end date.
+              </div>
+            )}
+            <label className='w-full relative'>
+              Start Date
+              <input
+                type='date'
+                name='start_data'
+                min={minDate}
+                id='start_data'
+                className='font-medium text-base text-[#616b62] uppercase h-full w-full border-2 border-gray-300 rounded-md py-3 px-3'
+                placeholder='DD/MM/YY'
+                value={startDate}
+                required
+                aria-required
+                onChange={(e) => {
+                  handleStartDateChange(e);
+                  setStartDate(e.target.value);
+                  console.log(e.target.value);
+                }}
+              />
+            </label>
+          </div>
+          <div className='flex flex-row'>
+            {error && (
+              <div className='text-red-500 text-center'>
+                Start date must be earlier than end date.
+              </div>
+            )}
+            <label className='w-full relative'>
+              End Date
+              <input
+                type='date'
+                name='end_date'
+                id='end_date'
+                className='font-medium text-base text-[#616b62] uppercase h-full w-full border-2 border-gray-300 rounded-md py-3 px-3'
+                placeholder='DD/MM/YY'
+                value={endDate}
+                required
+                aria-required
+                onChange={(e) => {
+                  handleEndDateChange(e);
+                  console.log(e.target.value);
+                }}
+              />
+            </label>
+          </div>
         </div>
 
         {/* Second Form */}
