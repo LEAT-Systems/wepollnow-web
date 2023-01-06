@@ -25,6 +25,7 @@ const AllPolls = () => {
 
     let formData = new FormData();
     formData.append("voter_id", `${uniqueID}`);
+
     const requestOptions = {
       method: "POST",
       body: formData
