@@ -1,5 +1,3 @@
-/** @format */
-
 import React, { useState, useEffect, useRef } from "react";
 import { Close } from "@mui/icons-material";
 import { Checkbox, Modal } from "@mui/material";
@@ -7,8 +5,7 @@ import { FileUploader } from "react-drag-drop-files";
 import {
   FormControl,
   FormControlLabel,
-  Radio,
-  RadioGroup,
+
 } from "@mui/material";
 import axios from "../../../../../api/axios";
 import swal from "sweetalert";
@@ -143,7 +140,7 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
     // formData.append("photo", candidateImage);
 
     console.log(file);
-    
+
         var presidentID = {
           name: name,
           poll: "",
@@ -554,12 +551,8 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
                   <option>Select Party</option>
                   {partyData.map((data) => {
                     return (
-                      <option
-                        key={data.id}
-                        data-id={data.id}
-                        value={data.id}
-                      >
-                        {data.name}
+                      <option key={data.id} data-id={data.id} value={data.id}>
+                        {`${data.name}  (${data.abbr})`}
                       </option>
                     );
                   })}
@@ -584,58 +577,8 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
                     }}
                   />
                 }
-                label='Main Candidate'
+                label='Running Mate'
               />
-              {/* <RadioGroup
-                value={mainCandidate}
-                onChange={(e) => {
-                  setMainCandidate(e.target.value);
-                }}
-              >
-                <div className='flex justify-between align-center'>
-                  <FormControlLabel
-                    value='true'
-                    className='text-[#616b62] font-medium'
-                    sx={{ width: "100%" }}
-                    control={
-                      <Radio
-                        sx={{
-                          color: "#616b62",
-                          "&.Mui-checked": {
-                            color: "#616b62",
-                          },
-                        }}
-                      />
-                    }
-                    label='Yes'
-                  />
-                  <h3 className='font-bold my-auto text-sm text-[#616b62] whitespace-nowrap'>
-                    Main Candidate
-                  </h3>
-                </div>
-                <div className='flex justify-between align-center'>
-                  <FormControlLabel
-                    value='false'
-                    className='text-[#616b62] font-medium'
-                    sx={{ width: "100%" }}
-                    control={
-                      <Radio
-                        sx={{
-                          color: "#616b62",
-                          "&.Mui-checked": {
-                            color: "#616b62",
-                          },
-                        }}
-                      />
-                    }
-                    label='No'
-                  />
-
-                  <h3 className='font-bold my-auto text-sm text-[#616b62] whitespace-nowrap'>
-                    Main Candidate
-                  </h3>
-                </div>
-              </RadioGroup> */}
             </FormControl>
           </div>
           <div className='flex items-center justify-end w-full my-2'>

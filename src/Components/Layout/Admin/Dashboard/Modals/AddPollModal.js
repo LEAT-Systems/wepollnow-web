@@ -36,7 +36,7 @@ const AddPollModal = ({
     setDistrict,
     setStartDate,
     setEndDate,
-    setPollName,
+    pollName,
   } = useContext(ModalFormContext);
 
   const [parti, setParti] = useState([]);
@@ -106,7 +106,7 @@ const AddPollModal = ({
     status: 1,
     party: parti,
     candidate: candi,
-    poll_name: setPollName,
+    poll_name: pollName,
     // poll_name: `Presidential Poll`,
   };
   var governorshipID = {
@@ -117,7 +117,7 @@ const AddPollModal = ({
     status: 1,
     party: parti,
     candidate: candi,
-    poll_name: setPollName,
+    poll_name: pollName,
     // poll_name: `Governorship Poll`,
   };
   var senatorialID = {
@@ -128,7 +128,7 @@ const AddPollModal = ({
     status: 1,
     party: parti,
     candidate: candi,
-    poll_name: setPollName,
+    poll_name: pollName,
     // poll_name: `Senatorial Poll `,
   };
 

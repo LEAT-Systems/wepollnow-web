@@ -11,23 +11,8 @@ import axios from "../../../../../api/axios";
 
 const TableBody = ({ tableData, open }) => {
   const { tableRowID, setTableRowID } = useContext(ModalFormContext);
-  const [value, setValue] = useState("");
+  const [id, setId] = useState("");
   console.log("TableRowID: ", tableRowID);
-  console.log("Value: ", value)
-
-  useEffect(() => {
-    setValue(tableRowID);
-  }, [tableRowID]);
-  const saveToLocalstorage = () => {
-    localStorage.setItem("pollID", tableRowID);
-  };
-
-  const getLocalstorageItem = () => {
-    const items = localStorage.getItem("pollID");
-    console.log(items);
-  };
-  console.log("set items func: ", saveToLocalstorage());
-  console.log("get items func: ", getLocalstorageItem());
 
   const history = useHistory();
 
@@ -60,55 +45,150 @@ const TableBody = ({ tableData, open }) => {
 
   const parentTarget = (e) =>
     e.currentTarget.parentNode.parentNode.getAttribute("data-id");
+
   const target = (e) => e.target.getAttribute("data-id");
 
   const handleDelete = async () => {
-    await axios
-      .delete(`/poll/rud_poll/${tableRowID}`)
-      .then((res) => {
-        console.log(res.data);
-        swal({
-          title: "Success",
-          text: "Poll Deleted!",
-          icon: "success",
-          button: "Ok",
-        });
-      })
-      .catch((err) => {
-        console.log(err);
-        if (!err?.response) {
+    try {
+      await axios
+        .delete(`/poll/rud_poll/${tableRowID}`, {
+          headers: {
+            "Content-type": "application/json",
+          },
+        })
+        .then((res) => {
+          console.log(res.data);
           swal({
             title: "Success",
-            text: "No Internet Connection",
-            icon: "error",
-            button: "Ok",
+            text: "Poll deleted successfully",
+            icon: "success",
+            buttons: [
+              {
+                color: "success",
+                label: "OK",
+              },
+            ],
           });
-        } else if (err.response?.status === 400) {
-          swal({
-            title: "Failure",
-            text: "Something went wrong!",
-            icon: "error",
-            button: "Ok",
-          });
-        } else if (err.response?.status === 401) {
-          swal({
-            title: "Failure",
-            text: "Unauthorized",
-            icon: "error",
-            button: "Ok",
-          });
-        } else {
-          swal({
-            title: "Failure",
-            text: "Poll Deletion Failed",
-            icon: "error",
-            button: "Ok",
-          });
-        }
-      });
-
-    window.location.reload();
+        });
+    } catch (err) {
+      console.log(err);
+      if (err.status === 400) {
+        swal({
+          title: "Oops!",
+          text: "That poll does not exist",
+          icon: "error",
+          buttons: [
+            {
+              color: "error",
+              label: "OK",
+              isCancel: true,
+            },
+          ],
+        });
+      } else if (err.status === 401) {
+        swal({
+          title: "Oops!",
+          text: "Check your token",
+          icon: "error",
+          buttons: [
+            {
+              color: "error",
+              label: "OK",
+              isCancel: true,
+            },
+          ],
+        });
+      } else if (err.status === 404) {
+        swal({
+          title: "Oops!",
+          text: "Poll does not exist",
+          icon: "error",
+          buttons: [
+            {
+              color: "error",
+              label: "OK",
+              isCancel: true,
+            },
+          ],
+        });
+        console.log(err);
+      } else if (err.status === 500) {
+        swal({
+          title: "Oops!",
+          text: "Internal server error",
+          icon: "error",
+          buttons: [
+            {
+              color: "error",
+              label: "OK",
+              isCancel: true,
+            },
+          ],
+        });
+        console.log(err);
+      } else {
+        swal({
+          title: "Oops!",
+          text: "Something went wrong!",
+          icon: "error",
+          buttons: [
+            {
+              color: "error",
+              label: "OK",
+              isCancel: true,
+            },
+          ],
+        });
+      }
+    }
   };
+
+  // await axios
+  //   .delete(`/poll/rud_poll/${id}`)
+  //   .then((res) => {
+  //     console.log(res.data);
+  //     swal({
+  //       title: "Success",
+  //       text: "Poll Deleted!",
+  //       icon: "success",
+  //       button: "Ok",
+  //     });
+  //   })
+  //   .catch((err) => {
+  //     console.log(err);
+  //     if (!err?.response) {
+  //       swal({
+  //         title: "Success",
+  //         text: "No Internet Connection",
+  //         icon: "error",
+  //         button: "Ok",
+  //       });
+  //     } else if (err.response?.status === 400) {
+  //       swal({
+  //         title: "Failure",
+  //         text: "Something went wrong!",
+  //         icon: "error",
+  //         button: "Ok",
+  //       });
+  //     } else if (err.response?.status === 401) {
+  //       swal({
+  //         title: "Failure",
+  //         text: "Unauthorized",
+  //         icon: "error",
+  //         button: "Ok",
+  //       });
+  //     } else {
+  //       swal({
+  //         title: "Failure",
+  //         text: "Poll Deletion Failed",
+  //         icon: "error",
+  //         button: "Ok",
+  //       });
+  //     }
+  //   });
+
+  // window.location.reload();
+  // }
 
   return (
     <tr
@@ -116,9 +196,7 @@ const TableBody = ({ tableData, open }) => {
       data-id={tableData.id}
       onClick={(e) => {
         setTableRowID(target(e));
-        saveToLocalstorage();
-        getLocalstorageItem();
-        console.log("Value for redirection :", getLocalstorageItem());
+        // setId(target(e));
         redirect();
       }}
     >
@@ -159,9 +237,8 @@ const TableBody = ({ tableData, open }) => {
           className='text-blue-500 cursor-pointer'
           onClick={(e) => {
             setTableRowID(parentTarget(e));
-            saveToLocalstorage();
-            getLocalstorageItem();
-            console.log("Value for redirection :", getLocalstorageItem());
+            // setId(parentTarget(e));
+            console.log(tableRowID);
             console.log(parentTarget(e));
             open();
           }}
@@ -172,14 +249,15 @@ const TableBody = ({ tableData, open }) => {
           <img src={Archive} alt='Archive' className='w-[1.1rem] h-[1.1rem]' />
         </div> */}
         <div
-          className='text-red-500 cursor-pointer'
+          className='text-red-500 cursor-pointer delete-button'
           onClick={(e) => {
             setTableRowID(parentTarget(e));
-            saveToLocalstorage();
-            getLocalstorageItem();
-            console.log("Value for redirection :", getLocalstorageItem());
+            // setId(
+            // e.currentTarget.parentNode.parentNode.getAttribute("data-id")
+            // );
+            console.log(tableRowID);
             handleDelete();
-            // console.log(parentTarget(e));
+            console.log(parentTarget(e));
           }}
         >
           <img src={Delete} alt='Trash' className='w-[1.1rem] h-[1.1rem]' />
