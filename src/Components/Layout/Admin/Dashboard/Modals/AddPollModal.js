@@ -1,3 +1,5 @@
+/** @format */
+
 import React, { useContext, useEffect, useState } from "react";
 import { ArrowBack } from "@mui/icons-material";
 import ModalFormContext from "../../../../../ModalFormContextAdmin/ModalFormContext";
@@ -158,9 +160,14 @@ const AddPollModal = ({
         console.log(res);
         swal({
           title: "Success",
-          text: "New Poll Added Successfully!",
+          text: "Poll Created!",
           icon: "success",
-          button: "Ok",
+          buttons: [
+            {
+              color: "success",
+              label: "OK",
+            },
+          ],
         });
         setPollType("");
         setSelectedState("");
@@ -174,41 +181,80 @@ const AddPollModal = ({
           setSuccessMessage("No Connection");
           console.log(err);
           swal({
-            title: "Success",
-            text: "No Internet Connection",
+            title: "Error",
+            text: "Check Your Internet Connection",
             icon: "error",
-            button: "Ok",
+            buttons: [
+              {
+                color: "error",
+                label: "OK",
+                isCancel: true,
+              },
+            ],
           });
         } else if (err.response?.status === 400) {
           setSuccessMessage("Email and Password are required");
           console.log(err);
           swal({
-            title: "Failure",
-            text: "All fields are required!",
+            title: "Error",
+            text: "Something went wrong",
             icon: "error",
-            button: "Ok",
+            buttons: [
+              {
+                color: "error",
+                label: "OK",
+                isCancel: true,
+              },
+            ],
           });
         } else if (err.response?.status === 401) {
           setSuccessMessage("Unauthorized");
           console.log(err);
           swal({
-            title: "Failure",
-            text: "Unauthorized",
+            title: "Error",
+            text: "Check Your Internet Connection",
             icon: "error",
-            button: "Ok",
+            buttons: [
+              {
+                color: "error",
+                label: "OK",
+                isCancel: true,
+              },
+            ],
+          });
+        } else if (err.response?.status === 500) {
+          setSuccessMessage("Something went wrong");
+          console.log(err);
+          swal({
+            title: "Error",
+            text: "Internal server error",
+            icon: "error",
+            buttons: [
+              {
+                color: "error",
+                label: "OK",
+                isCancel: true,
+              },
+            ],
           });
         } else {
           setSuccessMessage("Add Candidate Failed");
           console.log(err);
-          swal({
-            title: "Failure",
-            text: "Adding New Poll Failed",
+          swal( {
+            title: "Error",
+            text: "Add Poll Failed",
             icon: "error",
-            button: "Ok",
+            buttons: [
+              {
+                color: "error",
+                label: "OK",
+                isCancel: true,
+              },
+            ],
           });
         }
       });
-    
+
     window.location.reload();
   };
 

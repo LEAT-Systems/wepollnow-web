@@ -8,8 +8,6 @@ import { Navigation } from "swiper";
 import calendar from "../../images/calendar.png";
 import { baseUrl } from "../../store/baseUrl";
 
-//
-//
 
 const PollsSwiper = (props) => {
   const [data, setData] = useState([]);
@@ -25,7 +23,7 @@ const PollsSwiper = (props) => {
   // Setting data for polls from API here
   useEffect(() => {
     let formData = new FormData();
-    formData.append("user_id", `${uniqueID}`);
+    formData.append("voter_id", `${uniqueID}`);
     const requestOptions = {
       method: "POST",
       body: formData,
