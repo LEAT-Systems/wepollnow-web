@@ -24,12 +24,14 @@ const AllPolls = () => {
     setIdExist(uniqueID);
 
     let formData = new FormData();
+    formData.append("user_id", `${uniqueID}`);
     const requestOptions = {
       method: "POST",
+      body: formData
     };
     const getData = async () => {
       const response = await fetch(
-        baseUrl + `poll/user_polls/?voter_id=${uniqueID}`,
+        baseUrl + `poll/user_polls/`,
         requestOptions
       );
       const result = await response.text();
