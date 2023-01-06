@@ -44,6 +44,10 @@ const CreatePollModal = ({ open, handleClose, nextPage, setPage }) => {
     setParties,
   } = useContext(ModalFormContext);
 
+  const stateRef = useRef();
+  const presidentialRef = useRef();
+  const senatorialRef = useRef();
+
   const [enableState, setEnabledState] = useState(false);
   const [enabledSenetorial, setEnabledSenetorial] = useState(false);
   const [enabledZone, setEnabledZone] = useState(false);
@@ -183,7 +187,12 @@ const CreatePollModal = ({ open, handleClose, nextPage, setPage }) => {
 
     if (startDate !== "" && pollType === "1" && endDate !== "") {
       setConfirmBtn(false);
-    } else if (startDate !== "" && pollType === "2" && selectedState !== "" && endDate !== "") { 
+    } else if (
+      startDate !== "" &&
+      pollType === "2" &&
+      selectedState !== "" &&
+      endDate !== ""
+    ) {
       setConfirmBtn(false);
     } else if (
       startDate !== "" &&
@@ -251,7 +260,11 @@ const CreatePollModal = ({ open, handleClose, nextPage, setPage }) => {
               ref={adminRef}
               onChange={(e) => {
                 setPollType(e.target.value);
-                setPresidentialName(e.target.getAttribute("data-valueName"));
+                setPresidentialName(
+                  e.target.options[e.target.selectedIndex].getAttribute(
+                    "data-valueName"
+                  )
+                );
                 console.log(presidentialName);
                 console.log(e.target.value);
               }}
@@ -319,12 +332,19 @@ const CreatePollModal = ({ open, handleClose, nextPage, setPage }) => {
               name='state'
               id='state'
               className='custom_select disabled:bg-gray-200 disabled:cursor-not-allowed'
+              ref={stateRef}
               value={selectedState}
               onChange={(e) => {
                 setSelectedState(e.target.value);
-                setGubernationalName(e.target.getAttribute("data-valueName"));
-                console.log(gubernationalName);
+                setGubernationalName(
+                  e.target.options[e.target.selectedIndex].getAttribute(
+                    "data-valueName"
+                  )
+                );
+                console.log(stateRef.current.attribute);
+                console.log("ref: ", gubernationalName);
                 console.log(e.target.value);
+                console.log("ref 2: ", e.target.dataset.valueName);
               }}
               disabled={enableState}
             >
@@ -333,7 +353,6 @@ const CreatePollModal = ({ open, handleClose, nextPage, setPage }) => {
                 return (
                   <option
                     key={state.id}
-                    id={state.id}
                     value={state.id}
                     data-valueName={state.name}
                   >
@@ -356,7 +375,11 @@ const CreatePollModal = ({ open, handleClose, nextPage, setPage }) => {
               value={district}
               onChange={(e) => {
                 setDistrict(e.target.value);
-                setSenatorialName(e.target.getAttribute("data-valueName"));
+                setSenatorialName(
+                  e.target.options[e.target.selectedIndex].getAttribute(
+                    "data-valueName"
+                  )
+                );
                 console.log(senatorialName);
                 console.log(e.target.value);
               }}
@@ -390,7 +413,11 @@ const CreatePollModal = ({ open, handleClose, nextPage, setPage }) => {
               value={zone}
               onChange={(e) => {
                 setZone(e.target.value);
-                setZonelName(e.target.getAttribute("data-valueName"));
+                setZonelName(
+                  e.target.options[e.target.selectedIndex].getAttribute(
+                    "data-valueName"
+                  )
+                );
                 console.log(zonelName);
                 console.log(e.target.value);
               }}
