@@ -317,7 +317,7 @@ const CreatePollModal = ({ open, handleClose, nextPage, setPage }) => {
 
         {/*  */}
         <div className='flex flex-col md:flex-row my-2 justify-center items-center w-full gap-3 md:gap-5'>
-          <div className='flex flex-row'>
+          <div className='flex flex-row w-full'>
             {error && (
               <div className='text-red-500 text-center '>
                 Start date must be earlier than end date.
@@ -343,7 +343,7 @@ const CreatePollModal = ({ open, handleClose, nextPage, setPage }) => {
               />
             </label>
           </div>
-          <div className='flex flex-row'>
+          <div className='flex flex-row w-full'>
             {error && (
               <div className='text-red-500 text-center'>
                 Start date must be earlier than end date.
