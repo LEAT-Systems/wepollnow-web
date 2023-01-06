@@ -255,7 +255,8 @@ const CreatePollModal = ({ open, handleClose, nextPage, setPage }) => {
               ref={adminRef}
               onChange={(e) => {
                 setPollType(e.target.value);
-                setPresidentialName(e.target.getAttribute("data-valueName"));
+                setPresidentialName( e.target.options[e.target.selectedIndex].getAttribute(
+                    "data-valueName");
                 console.log(presidentialName);
                 console.log(e.target.value);
               }}
@@ -327,7 +328,11 @@ const CreatePollModal = ({ open, handleClose, nextPage, setPage }) => {
               value={selectedState}
               onChange={(e) => {
                 setSelectedState(e.target.value);
-                setGubernationalName(stateRef.current.attribute);
+                setGubernationalName(
+                  e.target.options[e.target.selectedIndex].getAttribute(
+                    "data-valueName"
+                  )
+                );
                 console.log(stateRef.current.attribute);
                 console.log("ref: ", gubernationalName);
                 console.log(e.target.value);
@@ -362,7 +367,8 @@ const CreatePollModal = ({ open, handleClose, nextPage, setPage }) => {
               value={district}
               onChange={(e) => {
                 setDistrict(e.target.value);
-                setSenatorialName(e.target.getAttribute("data-valueName"));
+                setSenatorialName(e.target.options[e.target.selectedIndex].getAttribute(
+                    "data-valueName"))
                 console.log(senatorialName);
                 console.log(e.target.value);
               }}
@@ -396,7 +402,8 @@ const CreatePollModal = ({ open, handleClose, nextPage, setPage }) => {
               value={zone}
               onChange={(e) => {
                 setZone(e.target.value);
-                setZonelName(e.target.getAttribute("data-valueName"));
+                setZonelName( e.target.options[e.target.selectedIndex].getAttribute(
+                    "data-valueName");
                 console.log(zonelName);
                 console.log(e.target.value);
               }}

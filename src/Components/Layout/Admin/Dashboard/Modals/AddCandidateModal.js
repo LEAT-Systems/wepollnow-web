@@ -579,56 +579,6 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
                 }
                 label='Running Mate'
               />
-              {/* <RadioGroup
-                value={mainCandidate}
-                onChange={(e) => {
-                  setMainCandidate(e.target.value);
-                }}
-              >
-                <div className='flex justify-between align-center'>
-                  <FormControlLabel
-                    value='true'
-                    className='text-[#616b62] font-medium'
-                    sx={{ width: "100%" }}
-                    control={
-                      <Radio
-                        sx={{
-                          color: "#616b62",
-                          "&.Mui-checked": {
-                            color: "#616b62",
-                          },
-                        }}
-                      />
-                    }
-                    label='Yes'
-                  />
-                  <h3 className='font-bold my-auto text-sm text-[#616b62] whitespace-nowrap'>
-                    Main Candidate
-                  </h3>
-                </div>
-                <div className='flex justify-between align-center'>
-                  <FormControlLabel
-                    value='false'
-                    className='text-[#616b62] font-medium'
-                    sx={{ width: "100%" }}
-                    control={
-                      <Radio
-                        sx={{
-                          color: "#616b62",
-                          "&.Mui-checked": {
-                            color: "#616b62",
-                          },
-                        }}
-                      />
-                    }
-                    label='No'
-                  />
-
-                  <h3 className='font-bold my-auto text-sm text-[#616b62] whitespace-nowrap'>
-                    Main Candidate
-                  </h3>
-                </div>
-              </RadioGroup> */}
             </FormControl>
           </div>
           <div className='flex items-center justify-end w-full my-2'>
