@@ -61,7 +61,7 @@ const CreatePollModal = ({ open, handleClose, nextPage, setPage }) => {
     if (selectedDate > endDate) {
       setEndDate(selectedDate);
       setError(false);
-    } else if (selectedDate <= endDate) {
+    } else if (selectedDate >= endDate) {
       setError(true);
     }
     setStartDate(selectedDate);
@@ -72,7 +72,7 @@ const CreatePollModal = ({ open, handleClose, nextPage, setPage }) => {
     if (selectedDate < startDate) {
       setEndDate(selectedDate);
       setError(false);
-    } else if (selectedDate >= startDate) {
+    } else if (selectedDate <= startDate) {
       setError(true);
     }
     setEndDate(selectedDate);
