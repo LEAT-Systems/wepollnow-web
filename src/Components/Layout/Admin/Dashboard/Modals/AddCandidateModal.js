@@ -577,7 +577,7 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
                     }}
                   />
                 }
-                label='Main Candidate'
+                label='Running Mate'
               />
               {/* <RadioGroup
                 value={mainCandidate}
