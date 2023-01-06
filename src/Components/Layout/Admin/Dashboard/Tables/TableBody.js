@@ -48,16 +48,10 @@ const TableBody = ({ tableData, open }) => {
 
   const target = (e) => e.target.getAttribute("data-id");
 
-  useEffect(() => {
-    if (tableData.id === tableRowID) {
-      setId(tableData.id);
-    }
-  }, [setId, tableData.id, tableRowID]);
-
   const handleDelete = async () => {
     try {
       await axios
-        .delete(`/poll/rud_poll/${id}`, {
+        .delete(`/poll/rud_poll/${tableRowID}`, {
           headers: {
             "Content-type": "application/json",
           },
