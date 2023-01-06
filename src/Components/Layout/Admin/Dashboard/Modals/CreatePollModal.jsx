@@ -44,6 +44,10 @@ const CreatePollModal = ({ open, handleClose, nextPage, setPage }) => {
     setParties,
   } = useContext(ModalFormContext);
 
+  const stateRef = useRef()
+  const presidentialRef = useRef()
+  const senatorialRef = useRef()
+
   const [enableState, setEnabledState] = useState(false);
   const [enabledSenetorial, setEnabledSenetorial] = useState(false);
   const [enabledZone, setEnabledZone] = useState(false);
@@ -319,12 +323,14 @@ const CreatePollModal = ({ open, handleClose, nextPage, setPage }) => {
               name='state'
               id='state'
               className='custom_select disabled:bg-gray-200 disabled:cursor-not-allowed'
+              ref={stateRef}
               value={selectedState}
               onChange={(e) => {
                 setSelectedState(e.target.value);
-                setGubernationalName(e.target.getAttribute("data-valueName"));
-                console.log(gubernationalName);
+                setGubernationalName(stateRef.current.attribute);
+                console.log("ref: ", gubernationalName);
                 console.log(e.target.value);
+                console.log("ref 2: ", e.target.dataset().valueName);
               }}
               disabled={enableState}
             >
@@ -333,7 +339,6 @@ const CreatePollModal = ({ open, handleClose, nextPage, setPage }) => {
                 return (
                   <option
                     key={state.id}
-                    id={state.id}
                     value={state.id}
                     data-valueName={state.name}
                   >
