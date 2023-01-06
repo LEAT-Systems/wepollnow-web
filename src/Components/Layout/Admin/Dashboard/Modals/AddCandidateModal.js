@@ -225,34 +225,75 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
         if (!err?.response) {
           setErrorMessage("No Connection");
           swal({
-            title: "Success",
-            text: "No Internet Connection",
+            title: "Error",
+            text: "Check Your Internet Connection",
             icon: "error",
-            button: "Ok",
+            buttons: [
+              {
+                color: "error",
+                label: "OK",
+                isCancel: true,
+              },
+            ],
           });
         } else if (err.response?.status === 400) {
-          setErrorMessage("Email and Password are required");
+          setSuccessMessage("Something went wrong");
+          console.log(err);
           swal({
-            title: "Failure",
-            text: "All fields are required!",
+            title: "Error",
+            text: "Something went wrong",
             icon: "error",
-            button: "Ok",
+            buttons: [
+              {
+                color: "error",
+                label: "OK",
+                isCancel: true,
+              },
+            ],
           });
         } else if (err.response?.status === 401) {
-          setErrorMessage("Unauthorized");
+          setSuccessMessage("Unauthorized");
+          console.log(err);
           swal({
-            title: "Failure",
-            text: "Unauthorized",
+            title: "Error",
+            text: "Check Your Internet Connection",
             icon: "error",
-            button: "Ok",
+            buttons: [
+              {
+                color: "error",
+                label: "OK",
+                isCancel: true,
+              },
+            ],
+          });
+        } else if (err.response?.status === 500) {
+          setSuccessMessage("Internal server error");
+          console.log(err);
+          swal({
+            title: "Error",
+            text: "Internal server error",
+            icon: "error",
+            buttons: [
+              {
+                color: "error",
+                label: "OK",
+                isCancel: true,
+              },
+            ],
           });
         } else {
           setErrorMessage("Add Candidate Failed");
           swal({
-            title: "Failure",
-            text: "Adding Candidate Failed",
+            title: "Error",
+            text: "Add Candidate Failed",
             icon: "error",
-            button: "Ok",
+            buttons: [
+              {
+                color: "error",
+                label: "OK",
+                isCancel: true,
+              },
+            ],
           });
         }
       });
