@@ -1,3 +1,5 @@
+/** @format */
+
 import React, { useState } from "react";
 import SearchBar from "../Search/SearchBar";
 import LinkIcon from "../../assets/Filter@2x.png";
@@ -11,6 +13,7 @@ const PollsHeader = ({
   handleGrid,
   handleList,
   handleOpenRefineResult,
+  showFilter,
 }) => {
   const [active, setActive] = useState(0);
   const [filterIsActive, setFilterIsActive] = useState(0);
@@ -50,22 +53,25 @@ const PollsHeader = ({
         </div>
 
         <div className='flex w-full justify-start md:justify-end items-end h-8 md:h-12'>
-          <nav className='flex mr-2 md:mr-2'>
-            <span title='Search' className='mr-1 w-[2.2rem]'>
-              <img src={LinkIcon} alt='Account' className='w-full' />
-            </span>
-            <span
-              title='Filter Table'
-              className={filterIsActive === 2 ? filterActive : filterNotActive}
-              onClick={() => {
-                handleFilterActive(2);
-                handleOpenRefineResult();
-              }}
-            >
-              <img src={FilterIcon} alt='Account' className='w-full' />
-            </span>
-          </nav>
-
+          {showFilter && (
+            <nav className='flex mr-2 md:mr-2'>
+              <span title='Search' className='mr-1 w-[2.2rem]'>
+                <img src={LinkIcon} alt='Account' className='w-full' />
+              </span>
+              <span
+                title='Filter Table'
+                className={
+                  filterIsActive === 2 ? filterActive : filterNotActive
+                }
+                onClick={() => {
+                  handleFilterActive(2);
+                  handleOpenRefineResult();
+                }}
+              >
+                <img src={FilterIcon} alt='Account' className='w-full' />
+              </span>
+            </nav>
+          )}
           <nav className='flex'>
             <span
               title='Table View - Default'
