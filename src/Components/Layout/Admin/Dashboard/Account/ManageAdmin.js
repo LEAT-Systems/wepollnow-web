@@ -184,7 +184,7 @@ const ManageAdmin = () => {
               />
             </div>
 
-            <div className="flex items-end justify-start h-12 md:justify-end">
+            {/* <div className="flex items-end justify-start h-12 md:justify-end">
               <nav className="flex">
                 <span title="Search" className="mr-1 w-[2.2rem]">
                   <img src={LinkIcon} alt="Account" className="w-full" />
@@ -202,7 +202,7 @@ const ManageAdmin = () => {
                   <img src={FilterIcon} alt="Account" className="w-full" />
                 </span>
               </nav>
-            </div>
+            </div> */}
           </div>
         </header>
 
@@ -220,10 +220,10 @@ const ManageAdmin = () => {
           <ManageAdminTable data={searchResult} />
         </div>
 
-        <FilterModal
+        {/* <FilterModal
           refineResult={refineResult}
           handleCloseRefineResult={handleCloseRefineResult}
-        />
+        /> */}
 
         {/* Add Admin Modal */}
         <Modal
