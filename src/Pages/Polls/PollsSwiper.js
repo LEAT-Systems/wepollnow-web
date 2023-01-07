@@ -28,7 +28,8 @@ const PollsSwiper = (props) => {
   // Setting data for polls from API here
   useEffect(() => {
     let formData = new FormData();
-    formData.append("user_id", `${uniqueIDRef.current}`);
+    // formData.append("user_id", `${uniqueIDRef.current}`);
+    formData.append("voter_id", `${uniqueIDRef.current}`);
     const requestOptions = {
       method: "POST",
       body: formData,
