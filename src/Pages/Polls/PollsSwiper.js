@@ -26,14 +26,23 @@ const PollsSwiper = (props) => {
   // });
 
   // Setting data for polls from API here
+  
   useEffect(() => {
-    let formData = new FormData();
-    // formData.append("user_id", `${uniqueIDRef.current}`);
-    formData.append("voter_id", `${uniqueIDRef.current}`);
-    const requestOptions = {
-      method: "POST",
-      body: formData,
-    };
+    let requestOptions = {};
+    if (uniqueIDRef.current == null){
+      requestOptions = {
+        method: "POST",
+        //body: formData,
+      };
+    }else{
+      let formData = new FormData();
+      formData.append("voter_id", `${uniqueIDRef.current}`);
+      requestOptions = {
+        method: "POST",
+        body: formData,
+      };
+    }
+
     const getData = async () => {
       const response = await fetch(
         baseUrl + `poll/user_polls/`,
