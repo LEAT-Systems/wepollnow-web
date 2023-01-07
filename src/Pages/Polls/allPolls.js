@@ -23,12 +23,21 @@ const AllPolls = () => {
     uniqueID = localStorage.getItem("uniqueID");
     setIdExist(uniqueID);
 
-    let formData = new FormData();
-    formData.append("voter_id", `${uniqueID}`);
-    const requestOptions = {
-      method: "POST",
-      body: formData
-    };
+    let requestOptions = {};
+    if (uniqueID == null){
+      requestOptions = {
+        method: "POST",
+        //body: formData,
+      };
+    }else{
+      let formData = new FormData();
+      formData.append("voter_id", `${uniqueID}`);
+      requestOptions = {
+        method: "POST",
+        body: formData,
+      };
+    }
+
     const getData = async () => {
       const response = await fetch(
         baseUrl + `poll/user_polls/`,
