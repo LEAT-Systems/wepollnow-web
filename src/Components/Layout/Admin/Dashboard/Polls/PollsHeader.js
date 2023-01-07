@@ -14,7 +14,8 @@ const PollsHeader = ({
   handleList,
   handleOpenRefineResult,
   showFilter,
-  showViews
+  showViews,
+  showLabel,
 }) => {
   const [active, setActive] = useState(0);
   const [filterIsActive, setFilterIsActive] = useState(0);
@@ -41,9 +42,11 @@ const PollsHeader = ({
 
   return (
     <header className='flex flex-col md:flex-row justify-start md:justify-between my-4 place-items-start md:place-items-center items-start w-full md:items-center'>
-      <h3 className='font-bold text-xl lg:text-2xl md:text-[1.4rem] capitalize py-4 pl-0 w-full'>
-        Manage polls
-      </h3>
+      {showLabel && (
+        <h3 className='font-bold text-xl lg:text-2xl md:text-[1.4rem] capitalize py-4 pl-0 w-full'>
+          Manage polls
+        </h3>
+      )}
       <div className='flex justify-start md:justify-end items-center'>
         <div className='w-[90%] sm:w-3/4'>
           <SearchBar

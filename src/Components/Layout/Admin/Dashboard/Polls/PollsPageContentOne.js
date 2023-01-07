@@ -102,6 +102,7 @@ const PollsPageContentOne = () => {
             handleList={handleList}
             handleOpenRefineResult={handleOpenRefineResult}
             showFilter={false}
+            showViews={true}
           />
         </div>
 
