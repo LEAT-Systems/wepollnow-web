@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import Timer from "../../UI/Timer";
@@ -11,19 +11,24 @@ import { baseUrl } from "../../store/baseUrl";
 
 const PollsSwiper = (props) => {
   const [data, setData] = useState([]);
+  let uniqueIDRef = useRef();
+
+  useEffect(() => {
+    uniqueIDRef.current = localStorage.getItem("uniqueID")
+  }, [])
 
   // TO check if API data contents is empty
   const isEmpty = data.length === 0;
 
-  let uniqueID;
-  useEffect(() => {
-    uniqueID = localStorage.getItem("uniqueID");
-  });
+  // let uniqueID;
+  // useEffect(() => {
+  //   uniqueID = localStorage.getItem("uniqueID");
+  // });
 
   // Setting data for polls from API here
   useEffect(() => {
     let formData = new FormData();
-    formData.append("user_id", `${uniqueID}`);
+    formData.append("user_id", `${uniqueIDRef.current}`);
     const requestOptions = {
       method: "POST",
       body: formData,
@@ -38,7 +43,7 @@ const PollsSwiper = (props) => {
       setData(JSONdata);
     };
     getData();
-  }, [uniqueID]);
+  }, []);
 
   return (
     <div className="relative">
