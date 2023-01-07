@@ -14,6 +14,7 @@ const PollsHeader = ({
   handleList,
   handleOpenRefineResult,
   showFilter,
+  showViews
 }) => {
   const [active, setActive] = useState(0);
   const [filterIsActive, setFilterIsActive] = useState(0);
@@ -72,30 +73,32 @@ const PollsHeader = ({
               </span>
             </nav>
           )}
-          <nav className='flex'>
-            <span
-              title='Table View - Default'
-              className={active === 0 ? viewActive : viewNotActive}
-              onClick={() => {
-                handleActive(0);
-                handleList();
-              }}
-            >
-              <ArticleOutlined
-                sx={{ width: "100%", height: "unset", color: "#082a0f" }}
-              />
-            </span>
-            <span
-              title='Table View - Grid'
-              className={active === 1 ? viewActive : viewNotActive}
-              onClick={() => {
-                handleActive(1);
-                handleGrid();
-              }}
-            >
-              <img src={GridIcon} alt='Account' className='w-full' />
-            </span>
-          </nav>
+          {showViews && (
+            <nav className='flex'>
+              <span
+                title='Table View - Default'
+                className={active === 0 ? viewActive : viewNotActive}
+                onClick={() => {
+                  handleActive(0);
+                  handleList();
+                }}
+              >
+                <ArticleOutlined
+                  sx={{ width: "100%", height: "unset", color: "#082a0f" }}
+                />
+              </span>
+              <span
+                title='Table View - Grid'
+                className={active === 1 ? viewActive : viewNotActive}
+                onClick={() => {
+                  handleActive(1);
+                  handleGrid();
+                }}
+              >
+                <img src={GridIcon} alt='Account' className='w-full' />
+              </span>
+            </nav>
+          )}
         </div>
       </div>
     </header>
