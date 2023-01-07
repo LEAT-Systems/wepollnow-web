@@ -101,6 +101,7 @@ const PollsPageContentOne = () => {
             handleGrid={handleGrid}
             handleList={handleList}
             handleOpenRefineResult={handleOpenRefineResult}
+            showFilter={true}
           />
         </div>
 
