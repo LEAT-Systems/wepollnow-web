@@ -25,6 +25,8 @@ const Header = () => {
 
   const leaveHandler = () => {
     history.push("/admin/login", { replace: true });
+    // removes the admin name and status
+    localStorage.setItem("loggedInUser", "");
     // destroy session here
     authCtx.logout();
     window.location.reload();

@@ -2,9 +2,8 @@ import React from "react";
 import { useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import logo from "../../../images/logo.png";
-import facebook from "../../../images/navIcons/Facebook.png";
 import instagram from "../../../images/navIcons/IG.png";
-import youtube from "../../../images/navIcons/YouTube.png";
+import twitter from "../../../images/navIcons/twitter.png";
 import EastIcon from "@mui/icons-material/East";
 import back from "../../../images/backArrow.png";
 import hamburger from "../../../images/hamburger.png";
@@ -118,15 +117,13 @@ const Nav = (props) => {
         </div>
       </div>
 
-      <div className="flex flex-row items-center justify-between mx-auto space-x-6 md:-ml-1">
+      <div className="flex flex-row items-center justify-between mx-auto space-x-8 md:-ml-1">
         <div>
           <img src={instagram} alt="instagram" />
         </div>
-        <div>
-          <img src={youtube} alt="youtube" />
-        </div>
-        <div>
-          <img src={facebook} alt="facebook" />
+
+        <div className="p-3 bg-[#191919] rounded-2xl">
+          <img src={twitter} alt="twitter" className="brightness-200" />
         </div>
       </div>
     </div>
@@ -160,11 +157,9 @@ const Nav = (props) => {
         <div>
           <img src={instagram} alt="instagram" />
         </div>
-        <div>
-          <img src={youtube} alt="youtube" />
-        </div>
-        <div>
-          <img src={facebook} alt="facebook" />
+
+        <div className="p-3 bg-[#191919] rounded-2xl">
+          <img src={twitter} alt="twitter" className="brightness-200" />
         </div>
       </div>
     </div>
