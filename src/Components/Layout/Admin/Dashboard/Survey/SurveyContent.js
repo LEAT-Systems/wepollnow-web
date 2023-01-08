@@ -92,7 +92,7 @@ const SurveyContent = () => {
         const response = await fetch(baseUrl + `poll/get_polls/`, {
           method: "GET",
         });
-        const result = await response.json();
+        const result = await response.result.json();
         setPolls(result);
       };
       getPollData();
