@@ -35,7 +35,7 @@ const PollsPageContentOne = () => {
       await axios.get("/poll/get_polls/")
         .then((res) => {
           console.log(res);
-          setModalData(res.data);
+          setModalData(res.data.results);
         })
         .catch((err) => console.log(err));
     };
