@@ -77,13 +77,7 @@ const Footer = () => {
             <p>Polls</p>
           </Link>
         </div>
-        <div className="flex flex-row items-start justify-center space-x-8 md:space-x-4 md:space-y-0 text-[#C0C0C0]">
-          <a
-            href="https://twitter.com/wepollnow"
-            className="flex flex-row space-x-2"
-          >
-            <TwitterIcon />
-          </a>
+        <div className="flex flex-row items-start justify-center space-x-8 md:space-x-8 md:space-y-0 text-[#C0C0C0]">
           <a
             href="https://instagram.com/wepollnow"
             className="flex flex-row space-x-2"
@@ -91,16 +85,10 @@ const Footer = () => {
             <InstagramIcon />
           </a>
           <a
-            href="https://facebook.com/wepollnow"
+            href="https://twitter.com/wepollnow"
             className="flex flex-row space-x-2"
           >
-            <FaceBookIcon />
-          </a>
-          <a
-            href="https://linkedin.com/wepollnow"
-            className="flex flex-row space-x-2"
-          >
-            <LinkedinIcon />
+            <TwitterIcon />
           </a>
         </div>
       </div>
