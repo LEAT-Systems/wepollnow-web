@@ -4,8 +4,7 @@ import { Link, useHistory } from "react-router-dom";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import instagram from "../../images/landingIcons/IG.png";
-import youtube from "../../images/landingIcons/YU.png";
-import facebook from "../../images/landingIcons/FB.png";
+import twitter from "../../images/landingIcons/twitter.png";
 import text_logo from "../../images/voteWatermark.png";
 import GettingStartedContent from "./GettingStartedContent";
 import ModalComponent from "./GettingStartedModal";
@@ -136,15 +135,13 @@ const GettingStartedFive = () => {
         <div
           className={`absolute z-10 flex flex-col items-center  left-4 md:left-16 top-[450px] md:top-48 justify-center`}
         >
-          <div className={`flex flex-col space-y-4`}>
+          <div className={`flex flex-col space-y-8 text-[#707070]`}>
             <a href="https://instagram.com/wepollnow">
               <img src={instagram} alt="instagram_link" />
             </a>
-            <a href="https://youtube.com/wepollnow">
-              <img src={youtube} alt="youtube_link" />
-            </a>
+
             <a href="https://facebook.com/wepollnow">
-              <img src={facebook} alt="facebook_link" />
+              <img src={twitter} alt="instagram_link" />
             </a>
           </div>
         </div>

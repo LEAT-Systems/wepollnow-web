@@ -10,6 +10,7 @@ import searchIcon from "../../../images/search.png";
 import Loading from "../../../UI/Loading";
 import img_avatar from "../../../images/avat.png";
 import swal from "sweetalert";
+import { baseUrl } from "../../../store/baseUrl";
 
 // Getting phone number and selected poll from local storage
 const selectedPoll = localStorage.getItem("pollType");
@@ -51,7 +52,7 @@ const FormFive = () => {
     setPollID(poll_id);
     setSelectedPoll(poll_name);
 
-    // sending selected poll to API to fetch poll data
+    // sending selected poll to API to fetch poll data (candidates, parties)
     const getData = async () => {
       const formdata = new FormData();
       formdata.append("poll_id", poll_id);
@@ -61,7 +62,7 @@ const FormFive = () => {
       };
       try {
         const response = await fetch(
-          "https://wepollnow.azurewebsites.net/poll/poll_candidates/",
+          baseUrl + "poll/poll_candidates/",
           requestOptions
         );
         const result = await response.json();
@@ -112,7 +113,7 @@ const FormFive = () => {
   }, []);
   //
 
-  // ======================    SEND VOTE TO API  ====================================
+  // Sending casted vote to API
 
   const sendToAPI = async (e) => {
     e.preventDefault();
@@ -122,15 +123,14 @@ const FormFive = () => {
     formdata.append("poll_id", pollID);
     var requestOptions = {
       method: "POST",
+      Headers: { "Content-Type": "application/json" },
       body: formdata,
     };
     try {
-      const response = await fetch(
-        "https://wepollnow.azurewebsites.net/voters/vote/",
-        requestOptions
-      );
+      const response = await fetch(baseUrl + `voters/vote/`, requestOptions);
 
       const result = await response.json();
+      console.log(result, response);
       // redirect or throw error
       if (response.ok === true) {
         history.push("/vote/vote-form-next", { replace: true });
@@ -276,7 +276,7 @@ const FormFive = () => {
                                   <img
                                     src={
                                       item.viceCandidateImg !== null
-                                        ? `https://wepollnow.azurewebsites.net/${item.viceCandidateImg}`
+                                        ? baseUrl + `${item.viceCandidateImg}`
                                         : img_avatar
                                     }
                                     className="w-8 h-8 rounded"
@@ -295,7 +295,7 @@ const FormFive = () => {
                                   <img
                                     src={
                                       item.viceCandidateImg !== null
-                                        ? `https://wepollnow.azurewebsites.net/${item.viceCandidateImg}`
+                                        ? baseUrl + `${item.viceCandidateImg}`
                                         : img_avatar
                                     }
                                     className="w-8 h-8 rounded"
