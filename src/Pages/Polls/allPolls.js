@@ -1,3 +1,5 @@
+/** @format */
+
 import React, { useState, useEffect } from "react";
 import Nav from "../../Components/Layout/Landing/mainNav";
 import Footer from "../../Components/Layout/Landing/Footer";
@@ -24,12 +26,12 @@ const AllPolls = () => {
     setIdExist(uniqueID);
 
     let requestOptions = {};
-    if (uniqueID == null){
+    if (uniqueID == null) {
       requestOptions = {
         method: "POST",
         //body: formData,
       };
-    }else{
+    } else {
       let formData = new FormData();
       formData.append("voter_id", `${uniqueID}`);
       requestOptions = {
@@ -72,57 +74,57 @@ const AllPolls = () => {
 
   // ===================    JSX    ==============================
   return (
-    <div className="w-screen h-screen overflow-x-hidden">
+    <div className='w-screen h-screen overflow-x-hidden'>
       <ModalComponent open={open} handleClose={handleClose} />
-      <Nav bg="FCEBEE" bgImg="hero-container-pattern" hamburgerBg="FCEBEE" />
-      <div className="flex flex-row items-center justify-between mx-auto bg-[#EDFFF0] md:bg-[#FCEBEE] bg-hero-container-pattern">
-        <div className="flex flex-col px-4 space-y-2 md:px-24">
-          <div className="relative flex flex-row items-center justify-start space-x-2">
-            <p className="text-xs md:text-lg font-bold underline underline-2 underline-offset-2 decoration-yellow-500 decoration-[6px]">
+      <Nav bg='FCEBEE' bgImg='hero-container-pattern' hamburgerBg='FCEBEE' />
+      <div className='flex flex-row items-center justify-between mx-auto bg-[#EDFFF0] md:bg-[#FCEBEE] bg-hero-container-pattern'>
+        <div className='flex flex-col px-4 space-y-2 md:px-24'>
+          <div className='relative flex flex-row items-center justify-start space-x-2'>
+            <p className='text-xs md:text-lg font-bold underline underline-2 underline-offset-2 decoration-yellow-500 decoration-[6px]'>
               Available Polls
             </p>
             <img
               src={tooltipIcon}
-              alt="tooltipIcon"
+              alt='tooltipIcon'
               onMouseEnter={() => setTooltipStatus(1)}
               onMouseLeave={() => setTooltipStatus(0)}
             />
             {tooltipStatus === 1 && (
               <div
-                role="tooltip"
-                className="absolute -mt-24 text-white transition duration-150 ease-in-out bg-black rounded shadow-lg"
+                role='tooltip'
+                className='absolute -mt-24 text-white transition duration-150 ease-in-out bg-black rounded shadow-lg'
               >
-                <p className="p-2 text-xs font-normal md:text-lg">
+                <p className='p-2 text-xs font-normal md:text-lg'>
                   Polls in this section have been sorted according to your
                   voting location.
                 </p>
               </div>
             )}
           </div>
-          <h1 className="max-w-full md:max-w-xl leading-none md:leading-tight text-[16px] md:text-5xl font-extrabold">
+          <h1 className='max-w-full md:max-w-xl leading-none md:leading-tight text-[16px] md:text-5xl font-extrabold'>
             Select a poll you want to participate
           </h1>
         </div>
-        <div className="z-10 flex md:-mt-36">
+        <div className='z-10 flex md:-mt-36'>
           <img
             src={image}
-            className="w-full md:h-[500px]"
-            loading="lazy"
+            className='w-full md:h-[500px]'
+            loading='lazy'
             alt={"Voter"}
           />
         </div>
       </div>
       {/* ==============   GRID FOR ARRANGING ITEMS  ===================*/}
       {isEmpty && (
-        <div className="flex flex-row items-center justify-center mt-48">
-          <div className="border-8 border-[#EAB308] w-2/3 p-12">
-            <p className="text-sm md:text-2xl">
+        <div className='flex flex-row items-center justify-center mt-48'>
+          <div className='border-8 border-[#EAB308] w-2/3 p-12'>
+            <p className='text-sm md:text-2xl'>
               No polls available at the moment...
             </p>
           </div>
         </div>
       )}
-      <div className="grid min-h-[50vh] grid-cols-1 pb-12 mt-12 md:grid-cols-2 lg:grid-cols-3 gap-y-4 gap-x-12 md:px-24 md:gap-x-12 ">
+      <div className='grid min-h-[50vh] grid-cols-1 pb-12 mt-12 md:grid-cols-2 lg:grid-cols-3 gap-y-4 gap-x-12 md:px-24 md:gap-x-12 '>
         {data?.map((item) => {
           // Here, I'm calculating the poll date from the current date so i could render items conditionally
           let due;
@@ -145,12 +147,12 @@ const AllPolls = () => {
 
           return (
             <div
-              className="flex flex-col items-center justify-center p-4 space-y-2 md:flex-row md:px-0 hover:-translate-y-1"
+              className='flex flex-col items-center justify-center p-4 space-y-2 md:flex-row md:px-0 hover:-translate-y-1'
               key={item.id}
             >
-              <div className="flex flex-col items-center justify-center w-full py-12 space-y-4 rounded-lg h-72 bg-polls-pattern">
+              <div className='flex flex-col items-center justify-center w-full py-12 space-y-4 rounded-lg h-72 bg-polls-pattern'>
                 {!due && (
-                  <p className="text-xl font-bold text-center text-white">
+                  <p className='text-xl font-bold text-center text-white'>
                     {item.poll_name}
                   </p>
                 )}
@@ -161,25 +163,25 @@ const AllPolls = () => {
                       : "bg-[#FFFAED] border-[#f9c833]"
                   } border rounded-md`}
                 >
-                  {!due && <img src={calendar} alt="calendarIcon" />}
-                  <label className="text-[14px]">
-                    <p className="font-normal">
+                  {!due && <img src={calendar} alt='calendarIcon' />}
+                  <label className='text-[14px]'>
+                    <p className='font-normal'>
                       {due ? "Ongoing" : item.poll_date}
                     </p>
                   </label>
                 </div>
                 {due && (
-                  <p className="text-xl font-bold text-center text-white">
+                  <p className='text-xl font-bold text-center text-white'>
                     {item.poll_name}
                   </p>
                 )}
-                <div className="px-2">
+                <div className='px-2'>
                   {!due ? (
                     <Timer
                       date={item.poll_date}
-                      size="2xl"
-                      pcolor="white"
-                      color="white"
+                      size='2xl'
+                      pcolor='white'
+                      color='white'
                     />
                   ) : (
                     <button
@@ -187,7 +189,7 @@ const AllPolls = () => {
                         handleOpen();
                         handler();
                       }}
-                      className="btn-stay animate"
+                      className='btn-stay animate'
                     >
                       Vote Now
                     </button>
