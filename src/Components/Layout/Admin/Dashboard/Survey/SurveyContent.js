@@ -92,8 +92,9 @@ const SurveyContent = () => {
         const response = await fetch(baseUrl + `poll/get_polls/`, {
           method: "GET",
         });
-        const result = await response.result.json();
-        setPolls(result);
+
+        const polls = await response.json();
+        setPolls(polls.results);
       };
       getPollData();
     } catch (error) {
@@ -113,7 +114,6 @@ const SurveyContent = () => {
   // This gets all the survey category so i could display percentages on the survey modal
 
   const getPollSurvey = (id) => {
-    console.log(id);
     try {
       const getData = async () => {
         const response = await fetch(
@@ -121,7 +121,6 @@ const SurveyContent = () => {
           { method: "GET" }
         );
         const result = await response.json();
-        console.log(result);
         if (response.ok) {
           setSurveyData(result);
         }
@@ -229,8 +228,6 @@ const SurveyContent = () => {
     }
   };
 
-  //Get opinions
-
   // Delete Item Handler of todo list
   const deleteHandler = (id) => {
     const filtered = list.filter((el) => el.id !== id);
@@ -318,7 +315,7 @@ const SurveyContent = () => {
           {/*General COntainer with Polls information  */}
           <div className="px-6 py-6 space-y-4 border border-gray-200 rounded-md">
             {isEmpty && <p>No data to show</p>}
-            {currentPosts.map((item) => {
+            {currentPosts?.map((item) => {
               return (
                 <div
                   key={item.id}

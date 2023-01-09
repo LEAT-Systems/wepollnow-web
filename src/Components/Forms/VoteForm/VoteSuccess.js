@@ -17,7 +17,7 @@ const VoteSuccess = () => {
 
   // text to be copied to clipboard
   const linkToBeCopied =
-    "I just voted for my preferred candidate in the wepollnow e-Nigeria opinion polls. You can give your candidate a vote by using this link. https://pollit-ashy.vercel.app/";
+    "I just voted for my preferred candidate in the wepollnow e-Nigeria opinion polls. You can give your candidate a vote by using this link. https://wepollnow.com/";
   const clipBoardHandler = () => {
     navigator.clipboard.writeText(linkToBeCopied);
     setCopied(true);
@@ -79,16 +79,32 @@ const VoteSuccess = () => {
                   <img src={whatsapp} alt="whatsapp" />
                 </a>
                 <button>
-                  <img src={facebook} alt="facebook" />
+                  <a
+                    href={`https://www.facebook.com/dialog/feed?app_id=140586622674265&link=wepollnow.com&name=${linkToBeCopied}&redirect_uri=http%3A%2F%2Fs7.addthis.com%2Fstatic%2Fpostshare%2Fc00.html`}
+                    target="_blank"
+                  >
+                    <img src={facebook} alt="facebook" />
+                  </a>
+                </button>
+
+                <button>
+                  <a
+                    href="https://www.linkedin.com/sharing/share-offsite/?url=https://www.wepollnow.com"
+                    target="_blank"
+                    title={linkToBeCopied}
+                  >
+                    <img src={linkedIn} alt="linkedin" />
+                  </a>
                 </button>
                 <button>
-                  <img src={instagram} alt="instagram" />
-                </button>
-                <button>
-                  <img src={linkedIn} alt="instagram" />
-                </button>
-                <button>
-                  <img src={twitter} alt="instagram" />
+                  <a
+                    href="https://twitter.com/share?ref_src=twsrc%5Etfw"
+                    data-show-count="false"
+                    data-text={linkToBeCopied}
+                    data-hashtags="wepollnow"
+                  >
+                    <img src={twitter} alt="twitter" />
+                  </a>
                 </button>
                 <a href="mailto:" target="_blank" rel="noreferrer">
                   <button className="p-2 bg-[#EDFFF0] rounded-md">
