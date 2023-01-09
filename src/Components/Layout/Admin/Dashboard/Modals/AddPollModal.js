@@ -1,7 +1,9 @@
+/** @format */
+
 import React, { useContext, useEffect, useState } from "react";
 import { ArrowBack } from "@mui/icons-material";
 import ModalFormContext from "../../../../../ModalFormContextAdmin/ModalFormContext";
-import axios from "axios";
+import axios from "../../../../../api/axios";
 import swal from "sweetalert";
 
 // const data = [
@@ -36,6 +38,7 @@ const AddPollModal = ({
     setDistrict,
     setStartDate,
     setEndDate,
+    pollName,
   } = useContext(ModalFormContext);
 
   const [parti, setParti] = useState([]);
@@ -105,7 +108,8 @@ const AddPollModal = ({
     status: 1,
     party: parti,
     candidate: candi,
-    poll_name: `Presidential Poll`,
+    poll_name: pollName,
+    // poll_name: `Presidential Poll`,
   };
   var governorshipID = {
     poll_category_id: pollType,
@@ -115,7 +119,8 @@ const AddPollModal = ({
     status: 1,
     party: parti,
     candidate: candi,
-    poll_name: `Governorship Poll`,
+    poll_name: pollName,
+    // poll_name: `Governorship Poll`,
   };
   var senatorialID = {
     poll_category_id: pollType,
@@ -125,7 +130,8 @@ const AddPollModal = ({
     status: 1,
     party: parti,
     candidate: candi,
-    poll_name: `Senatorial Poll`
+    poll_name: pollName,
+    // poll_name: `Senatorial Poll `,
   };
 
   var config = () => {
@@ -144,7 +150,7 @@ const AddPollModal = ({
     e.preventDefault();
 
     await axios
-      .post(`https://wepollnow.azurewebsites.net/poll/create_poll/`, config())
+      .post(`/poll/create_poll/`, config())
       // .then((res) => {
       //   setSuccessMessage(res.status);
       //   console.log(res.data);
@@ -154,9 +160,14 @@ const AddPollModal = ({
         console.log(res);
         swal({
           title: "Success",
-          text: "New Poll Added Successfully!",
+          text: "Poll Created!",
           icon: "success",
-          button: "Ok",
+          buttons: [
+            {
+              color: "success",
+              label: "OK",
+            },
+          ],
         });
         setPollType("");
         setSelectedState("");
@@ -170,41 +181,80 @@ const AddPollModal = ({
           setSuccessMessage("No Connection");
           console.log(err);
           swal({
-            title: "Success",
-            text: "No Internet Connection",
+            title: "Error",
+            text: "Check Your Internet Connection",
             icon: "error",
-            button: "Ok",
+            buttons: [
+              {
+                color: "error",
+                label: "OK",
+                isCancel: true,
+              },
+            ],
           });
         } else if (err.response?.status === 400) {
           setSuccessMessage("Email and Password are required");
           console.log(err);
           swal({
-            title: "Failure",
-            text: "All fields are required!",
+            title: "Error",
+            text: "Something went wrong",
             icon: "error",
-            button: "Ok",
+            buttons: [
+              {
+                color: "error",
+                label: "OK",
+                isCancel: true,
+              },
+            ],
           });
         } else if (err.response?.status === 401) {
           setSuccessMessage("Unauthorized");
           console.log(err);
           swal({
-            title: "Failure",
-            text: "Unauthorized",
+            title: "Error",
+            text: "Check Your Internet Connection",
             icon: "error",
-            button: "Ok",
+            buttons: [
+              {
+                color: "error",
+                label: "OK",
+                isCancel: true,
+              },
+            ],
+          });
+        } else if (err.response?.status === 500) {
+          setSuccessMessage("Something went wrong");
+          console.log(err);
+          swal({
+            title: "Error",
+            text: "Internal server error",
+            icon: "error",
+            buttons: [
+              {
+                color: "error",
+                label: "OK",
+                isCancel: true,
+              },
+            ],
           });
         } else {
           setSuccessMessage("Add Candidate Failed");
           console.log(err);
-          swal({
-            title: "Failure",
-            text: "Adding New Poll Failed",
+          swal( {
+            title: "Error",
+            text: "Add Poll Failed",
             icon: "error",
-            button: "Ok",
+            buttons: [
+              {
+                color: "error",
+                label: "OK",
+                isCancel: true,
+              },
+            ],
           });
         }
       });
-    
+
     window.location.reload();
   };
 
@@ -249,7 +299,7 @@ const AddPollModal = ({
                   <div className='flex items-center w-full border-b my-auto pb-2'>
                     {/* Party Logo */}
                     <img
-                      src={`https://wepollnow.azurewebsites.net${data.logo}`}
+                      src={`${data.logo}`}
                       alt='Political Party'
                       className='w-[2.3rem] aspect-square rounded-sm'
                     />

@@ -3,7 +3,7 @@ import axios from "../../../../api/axios";
 /* Get Table Data */
 const getTableData = async () => {
   try {
-    const response = await axios.get("https://wepollnow.azurewebsites.net/", {
+    const response = await axios.get("/", {
       headers: {
         "Content-Type": "application/json",
       },
@@ -29,7 +29,7 @@ const getTableData = async () => {
 /****************** Get All States ******************/
 const getState = async () => {
   axios
-    .get("https://wepollnow.azurewebsites.net/utilities/states/")
+    .get("/utilities/states/")
     .then((res) => {
       console.log(res);
     })
@@ -40,7 +40,7 @@ const getState = async () => {
 const getSenatorial = async ({ state_id }) => {
   axios
     .get(
-      `https://wepollnow.azurewebsites.net/utilities/senatorial/${state_id}/`
+      `/utilities/senatorial/${state_id}/`
     )
     .then((res) => {
       console.log(res);
@@ -51,7 +51,7 @@ const getSenatorial = async ({ state_id }) => {
 /*********************** Get LGA's ************************/
 const getLGA = async () => {
   try {
-    const response = await axios.get("https://wepollnow.azurewebsites.net/", {
+    const response = await axios.get("/", {
       headers: {
         "Content-Type": "application/json",
       },
@@ -77,7 +77,7 @@ const getLGA = async () => {
 /*********************** Get Zone ************************/
 const getZone = async () => {
   try {
-    const response = await axios.get("https://wepollnow.azurewebsites.net/", {
+    const response = await axios.get("/", {
       headers: {
         "Content-Type": "application/json",
       },
@@ -103,7 +103,7 @@ const getZone = async () => {
 /*********************** Get Poll Type ************************/
 const getPollType = async () => {
   try {
-    const response = await axios.get("https://wepollnow.azurewebsites.net/", {
+    const response = await axios.get("/", {
       headers: {
         "Content-Type": "application/json",
       },
@@ -148,7 +148,7 @@ const postImage = async (file, onUploadProgress) => {
 /*********************** Contact List ************************/
 const getContactList = async () => {
   axios
-    .get(`https://wepollnow.azurewebsites.net/utilities/contact_list/`)
+    .get(`/utilities/contact_list/`)
     .then((res) => {
       console.log(res);
     })
@@ -158,7 +158,7 @@ const getContactList = async () => {
 /*********************** Contact List ************************/
 const getEmails = async () => {
   axios
-    .get(`https://wepollnow.azurewebsites.net/utilities/subscriber/`)
+    .get(`/utilities/subscriber/`)
     .then((res) => {
       console.log(res);
     })

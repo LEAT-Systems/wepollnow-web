@@ -1,7 +1,7 @@
 /** @format */
 
 import React, { useState, useEffect, useContext, useRef } from "react";
-import axios from "axios";
+import axios from "../../../../../api/axios";
 import ModalFormContext from "../../../../../ModalFormContextAdmin/ModalFormContext";
 
 const CreatePollModal = ({ open, handleClose, nextPage, setPage }) => {
@@ -32,15 +32,57 @@ const CreatePollModal = ({ open, handleClose, nextPage, setPage }) => {
     setEndDate,
     setPollName,
     pollTypeName,
+
+    presidentialName,
+    setPresidentialName,
+    senatorialName,
+    setSenatorialName,
+    gubernationalName,
+    setGubernationalName,
+    zonelName,
+    setZonelName,
     setParties,
   } = useContext(ModalFormContext);
+
+  const stateRef = useRef();
+  const presidentialRef = useRef();
+  const senatorialRef = useRef();
 
   const [enableState, setEnabledState] = useState(false);
   const [enabledSenetorial, setEnabledSenetorial] = useState(false);
   const [enabledZone, setEnabledZone] = useState(false);
   const [confirmBtn, setConfirmBtn] = useState(true);
+  const [minDate, setMinDate] = useState("");
+  const [error, setError] = useState(false);
   const adminRef = useRef();
 
+  const handleStartDateChange = (event) => {
+    const selectedDate = event.target.value;
+    if (selectedDate > endDate) {
+      setEndDate(selectedDate);
+      setError(false);
+    } else if (selectedDate >= endDate) {
+      setError(true);
+    }
+    setStartDate(selectedDate);
+  };
+
+  const handleEndDateChange = (event) => {
+    const selectedDate = event.target.value;
+    if (selectedDate > startDate) {
+      setEndDate(selectedDate);
+      setError(false);
+    } else if (selectedDate <= startDate) {
+      setError(true);
+    }
+    setEndDate(selectedDate);
+  };
+
+  useEffect(() => {
+    const yesterday = new Date();
+    yesterday.setDate(yesterday.getDate() - 1);
+    setMinDate(yesterday.toISOString().substring(0, 10));
+  }, [new Date().toISOString().substring(0, 10)]);
   useEffect(() => {
     adminRef.current.focus();
   }, []);
@@ -48,7 +90,7 @@ const CreatePollModal = ({ open, handleClose, nextPage, setPage }) => {
   useEffect(() => {
     const getState = async () => {
       await axios
-        .get("https://wepollnow.azurewebsites.net/utilities/states/")
+        .get("/utilities/states/")
         .then((res) => setState(res.data))
         .catch((err) => console.log(err));
     };
@@ -60,20 +102,29 @@ const CreatePollModal = ({ open, handleClose, nextPage, setPage }) => {
   useEffect(() => {
     const getSenetorial = async () => {
       await axios
-        .get(
-          `https://wepollnow.azurewebsites.net/utilities/senatorial/${selectedState}`
-        )
+        .get(`/utilities/senatorial/${selectedState}`)
         .then((res) => setDistrictData(res.data))
         .catch((err) => console.log(err));
     };
     getSenetorial();
   }, [selectedState, setDistrictData]);
 
+  /* Get Zones */
+  useEffect(() => {
+    const getZones = async () => {
+      await axios
+        .get(`/utilities/constituency/${selectedState}`)
+        .then((res) => setZoneData(res.data))
+        .catch((err) => console.log(err));
+    };
+    getZones();
+  }, [selectedState, setZoneData]);
+
   /* Get Poll Type */
   useEffect(() => {
     const getPollType = async () => {
       await axios
-        .get(`https://wepollnow.azurewebsites.net/poll/poll_category/`)
+        .get(`/poll/poll_category/`)
         .then((res) => {
           setPollTypeData(res.data);
           console.log(res.data);
@@ -87,7 +138,7 @@ const CreatePollModal = ({ open, handleClose, nextPage, setPage }) => {
   useEffect(() => {
     const getParty = async () => {
       await axios
-        .get(`https://wepollnow.azurewebsites.net/utilities/party_list/`)
+        .get(`/utilities/party_list/`)
         .then((res) => {
           setPartyData(res.data);
           console.log(res.data);
@@ -125,10 +176,7 @@ const CreatePollModal = ({ open, handleClose, nextPage, setPage }) => {
     console.log(config());
     const getParties = async () => {
       await axios
-        .post(
-          `https://wepollnow.azurewebsites.net/poll/poll_category_party/`,
-          config()
-        )
+        .post(`/poll/poll_category_party/`, config())
         .then((res) => {
           setParties(res.data);
           console.log(res.data);
@@ -153,34 +201,77 @@ const CreatePollModal = ({ open, handleClose, nextPage, setPage }) => {
         setEnabledState(false);
         setEnabledSenetorial(false);
         setEnabledZone(true);
-      } else {
+      } else if (pollType === "4") {
         setEnabledSenetorial(true);
         setEnabledZone(false);
         setEnabledState(false);
+      } else {
+        setEnabledSenetorial(true);
+        setEnabledZone(true);
+        setEnabledState(true);
       }
     };
 
     onDisabled();
 
-    if (startDate !== "" && pollType !== "" && endDate !== "") {
+    if (startDate !== "" && pollType === "1" && endDate !== "") {
+      setConfirmBtn(false);
+    } else if (
+      startDate !== "" &&
+      pollType === "2" &&
+      selectedState !== "" &&
+      endDate !== ""
+    ) {
+      setConfirmBtn(false);
+    } else if (
+      startDate !== "" &&
+      pollType === "3" &&
+      selectedState !== "" &&
+      district !== "" &&
+      endDate !== ""
+    ) {
+      setConfirmBtn(false);
+    } else if (
+      startDate !== "" &&
+      pollType === "3" &&
+      selectedState !== "" &&
+      zone !== "" &&
+      endDate !== ""
+    ) {
       setConfirmBtn(false);
     } else {
       setConfirmBtn(true);
     }
-  }, [startDate, endDate, pollType]);
+  }, [startDate, endDate, pollType, district, selectedState, zone]);
 
-  // if (pollType === "1") {
-  //   return setPollName(`${pollTypeName} Poll`);
-  // } else if (pollType === "2") {
-  //   return setPollName(`${state} ${pollTypeName} Poll`);
-  // } else if (pollType === "3") {
-  //   setPollName(`${state} ${pollTypeName} Polls`);
-  // } else {
-  //   setPollName(`${state} ${pollTypeName} Polls`);
-  // }
+  useEffect(() => {
+    if (pollType === "1") {
+      setPollName(presidentialName);
+    } else if (pollType === "2") {
+      setPollName(`${gubernationalName} State Gubernational Poll`);
+    } else if (pollType === "3") {
+      setPollName(`${senatorialName} Senatorial Poll`);
+    } else {
+      setPollName(`${zonelName} Zonal Poll`);
+    }
+  }, [
+    presidentialName,
+    gubernationalName,
+    senatorialName,
+    zonelName,
+    setPollName,
+    pollType,
+  ]);
 
   // console.log('poll name: ' pollTypeName)
   // // polltype = 1 >>> pollTypeData.title[0]
+
+  // presidentialName,
+  // setPresidentialName,
+  // senatorialName,
+  // setSenatorialName,
+  // gubernationalName,
+  // setGubernationalName,
   return (
     <>
       <div className='flex flex-col justify-between items-center w-full my-2 hover:bg-transparent'>
@@ -198,13 +289,24 @@ const CreatePollModal = ({ open, handleClose, nextPage, setPage }) => {
               ref={adminRef}
               onChange={(e) => {
                 setPollType(e.target.value);
+                setPresidentialName(
+                  e.target.options[e.target.selectedIndex].getAttribute(
+                    "data-valueName"
+                  )
+                );
+                console.log(presidentialName);
                 console.log(e.target.value);
               }}
             >
               <option value='Select Poll Type'>Select Poll Type</option>
               {pollTypeData.map((poll) => {
                 return (
-                  <option key={poll.id} id={poll.id} value={poll.id}>
+                  <option
+                    key={poll.id}
+                    id={poll.id}
+                    value={poll.id}
+                    data-valueName={poll.title}
+                  >
                     {poll.title}
                   </option>
                 );
@@ -215,40 +317,56 @@ const CreatePollModal = ({ open, handleClose, nextPage, setPage }) => {
 
         {/*  */}
         <div className='flex flex-col md:flex-row my-2 justify-center items-center w-full gap-3 md:gap-5'>
-          <label className='w-full relative'>
-            Start Date
-            <input
-              type='date'
-              name='start_data'
-              id='start_data'
-              className='font-medium text-base text-[#616b62] uppercase h-full w-full border-2 border-gray-300 rounded-md py-3 px-3'
-              placeholder='DD/MM/YY'
-              value={startDate}
-              required
-              aria-required
-              onChange={(e) => {
-                setStartDate(e.target.value);
-                console.log(e.target.value);
-              }}
-            />
-          </label>
-          <label className='w-full relative'>
-            End Date
-            <input
-              type='date'
-              name='end_date'
-              id='end_date'
-              className='font-medium text-base text-[#616b62] uppercase h-full w-full border-2 border-gray-300 rounded-md py-3 px-3'
-              placeholder='DD/MM/YY'
-              value={endDate}
-              required
-              aria-required
-              onChange={(e) => {
-                setEndDate(e.target.value);
-                console.log(e.target.value);
-              }}
-            />
-          </label>
+          <div className='flex flex-row w-full my-2'>
+            {error && (
+              <div className='text-red-500 text-center '>
+                Start date must be earlier than end date.
+              </div>
+            )}
+            <label className='w-full relative'>
+              Start Date
+              <input
+                type='date'
+                name='start_data'
+                min={minDate}
+                id='start_data'
+                className='font-medium text-base text-[#616b62] uppercase h-full w-full border-2 border-gray-300 rounded-md py-3 px-3'
+                placeholder='DD/MM/YY'
+                value={startDate}
+                required
+                aria-required
+                onChange={(e) => {
+                  handleStartDateChange(e);
+                  setStartDate(e.target.value);
+                  console.log(e.target.value);
+                }}
+              />
+            </label>
+          </div>
+          <div className='flex flex-row w-full my-2'>
+            {error && (
+              <div className='text-red-500 text-center'>
+                Start date must be earlier than end date.
+              </div>
+            )}
+            <label className='w-full relative'>
+              End Date
+              <input
+                type='date'
+                name='end_date'
+                id='end_date'
+                className='font-medium text-base text-[#616b62] uppercase h-full w-full border-2 border-gray-300 rounded-md py-3 px-3'
+                placeholder='DD/MM/YY'
+                value={endDate}
+                required
+                aria-required
+                onChange={(e) => {
+                  handleEndDateChange(e);
+                  console.log(e.target.value);
+                }}
+              />
+            </label>
+          </div>
         </div>
 
         {/* Second Form */}
@@ -259,17 +377,30 @@ const CreatePollModal = ({ open, handleClose, nextPage, setPage }) => {
               name='state'
               id='state'
               className='custom_select disabled:bg-gray-200 disabled:cursor-not-allowed'
+              ref={stateRef}
               value={selectedState}
               onChange={(e) => {
                 setSelectedState(e.target.value);
+                setGubernationalName(
+                  e.target.options[e.target.selectedIndex].getAttribute(
+                    "data-valueName"
+                  )
+                );
+                console.log(stateRef.current.attribute);
+                console.log("ref: ", gubernationalName);
                 console.log(e.target.value);
+                console.log("ref 2: ", e.target.dataset.valueName);
               }}
               disabled={enableState}
             >
               <option>Select State</option>
               {state.map((state) => {
                 return (
-                  <option key={state.id} id={state.id} value={state.id}>
+                  <option
+                    key={state.id}
+                    value={state.id}
+                    data-valueName={state.name}
+                  >
                     {state.name}
                   </option>
                 );
@@ -289,6 +420,12 @@ const CreatePollModal = ({ open, handleClose, nextPage, setPage }) => {
               value={district}
               onChange={(e) => {
                 setDistrict(e.target.value);
+                setSenatorialName(
+                  e.target.options[e.target.selectedIndex].getAttribute(
+                    "data-valueName"
+                  )
+                );
+                console.log(senatorialName);
                 console.log(e.target.value);
               }}
               disabled={enabledSenetorial}
@@ -296,7 +433,11 @@ const CreatePollModal = ({ open, handleClose, nextPage, setPage }) => {
               <option>Select Senetorial District</option>
               {districtData.map((data) => {
                 return (
-                  <option key={data.id} value={data.id}>
+                  <option
+                    key={data.id}
+                    value={data.id}
+                    data-valueName={data.name}
+                  >
                     {data.name}
                   </option>
                 );
@@ -317,16 +458,29 @@ const CreatePollModal = ({ open, handleClose, nextPage, setPage }) => {
               value={zone}
               onChange={(e) => {
                 setZone(e.target.value);
+                setZonelName(
+                  e.target.options[e.target.selectedIndex].getAttribute(
+                    "data-valueName"
+                  )
+                );
+                console.log(zonelName);
                 console.log(e.target.value);
               }}
             >
-              <option value='Select Zone'>Select Zone</option>
-              <option>1</option>
-              <option>2</option>
-              <option>2</option>
-              <option>4</option>
-              <option>5</option>
-              <option>6</option>
+              <option value='Select Zone' data-valueName={"Zone 2"}>
+                Select Zone
+              </option>
+              {zoneData?.map((data) => {
+                return (
+                  <option
+                    key={data.id}
+                    value={data.id}
+                    data-valueName={data.name}
+                  >
+                    {data.name}
+                  </option>
+                );
+              })}
             </select>
           </label>
         </div>

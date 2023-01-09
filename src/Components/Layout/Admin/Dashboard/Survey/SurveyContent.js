@@ -92,6 +92,7 @@ const SurveyContent = () => {
         const response = await fetch(baseUrl + `poll/get_polls/`, {
           method: "GET",
         });
+
         const polls = await response.json();
         setPolls(polls.results);
       };
@@ -336,11 +337,11 @@ const SurveyContent = () => {
                   </div>
                   <button
                     className="flex items-center justify-center border border-1 rounded-md px-3 py-2 cursor-pointer text-sm md:text-base bg-[#08c127] text-white animate"
-                    onClick={() => (
-                      setShow(true),
-                      setSurveyType(item.poll_name),
-                      getPollSurvey(item.id)
-                    )}
+                    onClick={() => {
+                      setShow(true);
+                      setSurveyType(item.poll_name);
+                      getPollSurvey(item.id);
+                    }}
                   >
                     View Results
                   </button>

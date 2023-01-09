@@ -10,7 +10,7 @@ import ManageCandidateTable from "./ManageCandidateTable";
 import Header from "../../../Header";
 import AddCandidateModal from "../../Modals/AddCandidateModal";
 import FilterModal from "../../Modals/FilterModal";
-import axios from "axios";
+import axios from "../../../../../../api/axios";
 import EditCandidate from "../../Modals/Edit/Candidate/EditCandidate";
 
 const SubHeaderData = [
@@ -89,11 +89,11 @@ const Candidate = () => {
 
   useEffect(() => {
     axios
-      .get("https://wepollnow.azurewebsites.net/utilities/candidates/")
+      .get("/utilities/candidates/")
       .then((res) => {
         console.log(res);
-        setTableData(res.data);
-        setSearchResult(res.data);
+        setTableData(res?.data?.results);
+        setSearchResult(res?.data?.results);
       })
       .catch((err) => console.log(err));
   }, [setTableData, setSearchResult]);

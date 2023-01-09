@@ -1,5 +1,3 @@
-/** @format */
-
 import React, { useState, useEffect, useRef } from "react";
 import { Close } from "@mui/icons-material";
 import { Checkbox, Modal } from "@mui/material";
@@ -7,10 +5,9 @@ import { FileUploader } from "react-drag-drop-files";
 import {
   FormControl,
   FormControlLabel,
-  Radio,
-  RadioGroup,
+
 } from "@mui/material";
-import Axios from "axios";
+import axios from "../../../../../api/axios";
 import swal from "sweetalert";
 
 const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
@@ -59,7 +56,8 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
 
   useEffect(() => {
     const getState = async () => {
-      await Axios.get("https://wepollnow.azurewebsites.net/utilities/states/")
+      await axios
+        .get("/utilities/states/")
         .then((res) => setState(res.data))
         .catch((err) => console.log(err));
     };
@@ -69,23 +67,33 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
   /* Get Senetorial District */
   useEffect(() => {
     const getSenetorial = async () => {
-      await Axios.get(
-        `https://wepollnow.azurewebsites.net/utilities/senatorial/${selectedState}`, {
-          state_id: selectedState
-        }
-      )
+      await axios
+        .get(`/utilities/senatorial/${selectedState}`, {
+          state_id: selectedState,
+        })
         .then((res) => setDistrictData(res.data))
         .catch((err) => console.log(err));
     };
     getSenetorial();
   }, [selectedState, setDistrictData]);
+
+  /* Get Zones */
+  useEffect(() => {
+    const getZones = async () => {
+      await axios
+        .get(`/utilities/constituency/${selectedState}`)
+        .then((res) => setZoneData(res.data))
+        .catch((err) => console.log(err));
+    };
+    getZones();
+  }, [selectedState, setZoneData]);
   // console.log("Selected State: ", selectedState);
 
   // /* Get Zone */
   // useEffect(() => {
   //   const getSenetorial = async () => {
-  //     await Axios.get(
-  //       `https://wepollnow.azurewebsites.net/utilities/zone/${selectedState}`
+  //     await axios.get(
+  //       `/utilities/zone/${selectedState}`
   //     )
   //       .then((res) => setZoneData(res.data))
   //       .catch((err) => console.log(err));
@@ -97,7 +105,8 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
   /* Get Poll Type */
   useEffect(() => {
     const getPollType = async () => {
-      await Axios.get(`https://wepollnow.azurewebsites.net/poll/poll_category/`)
+      await axios
+        .get(`/poll/poll_category/`)
         .then((res) => {
           setPollTypeData(res.data);
         })
@@ -109,9 +118,8 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
   /* Get Party */
   useEffect(() => {
     const getParty = async () => {
-      await Axios.get(
-        `https://wepollnow.azurewebsites.net/utilities/party_list/`
-      )
+      await axios
+        .get(`/utilities/party_list/`)
         .then((res) => {
           setPartyData(res.data);
         })
@@ -133,19 +141,70 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
 
     console.log(file);
 
-    await Axios.post(
-      "https://wepollnow.azurewebsites.net/utilities/candidates/",
-      {
+        var presidentID = {
+          name: name,
+          poll: "",
+          poll_category_id: pollType,
+          party_id: party,
+          main_candidate: mainCandidate,
+        };
+        var governorshipID = {
+          name: name,
+          poll: "",
+          poll_category_id: pollType,
+          state_id_id: selectedState,
+          party_id: party,
+          main_candidate: mainCandidate,
+        };
+        var senatorialID = {
+          name: name,
+          poll: "",
+          poll_category_id: pollType,
+          state_id_id: selectedState,
+          senatorial_id_id: district,
+          party_id: party,
+          main_candidate: mainCandidate,
+        };
+        var zoneID = {
+          name: name,
+          poll: "",
+          poll_category_id: pollType,
+          state_id_id: selectedState,
+          zone_id_id: district,
+          party_id: party,
+          main_candidate: mainCandidate,
+        };
+
+    
+    
+        const config = () => {
+          if (pollType === "1") {
+            return presidentID;
+          } else if (pollType === "2") {
+            return governorshipID;
+          } else if (pollType === "3") {
+            return senatorialID;
+          } else if (pollType === "4") { 
+            return zoneID;
+          } else {
+            return presidentID;
+          }
+    };
+    
+    await axios
+      .post(
+        "/utilities/candidates/",
+        /* {
         name: name,
         poll: 2,
-        poll_category_id: pollType,
+        poll_category_id: pollType ,
         state_id_id: selectedState,
         senatorial_id_id: district,
         party_id: party,
         main_candidate: mainCandidate,
         // candidate_picture: file,
-      }
-    )
+      } */ config()
+      )
       .then((res) => {
         console.log(res);
         swal({
@@ -166,42 +225,83 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
         if (!err?.response) {
           setErrorMessage("No Connection");
           swal({
-            title: "Success",
-            text: "No Internet Connection",
+            title: "Error",
+            text: "Check Your Internet Connection",
             icon: "error",
-            button: "Ok",
+            buttons: [
+              {
+                color: "error",
+                label: "OK",
+                isCancel: true,
+              },
+            ],
           });
         } else if (err.response?.status === 400) {
-          setErrorMessage("Email and Password are required");
+          setSuccessMessage("Something went wrong");
+          console.log(err);
           swal({
-            title: "Failure",
-            text: "All fields are required!",
+            title: "Error",
+            text: "Something went wrong",
             icon: "error",
-            button: "Ok",
+            buttons: [
+              {
+                color: "error",
+                label: "OK",
+                isCancel: true,
+              },
+            ],
           });
         } else if (err.response?.status === 401) {
-          setErrorMessage("Unauthorized");
+          setSuccessMessage("Unauthorized");
+          console.log(err);
           swal({
-            title: "Failure",
-            text: "Unauthorized",
+            title: "Error",
+            text: "Check Your Internet Connection",
             icon: "error",
-            button: "Ok",
+            buttons: [
+              {
+                color: "error",
+                label: "OK",
+                isCancel: true,
+              },
+            ],
+          });
+        } else if (err.response?.status === 500) {
+          setSuccessMessage("Internal server error");
+          console.log(err);
+          swal({
+            title: "Error",
+            text: "Internal server error",
+            icon: "error",
+            buttons: [
+              {
+                color: "error",
+                label: "OK",
+                isCancel: true,
+              },
+            ],
           });
         } else {
           setErrorMessage("Add Candidate Failed");
           swal({
-            title: "Failure",
-            text: "Adding Candidate Failed",
+            title: "Error",
+            text: "Add Candidate Failed",
             icon: "error",
-            button: "Ok",
+            buttons: [
+              {
+                color: "error",
+                label: "OK",
+                isCancel: true,
+              },
+            ],
           });
         }
       });
-    
+
     window.location.reload()
   };
 
-      // console.log("Main Candidate: ", mainCandidate);
+  // console.log("Main Candidate: ", mainCandidate);
   useEffect(() => {
     var onDisabled = () => {
       if (pollType === "1") {
@@ -234,8 +334,8 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
 
   // const token = async () => {
   //   try {
-  //     const response = await Axios.post(
-  //       "https://wepollnow.azurewebsites.net/utilities/candidates/",
+  //     const response = await axios.post(
+  //       "/utilities/candidates/",
   //       {
   //         name: name,
   //         poll: null,
@@ -400,14 +500,19 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
                   aria-required
                   value={selectedState}
                   onChange={(e) => {
-                    setSelectedState(e.target.getAttribute("data-id"));
+                    setSelectedState(e.target.value);
+                    console.log("Seclected State ID is: ", selectedState);
                   }}
                   disabled={enableState}
                 >
                   <option>Select State</option>
                   {state.map((state) => {
                     return (
-                      <option key={state.id} data-id={state.id}>
+                      <option
+                        key={state.id}
+                        data-id={state.id}
+                        value={state.id}
+                      >
                         {state.name}
                       </option>
                     );
@@ -427,14 +532,14 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
                   aria-required
                   value={district}
                   onChange={(e) => {
-                    setDistrict(e.target.getAttribute("data-id"));
+                    setDistrict(e.target.value);
                   }}
                   disabled={enabledSenetorial}
                 >
                   <option>Select Senetorial District</option>
                   {districtData.map((data) => {
                     return (
-                      <option key={data.id} data-id={state.id}>
+                      <option key={data.id} data-id={data.id} value={data.id}>
                         {data.name}
                       </option>
                     );
@@ -452,24 +557,22 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
                   className='custom_select disabled:bg-gray-200 disabled:cursor-not-allowed'
                   value={zone}
                   onChange={(e) => {
-                    setZone(e.target.getAttribute("data-id"));
+                    setZone(e.target.value);
                   }}
                   disabled={enabledZone}
                 >
                   <option>Select Zone</option>
-                  <option>1</option>
-                  <option>2</option>
-                  <option>3</option>
-                  <option>4</option>
-                  <option>5</option>
-                  <option>6</option>
-                  {/* {zoneData.map((data) => {
+                  {zoneData?.map((data) => {
                     return (
-                      <option key={data.id} data-id={state.id}>
+                      <option
+                        key={data.id}
+                        value={data.id}
+                        data-valueName={data.name}
+                      >
                         {data.name}
                       </option>
                     );
-                  })} */}
+                  })}
                 </select>
               </label>
             </div>
@@ -483,14 +586,14 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
                   className='custom_select'
                   value={party}
                   onChange={(e) => {
-                    setParty(e.target.getAttribute("data-id"));
+                    setParty(e.target.value);
                   }}
                 >
                   <option>Select Party</option>
                   {partyData.map((data) => {
                     return (
-                      <option key={data.id} data-id={state.id}>
-                        {data.name}
+                      <option key={data.id} data-id={data.id} value={data.id}>
+                        {`${data.name}  (${data.abbr})`}
                       </option>
                     );
                   })}
@@ -515,58 +618,8 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
                     }}
                   />
                 }
-                label='Main Candidate'
+                label='Running Mate'
               />
-              {/* <RadioGroup
-                value={mainCandidate}
-                onChange={(e) => {
-                  setMainCandidate(e.target.value);
-                }}
-              >
-                <div className='flex justify-between align-center'>
-                  <FormControlLabel
-                    value='true'
-                    className='text-[#616b62] font-medium'
-                    sx={{ width: "100%" }}
-                    control={
-                      <Radio
-                        sx={{
-                          color: "#616b62",
-                          "&.Mui-checked": {
-                            color: "#616b62",
-                          },
-                        }}
-                      />
-                    }
-                    label='Yes'
-                  />
-                  <h3 className='font-bold my-auto text-sm text-[#616b62] whitespace-nowrap'>
-                    Main Candidate
-                  </h3>
-                </div>
-                <div className='flex justify-between align-center'>
-                  <FormControlLabel
-                    value='false'
-                    className='text-[#616b62] font-medium'
-                    sx={{ width: "100%" }}
-                    control={
-                      <Radio
-                        sx={{
-                          color: "#616b62",
-                          "&.Mui-checked": {
-                            color: "#616b62",
-                          },
-                        }}
-                      />
-                    }
-                    label='No'
-                  />
-
-                  <h3 className='font-bold my-auto text-sm text-[#616b62] whitespace-nowrap'>
-                    Main Candidate
-                  </h3>
-                </div>
-              </RadioGroup> */}
             </FormControl>
           </div>
           <div className='flex items-center justify-end w-full my-2'>

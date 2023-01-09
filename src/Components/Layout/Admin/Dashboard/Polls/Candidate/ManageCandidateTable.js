@@ -1,7 +1,7 @@
 import ManageCandidateTableRow from "./ManageCandidateTableRow.js";
 
 const ManageCandidateTable = ({ data, open }) => {
-  const results = data.map((data) => {
+  const results = data?.map((data) => {
     return <ManageCandidateTableRow key={data.id} id={data.id} tableData={data} open={open} />;
   });
   return (

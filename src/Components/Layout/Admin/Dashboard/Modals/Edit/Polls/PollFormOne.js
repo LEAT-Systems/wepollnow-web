@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext, useRef } from "react";
-import axios from "axios";
+import axios from "../../../../../../../api/axios";
 import ModalFormContext from "../../../../../../../ModalFormContextAdmin/ModalFormContext";
 
 const PollFormOne = ({ open, handleClose, nextPage, setPage }) => {
@@ -44,7 +44,7 @@ const PollFormOne = ({ open, handleClose, nextPage, setPage }) => {
   useEffect(() => {
     const getState = async () => {
       await axios
-        .get("https://wepollnow.azurewebsites.net/utilities/states/")
+        .get("/utilities/states/")
         .then((res) => setState(res.data))
         .catch((err) => console.log(err));
     };
@@ -57,7 +57,7 @@ const PollFormOne = ({ open, handleClose, nextPage, setPage }) => {
     const getSenetorial = async () => {
       await axios
         .get(
-          `https://wepollnow.azurewebsites.net/utilities/senatorial/${selectedState}`
+          `/utilities/senatorial/${selectedState}`
         )
         .then((res) => setDistrictData(res.data))
         .catch((err) => console.log(err));
@@ -69,7 +69,7 @@ const PollFormOne = ({ open, handleClose, nextPage, setPage }) => {
   useEffect(() => {
     const getPollType = async () => {
       await axios
-        .get(`https://wepollnow.azurewebsites.net/poll/poll_category/`)
+        .get(`/poll/poll_category/`)
         .then((res) => {
           setPollTypeData(res.data);
           console.log(res.data);
@@ -83,7 +83,7 @@ const PollFormOne = ({ open, handleClose, nextPage, setPage }) => {
   useEffect(() => {
     const getParty = async () => {
       await axios
-        .get(`https://wepollnow.azurewebsites.net/utilities/party_list/`)
+        .get(`/utilities/party_list/`)
         .then((res) => {
           setPartyData(res.data);
           console.log(res.data);
@@ -122,7 +122,7 @@ const PollFormOne = ({ open, handleClose, nextPage, setPage }) => {
     const getParties = async () => {
       await axios
         .post(
-          `https://wepollnow.azurewebsites.net/poll/poll_category_party/`,
+          `/poll/poll_category_party/`,
           config()
         )
         .then((res) => {
@@ -149,10 +149,14 @@ const PollFormOne = ({ open, handleClose, nextPage, setPage }) => {
         setEnabledState(false);
         setEnabledSenetorial(false);
         setEnabledZone(true);
-      } else {
+      } else if (pollType === "4") {
         setEnabledSenetorial(true);
         setEnabledZone(false);
         setEnabledState(false);
+      } else {
+        setEnabledSenetorial(true);
+        setEnabledZone(true);
+        setEnabledState(true);
       }
     };
 
@@ -169,7 +173,7 @@ const PollFormOne = ({ open, handleClose, nextPage, setPage }) => {
   useEffect(() => {
     const getData = async () => {
       await axios
-        .get(`https://wepollnow.azurewebsites.net/poll/get_polls/${tableRowID}`)
+        .get(`/poll/get_polls/${tableRowID}`)
         .then((res) => {
           console.log(res);
           setEditPollData(res.data);
@@ -275,7 +279,7 @@ const PollFormOne = ({ open, handleClose, nextPage, setPage }) => {
               <option>Select State</option>
               {state.map((state) => {
                 return (
-                  <option key={state.id} id={state.id} value={state.id}>
+                  <option key={state.id} data-id={state.id} value={state.id}>
                     {state.name}
                   </option>
                 );

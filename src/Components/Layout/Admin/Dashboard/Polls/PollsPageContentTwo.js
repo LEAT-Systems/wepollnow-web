@@ -8,15 +8,16 @@ import BarChart from "../Charts/BarChart";
 import PieChart from "../Charts/PieChart";
 import PieChart2 from "../Charts/PieChart2";
 import DropDown from "../DropDown/DropDown";
-import Grid from "./Grid";
 import Data from "../../Data.json";
 import { NavLink } from "react-router-dom";
 import VOTES from "../../assets/directbox-default.png";
 import TableResult from "../Tables/TableResult/TableResult";
 import TableStateResult from "../Tables/TableStateResult/TableStateResult";
-import axios from "axios";
+import axios from "../../../../../api/axios";
 import ModalFormContext from "../../../../../ModalFormContextAdmin/ModalFormContext";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import PollsHeader from "./PollsHeader";
+import FilterModal from "../Modals/FilterModal";
 
 /* POll RESULT DATA TEMPLATE 
 
@@ -47,10 +48,13 @@ const PollsPageContentTwo = () => {
   const [isTableState, setIsTableState] = useState(false);
   const [isBar, setIsBar] = useState(false);
   const [isPie, setIsPie] = useState(false);
+  const [refineResult, setRefineResult] = useState(false);
   const [isData, setIsData] = useState([]);
+  const [tableData, setTableData] = useState([]);
+  const [searchResult, setSearchResult] = useState([]);
   const { tableRowID } = useContext(ModalFormContext);
 
-  const history = useHistory()
+  const history = useHistory();
   const handleGrid = () => {
     setIsTableState(true);
     setIsBar(false);
@@ -79,19 +83,32 @@ const PollsPageContentTwo = () => {
     setOpen(!open);
   };
 
+  /* handle for refine results */
+  const handleOpenRefineResult = () => {
+    setRefineResult(!refineResult);
+  };
+  const handleCloseRefineResult = () => {
+    setRefineResult(!refineResult);
+  };
+
   useEffect(() => {
     axios
-      .post("https://wepollnow.azurewebsites.net/poll/poll_result/", {
+      .post("/poll/poll_result/", {
         poll_id: tableRowID,
       })
       .then((res) => {
         console.log(res.data);
-        setIsData(res.data);
+        setIsData(res.data.results);
       })
       .catch((err) => {
         console.log(err);
       });
   }, [tableRowID]);
+
+  useEffect(() => {
+    setTableData(isData);
+    setSearchResult(isData);
+  }, [isData]);
 
   const data = [
     {
@@ -122,8 +139,20 @@ const PollsPageContentTwo = () => {
               <p className='font-bold text-[#082b0e]'>Poll Result</p>
             </div>
           </div>
-        </div>
 
+          <div className='w-full'>
+            <PollsHeader
+              setSearchResult={setSearchResult}
+              tableData={tableData}
+              handleGrid={handleGrid}
+              handleList={handleList}
+              handleOpenRefineResult={handleOpenRefineResult}
+              showFilter={true}
+              showViews={false}
+              showLabel={false}
+            />
+          </div>
+        </div>
         {/* CARDS */}
         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 place-items-center w-full mx-auto my-9'>
           {/* First Card */}
@@ -236,6 +265,12 @@ const PollsPageContentTwo = () => {
           </div>
         </div>
       </main>
+
+      {/*************************** Filter Result Overlay *****************************/}
+      <FilterModal
+        refineResult={refineResult}
+        handleCloseRefineResult={handleCloseRefineResult}
+      />
     </>
   );
 };

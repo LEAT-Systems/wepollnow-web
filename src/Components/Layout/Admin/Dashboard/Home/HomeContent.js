@@ -2,11 +2,10 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import Tables from "../Tables/Tables";
 import Header from "../../Header";
-import { ArrowForwardIos, ArrowUpward, Splitscreen } from "@mui/icons-material";
+import { ArrowForwardIos, ArrowUpward } from "@mui/icons-material";
 import Chart from "../../assets/Chart.jpg";
 import People from "../../assets/People.jpg";
-import Axios from "axios";
-import Badge from "../../../../../UI/Badge";
+import axios from "../../../../../api/axios";
 
 const DashboardContent = () => {
   const data = [
@@ -25,8 +24,8 @@ const DashboardContent = () => {
   const [loggedInUser, setLoggedInUser] = useState({ name: "", status: "" });
 
   useEffect(() => {
-    const { name, status } = JSON.parse(localStorage.getItem("loggedInUser"));
-    const refinedName = name[0].toUpperCase() + name.slice(1);
+    const { name, status } = JSON.parse(localStorage?.getItem("loggedInUser"));
+    const refinedName = name[0]?.toUpperCase() + name?.slice(1);
     setLoggedInUser({
       name: refinedName,
       status: status === true ? "Super Admin" : "Admin",
@@ -35,10 +34,10 @@ const DashboardContent = () => {
 
   useEffect(() => {
     const getData = async () => {
-      Axios.get("https://wepollnow.azurewebsites.net/poll/get_polls/")
+      axios.get("/poll/get_polls/")
         .then((res) => {
           console.log(res);
-          setModalData(res.data);
+          setModalData(res.data.results);
         })
         .catch((err) => console.log(err));
     };

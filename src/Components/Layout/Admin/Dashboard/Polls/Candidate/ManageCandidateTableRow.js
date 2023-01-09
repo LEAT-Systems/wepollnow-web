@@ -1,8 +1,8 @@
-import React, {useContext} from "react";
+import React, {useContext, useEffect} from "react";
 import Edit from "../../../assets/edit@2x.png";
 import Delete from "../../../assets/trash@2x.png";
 import swal from "sweetalert";
-import axios from "axios";
+import axios from "../../../../../../api/axios";
 import ModalFormContext from "../../../../../../ModalFormContextAdmin/ModalFormContext";
 
 const ManageCandidateTableRow = ({ tableData, open }) => {
@@ -22,7 +22,7 @@ const ManageCandidateTableRow = ({ tableData, open }) => {
    const handleDelete = async () => {
      await axios
        .delete(
-         `https://wepollnow.azurewebsites.net/utilities/rud_candidate/${candidateID}`
+         `/utilities/rud_candidate/${candidateID}`
        )
        .then((res) => {
          console.log(res.data);
@@ -66,7 +66,7 @@ const ManageCandidateTableRow = ({ tableData, open }) => {
          }
        });
 
-     window.location.reload();
+    //  window.location.reload();
    };
 
   return (
@@ -87,6 +87,7 @@ const ManageCandidateTableRow = ({ tableData, open }) => {
           onClick={(e) => {
             console.log(parentTarget(e))
             setCandidateID(parentTarget(e))
+            console.log(candidateID);
             open();
           }}
         >
@@ -96,7 +97,10 @@ const ManageCandidateTableRow = ({ tableData, open }) => {
           className='text-red-500 cursor-pointer'
           onClick={(e) => {
             console.log(parentTarget(e));
-            setCandidateID(parentTarget(e));
+            setCandidateID(
+              e.currentTarget.parentNode.parentNode.getAttribute("data-id")
+            );
+            console.log(candidateID);
             handleDelete();
             
           }}
