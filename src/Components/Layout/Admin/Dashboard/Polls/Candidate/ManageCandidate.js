@@ -26,37 +26,11 @@ const SubHeaderData = [
   },
 ];
 
-const dataTable = [
-  {
-    id: 1,
-    candidate: "John Doe",
-    poll: "Presidential",
-    symbol: "RM",
-  },
-  {
-    id: 2,
-    candidate: "Jane Doe",
-    poll: "Lagos State of House",
-    symbol: "RM",
-  },
-  {
-    id: 3,
-    candidate: "John Doe",
-    poll: "Gubernational",
-    symbol: "RM",
-  },
-];
-
 const Candidate = () => {
-  const [filterIsActive, setFilterIsActive] = useState(0);
   const [openCandidateModal, setOpenCandidateModal] = useState(false);
-    const [openEdit, setOpenEdit] = useState(false);
-  const [refineResult, setRefineResult] = useState(false);
+  const [openEdit, setOpenEdit] = useState(false);
   const [tableData, setTableData] = useState([]);
-  const [polls, setPolls] = useState([]);
   const [searchResult, setSearchResult] = useState([]);
-  const [open, setOpen] = useState(false);
-
 
   /* handle for create new Candidate */
   const handleOpenAddCandidate = () => {
@@ -67,22 +41,12 @@ const Candidate = () => {
     setOpenCandidateModal(!openCandidateModal);
   };
 
-    /* handle for editing poll */
+  /* handle for editing poll */
   const handleOpenEdit = () => {
     setOpenEdit(!openEdit);
   };
   const handleCloseEdit = () => {
     setOpenEdit(!openEdit);
-  };
-
-
-  /* handle for refine results */
-  const handleOpenRefineResult = () => {
-    setRefineResult(!refineResult);
-  };
-
-  const handleCloseRefineResult = () => {
-    setRefineResult(!refineResult);
   };
 
   /* Request Data from Endpoint */
@@ -97,23 +61,6 @@ const Candidate = () => {
       })
       .catch((err) => console.log(err));
   }, [setTableData, setSearchResult]);
- 
-
-  // useEffect(() => {
-  //   /* For our demo json object */
-  //   setTableData(dataTable);
-  //   setSearchResult(dataTable);
-  // }, []);
-
-  const handleFilterActive = (index) => {
-    setFilterIsActive(index);
-    console.log(index);
-  };
-
-  const filterActive =
-    "hover:bg-blue-100 bg-blue-100 cursor-pointer  mr-1 w-[2.2rem]";
-
-  const filterNotActive = "hover:bg-blue-100 cursor-pointer mr-1 w-[2.2rem]";
 
   return (
     <main className='flex flex-col justify-center w-[98%]'>
@@ -131,26 +78,6 @@ const Candidate = () => {
                 tableData={tableData}
                 setSearchResult={setSearchResult}
               />
-            </div>
-
-            <div className='flex h-12 items-end justify-start md:justify-end'>
-              <nav className='flex'>
-                <span title='Search' className='mr-1 w-[2.2rem]'>
-                  <img src={LinkIcon} alt='Account' className='w-full' />
-                </span>
-                <span
-                  title='Filter Table'
-                  className={
-                    filterIsActive === 2 ? filterActive : filterNotActive
-                  }
-                  onClick={() => {
-                    handleFilterActive(2);
-                    handleOpenRefineResult();
-                  }}
-                >
-                  <img src={FilterIcon} alt='Account' className='w-full' />
-                </span>
-              </nav>
             </div>
           </div>
         </header>
@@ -177,10 +104,6 @@ const Candidate = () => {
         />
 
         <EditCandidate open={openEdit} close={handleCloseEdit} />
-        <FilterModal
-          refineResult={refineResult}
-          handleCloseRefineResult={handleCloseRefineResult}
-        />
       </div>
     </main>
   );
