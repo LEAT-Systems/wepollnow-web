@@ -10,9 +10,10 @@ import swal from "sweetalert";
 import axios from "../../../../../api/axios";
 
 const TableBody = ({ tableData, open }) => {
-  const { tableRowID, setTableRowID } = useContext(ModalFormContext);
+  const { tableRowID, setTableRowID } = useContext(ModalFormContext); 
   const [id, setId] = useState("");
   console.log("TableRowID: ", tableRowID);
+
 
   const history = useHistory();
 
@@ -21,11 +22,13 @@ const TableBody = ({ tableData, open }) => {
   };
   const getSymbol = () => {
     const string = tableData.poll_name;
-    const wordArray = string.split(" ", 2);
+    const wordArray = string?.split(" ", 2);
     let symbol;
+
     if (wordArray.length === 1) {
       symbol = string.slice(0, 2);
     }
+
     if (wordArray.length === 2) {
       symbol = string.slice(0, 1) + wordArray[1].slice(0, 1);
     }

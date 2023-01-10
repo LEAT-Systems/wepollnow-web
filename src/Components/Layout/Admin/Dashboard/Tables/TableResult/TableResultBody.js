@@ -13,14 +13,14 @@ const TableResultBody = ({ tableData }) => {
     console.log(tableRowID);
 
     const getSymbol = () => {
-      const string = tableData?.name;
-      const wordArray = string.split(" ", 2);
+      const string = tableData?.poll_name;
+      const wordArray = string?.split(" ", 2);
       let symbol;
       if (wordArray.length === 1) {
-        symbol = string.slice(0, 2);
+        symbol = string?.slice(0, 2);
       }
       if (wordArray.length === 2) {
-        symbol = string.slice(0, 1) + wordArray[1].slice(0, 1);
+        symbol = string?.slice(0, 1) + wordArray[1]?.slice(0, 1);
       }
       return symbol;
     };
@@ -33,12 +33,12 @@ const TableResultBody = ({ tableData }) => {
         <span className='text-white font-bold capitalize bg-green-900 mr-4 rounded-xl p-[.6rem]'>
           {getSymbol()}
         </span>{" "}
-        {tableData?.name}
+        {`${tableData?.name} (${tableData?.abbr})`}
       </th>
-      <td className='px-6 py-4'>{tableData?.partyCandidate[0]?.name}</td>
       <td className='px-6 py-4'>{tableData?.partyCandidate[1]?.name}</td>
+      <td className='px-6 py-4'>{tableData?.partyCandidate[0]?.name}</td>
       <td className='px-6 py-4'>{tableData?.voteCount}</td>
-      <td className='px-6 py-4'>{tableData?.votePercent}</td>
+      <td className='px-6 py-4'>{`${tableData?.votePercent}%`}</td>
     </tr>
   );
 };
