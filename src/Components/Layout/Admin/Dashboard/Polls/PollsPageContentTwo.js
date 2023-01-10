@@ -99,7 +99,7 @@ const PollsPageContentTwo = () => {
       })
       .then((res) => {
         console.log(res.data);
-        setIsData(res.data.results);
+        setIsData(res?.data);
       })
       .catch((err) => {
         console.log(err);
