@@ -41,7 +41,7 @@ const TableResult = ({ data }) => {
     data?.map((data) => {
       return <TableResultBody key={data?.id} id={data?.id} tableData={data} />;
     })
-  ) : data.length <= 0 ? (
+  ) : data?.length <= 0 ? (
     <div className='w-full h-full flex flex-row justify-center items-center text-center font-bold text-sm my-4 mx-auto'>
       <h2 className='text-center mr-8'>No vote was made!</h2>
     </div>
