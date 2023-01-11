@@ -87,6 +87,7 @@ const PollsPageContentTwo = () => {
   const handleOpenRefineResult = () => {
     setRefineResult(!refineResult);
   };
+
   const handleCloseRefineResult = () => {
     setRefineResult(!refineResult);
   };
@@ -98,7 +99,7 @@ const PollsPageContentTwo = () => {
       })
       .then((res) => {
         console.log(res.data);
-        setIsData(res.data.results);
+        setIsData(res?.data);
       })
       .catch((err) => {
         console.log(err);
@@ -165,6 +166,7 @@ const PollsPageContentTwo = () => {
                   </h2>
                   <span className='font-bold text-gray-500 text-[.75rem] capitalize'>
                     National
+                    {/* {poll_name === "Presidential Poll" ? "National" : poll_name === "Gubernational Poll" ? "State" : poll_name === "Senatorial Poll" ? "District" : "Zonal"} */}
                   </span>
                 </div>
 
@@ -259,7 +261,7 @@ const PollsPageContentTwo = () => {
               ) : isPie ? (
                 <PieChart2 />
               ) : (
-                <TableResult data={isData} />
+                <TableResult data={searchResult} />
               )}
             </div>
           </div>

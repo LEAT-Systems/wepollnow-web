@@ -1,7 +1,6 @@
 /** @format */
 
-import React from "react";
-
+import React, { useContext, useState } from "react";
 import { Close } from "@mui/icons-material";
 import {
   FormControl,
@@ -10,13 +9,151 @@ import {
   Radio,
   RadioGroup,
 } from "@mui/material";
+import swal from "sweetalert";
+import ModalFormContext from "../../../../../ModalFormContextAdmin/ModalFormContext";
+import axios from "../../../../../api/axios";
 
 const FilterModal = ({ refineResult, handleCloseRefineResult }) => {
+  const { tableRowID } = useContext(ModalFormContext);
+  const [gender, setGender] = useState("");
+  const [firstTimeVoter, setFirstTimeVoter] = useState(false);
+  const [diasporaVoter, setDiasporaVoter] = useState(false);
+  const [residenceLga, setResidenceLga] = useState("");
+  const [origin, setOrigin] = useState("");
+  const [ageRange, setAgeRange] = useState("");
+  const [religion, setReligion] = useState("");
+  const [maritialStatus, setMaritialStatus] = useState("");
+  const [employmenStatus, setEmploymenStatus] = useState("");
+  const [propertyStatus, setPropertyStatus] = useState("");
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    await axios
+      .post("/poll/poll_result_filter/", {
+        poll_id: tableRowID,
+        gender: gender,
+        firstTimeVoter: firstTimeVoter,
+        diaspora_voter: diasporaVoter,
+        residence_lga: residenceLga,
+        state_of_origin: origin,
+        age_range: ageRange,
+        religion: religion,
+        marital_status: maritialStatus,
+        employment_status: employmenStatus,
+        property_status: propertyStatus,
+      })
+      .then((res) => {
+        console.log(res);
+        swal({
+          title: "Success",
+          text: "Poll Result Filtered!",
+          icon: "success",
+          button: "Ok",
+        });
+        setGender("");
+        setFirstTimeVoter(false);
+        setDiasporaVoter(false);
+        setResidenceLga("");
+        setOrigin("");
+        setAgeRange(false);
+        setReligion("");
+        setMaritialStatus("")
+        setEmploymenStatus("");
+        setPropertyStatus("");
+      })
+      .catch((err) => {
+        if (!err?.response) {
+          swal({
+            title: "Error",
+            text: "Check Your Internet Connection",
+            icon: "error",
+            buttons: [
+              {
+                color: "error",
+                label: "OK",
+                isCancel: true,
+              },
+            ],
+          });
+        } else if (err.response?.status === 400) {
+          console.log(err);
+          swal({
+            title: "Error",
+            text: "Something went wrong",
+            icon: "error",
+            buttons: [
+              {
+                color: "error",
+                label: "OK",
+                isCancel: true,
+              },
+            ],
+          });
+        } else if (err.response?.status === 401) {
+          console.log(err);
+          swal({
+            title: "Error",
+            text: "Check Your Internet Connection",
+            icon: "error",
+            buttons: [
+              {
+                color: "error",
+                label: "OK",
+                isCancel: true,
+              },
+            ],
+          });
+        } else if (err.response?.status === 500) {
+          console.log(err);
+          swal({
+            title: "Error",
+            text: "Internal server error",
+            icon: "error",
+            buttons: [
+              {
+                color: "error",
+                label: "OK",
+                isCancel: true,
+              },
+            ],
+          });
+        } else {
+          swal({
+            title: "Error",
+            text: "Filter Poll Result Failed",
+            icon: "error",
+            buttons: [
+              {
+                color: "error",
+                label: "OK",
+                isCancel: true,
+              },
+            ],
+          });
+        }
+      });
+
+    window.location.reload();
+  };
+
   return (
-    <div className='w-full'>
+    <form className='w-full'>
       <Modal
         open={refineResult}
-        onClose={handleCloseRefineResult}
+        onClose={() => {
+          handleCloseRefineResult();
+          setGender("");
+          setFirstTimeVoter(false);
+          setDiasporaVoter(false);
+          setResidenceLga("");
+          setOrigin("");
+          setAgeRange(false);
+          setReligion("");
+          setMaritialStatus("");
+          setEmploymenStatus("");
+          setPropertyStatus("");
+        }}
         sx={{
           display: "flex",
           justifyContent: "center",
@@ -36,13 +173,25 @@ const FilterModal = ({ refineResult, handleCloseRefineResult }) => {
             </h2>
             <button
               className='flex items-center justify-center border border-1 rounded-md py-[2px] px-[2px] cursor-pointer text-sm md:text-base bg-[#fcf0f0] text-red-500'
-              onClick={handleCloseRefineResult}
+              onClick={() => {
+                handleCloseRefineResult();
+                setGender("");
+                setFirstTimeVoter(false);
+                setDiasporaVoter(false);
+                setResidenceLga("");
+                setOrigin("");
+                setAgeRange(false);
+                setReligion("");
+                setMaritialStatus("");
+                setEmploymenStatus("");
+                setPropertyStatus("");
+              }}
             >
               <Close />
             </button>
           </header>
 
-          <form className='flex flex-col justify-start items-center w-full my-2'>
+          <div className='flex flex-col justify-start items-center w-full my-2'>
             {/* First Form */}
             <div className='flex flex-col my-2 justify-start items-start w-full gap-3 px-6 py-4 bg-[#edfff0] rounded-xl'>
               <div className='w-full'>
@@ -802,23 +951,41 @@ const FilterModal = ({ refineResult, handleCloseRefineResult }) => {
                 </FormControl>
               </div>
             </div>
-          </form>
+          </div>
 
           {/* Buttons */}
           <div className='flex justify-end items-center w-full my-2'>
             <button
               className='flex items-center justify-center border-2 border-gray-300 py-3 px-5 h-full cursor-pointer text-sm rounded-md capitalize mr-4 transition-all duration-400 ease-in-out hover:bg-[#f3dddd] hover:text-red-600 hover:rounded-full'
-              onClick={handleCloseRefineResult}
+              onClick={() => {
+                handleCloseRefineResult();
+                setGender("");
+                setFirstTimeVoter(false);
+                setDiasporaVoter(false);
+                setResidenceLga("");
+                setOrigin("");
+                setAgeRange(false);
+                setReligion("");
+                setMaritialStatus("");
+                setEmploymenStatus("");
+                setPropertyStatus("");
+              }}
             >
               cancel
             </button>
-            <button className='flex items-center justify-center rounded-md py-3 px-5 h-full cursor-pointer text-sm bg-green-500 text-white capitalize transition-all duration-400 ease-in-out hover:bg-green-500 hover:text-white hover:rounded-full'>
+            <button
+              className='flex items-center justify-center rounded-md py-3 px-5 h-full cursor-pointer text-sm bg-green-500 text-white capitalize transition-all duration-400 ease-in-out hover:bg-green-500 hover:text-white hover:rounded-full'
+              onClick={(e) => {
+                handleSubmit(e);
+                handleCloseRefineResult();
+              }}
+            >
               confirm
             </button>
           </div>
         </div>
       </Modal>
-    </div>
+    </form>
   );
 };
 
