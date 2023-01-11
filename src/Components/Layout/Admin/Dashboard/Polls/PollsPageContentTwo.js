@@ -194,10 +194,10 @@ const PollsPageContentTwo = () => {
               <div className='flex flex-col flex-1 relative border-2 border-gray-400 bg-white rounded-lg px-5 py-2 w-full h-[9rem]'>
                 <div className='w-full whitespace'>
                   <h2 className='text-black text-base font-bold whitespace-nowrap'>
-                    {tableData?.poll_details?.poll_name}
+                    {tableData[0]?.poll_details?.poll_name}
                   </h2>
                   <span className='font-bold text-gray-500 text-[.75rem] capitalize'>
-                    {tableData?.poll_details?.poll_category?.title}
+                    {tableData[0]?.poll_details?.poll_category?.title}
                   </span>
                 </div>
 
@@ -260,7 +260,7 @@ const PollsPageContentTwo = () => {
           <div className='flex flex-col p-4 border rounded-lg'>
             <div className='flex flex-row items-center justify-between mb-10'>
               <p className='font-[800] text-[#082b0e]'>
-                {`${tableData?.poll_details?.poll_category?.title} Result`}
+                {`${tableData[0]?.poll_details?.poll_category?.title} Result`}
               </p>
 
               <div className='flex gap-2'>
