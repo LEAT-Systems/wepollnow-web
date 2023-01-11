@@ -146,6 +146,7 @@ const TableBody = ({ tableData, open }) => {
         });
       }
     }
+    window.location.reload();
   };
 
   // await axios
