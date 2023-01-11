@@ -21,6 +21,7 @@ const DashboardContent = () => {
 
   const [greeting, setGreeting] = useState("");
   const [modalData, setModalData] = useState([]);
+  const [pollStatus, setPollStatus] = useState([]);
   const [loggedInUser, setLoggedInUser] = useState({ name: "", status: "" });
 
   useEffect(() => {
@@ -38,6 +39,19 @@ const DashboardContent = () => {
         .then((res) => {
           console.log(res);
           setModalData(res.data.results);
+        })
+        .catch((err) => console.log(err));
+    };
+
+    getData();
+  }, []);
+
+  useEffect(() => {
+    const getData = async () => {
+      axios.get("/poll/poll_status/")
+        .then((res) => {
+          console.log(res);
+          setPollStatus(res.data.results);
         })
         .catch((err) => console.log(err));
     };
