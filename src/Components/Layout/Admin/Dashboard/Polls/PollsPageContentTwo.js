@@ -51,6 +51,7 @@ const PollsPageContentTwo = () => {
   const [refineResult, setRefineResult] = useState(false);
   const [isData, setIsData] = useState([]);
   const [tableData, setTableData] = useState([]);
+  const [status, setStatus] = useState("");
   const [searchResult, setSearchResult] = useState([]);
   const { tableRowID } = useContext(ModalFormContext);
 
@@ -121,6 +122,37 @@ const PollsPageContentTwo = () => {
       daily_users: 89,
     },
   ];
+
+  const formatDate = (string) => {
+    return string.slice(0, 10); /* string.split("T", 10).join() */
+  };
+
+
+  useEffect(() => {
+    const today = new Date();
+
+    // Get the start and end dates from props or state
+    const startDate = new Date(formatDate(tableData?.poll_details?.poll_date));
+    const endDate = new Date(formatDate(tableData?.poll_details?.poll_endDate));
+
+    if (startDate < today && endDate < today) {
+      setStatus("Concluded");
+    }
+    // Check if startDate is equal or greater than today and endDate is greater than today
+    else if (startDate >= today && endDate > today) {
+      setStatus("Ongoing");
+    }
+    // Check if both startDate and endDate are greater than today
+    else if (startDate > today && endDate > today) {
+      setStatus("Upcoming");
+    } else {
+      setStatus("Scheduled");
+    }
+  }, [
+    tableData?.poll_details?.poll_date,
+    tableData?.poll_details?.poll_endDate,
+  ]);
+
   return (
     <>
       <Header />
@@ -162,11 +194,10 @@ const PollsPageContentTwo = () => {
               <div className='flex flex-col flex-1 relative border-2 border-gray-400 bg-white rounded-lg px-5 py-2 w-full h-[9rem]'>
                 <div className='w-full whitespace'>
                   <h2 className='text-base font-bold whitespace-nowrap'>
-                    Presidential Poll
+                    {tableData?.poll_details?.poll_name}
                   </h2>
                   <span className='font-bold text-gray-500 text-[.75rem] capitalize'>
-                    National
-                    {/* {poll_name === "Presidential Poll" ? "National" : poll_name === "Gubernational Poll" ? "State" : poll_name === "Senatorial Poll" ? "District" : "Zonal"} */}
+                    {tableData?.poll_category?.title}
                   </span>
                 </div>
 
@@ -181,7 +212,7 @@ const PollsPageContentTwo = () => {
                     22/22/2022
                   </h3>
                   <h3 className='text-base relative after:content-[""] after:absolute after:w-[.6rem] after:h-[.6rem] after:rounded-full after:bg-red-500 after:-left-3 after:top-1/2 after:-translate-y-1/2'>
-                    {data.status[1]}
+                    {status}
                   </h3>
                 </div>
               </div>
@@ -229,12 +260,12 @@ const PollsPageContentTwo = () => {
           <div className='flex flex-col p-4 border rounded-lg'>
             <div className='flex flex-row items-center justify-between mb-10'>
               <p className='font-[800] text-[#082b0e]'>
-                Presidential Poll Result
+                {`${tableData?.poll_details?.poll_name} Result`}
               </p>
 
               <div className='flex gap-2'>
                 <span className='border rounded-md my-auto flex w-auto p-2 font-[500] text-[#616b62]'>
-                  Total: {Data.length}
+                  Total: {tableData?.length}
                 </span>
                 <DropDown
                   handleBar={handleBar}
