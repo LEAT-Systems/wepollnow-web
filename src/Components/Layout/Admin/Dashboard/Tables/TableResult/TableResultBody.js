@@ -13,7 +13,7 @@ const TableResultBody = ({ tableData }) => {
     console.log(tableRowID);
 
     const getSymbol = () => {
-      const string = tableData?.poll_name;
+      const string = tableData?.name;
       const wordArray = string?.split(" ", 2);
       let symbol;
       if (wordArray?.length === 1) {
