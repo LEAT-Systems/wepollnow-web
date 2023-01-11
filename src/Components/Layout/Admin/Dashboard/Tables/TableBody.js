@@ -11,9 +11,11 @@ import axios from "../../../../../api/axios";
 
 const TableBody = ({ tableData, open }) => {
   const { tableRowID, setTableRowID } = useContext(ModalFormContext); 
-  const [id, setId] = useState("");
   console.log("TableRowID: ", tableRowID);
 
+  useEffect(() => {
+    setTableRowID(tableData?.id)
+  }, [setTableRowID, tableData?.id])
 
   const history = useHistory();
 
@@ -198,10 +200,11 @@ const TableBody = ({ tableData, open }) => {
       className='table-row cursor-pointer'
       data-id={tableData.id}
       onClick={(e) => {
-        setTableRowID(target(e));
+        setTableRowID(tableData.id);
         // setId(target(e));
         redirect();
       }}
+      
     >
       <th
         scope='row'
@@ -239,7 +242,7 @@ const TableBody = ({ tableData, open }) => {
         <div
           className='text-blue-500 cursor-pointer'
           onClick={(e) => {
-            setTableRowID(parentTarget(e));
+            setTableRowID(tableData.id);
             // setId(parentTarget(e));
             console.log(tableRowID);
             console.log(parentTarget(e));
@@ -254,7 +257,7 @@ const TableBody = ({ tableData, open }) => {
         <div
           className='text-red-500 cursor-pointer delete-button'
           onClick={(e) => {
-            setTableRowID(parentTarget(e));
+            setTableRowID(tableData.id);
             // setId(
             // e.currentTarget.parentNode.parentNode.getAttribute("data-id")
             // );
