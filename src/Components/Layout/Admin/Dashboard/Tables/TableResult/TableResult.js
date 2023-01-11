@@ -37,24 +37,25 @@ const TableResult = ({ data }) => {
   console.log(typeof data);
   console.log(data);
   const history = useHistory();
-  const results =
-    typeof data === 'object' && data.length > 0 ? (
-      data?.map((data) => {
-        return (
-          <TableResultBody key={data?.id} id={data?.id} tableData={data} />
-        );
-      })
-    ) : (
-      <div className='w-full h-full flex flex-row justify-center items-center text-center font-bold text-sm mr-7'>
-        <h2 className='text-center'>No Poll, hence result doesn't exits</h2>
-        <button
-          className='bg-green-500 text-white p-3 rounded-md shadow-sm'
-          onClick={() => history.push("./polls")}
-        >
-          Select Poll First
-        </button>
-      </div>
-    );
+  const results = Array.isArray(data) ? (
+    data?.map((data) => {
+      return <TableResultBody key={data?.id} id={data?.id} tableData={data} />;
+    })
+  ) : data?.length <= 0 ? (
+    <div className='w-full h-full flex flex-row justify-center items-center text-center font-bold text-sm my-4 mx-auto'>
+      <h2 className='text-center mr-8'>No vote was made!</h2>
+    </div>
+  ) : (
+    <div className='w-full h-full flex flex-row justify-center items-center text-center font-bold text-sm my-4 mx-auto'>
+      <h2 className='text-center mr-8 text-red-500'>Something went wrong!</h2>
+      <button
+        className='text-gray-600 font-bold p-2 border-none bg-transparent'
+        onClick={() => history.push("./polls")}
+      >
+        Go Back
+      </button>
+    </div>
+  );
 
   return (
     <div className='relative overflow-auto scrollable sm:rounded-lg w-full'>
