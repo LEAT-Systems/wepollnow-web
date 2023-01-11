@@ -16,10 +16,10 @@ const TableResultBody = ({ tableData }) => {
       const string = tableData?.poll_name;
       const wordArray = string?.split(" ", 2);
       let symbol;
-      if (wordArray.length === 1) {
+      if (wordArray?.length === 1) {
         symbol = string?.slice(0, 2);
       }
-      if (wordArray.length === 2) {
+      if (wordArray?.length === 2) {
         symbol = string?.slice(0, 1) + wordArray[1]?.slice(0, 1);
       }
       return symbol;
