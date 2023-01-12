@@ -212,7 +212,6 @@ const PollsPageContentTwo = () => {
                   <h3
                     className={`text-base relative after:content-[""] after:absolute after:w-[.6rem] after:h-[.6rem] after:rounded-full ${statusColors} after:-left-3 after:top-1/2 after:-translate-y-1/2`}
                   >
-                    {status}
                     {status === "Upcoming"
                       ? "Upcoming"
                       : status === "Ongoing"
