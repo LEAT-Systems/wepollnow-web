@@ -11,7 +11,7 @@ const DashboardContent = () => {
   const data = [
     {
       id: 3,
-      status: ["Upcoming", "Scheduled", "Concluded"],
+      status: ["Upcoming", "Ongoing", "Concluded"],
       users: "235,436",
     },
   ];

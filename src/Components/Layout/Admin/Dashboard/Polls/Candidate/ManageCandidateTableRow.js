@@ -9,9 +9,9 @@ const ManageCandidateTableRow = ({ tableData, open }) => {
 
   const { candidateID, setCandidateID } = useContext(ModalFormContext);
   const getSymbol = () => {
-    const string = tableData.name;
-    const wordArray = string.split(" ", 2);
-    const symbol = wordArray[0].slice(0, 2);
+    const string = tableData?.name;
+    const wordArray = string?.split(" ", 2);
+    const symbol = wordArray[0]?.slice(0, 2);
     // + wordArray[1].slice(0, 1)
     return symbol;
   };
@@ -28,46 +28,107 @@ const ManageCandidateTableRow = ({ tableData, open }) => {
          console.log(res.data);
          swal({
            title: "Success",
-           text: "Poll Deleted!",
+           text: "Candidate deleted successfully",
            icon: "success",
-           button: "Ok",
+           buttons: [
+             {
+               color: "success",
+               label: "OK",
+             },
+           ],
          });
        })
        .catch((err) => {
          console.log(err);
          if (!err?.response) {
            swal({
-             title: "Success",
+             title: "Oops!",
              text: "No Internet Connection",
              icon: "error",
-             button: "Ok",
+             buttons: [
+               {
+                 color: "error",
+                 label: "OK",
+                 isCancel: true,
+               },
+             ],
            });
          } else if (err.response?.status === 400) {
            swal({
              title: "Failure",
              text: "Something went wrong!",
              icon: "error",
-             button: "Ok",
+             buttons: [
+               {
+                 color: "error",
+                 label: "OK",
+                 isCancel: true,
+               },
+             ],
            });
          } else if (err.response?.status === 401) {
            swal({
              title: "Failure",
              text: "Unauthorized",
              icon: "error",
-             button: "Ok",
+             buttons: [
+               {
+                 color: "error",
+                 label: "OK",
+                 isCancel: true,
+               },
+             ],
            });
+         } else if (err.status === 404) {
+           swal({
+             title: "Oops!",
+             text: "Candidate does not exist",
+             icon: "error",
+             buttons: [
+               {
+                 color: "error",
+                 label: "OK",
+                 isCancel: true,
+               },
+             ],
+           });
+           console.log(err);
+         } else if (err.status === 500) {
+           swal({
+             title: "Oops!",
+             text: "Internal server error",
+             icon: "error",
+             buttons: [
+               {
+                 color: "error",
+                 label: "OK",
+                 isCancel: true,
+               },
+             ],
+           });
+           console.log(err);
          } else {
            swal({
              title: "Failure",
-             text: "Poll Deletion Failed",
+             text: "Candidate deletion Failed",
              icon: "error",
-             button: "Ok",
+             buttons: [
+               {
+                 color: "error",
+                 label: "OK",
+                 isCancel: true,
+               },
+             ],
            });
          }
        });
 
     //  window.location.reload();
-   };
+  };
+  
+    useEffect(() => {
+      setCandidateID(tableData?.id);
+    }, [setCandidateID, tableData?.id]);
 
   return (
     <tr className='table-row' data-id={tableData.id}>
@@ -86,7 +147,7 @@ const ManageCandidateTableRow = ({ tableData, open }) => {
           className='text-blue-500 cursor-pointer'
           onClick={(e) => {
             console.log(parentTarget(e))
-            setCandidateID(parentTarget(e))
+            setCandidateID(tableData.id);
             console.log(candidateID);
             open();
           }}
@@ -97,9 +158,7 @@ const ManageCandidateTableRow = ({ tableData, open }) => {
           className='text-red-500 cursor-pointer'
           onClick={(e) => {
             console.log(parentTarget(e));
-            setCandidateID(
-              e.currentTarget.parentNode.parentNode.getAttribute("data-id")
-            );
+            setCandidateID(tableData.id);
             console.log(candidateID);
             handleDelete();
             
