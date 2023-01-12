@@ -141,8 +141,8 @@ const PollsPageContentTwo = () => {
     const today = new Date();
 
     // Get the start and end dates from props or state
-    const startDate = new Date(formatDate(tableData?.poll_details?.poll_date));
-    const endDate = new Date(formatDate(tableData?.poll_details?.poll_endDate));
+    const startDate = new Date(formatDate(tableData[0]?.poll_details?.poll_date));
+    const endDate = new Date(formatDate(tableData[0]?.poll_details?.poll_endDate));
 
     if (startDate < today && endDate < today) {
       setStatus("Concluded");
@@ -158,8 +158,9 @@ const PollsPageContentTwo = () => {
       setStatus("Upcoming");
     }
   }, [
-    tableData?.poll_details?.poll_date,
-    tableData?.poll_details?.poll_endDate,
+    tableData[0]?.poll_details?.poll_date,
+    tableData[0]?.poll_details?.poll_endDate,
+    tableData
   ]);
 
   return (
@@ -203,7 +204,7 @@ const PollsPageContentTwo = () => {
               <div className='flex flex-col flex-1 relative border-2 border-gray-400 bg-white rounded-lg px-5 py-2 w-full h-[9rem]'>
                 <div className='w-full whitespace'>
                   <h2 className='text-black text-base font-bold whitespace-nowrap'>
-                    {tableData[0]?.poll_details?.poll_name}
+                    {tableData?.[0]?.poll_details?.poll_name}
                   </h2>
                   <span className='font-bold text-gray-500 text-[.75rem] capitalize'>
                     {tableData[0]?.poll_details?.poll_category?.title}
