@@ -1,12 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Close } from "@mui/icons-material";
 import { Checkbox, Modal } from "@mui/material";
-import { FileUploader } from "react-drag-drop-files";
-import {
-  FormControl,
-  FormControlLabel,
-
-} from "@mui/material";
+// import { FileUploader } from "react-drag-drop-files";
+import { FormControl, FormControlLabel } from "@mui/material";
 import axios from "../../../../../api/axios";
 import swal from "sweetalert";
 

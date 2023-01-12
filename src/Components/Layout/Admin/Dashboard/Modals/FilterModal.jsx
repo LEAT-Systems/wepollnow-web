@@ -1,7 +1,7 @@
 /** @format */
 
 import React, { useContext, useState } from "react";
-import { Close } from "@mui/icons-material";
+import { Close, Streetview } from "@mui/icons-material";
 import {
   FormControl,
   FormControlLabel,
@@ -15,6 +15,7 @@ import axios from "../../../../../api/axios";
 
 const FilterModal = ({ refineResult, handleCloseRefineResult }) => {
   const { tableRowID } = useContext(ModalFormContext);
+  const [view, setView] = useState("default")
   const [gender, setGender] = useState("");
   const [firstTimeVoter, setFirstTimeVoter] = useState(false);
   const [diasporaVoter, setDiasporaVoter] = useState(false);
@@ -58,7 +59,7 @@ const FilterModal = ({ refineResult, handleCloseRefineResult }) => {
         setOrigin("");
         setAgeRange(false);
         setReligion("");
-        setMaritialStatus("")
+        setMaritialStatus("");
         setEmploymenStatus("");
         setPropertyStatus("");
       })
@@ -202,7 +203,10 @@ const FilterModal = ({ refineResult, handleCloseRefineResult }) => {
                   </h2>
                 </div>
                 <FormControl
-                  onChange={(e) => console.log(e.target.value)}
+                  onChange={(e) => {
+                    setView(e.target.value)
+                    console.log(e.target.value)
+                  }}
                   sx={{ width: "100%" }}
                 >
                   <RadioGroup>
@@ -222,7 +226,7 @@ const FilterModal = ({ refineResult, handleCloseRefineResult }) => {
                       label='Table View - Default'
                     />
                     <FormControlLabel
-                      value='state'
+                      value='stateView'
                       className='text-[#616b62] font-medium'
                       control={
                         <Radio
@@ -251,7 +255,10 @@ const FilterModal = ({ refineResult, handleCloseRefineResult }) => {
                   <span></span>
                 </div>
                 <FormControl
-                  onChange={(e) => console.log(e.target.value)}
+                  onChange={(e) => {
+                    console.log(e.target.value)
+                    setGender(e.target.value)
+                  }}
                   sx={{ width: "100%" }}
                 >
                   <RadioGroup>
@@ -300,12 +307,15 @@ const FilterModal = ({ refineResult, handleCloseRefineResult }) => {
                   <span></span>
                 </div>
                 <FormControl
-                  onChange={(e) => console.log(e.target.value)}
+                  onChange={(e) => {
+                    console.log(e.target.value)
+                    setFirstTimeVoter(e.target.value)
+                  }}
                   sx={{ width: "100%" }}
                 >
                   <RadioGroup>
                     <FormControlLabel
-                      value='first__time'
+                      value='true'
                       className='text-[#616b62] font-medium'
                       control={
                         <Radio
@@ -317,10 +327,10 @@ const FilterModal = ({ refineResult, handleCloseRefineResult }) => {
                           }}
                         />
                       }
-                      label='1st Time Voter'
+                      label='First Time Voter'
                     />
                     <FormControlLabel
-                      value='returning__voter'
+                      value='false'
                       className='text-[#616b62] font-medium'
                       control={
                         <Radio
@@ -354,7 +364,7 @@ const FilterModal = ({ refineResult, handleCloseRefineResult }) => {
                 >
                   <RadioGroup>
                     <FormControlLabel
-                      value='diaspora__voter'
+                      value='true'
                       className='text-[#616b62] font-medium'
                       control={
                         <Radio
@@ -387,7 +397,10 @@ const FilterModal = ({ refineResult, handleCloseRefineResult }) => {
                   </label>
                 </FormControl>
                 <FormControl
-                  onChange={(e) => console.log(e.target.value)}
+                  onChange={(e) => {
+                    console.log(e.target.value)
+
+                  }}
                   sx={{ width: "100%", mt: ".9rem" }}
                 >
                   <RadioGroup>
@@ -494,7 +507,7 @@ const FilterModal = ({ refineResult, handleCloseRefineResult }) => {
                       label='Voters without PVC'
                     />
                     <FormControlLabel
-                      value='voter__with__pvc'
+                      value='true'
                       className='text-[#616b62] font-medium'
                       control={
                         <Radio
@@ -537,7 +550,9 @@ const FilterModal = ({ refineResult, handleCloseRefineResult }) => {
                   <span></span>
                 </div>
                 <FormControl
-                  onChange={(e) => console.log(e.target.value)}
+                  onChange={(e) => {
+                    console.log(e.target.value)
+                  }}
                   sx={{ width: "100%" }}
                 >
                   <RadioGroup>
@@ -631,7 +646,9 @@ const FilterModal = ({ refineResult, handleCloseRefineResult }) => {
                   <span></span>
                 </div>
                 <FormControl
-                  onChange={(e) => console.log(e.target.value)}
+                  onChange={(e) => {
+                    console.log(e.target.value);
+                  }}
                   sx={{ width: "100%" }}
                 >
                   <RadioGroup>
@@ -715,7 +732,7 @@ const FilterModal = ({ refineResult, handleCloseRefineResult }) => {
                 >
                   <RadioGroup>
                     <FormControlLabel
-                      value='married'
+                      value='Married'
                       className='text-[#616b62] font-medium'
                       control={
                         <Radio
@@ -730,7 +747,7 @@ const FilterModal = ({ refineResult, handleCloseRefineResult }) => {
                       label='Married'
                     />
                     <FormControlLabel
-                      value='single'
+                      value='Single'
                       className='text-[#616b62] font-medium'
                       control={
                         <Radio
@@ -784,7 +801,7 @@ const FilterModal = ({ refineResult, handleCloseRefineResult }) => {
               <div className='w-full'>
                 {/* Title */}
                 <div className='modal__header__title'>
-                  <h4 className='capitalize'>employment status</h4>
+                  <h4 className='capitalize'>Employment Status</h4>
                   <p></p>
                   <span></span>
                 </div>
@@ -821,7 +838,7 @@ const FilterModal = ({ refineResult, handleCloseRefineResult }) => {
                           }}
                         />
                       }
-                      label='employed'
+                      label='Employed'
                     />
                     <FormControlLabel
                       value='unemployed'
@@ -851,7 +868,7 @@ const FilterModal = ({ refineResult, handleCloseRefineResult }) => {
                           }}
                         />
                       }
-                      label='Self-employed'
+                      label='Self-Employed'
                     />
                   </RadioGroup>
                 </FormControl>
@@ -868,12 +885,14 @@ const FilterModal = ({ refineResult, handleCloseRefineResult }) => {
                   <span></span>
                 </div>
                 <FormControl
-                  onChange={(e) => console.log(e.target.value)}
+                  onChange={(e) => {
+                    console.log(e.target.value)
+                  }}
                   sx={{ width: "100%" }}
                 >
                   <RadioGroup>
                     <FormControlLabel
-                      value='home__owner'
+                      value='home_owner'
                       className='text-[#616b62] font-medium'
                       control={
                         <Radio
