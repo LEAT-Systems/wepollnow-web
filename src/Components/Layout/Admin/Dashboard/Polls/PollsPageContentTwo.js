@@ -135,7 +135,7 @@ const PollsPageContentTwo = () => {
     else if (startDate > today && endDate > today) {
       setStatus("Upcoming");
     } else {
-      setStatus("Upcoming");
+      setStatus("Concluded");
     }
   }, [
     tableData[0]?.poll_details?.poll_date,
