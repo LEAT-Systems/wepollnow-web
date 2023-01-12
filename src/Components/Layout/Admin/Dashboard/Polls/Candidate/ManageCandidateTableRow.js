@@ -123,7 +123,7 @@ const ManageCandidateTableRow = ({ tableData, open }) => {
          }
        });
 
-    //  window.location.reload();
+     window.location.reload();
   };
   
     useEffect(() => {
