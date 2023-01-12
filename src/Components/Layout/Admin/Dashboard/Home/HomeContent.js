@@ -13,9 +13,6 @@ const DashboardContent = () => {
       id: 3,
       status: ["Upcoming", "Scheduled", "Concluded"],
       users: "235,436",
-      daily_hits: 45,
-      total_hits: 523,
-      daily_users: 89,
     },
   ];
 
@@ -51,7 +48,7 @@ const DashboardContent = () => {
       axios.get("/poll/poll_status/")
         .then((res) => {
           console.log(res);
-          setPollStatus(res.data.results);
+          setPollStatus(res.data);
         })
         .catch((err) => console.log(err));
     };
@@ -142,7 +139,7 @@ const DashboardContent = () => {
                 </span>
                 <div className="flex flex-col items-start">
                   <span className="text-2xl font-extrabold pb-1">
-                    {data.users}
+                    {pollStatus[0]?.allUsers == null ? 0 : pollStatus[0]?.allUsers}
                   </span>
                   <span className="font-bold text-gray-500 text-[.75rem] capitalize flex-1">
                     users
@@ -155,7 +152,7 @@ const DashboardContent = () => {
                     fontSize="0.1rem"
                   />
                   <h3 className="bg-[#e7f9ea] text-[.7rem] my-auto">
-                    + {data.daily_users} today
+                    + {pollStatus[0]?.newUsers == null ? 0 : pollStatus[0]?.newUsers } today
                   </h3>
                 </div>
               </div>
@@ -168,21 +165,21 @@ const DashboardContent = () => {
                 <div className="grid grid-cols-3 gap-4 w-full">
                   <div className="flex flex-col justify-center items-center h-full bg-[#edfff0] py-3 px-6 rounded-lg">
                     <span className="font-extrabold text-2xl">
-                      {data.status.length}
+                      {pollStatus[0]?.ongoingPolls == null ? 0 : pollStatus[0]?.ongoingPolls }
                     </span>
                     <span className="capitalize text-sm">{data.status[0]}</span>
                   </div>
 
                   <div className="flex flex-col justify-center items-center h-full bg-[#fffaed] py-3 px-6 rounded-lg">
                     <span className="font-extrabold text-2xl">
-                      {data.users.toString().length}
+                      {pollStatus[0]?.scheduledPolls == null ? 0 : pollStatus[0]?.scheduledPolls}
                     </span>
                     <span className="capitalize text-sm">{data.status[1]}</span>
                   </div>
 
                   <div className="flex flex-col justgiify-center items-center h-full bg-[#ffedf1] py-3 px-6 rounded-lg">
                     <span className="font-extrabold text-2xl">
-                      {data.status.length - 1}
+                      {pollStatus[0]?.concludedPolls == null ? 0 : pollStatus[0]?.concludedPolls}
                     </span>
                     <span className="capitalize text-sm">{data.status[2]}</span>
                   </div>
