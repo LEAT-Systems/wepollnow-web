@@ -1,1 +1,1 @@
-export const baseUrl = "http://api.wepollnow.com/";
+export const baseUrl = "https://api.wepollnow.com/";
