@@ -5,9 +5,9 @@ import * as Yup from "yup";
 import Done from "@mui/icons-material/Done";
 import Nav from "../Layout/Landing/mainNav";
 import FormLabel from "../../UI/FormLabel";
-import { states } from "./states";
 import spinner from "../../images/spinner.gif";
 import tooltipIcon from "../../images/tooltip.png";
+import { baseUrl } from "../../store/baseUrl";
 
 const FormTwo = (props) => {
   const [formisCompleted, setFormIsCompleted] = useState(false);
@@ -16,6 +16,7 @@ const FormTwo = (props) => {
   const [disable, setDisable] = useState(false);
   const [selectedState, setSelectedState] = useState();
   const [tooltipStatus, setTooltipStatus] = useState(0);
+  const [states, setStates] = useState([]);
 
   // Handling next step of form
   const handleSubmit = (values) => {
@@ -27,15 +28,37 @@ const FormTwo = (props) => {
     isLoading = data.length === 0;
   }
 
+  // fetching the state from the API
+  useEffect(() => {
+    try {
+      const fetchStates = async () => {
+        const response = await fetch(baseUrl + `utilities/states/`);
+        const result = await response.json();
+        if (response.ok) {
+          setStates(result);
+        } else {
+          throw new Error(
+            "Could not fetch state data... Please refresh and try again."
+          );
+        }
+      };
+      fetchStates();
+    } catch (error) {
+      setError(error);
+    }
+  }, [states]);
+
   // Loading LGA of voting residence from API with selected ID
   useEffect(() => {
     if (selectedState !== undefined) {
       try {
         async function getData() {
           const response = await fetch(
-            `https://wepollnow.azurewebsites.net/utilities/lga/${selectedState}`
+            baseUrl + `utilities/lga/${selectedState}`,
+            { method: "GET" }
           );
           const body = await response.json();
+          console.log(body);
           setData(body);
           if (!response.ok) {
             throw new Error("An error occured");
@@ -45,8 +68,6 @@ const FormTwo = (props) => {
       } catch (error) {
         setError(error.message);
       }
-    } else {
-      return;
     }
   }, [selectedState]);
 

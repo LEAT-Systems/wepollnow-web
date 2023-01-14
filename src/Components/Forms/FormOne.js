@@ -5,18 +5,41 @@ import * as Yup from "yup";
 import DoneIcon from "@mui/icons-material/Done";
 import Nav from "../Layout/Landing/mainNav";
 import FormLabel from "../../UI/FormLabel";
-import { states } from "./states";
+import { baseUrl } from "../../store/baseUrl";
 
 const FormOne = (props) => {
   // destructuring to configure the form arrow indicators
   let { email, firstTimeVoter, diasporaVoter, stateOfOrigin } = props.data;
   const [formisCompleted, setFormIsCompleted] = useState(false);
-  const [isDiaspora, setIsDiaspora] = useState();
+  const [states, setState] = useState([]);
+  const [error, setError] = useState("");
 
   // Handles next step of form
   const handleSubmit = (values) => {
     props.next(values);
   };
+
+  console.log(states);
+
+  // fetching the state from the API
+  useEffect(() => {
+    try {
+      const fetchStates = async () => {
+        const response = await fetch(baseUrl + `utilities/states/`);
+        const result = await response.json();
+        if (response.ok) {
+          setState(result);
+        } else {
+          throw new Error(
+            "Could not fetch state data... Please refresh and try again."
+          );
+        }
+      };
+      fetchStates();
+    } catch (error) {
+      setError(error);
+    }
+  }, []);
 
   // Configuring the indicators
   useEffect(() => {
@@ -77,6 +100,7 @@ const FormOne = (props) => {
               {() => (
                 <Form>
                   <div className="flex flex-col space-y-4 md:p-8">
+                    <p>{error}</p>
                     <div className="h-full px-4 space-y-4 ">
                       {/* Email Address */}
 
@@ -176,7 +200,7 @@ const FormOne = (props) => {
                           <Field
                             as="select"
                             name="stateOfOrigin"
-                            className="block w-full p-4 px-3 py-4  bg-white border border-gray-300 rounded"
+                            className="block w-full p-4 px-3 py-4 bg-white border border-gray-300 rounded"
                           >
                             <option value={null}>-- Select an option--</option>
                             {states.map((item) => {
