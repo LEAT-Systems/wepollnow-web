@@ -19,28 +19,8 @@ import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import PollsHeader from "./PollsHeader";
 import FilterModal from "../Modals/FilterModal";
 
-/* POll RESULT DATA TEMPLATE 
+// POll RESULT DATA TEMPLATE
 
-[
-    {
-        "id": 1,
-        "voteCount": 0,
-        "partyCandidate": [],
-        "votePercent": 0,
-        "name": "People's Democratic Party",
-        "logo": "/media/party_pictures/pdp-logo-1_w0ej5nj.png"
-    },
-    {
-        "id": 4,
-        "voteCount": 0,
-        "partyCandidate": [],
-        "votePercent": 0,
-        "name": "All Progressives Grand Alliance",
-        "logo": "/media/party_pictures/APGA_Nigeria_Logo_aeZzed2.png"
-    }
-]
-
-*/
 const PollsPageContentTwo = () => {
   const [open, setOpen] = useState(false);
 
@@ -141,8 +121,8 @@ const PollsPageContentTwo = () => {
     const today = new Date();
 
     // Get the start and end dates from props or state
-    const startDate = new Date(formatDate(tableData?.poll_details?.poll_date));
-    const endDate = new Date(formatDate(tableData?.poll_details?.poll_endDate));
+    const startDate = new Date(formatDate(tableData[0]?.poll_details?.poll_date));
+    const endDate = new Date(formatDate(tableData[0]?.poll_details?.poll_endDate));
 
     if (startDate < today && endDate < today) {
       setStatus("Concluded");
@@ -155,12 +135,21 @@ const PollsPageContentTwo = () => {
     else if (startDate > today && endDate > today) {
       setStatus("Upcoming");
     } else {
-      setStatus("Upcoming");
+      setStatus("Concluded");
     }
   }, [
-    tableData?.poll_details?.poll_date,
-    tableData?.poll_details?.poll_endDate,
+    tableData[0]?.poll_details?.poll_date,
+    tableData[0]?.poll_details?.poll_endDate,
+    tableData
   ]);
+
+  
+  const statusColors =
+    status === 'Upcoming'
+      ? "after:bg-blue-500"
+      : status === "Ongoing"
+      ? "after:bg-green-500"
+      : "after:bg-red-400";
 
   return (
     <>
@@ -203,7 +192,7 @@ const PollsPageContentTwo = () => {
               <div className='flex flex-col flex-1 relative border-2 border-gray-400 bg-white rounded-lg px-5 py-2 w-full h-[9rem]'>
                 <div className='w-full whitespace'>
                   <h2 className='text-black text-base font-bold whitespace-nowrap'>
-                    {tableData[0]?.poll_details?.poll_name}
+                    {tableData?.[0]?.poll_details?.poll_name}
                   </h2>
                   <span className='font-bold text-gray-500 text-[.75rem] capitalize'>
                     {tableData[0]?.poll_details?.poll_category?.title}
@@ -218,11 +207,16 @@ const PollsPageContentTwo = () => {
                         margin: "auto .2rem .2rem auto",
                       }}
                     />
-                     {tableData[0]?.poll_details?.poll_date.slice(0,10)}
-                    
+                    {tableData[0]?.poll_details?.poll_date.slice(0, 10)}
                   </h3>
-                  <h3 className='text-base relative after:content-[""] after:absolute after:w-[.6rem] after:h-[.6rem] after:rounded-full after:bg-red-500 after:-left-3 after:top-1/2 after:-translate-y-1/2'>
-                    {status}
+                  <h3
+                    className={`text-base relative after:content-[""] after:absolute after:w-[.6rem] after:h-[.6rem] after:rounded-full ${statusColors} after:-left-3 after:top-1/2 after:-translate-y-1/2`}
+                  >
+                    {status === "Upcoming"
+                      ? "Upcoming"
+                      : status === "Ongoing"
+                      ? "Ongoing"
+                      : "Concluded"}
                   </h3>
                 </div>
               </div>
@@ -238,7 +232,9 @@ const PollsPageContentTwo = () => {
                 </span>
                 <div className='flex flex-col items-start'>
                   <span className='text-2xl font-extrabold pb-1'>
-                  {pollStatus[0]?.allUsers == null ? 0 : pollStatus[0]?.allUsers}
+                    {pollStatus[0]?.allUsers == null
+                      ? 0
+                      : pollStatus[0]?.allUsers}
                   </span>
                   <span className='font-bold text-gray-500 text-[.75rem] capitalize flex-1'>
                     users
@@ -251,7 +247,11 @@ const PollsPageContentTwo = () => {
                     fontSize='0.1rem'
                   />
                   <h3 className='bg-[#e7f9ea] text-[.7rem] my-auto'>
-                    + {pollStatus[0]?.newUsers == null ? 0 : pollStatus[0]?.newUsers} today
+                    +{" "}
+                    {pollStatus[0]?.newUsers == null
+                      ? 0
+                      : pollStatus[0]?.newUsers}{" "}
+                    today
                   </h3>
                 </div>
               </div>
