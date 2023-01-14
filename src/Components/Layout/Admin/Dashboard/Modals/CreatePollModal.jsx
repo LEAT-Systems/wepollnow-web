@@ -248,11 +248,11 @@ const CreatePollModal = ({ open, handleClose, nextPage, setPage }) => {
     if (pollType === "1") {
       setPollName(presidentialName);
     } else if (pollType === "2") {
-      setPollName(`${gubernationalName} State Gubernational Poll`);
+      setPollName(`${gubernationalName} State Gubernatorial Poll`);
     } else if (pollType === "3") {
       setPollName(`${senatorialName} Senatorial Poll`);
     } else {
-      setPollName(`${zonelName} Zonal Poll`);
+      setPollName(`${zonelName} House of Assembly Poll`);
     }
   }, [
     presidentialName,
