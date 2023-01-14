@@ -94,7 +94,7 @@ const SurveyContent = () => {
         });
 
         const polls = await response.json();
-        setPolls(polls.results);
+        setPolls(polls);
       };
       getPollData();
     } catch (error) {
