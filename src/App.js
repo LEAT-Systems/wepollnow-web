@@ -77,6 +77,12 @@ const Password = React.lazy(() =>
 const Candidate = React.lazy(() =>
   import("./Components/Layout/Admin/Dashboard/Polls/Candidate/Candidate")
 );
+const Contact = React.lazy(() =>
+  import("./Components/Layout/Admin/Dashboard/Contact/Contact")
+);
+const Subscribers = React.lazy(() =>
+  import("./Components/Layout/Admin/Dashboard/Contact/Subscribers")
+);
 
 function App() {
   const authCtx = useContext(AuthContext);
@@ -208,7 +214,7 @@ function App() {
           {!authCtx.isLoggedIn && <Login />}
         </Route>
 
-        {/* blog */}
+        {/* blog and manage blog*/}
 
         <Route path="/admin/blog" exact>
           {authCtx.isLoggedIn && <Blog />}
@@ -220,7 +226,21 @@ function App() {
           {!authCtx.isLoggedIn && <Login />}
         </Route>
 
-        {/* account */}
+        {/* Contact & subscribers */}
+
+        <Route path="/admin/contact" exact>
+          <Contact />
+          {/* {authCtx.isLoggedIn && <Contact />} */}
+          {/* {!authCtx.isLoggedIn && <Login />} */}
+        </Route>
+
+        <Route path="/admin/contact/subscribers" exact>
+          <Subscribers />
+          {/* {authCtx.isLoggedIn && <Subscribers />}
+          {!authCtx.isLoggedIn && <Login />} */}
+        </Route>
+
+        {/* account and settings*/}
         <Route path="/admin/account" exact>
           {authCtx.isLoggedIn && <Account />}
           {!authCtx.isLoggedIn && <Login />}
