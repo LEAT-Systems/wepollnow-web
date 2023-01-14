@@ -94,7 +94,7 @@ const Footer = () => {
       </div>
       <div className="flex flex-col md:flex-row items-center justify-between bg-[#08C127] py-8 px-12 md:px-[100px] text-white">
         <p className="text-center">
-          WepollNow {copy} 2022. All rights reserved.
+          WepollNow {copy} 2023. All rights reserved.
         </p>
         <button onClick={() => setOpen(true)}>
           <p className="underline underline-offset-4">Credits</p>
