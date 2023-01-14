@@ -35,7 +35,7 @@ const DashboardContent = () => {
       axios.get("/poll/get_polls/")
         .then((res) => {
           console.log(res);
-          setModalData(res.data.results);
+          setModalData(res.data);
         })
         .catch((err) => console.log(err));
     };
