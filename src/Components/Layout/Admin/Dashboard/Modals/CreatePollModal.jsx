@@ -247,12 +247,16 @@ const CreatePollModal = ({ open, handleClose, nextPage, setPage }) => {
   useEffect(() => {
     if (pollType === "1") {
       setPollName(presidentialName);
+      console.log(presidentialName);
     } else if (pollType === "2") {
       setPollName(`${gubernationalName} State Gubernational Poll`);
+      console.log(`${gubernationalName} State Gubernational Poll`);
     } else if (pollType === "3") {
       setPollName(`${senatorialName} Senatorial Poll`);
+      console.log(`${senatorialName} Senatorial Poll`);
     } else {
       setPollName(`${zonelName} Zonal Poll`);
+      console.log(`${zonelName} Zonal Poll`);
     }
   }, [
     presidentialName,

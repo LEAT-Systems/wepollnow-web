@@ -75,6 +75,9 @@ const Tables = ({ data, close, open }) => {
             No result found!
           </div>
         )}
+        <div>
+          
+        </div>
       </div>
 
       
