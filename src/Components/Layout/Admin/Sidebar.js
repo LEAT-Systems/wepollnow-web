@@ -6,7 +6,7 @@ import HomeIcon from "./assets/grid-5@2x-1.png";
 import PollIcon from "./assets/chart-2@2x-1.png";
 import SurveyIcon from "./assets/note@2x-1.png";
 import AccountIcon from "./assets/profile-circle@2x-1.png";
-import AccountIcon2 from "./assets/profile-circle@2x.png";
+import MarkEmailUnreadOutlinedIcon from "@mui/icons-material/MarkEmailUnreadOutlined";
 import BlogIcon from "./assets/document-text@2x-1.png";
 
 const SideBar = () => {
@@ -27,9 +27,9 @@ const SideBar = () => {
       </NavLink>
 
       {/*  */}
-      <NavLink to='/admin/polls/' className='py-3'>
-        <div className='flex flex-col items-center justify-center transition duration-700 ease-in-out'>
-          <div className='rounded-md'>
+      <NavLink to="/admin/polls/" className="py-3">
+        <div className="flex flex-col items-center justify-center transition duration-700 ease-in-out">
+          <div className="rounded-md">
             <img
               src={PollIcon}
               alt="Account"
@@ -69,6 +69,16 @@ const SideBar = () => {
       </NavLink>
 
       {/*  */}
+      <NavLink to="/admin/contact" className="py-3">
+        <div className="flex flex-col items-center justify-center transition duration-700 ease-in-out">
+          <div className="rounded-md">
+            <MarkEmailUnreadOutlinedIcon sx={{ color: "white" }} />
+          </div>
+          <p className="text-[0.76rem] pt-1 text-white">Contacts</p>
+        </div>
+      </NavLink>
+
+      {/*  */}
       <NavLink to="/admin/account" className="py-3">
         <div className="flex flex-col items-center justify-center transition duration-700 ease-in-out">
           <div className="rounded-md">
@@ -86,7 +96,6 @@ const SideBar = () => {
 };
 
 export default SideBar;
-
 
 /* 
 

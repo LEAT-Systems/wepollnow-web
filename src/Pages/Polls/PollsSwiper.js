@@ -8,35 +8,28 @@ import { Navigation } from "swiper";
 import calendar from "../../images/calendar.png";
 import { baseUrl } from "../../store/baseUrl";
 
-
 const PollsSwiper = (props) => {
   const [data, setData] = useState([]);
-  let uniqueIDRef = useRef();
+  const [uniqueID, setUniqueID] = useState("");
 
   useEffect(() => {
-    uniqueIDRef.current = localStorage.getItem("uniqueID")
-  }, [])
+    setUniqueID(localStorage.getItem("uniqueID"));
+  }, []);
 
   // TO check if API data contents is empty
   const isEmpty = data.length === 0;
 
-  // let uniqueID;
-  // useEffect(() => {
-  //   uniqueID = localStorage.getItem("uniqueID");
-  // });
-
   // Setting data for polls from API here
-  
   useEffect(() => {
     let requestOptions = {};
-    if (uniqueIDRef.current == null){
+    if (uniqueID === null || uniqueID === undefined) {
       requestOptions = {
         method: "POST",
         //body: formData,
       };
-    }else{
+    } else {
       let formData = new FormData();
-      formData.append("voter_id", `${uniqueIDRef.current}`);
+      formData.append("voter_id", `${uniqueID}`);
       requestOptions = {
         method: "POST",
         body: formData,
@@ -48,9 +41,8 @@ const PollsSwiper = (props) => {
         baseUrl + `poll/user_polls/`,
         requestOptions
       );
-      const result = await response.text();
-      const JSONdata = await JSON.parse(result);
-      setData(JSONdata);
+      const result = await response.json();
+      setData(result);
     };
     getData();
   }, []);
@@ -93,7 +85,7 @@ const PollsSwiper = (props) => {
           modules={[Navigation]}
           navigation={true}
         >
-          {data.map((item) => {
+          {data?.map((item) => {
             // Here, I'm calculating the poll date from the current date so i could render poll items conditionally
             let due;
             const now = new Date().getTime();

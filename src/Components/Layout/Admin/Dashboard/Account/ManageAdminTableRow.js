@@ -3,14 +3,11 @@ import Edit from "../../assets/edit@2x.png";
 import Delete from "../../assets/trash@2x.png";
 import { baseUrl } from "../../../../../store/baseUrl";
 import swal from "sweetalert";
-import { useRef } from "react";
 import { Modal } from "@mui/material";
 import { Close } from "@mui/icons-material";
 
 const ManageAdminTableRow = ({ tableData }) => {
   const [id, setID] = useState();
-  const nameRef = useRef();
-  const emailRef = useRef();
   const [deleteRequest, setDeleteRequest] = useState(false);
   const [open, setOpen] = useState(false);
   const [name, setName] = useState("");

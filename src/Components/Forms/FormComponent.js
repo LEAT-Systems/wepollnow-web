@@ -6,6 +6,7 @@ import FormThree from "./FormThree";
 import Confirm from "./Confirm";
 import Message from "./Message";
 import FormFour from "./FormFour";
+import { baseUrl } from "../../store/baseUrl";
 
 //
 const FormComponent = () => {
@@ -121,10 +122,7 @@ const FormComponent = () => {
         };
       }
 
-      const response = await fetch(
-        "https://wepollnow.azurewebsites.net/voters/",
-        requestOptions
-      );
+      const response = await fetch(baseUrl + `voters/`, requestOptions);
       const result = await response.text();
       const JSONdata = await JSON.parse(result);
       const emailHasError = JSONdata?.email?.[0];
