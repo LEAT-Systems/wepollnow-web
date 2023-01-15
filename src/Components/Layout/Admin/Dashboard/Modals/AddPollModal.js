@@ -5,6 +5,7 @@ import { ArrowBack } from "@mui/icons-material";
 import ModalFormContext from "../../../../../ModalFormContextAdmin/ModalFormContext";
 import axios from "../../../../../api/axios";
 import swal from "sweetalert";
+import { baseUrl } from "../../../../../store/baseUrl";
 
 // const data = [
 //   {
@@ -299,7 +300,7 @@ const AddPollModal = ({
                   <div className='flex items-center w-full border-b my-auto pb-2'>
                     {/* Party Logo */}
                     <img
-                      src={`${data.logo}`}
+                      src={`${baseUrl + data.logo}`}
                       alt='Political Party'
                       className='w-[2.3rem] aspect-square rounded-sm'
                     />
