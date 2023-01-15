@@ -1,1 +1,1 @@
-export const baseUrl = "https://wepollnow.azurewebsites.net/";
+export const baseUrl = "https://api.wepollnow.com/";

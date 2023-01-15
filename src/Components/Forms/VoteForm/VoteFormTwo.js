@@ -100,7 +100,7 @@ const VoteFormTwo = () => {
       };
 
       const response = await fetch(
-       baseUrl + `poll/poll_survey_response/`,
+        baseUrl +`poll/poll_survey_response/`,
         requestOptions
       );
 
