@@ -11,7 +11,7 @@ const DashboardContent = () => {
   const data = [
     {
       id: 3,
-      status: ["Upcoming", "Ongoing", "Concluded"],
+      status: ["Scheduled", "Ongoing", "Concluded"],
       users: "235,436",
     },
   ];
@@ -172,7 +172,7 @@ const DashboardContent = () => {
 
                   <div className="flex flex-col justify-center items-center h-full bg-[#fffaed] py-3 px-6 rounded-lg">
                     <span className="font-extrabold text-2xl">
-                      {pollStatus[0]?.scheduledPolls == null ? 0 : pollStatus[0]?.scheduledPolls}
+                      {pollStatus[0]?.ongoingPolls == null ? 0 : pollStatus[0]?.ongoingPolls}
                     </span>
                     <span className="capitalize text-sm">{data.status[1]}</span>
                   </div>
