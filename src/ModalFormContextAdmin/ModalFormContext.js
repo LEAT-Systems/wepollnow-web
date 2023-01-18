@@ -31,6 +31,15 @@ export const ModalFormProvider = ({ children }) => {
   const [gubernationalName, setGubernationalName] = useState("");
   const [zonelName, setZonelName] = useState("");
 
+  /* Edit Data's Based of Table Row Selected */
+  const [editableID, setEditableID] = useState("");
+  const [editablePollData, setEditablePollData] = useState("");
+  const [editableStartDate, setEditableStartDate] = useState("");
+  const [editableEndDate, setEditableEndDate] = useState("");
+  const [editableState, setEditableState] = useState("");
+  const [editableDistrict, setEditableDistrict] = useState("");
+  const [editableZone, setEditableZone] = useState("");
+
   /* Poll Table State */
   const [tableRowID, setTableRowID] = useState("");
   /* Poll Table State */
@@ -99,6 +108,22 @@ export const ModalFormProvider = ({ children }) => {
         /* Edit Poll Data */
         editPollData,
         setEditPollData,
+
+        /* Edit Data's Based of Table Row Selected */
+        editableID,
+        setEditableID,
+        editablePollData,
+        setEditablePollData,
+        editableStartDate,
+        setEditableStartDate,
+        editableEndDate,
+        setEditableEndDate,
+        editableState,
+        setEditableState,
+        editableDistrict,
+        setEditableDistrict,
+        editableZone,
+        setEditableZone,
       }}
     >
       {children}

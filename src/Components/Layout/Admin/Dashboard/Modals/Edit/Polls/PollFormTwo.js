@@ -39,6 +39,8 @@ const PollFormTwo = ({
     tableRowID,
   } = useContext(ModalFormContext);
 
+  /* [poll] */
+
   const [parti, setParti] = useState([]);
   const [candi, setCandi] = useState([]);
 
@@ -90,6 +92,7 @@ const PollFormTwo = ({
     candidate: candi,
     poll_name: `Presidential Poll`,
   };
+
   var governorshipID = {
     poll_category_id: pollType,
     poll_state: selectedState,
@@ -100,6 +103,7 @@ const PollFormTwo = ({
     candidate: candi,
     poll_name: `Governorship Poll`,
   };
+
   var senatorialID = {
     poll_category_id: pollType,
     poll_senatorial_district: district,
