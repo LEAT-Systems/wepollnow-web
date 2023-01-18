@@ -27,18 +27,38 @@ const PollFormOne = ({ open, handleClose, nextPage, setPage }) => {
     tableRowID,
     editPollData,
     setEditPollData,
+
+    /* Edit Data's Based of Table Row Selected */
+    editableID,
+    setEditableID,
+    editablePollData,
+    setEditablePollData,
+    editableStartDate,
+    setEditableStartDate,
+    editableEndDate,
+    setEditableEndDate,
+    editableState,
+    setEditableState,
+    editableDistrict,
+    setEditableDistrict,
+    editableZone,
+    setEditableZone,
   } = useContext(ModalFormContext);
 
   const [enableState, setEnabledState] = useState(false);
   const [enabledSenetorial, setEnabledSenetorial] = useState(false);
   const [enabledZone, setEnabledZone] = useState(false);
   const [confirmBtn, setConfirmBtn] = useState(true);
+
+  const formatDate = (string) => {
+    return string.slice(0, 10); /* string.split("T", 10).join() */
+  };
+
   const adminRef = useRef();
 
-    useEffect(() => {
+  useEffect(() => {
     adminRef.current.focus();
   }, []);
-
 
   /* Get State */
   useEffect(() => {
@@ -56,9 +76,7 @@ const PollFormOne = ({ open, handleClose, nextPage, setPage }) => {
   useEffect(() => {
     const getSenetorial = async () => {
       await axios
-        .get(
-          `/utilities/senatorial/${selectedState}`
-        )
+        .get(`/utilities/senatorial/${selectedState}`)
         .then((res) => setDistrictData(res.data))
         .catch((err) => console.log(err));
     };
@@ -121,10 +139,7 @@ const PollFormOne = ({ open, handleClose, nextPage, setPage }) => {
     console.log(config());
     const getParties = async () => {
       await axios
-        .post(
-          `/poll/poll_category_party/`,
-          config()
-        )
+        .post(`/poll/poll_category_party/`, config())
         .then((res) => {
           setParties(res.data);
           console.log(res.data);
@@ -184,20 +199,53 @@ const PollFormOne = ({ open, handleClose, nextPage, setPage }) => {
     getData();
   }, [setEditPollData, tableRowID]);
 
-  console.log('Edit Poll Data : ', editPollData);
+  // Fetch Data For Table Row Based on Table Row Selected
+  useEffect(() => {
+    const getData = async () => {
+      await axios
+        .get(`/poll/get_polls/${tableRowID}`)
+        .then((res) => {
+          console.log(res);
+          setEditableID(res?.data?.id);
+          setEditablePollData(res?.data?.poll_category?.title);
+          setEditableStartDate(
+            res?.data?.poll_startDate !== null &&
+              formatDate(res?.data?.poll_startDate)
+          );
+          setEditableEndDate(
+            res?.data?.poll_endDate !== null &&
+              formatDate(res?.data?.poll_endDate)
+          );
+          setEditableState(
+            res?.data?.poll_state?.name !== null && res?.data?.poll_state?.name
+          );
+          setEditableDistrict(
+            res?.data?.poll_senatorial_district !== null &&
+              res?.data?.poll_senatorial_district
+          );
+          /* setEditableZone("") 
+          setEditPollData(res.data); */
+        })
+        .catch((err) => console.log(err));
+    };
+
+    getData();
+  }, [setEditPollData, tableRowID]);
+
+  console.log("Edit Poll Data : ", editPollData);
 
   return (
     <>
-      <div className='flex flex-col justify-between items-center w-full my-2 hover:bg-transparent'>
+      <div className="flex flex-col justify-between items-center w-full my-2 hover:bg-transparent">
         {/* First Form */}
-        <div className='flex flex-col md:flex-row my-2 justify-center items-center w-full gap-3 md:gap-5'>
-          <label className='custom_select_container'>
+        <div className="flex flex-col md:flex-row my-2 justify-center items-center w-full gap-3 md:gap-5">
+          <label className="custom_select_container">
             Poll Type
             <select
-              name='poll_type'
-              id='poll_type'
-              className='custom_select'
-              value={pollType}
+              name="poll_type"
+              id="poll_type"
+              className="custom_select"
+              value={pollType} /* empty string > 1, 2, 3, 4, 5 */
               required
               ref={adminRef}
               aria-required
@@ -206,7 +254,7 @@ const PollFormOne = ({ open, handleClose, nextPage, setPage }) => {
                 console.log(e.target.value);
               }}
             >
-              <option value='Select Poll Type'>Select Poll Type</option>
+              <option value={editableID}>{editablePollData}</option>
               {pollTypeData.map((poll) => {
                 return (
                   <option
@@ -224,15 +272,15 @@ const PollFormOne = ({ open, handleClose, nextPage, setPage }) => {
         </div>
 
         {/*  */}
-        <div className='flex flex-col md:flex-row my-2 justify-center items-center w-full gap-3 md:gap-5'>
-          <label className='w-full relative'>
+        <div className="flex flex-col md:flex-row my-2 justify-center items-center w-full gap-3 md:gap-5">
+          <label className="w-full relative">
             Start Date
             <input
-              type='date'
-              name='start_data'
-              id='start_data'
-              className='font-medium text-base text-[#616b62] uppercase h-full w-full border-2 border-gray-300 rounded-md py-3 px-3'
-              placeholder='DD/MM/YY'
+              type="date"
+              name="start_data"
+              id="start_data"
+              className="font-medium text-base text-[#616b62] uppercase h-full w-full border-2 border-gray-300 rounded-md py-3 px-3"
+              placeholder="DD/MM/YY"
               value={startDate}
               required
               aria-required
@@ -242,14 +290,14 @@ const PollFormOne = ({ open, handleClose, nextPage, setPage }) => {
               }}
             />
           </label>
-          <label className='w-full relative'>
+          <label className="w-full relative">
             End Date
             <input
-              type='date'
-              name='end_date'
-              id='end_date'
-              className='font-medium text-base text-[#616b62] uppercase h-full w-full border-2 border-gray-300 rounded-md py-3 px-3'
-              placeholder='DD/MM/YY'
+              type="date"
+              name="end_date"
+              id="end_date"
+              className="font-medium text-base text-[#616b62] uppercase h-full w-full border-2 border-gray-300 rounded-md py-3 px-3"
+              placeholder="DD/MM/YY"
               value={endDate}
               required
               aria-required
@@ -262,13 +310,13 @@ const PollFormOne = ({ open, handleClose, nextPage, setPage }) => {
         </div>
 
         {/* Second Form */}
-        <div className='flex flex-col md:flex-row my-2 justify-center items-center w-full gap-3 md:gap-5'>
-          <label className='custom_select_container'>
+        <div className="flex flex-col md:flex-row my-2 justify-center items-center w-full gap-3 md:gap-5">
+          <label className="custom_select_container">
             State
             <select
-              name='state'
-              id='state'
-              className='custom_select disabled:bg-gray-200 disabled:cursor-not-allowed'
+              name="state"
+              id="state"
+              className="custom_select disabled:bg-gray-200 disabled:cursor-not-allowed"
               value={selectedState}
               onChange={(e) => {
                 setSelectedState(e.target.value);
@@ -276,7 +324,7 @@ const PollFormOne = ({ open, handleClose, nextPage, setPage }) => {
               }}
               disabled={enableState}
             >
-              <option>Select State</option>
+              <option value={editableID}>{editableState}</option>
               {state.map((state) => {
                 return (
                   <option key={state.id} data-id={state.id} value={state.id}>
@@ -289,13 +337,13 @@ const PollFormOne = ({ open, handleClose, nextPage, setPage }) => {
         </div>
 
         {/* Third Form */}
-        <div className='flex flex-col md:flex-row my-2 justify-center items-center w-full gap-3 md:gap-5'>
-          <label className='custom_select_container'>
+        <div className="flex flex-col md:flex-row my-2 justify-center items-center w-full gap-3 md:gap-5">
+          <label className="custom_select_container">
             Senetorial District
             <select
-              name='senetorial_district'
-              id='senetorial_district'
-              className='custom_select disabled:bg-gray-200 disabled:cursor-not-allowed'
+              name="senetorial_district"
+              id="senetorial_district"
+              className="custom_select disabled:bg-gray-200 disabled:cursor-not-allowed"
               value={district}
               onChange={(e) => {
                 setDistrict(e.target.value);
@@ -303,7 +351,7 @@ const PollFormOne = ({ open, handleClose, nextPage, setPage }) => {
               }}
               disabled={enabledSenetorial}
             >
-              <option>Select Senetorial District</option>
+              <option value={editableID}>{editableDistrict}</option>
               {districtData.map((data) => {
                 return (
                   <option key={data.id} value={data.id}>
@@ -316,13 +364,13 @@ const PollFormOne = ({ open, handleClose, nextPage, setPage }) => {
         </div>
 
         {/* Final Form */}
-        <div className='flex flex-col md:flex-row my-2 justify-center items-center w-full gap-3 md:gap-5'>
-          <label className='custom_select_container'>
+        <div className="flex flex-col md:flex-row my-2 justify-center items-center w-full gap-3 md:gap-5">
+          <label className="custom_select_container">
             Zone
             <select
-              name='zone'
-              id='zone'
-              className='custom_select disabled:bg-gray-200 disabled:cursor-not-allowed'
+              name="zone"
+              id="zone"
+              className="custom_select disabled:bg-gray-200 disabled:cursor-not-allowed"
               disabled={enabledZone}
               value={zone}
               onChange={(e) => {
@@ -330,7 +378,7 @@ const PollFormOne = ({ open, handleClose, nextPage, setPage }) => {
                 console.log(e.target.value);
               }}
             >
-              <option value='Select Zone'>Select Zone</option>
+              <option value={editableID}>{editableZone}</option>
               <option>1</option>
               <option>2</option>
               <option>2</option>
@@ -342,9 +390,9 @@ const PollFormOne = ({ open, handleClose, nextPage, setPage }) => {
         </div>
 
         {/* Buttons */}
-        <div className='flex justify-end items-center w-full my-2'>
+        <div className="flex justify-end items-center w-full my-2">
           <button
-            className='flex items-center justify-center border-2 border-gray-300 py-3 px-5 h-full cursor-pointer text-sm rounded-md capitalize mr-4 transition-all duration-400 ease-in-out hover:bg-[#f3dddd] hover:text-red-600 hover:rounded-full'
+            className="flex items-center justify-center border-2 border-gray-300 py-3 px-5 h-full cursor-pointer text-sm rounded-md capitalize mr-4 transition-all duration-400 ease-in-out hover:bg-[#f3dddd] hover:text-red-600 hover:rounded-full"
             onClick={() => {
               handleClose();
               setPollType("");
@@ -358,7 +406,7 @@ const PollFormOne = ({ open, handleClose, nextPage, setPage }) => {
             cancel
           </button>
           <button
-            className='flex items-center justify-center rounded-md py-3 px-5 h-full cursor-pointer text-sm bg-green-500 text-white capitalize transition-all duration-400 ease-in-out hover:bg-green-500 hover:text-white hover:rounded-full disabled:bg-gray-200 disabled:cursor-not-allowed'
+            className="flex items-center justify-center rounded-md py-3 px-5 h-full cursor-pointer text-sm bg-green-500 text-white capitalize transition-all duration-400 ease-in-out hover:bg-green-500 hover:text-white hover:rounded-full disabled:bg-gray-200 disabled:cursor-not-allowed"
             disabled={confirmBtn}
             onClick={() => {
               nextPage();
