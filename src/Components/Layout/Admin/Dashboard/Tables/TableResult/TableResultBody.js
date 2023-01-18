@@ -35,8 +35,8 @@ const TableResultBody = ({ tableData }) => {
         </span>{" "}
         {`${tableData?.name} (${tableData?.abbr})`}
       </th>
-      <td className='px-6 py-4'>{tableData?.partyCandidate[1]?.name}</td>
       <td className='px-6 py-4'>{tableData?.partyCandidate[0]?.name}</td>
+      <td className='px-6 py-4'>{tableData?.partyCandidate[1]?.name}</td>
       <td className='px-6 py-4'>{tableData?.voteCount}</td>
       <td className='px-6 py-4'>{`${tableData?.votePercent}%`}</td>
     </tr>
