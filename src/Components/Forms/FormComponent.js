@@ -78,7 +78,8 @@ const FormComponent = () => {
           body: JSON.stringify({
             phone: formData.phone,
             country: formData.country,
-            email: formData.email,
+            // Not passing email. Backend requirement cos not needed
+            email: "",
             first_time_voter: formData.firstTimeVoter,
             diaspora_voter: formData.diasporaVoter,
             state_of_origin_id: parseInt(formData.stateOfOrigin),

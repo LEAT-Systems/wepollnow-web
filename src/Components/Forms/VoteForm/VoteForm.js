@@ -128,15 +128,12 @@ const FormFive = () => {
     };
     try {
       const response = await fetch(baseUrl + `voters/vote/`, requestOptions);
-
       const result = await response.json();
-      console.log(result, response);
       // redirect or throw error
-      if (response.ok === true) {
-        history.push("/vote/vote-form-next", { replace: true });
-      }
-      if (result?.errors[0] !== "") {
+      if (!response.ok) {
         throw new Error("You have voted already for this poll");
+      } else {
+        history.push("/vote/vote-form-next", { replace: true });
       }
 
       // catch error

@@ -2,6 +2,7 @@ import React, { useRef, useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import Nav from "../../Layout/Landing/mainNav";
 import swal from "sweetalert";
+import { baseUrl } from "../../../store/baseUrl";
 
 const VoteFormTwo = () => {
   const history = useHistory();
@@ -41,10 +42,9 @@ const VoteFormTwo = () => {
   useEffect(() => {
     try {
       const getData = async () => {
-        const response = await fetch(
-          "https://wepollnow.azurewebsites.net/poll/survey_category/",
-          { method: "GET" }
-        );
+        const response = await fetch(baseUrl + "poll/survey_category/", {
+          method: "GET",
+        });
         const result = await response.json();
         if (!response.ok) {
           swal({
@@ -74,7 +74,7 @@ const VoteFormTwo = () => {
         },
       });
     }
-  });
+  }, []);
 
   // Handle form change
 
@@ -99,7 +99,7 @@ const VoteFormTwo = () => {
       };
 
       const response = await fetch(
-        "https://wepollnow.azurewebsites.net/poll/poll_survey_response/",
+        baseUrl + "poll/poll_survey_response/",
         requestOptions
       );
 
