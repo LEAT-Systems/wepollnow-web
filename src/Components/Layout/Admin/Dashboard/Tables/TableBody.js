@@ -42,11 +42,13 @@ const TableBody = ({ tableData, open }) => {
   };
 
   const statusColors =
-    tableData.status === 1
+  tableData?.poll_startDate > Date.now
       ? "after:bg-blue-500"
-      : tableData.status === 2
+      : tableData?.poll_startDate <= Date.now <= tableData?.poll_endDate
       ? "after:bg-green-500"
-      : "after:bg-red-400";
+      :  tableData?.poll_endDate < Date.now
+      ? "after:bg-red-400"
+      : "";
 
   const parentTarget = (e) =>
     e.currentTarget.parentNode.parentNode.getAttribute("data-id");
@@ -229,11 +231,13 @@ const TableBody = ({ tableData, open }) => {
         <h3
           className={`relative after:content-[''] after:absolute after:w-[.6rem] after:h-[.6rem] after:rounded-full ${statusColors} after:-left-3 after:top-1/2 after:-translate-y-1/2`}
         >
-          {tableData.status === 1
+          {tableData?.poll_startDate > Date.now
             ? "Upcoming"
-            : tableData.status === 2
-            ? "Scheduled"
-            : "Concluded"}
+            : tableData?.poll_startDate <= Date.now <= tableData?.poll_endDate
+            ? "Ongoing"
+            :  tableData?.poll_endDate < Date.now
+            ? "Concluded"
+          : ""}
         </h3>
       </td>
       <td
