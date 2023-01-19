@@ -27,6 +27,10 @@ const PollFormOne = ({ open, handleClose, nextPage, setPage }) => {
     tableRowID,
     editPollData,
     setEditPollData,
+    editEndDate,
+    setEditEndDate,
+    editStartDate,
+    setEditStartDate,
 
     /* Edit Data's Based of Table Row Selected */
     editableID,
@@ -152,19 +156,25 @@ const PollFormOne = ({ open, handleClose, nextPage, setPage }) => {
 
   useEffect(() => {
     var onDisabled = () => {
-      if (pollType === "1") {
+      if (pollType === "1" || editablePollData === "Presidential Poll") {
         setEnabledState(true);
         setEnabledSenetorial(true);
         setEnabledZone(true);
-      } else if (pollType === "2") {
+      } else if (
+        pollType === "2" ||
+        editablePollData === "Gubernatorial Poll"
+      ) {
         setEnabledState(false);
         setEnabledSenetorial(true);
         setEnabledZone(true);
-      } else if (pollType === "3") {
+      } else if (pollType === "3" || editablePollData === "Senatorial Poll") {
         setEnabledState(false);
         setEnabledSenetorial(false);
         setEnabledZone(true);
-      } else if (pollType === "4") {
+      } else if (
+        pollType === "4" ||
+        editablePollData === "House Of Assembly Poll"
+      ) {
         setEnabledSenetorial(true);
         setEnabledZone(false);
         setEnabledState(false);
@@ -176,14 +186,26 @@ const PollFormOne = ({ open, handleClose, nextPage, setPage }) => {
     };
 
     onDisabled();
-
-    if (startDate !== "" && pollType !== "" && endDate !== "") {
+    if (pollType === "1" || editablePollData === "Presidential Poll") {
+      setConfirmBtn(false);
+    } else if (
+      pollType === "2" || editablePollData === "Gubernatorial Poll"
+    ) {
+      setConfirmBtn(false);
+    } else if (
+      pollType === "3" ||
+      editablePollData === "Senatorial Poll"
+    ) {
+      setConfirmBtn(false);
+    } else if (
+      pollType === "4" || editablePollData === "House Of Assembly Poll"
+    ) {
       setConfirmBtn(false);
     } else {
-      setConfirmBtn(true);
-    }
-  }, [startDate, endDate, pollType]);
-
+        setConfirmBtn(true);
+      }
+  }, [startDate, endDate, pollType, editablePollData]);
+console.log("Disable Button: ",confirmBtn);
   // Get Selected Poll To Edit Data
   useEffect(() => {
     const getData = async () => {
@@ -199,21 +221,22 @@ const PollFormOne = ({ open, handleClose, nextPage, setPage }) => {
     getData();
   }, [setEditPollData, tableRowID]);
 
+  console.log("Edit Start Date: ", editableStartDate);
+  console.log("Edit End Date: ", editableEndDate);
   // Fetch Data For Table Row Based on Table Row Selected
   useEffect(() => {
     const getData = async () => {
       await axios
-        .get(`/poll/get_polls/${tableRowID}`)
+        .get(`/poll/rud_poll/${tableRowID}`)
         .then((res) => {
           console.log(res);
           setEditableID(res?.data?.id);
           setEditablePollData(res?.data?.poll_category?.title);
           setEditableStartDate(
-            res?.data?.poll_startDate !== null &&
-              formatDate(res?.data?.poll_startDate)
+            res?.data?.poll_date !== null && formatDate(res?.data?.poll_date)
           );
           setEditableEndDate(
-            res?.data?.poll_endDate !== null &&
+            res?.data?.[0]?.poll_endDate !== null &&
               formatDate(res?.data?.poll_endDate)
           );
           setEditableState(
@@ -221,7 +244,7 @@ const PollFormOne = ({ open, handleClose, nextPage, setPage }) => {
           );
           setEditableDistrict(
             res?.data?.poll_senatorial_district !== null &&
-              res?.data?.poll_senatorial_district
+              res?.data?.poll_senatorial_district?.name
           );
           /* setEditableZone("") 
           setEditPollData(res.data); */
@@ -230,7 +253,15 @@ const PollFormOne = ({ open, handleClose, nextPage, setPage }) => {
     };
 
     getData();
-  }, [setEditPollData, tableRowID]);
+  }, [
+    setEditableID,
+    setEditableState,
+    setEditableEndDate,
+    setEditableDistrict,
+    tableRowID,
+    setEditableStartDate,
+    setEditablePollData,
+  ]);
 
   console.log("Edit Poll Data : ", editPollData);
 
@@ -281,11 +312,12 @@ const PollFormOne = ({ open, handleClose, nextPage, setPage }) => {
               id="start_data"
               className="font-medium text-base text-[#616b62] uppercase h-full w-full border-2 border-gray-300 rounded-md py-3 px-3"
               placeholder="DD/MM/YY"
-              value={startDate}
+              value={editableStartDate}
               required
               aria-required
               onChange={(e) => {
-                setStartDate(e.target.value);
+                setEditableStartDate(e.target.value);
+                console.log("Edit Start Date: ", editStartDate);
                 console.log(e.target.value);
               }}
             />
@@ -298,11 +330,12 @@ const PollFormOne = ({ open, handleClose, nextPage, setPage }) => {
               id="end_date"
               className="font-medium text-base text-[#616b62] uppercase h-full w-full border-2 border-gray-300 rounded-md py-3 px-3"
               placeholder="DD/MM/YY"
-              value={endDate}
+              value={editableEndDate}
               required
               aria-required
               onChange={(e) => {
-                setEndDate(e.target.value);
+                setEditableEndDate(e.target.value);
+                console.log("Edit End Date:", editEndDate);
                 console.log(e.target.value);
               }}
             />

@@ -10,6 +10,7 @@ export const ModalFormProvider = ({ children }) => {
   const [pollName, setPollName] = useState("");
   const [startDate, setStartDate] = useState([]);
   const [endDate, setEndDate] = useState([]);
+
   const [selectedState, setSelectedState] = useState("");
   const [district, setDistrict] = useState([]);
   const [party, setParty] = useState([]);
@@ -39,7 +40,8 @@ export const ModalFormProvider = ({ children }) => {
   const [editableState, setEditableState] = useState("");
   const [editableDistrict, setEditableDistrict] = useState("");
   const [editableZone, setEditableZone] = useState("");
-
+  const [editStartDate, setEditStartDate] = useState(editableStartDate);
+  const [editEndDate, setEditEndDate] = useState(editableEndDate);
   /* Poll Table State */
   const [tableRowID, setTableRowID] = useState("");
   /* Poll Table State */
@@ -96,6 +98,10 @@ export const ModalFormProvider = ({ children }) => {
         setZonelName,
         successMessage,
         setSuccessMessage,
+        editEndDate,
+        setEditEndDate,
+        editStartDate,
+        setEditStartDate,
 
         /* Poll Table State */
         tableRowID,

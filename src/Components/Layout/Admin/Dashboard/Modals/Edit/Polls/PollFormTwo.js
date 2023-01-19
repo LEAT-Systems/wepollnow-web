@@ -37,6 +37,8 @@ const PollFormTwo = ({
     setStartDate,
     setEndDate,
     tableRowID,
+    editableStartDate,
+    editableEndDate,
   } = useContext(ModalFormContext);
 
   /* [poll] */
@@ -85,8 +87,8 @@ const PollFormTwo = ({
 
   var presidentID = {
     poll_category_id: pollType,
-    poll_startDate: startDate,
-    poll_endDate: endDate,
+    poll_startDate: editableStartDate,
+    poll_endDate: editableEndDate,
     status: 1,
     party: parti,
     candidate: candi,
@@ -96,8 +98,8 @@ const PollFormTwo = ({
   var governorshipID = {
     poll_category_id: pollType,
     poll_state: selectedState,
-    poll_startDate: startDate,
-    poll_endDate: endDate,
+    poll_startDate: editableStartDate,
+    poll_endDate: editableEndDate,
     status: 1,
     party: parti,
     candidate: candi,
@@ -107,8 +109,8 @@ const PollFormTwo = ({
   var senatorialID = {
     poll_category_id: pollType,
     poll_senatorial_district: district,
-    poll_startDate: startDate,
-    poll_endDate: endDate,
+    poll_startDate: editableStartDate,
+    poll_endDate: editableEndDate,
     status: 1,
     party: parti,
     candidate: candi,
