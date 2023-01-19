@@ -11,7 +11,7 @@ const DashboardContent = () => {
   const data = [
     {
       id: 3,
-      status: ["Scheduled", "Ongoing", "Concluded"],
+      status: ["Scheduled","Upcoming", "Ongoing", "Concluded"],
       users: "235,436",
     },
   ];
@@ -162,26 +162,31 @@ const DashboardContent = () => {
                 <h2 className="capitalize font-extrabold text-lg pb-3">
                   Polls info
                 </h2>
-                <div className="grid grid-cols-3 gap-4 w-full">
-                  <div className="flex flex-col justify-center items-center h-full bg-[#edfff0] py-3 px-6 rounded-lg">
+                <div className="grid grid-cols-4 gap-4 w-full">
+                  <div className="flex flex-col justify-center items-center h-full bg-[#faffed] py-3 px-6 rounded-lg">
                     <span className="font-extrabold text-2xl">
-                      {pollStatus[0]?.ongoingPolls == null ? 0 : pollStatus[0]?.ongoingPolls }
+                      {pollStatus[0]?.ongoingPolls + pollStatus[0]?.concludedPolls == null ? 0 : pollStatus[0]?.ongoingPolls + pollStatus[0]?.concludedPolls }
                     </span>
                     <span className="capitalize text-sm">{data.status[0]}</span>
                   </div>
-
+                  <div className="flex flex-col justify-center items-center h-full bg-[#edfff0] py-3 px-6 rounded-lg">
+                    <span className="font-extrabold text-2xl">
+                      {pollStatus[0]?.scheduledPolls == null ? 0 : pollStatus[0]?.scheduledPolls}
+                    </span>
+                    <span className="capitalize text-sm">{data.status[1]}</span>
+                  </div>
                   <div className="flex flex-col justify-center items-center h-full bg-[#fffaed] py-3 px-6 rounded-lg">
                     <span className="font-extrabold text-2xl">
                       {pollStatus[0]?.ongoingPolls == null ? 0 : pollStatus[0]?.ongoingPolls}
                     </span>
-                    <span className="capitalize text-sm">{data.status[1]}</span>
+                    <span className="capitalize text-sm">{data.status[2]}</span>
                   </div>
 
                   <div className="flex flex-col justgiify-center items-center h-full bg-[#ffedf1] py-3 px-6 rounded-lg">
                     <span className="font-extrabold text-2xl">
                       {pollStatus[0]?.concludedPolls == null ? 0 : pollStatus[0]?.concludedPolls}
                     </span>
-                    <span className="capitalize text-sm">{data.status[2]}</span>
+                    <span className="capitalize text-sm">{data.status[3]}</span>
                   </div>
                 </div>
               </div>
