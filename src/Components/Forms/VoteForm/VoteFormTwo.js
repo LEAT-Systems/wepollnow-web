@@ -75,7 +75,7 @@ const VoteFormTwo = () => {
         },
       });
     }
-  });
+  }, []);
 
   // Handle form change
 

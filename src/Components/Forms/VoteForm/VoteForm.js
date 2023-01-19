@@ -66,6 +66,7 @@ const FormFive = () => {
           requestOptions
         );
         const result = await response.json();
+        console.log(result);
         if (!response.ok) {
           swal({
             title: "Something went wrong. Could not fetch candidates",
@@ -128,15 +129,12 @@ const FormFive = () => {
     };
     try {
       const response = await fetch(baseUrl + `voters/vote/`, requestOptions);
-
       const result = await response.json();
-      console.log(result, response);
       // redirect or throw error
-      if (response.ok === true) {
-        history.push("/vote/vote-form-next", { replace: true });
-      }
-      if (result?.errors[0] !== "") {
+      if (!response.ok) {
         throw new Error("You have voted already for this poll");
+      } else {
+        history.push("/vote/vote-form-next", { replace: true });
       }
 
       // catch error
@@ -249,7 +247,7 @@ const FormFive = () => {
                             <div className="flex flex-row items-center justify-between pb-2 border-b border-gray-200">
                               <div className="flex flex-row p-2 space-x-2 font-semibold">
                                 <img
-                                  src={`https://wepollnow.azurewebsites.net/${item.party_logo}`}
+                                  src={baseUrl + `${item.party_logo}`}
                                   className="w-5 h-5 rounded md:h-8 md:w-8"
                                   alt=""
                                 />
@@ -276,7 +274,8 @@ const FormFive = () => {
                                   <img
                                     src={
                                       item.viceCandidateImg !== null
-                                        ? baseUrl + `${item.viceCandidateImg}`
+                                        ? `https://api.wepollnow.com` +
+                                          `${item.viceCandidateImg}`
                                         : img_avatar
                                     }
                                     className="w-8 h-8 rounded"
@@ -295,7 +294,8 @@ const FormFive = () => {
                                   <img
                                     src={
                                       item.viceCandidateImg !== null
-                                        ? baseUrl + `${item.viceCandidateImg}`
+                                        ? `https://api.wepollnow.com` +
+                                          `${item.viceCandidateImg}`
                                         : img_avatar
                                     }
                                     className="w-8 h-8 rounded"
