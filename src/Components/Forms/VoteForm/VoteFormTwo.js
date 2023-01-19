@@ -42,9 +42,10 @@ const VoteFormTwo = () => {
   useEffect(() => {
     try {
       const getData = async () => {
-        const response = await fetch(baseUrl + "poll/survey_category/", {
-          method: "GET",
-        });
+        const response = await fetch(
+          baseUrl + `poll/survey_category/`,
+          { method: "GET" }
+        );
         const result = await response.json();
         if (!response.ok) {
           swal({
@@ -99,7 +100,7 @@ const VoteFormTwo = () => {
       };
 
       const response = await fetch(
-        baseUrl + "poll/poll_survey_response/",
+        baseUrl +`poll/poll_survey_response/`,
         requestOptions
       );
 
