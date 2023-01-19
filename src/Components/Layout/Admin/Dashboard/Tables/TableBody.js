@@ -42,9 +42,9 @@ const TableBody = ({ tableData, open }) => {
   };
 
   const statusColors =
-  tableData?.poll_startDate > Date.now
+      tableData?.poll_startDate > Date.now
       ? "after:bg-blue-500"
-      : tableData?.poll_startDate <= Date.now <= tableData?.poll_endDate
+      : tableData?.poll_startDate <= Date.now 
       ? "after:bg-green-500"
       :  tableData?.poll_endDate < Date.now
       ? "after:bg-red-400"
@@ -231,11 +231,11 @@ const TableBody = ({ tableData, open }) => {
         <h3
           className={`relative after:content-[''] after:absolute after:w-[.6rem] after:h-[.6rem] after:rounded-full ${statusColors} after:-left-3 after:top-1/2 after:-translate-y-1/2`}
         >
-          {tableData?.poll_startDate > Date.now
-            ? "Upcoming"
-            : tableData?.poll_startDate <= Date.now <= tableData?.poll_endDate
+          {tableData?.poll_startDate <= Date.now 
             ? "Ongoing"
-            :  tableData?.poll_endDate < Date.now
+            : tableData?.poll_startDate > Date.now
+            ? "Upcoming"
+            :  tableData?.poll_endDate < Date.now 
             ? "Concluded"
           : ""}
         </h3>

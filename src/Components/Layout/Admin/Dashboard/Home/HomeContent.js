@@ -165,7 +165,7 @@ const DashboardContent = () => {
                 <div className="grid grid-cols-4 gap-4 w-full">
                   <div className="flex flex-col justify-center items-center h-full bg-[#faffed] py-3 px-6 rounded-lg">
                     <span className="font-extrabold text-2xl">
-                      {pollStatus[0]?.ongoingPolls + pollStatus[0]?.concludedPolls == null ? 0 : pollStatus[0]?.ongoingPolls + pollStatus[0]?.concludedPolls }
+                      {pollStatus[0]?.ongoingPolls + pollStatus[0]?.scheduledPolls == null ? 0 : pollStatus[0]?.ongoingPolls + pollStatus[0]?.scheduledPolls }
                     </span>
                     <span className="capitalize text-sm">{data.status[0]}</span>
                   </div>
