@@ -25,7 +25,7 @@ const FormFive = () => {
   const [hasError, setHasError] = useState(false);
   const [error, setErrorMessage] = useState(false);
   const [apiData, setApiData] = useState([]);
-  const [pollID, setPollID] = useState("");
+  const [pollID, setPollID] = useState(0);
   const [voteID, setVoteID] = useState();
   const [selectedPoll, setSelectedPoll] = useState();
 
@@ -81,7 +81,7 @@ const FormFive = () => {
         } else {
           result.forEach((item) => {
             const pData = {
-              pollid: item.id,
+              party_id: item.id,
               party_logo: item.logo !== undefined ? item.logo : null,
               partyName: item.name !== undefined ? item.name : null,
               candidate: item.partyCandidate[0]?.name
@@ -257,11 +257,11 @@ const FormFive = () => {
                               </div>
 
                               <input
-                                id={item.id}
+                                id={item.party_id}
                                 name="party"
                                 type="radio"
                                 value={item.partyName}
-                                onBlur={() => setVoteID(item.pollid)}
+                                onBlur={() => setVoteID(item.party_id)}
                                 onChange={checkHandler}
                                 className="w-5 h-5 text-gray-600 border-gray-300 focus:ring-gray-500"
                               />
