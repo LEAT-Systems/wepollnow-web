@@ -284,10 +284,10 @@ const FormTwo = (props) => {
                                 type="radio"
                                 name="ageRange"
                                 value="1"
-                                placeholder="18-25"
+                                placeholder="18-29"
                                 className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
                               />
-                              <p>18-25</p>
+                              <p>18-29</p>
                             </label>
                             <label
                               htmlFor="ageRange2"
@@ -300,7 +300,7 @@ const FormTwo = (props) => {
                                 value="2"
                                 className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
                               />
-                              <p>25-35</p>
+                              <p>30-39</p>
                             </label>
                           </div>
                           <div className="flex flex-row items-center justify-between mt-2 space-x-4 md:mt-0">
@@ -315,7 +315,7 @@ const FormTwo = (props) => {
                                 value="3"
                                 className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
                               />
-                              <p>35-45</p>
+                              <p>40-49</p>
                             </label>
                             <label
                               htmlFor="ageRange4"
@@ -328,7 +328,7 @@ const FormTwo = (props) => {
                                 value="4"
                                 className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
                               />
-                              <p>45-50</p>
+                              <p>50-59</p>
                             </label>
                           </div>
                           <div className="flex flex-row items-center justify-between mt-2 space-x-4 md:space-y-4 md:pb-0 md:mt-0">
@@ -343,7 +343,7 @@ const FormTwo = (props) => {
                                 value="5"
                                 className="w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
                               />
-                              <p>50 and above</p>
+                              <p>60 and above</p>
                             </label>
                           </div>
                         </div>
