@@ -10,9 +10,11 @@ import Header from "../../Header";
 import Progress from "./Progress";
 import { Modal } from "@mui/material";
 import tooltipIcon from "../../../../../images/tooltip.png";
+import down from "../../../../../images/down.png";
 import swal from "sweetalert";
 import { Link } from "react-router-dom";
 import { baseUrl } from "../../../../../store/baseUrl";
+import { CSVLink } from "react-csv";
 
 const SurveyContent = () => {
   const [open, setOpen] = useState(false);
@@ -23,10 +25,13 @@ const SurveyContent = () => {
   const [show, setShow] = useState(false);
   const [surveyType, setSurveyType] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-  const [postPerPage] = useState(5);
+  const [postPerPage] = useState(10);
   const [title, setTitle] = useState("");
   const [surveyData, setSurveyData] = useState([]);
   const [tooltipStatus, setTooltipStatus] = useState(0);
+
+  // get current date
+  let currentDate = new Date().toJSON().slice(0, 10);
 
   // This handles pagination on the poll items
   const indexOfLastPost = currentPage * postPerPage;
@@ -93,8 +98,8 @@ const SurveyContent = () => {
           method: "GET",
         });
 
-        const polls = await response.json();
-        setPolls(polls.results);
+        const result = await response.json();
+        setPolls(result);
       };
       getPollData();
     } catch (error) {
@@ -118,7 +123,9 @@ const SurveyContent = () => {
       const getData = async () => {
         const response = await fetch(
           baseUrl + `poll/poll_survey_category/${id}`,
-          { method: "GET" }
+          {
+            method: "GET",
+          }
         );
         const result = await response.json();
         if (response.ok) {
@@ -266,6 +273,7 @@ const SurveyContent = () => {
             {/* <span className="mr-1 w-[2.6rem]">
               <img src={LinkIcon} alt="Account" className="w-full" />
             </span> */}
+
             <button
               className={open ? EditActiveStyle : EditNotActiveStyle}
               onClick={handleOpen}
@@ -285,31 +293,45 @@ const SurveyContent = () => {
                 }}
               />
             </button>
+            {/* <CSVLink
+              filename={`survey_data_exported_on_${currentDate}.csv`}
+              data={surveyData}
+              className="p-2 px-4 text-center text-black transition duration-150 border rounded-md hover:rounded-full"
+            >
+              <div className="flex flex-row items-center justify-center space-x-2">
+                <p>CSV</p>
+                <span>
+                  <img src={down} alt="export" className="w-6 h-6" />
+                </span>
+              </div>
+            </CSVLink> */}
           </nav>
         </header>
 
         <div className="block text-[#082a0f]">
-          <div className="flex flex-row items-center space-x-2">
-            <h4 className="mb-3 text-lg font-medium leading-10">
-              How users responded to issues that are most important to them
-            </h4>
-            <img
-              src={tooltipIcon}
-              className="w-4 h-4 mb-3"
-              alt="tooltipIcon"
-              onMouseEnter={() => setTooltipStatus(1)}
-              onMouseLeave={() => setTooltipStatus(0)}
-            />
-            {tooltipStatus === 1 && (
-              <div
-                role="tooltip"
-                className="absolute -mt-24 text-white transition duration-150 ease-in-out bg-black rounded shadow-lg"
-              >
-                <p className="p-2 text-xs font-normal md:text-lg">
-                  Click on a poll title to view more details about a poll.
-                </p>
-              </div>
-            )}
+          <div className="flex flex-row items-center justify-between pb-4">
+            <div className="flex flex-row items-center space-x-2">
+              <h4 className="mb-3 text-lg font-medium leading-10">
+                How users responded to issues that are most important to them
+              </h4>
+              <img
+                src={tooltipIcon}
+                className="w-4 h-4 mb-3"
+                alt="tooltipIcon"
+                onMouseEnter={() => setTooltipStatus(1)}
+                onMouseLeave={() => setTooltipStatus(0)}
+              />
+              {tooltipStatus === 1 && (
+                <div
+                  role="tooltip"
+                  className="absolute -mt-24 text-white transition duration-150 ease-in-out bg-black rounded shadow-lg"
+                >
+                  <p className="p-2 text-xs font-normal md:text-lg">
+                    Click on a poll title to view more details about a poll.
+                  </p>
+                </div>
+              )}
+            </div>
           </div>
 
           {/*General COntainer with Polls information  */}
