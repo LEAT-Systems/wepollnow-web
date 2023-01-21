@@ -56,8 +56,8 @@ const Candidate = () => {
       .get("/utilities/candidates/")
       .then((res) => {
         console.log(res);
-        setTableData(res?.data?.results);
-        setSearchResult(res?.data?.results);
+        setTableData(res?.data);
+        setSearchResult(res?.data);
       })
       .catch((err) => console.log(err));
   }, [setTableData, setSearchResult]);
