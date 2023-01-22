@@ -57,6 +57,8 @@ const PollsPageContentTwo = () => {
     if (searchResult.length !== 0) {
       searchResult?.forEach((item) => {
         const listdata = {
+          PARTY: item.name,
+          ABBREVIATION: item.abbr,
           CANDIDATE: item.partyCandidate[0].name,
           RUNNING_MATE: item.partyCandidate[1].name,
           VOTE_COUNT: item.voteCount,
