@@ -17,14 +17,14 @@ const ManageCandidateTable = ({ data, open }) => {
       );
     })
   ) : data?.length <= 0 ? (
-    <div className='w-full h-full flex flex-row justify-center items-center text-center font-bold text-sm my-4 mx-auto'>
-      <h2 className='text-center mr-8'>No vote was made!</h2>
+    <div className="flex flex-row items-center justify-center w-full h-full mx-auto my-4 text-sm font-bold text-center">
+      <h2 className="mr-8 text-center">No vote was made!</h2>
     </div>
   ) : (
-    <div className='w-full h-full flex flex-row justify-center items-center text-center font-bold text-sm my-4 mx-auto'>
-      <h2 className='text-center mr-8 text-red-500'>Something went wrong!</h2>
+    <div className="flex flex-row items-center justify-center w-full h-full mx-auto my-4 text-sm font-bold text-center">
+      <h2 className="mr-8 text-center text-red-500">Something went wrong!</h2>
       <button
-        className='text-gray-600 font-bold p-2 border-none bg-transparent'
+        className="p-2 font-bold text-gray-600 bg-transparent border-none"
         onClick={() => history.push("/")}
       >
         Go Back
@@ -33,19 +33,19 @@ const ManageCandidateTable = ({ data, open }) => {
   );
 
   return (
-    <div className='relative overflow-auto scrollable w-full'>
-      <div className='relative shadow-md'>
+    <div className="relative w-full overflow-auto scrollable">
+      <div className="relative shadow-md">
         {results?.length ? (
-          <table className='w-full text-sm text-left text-gray-500'>
-            <thead className='text-xs text-gray-700 uppercase'>
+          <table className="w-full text-sm text-left text-gray-500">
+            <thead className="text-xs text-gray-700 uppercase">
               <tr>
-                <th scope='col' className='table-head'>
+                <th scope="col" className="table-head">
                   Candidates
                 </th>
-                <th scope='col' className='table-head'>
+                <th scope="col" className="table-head">
                   Polls
                 </th>
-                <th scope='col' className='table-head'>
+                <th scope="col" className="table-head">
                   Actions
                 </th>
               </tr>
@@ -53,8 +53,8 @@ const ManageCandidateTable = ({ data, open }) => {
             <tbody>{results}</tbody>
           </table>
         ) : (
-          <div className='flex justify-center items-center font-bold text-lg md:text-xl text-[#333] capitalize py-5'>
-            No result found!
+          <div className="flex justify-center items-center font-bold text-lg md:text-xl text-[#333] capitalize py-5">
+            Please wait...
           </div>
         )}
       </div>

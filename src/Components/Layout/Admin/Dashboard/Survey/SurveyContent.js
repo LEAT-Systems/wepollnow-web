@@ -358,7 +358,7 @@ const SurveyContent = () => {
                     </h3>
                   </div>
                   <button
-                    className="flex items-center justify-center border border-1 rounded-md px-3 py-2 cursor-pointer text-sm md:text-base bg-[#08c127] text-white animate"
+                    className="flex items-center justify-center px-3 py-2 text-sm text-white bg-[#08c127] border rounded-md shadow-xl cursor-pointer border-1 md:text-base animate"
                     onClick={() => {
                       setShow(true);
                       setSurveyType(item.poll_name);
