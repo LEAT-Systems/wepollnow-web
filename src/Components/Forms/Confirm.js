@@ -10,7 +10,6 @@ const Confirm = (props) => {
   };
   const {
     phone,
-    email,
     firstTimeVoter,
     diasporaVoter,
     stateOfOrigin,
@@ -26,7 +25,6 @@ const Confirm = (props) => {
 
   const data = [
     phone,
-    email,
     firstTimeVoter,
     diasporaVoter,
     stateOfOrigin,

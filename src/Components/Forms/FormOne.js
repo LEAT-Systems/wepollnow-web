@@ -9,7 +9,7 @@ import { baseUrl } from "../../store/baseUrl";
 
 const FormOne = (props) => {
   // destructuring to configure the form arrow indicators
-  let { email, firstTimeVoter, diasporaVoter, stateOfOrigin } = props.data;
+  let { firstTimeVoter, diasporaVoter, stateOfOrigin } = props.data;
   const [formisCompleted, setFormIsCompleted] = useState(false);
   const [states, setState] = useState([]);
   const [error, setError] = useState("");
@@ -19,7 +19,6 @@ const FormOne = (props) => {
     props.next(values);
   };
 
-  console.log(states);
 
   // fetching the state from the API
   useEffect(() => {
@@ -43,14 +42,14 @@ const FormOne = (props) => {
 
   // Configuring the indicators
   useEffect(() => {
-    if (diasporaVoter && email && stateOfOrigin && firstTimeVoter !== "") {
+    if (diasporaVoter && stateOfOrigin && firstTimeVoter !== "") {
       setFormIsCompleted(true);
     }
-  }, [email, stateOfOrigin, diasporaVoter, firstTimeVoter]);
+  }, [stateOfOrigin, diasporaVoter, firstTimeVoter]);
 
   // Yup form Validation Schema
   const formOneValidationSchema = Yup.object({
-    email: Yup.string().email().required().label("* This"),
+    // email: Yup.string().email().required().label("* This"),
     stateOfOrigin: Yup.string().required().label("* This"),
     firstTimeVoter: Yup.string().required().label("* This"),
   });
@@ -104,7 +103,7 @@ const FormOne = (props) => {
                     <div className="h-full px-4 space-y-4 ">
                       {/* Email Address */}
 
-                      <div className="flex flex-col pt-8 md:pt-0">
+                      {/* <div className="flex flex-col pt-8 md:pt-0">
                         <FormLabel no="i" title="Email Address " />
                         <p className="text-red-600">
                           <ErrorMessage name="email" />
@@ -114,7 +113,7 @@ const FormOne = (props) => {
                           placeholder="Enter Email Address"
                           className="w-full p-4 px-4 mb-2 text-lg text-gray-700 placeholder-gray-600 border rounded-md accent-green-500 focus:shadow-outline"
                         />
-                      </div>
+                      </div> */}
 
                       {/* First Time Voter */}
 

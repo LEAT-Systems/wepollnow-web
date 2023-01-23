@@ -25,7 +25,7 @@ const FormFive = () => {
   const [hasError, setHasError] = useState(false);
   const [error, setErrorMessage] = useState(false);
   const [apiData, setApiData] = useState([]);
-  const [pollID, setPollID] = useState("");
+  const [pollID, setPollID] = useState(0);
   const [voteID, setVoteID] = useState();
   const [selectedPoll, setSelectedPoll] = useState();
 
@@ -66,6 +66,7 @@ const FormFive = () => {
           requestOptions
         );
         const result = await response.json();
+        console.log(result);
         if (!response.ok) {
           swal({
             title: "Something went wrong. Could not fetch candidates",
@@ -80,7 +81,7 @@ const FormFive = () => {
         } else {
           result.forEach((item) => {
             const pData = {
-              pollid: item.id,
+              party_id: item.id,
               party_logo: item.logo !== undefined ? item.logo : null,
               partyName: item.name !== undefined ? item.name : null,
               candidate: item.partyCandidate[0]?.name
@@ -128,15 +129,12 @@ const FormFive = () => {
     };
     try {
       const response = await fetch(baseUrl + `voters/vote/`, requestOptions);
-
       const result = await response.json();
-      console.log(result, response);
       // redirect or throw error
-      if (response.ok === true) {
-        history.push("/vote/vote-form-next", { replace: true });
-      }
-      if (result?.errors[0] !== "") {
+      if (!response.ok) {
         throw new Error("You have voted already for this poll");
+      } else {
+        history.push("/vote/vote-form-next", { replace: true });
       }
 
       // catch error
@@ -245,11 +243,11 @@ const FormFive = () => {
                           }
                       `}
                         >
-                          <label htmlFor={item.id}>
+                          <label htmlFor={item.party_id}>
                             <div className="flex flex-row items-center justify-between pb-2 border-b border-gray-200">
                               <div className="flex flex-row p-2 space-x-2 font-semibold">
                                 <img
-                                  src={`https://wepollnow.azurewebsites.net/${item.party_logo}`}
+                                  src={baseUrl + `${item.party_logo}`}
                                   className="w-5 h-5 rounded md:h-8 md:w-8"
                                   alt=""
                                 />
@@ -259,11 +257,11 @@ const FormFive = () => {
                               </div>
 
                               <input
-                                id={item.id}
+                                id={item.party_id}
                                 name="party"
                                 type="radio"
                                 value={item.partyName}
-                                onBlur={() => setVoteID(item.pollid)}
+                                onBlur={() => setVoteID(item.party_id)}
                                 onChange={checkHandler}
                                 className="w-5 h-5 text-gray-600 border-gray-300 focus:ring-gray-500"
                               />
@@ -276,7 +274,8 @@ const FormFive = () => {
                                   <img
                                     src={
                                       item.viceCandidateImg !== null
-                                        ? baseUrl + `${item.viceCandidateImg}`
+                                        ? baseUrl +
+                                          `${item.viceCandidateImg}`
                                         : img_avatar
                                     }
                                     className="w-8 h-8 rounded"
@@ -295,7 +294,8 @@ const FormFive = () => {
                                   <img
                                     src={
                                       item.viceCandidateImg !== null
-                                        ? baseUrl + `${item.viceCandidateImg}`
+                                        ? baseUrl +
+                                          `${item.viceCandidateImg}`
                                         : img_avatar
                                     }
                                     className="w-8 h-8 rounded"
