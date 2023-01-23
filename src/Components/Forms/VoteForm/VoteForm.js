@@ -243,7 +243,7 @@ const FormFive = () => {
                           }
                       `}
                         >
-                          <label htmlFor={item.id}>
+                          <label htmlFor={item.party_id}>
                             <div className="flex flex-row items-center justify-between pb-2 border-b border-gray-200">
                               <div className="flex flex-row p-2 space-x-2 font-semibold">
                                 <img
