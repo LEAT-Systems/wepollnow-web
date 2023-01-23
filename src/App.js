@@ -66,6 +66,10 @@ const Survey = React.lazy(() =>
 const Dashboard = React.lazy(() =>
   import("./Components/Layout/Admin/Dashboard/Home/Home")
 );
+
+const DashboardAll = React.lazy(() =>
+  import("./Components/Layout/Admin/Dashboard/Home/HomeAll")
+);
 const Login = React.lazy(() =>
   import("./Components/Layout/Admin/Dashboard/Login/Login")
 );
@@ -179,6 +183,12 @@ function App() {
         {/* Dashboard Landing */}
         <Route path="/admin/home" exact>
           {authCtx.isLoggedIn && <Dashboard />}
+          {!authCtx.isLoggedIn && <Login />}
+        </Route>
+
+        {/* Dashboard Landing */}
+        <Route path="/admin/home/view_all" exact>
+          {authCtx.isLoggedIn && <DashboardAll />}
           {!authCtx.isLoggedIn && <Login />}
         </Route>
 

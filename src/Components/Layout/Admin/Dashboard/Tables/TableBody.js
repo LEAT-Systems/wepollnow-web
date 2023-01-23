@@ -10,12 +10,11 @@ import swal from "sweetalert";
 import axios from "../../../../../api/axios";
 
 const TableBody = ({ tableData, open }) => {
-  const { tableRowID, setTableRowID } = useContext(ModalFormContext); 
-  console.log("TableRowID: ", tableRowID);
+  const { tableRowID, setTableRowID } = useContext(ModalFormContext);
 
   useEffect(() => {
-    setTableRowID(tableData?.id)
-  }, [setTableRowID, tableData?.id])
+    setTableRowID(tableData?.id);
+  }, [setTableRowID, tableData?.id]);
 
   const history = useHistory();
 
@@ -42,11 +41,11 @@ const TableBody = ({ tableData, open }) => {
   };
 
   const statusColors =
-      tableData?.poll_startDate > Date.now
+    tableData?.poll_startDate > Date.now
       ? "after:bg-blue-500"
-      : tableData?.poll_startDate <= Date.now 
+      : tableData?.poll_startDate <= Date.now
       ? "after:bg-green-500"
-      :  tableData?.poll_endDate < Date.now
+      : tableData?.poll_endDate < Date.now
       ? "after:bg-red-400"
       : "";
 
@@ -64,7 +63,6 @@ const TableBody = ({ tableData, open }) => {
           },
         })
         .then((res) => {
-          console.log(res.data);
           swal({
             title: "Success",
             text: "Poll deleted successfully",
@@ -78,7 +76,6 @@ const TableBody = ({ tableData, open }) => {
           });
         });
     } catch (err) {
-      console.log(err);
       if (err.status === 400) {
         swal({
           title: "Oops!",
@@ -118,7 +115,6 @@ const TableBody = ({ tableData, open }) => {
             },
           ],
         });
-        console.log(err);
       } else if (err.status === 500) {
         swal({
           title: "Oops!",
@@ -132,7 +128,6 @@ const TableBody = ({ tableData, open }) => {
             },
           ],
         });
-        console.log(err);
       } else {
         swal({
           title: "Oops!",
@@ -200,78 +195,73 @@ const TableBody = ({ tableData, open }) => {
 
   return (
     <tr
-      className='table-row cursor-pointer'
+      className="table-row cursor-pointer"
       data-id={tableData.id}
       onClick={(e) => {
         setTableRowID(tableData.id);
         // setId(target(e));
         redirect();
       }}
-      
     >
       <th
-        scope='row'
-        className='px-6 py-4 font-medium text-gray-900 whitespace-nowrap text-sm'
+        scope="row"
+        className="px-6 py-4 text-sm font-medium text-gray-900 whitespace-nowrap"
       >
-        <span className='text-white font-bold uppercase bg-green-900 mr-4 rounded-xl p-[.6rem]'>
+        <span className="text-white font-bold uppercase bg-green-900 mr-4 rounded-xl p-[.6rem]">
           {getSymbol()}
         </span>{" "}
         {tableData?.poll_name}
       </th>
-      <td className='px-6 py-4 cursor-pointer text-sm'>
+      <td className="px-6 py-4 text-sm cursor-pointer">
         {tableData?.poll_state?.name}
       </td>
-      <td className='px-6 py-4 cursor-pointer text-sm'>
+      <td className="px-6 py-4 text-sm cursor-pointer">
         {formatDate(tableData?.poll_startDate)}
       </td>
-      <td className='px-6 py-4 cursor-pointer text-sm'>
+      <td className="px-6 py-4 text-sm cursor-pointer">
         {formatDate(tableData?.poll_endDate)}
       </td>
-      <td className='px-6 py-4 cursor-pointer'>
+      <td className="px-6 py-4 cursor-pointer">
         <h3
           className={`relative after:content-[''] after:absolute after:w-[.6rem] after:h-[.6rem] after:rounded-full ${statusColors} after:-left-3 after:top-1/2 after:-translate-y-1/2`}
         >
-          {tableData?.poll_startDate <= Date.now 
+          {tableData?.poll_startDate <= Date.now
             ? "Ongoing"
             : tableData?.poll_startDate > Date.now
             ? "Upcoming"
-            :  tableData?.poll_endDate < Date.now 
+            : tableData?.poll_endDate < Date.now
             ? "Concluded"
-          : ""}
+            : ""}
         </h3>
       </td>
       <td
-        className='flex flex-row px-6 py-4 space-x-2'
+        className="flex flex-row px-6 py-4 space-x-2"
         onClick={(e) => e.stopPropagation()}
       >
         <div
-          className='text-blue-500 cursor-pointer'
+          className="text-blue-500 cursor-pointer"
           onClick={(e) => {
             setTableRowID(tableData.id);
             // setId(parentTarget(e));
-            console.log(tableRowID);
-            console.log(parentTarget(e));
             open();
           }}
         >
-          <img src={Edit} alt='Edit' className='w-[1.1rem] h-[1.1rem]' />
+          <img src={Edit} alt="Edit" className="w-[1.1rem] h-[1.1rem]" />
         </div>
         {/* <div className='text-black cursor-pointer'>
           <img src={Archive} alt='Archive' className='w-[1.1rem] h-[1.1rem]' />
         </div> */}
         <div
-          className='text-red-500 cursor-pointer delete-button'
+          className="text-red-500 cursor-pointer delete-button"
           onClick={(e) => {
             setTableRowID(tableData.id);
             // setId(
             // e.currentTarget.parentNode.parentNode.getAttribute("data-id")
             // );
-            console.log(tableRowID);
             handleDelete();
-            console.log(parentTarget(e));
           }}
         >
-          <img src={Delete} alt='Trash' className='w-[1.1rem] h-[1.1rem]' />
+          <img src={Delete} alt="Trash" className="w-[1.1rem] h-[1.1rem]" />
         </div>
       </td>
     </tr>

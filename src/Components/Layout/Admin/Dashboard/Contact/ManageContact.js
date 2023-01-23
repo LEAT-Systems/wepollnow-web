@@ -4,6 +4,7 @@ import Header from "../../Header";
 import { ContactHeader } from "../../SubHeader";
 import { baseUrl } from "../../../../../store/baseUrl";
 import { CSVLink } from "react-csv";
+import down from "../../../../../images/down.png";
 
 const SubHeaderData = [
   {
@@ -18,41 +19,10 @@ const SubHeaderData = [
   },
 ];
 
-const tableData = [
-  {
-    id: 123123,
-    name: "Akaneno",
-    email: "ekongAkaneno@gmail.com",
-    message: "TEst",
-    date: "12 Jan 2023",
-  },
-  {
-    id: 34234234,
-    name: "Stanley",
-    email: "stan@gmail.com",
-    message: "TEst",
-    date: "12 Jan 2023",
-  },
-  {
-    id: 3423424,
-    name: "Peter",
-    email: "Peter@gmail.com",
-    message: "TEst",
-    date: "12 Jan 2023",
-  },
-  {
-    id: 342343424,
-    name: "AmeKing",
-    email: "Olaswift@gmail.com",
-    message: "TEst",
-    date: "12 Jan 2023",
-  },
-];
-
 const ManageContact = () => {
-  const [data, setData] = useState();
+  const [tableData, setData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [postPerPage] = useState(10);
+  const [postPerPage] = useState(25);
 
   let currentDate = new Date().toJSON().slice(0, 10);
   /////////////////////////////////  =====     PAGINATION    ===========   ////////////////////////////////
@@ -86,6 +56,7 @@ const ManageContact = () => {
       requestOptions
     );
     const result = await response.json();
+    setData(result);
   };
 
   useEffect(() => {
@@ -100,12 +71,18 @@ const ManageContact = () => {
           <h3 className="font-bold text-xl lg:text-2xl md:text-[1.4rem] capitalize py-4 pl-0 w-full">
             Inbox Messages
           </h3>
+
           <CSVLink
             filename={`inbox_messages_exported_on_${currentDate}.csv`}
             data={tableData}
-            className="w-1/6 p-3 text-center rounded-md bg-[#08c127] text-white px-5 animate"
+            className="p-3 px-4 text-center text-black transition duration-150 border rounded-md hover:translate-y-1"
           >
-            Export as CSV
+            <div className="flex flex-row items-center justify-center space-x-2">
+              <p>CSV</p>
+              <span>
+                <img src={down} alt="export" className="h-6 w-7" />
+              </span>
+            </div>
           </CSVLink>
         </header>
 
@@ -135,7 +112,12 @@ const ManageContact = () => {
                     <td className="p-3 border-b border-r">{item.name}</td>
                     <td className="p-3 border-b border-r">{item.message}</td>
                     <td className="p-3 border-b border-r">{item.email}</td>
-                    <td className="p-3 border-b border-r">{item.date}</td>
+                    <td className="p-3 border-b border-r">
+                      {new Date(`${item.created_date}`).toLocaleDateString(
+                        "en-EN",
+                        { year: "numeric", month: "long", day: "numeric" }
+                      )}
+                    </td>
                   </tr>
                 );
               })}

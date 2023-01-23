@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import Nav from "../../Layout/Landing/mainNav";
 import swal from "sweetalert";
@@ -18,7 +18,6 @@ const VoteFormTwo = () => {
     surveyID: "",
   });
 
-  // console.log(surveyDetails);
   // To display the others field
   const { surveyName, surveyID } = surveyDetails;
 
@@ -36,7 +35,7 @@ const VoteFormTwo = () => {
     const unique_id = localStorage.getItem("uniqueID");
     setPollID(poll_id);
     setUniqueID(unique_id);
-  });
+  }, []);
 
   // Get data for radio buttons
   useEffect(() => {

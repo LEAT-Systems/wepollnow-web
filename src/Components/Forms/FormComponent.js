@@ -79,7 +79,7 @@ const FormComponent = () => {
             phone: formData.phone,
             country: formData.country,
             // Not passing email. Backend requirement cos not needed
-            email: "",
+            email: "default@gmail.com",
             first_time_voter: formData.firstTimeVoter,
             diaspora_voter: formData.diasporaVoter,
             state_of_origin_id: parseInt(formData.stateOfOrigin),
