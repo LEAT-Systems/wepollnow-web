@@ -274,7 +274,7 @@ const FormFive = () => {
                                   <img
                                     src={
                                       item.viceCandidateImg !== null
-                                        ? `https://api.wepollnow.com` +
+                                        ? baseUrl +
                                           `${item.viceCandidateImg}`
                                         : img_avatar
                                     }
@@ -294,7 +294,7 @@ const FormFive = () => {
                                   <img
                                     src={
                                       item.viceCandidateImg !== null
-                                        ? `https://api.wepollnow.com` +
+                                        ? baseUrl +
                                           `${item.viceCandidateImg}`
                                         : img_avatar
                                     }
