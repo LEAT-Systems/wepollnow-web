@@ -14,6 +14,8 @@ const PollFormOne = ({ open, handleClose, nextPage, setPage }) => {
     setDistrict,
     zone,
     setZone,
+    zoneData,
+    setZoneData,
     pollTypeData,
     setPollTypeData,
     districtData,
@@ -23,7 +25,8 @@ const PollFormOne = ({ open, handleClose, nextPage, setPage }) => {
     setStartDate,
     endDate,
     setEndDate,
-    setParties,
+    setPollName,
+
     tableRowID,
     editPollData,
     setEditPollData,
@@ -31,6 +34,16 @@ const PollFormOne = ({ open, handleClose, nextPage, setPage }) => {
     setEditEndDate,
     editStartDate,
     setEditStartDate,
+
+    presidentialName,
+    setPresidentialName,
+    senatorialName,
+    setSenatorialName,
+    gubernationalName,
+    setGubernationalName,
+    zonelName,
+    setZonelName,
+    setParties,
 
     /* Edit Data's Based of Table Row Selected */
     editableID,
@@ -188,24 +201,20 @@ const PollFormOne = ({ open, handleClose, nextPage, setPage }) => {
     onDisabled();
     if (pollType === "1" || editablePollData === "Presidential Poll") {
       setConfirmBtn(false);
-    } else if (
-      pollType === "2" || editablePollData === "Gubernatorial Poll"
-    ) {
+    } else if (pollType === "2" || editablePollData === "Gubernatorial Poll") {
+      setConfirmBtn(false);
+    } else if (pollType === "3" || editablePollData === "Senatorial Poll") {
       setConfirmBtn(false);
     } else if (
-      pollType === "3" ||
-      editablePollData === "Senatorial Poll"
-    ) {
-      setConfirmBtn(false);
-    } else if (
-      pollType === "4" || editablePollData === "House Of Assembly Poll"
+      pollType === "4" ||
+      editablePollData === "House Of Assembly Poll"
     ) {
       setConfirmBtn(false);
     } else {
-        setConfirmBtn(true);
-      }
+      setConfirmBtn(true);
+    }
   }, [startDate, endDate, pollType, editablePollData]);
-console.log("Disable Button: ",confirmBtn);
+  console.log("Disable Button: ", confirmBtn);
   // Get Selected Poll To Edit Data
   useEffect(() => {
     const getData = async () => {
@@ -232,6 +241,7 @@ console.log("Disable Button: ",confirmBtn);
           console.log(res);
           setEditableID(res?.data?.id);
           setEditablePollData(res?.data?.poll_category?.title);
+
           setEditableStartDate(
             res?.data?.poll_date !== null && formatDate(res?.data?.poll_date)
           );
@@ -242,12 +252,33 @@ console.log("Disable Button: ",confirmBtn);
           setEditableState(
             res?.data?.poll_state?.name !== null && res?.data?.poll_state?.name
           );
+          setGubernationalName(
+            res?.data?.poll_state?.name !== null && res?.data?.poll_state?.name
+          );
+          setSenatorialName(
+            res?.data?.poll_senatorial_district !== null &&
+              res?.data?.poll_senatorial_district?.name
+          );
           setEditableDistrict(
             res?.data?.poll_senatorial_district !== null &&
               res?.data?.poll_senatorial_district?.name
           );
           /* setEditableZone("") 
           setEditPollData(res.data); */
+
+          // Set default values to the state
+          setPollType(res?.data?.poll_category?.id);
+          setSelectedState(
+            res?.data?.poll_state?.id !== null && res?.data?.poll_state?.id
+          );
+          setDistrict(
+            res?.data?.poll_senatorial_district !== null &&
+              res?.data?.poll_senatorial_district?.id
+          );
+          setStartDate(res?.data?.poll_date !== null && res?.data?.poll_date);
+          setEndDate(
+            res?.data?.[0]?.poll_endDate !== null && res?.data?.poll_endDate
+          );
         })
         .catch((err) => console.log(err));
     };
@@ -265,6 +296,30 @@ console.log("Disable Button: ",confirmBtn);
 
   console.log("Edit Poll Data : ", editPollData);
 
+  useEffect(() => {
+    if (pollType === "1" || pollType === 1) {
+      setPollName(presidentialName);
+    } else if (pollType === "2" || pollType === 2) {
+      setPollName(`${gubernationalName} State Gubernatorial Poll`);
+    } else if (pollType === "3" || pollType === 3) {
+      setPollName(`${senatorialName} Senatorial Poll`);
+    } else {
+      setPollName(`${zonelName} House of Assembly Poll`);
+    }
+  }, [
+    presidentialName,
+    gubernationalName,
+    senatorialName,
+    zonelName,
+    setPollName,
+    pollType,
+  ]);
+
+  console.log("Git Poll Type : ", pollType);
+  console.log("Poll Name" + presidentialName);
+  console.log("Poll Name: " + gubernationalName);
+  console.log("Poll Name: " + senatorialName);
+  console.log("Poll Name: " + zonelName);
   return (
     <>
       <div className="flex flex-col justify-between items-center w-full my-2 hover:bg-transparent">
@@ -282,17 +337,21 @@ console.log("Disable Button: ",confirmBtn);
               aria-required
               onChange={(e) => {
                 setPollType(e.target.value);
+                setPresidentialName(
+                  e.target.options[e.target.selectedIndex].getAttribute(
+                    "data-valuename"
+                  )
+                );
                 console.log(e.target.value);
               }}
             >
-              <option value={editableID}>{editablePollData}</option>
               {pollTypeData.map((poll) => {
                 return (
                   <option
                     key={poll.id}
                     id={poll.id}
                     value={poll.id}
-                    defaultValue={"Presidential Polls"}
+                    data-valuename={poll.title}
                   >
                     {poll.title}
                   </option>
@@ -353,14 +412,23 @@ console.log("Disable Button: ",confirmBtn);
               value={selectedState}
               onChange={(e) => {
                 setSelectedState(e.target.value);
+                setGubernationalName(
+                  e.target.options[e.target.selectedIndex].getAttribute(
+                    "data-valuename"
+                  )
+                );
                 console.log(e.target.value);
               }}
               disabled={enableState}
             >
-              <option value={editableID}>{editableState}</option>
-              {state.map((state) => {
+              {state?.map((state) => {
                 return (
-                  <option key={state.id} data-id={state.id} value={state.id}>
+                  <option
+                    key={state.id}
+                    data-id={state.id}
+                    data-valuename={state.name}
+                    value={state.id}
+                  >
                     {state.name}
                   </option>
                 );
@@ -380,14 +448,22 @@ console.log("Disable Button: ",confirmBtn);
               value={district}
               onChange={(e) => {
                 setDistrict(e.target.value);
+                setSenatorialName(
+                  e.target.options[e.target.selectedIndex].getAttribute(
+                    "data-valuename"
+                  )
+                );
                 console.log(e.target.value);
               }}
               disabled={enabledSenetorial}
             >
-              <option value={editableID}>{editableDistrict}</option>
               {districtData.map((data) => {
                 return (
-                  <option key={data.id} value={data.id}>
+                  <option
+                    key={data.id}
+                    value={data.id}
+                    data-valuename={data.name}
+                  >
                     {data.name}
                   </option>
                 );
@@ -408,16 +484,25 @@ console.log("Disable Button: ",confirmBtn);
               value={zone}
               onChange={(e) => {
                 setZone(e.target.value);
+                setZonelName(
+                  e.target.options[e.target.selectedIndex].getAttribute(
+                    "data-valuename"
+                  )
+                );
                 console.log(e.target.value);
               }}
             >
-              <option value={editableID}>{editableZone}</option>
-              <option>1</option>
-              <option>2</option>
-              <option>2</option>
-              <option>4</option>
-              <option>5</option>
-              <option>6</option>
+              {zoneData?.map((data) => {
+                return (
+                  <option
+                    key={data.id}
+                    value={data.id}
+                    data-valuename={data.name}
+                  >
+                    {data.name}
+                  </option>
+                );
+              })}
             </select>
           </label>
         </div>

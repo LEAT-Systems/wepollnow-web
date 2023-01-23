@@ -39,6 +39,7 @@ const PollFormTwo = ({
     tableRowID,
     editableStartDate,
     editableEndDate,
+    pollName
   } = useContext(ModalFormContext);
 
   /* [poll] */
@@ -92,7 +93,7 @@ const PollFormTwo = ({
     status: 1,
     party: parti,
     candidate: candi,
-    poll_name: `Presidential Poll`,
+    poll_name: pollName,
   };
 
   var governorshipID = {
@@ -103,7 +104,7 @@ const PollFormTwo = ({
     status: 1,
     party: parti,
     candidate: candi,
-    poll_name: `Governorship Poll`,
+    poll_name: pollName,
   };
 
   var senatorialID = {
@@ -114,15 +115,15 @@ const PollFormTwo = ({
     status: 1,
     party: parti,
     candidate: candi,
-    poll_name: `Senatorial Poll`,
+    poll_name: pollName,
   };
 
   var config = () => {
-    if (pollType === "1") {
+    if (pollType === "1" || pollType === 1) {
       return presidentID;
-    } else if (pollType === "2") {
+    } else if (pollType === "2" || pollType === 2) {
       return governorshipID;
-    } else if (pollType === "3") {
+    } else if (pollType === "3" || pollType === 3) {
       return senatorialID;
     } else {
       return presidentID;
@@ -140,7 +141,13 @@ const PollFormTwo = ({
           title: "Success",
           text: "Poll Edited!",
           icon: "success",
-          button: "Ok",
+          buttons: [
+            {
+              color: "success",
+              label: "OK",
+              isCancel: true,
+            },
+          ],
         });
         setPollType("");
         setSelectedState("");
@@ -154,10 +161,16 @@ const PollFormTwo = ({
           setSuccessMessage("No Connection");
           console.log(err);
           swal({
-            title: "Success",
+            title: "Error",
             text: "No Internet Connection",
             icon: "error",
-            button: "Ok",
+            buttons: [
+              {
+                color: "error",
+                label: "OK",
+                isCancel: true,
+              },
+            ],
           });
         } else if (err.response?.status === 400) {
           setSuccessMessage("Email and Password are required");
@@ -166,7 +179,13 @@ const PollFormTwo = ({
             title: "Failure",
             text: "All fields are required!",
             icon: "error",
-            button: "Ok",
+            buttons: [
+              {
+                color: "error",
+                label: "OK",
+                isCancel: true,
+              },
+            ],
           });
         } else if (err.response?.status === 401) {
           setSuccessMessage("Unauthorized");
@@ -175,7 +194,13 @@ const PollFormTwo = ({
             title: "Failure",
             text: "Unauthorized",
             icon: "error",
-            button: "Ok",
+            buttons: [
+              {
+                color: "error",
+                label: "OK",
+                isCancel: true,
+              },
+            ],
           });
         } else {
           setSuccessMessage("Poll Edition Failed");
@@ -184,7 +209,13 @@ const PollFormTwo = ({
             title: "Failure",
             text: "Poll Failed To Edit",
             icon: "error",
-            button: "Ok",
+            buttons: [
+              {
+                color: "error",
+                label: "OK",
+                isCancel: true,
+              },
+            ],
           });
         }
       });
