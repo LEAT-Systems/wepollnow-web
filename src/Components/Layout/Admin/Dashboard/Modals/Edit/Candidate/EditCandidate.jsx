@@ -20,13 +20,14 @@ const EditCandidate = ({ open, close }) => {
   const [districtData, setDistrictData] = useState([]);
   const [candidateImage, setCandidateImage] = useState(null);
   const [zone, setZone] = useState([]);
+  const [zoneData, setZoneData] = useState([]);
   const [partyData, setPartyData] = useState([]);
   const [party, setParty] = useState([]);
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
   const [mainCandidate, setMainCandidate] = useState(false);
   const { candidateID, setCandidateID } = useContext(ModalFormContext);
-  const [editData, setEditData] = useState([])
+  const [editData, setEditData] = useState([]);
   // newly added states
   const [file, setFile] = useState(null);
   const [fileName, setFileName] = useState("");
@@ -144,9 +145,15 @@ const EditCandidate = ({ open, close }) => {
         console.log(res);
         swal({
           title: "Success",
-          text: "Candidate Modified!",
+          text: "Candidate Details Modified!",
           icon: "success",
-          button: "Ok",
+          buttons: [
+            {
+              color: "success",
+              label: "OK",
+              isCancel: true,
+            },
+          ],
         });
         setName("");
         setPollType("");
@@ -163,31 +170,55 @@ const EditCandidate = ({ open, close }) => {
             title: "Failure",
             text: "No Internet Connection",
             icon: "error",
-            button: "Ok",
+            buttons: [
+              {
+                color: "error",
+                label: "OK",
+                isCancel: true,
+              },
+            ],
           });
         } else if (err.response?.status === 400) {
           setErrorMessage("Email and Password are required");
           swal({
             title: "Failure",
-            text: "All fields are required!",
+            text: "All Fields Are Required!",
             icon: "error",
-            button: "Ok",
+            buttons: [
+              {
+                color: "error",
+                label: "OK",
+                isCancel: true,
+              },
+            ],
           });
         } else if (err.response?.status === 401) {
           setErrorMessage("Unauthorized");
           swal({
             title: "Failure",
-            text: "Unauthorized",
+            text: "Action Unauthorized!",
             icon: "error",
-            button: "Ok",
+            buttons: [
+              {
+                color: "error",
+                label: "OK",
+                isCancel: true,
+              },
+            ],
           });
         } else {
           setErrorMessage("Add Candidate Failed");
           swal({
             title: "Failure",
-            text: "Editing Candidate Failed",
+            text: "Candidate Details Modification Failed",
             icon: "error",
-            button: "Ok",
+            buttons: [
+              {
+                color: "error",
+                label: "OK",
+                isCancel: true,
+              },
+            ],
           });
         }
       });
@@ -198,15 +229,15 @@ const EditCandidate = ({ open, close }) => {
   console.log("Main Candidate: ", mainCandidate);
   useEffect(() => {
     var onDisabled = () => {
-      if (pollType === "1") {
+      if (pollType === "1" || pollType === 1) {
         setEnabledState(true);
         setEnabledSenetorial(true);
         setEnabledZone(true);
-      } else if (pollType === "2") {
+      } else if (pollType === "2" || pollType === 2) {
         setEnabledState(false);
         setEnabledSenetorial(true);
         setEnabledZone(true);
-      } else if (pollType === "3") {
+      } else if (pollType === "3" || pollType === 3) {
         setEnabledState(false);
         setEnabledSenetorial(false);
         setEnabledZone(true);
@@ -234,17 +265,29 @@ const EditCandidate = ({ open, close }) => {
         .then((res) => {
           console.log(res);
           setEditData(res?.data);
-          setName(res?.data?.name)
+          setName(res?.data?.name);
           setPollType(res?.data?.poll_category?.id);
-          setSelectedState(res?.data?.state_id);
-          setDistrict(res?.data?.senatorial_id);
-          setParty(res?.data?.party?.id)
+          setSelectedState(res?.data?.state_id?.id);
+          setDistrict(res?.data?.senatorial_id?.id);
+          setParty(res?.data?.party?.id);
+          setMainCandidate(res?.data?.main_candidate);
         })
         .catch((err) => console.log(err));
     };
 
     getData();
-  }, [setEditData, setName, setDistrict, setParty, setPollType]);
+  }, [
+    setEditData,
+    setName,
+    setDistrict,
+    setParty,
+    setPollType,
+    pollType,
+    party,
+    district,
+    name,
+    mainCandidate,
+  ]);
 
   return (
     <form onSubmit={handleSubmit} className="w-full">
@@ -327,9 +370,6 @@ const EditCandidate = ({ open, close }) => {
                   }}
                   className="custom__select"
                 >
-                  <option value={editData?.poll_category?.id}>
-                    {editData?.poll_category?.title}
-                  </option>
                   {pollTypeData.map((poll) => {
                     return (
                       <option key={poll.id} id={poll.id} value={poll.id}>
@@ -356,9 +396,6 @@ const EditCandidate = ({ open, close }) => {
                   }}
                   disabled={enableState}
                 >
-                  <option value={editData?.state_id?.id}>
-                    {editData?.state_id?.name}
-                  </option>
                   {state.map((state) => {
                     return (
                       <option key={state.id} value={state.id}>
@@ -385,7 +422,9 @@ const EditCandidate = ({ open, close }) => {
                   }}
                   disabled={enabledSenetorial}
                 >
-                  <option value={editData?.senatorial_id?.id}>{editData?.senatorial_id?.name}</option>
+                  <option value={editData?.senatorial_id?.id}>
+                    {editData?.senatorial_id?.name}
+                  </option>
                   {districtData.map((data) => {
                     return (
                       <option key={data.id} value={data.id}>
@@ -410,20 +449,13 @@ const EditCandidate = ({ open, close }) => {
                   }}
                   disabled={enabledZone}
                 >
-                  <option>Select Zone</option>
-                  <option>1</option>
-                  <option>2</option>
-                  <option>3</option>
-                  <option>4</option>
-                  <option>5</option>
-                  <option>6</option>
-                  {/* {zoneData.map((data) => {
+                  {zoneData.map((data) => {
                     return (
                       <option key={data.id} value={data.id}>
                         {data.name}
                       </option>
                     );
-                  })} */}
+                  })}
                 </select>
               </label>
             </div>
@@ -440,7 +472,6 @@ const EditCandidate = ({ open, close }) => {
                     setParty(e.target.value);
                   }}
                 >
-                  <option value={editData?.party?.id}>{editData?.party?.name}</option>
                   {partyData.map((data) => {
                     return (
                       <option key={data.id} value={data.id}>
