@@ -608,7 +608,7 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
                       },
                     }}
                     checked={mainCandidate}
-                    value={mainCandidate}
+                    value={!mainCandidate}
                     onChange={(e) => {
                       setMainCandidate(e.target.checked);
                     }}
@@ -639,8 +639,8 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
               type='submit'
               disabled={confirmBtn}
               onClick={(e) => {
-                handleCloseAddCandidate();
                 handleSubmit(e);
+                handleCloseAddCandidate();
               }}
             >
               continue
