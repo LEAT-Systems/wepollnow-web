@@ -13,7 +13,8 @@ const TableBody = ({ tableData, open }) => {
   const { tableRowID, setTableRowID } = useContext(ModalFormContext);
 
   useEffect(() => {
-    setTableRowID(tableData?.id);
+    localStorage.setItem("table_row_id", tableData?.id)
+    setTableRowID(localStorage.getItem("tableData"));
   }, [setTableRowID, tableData?.id]);
 
   const history = useHistory();
@@ -198,7 +199,8 @@ const TableBody = ({ tableData, open }) => {
       className="table-row cursor-pointer"
       data-id={tableData.id}
       onClick={(e) => {
-        setTableRowID(tableData.id);
+        localStorage.setItem('tableData', JSON.stringify(tableData.id));
+        setTableRowID(localStorage.getItem("tableData"));
         // setId(target(e));
         redirect();
       }}
@@ -241,7 +243,8 @@ const TableBody = ({ tableData, open }) => {
         <div
           className="text-blue-500 cursor-pointer"
           onClick={(e) => {
-            setTableRowID(tableData.id);
+            localStorage.setItem("tableData", JSON.stringify(tableData.id));
+            setTableRowID(localStorage.getItem("tableData"));
             // setId(parentTarget(e));
             open();
           }}
@@ -254,7 +257,8 @@ const TableBody = ({ tableData, open }) => {
         <div
           className="text-red-500 cursor-pointer delete-button"
           onClick={(e) => {
-            setTableRowID(tableData.id);
+            localStorage.setItem("tableData", JSON.stringify(tableData.id));
+            setTableRowID(localStorage.getItem("tableData"))
             // setId(
             // e.currentTarget.parentNode.parentNode.getAttribute("data-id")
             // );

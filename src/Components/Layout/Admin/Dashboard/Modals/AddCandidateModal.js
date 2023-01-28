@@ -639,8 +639,8 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
               type='submit'
               disabled={confirmBtn}
               onClick={(e) => {
-                handleCloseAddCandidate();
                 handleSubmit(e);
+                handleCloseAddCandidate();
               }}
             >
               continue

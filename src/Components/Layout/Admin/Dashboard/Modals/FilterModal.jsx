@@ -14,10 +14,10 @@ import ModalFormContext from "../../../../../ModalFormContextAdmin/ModalFormCont
 import axios from "../../../../../api/axios";
 
 const FilterModal = ({ refineResult, handleCloseRefineResult }) => {
-  const { tableRowID, selectedState } = useContext(ModalFormContext);
-  const [view, setView] = useState("default")
-  const [state, setState] = useState([])
-  const [districtData, setDistrictData] = useState([])
+  const { selectedState } = useContext(ModalFormContext);
+  const [view, setView] = useState("default");
+  const [state, setState] = useState([]);
+  const [districtData, setDistrictData] = useState([]);
   const [gender, setGender] = useState();
   const [firstTimeVoter, setFirstTimeVoter] = useState(false);
   const [validVotersCard, setValidVotersCard] = useState(false);
@@ -36,11 +36,11 @@ const FilterModal = ({ refineResult, handleCloseRefineResult }) => {
 
     await axios
       .post("/poll/poll_result_filter/", {
-        poll_id: tableRowID,
+        poll_id: localStorage.getItem("tableData"),
         gender: gender,
-        firstTimeVoter: firstTimeVoter,
-        validVotersCard: validVotersCard,
-        diaspora_voter: diasporaVoter,
+        firstTimeVoter: JSON?.parse(firstTimeVoter),
+        validVotersCard: JSON?.parse(validVotersCard),
+        diaspora_voter: JSON?.parse(diasporaVoter),
         residence_state: residentState,
         residence_lga: residenceLga,
         state_of_origin: origin,
@@ -56,7 +56,13 @@ const FilterModal = ({ refineResult, handleCloseRefineResult }) => {
           title: "Success",
           text: "Poll Result Filtered!",
           icon: "success",
-          button: "Ok",
+          buttons: [
+            {
+              color: "success",
+              label: "OK",
+              isCancel: true,
+            },
+          ],
         });
         setGender("");
         setFirstTimeVoter(false);
@@ -141,35 +147,34 @@ const FilterModal = ({ refineResult, handleCloseRefineResult }) => {
         }
       });
 
-    // window.location.reload();
+    window.location.reload();
   };
 
-    /* Get State */
-    useEffect(() => {
-      const getState = async () => {
-        await axios
-          .get("/utilities/states/")
-          .then((res) => setState(res.data))
-          .catch((err) => console.log(err));
-      };
-      getState();
-    }, [setState]);
-  
-    console.log(selectedState);
-    /* Get Senetorial District */
-    useEffect(() => {
-      const getSenetorial = async () => {
-        await axios
-          .get(`/utilities/senatorial/${residentState}`)
-          .then((res) => setDistrictData(res.data))
-          .catch((err) => console.log(err));
-      };
-      getSenetorial();
-    }, [residentState, setDistrictData]);
-  
+  /* Get State */
+  useEffect(() => {
+    const getState = async () => {
+      await axios
+        .get("/utilities/states/")
+        .then((res) => setState(res.data))
+        .catch((err) => console.log(err));
+    };
+    getState();
+  }, [setState]);
+
+  console.log(selectedState);
+  /* Get Senetorial District */
+  useEffect(() => {
+    const getSenetorial = async () => {
+      await axios
+        .get(`/utilities/senatorial/${residentState}`)
+        .then((res) => setDistrictData(res.data))
+        .catch((err) => console.log(err));
+    };
+    getSenetorial();
+  }, [residentState, setDistrictData]);
 
   return (
-    <form className='w-full'>
+    <form className="w-full">
       <Modal
         open={refineResult}
         onClose={() => {
@@ -197,13 +202,13 @@ const FilterModal = ({ refineResult, handleCloseRefineResult }) => {
           },
         }}
       >
-        <div className='flex flex-col items-start justify-start px-6 py-4 my-auto mx-auto h-auto w-[95%] sm:w-5/6 md:w-2/5 bg-white rounded-lg overflow-y-auto focus:outline-none'>
-          <header className='flex justify-between items-center w-full border-b-2 border-solid border-gray-300 mb-3 py-2'>
-            <h2 className='font-extrabold text-lg md:text-xl text-[#082a0f] capitalize'>
+        <div className="flex flex-col items-start justify-start px-6 py-4 my-auto mx-auto h-auto w-[95%] sm:w-5/6 md:w-2/5 bg-white rounded-lg overflow-y-auto focus:outline-none">
+          <header className="flex justify-between items-center w-full border-b-2 border-solid border-gray-300 mb-3 py-2">
+            <h2 className="font-extrabold text-lg md:text-xl text-[#082a0f] capitalize">
               Refine Results
             </h2>
             <button
-              className='flex items-center justify-center border border-1 rounded-md py-[2px] px-[2px] cursor-pointer text-sm md:text-base bg-[#fcf0f0] text-red-500'
+              className="flex items-center justify-center border border-1 rounded-md py-[2px] px-[2px] cursor-pointer text-sm md:text-base bg-[#fcf0f0] text-red-500"
               onClick={() => {
                 handleCloseRefineResult();
                 setGender("");
@@ -222,27 +227,27 @@ const FilterModal = ({ refineResult, handleCloseRefineResult }) => {
             </button>
           </header>
 
-          <div className='flex flex-col justify-start items-center w-full my-2'>
+          <div className="flex flex-col justify-start items-center w-full my-2">
             {/* First Form */}
-            <div className='flex flex-col my-2 justify-start items-start w-full gap-3 px-6 py-4 bg-[#edfff0] rounded-xl'>
-              <div className='w-full'>
+            <div className="flex flex-col my-2 justify-start items-start w-full gap-3 px-6 py-4 bg-[#edfff0] rounded-xl">
+              <div className="w-full">
                 {/* Title */}
-                <div className='flex items-center w-full border-b-2 border-solid border-gray-300 mb-3 pb-2'>
-                  <h2 className='font-extrabold text-[1.05rem] text-[#082a0f] capitalize'>
+                <div className="flex items-center w-full border-b-2 border-solid border-gray-300 mb-3 pb-2">
+                  <h2 className="font-extrabold text-[1.05rem] text-[#082a0f] capitalize">
                     Table view
                   </h2>
                 </div>
                 <FormControl
                   onChange={(e) => {
-                    setView(e.target.value)
-                    console.log(e.target.value)
+                    setView(e.target.value);
+                    console.log(e.target.value);
                   }}
                   sx={{ width: "100%" }}
                 >
                   <RadioGroup>
                     <FormControlLabel
-                      value='default'
-                      className='text-[#616b62] font-medium'
+                      value="default"
+                      className="text-[#616b62] font-medium"
                       control={
                         <Radio
                           sx={{
@@ -253,11 +258,11 @@ const FilterModal = ({ refineResult, handleCloseRefineResult }) => {
                           }}
                         />
                       }
-                      label='Table View - Default'
+                      label="Table View - Default"
                     />
                     <FormControlLabel
-                      value='state'
-                      className='text-[#616b62] font-medium'
+                      value="state"
+                      className="text-[#616b62] font-medium"
                       control={
                         <Radio
                           sx={{
@@ -268,7 +273,7 @@ const FilterModal = ({ refineResult, handleCloseRefineResult }) => {
                           }}
                         />
                       }
-                      label='Table View - State'
+                      label="Table View - State"
                     />
                   </RadioGroup>
                 </FormControl>
@@ -276,25 +281,25 @@ const FilterModal = ({ refineResult, handleCloseRefineResult }) => {
             </div>
 
             {/* First Form */}
-            <div className='flex flex-col my-2 justify-start items-start w-full gap-3'>
-              <div className='w-full'>
+            <div className="flex flex-col my-2 justify-start items-start w-full gap-3">
+              <div className="w-full">
                 {/* Title */}
-                <div className='modal__header__title'>
-                  <h4 className='capitalize'>Gender</h4>
+                <div className="modal__header__title">
+                  <h4 className="capitalize">Gender</h4>
                   <p></p>
                   <span></span>
                 </div>
                 <FormControl
                   onChange={(e) => {
-                    console.log(e.target.value)
-                    setGender(e.target.value)
+                    console.log(e.target.value);
+                    setGender(e.target.value);
                   }}
                   sx={{ width: "100%" }}
                 >
                   <RadioGroup>
                     <FormControlLabel
                       value={1}
-                      className='text-[#616b62] font-medium'
+                      className="text-[#616b62] font-medium"
                       control={
                         <Radio
                           sx={{
@@ -305,11 +310,11 @@ const FilterModal = ({ refineResult, handleCloseRefineResult }) => {
                           }}
                         />
                       }
-                      label='Male'
+                      label="Male"
                     />
                     <FormControlLabel
                       value={2}
-                      className='text-[#616b62] font-medium'
+                      className="text-[#616b62] font-medium"
                       control={
                         <Radio
                           sx={{
@@ -320,7 +325,7 @@ const FilterModal = ({ refineResult, handleCloseRefineResult }) => {
                           }}
                         />
                       }
-                      label='Female'
+                      label="Female"
                     />
                   </RadioGroup>
                 </FormControl>
@@ -328,25 +333,25 @@ const FilterModal = ({ refineResult, handleCloseRefineResult }) => {
             </div>
 
             {/* Second Form */}
-            <div className='flex flex-col my-2 justify-start items-start w-full gap-3'>
-              <div className='w-full'>
+            <div className="flex flex-col my-2 justify-start items-start w-full gap-3">
+              <div className="w-full">
                 {/* Title */}
-                <div className='modal__header__title'>
-                  <h4 className='capitalize'>category</h4>
+                <div className="modal__header__title">
+                  <h4 className="capitalize">category</h4>
                   <p></p>
                   <span></span>
                 </div>
                 <FormControl
                   onChange={(e) => {
-                    console.log(e.target.value)
-                    setFirstTimeVoter(e.target.value)
+                    console.log(e.target.value);
+                    setFirstTimeVoter(e.target.value);
                   }}
                   sx={{ width: "100%" }}
                 >
                   <RadioGroup>
                     <FormControlLabel
                       value={true}
-                      className='text-[#616b62] font-medium'
+                      className="text-[#616b62] font-medium"
                       control={
                         <Radio
                           sx={{
@@ -357,11 +362,11 @@ const FilterModal = ({ refineResult, handleCloseRefineResult }) => {
                           }}
                         />
                       }
-                      label='First Time Voter'
+                      label="First Time Voter"
                     />
                     <FormControlLabel
                       value={false}
-                      className='text-[#616b62] font-medium'
+                      className="text-[#616b62] font-medium"
                       control={
                         <Radio
                           sx={{
@@ -372,7 +377,7 @@ const FilterModal = ({ refineResult, handleCloseRefineResult }) => {
                           }}
                         />
                       }
-                      label='Returning Voter'
+                      label="Returning Voter"
                     />
                   </RadioGroup>
                 </FormControl>
@@ -380,26 +385,25 @@ const FilterModal = ({ refineResult, handleCloseRefineResult }) => {
             </div>
 
             {/* Third */}
-            <div className='flex flex-col my-2 justify-start items-start w-full gap-3'>
-              <div className='w-full'>
+            <div className="flex flex-col my-2 justify-start items-start w-full gap-3">
+              <div className="w-full">
                 {/* Title */}
-                <div className='modal__header__title'>
-                  <h4 className='capitalize'>voting residence</h4>
+                <div className="modal__header__title">
+                  <h4 className="capitalize">voting residence</h4>
                   <p></p>
                   <span></span>
                 </div>
                 <FormControl
                   onChange={(e) => {
-                    setDiasporaVoter(e.target.value)
-                    console.log(e.target.value)
-                  }
-                  }
+                    setDiasporaVoter(e.target.value);
+                    console.log(e.target.value);
+                  }}
                   sx={{ width: "100%" }}
                 >
                   <RadioGroup>
                     <FormControlLabel
                       value={true}
-                      className='text-[#616b62] font-medium'
+                      className="text-[#616b62] font-medium"
                       control={
                         <Radio
                           sx={{
@@ -410,10 +414,11 @@ const FilterModal = ({ refineResult, handleCloseRefineResult }) => {
                           }}
                         />
                       }
-                      label='Diaspora Voter'
+                      label="Diaspora Voter"
                     />
 
-                    {/*                     <label className='custom__select__container after:!top-[2.2rem]'>
+                    {/*                     
+                    <label className='custom__select__container after:!top-[2.2rem]'>
                       <select
                         name='country'
                         id='country'
@@ -430,16 +435,16 @@ const FilterModal = ({ refineResult, handleCloseRefineResult }) => {
                       </select>
                     </label> */}
                     {/*<FormControl
-                  onChange={(e) => {
-                    console.log(e.target.value)
-
-                  }}
-                  sx={{ width: "100%", mt: ".9rem" }}
-                > */}
+                      onChange={(e) => {
+                      console.log(e.target.value)
+                    }}
+                      sx={{ width: "100%", mt: ".9rem" }}
+                    > 
+                      */}
 
                     <FormControlLabel
                       value={false}
-                      className='text-[#616b62] font-medium'
+                      className="text-[#616b62] font-medium"
                       control={
                         <Radio
                           sx={{
@@ -450,20 +455,28 @@ const FilterModal = ({ refineResult, handleCloseRefineResult }) => {
                           }}
                         />
                       }
-                      label='Resident Voter'
+                      label="Resident Voter"
                     />
 
-                    <label className='custom__select__container after:!top-[2.2rem] mb-2'>
-                      <select name='state' id='state' className='custom__select' value={residentState} onChange={(e) => {
-                        setResidentState(e.target.value)
-                      }}>
-                        <option value='Filter by States'>Filter by State</option>
+                    <label className="custom__select__container after:!top-[2.2rem] mb-2">
+                      <select
+                        name="state"
+                        id="state"
+                        className="custom__select"
+                        value={residentState}
+                        onChange={(e) => {
+                          setResidentState(e.target.value);
+                        }}
+                      >
+                        <option value="Filter by States">
+                          Filter by State
+                        </option>
                         {state?.map((state) => {
                           return (
                             <option
                               key={state?.id}
                               value={state?.id}
-                              data-valueName={state?.name}
+                              data-valuename={state?.name}
                             >
                               {state?.name}
                             </option>
@@ -471,11 +484,17 @@ const FilterModal = ({ refineResult, handleCloseRefineResult }) => {
                         })}
                       </select>
                     </label>
-                    <label className='custom__select__container after:!top-[2.2rem] mb-2'>
-                      <select name='lga' id='lga' className='custom__select' value={residenceLga} onChange={(e) => {
-                        setResidenceLga(e.target.value)
-                      }}>
-                        <option value='Filter by Local Government'>
+                    <label className="custom__select__container after:!top-[2.2rem] mb-2">
+                      <select
+                        name="lga"
+                        id="lga"
+                        className="custom__select"
+                        value={residenceLga}
+                        onChange={(e) => {
+                          setResidenceLga(e.target.value);
+                        }}
+                      >
+                        <option value="Filter by Local Government">
                           Select Local Government
                         </option>
                         {districtData?.map((data) => {
@@ -483,7 +502,7 @@ const FilterModal = ({ refineResult, handleCloseRefineResult }) => {
                             <option
                               key={data?.id}
                               value={data?.id}
-                              data-valueName={data?.name}
+                              data-valuename={data?.name}
                             >
                               {data?.name}
                             </option>
@@ -497,40 +516,39 @@ const FilterModal = ({ refineResult, handleCloseRefineResult }) => {
             </div>
 
             {/* Fourth */}
-            <div className='flex flex-col my-2 justify-start items-start w-full gap-3'>
-              <div className='w-full'>
+            <div className="flex flex-col my-2 justify-start items-start w-full gap-3">
+              <div className="w-full">
                 {/* Title */}
-                <div className='modal__header__title'>
-                  <h4 className='capitalize'>state of origin</h4>
+                <div className="modal__header__title">
+                  <h4 className="capitalize">state of origin</h4>
                   <p></p>
                   <span></span>
                 </div>
                 <FormControl
                   onChange={(e) => {
-                    setOrigin(e.target.value)
-                    console.log(e.target.value)
-                  }
-                  }
+                    setOrigin(e.target.value);
+                    console.log(e.target.value);
+                  }}
                   sx={{ width: "100%" }}
                 >
-                  <label className='custom__select__container after:!top-[2.2rem]'>
+                  <label className="custom__select__container after:!top-[2.2rem]">
                     <select
-                      name='poll__type'
-                      id='poll__type'
-                      className='custom__select'
+                      name="poll__type"
+                      id="poll__type"
+                      className="custom__select"
                     >
-                      <option value=''>Select Origin</option>
+                      <option value="">Select Origin</option>
                       {state?.map((state) => {
-                          return (
-                            <option
-                              key={state?.id}
-                              value={state?.id}
-                              data-valueName={state?.name}
-                            >
-                              {state?.name}
-                            </option>
-                          );
-                        })}
+                        return (
+                          <option
+                            key={state?.id}
+                            value={state?.id}
+                            data-valuename={state?.name}
+                          >
+                            {state?.name}
+                          </option>
+                        );
+                      })}
                     </select>
                   </label>
                 </FormControl>
@@ -538,25 +556,25 @@ const FilterModal = ({ refineResult, handleCloseRefineResult }) => {
             </div>
 
             {/* Fifth */}
-            <div className='flex flex-col my-2 justify-start items-start w-full gap-3'>
-              <div className='w-full'>
+            <div className="flex flex-col my-2 justify-start items-start w-full gap-3">
+              <div className="w-full">
                 {/* Title */}
-                <div className='modal__header__title'>
-                  <h4 className='uppercase'>pvc</h4>
+                <div className="modal__header__title">
+                  <h4 className="uppercase">pvc</h4>
                   <p></p>
                   <span></span>
                 </div>
                 <FormControl
                   onChange={(e) => {
-                    setValidVotersCard(e.target.value)
-                    console.log(e.target.value)
+                    setValidVotersCard(e.target.value);
+                    console.log(e.target.value);
                   }}
                   sx={{ width: "100%" }}
                 >
                   <RadioGroup>
                     <FormControlLabel
-                      value={false}
-                      className='text-[#616b62] font-medium'
+                      value="false"
+                      className="text-[#616b62] font-medium"
                       control={
                         <Radio
                           sx={{
@@ -567,11 +585,11 @@ const FilterModal = ({ refineResult, handleCloseRefineResult }) => {
                           }}
                         />
                       }
-                      label='Voter Without PVC'
+                      label="Voter Without PVC"
                     />
                     <FormControlLabel
                       value={true}
-                      className='text-[#616b62] font-medium'
+                      className="text-[#616b62] font-medium"
                       control={
                         <Radio
                           sx={{
@@ -582,10 +600,11 @@ const FilterModal = ({ refineResult, handleCloseRefineResult }) => {
                           }}
                         />
                       }
-                      label='Voter With PVC'
+                      label="Voter With PVC"
                     />
                   </RadioGroup>
-                  {/*                   <label className='custom__select__container after:!top-[2.2rem]'>
+                  {/*                  
+                   <label className='custom__select__container after:!top-[2.2rem]'>
                     <select
                       name='poll__type'
                       id='poll__type'
@@ -604,25 +623,25 @@ const FilterModal = ({ refineResult, handleCloseRefineResult }) => {
             </div>
 
             {/* Sixth */}
-            <div className='flex flex-col my-2 justify-start items-start w-full gap-3'>
-              <div className='w-full'>
+            <div className="flex flex-col my-2 justify-start items-start w-full gap-3">
+              <div className="w-full">
                 {/* Title */}
-                <div className='modal__header__title'>
-                  <h4 className='capitalize'>age range</h4>
+                <div className="modal__header__title">
+                  <h4 className="capitalize">age range</h4>
                   <p></p>
                   <span></span>
                 </div>
                 <FormControl
                   onChange={(e) => {
-                    setAgeRange(e.target.value)
-                    console.log(e.target.value)
+                    setAgeRange(e.target.value);
+                    console.log(e.target.value);
                   }}
                   sx={{ width: "100%" }}
                 >
                   <RadioGroup>
                     <FormControlLabel
                       value={1}
-                      className='text-[#616b62] font-medium'
+                      className="text-[#616b62] font-medium"
                       control={
                         <Radio
                           sx={{
@@ -633,11 +652,11 @@ const FilterModal = ({ refineResult, handleCloseRefineResult }) => {
                           }}
                         />
                       }
-                      label='18-29'
+                      label="18-29"
                     />
                     <FormControlLabel
                       value={2}
-                      className='text-[#616b62] font-medium'
+                      className="text-[#616b62] font-medium"
                       control={
                         <Radio
                           sx={{
@@ -648,11 +667,11 @@ const FilterModal = ({ refineResult, handleCloseRefineResult }) => {
                           }}
                         />
                       }
-                      label='30-39'
+                      label="30-39"
                     />
                     <FormControlLabel
                       value={3}
-                      className='text-[#616b62] font-medium'
+                      className="text-[#616b62] font-medium"
                       control={
                         <Radio
                           sx={{
@@ -663,11 +682,11 @@ const FilterModal = ({ refineResult, handleCloseRefineResult }) => {
                           }}
                         />
                       }
-                      label='40-49'
+                      label="40-49"
                     />
                     <FormControlLabel
                       value={4}
-                      className='text-[#616b62] font-medium'
+                      className="text-[#616b62] font-medium"
                       control={
                         <Radio
                           sx={{
@@ -678,11 +697,11 @@ const FilterModal = ({ refineResult, handleCloseRefineResult }) => {
                           }}
                         />
                       }
-                      label='50-59'
+                      label="50-59"
                     />
                     <FormControlLabel
                       value={5}
-                      className='text-[#616b62] font-medium'
+                      className="text-[#616b62] font-medium"
                       control={
                         <Radio
                           sx={{
@@ -693,7 +712,7 @@ const FilterModal = ({ refineResult, handleCloseRefineResult }) => {
                           }}
                         />
                       }
-                      label='Above 59'
+                      label="Above 59"
                     />
                   </RadioGroup>
                 </FormControl>
@@ -701,11 +720,11 @@ const FilterModal = ({ refineResult, handleCloseRefineResult }) => {
             </div>
 
             {/* seventh */}
-            <div className='flex flex-col my-2 justify-start items-start w-full gap-3'>
-              <div className='w-full'>
+            <div className="flex flex-col my-2 justify-start items-start w-full gap-3">
+              <div className="w-full">
                 {/* Title */}
-                <div className='modal__header__title'>
-                  <h4 className='capitalize'>religion</h4>
+                <div className="modal__header__title">
+                  <h4 className="capitalize">religion</h4>
                   <p></p>
                   <span></span>
                 </div>
@@ -719,7 +738,7 @@ const FilterModal = ({ refineResult, handleCloseRefineResult }) => {
                   <RadioGroup>
                     <FormControlLabel
                       value={1}
-                      className='text-[#616b62] font-medium'
+                      className="text-[#616b62] font-medium"
                       control={
                         <Radio
                           sx={{
@@ -730,11 +749,11 @@ const FilterModal = ({ refineResult, handleCloseRefineResult }) => {
                           }}
                         />
                       }
-                      label='Christianity'
+                      label="Christianity"
                     />
                     <FormControlLabel
                       value={2}
-                      className='text-[#616b62] font-medium'
+                      className="text-[#616b62] font-medium"
                       control={
                         <Radio
                           sx={{
@@ -745,11 +764,11 @@ const FilterModal = ({ refineResult, handleCloseRefineResult }) => {
                           }}
                         />
                       }
-                      label='Islam'
+                      label="Islam"
                     />
                     <FormControlLabel
                       value={3}
-                      className='text-[#616b62] font-medium'
+                      className="text-[#616b62] font-medium"
                       control={
                         <Radio
                           sx={{
@@ -760,11 +779,11 @@ const FilterModal = ({ refineResult, handleCloseRefineResult }) => {
                           }}
                         />
                       }
-                      label='Traditional'
+                      label="Traditional"
                     />
                     <FormControlLabel
                       value={4}
-                      className='text-[#616b62] font-medium'
+                      className="text-[#616b62] font-medium"
                       control={
                         <Radio
                           sx={{
@@ -775,7 +794,7 @@ const FilterModal = ({ refineResult, handleCloseRefineResult }) => {
                           }}
                         />
                       }
-                      label='Others'
+                      label="Others"
                     />
                   </RadioGroup>
                 </FormControl>
@@ -783,25 +802,25 @@ const FilterModal = ({ refineResult, handleCloseRefineResult }) => {
             </div>
 
             {/* eighth */}
-            <div className='flex flex-col my-2 justify-start items-start w-full gap-3'>
-              <div className='w-full'>
+            <div className="flex flex-col my-2 justify-start items-start w-full gap-3">
+              <div className="w-full">
                 {/* Title */}
-                <div className='modal__header__title'>
-                  <h4 className='capitalize'>marital status</h4>
+                <div className="modal__header__title">
+                  <h4 className="capitalize">marital status</h4>
                   <p></p>
                   <span></span>
                 </div>
                 <FormControl
                   onChange={(e) => {
-                    setMaritialStatus(e.target.value)
-                    console.log(e.target.value)
+                    setMaritialStatus(e.target.value);
+                    console.log(e.target.value);
                   }}
                   sx={{ width: "100%" }}
                 >
                   <RadioGroup>
                     <FormControlLabel
                       value={1}
-                      className='text-[#616b62] font-medium'
+                      className="text-[#616b62] font-medium"
                       control={
                         <Radio
                           sx={{
@@ -812,11 +831,11 @@ const FilterModal = ({ refineResult, handleCloseRefineResult }) => {
                           }}
                         />
                       }
-                      label='Married'
+                      label="Married"
                     />
                     <FormControlLabel
                       value={2}
-                      className='text-[#616b62] font-medium'
+                      className="text-[#616b62] font-medium"
                       control={
                         <Radio
                           sx={{
@@ -827,11 +846,11 @@ const FilterModal = ({ refineResult, handleCloseRefineResult }) => {
                           }}
                         />
                       }
-                      label='Single'
+                      label="Single"
                     />
                     <FormControlLabel
                       value={3}
-                      className='text-[#616b62] font-medium'
+                      className="text-[#616b62] font-medium"
                       control={
                         <Radio
                           sx={{
@@ -842,11 +861,11 @@ const FilterModal = ({ refineResult, handleCloseRefineResult }) => {
                           }}
                         />
                       }
-                      label='Divorced'
+                      label="Divorced"
                     />
                     <FormControlLabel
                       value={4}
-                      className='text-[#616b62] font-medium'
+                      className="text-[#616b62] font-medium"
                       control={
                         <Radio
                           sx={{
@@ -857,7 +876,7 @@ const FilterModal = ({ refineResult, handleCloseRefineResult }) => {
                           }}
                         />
                       }
-                      label='Widowed'
+                      label="Widowed"
                     />
                   </RadioGroup>
                 </FormControl>
@@ -865,25 +884,25 @@ const FilterModal = ({ refineResult, handleCloseRefineResult }) => {
             </div>
 
             {/* nineth */}
-            <div className='flex flex-col my-2 justify-start items-start w-full gap-3'>
-              <div className='w-full'>
+            <div className="flex flex-col my-2 justify-start items-start w-full gap-3">
+              <div className="w-full">
                 {/* Title */}
-                <div className='modal__header__title'>
-                  <h4 className='capitalize'>Employment Status</h4>
+                <div className="modal__header__title">
+                  <h4 className="capitalize">Employment Status</h4>
                   <p></p>
                   <span></span>
                 </div>
                 <FormControl
                   onChange={(e) => {
-                    setEmploymenStatus(e.target.value)
-                    console.log(e.target.value)
+                    setEmploymenStatus(e.target.value);
+                    console.log(e.target.value);
                   }}
                   sx={{ width: "100%" }}
                 >
                   <RadioGroup>
                     <FormControlLabel
                       value={1}
-                      className='text-[#616b62] font-medium'
+                      className="text-[#616b62] font-medium"
                       control={
                         <Radio
                           sx={{
@@ -894,11 +913,11 @@ const FilterModal = ({ refineResult, handleCloseRefineResult }) => {
                           }}
                         />
                       }
-                      label='Student'
+                      label="Student"
                     />
                     <FormControlLabel
                       value={2}
-                      className='text-[#616b62] font-medium'
+                      className="text-[#616b62] font-medium"
                       control={
                         <Radio
                           sx={{
@@ -909,11 +928,11 @@ const FilterModal = ({ refineResult, handleCloseRefineResult }) => {
                           }}
                         />
                       }
-                      label='Employed'
+                      label="Employed"
                     />
                     <FormControlLabel
                       value={3}
-                      className='text-[#616b62] font-medium'
+                      className="text-[#616b62] font-medium"
                       control={
                         <Radio
                           sx={{
@@ -924,11 +943,11 @@ const FilterModal = ({ refineResult, handleCloseRefineResult }) => {
                           }}
                         />
                       }
-                      label='Unemployed'
+                      label="Unemployed"
                     />
                     <FormControlLabel
                       value={4}
-                      className='text-[#616b62] font-medium'
+                      className="text-[#616b62] font-medium"
                       control={
                         <Radio
                           sx={{
@@ -939,7 +958,7 @@ const FilterModal = ({ refineResult, handleCloseRefineResult }) => {
                           }}
                         />
                       }
-                      label='Self-Employed'
+                      label="Self-Employed"
                     />
                   </RadioGroup>
                 </FormControl>
@@ -947,25 +966,25 @@ const FilterModal = ({ refineResult, handleCloseRefineResult }) => {
             </div>
 
             {/* Final Form */}
-            <div className='flex flex-col my-2 justify-start items-start w-full gap-3'>
-              <div className='w-full'>
+            <div className="flex flex-col my-2 justify-start items-start w-full gap-3">
+              <div className="w-full">
                 {/* Title */}
-                <div className='modal__header__title'>
-                  <h4 className='capitalize'>Property Status</h4>
+                <div className="modal__header__title">
+                  <h4 className="capitalize">Property Status</h4>
                   <p></p>
                   <span></span>
                 </div>
                 <FormControl
                   onChange={(e) => {
-                    setPropertyStatus(e.target.value)
-                    console.log(e.target.value)
+                    setPropertyStatus(e.target.value);
+                    console.log(e.target.value);
                   }}
                   sx={{ width: "100%" }}
                 >
                   <RadioGroup>
                     <FormControlLabel
                       value={1}
-                      className='text-[#616b62] font-medium'
+                      className="text-[#616b62] font-medium"
                       control={
                         <Radio
                           sx={{
@@ -976,11 +995,11 @@ const FilterModal = ({ refineResult, handleCloseRefineResult }) => {
                           }}
                         />
                       }
-                      label='Home owner'
+                      label="Home owner"
                     />
                     <FormControlLabel
                       value={2}
-                      className='text-[#616b62] font-medium'
+                      className="text-[#616b62] font-medium"
                       control={
                         <Radio
                           sx={{
@@ -991,11 +1010,11 @@ const FilterModal = ({ refineResult, handleCloseRefineResult }) => {
                           }}
                         />
                       }
-                      label='Renting'
+                      label="Renting"
                     />
                     <FormControlLabel
                       value={3}
-                      className='text-[#616b62] font-medium'
+                      className="text-[#616b62] font-medium"
                       control={
                         <Radio
                           sx={{
@@ -1006,7 +1025,7 @@ const FilterModal = ({ refineResult, handleCloseRefineResult }) => {
                           }}
                         />
                       }
-                      label='None'
+                      label="None"
                     />
                     {/* <FormControlLabel
                       value='living__with__friends'
@@ -1045,9 +1064,9 @@ const FilterModal = ({ refineResult, handleCloseRefineResult }) => {
           </div>
 
           {/* Buttons */}
-          <div className='flex justify-end items-center w-full my-2'>
+          <div className="flex justify-end items-center w-full my-2">
             <button
-              className='flex items-center justify-center border-2 border-gray-300 py-3 px-5 h-full cursor-pointer text-sm rounded-md capitalize mr-4 transition-all duration-400 ease-in-out hover:bg-[#f3dddd] hover:text-red-600 hover:rounded-full'
+              className="flex items-center justify-center border-2 border-gray-300 py-3 px-5 h-full cursor-pointer text-sm rounded-md capitalize mr-4 transition-all duration-400 ease-in-out hover:bg-[#f3dddd] hover:text-red-600 hover:rounded-full"
               onClick={() => {
                 handleCloseRefineResult();
                 setGender("");
@@ -1065,7 +1084,7 @@ const FilterModal = ({ refineResult, handleCloseRefineResult }) => {
               cancel
             </button>
             <button
-              className='flex items-center justify-center rounded-md py-3 px-5 h-full cursor-pointer text-sm bg-green-500 text-white capitalize transition-all duration-400 ease-in-out hover:bg-green-500 hover:text-white hover:rounded-full'
+              className="flex items-center justify-center rounded-md py-3 px-5 h-full cursor-pointer text-sm bg-green-500 text-white capitalize transition-all duration-400 ease-in-out hover:bg-green-500 hover:text-white hover:rounded-full"
               onClick={(e) => {
                 handleSubmit(e);
                 handleCloseRefineResult();

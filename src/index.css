@@ -12,10 +12,12 @@ customColors {
   color: #e7f9ea; /* progress background color */
 }
 
-/* .active {
+/* 
+.active {
   @apply after:content-[''] relative after:absolute
   after:w-1 after:h-1 bg-green-400  after:top-0 right-0;
-} */
+} 
+*/
 
 *,
 body,

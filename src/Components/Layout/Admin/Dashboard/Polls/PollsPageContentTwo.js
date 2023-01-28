@@ -34,7 +34,6 @@ const PollsPageContentTwo = () => {
   const [tableData, setTableData] = useState([]);
   const [status, setStatus] = useState("");
   const [searchResult, setSearchResult] = useState([]);
-  const { tableRowID } = useContext(ModalFormContext);
   const [pollStatus, setPollStatus] = useState([]);
   const [csvData, setCsvData] = useState([
     {
@@ -113,7 +112,7 @@ const PollsPageContentTwo = () => {
   useEffect(() => {
     axios
       .post("/poll/poll_result/", {
-        poll_id: tableRowID,
+        poll_id: localStorage.getItem("tableData"),
       })
       .then((res) => {
         setIsData(res?.data);
@@ -122,7 +121,7 @@ const PollsPageContentTwo = () => {
       .catch((err) => {
         console.log(err);
       });
-  }, [tableRowID]);
+  }, [localStorage.getItem("tableData")]);
 
   useEffect(() => {
     const getData = async () => {
