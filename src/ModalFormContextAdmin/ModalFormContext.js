@@ -1,5 +1,3 @@
-/** @format */
-
 import { useState, createContext } from "react";
 const ModalFormContext = createContext();
 
@@ -48,6 +46,21 @@ export const ModalFormProvider = ({ children }) => {
   const [candidateID, setCandidateID] = useState("");
   /* Edit Poll Data  */
   const [editPollData, setEditPollData] = useState([]);
+
+  /* Filter Data */
+  const [view, setView] = useState("default");
+  const [gender, setGender] = useState("");
+  const [firstTimeVoter, setFirstTimeVoter] = useState(false);
+  const [validVotersCard, setValidVotersCard] = useState(false);
+  const [diasporaVoter, setDiasporaVoter] = useState(false);
+  const [residenceLga, setResidenceLga] = useState("");
+  const [residentState, setResidentState] = useState("");
+  const [origin, setOrigin] = useState("");
+  const [ageRange, setAgeRange] = useState("");
+  const [religion, setReligion] = useState("");
+  const [maritialStatus, setMaritialStatus] = useState("");
+  const [employmenStatus, setEmploymenStatus] = useState("");
+  const [propertyStatus, setPropertyStatus] = useState("");
 
   return (
     <ModalFormContext.Provider
@@ -130,6 +143,34 @@ export const ModalFormProvider = ({ children }) => {
         setEditableDistrict,
         editableZone,
         setEditableZone,
+
+        /* Filter Data */
+        view,
+        setView,
+        gender,
+        setGender,
+        firstTimeVoter,
+        setFirstTimeVoter,
+        validVotersCard,
+        setValidVotersCard,
+        diasporaVoter,
+        setDiasporaVoter,
+        residenceLga,
+        setResidenceLga,
+        residentState,
+        setResidentState,
+        origin,
+        setOrigin,
+        ageRange,
+        setAgeRange,
+        religion,
+        setReligion,
+        maritialStatus,
+        setMaritialStatus,
+        employmenStatus,
+        setEmploymenStatus,
+        propertyStatus,
+        setPropertyStatus,
       }}
     >
       {children}

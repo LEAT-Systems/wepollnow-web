@@ -14,22 +14,40 @@ import ModalFormContext from "../../../../../ModalFormContextAdmin/ModalFormCont
 import axios from "../../../../../api/axios";
 
 const FilterModal = ({ refineResult, handleCloseRefineResult }) => {
-  const { selectedState } = useContext(ModalFormContext);
-  const [view, setView] = useState("default");
-  const [state, setState] = useState([]);
-  const [districtData, setDistrictData] = useState([]);
-  const [gender, setGender] = useState();
-  const [firstTimeVoter, setFirstTimeVoter] = useState(false);
-  const [validVotersCard, setValidVotersCard] = useState(false);
-  const [diasporaVoter, setDiasporaVoter] = useState(false);
-  const [residenceLga, setResidenceLga] = useState("");
-  const [residentState, setResidentState] = useState();
-  const [origin, setOrigin] = useState();
-  const [ageRange, setAgeRange] = useState("");
-  const [religion, setReligion] = useState("");
-  const [maritialStatus, setMaritialStatus] = useState();
-  const [employmenStatus, setEmploymenStatus] = useState();
-  const [propertyStatus, setPropertyStatus] = useState();
+  const {
+    selectedState,
+    view,
+    setView,
+    state,
+    setState,
+    districtData,
+    setDistrictData,
+    gender,
+    setGender,
+    firstTimeVoter,
+    setFirstTimeVoter,
+    validVotersCard,
+    setValidVotersCard,
+    diasporaVoter,
+    setDiasporaVoter,
+    residenceLga,
+    setResidenceLga,
+    residentState,
+    setResidentState,
+    origin,
+    setOrigin,
+    ageRange,
+    setAgeRange,
+    religion,
+    setReligion,
+    maritialStatus,
+    setMaritialStatus,
+    employmenStatus,
+    setEmploymenStatus,
+    propertyStatus,
+    setPropertyStatus,
+  } = useContext(ModalFormContext);
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -468,7 +486,7 @@ const FilterModal = ({ refineResult, handleCloseRefineResult }) => {
                           setResidentState(e.target.value);
                         }}
                       >
-                        <option value="Filter by States">
+                        <option>
                           Filter by State
                         </option>
                         {state?.map((state) => {
