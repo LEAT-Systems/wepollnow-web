@@ -15,7 +15,7 @@ const PollFormOne = ({ open, handleClose, nextPage, setPage }) => {
     zone,
     setZone,
     zoneData,
-    setZoneData,
+
     pollTypeData,
     setPollTypeData,
     districtData,
@@ -31,9 +31,8 @@ const PollFormOne = ({ open, handleClose, nextPage, setPage }) => {
     editPollData,
     setEditPollData,
     editEndDate,
-    setEditEndDate,
     editStartDate,
-    setEditStartDate,
+
 
     presidentialName,
     setPresidentialName,
@@ -46,7 +45,6 @@ const PollFormOne = ({ open, handleClose, nextPage, setPage }) => {
     setParties,
 
     /* Edit Data's Based of Table Row Selected */
-    editableID,
     setEditableID,
     editablePollData,
     setEditablePollData,
@@ -54,12 +52,10 @@ const PollFormOne = ({ open, handleClose, nextPage, setPage }) => {
     setEditableStartDate,
     editableEndDate,
     setEditableEndDate,
-    editableState,
     setEditableState,
-    editableDistrict,
+
     setEditableDistrict,
-    editableZone,
-    setEditableZone,
+
   } = useContext(ModalFormContext);
 
   const [enableState, setEnabledState] = useState(false);
@@ -88,7 +84,6 @@ const PollFormOne = ({ open, handleClose, nextPage, setPage }) => {
     getState();
   }, [setState]);
 
-  console.log(selectedState);
   /* Get Senetorial District */
   useEffect(() => {
     const getSenetorial = async () => {
@@ -107,7 +102,6 @@ const PollFormOne = ({ open, handleClose, nextPage, setPage }) => {
         .get(`/poll/poll_category/`)
         .then((res) => {
           setPollTypeData(res.data);
-          console.log(res.data);
         })
         .catch((err) => console.log(err));
     };
@@ -121,7 +115,6 @@ const PollFormOne = ({ open, handleClose, nextPage, setPage }) => {
         .get(`/utilities/party_list/`)
         .then((res) => {
           setPartyData(res.data);
-          console.log(res.data);
         })
         .catch((err) => console.log(err));
     };
@@ -153,13 +146,12 @@ const PollFormOne = ({ open, handleClose, nextPage, setPage }) => {
       }
     };
 
-    console.log(config());
+
     const getParties = async () => {
       await axios
         .post(`/poll/poll_category_party/`, config())
         .then((res) => {
           setParties(res.data);
-          console.log(res.data);
         })
         .catch((err) => console.log(err));
     };
@@ -214,14 +206,13 @@ const PollFormOne = ({ open, handleClose, nextPage, setPage }) => {
       setConfirmBtn(true);
     }
   }, [startDate, endDate, pollType, editablePollData]);
-  console.log("Disable Button: ", confirmBtn);
+
   // Get Selected Poll To Edit Data
   useEffect(() => {
     const getData = async () => {
       await axios
         .get(`/poll/get_polls/${tableRowID}`)
         .then((res) => {
-          console.log(res);
           setEditPollData(res.data);
         })
         .catch((err) => console.log(err));
@@ -230,15 +221,13 @@ const PollFormOne = ({ open, handleClose, nextPage, setPage }) => {
     getData();
   }, [setEditPollData, tableRowID]);
 
-  console.log("Edit Start Date: ", editableStartDate);
-  console.log("Edit End Date: ", editableEndDate);
+
   // Fetch Data For Table Row Based on Table Row Selected
   useEffect(() => {
     const getData = async () => {
       await axios
         .get(`/poll/rud_poll/${tableRowID}`)
         .then((res) => {
-          console.log(res);
           setEditableID(res?.data?.id);
           setEditablePollData(res?.data?.poll_category?.title);
 
@@ -284,17 +273,8 @@ const PollFormOne = ({ open, handleClose, nextPage, setPage }) => {
     };
 
     getData();
-  }, [
-    setEditableID,
-    setEditableState,
-    setEditableEndDate,
-    setEditableDistrict,
-    tableRowID,
-    setEditableStartDate,
-    setEditablePollData,
-  ]);
+  }, [setEditableID, setEditableState, setEditableEndDate, setEditableDistrict, tableRowID, setEditableStartDate, setEditablePollData, setGubernationalName, setSenatorialName, setPollType, setSelectedState, setDistrict, setStartDate, setEndDate]);
 
-  console.log("Edit Poll Data : ", editPollData);
 
   useEffect(() => {
     if (pollType === "1" || pollType === 1) {
@@ -315,11 +295,6 @@ const PollFormOne = ({ open, handleClose, nextPage, setPage }) => {
     pollType,
   ]);
 
-  console.log("Git Poll Type : ", pollType);
-  console.log("Poll Name" + presidentialName);
-  console.log("Poll Name: " + gubernationalName);
-  console.log("Poll Name: " + senatorialName);
-  console.log("Poll Name: " + zonelName);
   return (
     <>
       <div className="flex flex-col justify-between items-center w-full my-2 hover:bg-transparent">
@@ -342,7 +317,6 @@ const PollFormOne = ({ open, handleClose, nextPage, setPage }) => {
                     "data-valuename"
                   )
                 );
-                console.log(e.target.value);
               }}
             >
               {pollTypeData.map((poll) => {
@@ -376,8 +350,6 @@ const PollFormOne = ({ open, handleClose, nextPage, setPage }) => {
               aria-required
               onChange={(e) => {
                 setEditableStartDate(e.target.value);
-                console.log("Edit Start Date: ", editStartDate);
-                console.log(e.target.value);
               }}
             />
           </label>
@@ -394,8 +366,6 @@ const PollFormOne = ({ open, handleClose, nextPage, setPage }) => {
               aria-required
               onChange={(e) => {
                 setEditableEndDate(e.target.value);
-                console.log("Edit End Date:", editEndDate);
-                console.log(e.target.value);
               }}
             />
           </label>
@@ -417,7 +387,6 @@ const PollFormOne = ({ open, handleClose, nextPage, setPage }) => {
                     "data-valuename"
                   )
                 );
-                console.log(e.target.value);
               }}
               disabled={enableState}
             >
@@ -453,7 +422,6 @@ const PollFormOne = ({ open, handleClose, nextPage, setPage }) => {
                     "data-valuename"
                   )
                 );
-                console.log(e.target.value);
               }}
               disabled={enabledSenetorial}
             >
@@ -489,7 +457,6 @@ const PollFormOne = ({ open, handleClose, nextPage, setPage }) => {
                     "data-valuename"
                   )
                 );
-                console.log(e.target.value);
               }}
             >
               {zoneData?.map((data) => {

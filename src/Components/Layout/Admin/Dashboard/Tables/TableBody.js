@@ -13,7 +13,6 @@ const TableBody = ({ tableData, open }) => {
   const { tableRowID, setTableRowID } = useContext(ModalFormContext);
 
   useEffect(() => {
-    localStorage.setItem("table_row_id", tableData?.id)
     setTableRowID(localStorage.getItem("tableData"));
   }, [setTableRowID, tableData?.id]);
 
@@ -201,7 +200,7 @@ const TableBody = ({ tableData, open }) => {
       onClick={(e) => {
         localStorage.setItem('tableData', JSON.stringify(tableData.id));
         setTableRowID(localStorage.getItem("tableData"));
-        // setId(target(e));
+        console.log("ID: ", tableRowID);
         redirect();
       }}
     >
@@ -245,6 +244,7 @@ const TableBody = ({ tableData, open }) => {
           onClick={(e) => {
             localStorage.setItem("tableData", JSON.stringify(tableData.id));
             setTableRowID(localStorage.getItem("tableData"));
+            console.log("ID: ",tableRowID);
             // setId(parentTarget(e));
             open();
           }}
@@ -259,6 +259,7 @@ const TableBody = ({ tableData, open }) => {
           onClick={(e) => {
             localStorage.setItem("tableData", JSON.stringify(tableData.id));
             setTableRowID(localStorage.getItem("tableData"))
+            console.log("ID: ", tableRowID);
             // setId(
             // e.currentTarget.parentNode.parentNode.getAttribute("data-id")
             // );

@@ -28,15 +28,12 @@ const EditCandidate = ({ open, close }) => {
   const [mainCandidate, setMainCandidate] = useState(false);
   const { candidateID, setCandidateID } = useContext(ModalFormContext);
   const [editData, setEditData] = useState([]);
-  // newly added states
-  const [file, setFile] = useState(null);
-  const [fileName, setFileName] = useState("");
-  const [fileError, setFileError] = useState();
+
 
   // Newly added: Handler to listen to file change
-  const handleFileChange = (file) => {
-    setFile(file);
-  };
+  // const handleFileChange = (file) => {
+  //   setFile(file);
+  // };
 
   // Newly added: Allowable file types
   const fileTypes = ["JPG", "PNG", "JPEG"];
@@ -76,20 +73,6 @@ const EditCandidate = ({ open, close }) => {
     };
     getSenetorial();
   }, [selectedState, setDistrictData]);
-  console.log("Selected State: ", selectedState);
-
-  // /* Get Zone */
-  // useEffect(() => {
-  //   const getSenetorial = async () => {
-  //     await axios.get(
-  //       `/utilities/zone/${selectedState}`
-  //     )
-  //       .then((res) => setZoneData(res.data))
-  //       .catch((err) => console.log(err));
-  //   };
-  //   getSenetorial();
-  // }, [selectedState, setZoneData]);
-  // console.log("Selected Zone: ", zone);
 
   /* Get Poll Type */
   useEffect(() => {
@@ -124,11 +107,6 @@ const EditCandidate = ({ open, close }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // const formData = new FormData();
-    // formData.append("photo", candidateImage);
-
-    console.log(file);
 
     await axios
       .put(`/utilities/rud_candidate/${candidateID}`, {
@@ -226,7 +204,6 @@ const EditCandidate = ({ open, close }) => {
     // window.location.reload();
   };
 
-  console.log("Main Candidate: ", mainCandidate);
   useEffect(() => {
     var onDisabled = () => {
       if (pollType === "1" || pollType === 1) {
@@ -287,6 +264,7 @@ const EditCandidate = ({ open, close }) => {
     district,
     name,
     mainCandidate,
+    candidateID,
   ]);
 
   return (
