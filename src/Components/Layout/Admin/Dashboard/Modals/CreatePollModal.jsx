@@ -459,11 +459,7 @@ const CreatePollModal = ({ open, handleClose, nextPage, setPage }) => {
               value={zone}
               onChange={(e) => {
                 setZone(e.target.value);
-                setZonelName(
-                  e.target.options[e.target.selectedIndex].getAttribute(
-                    "data-valueName"
-                  )
-                );
+                setZonelName(e.target.options[e.target.selectedIndex].getAttribute("data-valueName"));
                 console.log(zonelName);
                 console.log(e.target.value);
               }}

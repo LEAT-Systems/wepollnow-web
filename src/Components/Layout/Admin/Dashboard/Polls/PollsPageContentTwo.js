@@ -2,7 +2,7 @@
 
 import React, { useContext, useEffect, useState } from "react";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
-import { ArrowUpward, CalendarMonthOutlined, Save } from "@mui/icons-material";
+import { ArrowUpward, CalendarMonthOutlined } from "@mui/icons-material";
 import Header from "../../Header";
 import BarChart from "../Charts/BarChart";
 import PieChart from "../Charts/PieChart";
@@ -23,6 +23,22 @@ import down from "../../../../../images/down.png";
 // POll RESULT DATA TEMPLATE
 
 const PollsPageContentTwo = () => {
+  const {
+    gender,
+    firstTimeVoter,
+    validVotersCard,
+    diasporaVoter,
+    residenceLga,
+    residentState,
+    origin,
+    ageRange,
+    religion,
+    maritialStatus,
+    employmenStatus,
+    propertyStatus,
+  } = useContext(ModalFormContext);
+  const [filterData, setFilterData] = useState([]);
+
   const [open, setOpen] = useState(false);
 
   /* View State */
@@ -34,7 +50,6 @@ const PollsPageContentTwo = () => {
   const [tableData, setTableData] = useState([]);
   const [status, setStatus] = useState("");
   const [searchResult, setSearchResult] = useState([]);
-  const { tableRowID } = useContext(ModalFormContext);
   const [pollStatus, setPollStatus] = useState([]);
   const [csvData, setCsvData] = useState([
     {
@@ -46,11 +61,6 @@ const PollsPageContentTwo = () => {
   ]);
 
   let currentDate = new Date().toJSON().slice(0, 10);
-
-  useEffect(() => {
-    setTableData(isData);
-    setSearchResult(isData);
-  }, [isData]);
 
   let finalData = [];
   const exportData = () => {
@@ -106,6 +116,8 @@ const PollsPageContentTwo = () => {
     setRefineResult(!refineResult);
   };
 
+
+
   const handleCloseRefineResult = () => {
     setRefineResult(!refineResult);
   };
@@ -113,16 +125,57 @@ const PollsPageContentTwo = () => {
   useEffect(() => {
     axios
       .post("/poll/poll_result/", {
-        poll_id: tableRowID,
+        poll_id: localStorage.getItem("tableData"),
       })
       .then((res) => {
         setIsData(res?.data);
-        setSearchResult(res?.data);
       })
       .catch((err) => {
         console.log(err);
       });
-  }, [tableRowID]);
+  }, [localStorage.getItem("tableData")]);
+
+  useEffect(() => {
+    axios
+      .post("/poll/poll_result_filter/", {
+        poll_id: localStorage.getItem("tableData"),
+        gender: gender,
+        firstTimeVoter: JSON?.parse(firstTimeVoter),
+        validVotersCard: JSON?.parse(validVotersCard),
+        diaspora_voter: JSON?.parse(diasporaVoter),
+        residence_state: residentState,
+        residence_lga: residenceLga,
+        state_of_origin: origin,
+        age_range: ageRange,
+        religion: religion,
+        marital_status: maritialStatus,
+        employment_status: employmenStatus,
+        property_status: propertyStatus,
+      })
+      .then((res) => {
+        setFilterData(res?.data);
+        setTableData(res?.data);
+        setSearchResult(res?.data);
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [
+    localStorage.getItem("tableData"),
+    gender,
+    firstTimeVoter,
+    validVotersCard,
+    diasporaVoter,
+    residenceLga,
+    residentState,
+    origin,
+    ageRange,
+    religion,
+    maritialStatus,
+    employmenStatus,
+    propertyStatus,
+  ]);
 
   useEffect(() => {
     const getData = async () => {
@@ -219,10 +272,10 @@ const PollsPageContentTwo = () => {
             <div className="flex flex-col flex-1 relative border-2 border-gray-400 bg-white rounded-lg px-5 py-2 w-full h-[9rem]">
               <div className="w-full whitespace">
                 <h2 className="text-base font-bold text-black whitespace-nowrap">
-                  {tableData?.[0]?.poll_details?.poll_name}
+                  {isData?.[0]?.poll_details?.poll_name}
                 </h2>
                 <span className="font-bold text-gray-500 text-[.75rem] capitalize">
-                  {tableData[0]?.poll_details?.poll_category?.title}
+                  {isData[0]?.poll_details?.poll_category?.title}
                 </span>
               </div>
 
@@ -234,7 +287,7 @@ const PollsPageContentTwo = () => {
                       margin: "auto .2rem .2rem auto",
                     }}
                   />
-                  {tableData[0]?.poll_details?.poll_date.slice(0, 10)}
+                  {isData[0]?.poll_details?.poll_date.slice(0, 10)}
                 </h3>
                 <h3
                   className={`text-base relative after:content-[""] after:absolute after:w-[.6rem] after:h-[.6rem] after:rounded-full ${statusColors} after:-left-3 after:top-1/2 after:-translate-y-1/2`}
@@ -296,12 +349,12 @@ const PollsPageContentTwo = () => {
           <div className="flex flex-col p-4 border rounded-lg">
             <div className="flex flex-row items-center justify-between mb-10">
               <p className="font-[800] text-[#082b0e]">
-                {`${tableData[0]?.poll_details?.poll_category?.title} Result`}
+                {`${isData[0]?.poll_details?.poll_category?.title} Result`}
               </p>
 
               <div className="flex gap-2">
                 <span className="border rounded-md my-auto flex w-auto p-2 font-[500] text-[#616b62]">
-                  Total: {tableData?.length}
+                  Total: {isData?.length}
                 </span>
                 <DropDown
                   handleBar={handleBar}
@@ -310,7 +363,7 @@ const PollsPageContentTwo = () => {
                   handleList={handleList}
                 />
                 <CSVLink
-                  filename={`${tableData?.[0]?.poll_details?.poll_name}_result_exported_on_${currentDate}.csv`}
+                  filename={`${isData?.[0]?.poll_details?.poll_name}_result_exported_on_${currentDate}.csv`}
                   data={dataforCSV()}
                   asyncOnClick={true}
                   onClick={() => exportData()}

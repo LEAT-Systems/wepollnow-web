@@ -20,22 +20,20 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
   const [partyData, setPartyData] = useState([]);
   const [party, setParty] = useState([]);
   const [zoneData, setZoneData] = useState([]);
-  const [percentage, setPercentage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
   const [mainCandidate, setMainCandidate] = useState(false);
   // newly added states
   const [file, setFile] = useState(null);
-  const [fileName, setFileName] = useState("");
-  const [fileError, setFileError] = useState();
 
-  // Newly added: Handler to listen to file change
-  const handleFileChange = (file) => {
-    setFile(file);
-  };
 
-  // Newly added: Allowable file types
-  const fileTypes = ["JPG", "PNG", "JPEG"];
+  // // Newly added: Handler to listen to file change
+  // const handleFileChange = (file) => {
+  //   setFile(file);
+  // };
+
+  // // Newly added: Allowable file types
+  // const fileTypes = ["JPG", "PNG", "JPEG"];
 
   const [enableState, setEnabledState] = useState(false);
   const [enabledSenetorial, setEnabledSenetorial] = useState(false);
@@ -83,20 +81,6 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
     };
     getZones();
   }, [selectedState, setZoneData]);
-  // console.log("Selected State: ", selectedState);
-
-  // /* Get Zone */
-  // useEffect(() => {
-  //   const getSenetorial = async () => {
-  //     await axios.get(
-  //       `/utilities/zone/${selectedState}`
-  //     )
-  //       .then((res) => setZoneData(res.data))
-  //       .catch((err) => console.log(err));
-  //   };
-  //   getSenetorial();
-  // }, [selectedState, setZoneData]);
-  // console.log("Selected Zone: ", zone);
 
   /* Get Poll Type */
   useEffect(() => {
@@ -131,11 +115,6 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // const formData = new FormData();
-    // formData.append("photo", candidateImage);
-
-    console.log(file);
 
         var presidentID = {
           name: name,
@@ -297,7 +276,6 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
     window.location.reload()
   };
 
-  // console.log("Main Candidate: ", mainCandidate);
   useEffect(() => {
     var onDisabled = () => {
       if (pollType === "1") {
@@ -326,6 +304,8 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
     } else {
       setConfirmBtn(true);
     }
+
+    
   }, [name, pollType]);
 
   // const token = async () => {
@@ -497,7 +477,6 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
                   value={selectedState}
                   onChange={(e) => {
                     setSelectedState(e.target.value);
-                    console.log("Seclected State ID is: ", selectedState);
                   }}
                   disabled={enableState}
                 >
@@ -639,8 +618,8 @@ const AddCandidateModal = ({ addCandidate, handleCloseAddCandidate }) => {
               type='submit'
               disabled={confirmBtn}
               onClick={(e) => {
-                handleCloseAddCandidate();
                 handleSubmit(e);
+                handleCloseAddCandidate();
               }}
             >
               continue
