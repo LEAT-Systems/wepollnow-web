@@ -500,7 +500,7 @@ const CreatePollModal = ({ open, handleClose, nextPage, setPage }) => {
           </button>
           <button
             className='flex items-center justify-center rounded-md py-3 px-5 h-full cursor-pointer text-sm bg-green-500 text-white capitalize transition-all duration-400 ease-in-out hover:bg-green-500 hover:text-white hover:rounded-full disabled:bg-gray-200 disabled:cursor-not-allowed'
-            disabled={confirmBtn}
+            disabled={!confirmBtn}
             onClick={() => {
               nextPage();
             }}

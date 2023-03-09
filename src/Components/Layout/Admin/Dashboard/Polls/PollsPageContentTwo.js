@@ -61,6 +61,7 @@ const PollsPageContentTwo = () => {
   ]);
 
   let currentDate = new Date().toJSON().slice(0, 10);
+  var id = localStorage.getItem("tableData");
 
   let finalData = [];
   const exportData = () => {
@@ -116,8 +117,6 @@ const PollsPageContentTwo = () => {
     setRefineResult(!refineResult);
   };
 
-
-
   const handleCloseRefineResult = () => {
     setRefineResult(!refineResult);
   };
@@ -125,7 +124,7 @@ const PollsPageContentTwo = () => {
   useEffect(() => {
     axios
       .post("/poll/poll_result/", {
-        poll_id: localStorage.getItem("tableData"),
+        poll_id: +id,
       })
       .then((res) => {
         setIsData(res?.data);
@@ -133,36 +132,35 @@ const PollsPageContentTwo = () => {
       .catch((err) => {
         console.log(err);
       });
-  }, [localStorage.getItem("tableData")]);
+  }, [id]);
+
 
   useEffect(() => {
     axios
       .post("/poll/poll_result_filter/", {
-        poll_id: localStorage.getItem("tableData"),
-        gender: gender,
+        poll_id: +id,
+        gender: +gender,
         firstTimeVoter: JSON?.parse(firstTimeVoter),
         validVotersCard: JSON?.parse(validVotersCard),
         diaspora_voter: JSON?.parse(diasporaVoter),
-        residence_state: residentState,
-        residence_lga: residenceLga,
-        state_of_origin: origin,
-        age_range: ageRange,
-        religion: religion,
-        marital_status: maritialStatus,
-        employment_status: employmenStatus,
-        property_status: propertyStatus,
+        residence_state: +residentState,
+        residence_lga: +residenceLga,
+        state_of_origin: +origin,
+        age_range: +ageRange,
+        religion: +religion,
+        marital_status: +maritialStatus,
+        employment_status: +employmenStatus,
+        property_status: +propertyStatus,
       })
       .then((res) => {
         setFilterData(res?.data);
-        setTableData(res?.data);
-        setSearchResult(res?.data);
         console.log(res);
       })
       .catch((err) => {
         console.log(err);
       });
   }, [
-    localStorage.getItem("tableData"),
+    id,
     gender,
     firstTimeVoter,
     validVotersCard,
@@ -176,6 +174,11 @@ const PollsPageContentTwo = () => {
     employmenStatus,
     propertyStatus,
   ]);
+
+  useEffect(() => {
+    setSearchResult(filterData);
+    setTableData(filterData);
+  }, [filterData]);
 
   useEffect(() => {
     const getData = async () => {
@@ -194,16 +197,14 @@ const PollsPageContentTwo = () => {
     return string?.slice(0, 10); /* string.split("T", 10).join() */
   };
 
+  let dateStart = tableData[0]?.poll_details?.poll_date;
+  let dateEnd = tableData[0]?.poll_details?.poll_endDate;
   useEffect(() => {
     const today = new Date();
 
     // Get the start and end dates from props or state
-    const startDate = new Date(
-      formatDate(tableData[0]?.poll_details?.poll_date)
-    );
-    const endDate = new Date(
-      formatDate(tableData[0]?.poll_details?.poll_endDate)
-    );
+    const startDate = new Date(formatDate(dateStart));
+    const endDate = new Date(formatDate(dateEnd));
 
     if (startDate < today && endDate < today) {
       setStatus("Concluded");
@@ -218,11 +219,7 @@ const PollsPageContentTwo = () => {
     } else {
       setStatus("Concluded");
     }
-  }, [
-    tableData[0]?.poll_details?.poll_date,
-    tableData[0]?.poll_details?.poll_endDate,
-    tableData,
-  ]);
+  }, [dateEnd, dateStart, tableData]);
 
   const statusColors =
     status === "Upcoming"
@@ -234,24 +231,24 @@ const PollsPageContentTwo = () => {
   return (
     <>
       <Header />
-      <main className="max-h-screen w-full px-4 md:px-6 lg:px-12 text-[#082a0f]">
-        <div className="flex flex-row items-center justify-between pt-2">
-          <div className="flex flex-col items-start w-full my-auto mt-3 place-items-start">
-            <h2 className="font-extrabold text-xl lg:text-2xl md:text-[1.4rem] capitalize pt-4 pb-2 pl-0 w-full">
+      <main className='max-h-screen w-full px-4 md:px-6 lg:px-12 text-[#082a0f]'>
+        <div className='flex flex-row items-center justify-between pt-2'>
+          <div className='flex flex-col items-start w-full my-auto mt-3 place-items-start'>
+            <h2 className='font-extrabold text-xl lg:text-2xl md:text-[1.4rem] capitalize pt-4 pb-2 pl-0 w-full'>
               Polls Result
             </h2>
-            <div className="flex flex-row items-center justify-start text-base">
-              <NavLink to="/admin/polls" activeClassName={null}>
-                <p className="font-bold text-[#616b62]">Manage Polls</p>
+            <div className='flex flex-row items-center justify-start text-base'>
+              <NavLink to='/admin/polls' activeClassName={null}>
+                <p className='font-bold text-[#616b62]'>Manage Polls</p>
               </NavLink>
               <NavigateNextIcon
                 sx={{ fontSize: "0.8rem", margin: "auto .7rem" }}
               />
-              <p className="font-bold text-[#082b0e]">Poll Result</p>
+              <p className='font-bold text-[#082b0e]'>Poll Result</p>
             </div>
           </div>
 
-          <div className="w-full">
+          <div className='w-full'>
             <PollsHeader
               setSearchResult={setSearchResult}
               tableData={tableData}
@@ -265,22 +262,22 @@ const PollsPageContentTwo = () => {
           </div>
         </div>
         {/* CARDS */}
-        <div className="grid w-full grid-cols-1 gap-8 mx-auto md:grid-cols-2 lg:grid-cols-3 place-items-center my-9">
+        <div className='grid w-full grid-cols-1 gap-8 mx-auto md:grid-cols-2 lg:grid-cols-3 place-items-center my-9'>
           {/* First Card */}
 
           <>
-            <div className="flex flex-col flex-1 relative border-2 border-gray-400 bg-white rounded-lg px-5 py-2 w-full h-[9rem]">
-              <div className="w-full whitespace">
-                <h2 className="text-base font-bold text-black whitespace-nowrap">
+            <div className='flex flex-col flex-1 relative border-2 border-gray-400 bg-white rounded-lg px-5 py-2 w-full h-[9rem]'>
+              <div className='w-full whitespace'>
+                <h2 className='text-base font-bold text-black whitespace-nowrap'>
                   {isData?.[0]?.poll_details?.poll_name}
                 </h2>
-                <span className="font-bold text-gray-500 text-[.75rem] capitalize">
+                <span className='font-bold text-gray-500 text-[.75rem] capitalize'>
                   {isData[0]?.poll_details?.poll_category?.title}
                 </span>
               </div>
 
-              <div className="flex justify-between w-full mt-auto">
-                <h3 className="text-[.9rem]">
+              <div className='flex justify-between w-full mt-auto'>
+                <h3 className='text-[.9rem]'>
                   <CalendarMonthOutlined
                     sx={{
                       fontSize: "0.9rem",
@@ -302,31 +299,31 @@ const PollsPageContentTwo = () => {
             </div>
 
             {/* Second Card  */}
-            <div className="flex flex-row items-center relative border-2 border-gray-400 bg-white rounded-lg p-5 w-full h-[9rem]">
-              <span className="rounded-2xl bg-[#e7f9ea] p-4 mr-4 items-start">
+            <div className='flex flex-row items-center relative border-2 border-gray-400 bg-white rounded-lg p-5 w-full h-[9rem]'>
+              <span className='rounded-2xl bg-[#e7f9ea] p-4 mr-4 items-start'>
                 <img
                   src={VOTES}
-                  alt="Votes"
-                  className="w-[3.5rem] h-[3.5rem] bg-[#e7f9ea]"
+                  alt='Votes'
+                  className='w-[3.5rem] h-[3.5rem] bg-[#e7f9ea]'
                 />
               </span>
-              <div className="flex flex-col items-start">
-                <span className="pb-1 text-2xl font-extrabold">
+              <div className='flex flex-col items-start'>
+                <span className='pb-1 text-2xl font-extrabold'>
                   {pollStatus[0]?.allUsers == null
                     ? 0
                     : pollStatus[0]?.allUsers}
                 </span>
-                <span className="font-bold text-gray-500 text-[.75rem] capitalize flex-1">
+                <span className='font-bold text-gray-500 text-[.75rem] capitalize flex-1'>
                   users
                 </span>
               </div>
 
-              <div className="absolute bottom-4 right-4 flex bg-[#e7f9ea] text-green-500 p-1 rounded-lg border">
+              <div className='absolute bottom-4 right-4 flex bg-[#e7f9ea] text-green-500 p-1 rounded-lg border'>
                 <ArrowUpward
                   sx={{ fontsize: "0.2rem", margin: "auto .1rem auto auto" }}
-                  fontSize="0.1rem"
+                  fontSize='0.1rem'
                 />
-                <h3 className="bg-[#e7f9ea] text-[.7rem] my-auto">
+                <h3 className='bg-[#e7f9ea] text-[.7rem] my-auto'>
                   +{" "}
                   {pollStatus[0]?.newUsers == null
                     ? 0
@@ -337,7 +334,7 @@ const PollsPageContentTwo = () => {
             </div>
 
             {/* Third Card */}
-            <div className="border-2 border-gray-400 bg-white text-[#082a0f] rounded-lg px-4 py-3 w-full h-[9rem]">
+            <div className='border-2 border-gray-400 bg-white text-[#082a0f] rounded-lg px-4 py-3 w-full h-[9rem]'>
               <PieChart />
             </div>
           </>
@@ -345,15 +342,15 @@ const PollsPageContentTwo = () => {
 
         {/* ===============   Chart Table ========================*/}
 
-        <div className="w-full px-2 md:px-4">
-          <div className="flex flex-col p-4 border rounded-lg">
-            <div className="flex flex-row items-center justify-between mb-10">
-              <p className="font-[800] text-[#082b0e]">
+        <div className='w-full px-2 md:px-4'>
+          <div className='flex flex-col p-4 border rounded-lg'>
+            <div className='flex flex-row items-center justify-between mb-10'>
+              <p className='font-[800] text-[#082b0e]'>
                 {`${isData[0]?.poll_details?.poll_category?.title} Result`}
               </p>
 
-              <div className="flex gap-2">
-                <span className="border rounded-md my-auto flex w-auto p-2 font-[500] text-[#616b62]">
+              <div className='flex gap-2'>
+                <span className='border rounded-md my-auto flex w-auto p-2 font-[500] text-[#616b62]'>
                   Total: {isData?.length}
                 </span>
                 <DropDown
@@ -367,19 +364,19 @@ const PollsPageContentTwo = () => {
                   data={dataforCSV()}
                   asyncOnClick={true}
                   onClick={() => exportData()}
-                  className="p-2 px-3 text-center text-black transition duration-150 border rounded-md hover:bg-gray-50"
+                  className='p-2 px-3 text-center text-black transition duration-150 border rounded-md hover:bg-gray-50'
                 >
-                  <div className="flex flex-row items-center justify-center space-x-2">
+                  <div className='flex flex-row items-center justify-center space-x-2'>
                     <p>CSV</p>
                     <span>
-                      <img src={down} alt="export" className="w-6 h-6" />
+                      <img src={down} alt='export' className='w-6 h-6' />
                     </span>
                   </div>
                 </CSVLink>
               </div>
             </div>
 
-            <div className="max-w-full">
+            <div className='max-w-full'>
               {isTableState ? (
                 <TableStateResult />
               ) : isBar ? (

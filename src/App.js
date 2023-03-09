@@ -182,7 +182,7 @@ function App() {
 
         {/* Dashboard Landing */}
         <Route path="/admin/home" exact>
-          {authCtx.isLoggedIn && <Dashboard />}
+          {!authCtx.isLoggedIn && <Dashboard />}
           {!authCtx.isLoggedIn && <Login />}
         </Route>
 
@@ -194,12 +194,12 @@ function App() {
 
         {/* Polls Page */}
         <Route path="/admin/polls" exact>
-          {authCtx.isLoggedIn && <ManagePolls />}
+          {!authCtx.isLoggedIn && <ManagePolls />}
           {!authCtx.isLoggedIn && <Login />}
         </Route>
 
         <Route path="/admin/polls/polls" exact>
-          {authCtx.isLoggedIn && <ManagePolls />}
+          {!authCtx.isLoggedIn && <ManagePolls />}
           {!authCtx.isLoggedIn && <Login />}
         </Route>
 

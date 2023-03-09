@@ -48,14 +48,14 @@ const DashboardContent = () => {
     </button>
   ));
 
-  useEffect(() => {
-    const { name, status } = JSON.parse(localStorage?.getItem("loggedInUser"));
-    const refinedName = name[0]?.toUpperCase() + name?.slice(1);
-    setLoggedInUser({
-      name: refinedName,
-      status: status === true ? "Super Admin" : "Admin",
-    });
-  }, []);
+  // useEffect(() => {
+  //   const { name, status } = JSON.parse(localStorage?.getItem("loggedInUser"));
+  //   const refinedName = name[0]?.toUpperCase() + name?.slice(1);
+  //   setLoggedInUser({
+  //     name: refinedName,
+  //     status: status === true ? "Super Admin" : "Admin",
+  //   });
+  // }, []);
 
   useEffect(() => {
     const getData = async () => {
